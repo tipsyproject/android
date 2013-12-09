@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Tipsy</string>
+    <string-array name="menu_participant">
+        <item>Les Événements</item>
+        <item>Mon Panier</item>
+        <item>Mes Coordonnées</item>
+        <item>Mes Billets</item>
+        <item>Mes Crédits</item>
+        <item>Aide</item>
+    </string-array>
+    <string name="drawer_open">Ouvrir le menu déroulant</string>
+    <string name="drawer_close">Fermer le menu déroulant</string>
+    <string name="app_not_available">Erreur</string>
+    <string name="hello_world">Hello World!</string>
+    <string name="action_settings">Options</string>
+    <string name="search">"Recherche d\'événements"</string>
+    <color name="background">#475F77</color>
+    <color name="background_menu">#354B5E</color>
+    <color name="text_menu">#ffffff</color>
+    <color name="text_hint">#adadad</color>
+    <color name="button_unpressed">#354B5E</color>
+    <color name="button_pressed">#DCDDD8</color>
+    <color name="text_pressed">#354B5E</color>
+</resources>

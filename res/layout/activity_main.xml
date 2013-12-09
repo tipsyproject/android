@@ -1,0 +1,16 @@
+
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/first_bg">
+    <Button
+        android:layout_width="125dp"
+        android:layout_height="40dp"
+        android:text="Passer"
+        android:id="@+id/next"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_marginBottom="53dp" />
+</FrameLayout>
+
