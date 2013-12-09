@@ -26,11 +26,11 @@
             </intent-filter>
         </activity>
         <activity
-                android:name=".Connection"
+                android:name=".LoginActivity"
                 android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity
-                android:name=".Home">
+                android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

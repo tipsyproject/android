@@ -20,7 +20,7 @@ import android.widget.SearchView;
 /**
  * Created by tech on 05/12/13.
  */
-public class Home extends Activity {
+public class HomeActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;

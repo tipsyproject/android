@@ -9,7 +9,7 @@
             android:inputType="textPersonName"
             android:hint="adressemail@tipsy.fr"
             android:ems="10"
-            android:id="@+id/username"
+            android:id="@+id/email"
             android:layout_gravity="center"
             android:layout_marginBottom="12dp" />
 
