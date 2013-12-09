@@ -20,7 +20,7 @@ public class MainActivity extends Activity{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // Initialisation de STACKMOB avec la clé publique
-        StackMobAndroid.init(getApplicationContext(), 0, "60e9809f-6268-4fa3-9d4b-a4375ac15884");
+        StackMobAndroid.init(getApplicationContext(), 0, "eeedff37-f59d-408a-9279-27cd8fe7062e");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
