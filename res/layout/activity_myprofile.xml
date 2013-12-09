@@ -10,7 +10,6 @@
         android:layout_height="130dp"
         android:id="@+id/imageView"
         android:layout_gravity="center_horizontal|top"
-        android:src="@drawable/photo_profil_vide"
         android:layout_margin="50dp" />
 
     <TextView
