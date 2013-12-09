@@ -25,7 +25,7 @@ public class Organisateur extends StackMobUser implements UtilisateurTipsy {
         this.nom = nom;
     }
 
-    // Défini le nom de la table STACKMOB
+    // Défini le nom de la table
     @Override
     public String getSchemaName() { return "organisateur"; }
 
