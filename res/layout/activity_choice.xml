@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_menu"
+    android:weightSum="1">
+
+    <ImageButton
+        android:layout_width="418dp"
+        android:layout_height="281dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/choix"
+        android:id="@+id/next_orga" />
+
+    <ImageButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/next_user"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/tumblr_photo"
+        android:layout_weight="2.25" />
+</LinearLayout>
