@@ -44,7 +44,8 @@ public class LoginActivity extends Activity {
                     // SINON TENTATIVE DE CONNEXION EN TANT QUE MEMBRE
                     @Override
                     public void failure(StackMobException e) {
-
+                        Intent inscription = new Intent(LoginActivity.this, InscriptionOrgaActivity.class);
+                        startActivity(inscription);
                     }
                 });
 

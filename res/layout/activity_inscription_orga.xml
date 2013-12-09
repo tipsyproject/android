@@ -66,7 +66,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Afficher le mot de passe"
-        android:id="@+id/checkBox"
+        android:id="@+id/afficherPassword"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="120dp" />
 </FrameLayout>

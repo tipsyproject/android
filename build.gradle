@@ -1,3 +1,4 @@
 dependencies {
     compile files('libs/stackmob-android-sdk-1.3.5')
+    compile 'com.mobsandgeeks:android-saripaar:1.0.0'
 }
