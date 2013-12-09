@@ -28,7 +28,7 @@ public class MainActivity extends Activity{
         final Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent connection = new Intent(MainActivity.this, Connection.class);
+                Intent connection = new Intent(MainActivity.this, LoginActivity.class);
                 startActivity(connection);
             }
         });
