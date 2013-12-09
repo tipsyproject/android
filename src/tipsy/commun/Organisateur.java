@@ -20,14 +20,11 @@ public class Organisateur extends StackMobUser implements UtilisateurTipsy {
         super(Organisateur.class, username, password);
         this.nom = null;
     }
+    // Constructeur pour l'inscription
     public Organisateur(String username, String password, String nom){
         super(Organisateur.class, username, password);
         this.nom = nom;
     }
-
-    // Défini le nom de la table
-    @Override
-    public String getSchemaName() { return "organisateur"; }
 
     /*
     public ArrayList<Event> getEvents() { return events; }
