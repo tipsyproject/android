@@ -9,6 +9,7 @@
         <item>Mes Crédits</item>
         <item>Aide</item>
     </string-array>
+    <string name="creer_event">Créer un événement</string>
     <string name="drawer_open">Ouvrir le menu déroulant</string>
     <string name="drawer_close">Fermer le menu déroulant</string>
     <string name="app_not_available">Erreur</string>

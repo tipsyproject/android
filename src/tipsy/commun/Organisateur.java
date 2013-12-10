@@ -41,15 +41,7 @@ public class Organisateur extends StackMobUser implements UtilisateurTipsy {
 
     public void creerEvent(String nom, Date debut){
         Event e = new Event(nom,debut);
-        e.save(new StackMobModelCallback() {
-            @Override
-            public void success() {
-            }
-            @Override
-            public void failure(StackMobException e) {
-                Log.d("CREATION EVENT", e.getMessage());
-            }
-        });
+        e.save();
         this.events.add(e);
     }
 

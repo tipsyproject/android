@@ -66,8 +66,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         orga.login(new StackMobModelCallback() {
             @Override
             public void success() {
-                orga.creerEvent("Mon event",new Date());
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class));
+                startActivity(new Intent(LoginActivity.this, HomeOrgaActivity.class));
             }
 
             // SINON TENTATIVE DE CONNEXION EN TANT QUE MEMBRE

@@ -22,10 +22,10 @@ import tipsy.commun.Organisateur;
 
 public class InscriptionOrgaActivity extends Activity implements Validator.ValidationListener {
 
-    @Required(order = 2)
+    @Required(order = 1)
     private EditText nom;
     @Required(order = 2)
-    @Email(order = 3)
+    @Email(order = 3, message="Entrez une adresse email valide.")
     private EditText email;
     @Password(order = 3)
     @TextRule(order = 4, minLength = 6, message = "Entrez au moins 6 caractères.")
