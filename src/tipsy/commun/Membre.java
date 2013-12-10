@@ -8,10 +8,10 @@ import java.util.Date;
 
 public class Membre extends Participant {
 
-    private String  password;
-    private Date    naissance;
+    private String password;
+    private Date naissance;
 
-    public TypeUtilisateur getTypeUtilisateur(){
+    public TypeUtilisateur getTypeUtilisateur() {
         return TypeUtilisateur.MEMBRE;
     }
 }

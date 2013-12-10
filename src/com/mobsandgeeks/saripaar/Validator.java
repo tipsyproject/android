@@ -69,8 +69,8 @@ public class Validator {
      * Creates a new {@link Validator}.
      *
      * @param controller The instance that holds references to the Views that are
-     * being validated. Usually an {@code Activity} or a {@code Fragment}. Also accepts
-     * controller instances that have annotated {@code View} references.
+     *                   being validated. Usually an {@code Activity} or a {@code Fragment}. Also accepts
+     *                   controller instances that have annotated {@code View} references.
      */
     public Validator(Object controller) {
         this();
@@ -104,7 +104,6 @@ public class Validator {
      *
      * @param view The {@link View} to be validated.
      * @param rule The {@link Rule} associated with the view.
-     *
      * @throws IllegalArgumentException If {@code rule} is {@code null}.
      */
     public void put(View view, Rule<?> rule) {
@@ -118,9 +117,8 @@ public class Validator {
     /**
      * Convenience method for adding multiple {@link Rule}s for a single {@link View}.
      *
-     * @param view The {@link View} to be validated.
+     * @param view  The {@link View} to be validated.
      * @param rules {@link List} of {@link Rule}s associated with the view.
-     *
      * @throws IllegalArgumentException If {@code rules} is {@code null}.
      */
     public void put(View view, List<Rule<?>> rules) {
@@ -255,9 +253,8 @@ public class Validator {
     /**
      * Updates a property value if it exists, else creates a new one.
      *
-     * @param name The property name.
+     * @param name  The property name.
      * @param value Value of the property.
-     *
      * @throws IllegalArgumentException If {@code name} is {@code null}.
      */
     public void setProperty(String name, Object value) {
@@ -272,10 +269,8 @@ public class Validator {
      * Retrieves the value of the given property.
      *
      * @param name The property name.
-     *
-     * @throws IllegalArgumentException If {@code name} is {@code null}.
-     *
      * @return Value of the property or {@code null} if the property does not exist.
+     * @throws IllegalArgumentException If {@code name} is {@code null}.
      */
     public Object getProperty(String name) {
         if (name == null) {
@@ -289,7 +284,6 @@ public class Validator {
      * Removes the property from this Validator.
      *
      * @param name The property name.
-     *
      * @return The value of the removed property or {@code null} if the property was not found.
      */
     public Object removeProperty(String name) {
@@ -300,7 +294,6 @@ public class Validator {
      * Checks if the specified property exists in this Validator.
      *
      * @param name The property name.
-     *
      * @return True if the property exists.
      */
     public boolean containsProperty(String name) {
@@ -316,6 +309,7 @@ public class Validator {
 
     /**
      * Removes all the rules for the matching {@link View}
+     *
      * @param view The {@code View} whose rules must be removed.
      */
     public void removeRulesFor(View view) {
@@ -339,7 +333,7 @@ public class Validator {
      * Validates all rules added to this Validator.
      *
      * @return {@code null} if all {@code Rule}s are valid, else returns the failed
-     *          {@code ViewRulePair}.
+     * {@code ViewRulePair}.
      */
     private ViewRulePair validateAllRules() {
         if (!mAnnotationsProcessed) {

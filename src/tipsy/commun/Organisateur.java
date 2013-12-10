@@ -1,9 +1,6 @@
 package tipsy.commun;
 
-import android.location.Address;
 import com.stackmob.sdk.model.StackMobUser;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Created by valoo on 07/12/13.
@@ -11,17 +8,20 @@ import java.util.Date;
 public class Organisateur extends StackMobUser implements UtilisateurTipsy {
 
     //private ArrayList<Event>    events;
-    private String              nom;
+    private String nom;
 
-    /****************
-    * CONSTRUCTEURS *
-    ****************/
-    public Organisateur(String username, String password){
+    /**
+     * *************
+     * CONSTRUCTEURS *
+     * **************
+     */
+    public Organisateur(String username, String password) {
         super(Organisateur.class, username, password);
         this.nom = null;
     }
+
     // Constructeur pour l'inscription
-    public Organisateur(String username, String password, String nom){
+    public Organisateur(String username, String password, String nom) {
         super(Organisateur.class, username, password);
         this.nom = nom;
     }
@@ -36,11 +36,16 @@ public class Organisateur extends StackMobUser implements UtilisateurTipsy {
     }*/
 
 
-    public String getNom() { return nom; }
-    public void setNom(String nom) { this.nom = nom; }
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 
 
-    public TypeUtilisateur getTypeUtilisateur(){
+    public TypeUtilisateur getTypeUtilisateur() {
         return TypeUtilisateur.ORGANISATEUR;
     }
 }

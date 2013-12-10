@@ -16,12 +16,12 @@ package com.mobsandgeeks.saripaar.annotation;
 
 import android.widget.Checkable;
 
+import com.mobsandgeeks.saripaar.Rules;
+
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
-
-import com.mobsandgeeks.saripaar.Rules;
 
 /**
  * Annotation works with {@code Views} that implement the {@link Checkable} interface.
@@ -32,7 +32,10 @@ import com.mobsandgeeks.saripaar.Rules;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Checked {
     public int order();
-    public boolean checked()    default true;
-    public String message()     default Rules.EMPTY_STRING;
-    public int messageResId()   default 0;
+
+    public boolean checked() default true;
+
+    public String message() default Rules.EMPTY_STRING;
+
+    public int messageResId() default 0;
 }

@@ -6,14 +6,20 @@ package tipsy.commun;
  */
 public class Participant extends Contact implements UtilisateurTipsy {
 
-    private Bracelet                bracelet;
+    private Bracelet bracelet;
 
-    public Participant(){}
+    public Participant() {
+    }
 
-    public Bracelet getBracelet() { return bracelet; }
-    private void setBracelet(Bracelet bracelet) { this.bracelet = bracelet; }
+    public Bracelet getBracelet() {
+        return bracelet;
+    }
 
-    public TypeUtilisateur getTypeUtilisateur(){
+    private void setBracelet(Bracelet bracelet) {
+        this.bracelet = bracelet;
+    }
+
+    public TypeUtilisateur getTypeUtilisateur() {
         return TypeUtilisateur.ANONYME;
     }
 }

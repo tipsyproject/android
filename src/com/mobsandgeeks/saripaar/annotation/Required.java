@@ -28,7 +28,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Required {
     public int order();
-    public boolean trim()       default true;
-    public String message()     default "This field is required.";
-    public int messageResId()   default 0;
+
+    public boolean trim() default true;
+
+    public String message() default "This field is required.";
+
+    public int messageResId() default 0;
 }

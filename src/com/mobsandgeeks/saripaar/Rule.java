@@ -19,9 +19,8 @@ import android.view.View;
 /**
  * Abstract class that allows to define validation rules for {@link View}s.
  *
- * @author Ragunath Jawahar <rj@mobsandgeeks.com>
- *
  * @param <T> The {@link View} this rule is applicable for.
+ * @author Ragunath Jawahar <rj@mobsandgeeks.com>
  */
 public abstract class Rule<T extends View> {
 

@@ -46,7 +46,7 @@ import java.util.List;
 class AnnotationToRuleConverter {
     // Debug
     static final String TAG = "AnnotationToRuleConverter";
- 
+
     // Constants
     static final String WARN_TEXT = "%s - @%s can only be applied to TextView and " +
             "its subclasses.";
@@ -118,7 +118,7 @@ class AnnotationToRuleConverter {
 
         int messageResId = required.messageResId();
         String message = messageResId != 0 ? view.getContext().getString(messageResId) :
-            required.message();
+                required.message();
 
         return Rules.required(message, required.trim());
     }
@@ -132,7 +132,7 @@ class AnnotationToRuleConverter {
         List<Rule<?>> rules = new ArrayList<Rule<?>>();
         int messageResId = textRule.messageResId();
         String message = messageResId != 0 ? view.getContext().getString(messageResId) :
-            textRule.message();
+                textRule.message();
 
         if (textRule.minLength() > 0) {
             rules.add(Rules.minLength(null, textRule.minLength(), textRule.trim()));
@@ -159,7 +159,7 @@ class AnnotationToRuleConverter {
 
         int patternResId = regexRule.patternResId();
         String pattern = patternResId != 0 ? view.getContext().getString(patternResId) :
-            regexRule.pattern();
+                regexRule.pattern();
 
         return Rules.regex(message, pattern, regexRule.trim());
     }
@@ -176,43 +176,71 @@ class AnnotationToRuleConverter {
         List<Rule<?>> rules = new ArrayList<Rule<?>>();
         int messageResId = numberRule.messageResId();
         String message = messageResId != 0 ? view.getContext().getString(messageResId) :
-            numberRule.message();
+                numberRule.message();
 
         switch (numberRule.type()) {
-        case INTEGER: case LONG:
-            Rules.regex(null, Rules.REGEX_INTEGER, true); break;
-        case FLOAT: case DOUBLE:
-            Rules.regex(null, Rules.REGEX_DECIMAL, true); break;
+            case INTEGER:
+            case LONG:
+                Rules.regex(null, Rules.REGEX_INTEGER, true);
+                break;
+            case FLOAT:
+            case DOUBLE:
+                Rules.regex(null, Rules.REGEX_DECIMAL, true);
+                break;
         }
 
         if (numberRule.lt() != Double.MIN_VALUE) {
             String ltNumber = String.valueOf(numberRule.lt());
             double number = Double.parseDouble(ltNumber);
             switch (numberRule.type()) {
-            case INTEGER:   rules.add(Rules.lt(null, ((int) number)));   break;
-            case LONG:      rules.add(Rules.lt(null, ((long) number)));  break;
-            case FLOAT:     rules.add(Rules.lt(null, Float.parseFloat(ltNumber)));   break;
-            case DOUBLE:    rules.add(Rules.lt(null, Double.parseDouble(ltNumber))); break;
+                case INTEGER:
+                    rules.add(Rules.lt(null, ((int) number)));
+                    break;
+                case LONG:
+                    rules.add(Rules.lt(null, ((long) number)));
+                    break;
+                case FLOAT:
+                    rules.add(Rules.lt(null, Float.parseFloat(ltNumber)));
+                    break;
+                case DOUBLE:
+                    rules.add(Rules.lt(null, Double.parseDouble(ltNumber)));
+                    break;
             }
         }
         if (numberRule.gt() != Double.MAX_VALUE) {
             String gtNumber = String.valueOf(numberRule.gt());
             double number = Double.parseDouble(gtNumber);
             switch (numberRule.type()) {
-            case INTEGER:   rules.add(Rules.gt(null, ((int) number)));  break;
-            case LONG:      rules.add(Rules.gt(null, ((long) number))); break;
-            case FLOAT:     rules.add(Rules.gt(null, Float.parseFloat(gtNumber)));   break;
-            case DOUBLE:    rules.add(Rules.gt(null, Double.parseDouble(gtNumber))); break;
+                case INTEGER:
+                    rules.add(Rules.gt(null, ((int) number)));
+                    break;
+                case LONG:
+                    rules.add(Rules.gt(null, ((long) number)));
+                    break;
+                case FLOAT:
+                    rules.add(Rules.gt(null, Float.parseFloat(gtNumber)));
+                    break;
+                case DOUBLE:
+                    rules.add(Rules.gt(null, Double.parseDouble(gtNumber)));
+                    break;
             }
         }
         if (numberRule.eq() != Double.MAX_VALUE) {
             String eqNumber = String.valueOf(numberRule.eq());
             double number = Double.parseDouble(eqNumber);
             switch (numberRule.type()) {
-            case INTEGER:   rules.add(Rules.eq(null, ((int) number)));  break;
-            case LONG:      rules.add(Rules.eq(null, ((long) number))); break;
-            case FLOAT:     rules.add(Rules.eq(null, Float.parseFloat(eqNumber)));   break;
-            case DOUBLE:    rules.add(Rules.eq(null, Double.parseDouble(eqNumber))); break;
+                case INTEGER:
+                    rules.add(Rules.eq(null, ((int) number)));
+                    break;
+                case LONG:
+                    rules.add(Rules.eq(null, ((long) number)));
+                    break;
+                case FLOAT:
+                    rules.add(Rules.eq(null, Float.parseFloat(eqNumber)));
+                    break;
+                case DOUBLE:
+                    rules.add(Rules.eq(null, Double.parseDouble(eqNumber)));
+                    break;
             }
         }
 
@@ -230,13 +258,13 @@ class AnnotationToRuleConverter {
 
         int messageResId = password.messageResId();
         String message = messageResId != 0 ? view.getContext().getString(messageResId) :
-            password.message();
+                password.message();
 
         return Rules.required(message, false);
     }
 
     private static Rule<TextView> getConfirmPasswordRule(Field field, View view,
-            ConfirmPassword confirmPassword, TextView passwordTextView) {
+                                                         ConfirmPassword confirmPassword, TextView passwordTextView) {
         if (!TextView.class.isAssignableFrom(view.getClass())) {
             Log.w(TAG, String.format(WARN_TEXT, field.getName(),
                     ConfirmPassword.class.getSimpleName()));
@@ -245,7 +273,7 @@ class AnnotationToRuleConverter {
 
         int messageResId = confirmPassword.messageResId();
         String message = messageResId != 0 ? view.getContext().getString(messageResId) :
-            confirmPassword.message();
+                confirmPassword.message();
 
         return Rules.eq(message, passwordTextView);
     }
@@ -258,7 +286,7 @@ class AnnotationToRuleConverter {
 
         int messageResId = email.messageResId();
         String message = messageResId != 0 ? view.getContext().getString(messageResId) :
-            email.message();
+                email.message();
 
         return Rules.or(message, Rules.eq(null, Rules.EMPTY_STRING),
                 Rules.regex(message, Rules.REGEX_EMAIL, true));
@@ -272,7 +300,7 @@ class AnnotationToRuleConverter {
 
         int messageResId = ipAddress.messageResId();
         String message = messageResId != 0 ? view.getContext().getString(messageResId) :
-            ipAddress.message();
+                ipAddress.message();
 
         return Rules.or(message, Rules.eq(null, Rules.EMPTY_STRING),
                 Rules.regex(message, Rules.REGEX_IP_ADDRESS, true));
@@ -289,7 +317,7 @@ class AnnotationToRuleConverter {
 
         int messageResId = checked.messageResId();
         String message = messageResId != 0 ? view.getContext().getString(messageResId) :
-            checked.message();
+                checked.message();
 
         return Rules.checked(message, checked.checked());
     }
