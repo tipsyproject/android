@@ -54,7 +54,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         // Redirection inscription
         inscription.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, InscriptionOrgaActivity.class));
+                startActivity(new Intent(LoginActivity.this, OrgaInscriptionActivity.class));
             }
         });
     }
@@ -66,7 +66,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         orga.login(new StackMobModelCallback() {
             @Override
             public void success() {
-                startActivity(new Intent(LoginActivity.this, HomeOrgaActivity.class));
+                startActivity(new Intent(LoginActivity.this, OrgaHomeActivity.class));
             }
 
             // SINON TENTATIVE DE CONNEXION EN TANT QUE MEMBRE

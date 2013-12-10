@@ -20,7 +20,7 @@ import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.commun.Organisateur;
 
-public class InscriptionOrgaActivity extends Activity implements Validator.ValidationListener {
+public class OrgaInscriptionActivity extends Activity implements Validator.ValidationListener {
 
     @Required(order = 1)
     private EditText nom;
@@ -39,7 +39,7 @@ public class InscriptionOrgaActivity extends Activity implements Validator.Valid
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_inscription_orga);
+        setContentView(R.layout.activity_orga_inscription);
 
         validator = new Validator(this);
         validator.setValidationListener(this);
@@ -77,13 +77,13 @@ public class InscriptionOrgaActivity extends Activity implements Validator.Valid
                     @Override
                     public void success() {
                         // Tableau de bord Organisateur
-                        startActivity(new Intent(InscriptionOrgaActivity.this, HomeActivity.class));
+                        startActivity(new Intent(OrgaInscriptionActivity.this, HomeActivity.class));
                     }
 
                     @Override
                     public void failure(StackMobException e) {
                         // Connexion
-                        startActivity(new Intent(InscriptionOrgaActivity.this, LoginActivity.class));
+                        startActivity(new Intent(OrgaInscriptionActivity.this, LoginActivity.class));
                     }
                 });
             }
