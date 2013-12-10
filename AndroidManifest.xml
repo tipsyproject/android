@@ -36,11 +36,11 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
-        <activity android:name=".InscriptionOrgaActivity">
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
+        <activity android:name=".ChoiceActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".InscriptionOrgaActivity"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
     </application>
 
