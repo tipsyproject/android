@@ -12,13 +12,13 @@
         android:layout_height="281dp"
         android:layout_gravity="center_horizontal"
         android:background="@drawable/choix"
-        android:id="@+id/next_orga" />
+        android:id="@+id/next_user" />
 
     <ImageButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/next_user"
+        android:id="@+id/next_orga"
         android:layout_gravity="center_horizontal"
-        android:background="@drawable/tumblr_photo"
+        android:background="@drawable/tumblr_photo_copie"
         android:layout_weight="2.25" />
 </LinearLayout>

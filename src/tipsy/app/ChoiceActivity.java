@@ -27,5 +27,14 @@ public class ChoiceActivity extends Activity {
                 startActivity(connect);
             }
         });
+
+        final ImageButton next_user = (ImageButton) findViewById(R.id.next_user);
+        next_user.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                Intent connect = new Intent(ChoiceActivity.this, InscriptionUserActivity.class);
+                startActivity(connect);
+            }
+        });
     }
 }

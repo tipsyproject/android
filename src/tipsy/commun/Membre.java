@@ -3,7 +3,7 @@ package tipsy.commun;
 /**
  * Created by valoo on 07/12/13.
  */
-
+/**
 import java.util.Date;
 
 public class Membre extends Participant {
@@ -15,3 +15,4 @@ public class Membre extends Participant {
         return TypeUtilisateur.MEMBRE;
     }
 }
+**/

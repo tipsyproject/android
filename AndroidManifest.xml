@@ -42,6 +42,9 @@
         <activity android:name=".InscriptionOrgaActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".InscriptionUserActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>
