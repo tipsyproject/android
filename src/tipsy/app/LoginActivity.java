@@ -16,6 +16,8 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import java.util.Date;
+
 import tipsy.commun.Organisateur;
 
 public class LoginActivity extends Activity implements Validator.ValidationListener {
@@ -60,10 +62,11 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
 
     public void onValidationSucceeded() {
         // D'ABORD TENTATIVE DE CONNEXION EN TANT QU'ORGANISATEUR
-        Organisateur user = new Organisateur(email.getText().toString(), password.getText().toString());
-        user.login(new StackMobModelCallback() {
+        final Organisateur orga = new Organisateur(email.getText().toString(), password.getText().toString());
+        orga.login(new StackMobModelCallback() {
             @Override
             public void success() {
+                orga.creerEvent("Mon event",new Date());
                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             }
 

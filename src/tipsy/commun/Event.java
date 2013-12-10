@@ -3,32 +3,39 @@ package tipsy.commun;
 import android.location.Address;
 import android.media.Image;
 
+import com.stackmob.sdk.model.StackMobModel;
+
 import java.util.Date;
 
 /**
  * Created by Valentin on 07/12/13.
  */
-public class Event {
-    private Address adresse;
+public class Event extends StackMobModel{
+    //private Address adresse = null;
     /*
     private Bar             bar;
     private Billetterie     billetterie;
     */
-    private Date debut;
-    private String description;
-    private EtatPublication etat;
-    private Date fin;
-    private int idOrganisateur;
-    private Image image;
-    private String nom;
-    private TypeEvent type;
+    private Date debut = null;
+    /*private String description = null;
+    private EtatPublication etat = EtatPublication.EN_PREPARATION;
+    private Date fin = null;
+    private Image image = null;*/
+    private String nom = null;
+    //private TypeEvent type = TypeEvent.UNDEFINED;
+    private Organisateur organisateur = null;
 
-    public Event(String nom, Date debut, Address adresse) {
-        this.nom = nom;
-        this.debut = debut;
-        this.adresse = adresse;
+    public Event(){
+        super(Event.class);
     }
 
+    public Event(String nom, Date debut) {
+        super(Event.class);
+        this.nom = nom;
+        this.debut = debut;
+    }
+
+    /*
     public Address getAdresse() {
         return adresse;
     }
@@ -36,7 +43,7 @@ public class Event {
     public void setAdresse(Address adresse) {
         this.adresse = adresse;
     }
-
+*/
     /*
         public Bar getBar() { return bar; }
         public void setBar(Bar bar) { this.bar = bar; }
@@ -44,6 +51,7 @@ public class Event {
         public Billetterie getBilletterie() { return billetterie; }
         public void setBilletterie(Billetterie billetterie) { this.billetterie = billetterie; }
     */
+
     public Date getDebut() {
         return debut;
     }
@@ -51,7 +59,7 @@ public class Event {
     public void setDebut(Date debut) {
         this.debut = debut;
     }
-
+/*
     public String getDescription() {
         return description;
     }
@@ -76,10 +84,6 @@ public class Event {
         this.fin = fin;
     }
 
-    public int getIdOrganisateur() {
-        return idOrganisateur;
-    }
-
 
     public Image getImage() {
         return image;
@@ -88,7 +92,7 @@ public class Event {
     public void setImage(Image image) {
         this.image = image;
     }
-
+*/
     public String getNom() {
         return nom;
     }
@@ -97,11 +101,15 @@ public class Event {
         this.nom = nom;
     }
 
+    public Organisateur getOrganisateur() {
+        return organisateur;
+    }
+/*
     public TypeEvent getType() {
         return type;
     }
 
     public void setType(TypeEvent type) {
         this.type = type;
-    }
+    }*/
 }

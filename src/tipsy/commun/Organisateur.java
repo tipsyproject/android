@@ -1,14 +1,24 @@
 package tipsy.commun;
 
+
+import android.util.Log;
+
+import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.exception.StackMobException;
 import com.stackmob.sdk.model.StackMobUser;
+
+import java.util.ArrayList;
+import java.util.Date;
+
+import tipsy.app.HomeActivity;
 
 /**
  * Created by valoo on 07/12/13.
  */
 public class Organisateur extends StackMobUser implements UtilisateurTipsy {
 
-    //private ArrayList<Event>    events;
-    private String nom;
+    private ArrayList<Event> events = null;
+    private String nom = null;
 
     /**
      * *************
@@ -17,7 +27,6 @@ public class Organisateur extends StackMobUser implements UtilisateurTipsy {
      */
     public Organisateur(String username, String password) {
         super(Organisateur.class, username, password);
-        this.nom = null;
     }
 
     // Constructeur pour l'inscription
@@ -26,14 +35,23 @@ public class Organisateur extends StackMobUser implements UtilisateurTipsy {
         this.nom = nom;
     }
 
-    /*
+
     public ArrayList<Event> getEvents() { return events; }
     protected void setEvents(ArrayList<Event> events) { this.events = events; }
 
-    public void creerEvent(String nom, Date debut, Address adresse){
-        Event e = new Event(nom,debut,adresse);
+    public void creerEvent(String nom, Date debut){
+        Event e = new Event(nom,debut);
+        e.save(new StackMobModelCallback() {
+            @Override
+            public void success() {
+            }
+            @Override
+            public void failure(StackMobException e) {
+                Log.d("CREATION EVENT", e.getMessage());
+            }
+        });
         this.events.add(e);
-    }*/
+    }
 
 
     public String getNom() {
