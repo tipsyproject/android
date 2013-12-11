@@ -16,59 +16,7 @@
     <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09415498-4d1b-4542-9a8b-164207e7fef1" name="Default" comment="Merge branch 'EventOrga' of https://github.com/tipsyproject/android&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;AndroidManifest.xml&#10;&#9;src/tipsy/app/LoginActivity.java&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/Thumbs.db" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_action_about.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_action_about.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_action_about.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_action_about.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_action_go_to_today.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_action_go_to_today.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_action_go_to_today.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_action_go_to_today.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_action_new.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_action_new.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_action_new.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_action_new.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_action_place.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_action_place.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_action_place.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_action_place.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_action_settings.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_action_settings.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_action_settings.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_action_settings.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDateFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDescFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventLocFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventSettingsFragment.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/HomeActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_orga_editer_event.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_orga_home.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/fragment_orga_edit_event_date.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/fragment_orga_edit_event_desc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/fragment_orga_edit_event_loc.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/fragment_orga_edit_event_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/fragment_orga_editer_event.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/res/layout/activity_inscription_orga.xml" afterPath="$PROJECT_DIR$/res/layout/activity_orga_inscription.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/tipsy/app/InscriptionOrgaActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/InscriptionActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/ChoiceActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/ChoiceActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Event.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/LoginActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/MainActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/res/layout/activity_login.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/dimens.xml" afterPath="$PROJECT_DIR$/res/values/dimens.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="09415498-4d1b-4542-9a8b-164207e7fef1" name="Default" comment="Merge branch 'EventOrga' of https://github.com/tipsyproject/android&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;AndroidManifest.xml&#10;&#9;src/tipsy/app/LoginActivity.java&#10;" />
     <ignored path="TipsyApp.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -135,7 +83,7 @@
       <file leaf-file-name="Organisateur.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Organisateur.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="37" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="780">
+            <state line="41" column="37" selection-start="1062" selection-end="1062" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1005">
               <folding />
             </state>
           </provider>
@@ -144,7 +92,7 @@
       <file leaf-file-name="InscriptionActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/InscriptionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="5" selection-start="2142" selection-end="3728" vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="1395">
+            <state line="64" column="5" selection-start="2142" selection-end="3728" vertical-scroll-proportion="0.0" vertical-offset="960" max-vertical-offset="1770">
               <folding />
             </state>
           </provider>
@@ -153,14 +101,8 @@
       <file leaf-file-name="EditEventActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/EditEventActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="43" column="38" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="2085">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#2338#2703#0" expanded="true" />
-                <element signature="e#2684#2685#0" expanded="true" />
-                <element signature="method#onValidationSucceeded#0;class#EditEventActivity#0" expanded="false" />
-                <element signature="method#onValidationFailed#0;class#EditEventActivity#0" expanded="false" />
-              </folding>
+            <state line="43" column="38" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0" vertical-offset="645" max-vertical-offset="2580">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -168,7 +110,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tipsy/app/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="72" column="66" selection-start="2796" selection-end="2865" vertical-scroll-proportion="0.4698795" vertical-offset="438" max-vertical-offset="1320">
+            <state line="73" column="68" selection-start="2865" selection-end="2865" vertical-scroll-proportion="0.47149462" vertical-offset="459" max-vertical-offset="1320">
               <folding />
             </state>
           </provider>
@@ -177,7 +119,7 @@
       <file leaf-file-name="fragment_orga_edit_event_desc.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/fragment_orga_edit_event_desc.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="25" selection-start="269" selection-end="269" vertical-scroll-proportion="-4.0384617" vertical-offset="0" max-vertical-offset="405">
+            <state line="7" column="25" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="405">
               <folding />
             </state>
           </provider>
@@ -189,7 +131,7 @@
       <file leaf-file-name="activity_orga_editer_event.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/layout/activity_orga_editer_event.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="32" column="15" selection-start="1126" selection-end="1126" vertical-scroll-proportion="-18.23077" vertical-offset="6" max-vertical-offset="570">
+            <state line="32" column="15" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="570">
               <folding />
             </state>
           </provider>
@@ -201,7 +143,7 @@
       <file leaf-file-name="Event.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Event.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="31" column="27" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1650">
+            <state line="31" column="27" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1815">
               <folding />
             </state>
           </provider>
@@ -307,7 +249,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -462,7 +404,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -524,26 +466,6 @@
       <setting name="debug" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -566,25 +488,32 @@
       </MavenSettings>
       <method />
     </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -612,6 +541,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -761,28 +703,28 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3231405" sideWeight="0.67938024" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23982398" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23873875" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39928487" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896304" sideWeight="0.1980198" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2450495" sideWeight="0.31108463" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32985386" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2450495" sideWeight="0.31108463" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32453245" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3212321" sideWeight="0.8019802" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32881355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23046875" sideWeight="0.8224076" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23014587" sideWeight="0.8224076" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21892188" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3231405" sideWeight="0.67938024" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32453245" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1006,9 +948,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Membre.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="1" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345">
-          <folding />
-        </state>
+        <state line="16" column="1" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="345" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/app/ChoiceActivity.java">
@@ -1122,7 +1062,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_orga_editer_event.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="15" selection-start="1126" selection-end="1126" vertical-scroll-proportion="-18.23077" vertical-offset="6" max-vertical-offset="570">
+        <state line="32" column="15" selection-start="1126" selection-end="1126" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="570">
           <folding />
         </state>
       </provider>
@@ -1153,7 +1093,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/fragment_orga_edit_event_desc.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="25" selection-start="269" selection-end="269" vertical-scroll-proportion="-4.0384617" vertical-offset="0" max-vertical-offset="405">
+        <state line="7" column="25" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="405">
           <folding />
         </state>
       </provider>
@@ -1164,13 +1104,7 @@
     <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/EditEventActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="43" column="38" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.0" vertical-offset="399" max-vertical-offset="2085">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2338#2703#0" expanded="true" />
-            <element signature="e#2684#2685#0" expanded="true" />
-            <element signature="method#onValidationSucceeded#0;class#EditEventActivity#0" expanded="false" />
-            <element signature="method#onValidationFailed#0;class#EditEventActivity#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1183,7 +1117,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/app/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="66" selection-start="2796" selection-end="2865" vertical-scroll-proportion="0.4698795" vertical-offset="438" max-vertical-offset="1320">
+        <state line="73" column="68" selection-start="2865" selection-end="2865" vertical-scroll-proportion="0.47149462" vertical-offset="459" max-vertical-offset="1320">
           <folding />
         </state>
       </provider>
