@@ -3,9 +3,6 @@ package tipsy.commun;
 
 import android.util.Log;
 
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
-import com.stackmob.sdk.model.StackMobUser;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,23 +12,21 @@ import tipsy.app.HomeActivity;
 /**
  * Created by valoo on 07/12/13.
  */
-public class Organisateur extends StackMobUser implements UtilisateurTipsy {
+public class Organisateur extends User{
 
     private ArrayList<Event> events = null;
-    private String nom = null;
 
-    /**
-     * *************
+
+     /****************
      * CONSTRUCTEURS *
-     * **************
-     */
+     ****************/
     public Organisateur(String username, String password) {
-        super(Organisateur.class, username, password);
+        super(username, password);
     }
 
     // Constructeur pour l'inscription
     public Organisateur(String username, String password, String nom) {
-        super(Organisateur.class, username, password);
+        super(username, password);
         this.nom = nom;
     }
 
