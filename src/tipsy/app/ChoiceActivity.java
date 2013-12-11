@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import tipsy.app.orga.InscriptionActivity;
+
 /**
  * Created by Guillaume on 09/12/13.
  */
@@ -23,7 +25,7 @@ public class ChoiceActivity extends Activity {
         next_orga.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent connect = new Intent(ChoiceActivity.this, InscriptionOrgaActivity.class);
+                Intent connect = new Intent(ChoiceActivity.this, InscriptionActivity.class);
                 startActivity(connect);
             }
         });

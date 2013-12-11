@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="background">#475F77</color>
+    <color name="background_menu">#354B5E</color>
+    <color name="text_menu">#ffffff</color>
+    <color name="text_hint">#adadad</color>
+    <color name="button_unpressed">#354B5E</color>
+    <color name="button_pressed">#DCDDD8</color>
+    <color name="text_pressed">#354B5E</color>
+    <color name="background2">#D74B4B</color>
+
+</resources>

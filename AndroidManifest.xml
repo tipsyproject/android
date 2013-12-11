@@ -36,14 +36,17 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".ChoiceActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".orga.InscriptionActivity">
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".InscriptionOrgaActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".orga.HomeActivity">
         </activity>
-        <activity android:name=".InscriptionUserActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+
+        <activity android:name=".orga.EditEventActivity">
         </activity>
     </application>
 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/event_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"
+        >
+    </android.support.v4.view.ViewPager>
+
+    <LinearLayout android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:measureWithLargestChild="true"
+        android:layout_weight="0.10">
+
+        <ImageButton android:id="@+id/button_enregistrer"
+            android:src="@drawable/ic_action_done"
+            android:layout_height="@dimen/bar_height"
+            android:layout_width="match_parent"
+            android:background="@color/background2"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -16,7 +16,7 @@ public class Event extends StackMobModel{
     private Bar             bar;
     private Billetterie     billetterie;
     */
-    private Date debut = null;
+    //private Date debut = null;
     /*private String description = null;
     private EtatPublication etat = EtatPublication.EN_PREPARATION;
     private Date fin = null;
@@ -29,10 +29,10 @@ public class Event extends StackMobModel{
         super(Event.class);
     }
 
-    public Event(String nom, Date debut) {
+    public Event(String nom) {
         super(Event.class);
         this.nom = nom;
-        this.debut = debut;
+        //this.debut = debut;
     }
 
     /*
@@ -51,14 +51,14 @@ public class Event extends StackMobModel{
         public Billetterie getBilletterie() { return billetterie; }
         public void setBilletterie(Billetterie billetterie) { this.billetterie = billetterie; }
     */
-
+/*
     public Date getDebut() {
         return debut;
     }
 
     public void setDebut(Date debut) {
         this.debut = debut;
-    }
+    }*/
 /*
     public String getDescription() {
         return description;

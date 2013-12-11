@@ -8,13 +8,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 import com.stackmob.android.sdk.common.StackMobAndroid;
+import com.stackmob.sdk.api.StackMob;
+import com.stackmob.sdk.callback.StackMobQueryCallback;
+import com.stackmob.sdk.exception.StackMobException;
 
 import java.util.List;
 import java.util.Vector;
+
+import tipsy.app.orga.*;
+import tipsy.commun.Organisateur;
 
 /**
  * Created by Alexandre on 04/12/13.
@@ -51,15 +58,28 @@ public class MainActivity extends FragmentActivity {
         // Affectation de l'adapter au ViewPager
         pager.setAdapter(this.mPagerAdapter);
 
-        //if(getLayoutInflater().equals(R.layout.help_three)){
         final Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent connection = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(connection);
+                if(StackMob.getStackMob().isLoggedIn()) {
+                    Organisateur.getLoggedInUser(Organisateur.class, new StackMobQueryCallback<Organisateur>() {
+                        @Override
+                        public void success(List<Organisateur> list) {
+                            Organisateur loggedInUser = list.get(0);
+                            startActivity(new Intent(MainActivity.this, tipsy.app.orga.HomeActivity.class));
+                        }
+
+                        @Override
+                        public void failure(StackMobException e) {
+                            Log.d("Connexion Orga", e.getMessage());
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        }
+                    });
+                } else {
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                }
             }
         });
-        //}
     }
 
     public class MyPagerAdapter extends FragmentStatePagerAdapter {
