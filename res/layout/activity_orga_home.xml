@@ -13,15 +13,14 @@
         android:orientation="vertical"
         android:weightSum="1">
 
-        <Button
+        <ImageButton
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/creer_event"
+            android:src="@drawable/ic_action_new"
             android:id="@+id/button_creer_event"
             android:layout_alignParentLeft="true"
             android:layout_gravity="center_horizontal"
             android:layout_weight="0.10"
-            android:onClick="creerEventActivity"
             android:background="@color/background2" />
 
     </LinearLayout>
