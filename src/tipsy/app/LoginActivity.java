@@ -16,8 +16,7 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import java.util.Date;
-
+import tipsy.app.orga.*;
 import tipsy.commun.Organisateur;
 
 public class LoginActivity extends Activity implements Validator.ValidationListener {
@@ -54,7 +53,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         // Redirection inscription
         inscription.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, OrgaInscriptionActivity.class));
+                startActivity(new Intent(LoginActivity.this, InscriptionActivity.class));
             }
         });
     }
@@ -66,7 +65,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         orga.login(new StackMobModelCallback() {
             @Override
             public void success() {
-                startActivity(new Intent(LoginActivity.this, OrgaHomeActivity.class));
+                startActivity(new Intent(LoginActivity.this, tipsy.app.orga.HomeActivity.class));
             }
 
             // SINON TENTATIVE DE CONNEXION EN TANT QUE MEMBRE

@@ -17,12 +17,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/creer_event"
-            android:id="@+id/button"
+            android:id="@+id/button_creer_event"
             android:layout_alignParentLeft="true"
             android:layout_gravity="center_horizontal"
-            android:layout_weight="0.08"
+            android:layout_weight="0.10"
             android:onClick="creerEventActivity"
-            android:layout_margin="5dp" />
+            android:background="@color/background2" />
 
     </LinearLayout>
 

@@ -1,4 +1,4 @@
-package tipsy.app;
+package tipsy.app.orga;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -18,9 +18,12 @@ import com.mobsandgeeks.saripaar.annotation.TextRule;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import tipsy.app.HomeActivity;
+import tipsy.app.LoginActivity;
+import tipsy.app.R;
 import tipsy.commun.Organisateur;
 
-public class OrgaInscriptionActivity extends Activity implements Validator.ValidationListener {
+public class InscriptionActivity extends Activity implements Validator.ValidationListener {
 
     @Required(order = 1)
     private EditText nom;
@@ -77,13 +80,13 @@ public class OrgaInscriptionActivity extends Activity implements Validator.Valid
                     @Override
                     public void success() {
                         // Tableau de bord Organisateur
-                        startActivity(new Intent(OrgaInscriptionActivity.this, HomeActivity.class));
+                        startActivity(new Intent(InscriptionActivity.this, HomeActivity.class));
                     }
 
                     @Override
                     public void failure(StackMobException e) {
                         // Connexion
-                        startActivity(new Intent(OrgaInscriptionActivity.this, LoginActivity.class));
+                        startActivity(new Intent(InscriptionActivity.this, LoginActivity.class));
                     }
                 });
             }
