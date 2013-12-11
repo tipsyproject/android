@@ -17,10 +17,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09415498-4d1b-4542-9a8b-164207e7fef1" name="Default" comment="Merge branch 'EventOrga' of https://github.com/tipsyproject/android&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;AndroidManifest.xml&#10;&#9;src/tipsy/app/LoginActivity.java&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/commun/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/MainActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Membre.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Membre.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/Help.java" afterPath="$PROJECT_DIR$/src/tipsy/app/Help.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/User.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/User.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TipsyApp.iws" />
@@ -86,13 +84,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Organisateur.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Organisateur.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Organisateur.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="22" selection-start="308" selection-end="308" vertical-scroll-proportion="0.4203103" vertical-offset="2" max-vertical-offset="840">
+            <state line="29" column="23" selection-start="603" selection-end="603" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tipsy/app/MainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="74" column="71" selection-start="2589" selection-end="2589" vertical-scroll-proportion="0.0" vertical-offset="10" max-vertical-offset="1440">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Help.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tipsy/app/Help.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -100,11 +116,8 @@
       <file leaf-file-name="Membre.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Membre.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="20" column="1" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
-              <folding>
-                <element signature="e#325#326#0" expanded="true" />
-                <element signature="e#370#371#0" expanded="true" />
-              </folding>
+            <state line="20" column="1" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0" vertical-offset="300" max-vertical-offset="405">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -112,19 +125,17 @@
       <file leaf-file-name="InscriptionActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/InscriptionActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="64" column="5" selection-start="2142" selection-end="3728" vertical-scroll-proportion="0.0" vertical-offset="960" max-vertical-offset="1770">
+            <state line="95" column="54" selection-start="3320" selection-end="3320" vertical-scroll-proportion="0.0" vertical-offset="640" max-vertical-offset="1395">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="User.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="User.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/tipsy/commun/User.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="40" column="32" selection-start="1076" selection-end="1076" vertical-scroll-proportion="0.0" vertical-offset="41" max-vertical-offset="750">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="39" column="8" selection-start="1057" selection-end="1057" vertical-scroll-proportion="0.6754967" vertical-offset="0" max-vertical-offset="765">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -232,6 +243,7 @@
         <option value="$PROJECT_DIR$/src/tipsy/app/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" />
         <option value="$PROJECT_DIR$/src/tipsy/commun/Membre.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/Help.java" />
         <option value="$PROJECT_DIR$/src/tipsy/commun/User.java" />
       </list>
     </option>
@@ -253,7 +265,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="2" />
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectStructureProblems">
     <ignored-problems>
@@ -273,6 +285,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -330,6 +344,10 @@
               <option name="myItemId" value="tipsy" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -375,8 +393,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -438,26 +454,6 @@
       <setting name="debug" value="false" />
       <method />
     </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -480,25 +476,32 @@
       </MavenSettings>
       <method />
     </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -526,6 +529,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -676,27 +692,27 @@
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3277027" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16930023" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.11936937" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39928487" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32896304" sideWeight="0.1980198" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2450495" sideWeight="0.31108463" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32985386" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2450495" sideWeight="0.31108463" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3243243" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32094595" sideWeight="0.8019802" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32881355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24878444" sideWeight="0.8224076" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2682334" sideWeight="0.8224076" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21846847" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3231405" sideWeight="0.67938024" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3231405" sideWeight="0.67938024" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32843137" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3243243" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -721,13 +737,6 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/mobsandgeeks/saripaar/Validator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="7" selection-start="1666" selection-end="1666" vertical-scroll-proportion="0.2606635" vertical-offset="0" max-vertical-offset="8460">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="53" selection-start="121" selection-end="121" vertical-scroll-proportion="0.05811966" vertical-offset="0" max-vertical-offset="585" />
@@ -1048,13 +1057,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/InscriptionActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="64" column="5" selection-start="2142" selection-end="3728" vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="1395">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Event.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="31" column="27" selection-start="783" selection-end="783" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1650">
@@ -1062,38 +1064,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Membre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="1" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Organisateur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="23" selection-start="603" selection-end="603" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/app/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="39" selection-start="890" selection-end="890" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1335">
+        <state line="74" column="71" selection-start="2589" selection-end="2589" vertical-scroll-proportion="0.0" vertical-offset="10" max-vertical-offset="1440">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/Help.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="0" selection-start="84" selection-end="84" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/InscriptionActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="95" column="54" selection-start="3320" selection-end="3320" vertical-scroll-proportion="0.0" vertical-offset="640" max-vertical-offset="1395">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/commun/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="32" selection-start="1076" selection-end="1076" vertical-scroll-proportion="0.0" vertical-offset="41" max-vertical-offset="750">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Membre.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="1" selection-start="373" selection-end="373" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="405">
-          <folding>
-            <element signature="e#325#326#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Organisateur.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="22" selection-start="308" selection-end="308" vertical-scroll-proportion="0.4203103" vertical-offset="2" max-vertical-offset="840">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="39" column="8" selection-start="1057" selection-end="1057" vertical-scroll-proportion="0.6754967" vertical-offset="0" max-vertical-offset="765">
+          <folding />
         </state>
       </provider>
     </entry>
