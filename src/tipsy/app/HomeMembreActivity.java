@@ -20,7 +20,7 @@ import android.widget.SearchView;
 /**
  * Created by tech on 05/12/13.
  */
-public class HomeUserActivity extends Activity {
+public class HomeMembreActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -76,7 +76,7 @@ public class HomeUserActivity extends Activity {
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(HomeUserActivity.this);
+                hideKeyboard(HomeMembreActivity.this);
                 return false;
             }
         });
@@ -132,7 +132,7 @@ public class HomeUserActivity extends Activity {
 
         // update selected item and title, then close the drawer
         if (position == 3) {
-            startActivity(new Intent(HomeUserActivity.this, HelpMainActivity.class));
+            startActivity(new Intent(HomeMembreActivity.this, HelpActivity.class));
         } else {
             mDrawerList.setItemChecked(position, true);
             setTitle(titres_menu[position]);

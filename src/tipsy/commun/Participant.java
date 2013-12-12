@@ -32,7 +32,7 @@ public class Participant extends StackMobUser implements UtilisateurTipsy {
         this.bracelet = bracelet;
     }
 
-    public TypeUtilisateur getTypeUtilisateur() {
-        return TypeUtilisateur.ANONYME;
+    public TypeUser getTypeUtilisateur() {
+        return TypeUser.ANONYME;
     }
 }

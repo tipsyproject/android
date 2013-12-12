@@ -19,7 +19,7 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.HomeUserActivity;
+import tipsy.app.HomeMembreActivity;
 import tipsy.app.R;
 import tipsy.commun.Event;
 
@@ -102,7 +102,7 @@ public class EditEventActivity extends FragmentActivity implements ActionBar.Tab
             // Connexion automatique en cas de réussite
             @Override
             public void success() {
-                startActivity(new Intent(EditEventActivity.this, HomeUserActivity.class));
+                startActivity(new Intent(EditEventActivity.this, HomeMembreActivity.class));
             }
 
             // En cas d'échec

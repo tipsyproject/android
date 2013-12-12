@@ -20,7 +20,7 @@ import com.mobsandgeeks.saripaar.annotation.TextRule;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.HomeUserActivity;
+import tipsy.app.HomeMembreActivity;
 import tipsy.app.LoginActivity;
 import tipsy.app.R;
 import tipsy.commun.Organisateur;
@@ -90,7 +90,7 @@ public class InscriptionActivity extends Activity implements Validator.Validatio
                     @Override
                     public void success() {
                         // Tableau de bord Organisateur
-                        startActivity(new Intent(InscriptionActivity.this, HomeUserActivity.class));
+                        startActivity(new Intent(InscriptionActivity.this, HomeMembreActivity.class));
                     }
 
                     @Override

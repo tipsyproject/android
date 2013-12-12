@@ -1,6 +1,6 @@
 package tipsy.app;
 
-import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -14,23 +14,27 @@ import android.widget.Button;
 import java.util.List;
 import java.util.Vector;
 
+import tipsy.commun.Prefs;
+
 /**
  * Created by Alexandre on 12/12/13.
  */
-public class HelpMainActivity extends FragmentActivity {
+public class HelpActivity extends FragmentActivity {
 
     private PagerAdapter mPagerAdapter;
+    private SharedPreferences prefs;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         super.setContentView(R.layout.activity_main);
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();
 
         // Ajout des Fragments dans la liste
-        fragments.add(Fragment.instantiate(this, HelpOneFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, HelpTwoFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, HelpThreeFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Help1Fragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Help2Fragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, Help3Fragment.class.getName()));
 
         // Création de l'adapter qui s'occupera de l'affichage de la liste de
         // Fragments
@@ -43,14 +47,10 @@ public class HelpMainActivity extends FragmentActivity {
         final Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(HelpMainActivity.this, HomeAnonymousActivity.class));
-                finish();
-            }
-        });
-        final Button inscription_or_connect = (Button) findViewById(R.id.inscription_or_connect);
-        inscription_or_connect.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(HelpMainActivity.this, LoginActivity.class));
+                prefs.edit()
+                        .putBoolean(Prefs.SKIP_HELP, true)
+                        .commit();
+                LoginActivity.rememberMe(HelpActivity.this);
             }
         });
     }
@@ -64,12 +64,10 @@ public class HelpMainActivity extends FragmentActivity {
             super(fm);
             this.fragments = fragments;
         }
-
         @Override
         public Fragment getItem(int position) {
             return this.fragments.get(position);
         }
-
         @Override
         public int getCount() {
             return this.fragments.size();

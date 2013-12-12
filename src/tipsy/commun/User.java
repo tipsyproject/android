@@ -1,51 +1,55 @@
 package tipsy.commun;
 
-import android.app.Activity;
-import android.content.Context;
-
 import com.stackmob.sdk.model.StackMobUser;
 
-import java.io.FileOutputStream;
 
 /**
  * Created by vquefelec on 11/12/13.
  */
-public abstract class User extends StackMobUser implements UtilisateurTipsy {
+public class User extends StackMobUser {
 
-    private static String lastUserFilename = "lastlogin";
-    private static boolean loggedIn = false;
-    protected String nom = null;
+    protected String nom;
+    protected int type;
 
-    /* CONSTRUCTEUR */
-    public User(String username, String password) {
+    public User(String username, String password){
         super(User.class, username, password);
     }
 
+    public User(String username, String password, String nom){
+        super(User.class, username, password);
+        this.nom = nom;
+    }
+
+    public int getType() {
+        return type;
+    }
+
     public String getEmail(){
-        return this.getUsername();
+        return getUsername();
     }
 
-    public void remember(Context context){
-        FileOutputStream outputStream;
-        try {
-            outputStream = context.openFileOutput(lastUserFilename, Context.MODE_PRIVATE);
-            outputStream.write(this.getEmail().getBytes());
-            outputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+    /*
+    public void login(){
+        try{
+            super.login(new StackMobModelCallback() {
+                @Override
+                public void success() {
+                    fetch(new StackMobModelCallback() {
+                        @Override
+                        public void success() {
+                        }
+                        @Override
+                        public void failure(StackMobException e) {
+                        }
+                    });
+                }
+                @Override
+                public void failure(StackMobException e) {
+                }
+            });
+        }catch(Exception e){
+
         }
-    }
+    }*/
 
-    public static String getLastUserFilename(Activity act){
-        //A compléter
-        return lastUserFilename;
-    }
-
-    public static void loggingIn(){
-        User.loggedIn = true;
-    }
-
-    public static void loggingOut(){
-        User.loggedIn = false;
-    }
 }

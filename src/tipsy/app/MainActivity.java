@@ -2,17 +2,13 @@ package tipsy.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+import android.preference.PreferenceManager;
 
 import com.stackmob.android.sdk.common.StackMobAndroid;
-import com.stackmob.sdk.api.StackMob;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
-import com.stackmob.sdk.exception.StackMobException;
 
-import java.util.List;
-
-import tipsy.commun.Organisateur;
+import tipsy.commun.Prefs;
 
 /**
  * Created by Alexandre on 04/12/13.
@@ -20,9 +16,8 @@ import tipsy.commun.Organisateur;
 
 public class MainActivity extends Activity {
 
-    /**
-     * Called when the activity is first created.
-     */
+    private SharedPreferences prefs;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         // Initialisation de STACKMOB avec la clé publique
@@ -32,23 +27,15 @@ public class MainActivity extends Activity {
 
         super.onCreate(savedInstanceState);
 
-        if (StackMob.getStackMob().isLoggedIn()) {
-            Organisateur.getLoggedInUser(Organisateur.class, new StackMobQueryCallback<Organisateur>() {
-                @Override
-                public void success(List<Organisateur> list) {
-                    Organisateur loggedInUser = list.get(0);
-                    startActivity(new Intent(MainActivity.this, tipsy.app.orga.HomeOrgaActivity.class));
-                }
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        boolean skipHelp = prefs.getBoolean(Prefs.SKIP_HELP,false);
 
-                @Override
-                public void failure(StackMobException e) {
-                    Log.d("Connexion Orga", e.getMessage());
-                    startActivity(new Intent(MainActivity.this, HelpMainActivity.class));
-                }
-            });
-        } else {
-            startActivity(new Intent(MainActivity.this, HelpMainActivity.class));
-        }
+        /*
+            Affichage de l'aide si elle n'a encore jamais été passée.
+            Sinon, on essaye de reconnecter automatiquement l'utilisateur
+         */
+        if (!skipHelp) startActivity(new Intent(MainActivity.this, HelpActivity.class));
+        else LoginActivity.rememberMe(this);
     }
 
 

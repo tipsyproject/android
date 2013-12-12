@@ -1,7 +1,6 @@
 package tipsy.app;
 
 import android.app.Activity;
-import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -139,7 +138,7 @@ public class HomeAnonymousActivity extends Activity {
             startActivity(new Intent(HomeAnonymousActivity.this, ChoiceActivity.class));
         }
         else if (position == 3) {
-            startActivity(new Intent(HomeAnonymousActivity.this, HelpMainActivity.class));
+            startActivity(new Intent(HomeAnonymousActivity.this, HelpActivity.class));
         } else {
             mDrawerList.setItemChecked(position, true);
             setTitle(titres_menu[position]);

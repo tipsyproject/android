@@ -2,10 +2,11 @@ package tipsy.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,11 +20,14 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.orga.HomeOrgaActivity;
 import tipsy.app.orga.InscriptionActivity;
-import tipsy.commun.Organisateur;
+import tipsy.commun.TypeUser;
+import tipsy.commun.User;
+import tipsy.commun.Prefs;
 
 public class LoginActivity extends Activity implements Validator.ValidationListener {
+
+    private SharedPreferences prefs;
 
     @Required(order = 1)
     @Email(order = 2)
@@ -33,6 +37,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     private Button connect;
     private TextView inscription;
     private Validator validator;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,10 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
 
         validator = new Validator(this);
         validator.setValidationListener(this);
+
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+
+
 
         // TENTATIVE DE CONNEXION
         connect.setOnClickListener(new View.OnClickListener() {
@@ -70,18 +79,25 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     }
 
     public void onValidationSucceeded() {
-        // D'ABORD TENTATIVE DE CONNEXION EN TANT QU'ORGANISATEUR
-        final Organisateur orga = new Organisateur(email.getText().toString(), password.getText().toString());
-        orga.login(new StackMobModelCallback() {
+        final User user = new User(email.getText().toString(), password.getText().toString());
+        user.login(new StackMobModelCallback() {
             @Override
             public void success() {
-                startActivity(new Intent(LoginActivity.this, HomeOrgaActivity.class));
+                // Sauvegarde locale des identifiants pour connexion auto
+                prefs.edit()
+                    .putString(Prefs.USERNAME, email.getText().toString())
+                    .putString(Prefs.PASSWORD, password.getText().toString())
+                    .commit();
+                // Redirection en fonction du type utilisateur
+                if (user.getType() == TypeUser.ORGANISATEUR)
+                    startActivity(new Intent(LoginActivity.this,tipsy.app.orga.HomeOrgaActivity.class));
+                else if (user.getType() == TypeUser.MEMBRE)
+                    startActivity(new Intent(LoginActivity.this,tipsy.app.HomeMembreActivity.class));
+                else Toast.makeText(LoginActivity.this,"Connexion impossible", Toast.LENGTH_SHORT).show();
             }
-
-            // SINON TENTATIVE DE CONNEXION EN TANT QUE MEMBRE
             @Override
             public void failure(StackMobException e) {
-                Toast.makeText(getApplicationContext(), R.string.failed_connexion, Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -101,6 +117,44 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     public static void hideKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+
+    /*
+    Si aucun couple username/password n'a été mémorisé,
+    l'utilisateur est redirigé vers la page de login.
+
+    Sinon il est connecté automatiquement.
+    Et en fonction du type d'utilisateur,
+    celui-ci est redirigé vers l'activité correspondante.
+    (en cas d'echec lors de la connexion auto, l'utilisateur est redirigé vers LoginActivity)
+    */
+    public static void rememberMe(Activity act){
+        final Activity a = act;
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(a);
+        String username = prefs.getString(Prefs.USERNAME, null);
+        String password = prefs.getString(Prefs.PASSWORD, null);
+        if (username == null || password == null) {
+            a.startActivity(new Intent(a, LoginActivity.class));
+        }else{
+            final User user = new User(username,password);
+            user.login(new StackMobModelCallback() {
+                @Override
+                public void success() {
+                    if (user.getType() == TypeUser.ORGANISATEUR)
+                        a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
+                    else if (user.getType() == TypeUser.MEMBRE)
+                        a.startActivity(new Intent(a,tipsy.app.HomeMembreActivity.class));
+                    else  a.startActivity(new Intent(a, LoginActivity.class));
+                }
+                /* En cas d'echec, redirection vers LoginActivity */
+                @Override
+                public void failure(StackMobException e) {
+                    a.startActivity(new Intent(a, LoginActivity.class));
+                }
+            });
+        }
+
     }
 
 }

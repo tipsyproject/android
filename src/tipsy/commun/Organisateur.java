@@ -1,13 +1,7 @@
 package tipsy.commun;
 
 
-import android.util.Log;
-
-
 import java.util.ArrayList;
-import java.util.Date;
-
-import tipsy.app.HomeUserActivity;
 
 /**
  * Created by valoo on 07/12/13.
@@ -49,8 +43,4 @@ public class Organisateur extends User{
         this.nom = nom;
     }
 
-
-    public TypeUtilisateur getTypeUtilisateur() {
-        return TypeUtilisateur.ORGANISATEUR;
-    }
 }

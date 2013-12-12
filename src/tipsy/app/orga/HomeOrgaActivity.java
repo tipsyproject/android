@@ -17,7 +17,7 @@ import android.widget.ListView;
 
 import com.stackmob.android.sdk.common.StackMobAndroid;
 
-import tipsy.app.HelpMainActivity;
+import tipsy.app.HelpActivity;
 import tipsy.app.R;
 
 /**
@@ -124,7 +124,7 @@ public class HomeOrgaActivity extends Activity {
 
         // update selected item and title, then close the drawer
         if (position == 2) {
-            startActivity(new Intent(HomeOrgaActivity.this, HelpMainActivity.class));
+            startActivity(new Intent(HomeOrgaActivity.this, HelpActivity.class));
         } else {
             mDrawerList.setItemChecked(position, true);
             setTitle(titres_menu[position]);

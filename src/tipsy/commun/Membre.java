@@ -15,7 +15,4 @@ public class Membre extends User {
         super(username,password);
     }
 
-    public TypeUtilisateur getTypeUtilisateur() {
-        return TypeUtilisateur.MEMBRE;
-    }
 }

@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HelpMainActivity"
+            android:name=".HelpActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".LoginActivity"
@@ -42,7 +42,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".HomeUserActivity">
+        <activity android:name=".HomeMembreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>

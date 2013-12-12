@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 /**
  * Created by Alexandre on 10/12/13.
  */
-public class HelpTwoFragment extends Fragment {
+public class Help2Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
