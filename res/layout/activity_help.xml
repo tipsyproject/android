@@ -20,16 +20,4 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="58dp" />
 
-    <!-- <Button
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/inscription_or_connect"
-        android:id="@+id/inscription_or_connect"
-        android:layout_gravity="center_horizontal|bottom"
-        android:textIsSelectable="false"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" /> -->
-
 </RelativeLayout>

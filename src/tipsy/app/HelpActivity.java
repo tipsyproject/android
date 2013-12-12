@@ -27,7 +27,7 @@ public class HelpActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        super.setContentView(R.layout.activity_main);
+        super.setContentView(R.layout.activity_help);
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();
 
