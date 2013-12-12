@@ -34,7 +34,7 @@ public class EditEventLocFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View layoutView = inflater.inflate(R.layout.fragment_orga_edit_event_loc, container,false);
+        View layoutView = inflater.inflate(R.layout.fragment_orga_edit_event_loc, container, false);
         return layoutView;
     }
 }

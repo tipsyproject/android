@@ -18,7 +18,7 @@ import com.mobsandgeeks.saripaar.annotation.TextRule;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.HomeActivity;
+import tipsy.app.HomeUserActivity;
 import tipsy.app.LoginActivity;
 import tipsy.app.R;
 import tipsy.commun.Organisateur;
@@ -28,7 +28,7 @@ public class InscriptionActivity extends Activity implements Validator.Validatio
     @Required(order = 1)
     private EditText nom;
     @Required(order = 2)
-    @Email(order = 3, message="Entrez une adresse email valide.")
+    @Email(order = 3, message = "Entrez une adresse email valide.")
     private EditText email;
     @Password(order = 3)
     @TextRule(order = 4, minLength = 6, message = "Entrez au moins 6 caractères.")
@@ -80,7 +80,7 @@ public class InscriptionActivity extends Activity implements Validator.Validatio
                     @Override
                     public void success() {
                         // Tableau de bord Organisateur
-                        startActivity(new Intent(InscriptionActivity.this, HomeActivity.class));
+                        startActivity(new Intent(InscriptionActivity.this, HomeUserActivity.class));
                     }
 
                     @Override

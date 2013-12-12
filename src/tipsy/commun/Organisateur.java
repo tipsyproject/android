@@ -7,7 +7,7 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.Date;
 
-import tipsy.app.HomeActivity;
+import tipsy.app.HomeUserActivity;
 
 /**
  * Created by valoo on 07/12/13.

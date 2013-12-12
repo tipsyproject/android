@@ -37,7 +37,7 @@ public class SearchableActivity extends Activity implements SearchView.OnQueryTe
         super.onCreateOptionsMenu(menu);
 
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        inflater.inflate(R.menu.menu_user, menu);
         MenuItem searchItem = menu.findItem(R.id.search);
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setQueryHint(getString(R.string.search));

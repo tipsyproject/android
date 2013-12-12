@@ -34,7 +34,7 @@ public class EditEventDateFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View layoutView = inflater.inflate(R.layout.fragment_orga_edit_event_date, container,false);
+        View layoutView = inflater.inflate(R.layout.fragment_orga_edit_event_date, container, false);
         return layoutView;
     }
 }

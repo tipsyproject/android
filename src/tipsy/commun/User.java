@@ -37,7 +37,8 @@ public abstract class User extends StackMobUser implements UtilisateurTipsy {
     }
 
     public static String getLastUserFilename(Activity act){
-        
+        //A compléter
+        return lastUserFilename;
     }
 
     public static void loggingIn(){

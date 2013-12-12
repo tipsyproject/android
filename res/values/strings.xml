@@ -2,21 +2,37 @@
 <resources>
     <string name="app_name">Tipsy</string>
     <string-array name="menu_participant">
-        <item>Les Événements</item>
-        <item>Mon Panier</item>
-        <item>Mes Coordonnées</item>
-        <item>Mes Billets</item>
-        <item>Mes Crédits</item>
+        <item>Événements</item>
+        <item>Solde</item>
+        <item>Paramètres</item>
+        <item>Aide</item>
+        <item>Déconnexion</item>
+    </string-array>
+    <string-array name="menu_organisateur">
+        <item>Événements</item>
+        <item>Paramètres</item>
+        <item>Aide</item>
+        <item>Déconnexion</item>
+    </string-array>
+    <string-array name="menu_anonyme">
+        <item>Événements</item>
+        <item>Connexion</item>
+        <item>Inscription</item>
         <item>Aide</item>
     </string-array>
     <string name="creer_event">Créer un événement</string>
     <string name="drawer_open">Ouvrir le menu déroulant</string>
     <string name="drawer_close">Fermer le menu déroulant</string>
     <string name="app_not_available">Erreur</string>
-    <string name="hello_world">Hello World!</string>
     <string name="action_settings">Options</string>
-    <string name="search">"Recherche d\'événements"</string>
+    <string name="search">"Rech. d\'événements"</string>
     <string name="next">"Passer"</string>
-
-
+    <string name="connection">"Connexion"</string>
+    <string name="disconnection">"Déconnexion"</string>
+    <string name="inscription">"Inscription"</string>
+    <string name="anonymous_access">"Accès Anonyme"</string>
+    <string name="inscription_or_connect">"Connexion ou Inscription"</string>
+    <string name="conditions">"En m'inscrivant, j'accepte les conditions générales."</string>
+    <string name="affichermdp">"Afficher le mot de passe"</string>
+    <string name="loading">"Chargement"</string>
 </resources>

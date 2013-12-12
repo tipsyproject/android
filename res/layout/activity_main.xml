@@ -1,20 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/first_bg">
+    android:orientation="vertical">
 
-    <ImageView
-        android:layout_width="245dp"
-        android:layout_height="108dp"
-        android:id="@+id/imageView"
-        android:layout_gravity="center_horizontal|top"
-        android:background="@drawable/tipsy_logo"
-        android:layout_row="2"
-        android:layout_column="0"
-        android:layout_alignParentTop="true"
+    <android.support.v4.view.ViewPager xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <Button
+        android:layout_width="125dp"
+        android:layout_height="48dp"
+        android:text="@string/next"
+        android:id="@+id/next"
+        android:layout_gravity="center_horizontal|bottom"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp" />
+        android:layout_marginBottom="58dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/inscription_or_connect"
+        android:id="@+id/inscription_or_connect"
+        android:layout_gravity="center_horizontal|bottom"
+        android:textIsSelectable="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

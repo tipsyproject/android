@@ -1,16 +1,11 @@
 package tipsy.commun;
 
-import android.location.Address;
-import android.media.Image;
-
 import com.stackmob.sdk.model.StackMobModel;
-
-import java.util.Date;
 
 /**
  * Created by Valentin on 07/12/13.
  */
-public class Event extends StackMobModel{
+public class Event extends StackMobModel {
     //private Address adresse = null;
     /*
     private Bar             bar;
@@ -25,7 +20,7 @@ public class Event extends StackMobModel{
     //private TypeEvent type = TypeEvent.UNDEFINED;
     private Organisateur organisateur = null;
 
-    public Event(){
+    public Event() {
         super(Event.class);
     }
 

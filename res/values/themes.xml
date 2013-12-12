@@ -6,18 +6,24 @@
         <!-- Customize your theme here. -->
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <!--   <item name="android:checkboxStyle">@color/text_menu</item>-->
-           <item name="android:textColor">@color/text_menu</item>
-           <item name="android:buttonStyle">@style/Button_Style</item>
-           <item name="android:textColorHint">@color/text_hint</item>
-           <item name="android:editTextColor">@color/text_menu</item>
-           <item name="android:windowBackground">@color/background</item>
-       </style>
+        <item name="android:textColor">@color/text_menu</item>
+        <item name="android:buttonStyle">@style/Button_Style</item>
+        <item name="android:textColorHint">@color/text_hint</item>
+        <item name="android:editTextColor">@color/text_menu</item>
+        <item name="android:windowBackground">@color/background</item>
+        <item name="android:imageButtonStyle">@style/ImageButton_Style</item>
+    </style>
 
-       <style name="AppTheme.NoActionBar" parent="AppTheme">
-           <!-- Customize your theme here. -->
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:buttonStyle">@style/Button_Style.NoAction</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.White" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@color/background_loading</item>
+        <item name="android:textColor">@color/text_loading</item>
+        <item name="android:editTextColor">@color/text_loading</item>
     </style>
 
     <style name="MyActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
@@ -36,14 +42,19 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
-    <style name="Checkbox_Style">
-        <item name="android:textColor">@color/button_color</item>
-
-    </style>
-
     <style name="Button_Style.NoAction">
         <item name="android:background">@drawable/button</item>
         <item name="android:textColor">@color/button_color</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
+    <style name="Checkbox_Style">
+        <item name="android:textColor">@color/text_hint</item>
+
+    </style>
+
+    <style name="ImageButton_Style">
+        <item name="android:background">@color/background2</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 

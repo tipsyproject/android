@@ -1,8 +1,7 @@
 package tipsy.app;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -19,7 +18,7 @@ import android.widget.SearchView;
 /**
  * Created by tech on 05/12/13.
  */
-public class HomeActivity extends Activity {
+public class HomeAnonymousActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -32,10 +31,10 @@ public class HomeActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home);
+        setContentView(R.layout.activity_anonymous_home);
 
         titre = mDrawerTitle = getTitle();
-        titres_menu = getResources().getStringArray(R.array.menu_participant);
+        titres_menu = getResources().getStringArray(R.array.menu_anonyme);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_Layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -77,10 +76,11 @@ public class HomeActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.main, menu);
+        inflater.inflate(R.menu.menu_user, menu);
         MenuItem searchItem = menu.findItem(R.id.search);
         mSearchView = (SearchView) searchItem.getActionView();
         mSearchView.setQueryHint(getString(R.string.search));
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -113,18 +113,22 @@ public class HomeActivity extends Activity {
 
     private void selectItem(int position) {
         // update the main content by replacing fragments
-        Fragment fragment = new EventFragment();
+        /*Fragment fragment = new EventFragment();
         Bundle args = new Bundle();
         args.putInt(EventFragment.ARG_EVENT_NUMBER, position);
         fragment.setArguments(args);
 
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();*/
 
         // update selected item and title, then close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(titres_menu[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
+        if (position == 3) {
+            startActivity(new Intent(HomeAnonymousActivity.this, HelpMainActivity.class));
+        } else {
+            mDrawerList.setItemChecked(position, true);
+            setTitle(titres_menu[position]);
+            mDrawerLayout.closeDrawer(mDrawerList);
+        }
     }
 
     @Override
@@ -151,15 +155,13 @@ public class HomeActivity extends Activity {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
-
     /**
      * Fragment that appears in the "content_frame", shows a planet
      */
-    public static class EventFragment extends Fragment {
-        public static final String ARG_EVENT_NUMBER = "event_number";
+    /*public static class EventFragment extends Fragment {
 
         public EventFragment() {
             // Empty constructor required for fragment subclasses
         }
-    }
+    }*/
 }

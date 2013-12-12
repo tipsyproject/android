@@ -84,7 +84,7 @@ public class InscriptionUserActivity extends Activity implements Validator.Valid
                     @Override
                     public void success() {
                         // Tableau de bord Organisateur
-                        startActivity(new Intent(InscriptionUserActivity.this, HomeActivity.class));
+                        startActivity(new Intent(InscriptionUserActivity.this, HomeUserActivity.class));
                     }
 
                     @Override

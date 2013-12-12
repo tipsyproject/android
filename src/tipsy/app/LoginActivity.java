@@ -16,7 +16,8 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.orga.*;
+import tipsy.app.orga.HomeOrgaActivity;
+import tipsy.app.orga.InscriptionActivity;
 import tipsy.commun.Organisateur;
 
 public class LoginActivity extends Activity implements Validator.ValidationListener {
@@ -28,7 +29,6 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     private EditText password;
     private Button connect;
     private TextView inscription;
-
     private Validator validator;
 
     @Override
@@ -65,12 +65,14 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         orga.login(new StackMobModelCallback() {
             @Override
             public void success() {
-                startActivity(new Intent(LoginActivity.this, tipsy.app.orga.HomeActivity.class));
+                startActivity(new Intent(LoginActivity.this, HomeOrgaActivity.class));
             }
 
             // SINON TENTATIVE DE CONNEXION EN TANT QUE MEMBRE
             @Override
             public void failure(StackMobException e) {
+                String failed_connexion = "Email ou Mot de Passe Incorrect";
+                Toast.makeText(getApplicationContext(), failed_connexion, Toast.LENGTH_SHORT).show();
             }
         });
     }

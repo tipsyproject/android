@@ -11,22 +11,22 @@
         android:id="@+id/event_pager"
         android:layout_width="match_parent"
         android:layout_height="0px"
-        android:layout_weight="1"
-        >
-    </android.support.v4.view.ViewPager>
+        android:layout_weight="1"></android.support.v4.view.ViewPager>
 
-    <LinearLayout android:orientation="horizontal"
+    <LinearLayout
+        android:orientation="horizontal"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:measureWithLargestChild="true"
         android:layout_weight="0.10">
 
-        <ImageButton android:id="@+id/button_enregistrer"
+        <ImageButton
+            android:id="@+id/button_enregistrer"
             android:src="@drawable/ic_action_done"
             android:layout_height="@dimen/bar_height"
             android:layout_width="match_parent"
-            android:background="@color/background2"/>
+            android:background="@color/background2" />
 
     </LinearLayout>
 

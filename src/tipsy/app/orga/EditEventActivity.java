@@ -7,11 +7,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -22,15 +19,15 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.*;
+import tipsy.app.HomeUserActivity;
+import tipsy.app.R;
 import tipsy.commun.Event;
-import tipsy.commun.Organisateur;
 
 /**
  * Created by Valoo on 05/12/13.
  */
 
-public class EditEventActivity extends FragmentActivity implements ActionBar.TabListener, Validator.ValidationListener  {
+public class EditEventActivity extends FragmentActivity implements ActionBar.TabListener, Validator.ValidationListener {
     // Nombre de colonnes
     private static final int NUM_ITEMS = 4;
     private static final int[] icones = {
@@ -56,7 +53,7 @@ public class EditEventActivity extends FragmentActivity implements ActionBar.Tab
         setContentView(R.layout.activity_orga_editer_event);
 
         mAdapter = new EditEventAdapter(getSupportFragmentManager());
-        mPager = (ViewPager)findViewById(R.id.event_pager);
+        mPager = (ViewPager) findViewById(R.id.event_pager);
         mPager.setAdapter(mAdapter);
 
         actionBar = getActionBar();
@@ -95,7 +92,6 @@ public class EditEventActivity extends FragmentActivity implements ActionBar.Tab
     }
 
 
-
     public void onValidationSucceeded() {
         // Création d'un nouvel organisateur
 
@@ -106,7 +102,7 @@ public class EditEventActivity extends FragmentActivity implements ActionBar.Tab
             // Connexion automatique en cas de réussite
             @Override
             public void success() {
-                startActivity(new Intent(EditEventActivity.this, tipsy.app.HomeActivity.class));
+                startActivity(new Intent(EditEventActivity.this, HomeUserActivity.class));
             }
 
             // En cas d'échec
@@ -132,16 +128,21 @@ public class EditEventActivity extends FragmentActivity implements ActionBar.Tab
     public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
         mPager.setCurrentItem(tab.getPosition());
     }
+
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
+    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+    }
+
     @Override
-    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
+    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+    }
 
     // Gestionnaire de Fragments
     public static class EditEventAdapter extends FragmentPagerAdapter {
         public EditEventAdapter(FragmentManager fm) {
             super(fm);
         }
+
         @Override
         public int getCount() {
             return NUM_ITEMS;
@@ -151,7 +152,7 @@ public class EditEventActivity extends FragmentActivity implements ActionBar.Tab
         // Affiche le fragment voulu en fonction de la position
         public Fragment getItem(int position) {
             // Dans l'ordre de gauche à droite
-            switch(position){
+            switch (position) {
                 case 0:
                     return EditEventDescFragment.init(position);
                 case 1:

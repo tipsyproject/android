@@ -36,9 +36,9 @@
         android:background="@drawable/tipsy_logo" />
 
     <Button
-        android:layout_width="385dp"
-        android:layout_height="40dp"
-        android:text="Inscription"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:text="@string/inscription"
         android:id="@+id/connect"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="0dp" />
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="En m'inscrivant, j'accepte les conditions générales"
+        android:text="@string/conditions"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="80dp" />
@@ -66,8 +66,9 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Afficher le mot de passe"
+        android:text="@string/affichermdp"
         android:id="@+id/afficherPassword"
         android:layout_gravity="center_horizontal|bottom"
+        android:textColor="@color/text_hint"
         android:layout_marginBottom="120dp" />
 </FrameLayout>
