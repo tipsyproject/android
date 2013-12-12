@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import tipsy.app.membre.InscriptionMembreActivity;
 import tipsy.app.orga.InscriptionActivity;
 
 /**
@@ -36,7 +37,7 @@ public class ChoiceActivity extends Activity {
         next_user.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent connect = new Intent(ChoiceActivity.this, InscriptionUserActivity.class);
+                Intent connect = new Intent(ChoiceActivity.this, InscriptionMembreActivity.class);
                 startActivity(connect);
             }
         });

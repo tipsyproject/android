@@ -6,13 +6,18 @@ package tipsy.commun;
 
 import java.util.Date;
 
+
 public class Membre extends User {
 
-    private String password;
-    private Date naissance;
+    private String prenom;
 
     public Membre(String username, String password){
         super(username,password);
+        this.type = TypeUser.MEMBRE;
     }
 
+    public Membre(String username, String password, String nom, String prenom){
+        super(username,password,nom);
+        this.prenom = prenom;
+    }
 }

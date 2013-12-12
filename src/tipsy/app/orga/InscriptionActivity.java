@@ -20,7 +20,7 @@ import com.mobsandgeeks.saripaar.annotation.TextRule;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.HomeMembreActivity;
+import tipsy.app.membre.HomeMembreActivity;
 import tipsy.app.LoginActivity;
 import tipsy.app.R;
 import tipsy.commun.Organisateur;

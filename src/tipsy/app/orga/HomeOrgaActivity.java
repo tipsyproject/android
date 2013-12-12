@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,9 +17,17 @@ import android.widget.ImageButton;
 import android.widget.ListView;
 
 import com.stackmob.android.sdk.common.StackMobAndroid;
+import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.callback.StackMobQueryCallback;
+import com.stackmob.sdk.exception.StackMobException;
+
+import java.util.List;
 
 import tipsy.app.HelpActivity;
+import tipsy.app.HomeAnonymousActivity;
 import tipsy.app.R;
+import tipsy.commun.TypeUser;
+import tipsy.commun.User;
 
 /**
  * Created by Valoo on 05/12/13.
@@ -36,7 +45,6 @@ public class HomeOrgaActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        StackMobAndroid.init(getApplicationContext(), 0, "eeedff37-f59d-408a-9279-27cd8fe7062e");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_orga_home);
 
@@ -125,6 +133,27 @@ public class HomeOrgaActivity extends Activity {
         // update selected item and title, then close the drawer
         if (position == 2) {
             startActivity(new Intent(HomeOrgaActivity.this, HelpActivity.class));
+        } else if (position == 3) {
+            User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
+                @Override
+                public void success(List<User> list) {
+                    User user = list.get(0);
+                    user.logout(new StackMobModelCallback() {
+                        @Override
+                        public void success() {
+                            Log.d("REMEMBER", "Logout");
+                            startActivity(new Intent(HomeOrgaActivity.this, HomeAnonymousActivity.class));
+                        }
+                        @Override
+                        public void failure(StackMobException e) {
+                            Log.d("REMEMBER", "Logout failed");
+                        }
+                    });
+                }
+                @Override
+                public void failure(StackMobException e) {
+                }
+            });
         } else {
             mDrawerList.setItemChecked(position, true);
             setTitle(titres_menu[position]);

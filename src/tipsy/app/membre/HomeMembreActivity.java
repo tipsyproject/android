@@ -1,4 +1,4 @@
-package tipsy.app;
+package tipsy.app.membre;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,6 +16,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
+
+import tipsy.app.HelpActivity;
+import tipsy.app.R;
 
 /**
  * Created by tech on 05/12/13.

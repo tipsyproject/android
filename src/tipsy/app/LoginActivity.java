@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -18,8 +19,12 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import java.util.List;
+
+import tipsy.app.membre.HomeMembreActivity;
 import tipsy.app.orga.InscriptionActivity;
 import tipsy.commun.TypeUser;
 import tipsy.commun.User;
@@ -92,7 +97,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                 if (user.getType() == TypeUser.ORGANISATEUR)
                     startActivity(new Intent(LoginActivity.this,tipsy.app.orga.HomeOrgaActivity.class));
                 else if (user.getType() == TypeUser.MEMBRE)
-                    startActivity(new Intent(LoginActivity.this,tipsy.app.HomeMembreActivity.class));
+                    startActivity(new Intent(LoginActivity.this,HomeMembreActivity.class));
                 else Toast.makeText(LoginActivity.this,"Connexion impossible", Toast.LENGTH_SHORT).show();
             }
             @Override
@@ -121,7 +126,10 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
 
 
     /*
-    Si aucun couple username/password n'a été mémorisé,
+
+    On renvoie vers la page d'accueil correspondante si l'utilsiateur est encore connecté
+
+    Sinon si aucun couple username/password n'a été mémorisé,
     l'utilisateur est redirigé vers la page de login.
 
     Sinon il est connecté automatiquement.
@@ -131,30 +139,47 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     */
     public static void rememberMe(Activity act){
         final Activity a = act;
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(a);
-        String username = prefs.getString(Prefs.USERNAME, null);
-        String password = prefs.getString(Prefs.PASSWORD, null);
-        if (username == null || password == null) {
-            a.startActivity(new Intent(a, LoginActivity.class));
-        }else{
-            final User user = new User(username,password);
-            user.login(new StackMobModelCallback() {
-                @Override
-                public void success() {
-                    if (user.getType() == TypeUser.ORGANISATEUR)
-                        a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
-                    else if (user.getType() == TypeUser.MEMBRE)
-                        a.startActivity(new Intent(a,tipsy.app.HomeMembreActivity.class));
-                    else  a.startActivity(new Intent(a, LoginActivity.class));
-                }
-                /* En cas d'echec, redirection vers LoginActivity */
-                @Override
-                public void failure(StackMobException e) {
-                    a.startActivity(new Intent(a, LoginActivity.class));
-                }
-            });
-        }
+        // Si utilisateur encore connecté
+        User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
+            @Override
+            public void success(List<User> list) {
+                Log.d("REMEMBER", "Deja connecte");
+                User user = list.get(0);
+                if (user.getType() == TypeUser.ORGANISATEUR)
+                    a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
+                else if (user.getType() == TypeUser.MEMBRE)
+                    a.startActivity(new Intent(a,HomeMembreActivity.class));
+            }
 
+            @Override
+            public void failure(StackMobException e) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(a);
+                final String username = prefs.getString(Prefs.USERNAME, null);
+                final String password = prefs.getString(Prefs.PASSWORD, null);
+                if (username == null || password == null) {
+                    a.startActivity(new Intent(a, LoginActivity.class));
+                }else{
+                    final User user = new User(username,password);
+                    user.login(new StackMobModelCallback() {
+                        @Override
+                        public void success() {
+                            Log.d("REMEMBER", "Souvenir user");
+                            if (user.getType() == TypeUser.ORGANISATEUR)
+                                a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
+                            else if (user.getType() == TypeUser.MEMBRE)
+                                a.startActivity(new Intent(a,HomeMembreActivity.class));
+                            else  a.startActivity(new Intent(a, LoginActivity.class));
+                        }
+                        /* En cas d'echec, redirection vers LoginActivity */
+                        @Override
+                        public void failure(StackMobException e) {
+                            a.startActivity(new Intent(a, LoginActivity.class));
+                        }
+                    });
+                }
+            }
+
+        });
     }
 
 }

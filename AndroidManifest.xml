@@ -42,7 +42,7 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-        <activity android:name=".HomeMembreActivity">
+        <activity android:name=".membre.HomeMembreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -58,7 +58,7 @@
             android:name=".orga.InscriptionActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
-        <activity android:name=".InscriptionUserActivity"
+        <activity android:name=".membre.InscriptionMembreActivity"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".orga.HomeOrgaActivity">

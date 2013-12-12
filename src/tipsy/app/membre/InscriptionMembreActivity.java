@@ -1,4 +1,4 @@
-package tipsy.app;
+package tipsy.app.membre;
 
 /**
  * Created by Guillaume on 10/12/13.
@@ -24,9 +24,11 @@ import com.mobsandgeeks.saripaar.annotation.TextRule;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import tipsy.app.LoginActivity;
+import tipsy.app.R;
 import tipsy.commun.Participant;
 
-public class InscriptionUserActivity extends Activity implements Validator.ValidationListener {
+public class InscriptionMembreActivity extends Activity implements Validator.ValidationListener {
 
     @Required(order = 2)
     private EditText prenom;
@@ -72,7 +74,7 @@ public class InscriptionUserActivity extends Activity implements Validator.Valid
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(InscriptionUserActivity.this);
+                hideKeyboard(InscriptionMembreActivity.this);
                 return false;
             }
         });
@@ -94,13 +96,13 @@ public class InscriptionUserActivity extends Activity implements Validator.Valid
                     @Override
                     public void success() {
                         // Tableau de bord Organisateur
-                        startActivity(new Intent(InscriptionUserActivity.this, HomeMembreActivity.class));
+                        startActivity(new Intent(InscriptionMembreActivity.this, HomeMembreActivity.class));
                     }
 
                     @Override
                     public void failure(StackMobException e) {
                         // Connexion
-                        startActivity(new Intent(InscriptionUserActivity.this, LoginActivity.class));
+                        startActivity(new Intent(InscriptionMembreActivity.this, LoginActivity.class));
                     }
                 });
             }

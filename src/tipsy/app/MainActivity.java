@@ -35,7 +35,6 @@ public class MainActivity extends Activity {
             Affichage de l'aide si elle n'a encore jamais été passée.
             Sinon, on essaye de reconnecter automatiquement l'utilisateur
          */
-        Log.d("DEBUG FUCK", Boolean.toString(skipHelp));
         if (!skipHelp) startActivity(new Intent(this, HelpActivity.class));
         else LoginActivity.rememberMe(this);
     }
