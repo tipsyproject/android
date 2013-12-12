@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.stackmob.android.sdk.common.StackMobAndroid;
 
@@ -34,7 +35,8 @@ public class MainActivity extends Activity {
             Affichage de l'aide si elle n'a encore jamais été passée.
             Sinon, on essaye de reconnecter automatiquement l'utilisateur
          */
-        if (!skipHelp) startActivity(new Intent(MainActivity.this, HelpActivity.class));
+        Log.d("DEBUG FUCK", Boolean.toString(skipHelp));
+        if (!skipHelp) startActivity(new Intent(this, HelpActivity.class));
         else LoginActivity.rememberMe(this);
     }
 

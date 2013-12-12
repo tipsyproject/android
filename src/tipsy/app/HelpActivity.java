@@ -2,12 +2,14 @@ package tipsy.app;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -22,7 +24,6 @@ import tipsy.commun.Prefs;
 public class HelpActivity extends FragmentActivity {
 
     private PagerAdapter mPagerAdapter;
-    private SharedPreferences prefs;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,12 +45,13 @@ public class HelpActivity extends FragmentActivity {
         // Affectation de l'adapter au ViewPager
         pager.setAdapter(this.mPagerAdapter);
 
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         final Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                prefs.edit()
-                        .putBoolean(Prefs.SKIP_HELP, true)
-                        .commit();
+            prefs.edit()
+                .putBoolean(Prefs.SKIP_HELP, true)
+                .commit();
                 LoginActivity.rememberMe(HelpActivity.this);
             }
         });

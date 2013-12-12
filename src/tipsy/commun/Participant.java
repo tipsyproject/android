@@ -6,7 +6,7 @@ import com.stackmob.sdk.model.StackMobUser;
 /**
  * Created by Valentin on 07/12/13.
  */
-public class Participant extends StackMobUser implements UtilisateurTipsy {
+public class Participant extends StackMobUser {
 
     private Bracelet bracelet;
 
@@ -32,7 +32,7 @@ public class Participant extends StackMobUser implements UtilisateurTipsy {
         this.bracelet = bracelet;
     }
 
-    public TypeUser getTypeUtilisateur() {
+    public int getTypeUser() {
         return TypeUser.ANONYME;
     }
 }
