@@ -35,4 +35,5 @@
     <string name="conditions">"En m'inscrivant, j'accepte les conditions générales."</string>
     <string name="affichermdp">"Afficher le mot de passe"</string>
     <string name="loading">"Chargement"</string>
+    <string name="failed_connexion">Email ou Mot de Passe Incorrect</string>
 </resources>

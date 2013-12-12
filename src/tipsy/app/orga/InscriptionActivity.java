@@ -3,7 +3,9 @@ package tipsy.app.orga;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -62,6 +64,14 @@ public class InscriptionActivity extends Activity implements Validator.Validatio
 
             ;
         });
+
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(InscriptionActivity.this);
+                return false;
+            }
+        });
     }
 
     public void onValidationSucceeded() {
@@ -109,4 +119,8 @@ public class InscriptionActivity extends Activity implements Validator.Validatio
         }
     }
 
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
 }

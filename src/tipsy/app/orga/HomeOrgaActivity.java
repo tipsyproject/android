@@ -7,7 +7,9 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
@@ -81,6 +83,14 @@ public class HomeOrgaActivity extends Activity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
+
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(HomeOrgaActivity.this);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -146,6 +156,12 @@ public class HomeOrgaActivity extends Activity {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
     /**
      * Fragment that appears in the "content_frame", shows a planet
      */

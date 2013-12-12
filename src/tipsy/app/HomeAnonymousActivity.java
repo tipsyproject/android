@@ -9,7 +9,9 @@ import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -71,6 +73,13 @@ public class HomeAnonymousActivity extends Activity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(HomeAnonymousActivity.this);
+                return false;
+            }
+        });
     }
 
     @Override
@@ -122,7 +131,13 @@ public class HomeAnonymousActivity extends Activity {
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();*/
 
         // update selected item and title, then close the drawer
-        if (position == 3) {
+        if (position == 1) {
+            startActivity(new Intent(HomeAnonymousActivity.this, LoginActivity.class));
+        }
+        else if (position == 2) {
+            startActivity(new Intent(HomeAnonymousActivity.this, ChoiceActivity.class));
+        }
+        else if (position == 3) {
             startActivity(new Intent(HomeAnonymousActivity.this, HelpMainActivity.class));
         } else {
             mDrawerList.setItemChecked(position, true);
@@ -155,6 +170,12 @@ public class HomeAnonymousActivity extends Activity {
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
     /**
      * Fragment that appears in the "content_frame", shows a planet
      */

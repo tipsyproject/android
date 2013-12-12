@@ -3,7 +3,10 @@ package tipsy.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -56,8 +59,15 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                 startActivity(new Intent(LoginActivity.this, InscriptionActivity.class));
             }
         });
-    }
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(LoginActivity.this);
+                return false;
+            }
+        });
 
+    }
 
     public void onValidationSucceeded() {
         // D'ABORD TENTATIVE DE CONNEXION EN TANT QU'ORGANISATEUR
@@ -71,8 +81,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
             // SINON TENTATIVE DE CONNEXION EN TANT QUE MEMBRE
             @Override
             public void failure(StackMobException e) {
-                String failed_connexion = "Email ou Mot de Passe Incorrect";
-                Toast.makeText(getApplicationContext(), failed_connexion, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), R.string.failed_connexion, Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -87,6 +96,11 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
 }

@@ -50,17 +50,19 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
+        <activity
+            android:name=".ChoiceActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".orga.InscriptionActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
         </activity>
-
-        <activity android:name=".orga.HomeOrgaActivity"></activity>
-
+        <activity android:name=".InscriptionUserActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".orga.HomeOrgaActivity">
+        </activity>
         <activity android:name=".orga.EditEventActivity"></activity>
     </application>
 
