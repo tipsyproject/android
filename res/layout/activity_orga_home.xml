@@ -2,27 +2,35 @@
 
 <android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:gravity="center_horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawer_Layout">
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/event_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0px"
+        android:layout_weight="1"></android.support.v4.view.ViewPager>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.08"
-        android:gravity="center|bottom"
-        android:orientation="vertical"
-        android:weightSum="1">
+        android:layout_weight="0.10"
+        android:gravity="center"
+        android:measureWithLargestChild="true"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/activity_margin">
 
         <ImageButton
-            android:layout_width="match_parent"
             android:layout_height="@dimen/bar_height"
+            android:layout_width="match_parent"
             android:src="@drawable/ic_action_new"
             android:id="@+id/button_creer_event"
             android:layout_alignParentLeft="true"
-            android:layout_gravity="center_horizontal"
-            android:layout_weight="0.10" />
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="20dp"/>
 
     </LinearLayout>
 
