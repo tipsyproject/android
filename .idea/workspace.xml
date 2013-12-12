@@ -23,62 +23,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09415498-4d1b-4542-9a8b-164207e7fef1" name="Default" comment="Merge branch 'EventOrga' of https://github.com/tipsyproject/android&#10;&#10;Conflicts:&#10;&#9;.idea/workspace.xml&#10;&#9;AndroidManifest.xml&#10;&#9;src/tipsy/app/LoginActivity.java&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/libs/support-v4-19.0.0.jar" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/HelpMainActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/HomeAnonymousActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/HomeOrgaActivity.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_loading.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/activity_user_home.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/animator/fade_in.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/animator/fade_out.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/menu/menu_orga.xml" />
-      <change type="DELETED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\libs\android-support-v4.jar" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\res\values\styles.xml" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\src\tipsy\app\orga\HomeActivity.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/res/layout/activity_main.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_help_one.xml" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\res\layout\activity_home.xml" afterPath="$PROJECT_DIR$/res/layout/activity_anonymous_home.xml" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\res\layout\activity_screen_slide.xml" afterPath="$PROJECT_DIR$/res/layout/activity_main.xml" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\res\layout\help_three.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_help_three.xml" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\res\layout\help_two.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_help_two.xml" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\res\menu\main.xml" afterPath="$PROJECT_DIR$/res/menu/menu_user.xml" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\src\tipsy\app\Help_Main.java" afterPath="$PROJECT_DIR$/src/tipsy/app/HelpTwoFragment.java" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\src\tipsy\app\Help_Three.java" afterPath="$PROJECT_DIR$/src/tipsy/app/HelpThreeFragment.java" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\src\tipsy\app\Help_Two.java" afterPath="$PROJECT_DIR$/src/tipsy/app/HelpOneFragment.java" />
-      <change type="MOVED" beforePath="C:\Users\Alexandre\AndroidStudioProjects\android\src\tipsy\app\HomeActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/HomeUserActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/Thumbs.db" afterPath="$PROJECT_DIR$/res/drawable-hdpi/Thumbs.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/Thumbs.db" afterPath="$PROJECT_DIR$/res/drawable-mdpi/Thumbs.db" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/Thumbs.db" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/Thumbs.db" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-hdpi/ic_drawer.png" afterPath="$PROJECT_DIR$/res/drawable-hdpi/ic_drawer.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-mdpi/ic_drawer.png" afterPath="$PROJECT_DIR$/res/drawable-mdpi/ic_drawer.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xhdpi/ic_drawer.png" afterPath="$PROJECT_DIR$/res/drawable-xhdpi/ic_drawer.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_drawer.png" afterPath="$PROJECT_DIR$/res/drawable-xxhdpi/ic_drawer.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/ChoiceActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/ChoiceActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDateFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDateFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDescFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDescFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventLocFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventLocFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventSettingsFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventSettingsFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Event.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Event.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/InscriptionActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/InscriptionActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/InscriptionUserActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/InscriptionUserActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/LoginActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/LoginActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/MainActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/MainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Participant.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Participant.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/SearchableActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/SearchableActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/User.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/User.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_inscription.xml" afterPath="$PROJECT_DIR$/res/layout/activity_inscription.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_login.xml" afterPath="$PROJECT_DIR$/res/layout/activity_login.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_orga_editer_event.xml" afterPath="$PROJECT_DIR$/res/layout/activity_orga_editer_event.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_orga_home.xml" afterPath="$PROJECT_DIR$/res/layout/activity_orga_home.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/activity_orga_inscription.xml" afterPath="$PROJECT_DIR$/res/layout/activity_orga_inscription.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/colors.xml" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_orga_editer_event.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_orga_editer_event.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/libs.xml" afterPath="$PROJECT_DIR$/.idea/libraries/libs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/themes.xml" afterPath="$PROJECT_DIR$/res/values/themes.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TipsyApp.iws" />
@@ -143,7 +91,17 @@
     <favorites_list name="TipsyApp" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="colors.xml" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="6" column="37" selection-start="271" selection-end="271" vertical-scroll-proportion="0.18085106" vertical-offset="0" max-vertical-offset="564">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -204,14 +162,12 @@
         <option value="$PROJECT_DIR$/res/layout/activity_anonymous_home.xml" />
         <option value="$PROJECT_DIR$/src/tipsy/app/HelpMainActivity.java" />
         <option value="$PROJECT_DIR$/res/layout/activity_inscription.xml" />
-        <option value="$PROJECT_DIR$/res/layout/activity_orga_inscription.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_login.xml" />
         <option value="$PROJECT_DIR$/src/tipsy/app/Loading.java" />
         <option value="$PROJECT_DIR$/res/animator/fade_in.xml" />
         <option value="$PROJECT_DIR$/res/animator/fade_out.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_loading.xml" />
         <option value="$PROJECT_DIR$/res/values/themes.xml" />
-        <option value="$PROJECT_DIR$/res/values/colors.xml" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/res/layout/activity_orga_home.xml" />
         <option value="$PROJECT_DIR$/src/tipsy/app/HomeAnonymousActivity.java" />
@@ -222,6 +178,8 @@
         <option value="$PROJECT_DIR$/src/tipsy/app/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" />
         <option value="$PROJECT_DIR$/src/tipsy/commun/User.java" />
+        <option value="$PROJECT_DIR$/res/layout/activity_orga_inscription.xml" />
+        <option value="$PROJECT_DIR$/res/values/colors.xml" />
       </list>
     </option>
   </component>
@@ -479,6 +437,26 @@
       <setting name="debug" value="false" />
       <method />
     </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
     <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
       <MavenSettings>
         <option name="myGeneralSettings" />
@@ -501,26 +479,6 @@
       </MavenSettings>
       <method />
     </configuration>
-    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
-      <module name="" />
-      <option name="TESTING_TYPE" value="0" />
-      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="CLASS_NAME" value="" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
-      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
-      <option name="PREFERRED_AVD" value="" />
-      <option name="USE_COMMAND_LINE" value="true" />
-      <option name="COMMAND_LINE" value="" />
-      <option name="WIPE_USER_DATA" value="false" />
-      <option name="DISABLE_BOOT_ANIMATION" value="false" />
-      <option name="NETWORK_SPEED" value="full" />
-      <option name="NETWORK_LATENCY" value="none" />
-      <option name="CLEAR_LOGCAT" value="false" />
-      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -541,6 +499,19 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -568,19 +539,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -700,7 +658,11 @@
       <created>1386710504996</created>
       <updated>1386710504996</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Chargement au lancement =&gt; check de l'utilisateur déjà connecté + Thème spécial (blanc). Touche Retour gérée dans les activities. Création de la page anonymous. Menu de gauche spécifique pour chaque profil. Modif design bouton. Modif vue Login. Icône ic_drawer blanc. Bouton Aide du menu marche.">
+      <created>1386833573990</created>
+      <updated>1386833573990</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -725,11 +687,12 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="0" width="123" height="1552" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32711864" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32245827" sideWeight="0.67938024" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23728813" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39928487" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -744,13 +707,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22954546" sideWeight="0.8224076" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22954546" sideWeight="0.8224076" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21694915" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32245827" sideWeight="0.67938024" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3265306" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
@@ -764,13 +726,15 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
     <option name="myTodoPanelSettings">
       <TodoPanelSettings />
     </option>
     <MESSAGE value="authentification organisateur" />
     <MESSAGE value="Validation du formulaire d'inscription Orga et de connexion" />
     <MESSAGE value="Layout Choice &#10;" />
-    <option name="LAST_COMMIT_MESSAGE" value="Layout Choice &#10;" />
+    <MESSAGE value="Chargement au lancement =&gt; check de l'utilisateur déjà connecté + Thème spécial (blanc). Touche Retour gérée dans les activities. Création de la page anonymous. Menu de gauche spécifique pour chaque profil. Modif design bouton. Modif vue Login. Icône ic_drawer blanc. Bouton Aide du menu marche." />
+    <option name="LAST_COMMIT_MESSAGE" value="Chargement au lancement =&gt; check de l'utilisateur déjà connecté + Thème spécial (blanc). Touche Retour gérée dans les activities. Création de la page anonymous. Menu de gauche spécifique pour chaque profil. Modif design bouton. Modif vue Login. Icône ic_drawer blanc. Bouton Aide du menu marche." />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -820,9 +784,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Event.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="0" selection-start="56" selection-end="56" vertical-scroll-proportion="0.09042553" vertical-offset="0" max-vertical-offset="1938">
-          <folding />
-        </state>
+        <state line="3" column="0" selection-start="56" selection-end="56" vertical-scroll-proportion="0.09042553" vertical-offset="0" max-vertical-offset="1938" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/EditEventActivity.java">
@@ -953,33 +915,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_orga_inscription.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="13" selection-start="2199" selection-end="2199" vertical-scroll-proportion="0.5251397" vertical-offset="823" max-vertical-offset="1360">
-          <folding>
-            <element signature="e#1306#1327#0" expanded="false" />
-            <element signature="e#2025#2045#0" expanded="false" />
-            <element signature="e#2310#2331#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/app/InscriptionUserActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="73" column="39" selection-start="2340" selection-end="2340" vertical-scroll-proportion="0.03024911" vertical-offset="850" max-vertical-offset="1700">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_inscription.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="40" selection-start="2294" selection-end="2294" vertical-scroll-proportion="1.6469465" vertical-offset="361" max-vertical-offset="1598">
           <folding />
         </state>
       </provider>
@@ -1032,30 +970,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/themes.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="25" selection-start="412" selection-end="412" vertical-scroll-proportion="0.21174377" vertical-offset="34" max-vertical-offset="1105">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="55" selection-start="2327" selection-end="2327" vertical-scroll-proportion="0.727758" vertical-offset="628" max-vertical-offset="1258">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_anonymous_home.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="20" selection-start="330" selection-end="330" vertical-scroll-proportion="0.29198474" vertical-offset="0" max-vertical-offset="527">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/activity_orga_editer_event.xml">
       <provider editor-type-id="android-designer">
         <state />
@@ -1082,30 +996,6 @@
       </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="539">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="32" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="748">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="48" selection-start="335" selection-end="335" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="323">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/layout/activity_orga_home.xml">
-      <provider editor-type-id="android-designer">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="21" selection-start="272" selection-end="285" vertical-scroll-proportion="-3.4" vertical-offset="0" max-vertical-offset="714">
           <folding />
         </state>
       </provider>
@@ -1143,26 +1033,88 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Organisateur.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="29" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
+        <state line="14" column="29" selection-start="209" selection-end="209" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="952" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/commun/User.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="21" selection-start="1070" selection-end="1070" vertical-scroll-proportion="0.0" vertical-offset="303" max-vertical-offset="884">
-          <folding />
-        </state>
+        <state line="39" column="21" selection-start="1070" selection-end="1070" vertical-scroll-proportion="0.0" vertical-offset="303" max-vertical-offset="884" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/app/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="8" selection-start="786" selection-end="786" vertical-scroll-proportion="0.8741135" vertical-offset="0" max-vertical-offset="1037">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_orga_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="21" selection-start="272" selection-end="285" vertical-scroll-proportion="0.0" vertical-offset="85" max-vertical-offset="731">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_anonymous_home.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="527">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="48" selection-start="2117" selection-end="2117" vertical-scroll-proportion="0.48758864" vertical-offset="660" max-vertical-offset="1224">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/themes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="28" selection-start="2319" selection-end="2319" vertical-scroll-proportion="0.5177305" vertical-offset="558" max-vertical-offset="1122">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_inscription.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="72" column="40" selection-start="2360" selection-end="2360" vertical-scroll-proportion="-7.28" vertical-offset="1042" max-vertical-offset="1581">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/activity_orga_inscription.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="29" selection-start="468" selection-end="468" vertical-scroll-proportion="0.4524715" vertical-offset="0" max-vertical-offset="1360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="32" selection-start="1002" selection-end="1002" vertical-scroll-proportion="0.0" vertical-offset="186" max-vertical-offset="748">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="37" selection-start="271" selection-end="271" vertical-scroll-proportion="0.18085106" vertical-offset="0" max-vertical-offset="564">
+          <folding />
         </state>
       </provider>
     </entry>
