@@ -1,81 +1,77 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content_frame"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <ImageView
-        android:layout_width="211dp"
-        android:layout_height="108dp"
-        android:id="@+id/imageView2"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="57dp"
-        android:background="@drawable/tipsy_logo" />
-
-    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Connectez-vous !"
-        android:id="@+id/textView"
-        android:layout_gravity="center"
-        android:layout_marginBottom="70dp"
-        android:clickable="false" />
+        android:id="@+id/logo"
+        android:background="@drawable/tipsy_logo"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
-        android:hint="adressemail@tipsy.fr"
         android:ems="10"
-        android:id="@+id/email"
-        android:layout_gravity="center"
-        android:layout_marginBottom="12dp" />
+        android:id="@+id/input_email"
+        android:layout_below="@+id/logo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Email" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/password"
-        android:layout_gravity="center"
-        android:layout_marginTop="12dp"
-        android:hint="motdepasse"
-        android:layout_marginBottom="-21dp" />
+        android:id="@+id/input_password"
+        android:layout_below="@+id/input_email"
+        android:layout_marginTop="@dimen/activity_margin"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="Mot de passe"
+        android:layout_marginBottom="@dimen/activity_margin" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Mot de passe oublié ?"
-        android:id="@+id/mdpoublie"
-        android:layout_gravity="center"
-        android:layout_marginTop="70dp"
-        android:textSize="15dp"
-        android:textIsSelectable="false"
-        android:textColor="@color/text_hint" />
-
-    <Button
-        android:layout_width="140dp"
-        android:layout_height="48dp"
+        android:layout_height="@dimen/bar_height"
         android:text="@string/connection"
-        android:id="@+id/connect"
-        android:layout_gravity="center_horizontal|center"
-        android:layout_marginTop="130dp" />
+        android:id="@+id/button_signin"
+        android:layout_marginTop="@dimen/ui_margin"
+        android:background="@color/background2"
+        android:layout_below="@+id/input_password"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="@dimen/ui_margin" />
 
     <Button
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Inscription"
-        android:id="@+id/inscription"
-        android:layout_gravity="center_horizontal|bottom"
-        android:textSize="15dp"
-        android:textIsSelectable="false" />
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/bar_height"
+        android:text="@string/inscription"
+        android:id="@+id/button_signup"
+        android:layout_below="@+id/button_signin"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="@dimen/ui_margin"
+        android:layout_marginBottom="@dimen/ui_margin" />
+
 
     <!--        <com.google.android.gms.common.SignInButton
                 android:id="@+id/sign_in_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />-->
-</FrameLayout>
+</RelativeLayout>
 
 

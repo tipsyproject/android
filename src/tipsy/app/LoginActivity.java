@@ -34,11 +34,11 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
 
     @Required(order = 1)
     @Email(order = 2)
-    private EditText email;
+    private EditText inputEmail;
     @Required(order = 3)
-    private EditText password;
-    private Button connect;
-    private TextView inscription;
+    private EditText inputPassword;
+    private Button buttonSignin;
+    private Button buttonSignup;
     private Validator validator;
 
 
@@ -46,10 +46,10 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_login);
-        connect = (Button) findViewById(R.id.connect);
-        email = (EditText) findViewById(R.id.email);
-        password = (EditText) findViewById(R.id.password);
-        inscription = (TextView) findViewById(R.id.inscription);
+        buttonSignin = (Button) findViewById(R.id.button_signin);
+        buttonSignup = (Button) findViewById(R.id.button_signup);
+        inputEmail = (EditText) findViewById(R.id.input_email);
+        inputPassword = (EditText) findViewById(R.id.input_password);
 
         validator = new Validator(this);
         validator.setValidationListener(this);
@@ -58,14 +58,14 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
 
 
         // TENTATIVE DE CONNEXION
-        connect.setOnClickListener(new View.OnClickListener() {
+        buttonSignin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validator.validate();
             }
         });
 
         // Redirection inscription
-        inscription.setOnClickListener(new View.OnClickListener() {
+        buttonSignup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, ChoiceActivity.class));
             }
@@ -81,14 +81,14 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     }
 
     public void onValidationSucceeded() {
-        final User user = new User(email.getText().toString(), password.getText().toString());
+        final User user = new User(inputEmail.getText().toString(), inputPassword.getText().toString());
         user.login(new StackMobModelCallback() {
             @Override
             public void success() {
                 // Sauvegarde locale des identifiants pour connexion auto
                 prefs.edit()
-                        .putString(Prefs.USERNAME, email.getText().toString())
-                        .putString(Prefs.PASSWORD, password.getText().toString())
+                        .putString(Prefs.USERNAME, inputEmail.getText().toString())
+                        .putString(Prefs.PASSWORD, inputPassword.getText().toString())
                         .commit();
                 // Redirection en fonction du type utilisateur
                 if (user.getType() == TypeUser.ORGANISATEUR)
