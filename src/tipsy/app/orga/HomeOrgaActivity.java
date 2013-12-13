@@ -32,7 +32,7 @@ import tipsy.commun.User;
 /**
  * Created by Valoo on 05/12/13.
  */
-public class HomeOrgaActivity extends Activity {
+public class HomeOrgaActivity extends OrgaActivity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;

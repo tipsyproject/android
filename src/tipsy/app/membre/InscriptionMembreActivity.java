@@ -7,6 +7,7 @@ package tipsy.app.membre;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -26,7 +27,12 @@ import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.LoginActivity;
 import tipsy.app.R;
+import tipsy.app.orga.HomeOrgaActivity;
+import tipsy.commun.Membre;
+import tipsy.commun.Organisateur;
 import tipsy.commun.Participant;
+import tipsy.commun.TypeUser;
+import tipsy.commun.User;
 
 public class InscriptionMembreActivity extends Activity implements Validator.ValidationListener {
 
@@ -81,28 +87,46 @@ public class InscriptionMembreActivity extends Activity implements Validator.Val
     }
 
     public void onValidationSucceeded() {
-        // Création d'un nouvel Participant
-        final Participant user = new Participant(
+        // Création d'un nouveau user
+        final User user = new User(
                 email.getText().toString(),
                 password.getText().toString(),
-                nom.getText().toString()
+                TypeUser.MEMBRE
         );
-        // Sauvegarde dans la BDD
+
+        // Sauvegarde dans la BDD du user
         user.save(new StackMobModelCallback() {
+
             // Connexion automatique en cas de réussite
             @Override
             public void success() {
+
                 user.login(new StackMobModelCallback() {
+                    // Enregistrement des infos orga
                     @Override
                     public void success() {
-                        // Tableau de bord Organisateur
-                        startActivity(new Intent(InscriptionMembreActivity.this, HomeMembreActivity.class));
+                        Membre membre = new Membre(
+                            email.getText().toString(),
+                            password.getText().toString(),
+                            nom.getText().toString(),
+                            prenom.getText().toString()
+                        );
+                        membre.save(new StackMobModelCallback() {
+                            // Direction accueil Organisateur
+                            @Override
+                            public void success() {
+                                startActivity(new Intent(InscriptionMembreActivity.this, HomeMembreActivity.class));
+                            }
+                            @Override
+                            public void failure(StackMobException e) {
+                                Log.d("TOUTAFAIT", "save membre:" + e.getMessage());
+                            }
+                        });
                     }
 
                     @Override
                     public void failure(StackMobException e) {
-                        // Connexion
-                        startActivity(new Intent(InscriptionMembreActivity.this, LoginActivity.class));
+                        Log.d("TOUTAFAIT", "login:" + e.getMessage());
                     }
                 });
             }
@@ -110,6 +134,7 @@ public class InscriptionMembreActivity extends Activity implements Validator.Val
             // En cas d'échec
             @Override
             public void failure(StackMobException e) {
+                Log.d("TOUTAFAIT", "signin User:" + e.getMessage());
             }
         });
     }

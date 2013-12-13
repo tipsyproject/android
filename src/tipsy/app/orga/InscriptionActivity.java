@@ -3,6 +3,7 @@ package tipsy.app.orga;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -20,10 +21,14 @@ import com.mobsandgeeks.saripaar.annotation.TextRule;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import tipsy.app.ChoiceActivity;
+import tipsy.app.HomeAnonymousActivity;
 import tipsy.app.membre.HomeMembreActivity;
 import tipsy.app.LoginActivity;
 import tipsy.app.R;
 import tipsy.commun.Organisateur;
+import tipsy.commun.TypeUser;
+import tipsy.commun.User;
 
 public class InscriptionActivity extends Activity implements Validator.ValidationListener {
 
@@ -75,28 +80,46 @@ public class InscriptionActivity extends Activity implements Validator.Validatio
     }
 
     public void onValidationSucceeded() {
-        // Création d'un nouvel organisateur
-        final Organisateur orga = new Organisateur(
-                email.getText().toString(),
-                password.getText().toString(),
-                nom.getText().toString()
+        // Création d'un nouveau user
+        final User user = new User(
+            email.getText().toString(),
+            password.getText().toString(),
+                TypeUser.ORGANISATEUR
         );
-        // Sauvegarde dans la BDD
-        orga.save(new StackMobModelCallback() {
+
+        // Sauvegarde dans la BDD du user
+        user.save(new StackMobModelCallback() {
+
             // Connexion automatique en cas de réussite
             @Override
             public void success() {
-                orga.login(new StackMobModelCallback() {
+
+                user.login(new StackMobModelCallback() {
+                    // Enregistrement des infos orga
                     @Override
                     public void success() {
-                        // Tableau de bord Organisateur
-                        startActivity(new Intent(InscriptionActivity.this, HomeMembreActivity.class));
+                        Organisateur orga = new Organisateur(
+                                email.getText().toString(),
+                                password.getText().toString(),
+                                nom.getText().toString()
+                        );
+                        orga.setTelephone("0123456789");
+                        orga.save(new StackMobModelCallback() {
+                            // Direction accueil Organisateur
+                            @Override
+                            public void success() {
+                                startActivity(new Intent(InscriptionActivity.this, HomeOrgaActivity.class));
+                            }
+                            @Override
+                            public void failure(StackMobException e) {
+                                Log.d("TOUTAFAIT", "save orga:" + e.getMessage());
+                            }
+                        });
                     }
 
                     @Override
                     public void failure(StackMobException e) {
-                        // Connexion
-                        startActivity(new Intent(InscriptionActivity.this, LoginActivity.class));
+                        Log.d("TOUTAFAIT", "login:" + e.getMessage());
                     }
                 });
             }
@@ -104,6 +127,7 @@ public class InscriptionActivity extends Activity implements Validator.Validatio
             // En cas d'échec
             @Override
             public void failure(StackMobException e) {
+                Log.d("TOUTAFAIT", "signin User:" + e.getMessage());
             }
         });
     }

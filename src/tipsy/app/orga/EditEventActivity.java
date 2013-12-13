@@ -27,7 +27,7 @@ import tipsy.commun.Event;
  * Created by Valoo on 05/12/13.
  */
 
-public class EditEventActivity extends FragmentActivity implements ActionBar.TabListener, Validator.ValidationListener {
+public class EditEventActivity extends OrgaActivity implements ActionBar.TabListener, Validator.ValidationListener {
     // Nombre de colonnes
     private static final int NUM_ITEMS = 4;
     private static final int[] icones = {

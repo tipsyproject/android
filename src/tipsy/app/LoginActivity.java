@@ -70,7 +70,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         // Redirection inscription
         inscription.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, InscriptionActivity.class));
+                startActivity(new Intent(LoginActivity.this, ChoiceActivity.class));
             }
         });
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
@@ -139,11 +139,10 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     */
     public static void rememberMe(Activity act){
         final Activity a = act;
-        // Si utilisateur encore connecté
+        // Si utilisateur est encore connecté
         User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
             @Override
             public void success(List<User> list) {
-                Log.d("REMEMBER", "Deja connecte");
                 User user = list.get(0);
                 if (user.getType() == TypeUser.ORGANISATEUR)
                     a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
@@ -163,7 +162,6 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                     user.login(new StackMobModelCallback() {
                         @Override
                         public void success() {
-                            Log.d("REMEMBER", "Souvenir user");
                             if (user.getType() == TypeUser.ORGANISATEUR)
                                 a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
                             else if (user.getType() == TypeUser.MEMBRE)
