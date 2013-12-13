@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/content_frame"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Prenom"
-        android:ems="10"
-        android:id="@+id/input_prenom"
-        android:layout_gravity="center"
-        android:layout_marginBottom="60dp" />
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <EditText
         android:layout_width="wrap_content"
@@ -25,7 +14,26 @@
         android:ems="10"
         android:id="@+id/input_nom"
         android:layout_gravity="center"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginTop="22dp"
+        android:layout_below="@+id/imageView2"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Prenom"
+        android:ems="10"
+        android:id="@+id/input_prenom"
+        android:layout_gravity="center"
+        android:layout_below="@+id/input_nom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -34,26 +42,22 @@
         android:ems="10"
         android:id="@+id/input_email"
         android:layout_gravity="center"
-        android:layout_marginTop="12dp"
         android:hint="Email"
-        android:layout_marginBottom="-21dp" />
+        android:layout_below="@+id/input_prenom"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
-        android:layout_width="211dp"
-        android:layout_height="108dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:id="@+id/imageView2"
         android:layout_gravity="center_horizontal|top"
-        android:layout_marginTop="57dp"
-        android:background="@drawable/tipsy_logo" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:text="@string/inscription"
-        android:id="@+id/button_signup"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="0dp" />
-
+        android:background="@drawable/tipsy_logo"
+        android:layout_marginTop="22dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -62,9 +66,12 @@
         android:ems="10"
         android:id="@+id/input_password"
         android:layout_gravity="center"
-        android:layout_marginTop="12dp"
         android:hint="Mot de passe"
-        android:layout_marginBottom="-65dp" />
+        android:layout_below="@+id/input_email"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -73,7 +80,62 @@
         android:text="@string/conditions"
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal|bottom"
-        android:layout_marginBottom="80dp" />
+        android:layout_marginBottom="16dp"
+        android:layout_above="@+id/tableLayout"
+        android:layout_centerHorizontal="true" />
 
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:columnOrderPreserved="false"
+        android:useDefaultMargins="true"
+        android:id="@+id/tableLayout">
 
-</FrameLayout>
+        <TableRow android:layout_height="wrap_content">
+
+            <ImageButton
+                android:layout_width="fill_parent"
+                android:layout_height="@dimen/bar_height"
+                android:layout_weight="1"
+                android:text="@string/inscription"
+                android:id="@+id/button_signup"
+                android:layout_span="2"
+                android:layout_column="0"
+                android:layout_margin="@dimen/ui_margin"
+                android:src="@drawable/ic_action_done"
+                android:background="@color/background2" />
+        </TableRow>
+
+        <TableRow android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/bar_height"
+                android:layout_weight="1"
+                android:text="@string/connection"
+                android:id="@+id/button_signin"
+                android:layout_span="1"
+                android:layout_column="0"
+                android:layout_margin="@dimen/ui_margin" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/bar_height"
+                android:layout_weight="1"
+                android:text="@string/later"
+                android:id="@+id/button_later"
+                android:layout_span="1"
+                android:layout_column="1"
+                android:layout_margin="@dimen/ui_margin" />
+        </TableRow>
+
+    </TableLayout>
+
+</RelativeLayout>

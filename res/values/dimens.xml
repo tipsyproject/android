@@ -5,5 +5,6 @@
     <dimen name="activity_margin">16dp</dimen>
 
     <dimen name="bar_height">48dp</dimen>
+    <dimen name="ui_margin">4dp</dimen>
 
 </resources>

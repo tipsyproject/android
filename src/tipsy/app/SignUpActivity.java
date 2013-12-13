@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -24,12 +25,14 @@ import tipsy.commun.User;
  */
 public abstract class SignUpActivity extends Activity implements Validator.ValidationListener {
 
-    @Required(order = 1)
-    @Email(order = 2)
+    @Required(order = 10)
+    @Email(order = 11)
     protected EditText inputEmail;
-    @Required(order = 3)
+    @Required(order = 12)
     protected EditText inputPassword;
-    protected Button buttonSignup;
+    protected ImageButton buttonSignup;
+    protected Button buttonSignin;
+    protected Button buttonLater;
 
     protected Validator validator;
 
@@ -38,13 +41,27 @@ public abstract class SignUpActivity extends Activity implements Validator.Valid
         super.onCreate(savedInstanceState);
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
-        buttonSignup = (Button) findViewById(R.id.button_signup);
+        buttonSignup = (ImageButton) findViewById(R.id.button_signup);
+        buttonSignin = (Button) findViewById(R.id.button_signin);
+        buttonLater = (Button) findViewById(R.id.button_later);
         validator = new Validator(this);
         validator.setValidationListener(this);
 
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 validator.validate();
+            }
+        });
+
+        buttonSignin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+            }
+        });
+
+        buttonLater.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpActivity.this, HomeAnonymousActivity.class));
             }
         });
     }

@@ -19,7 +19,7 @@ import tipsy.commun.Organisateur;
  */
 public class SignUpOrgaActivity extends SignUpActivity {
 
-    @Required(order = 4)
+    @Required(order = 1)
     protected EditText inputNom;
 
     @Override

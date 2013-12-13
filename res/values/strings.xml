@@ -36,4 +36,6 @@
     <string name="affichermdp">"Afficher le mot de passe"</string>
     <string name="loading">"Chargement"</string>
     <string name="failed_connexion">Email ou Mot de Passe Incorrect</string>
+    <string name="later">Plus tard</string>
+    <string name="ok">OK</string>
 </resources>

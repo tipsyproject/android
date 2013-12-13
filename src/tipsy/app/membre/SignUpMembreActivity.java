@@ -20,9 +20,9 @@ import tipsy.commun.Membre;
 
 public class SignUpMembreActivity extends SignUpActivity {
 
-    @Required(order = 4)
+    @Required(order = 1)
     protected EditText inputNom;
-    @Required(order = 5)
+    @Required(order = 2)
     protected EditText inputPrenom;
 
     @Override
