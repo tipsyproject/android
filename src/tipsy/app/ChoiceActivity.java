@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
-import tipsy.app.membre.InscriptionMembreActivity;
-import tipsy.app.orga.InscriptionActivity;
+import tipsy.app.membre.SignUpMembreActivity;
+import tipsy.app.orga.SignUpOrgaActivity;
 
 /**
  * Created by Guillaume on 09/12/13.
@@ -28,8 +28,7 @@ public class ChoiceActivity extends Activity {
         next_orga.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent connect = new Intent(ChoiceActivity.this, InscriptionActivity.class);
-                startActivity(connect);
+                startActivity(new Intent(ChoiceActivity.this, SignUpOrgaActivity.class));
             }
         });
 
@@ -37,8 +36,7 @@ public class ChoiceActivity extends Activity {
         next_user.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                Intent connect = new Intent(ChoiceActivity.this, InscriptionMembreActivity.class);
-                startActivity(connect);
+                startActivity(new Intent(ChoiceActivity.this, SignUpMembreActivity.class));
             }
         });
     }

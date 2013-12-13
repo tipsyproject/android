@@ -6,37 +6,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Prenom"
+        android:hint="Organisation"
         android:ems="10"
-        android:id="@+id/prenom"
+        android:id="@+id/input_nom"
         android:layout_gravity="center"
-        android:layout_marginBottom="60dp" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:hint="Nom"
-        android:ems="10"
-        android:id="@+id/nom"
-        android:layout_gravity="center"
-        android:layout_marginBottom="12dp" />
+        android:layout_marginBottom="45dp" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/email"
+        android:id="@+id/input_email"
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
         android:hint="Email"
-        android:layout_marginBottom="-21dp" />
+        android:layout_marginBottom="0dp" />
 
     <ImageView
         android:layout_width="211dp"
@@ -50,21 +39,20 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:text="@string/inscription"
-        android:id="@+id/connect"
+        android:id="@+id/button_signup"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="0dp" />
-
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:ems="10"
-        android:id="@+id/password"
+        android:id="@+id/input_password"
         android:layout_gravity="center"
         android:layout_marginTop="12dp"
         android:hint="Mot de passe"
-        android:layout_marginBottom="-65dp" />
+        android:layout_marginBottom="-60dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -74,14 +62,5 @@
         android:id="@+id/textView"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginBottom="80dp" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/affichermdp"
-        android:id="@+id/afficherPassword"
-        android:layout_gravity="center_horizontal|bottom"
-        android:textColor="@color/text_hint"
-        android:layout_marginBottom="120dp" />
 
 </FrameLayout>

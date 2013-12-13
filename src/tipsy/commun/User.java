@@ -9,11 +9,11 @@ import com.stackmob.sdk.model.StackMobUser;
 public class User extends StackMobUser {
     protected int type;
 
-    public User(String username, String password){
+    public User(String username, String password) {
         super(User.class, username, password);
     }
 
-    public User(String username, String password, int type){
+    public User(String username, String password, int type) {
         super(User.class, username, password);
         this.type = type;
     }
@@ -22,8 +22,17 @@ public class User extends StackMobUser {
         return type;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return getUsername();
+    }
+
+
+    public interface TipsyUser {
+        public User getUser();
+
+        public int getType();
+
+        public void save(com.stackmob.sdk.callback.StackMobCallback callback);
     }
 
 }
