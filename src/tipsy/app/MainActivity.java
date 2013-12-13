@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 
 import com.stackmob.android.sdk.common.StackMobAndroid;
 
@@ -24,12 +23,12 @@ public class MainActivity extends Activity {
         // Initialisation de STACKMOB avec la clé publique
         StackMobAndroid.init(getApplicationContext(), 0, "eeedff37-f59d-408a-9279-27cd8fe7062e");
         overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
-        setContentView(R.layout.activity_loading);
+        setContentView(R.layout.act_loading);
 
         super.onCreate(savedInstanceState);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        boolean skipHelp = prefs.getBoolean(Prefs.SKIP_HELP,false);
+        boolean skipHelp = prefs.getBoolean(Prefs.SKIP_HELP, false);
 
         /*
             Affichage de l'aide si elle n'a encore jamais été passée.

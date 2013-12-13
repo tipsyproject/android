@@ -22,7 +22,7 @@ public class ChoiceActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_choice);
+        setContentView(R.layout.act_choice);
 
         final ImageButton next_orga = (ImageButton) findViewById(R.id.next_orga);
         next_orga.setOnClickListener(new View.OnClickListener() {

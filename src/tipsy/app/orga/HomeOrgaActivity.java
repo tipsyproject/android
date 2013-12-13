@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
-import com.stackmob.android.sdk.common.StackMobAndroid;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
@@ -26,7 +25,6 @@ import java.util.List;
 import tipsy.app.HelpActivity;
 import tipsy.app.HomeAnonymousActivity;
 import tipsy.app.R;
-import tipsy.commun.TypeUser;
 import tipsy.commun.User;
 
 /**
@@ -46,7 +44,7 @@ public class HomeOrgaActivity extends OrgaActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orga_home);
+        setContentView(R.layout.act_orga_home);
 
         buttonCreerEvent = (ImageButton) findViewById(R.id.button_creer_event);
 
@@ -144,12 +142,14 @@ public class HomeOrgaActivity extends OrgaActivity {
                             Log.d("REMEMBER", "Logout");
                             startActivity(new Intent(HomeOrgaActivity.this, HomeAnonymousActivity.class));
                         }
+
                         @Override
                         public void failure(StackMobException e) {
                             Log.d("REMEMBER", "Logout failed");
                         }
                     });
                 }
+
                 @Override
                 public void failure(StackMobException e) {
                 }
@@ -187,7 +187,7 @@ public class HomeOrgaActivity extends OrgaActivity {
     }
 
     public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 

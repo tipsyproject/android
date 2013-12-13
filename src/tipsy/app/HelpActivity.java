@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -28,7 +27,7 @@ public class HelpActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        super.setContentView(R.layout.activity_help);
+        super.setContentView(R.layout.act_help);
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();
 
@@ -49,9 +48,9 @@ public class HelpActivity extends FragmentActivity {
         final Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            prefs.edit()
-                .putBoolean(Prefs.SKIP_HELP, true)
-                .commit();
+                prefs.edit()
+                        .putBoolean(Prefs.SKIP_HELP, true)
+                        .commit();
                 LoginActivity.rememberMe(HelpActivity.this);
             }
         });
@@ -66,10 +65,12 @@ public class HelpActivity extends FragmentActivity {
             super(fm);
             this.fragments = fragments;
         }
+
         @Override
         public Fragment getItem(int position) {
             return this.fragments.get(position);
         }
+
         @Override
         public int getCount() {
             return this.fragments.size();

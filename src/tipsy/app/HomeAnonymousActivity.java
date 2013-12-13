@@ -33,7 +33,7 @@ public class HomeAnonymousActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anonymous_home);
+        setContentView(R.layout.act_anonymous_home);
 
         titre = mDrawerTitle = getTitle();
         titres_menu = getResources().getStringArray(R.array.menu_anonyme);
@@ -133,11 +133,9 @@ public class HomeAnonymousActivity extends Activity {
         // update selected item and title, then close the drawer
         if (position == 1) {
             startActivity(new Intent(HomeAnonymousActivity.this, LoginActivity.class));
-        }
-        else if (position == 2) {
+        } else if (position == 2) {
             startActivity(new Intent(HomeAnonymousActivity.this, ChoiceActivity.class));
-        }
-        else if (position == 3) {
+        } else if (position == 3) {
             startActivity(new Intent(HomeAnonymousActivity.this, HelpActivity.class));
         } else {
             mDrawerList.setItemChecked(position, true);
@@ -172,7 +170,7 @@ public class HomeAnonymousActivity extends Activity {
     }
 
     public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 

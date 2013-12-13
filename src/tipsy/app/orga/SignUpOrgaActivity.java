@@ -24,7 +24,7 @@ public class SignUpOrgaActivity extends SignUpActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_signup_orga);
+        setContentView(R.layout.act_signup_orga);
         inputNom = (EditText) findViewById(R.id.input_nom);
         super.onCreate(savedInstanceState);
     }

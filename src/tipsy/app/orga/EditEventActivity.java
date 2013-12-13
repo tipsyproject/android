@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -50,7 +49,7 @@ public class EditEventActivity extends OrgaActivity implements ActionBar.TabList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orga_editer_event);
+        setContentView(R.layout.act_orga_editer_event);
 
         mAdapter = new EditEventAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.event_pager);

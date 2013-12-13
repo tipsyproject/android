@@ -5,31 +5,18 @@ package tipsy.app.membre;
  */
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
-import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.Email;
-import com.mobsandgeeks.saripaar.annotation.Password;
 import com.mobsandgeeks.saripaar.annotation.Required;
-import com.mobsandgeeks.saripaar.annotation.TextRule;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
 import tipsy.app.SignUpActivity;
 import tipsy.commun.Membre;
-import tipsy.commun.TypeUser;
-import tipsy.commun.User;
 
 public class SignUpMembreActivity extends SignUpActivity {
 
@@ -40,7 +27,7 @@ public class SignUpMembreActivity extends SignUpActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.activity_signup_membre);
+        setContentView(R.layout.act_signup_membre);
         inputNom = (EditText) findViewById(R.id.input_nom);
         inputPrenom = (EditText) findViewById(R.id.input_prenom);
         super.onCreate(savedInstanceState);
