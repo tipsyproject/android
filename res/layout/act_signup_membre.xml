@@ -112,7 +112,7 @@
                 android:layout_column="0"
                 android:layout_margin="@dimen/ui_margin"
                 android:src="@drawable/ic_action_done"
-                android:background="@color/background2" />
+                android:background="@color/button_red_unpressed" />
         </TableRow>
 
         <TableRow android:layout_height="wrap_content">

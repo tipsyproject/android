@@ -46,7 +46,7 @@
         android:text="@string/connection"
         android:id="@+id/button_signin"
         android:layout_marginTop="@dimen/ui_margin"
-        android:background="@color/background2"
+        android:background="@drawable/button_red"
         android:layout_below="@+id/input_password"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -66,6 +66,44 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="@dimen/ui_margin"
         android:layout_marginBottom="@dimen/ui_margin" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="@dimen/activity_margin"
+        android:columnOrderPreserved="false"
+        android:useDefaultMargins="true"
+        android:id="@+id/tableLayout">
+
+    <TableRow android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="@dimen/bar_height"
+            android:layout_weight="1"
+            android:text="@string/help"
+            android:id="@+id/button_help"
+            android:layout_span="1"
+            android:layout_column="0"
+            android:layout_margin="@dimen/ui_margin" />
+
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="@dimen/bar_height"
+            android:layout_weight="1"
+            android:text="@string/later"
+            android:id="@+id/button_later"
+            android:layout_span="1"
+            android:layout_column="1"
+            android:layout_margin="@dimen/ui_margin" />
+    </TableRow>
+    </TableLayout>
 
 
     <!--        <com.google.android.gms.common.SignInButton

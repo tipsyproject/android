@@ -26,7 +26,7 @@
             android:src="@drawable/ic_action_done"
             android:layout_height="@dimen/bar_height"
             android:layout_width="match_parent"
-            android:background="@color/background2" />
+            android:background="@color/button_red_unpressed" />
 
     </LinearLayout>
 

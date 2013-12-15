@@ -6,6 +6,7 @@ package tipsy.app.membre;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -30,6 +31,13 @@ public class SignUpMembreActivity extends SignUpActivity {
         setContentView(R.layout.act_signup_membre);
         inputNom = (EditText) findViewById(R.id.input_nom);
         inputPrenom = (EditText) findViewById(R.id.input_prenom);
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(SignUpMembreActivity.this);
+                return false;
+            }
+        });
         super.onCreate(savedInstanceState);
     }
 

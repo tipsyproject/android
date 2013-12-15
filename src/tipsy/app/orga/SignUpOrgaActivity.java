@@ -2,6 +2,7 @@ package tipsy.app.orga;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -26,6 +27,13 @@ public class SignUpOrgaActivity extends SignUpActivity {
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_signup_orga);
         inputNom = (EditText) findViewById(R.id.input_nom);
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(SignUpOrgaActivity.this);
+                return false;
+            }
+        });
         super.onCreate(savedInstanceState);
     }
 

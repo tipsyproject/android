@@ -4,10 +4,11 @@
     <color name="background_menu">#354B5E</color>
     <color name="text_menu">#ffffff</color>
     <color name="text_hint">#adadad</color>
-    <color name="button_unpressed">#20FFFFFF</color>
-    <color name="button_pressed">#DCDDD8</color>
+    <color name="button_blue_unpressed">#20FFFFFF</color>
+    <color name="button_blue_pressed">#DCDDD8</color>
+    <color name="button_red_unpressed">#D74B4B</color>
+    <color name="button_red_pressed">#FFCC00</color>
     <color name="text_pressed">#354B5E</color>
-    <color name="background2">#D74B4B</color>
     <color name="background_loading">#DCDDD8</color>
     <color name="text_loading">#354B5E</color>
 

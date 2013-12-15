@@ -17,7 +17,6 @@
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:buttonStyle">@style/Button_Style.NoAction</item>
     </style>
 
     <style name="AppTheme.NoActionBar.White" parent="AppTheme.NoActionBar">
@@ -37,13 +36,19 @@
     </style>
 
     <style name="Button_Style">
-        <item name="android:background">@drawable/button</item>
+        <item name="android:background">@drawable/button_blue</item>
         <item name="android:textColor">@color/button_color</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
-    <style name="Button_Style.NoAction">
-        <item name="android:background">@drawable/button</item>
+    <style name="Button_Style.Transparent">
+        <item name="android:background">@drawable/button_blue</item>
+        <item name="android:textColor">@color/button_color</item>
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+    </style>
+
+    <style name="Button_Style.Red">
+        <item name="android:background">@drawable/button_red</item>
         <item name="android:textColor">@color/button_color</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
@@ -54,7 +59,7 @@
     </style>
 
     <style name="ImageButton_Style">
-        <item name="android:background">@color/background2</item>
+        <item name="android:background">@color/button_red_unpressed</item>
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 

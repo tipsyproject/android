@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,8 +18,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SearchView;
 
+import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.callback.StackMobQueryCallback;
+import com.stackmob.sdk.exception.StackMobException;
+
+import java.util.List;
+
 import tipsy.app.HelpActivity;
+import tipsy.app.HomeAnonymousActivity;
+import tipsy.app.LoginActivity;
 import tipsy.app.R;
+import tipsy.commun.User;
 
 /**
  * Created by tech on 05/12/13.
@@ -136,7 +146,31 @@ public class HomeMembreActivity extends Activity {
         // update selected item and title, then close the drawer
         if (position == 3) {
             startActivity(new Intent(HomeMembreActivity.this, HelpActivity.class));
-        } else {
+        }
+        else if(position == 4){
+            User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
+                @Override
+                public void success(List<User> list) {
+                    User user = list.get(0);
+                    user.logout(new StackMobModelCallback() {
+                        @Override
+                        public void success() {
+                            Log.d("REMEMBER", "Logout");
+                            startActivity(new Intent(HomeMembreActivity.this, LoginActivity.class));
+                        }
+
+                        @Override
+                        public void failure(StackMobException e) {
+                            Log.d("REMEMBER", "Logout failed");
+                        }
+                    });
+                }
+
+                @Override
+                public void failure(StackMobException e) {
+                }
+            });
+        } else{
             mDrawerList.setItemChecked(position, true);
             setTitle(titres_menu[position]);
             mDrawerLayout.closeDrawer(mDrawerList);

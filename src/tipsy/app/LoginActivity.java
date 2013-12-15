@@ -40,6 +40,8 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     private Button buttonSignin;
     private Button buttonSignup;
     private Validator validator;
+    protected Button buttonHelp;
+    protected Button buttonLater;
 
 
     @Override
@@ -48,6 +50,8 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         setContentView(R.layout.act_login);
         buttonSignin = (Button) findViewById(R.id.button_signin);
         buttonSignup = (Button) findViewById(R.id.button_signup);
+        buttonHelp = (Button) findViewById(R.id.button_help);
+        buttonLater = (Button) findViewById(R.id.button_later);
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
 
@@ -60,6 +64,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         // TENTATIVE DE CONNEXION
         buttonSignin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                hideKeyboard(LoginActivity.this);
                 validator.validate();
             }
         });
@@ -70,11 +75,25 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                 startActivity(new Intent(LoginActivity.this, ChoiceActivity.class));
             }
         });
+
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 hideKeyboard(LoginActivity.this);
                 return false;
+            }
+        });
+        buttonHelp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, HelpActivity.class));
+                finish();
+            }
+        });
+
+        buttonLater.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(LoginActivity.this, HomeAnonymousActivity.class));
+                finish();
             }
         });
 
@@ -147,6 +166,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                     a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
                 else if (user.getType() == TypeUser.MEMBRE)
                     a.startActivity(new Intent(a, HomeMembreActivity.class));
+                a.finish();
             }
 
             @Override

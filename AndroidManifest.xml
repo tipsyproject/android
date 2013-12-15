@@ -43,10 +43,10 @@
 
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true"></activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".HomeAnonymousActivity">
+        <activity android:name=".HomeAnonymousActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -55,7 +55,8 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".membre.HomeMembreActivity">
+        <activity android:name=".membre.HomeMembreActivity"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -64,7 +65,8 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".orga.HomeOrgaActivity">
+        <activity android:name=".orga.HomeOrgaActivity"
+            android:noHistory="true">
         </activity>
 
         <activity android:name=".orga.EditEventActivity"></activity>

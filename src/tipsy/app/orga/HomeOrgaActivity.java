@@ -24,6 +24,7 @@ import java.util.List;
 
 import tipsy.app.HelpActivity;
 import tipsy.app.HomeAnonymousActivity;
+import tipsy.app.LoginActivity;
 import tipsy.app.R;
 import tipsy.commun.User;
 
@@ -140,7 +141,7 @@ public class HomeOrgaActivity extends OrgaActivity {
                         @Override
                         public void success() {
                             Log.d("REMEMBER", "Logout");
-                            startActivity(new Intent(HomeOrgaActivity.this, HomeAnonymousActivity.class));
+                            startActivity(new Intent(HomeOrgaActivity.this, LoginActivity.class));
                         }
 
                         @Override
