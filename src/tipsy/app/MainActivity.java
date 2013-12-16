@@ -22,7 +22,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         // Initialisation de STACKMOB avec la clé publique
         StackMobAndroid.init(getApplicationContext(), 0, "eeedff37-f59d-408a-9279-27cd8fe7062e");
-        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
+        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
         setContentView(R.layout.act_loading);
 
         super.onCreate(savedInstanceState);

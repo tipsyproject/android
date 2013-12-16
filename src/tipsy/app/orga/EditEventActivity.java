@@ -18,8 +18,8 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.membre.HomeMembreActivity;
 import tipsy.app.R;
+import tipsy.app.membre.MembreActivity;
 import tipsy.commun.Event;
 
 /**
@@ -101,7 +101,7 @@ public class EditEventActivity extends OrgaActivity implements ActionBar.TabList
             // Connexion automatique en cas de réussite
             @Override
             public void success() {
-                startActivity(new Intent(EditEventActivity.this, HomeMembreActivity.class));
+                startActivity(new Intent(EditEventActivity.this, MembreActivity.class));
             }
 
             // En cas d'échec

@@ -35,39 +35,34 @@
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".orga.SignUpOrgaActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"></activity>
 
         <activity
             android:name=".membre.SignUpMembreActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:noHistory="true"></activity>
 
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".HomeAnonymousActivity"
-            android:noHistory="true">
+        <activity
+            android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
             <meta-data
                 android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
+                android:resource="@xml/searchable" /></activity>
 
-        <activity android:name=".membre.HomeMembreActivity"
-            android:noHistory="true">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
+        <activity
+            android:name=".membre.MembreActivity"
+            android:noHistory="true"></activity>
 
-        <activity android:name=".orga.HomeOrgaActivity"
-            android:noHistory="true">
-        </activity>
+        <activity
+            android:name=".orga.HomeOrgaActivity"
+            android:noHistory="true"></activity>
 
         <activity android:name=".orga.EditEventActivity"></activity>
 

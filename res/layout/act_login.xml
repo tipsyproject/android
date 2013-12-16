@@ -81,28 +81,28 @@
         android:useDefaultMargins="true"
         android:id="@+id/tableLayout">
 
-    <TableRow android:layout_height="wrap_content">
+        <TableRow android:layout_height="wrap_content">
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="@dimen/bar_height"
-            android:layout_weight="1"
-            android:text="@string/help"
-            android:id="@+id/button_help"
-            android:layout_span="1"
-            android:layout_column="0"
-            android:layout_margin="@dimen/ui_margin" />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/bar_height"
+                android:layout_weight="1"
+                android:text="@string/help"
+                android:id="@+id/button_help"
+                android:layout_span="1"
+                android:layout_column="0"
+                android:layout_margin="@dimen/ui_margin" />
 
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="@dimen/bar_height"
-            android:layout_weight="1"
-            android:text="@string/later"
-            android:id="@+id/button_later"
-            android:layout_span="1"
-            android:layout_column="1"
-            android:layout_margin="@dimen/ui_margin" />
-    </TableRow>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/bar_height"
+                android:layout_weight="1"
+                android:text="@string/later"
+                android:id="@+id/button_later"
+                android:layout_span="1"
+                android:layout_column="1"
+                android:layout_margin="@dimen/ui_margin" />
+        </TableRow>
     </TableLayout>
 
 

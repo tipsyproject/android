@@ -1,9 +1,13 @@
-package tipsy.app.membre;
+package tipsy.app;
 
 import android.app.Activity;
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
@@ -24,19 +28,17 @@ import com.stackmob.sdk.exception.StackMobException;
 
 import java.util.List;
 
-import tipsy.app.HelpActivity;
-import tipsy.app.HomeAnonymousActivity;
-import tipsy.app.LoginActivity;
-import tipsy.app.R;
+import tipsy.commun.Prefs;
 import tipsy.commun.User;
 
 /**
- * Created by tech on 05/12/13.
+ * Created by Alexandre on 15/12/13.
  */
-public class HomeMembreActivity extends Activity {
+public class HomeActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
+    private SharedPreferences prefs;
 
     private CharSequence mDrawerTitle;
     private CharSequence titre;
@@ -46,10 +48,22 @@ public class HomeMembreActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_user_home);
+        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
+        setContentView(R.layout.act_home);
 
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
         titre = mDrawerTitle = getTitle();
-        titres_menu = getResources().getStringArray(R.array.menu_participant);
+        //StackMobQuery query = new StackMobQuery("user")
+        //        .fieldIsEqualTo("username", Prefs.USERNAME).and().field(new StackMobQueryField("type"));
+
+        if (LoginActivity.type == 2) {
+            titres_menu = getResources().getStringArray(R.array.menu_organisateur);
+        } else if (LoginActivity.type == 1) {
+            titres_menu = getResources().getStringArray(R.array.menu_participant);
+        } else {
+            titres_menu = getResources().getStringArray(R.array.menu_anonyme);
+        }
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_Layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -86,32 +100,44 @@ public class HomeMembreActivity extends Activity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
+
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(HomeMembreActivity.this);
+                hideKeyboard(HomeActivity.this);
                 return false;
             }
         });
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_user, menu);
-        MenuItem searchItem = menu.findItem(R.id.search);
-        mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setQueryHint(getString(R.string.search));
-
-        return super.onCreateOptionsMenu(menu);
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
     }
 
     /* Called whenever we call invalidateOptionsMenu() */
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         // If the nav drawer is open, hide action items related to the content view
-        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        if (LoginActivity.type == 1) {
+            boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+            menu.findItem(R.id.search).setVisible(!drawerOpen);
+        }
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        if (LoginActivity.type == 1) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_user, menu);
+            MenuItem searchItem = menu.findItem(R.id.search);
+            SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            mSearchView = (SearchView) searchItem.getActionView();
+            mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        }
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -144,10 +170,18 @@ public class HomeMembreActivity extends Activity {
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();*/
 
         // update selected item and title, then close the drawer
-        if (position == 3) {
-            startActivity(new Intent(HomeMembreActivity.this, HelpActivity.class));
-        }
-        else if(position == 4){
+
+        if (position == 1 && LoginActivity.type == 0) {
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        } else if (position == 2 && LoginActivity.type == 0)
+            startActivity(new Intent(HomeActivity.this, ChoiceActivity.class));
+        else if (position == 2 && LoginActivity.type == 2)
+            startActivity(new Intent(HomeActivity.this, HelpActivity.class));
+        else if (position == 3 && LoginActivity.type == 0) {
+            startActivity(new Intent(HomeActivity.this, HelpActivity.class));
+        } else if (LoginActivity.type == 1 && position == 3 || LoginActivity.type == 2 && position == 2) {
+            startActivity(new Intent(HomeActivity.this, HelpActivity.class));
+        } else if (LoginActivity.type == 2 && position == 3 || LoginActivity.type == 1 && position == 4) {
             User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
                 @Override
                 public void success(List<User> list) {
@@ -156,7 +190,11 @@ public class HomeMembreActivity extends Activity {
                         @Override
                         public void success() {
                             Log.d("REMEMBER", "Logout");
-                            startActivity(new Intent(HomeMembreActivity.this, LoginActivity.class));
+                            startActivity(new Intent(HomeActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            prefs.edit()
+                                    .putString(Prefs.USERNAME, "")
+                                    .putString(Prefs.PASSWORD, "")
+                                    .commit();
                         }
 
                         @Override
@@ -170,11 +208,13 @@ public class HomeMembreActivity extends Activity {
                 public void failure(StackMobException e) {
                 }
             });
-        } else{
+
+        } else {
             mDrawerList.setItemChecked(position, true);
             setTitle(titres_menu[position]);
             mDrawerLayout.closeDrawer(mDrawerList);
         }
+
     }
 
     @Override
@@ -206,15 +246,4 @@ public class HomeMembreActivity extends Activity {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
-
-
-    /**
-     * Fragment that appears in the "content_frame", shows a planet
-     */
-    /*public static class EventFragment extends Fragment {
-
-        public EventFragment() {
-            // Empty constructor required for fragment subclasses
-        }
-    }*/
 }

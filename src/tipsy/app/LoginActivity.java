@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
@@ -23,10 +22,9 @@ import com.stackmob.sdk.exception.StackMobException;
 
 import java.util.List;
 
-import tipsy.app.membre.HomeMembreActivity;
+import tipsy.commun.Prefs;
 import tipsy.commun.TypeUser;
 import tipsy.commun.User;
-import tipsy.commun.Prefs;
 
 public class LoginActivity extends Activity implements Validator.ValidationListener {
 
@@ -42,11 +40,13 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     private Validator validator;
     protected Button buttonHelp;
     protected Button buttonLater;
+    public static int type = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
         setContentView(R.layout.act_login);
         buttonSignin = (Button) findViewById(R.id.button_signin);
         buttonSignup = (Button) findViewById(R.id.button_signup);
@@ -86,17 +86,22 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         buttonHelp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 startActivity(new Intent(LoginActivity.this, HelpActivity.class));
-                finish();
             }
         });
 
         buttonLater.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, HomeAnonymousActivity.class));
-                finish();
+                type = 0;
+                startActivity(new Intent(LoginActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         });
 
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
     }
 
     public void onValidationSucceeded() {
@@ -110,11 +115,13 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                         .putString(Prefs.PASSWORD, inputPassword.getText().toString())
                         .commit();
                 // Redirection en fonction du type utilisateur
-                if (user.getType() == TypeUser.ORGANISATEUR)
-                    startActivity(new Intent(LoginActivity.this, tipsy.app.orga.HomeOrgaActivity.class));
-                else if (user.getType() == TypeUser.MEMBRE)
-                    startActivity(new Intent(LoginActivity.this, HomeMembreActivity.class));
-                else
+                if (user.getType() == TypeUser.ORGANISATEUR) {
+                    type = 2;
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                } else if (user.getType() == TypeUser.MEMBRE) {
+                    type = 1;
+                    startActivity(new Intent(LoginActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                } else
                     Toast.makeText(LoginActivity.this, "Connexion impossible", Toast.LENGTH_SHORT).show();
             }
 
@@ -145,7 +152,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
 
     /*
 
-    On renvoie vers la page d'accueil correspondante si l'utilsiateur est encore connecté
+    On renvoie vers la page d'accueil correspondante si l'utilisateur est encore connecté
 
     Sinon si aucun couple username/password n'a été mémorisé,
     l'utilisateur est redirigé vers la page de login.
@@ -162,11 +169,13 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
             @Override
             public void success(List<User> list) {
                 User user = list.get(0);
-                if (user.getType() == TypeUser.ORGANISATEUR)
-                    a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
-                else if (user.getType() == TypeUser.MEMBRE)
-                    a.startActivity(new Intent(a, HomeMembreActivity.class));
-                a.finish();
+                if (user.getType() == TypeUser.ORGANISATEUR) {
+                    type = 2;
+                    a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                } else if (user.getType() == TypeUser.MEMBRE) {
+                    type = 1;
+                    a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                }
             }
 
             @Override
@@ -181,11 +190,13 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                     user.login(new StackMobModelCallback() {
                         @Override
                         public void success() {
-                            if (user.getType() == TypeUser.ORGANISATEUR)
-                                a.startActivity(new Intent(a, tipsy.app.orga.HomeOrgaActivity.class));
-                            else if (user.getType() == TypeUser.MEMBRE)
-                                a.startActivity(new Intent(a, HomeMembreActivity.class));
-                            else a.startActivity(new Intent(a, LoginActivity.class));
+                            if (user.getType() == TypeUser.ORGANISATEUR) {
+                                type = 2;
+                                a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            } else if (user.getType() == TypeUser.MEMBRE) {
+                                type = 1;
+                                a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            } else a.startActivity(new Intent(a, LoginActivity.class));
                         }
 
                         /* En cas d'echec, redirection vers LoginActivity */

@@ -26,7 +26,7 @@ public class HelpActivity extends FragmentActivity {
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
         super.setContentView(R.layout.act_help);
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();
@@ -54,6 +54,12 @@ public class HelpActivity extends FragmentActivity {
                 LoginActivity.rememberMe(HelpActivity.this);
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
     }
 
     public class MyPagerAdapter extends FragmentStatePagerAdapter {

@@ -20,8 +20,8 @@ public class ChoiceActivity extends Activity {
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
         setContentView(R.layout.act_choice);
 
         final ImageButton next_orga = (ImageButton) findViewById(R.id.next_orga);
@@ -39,5 +39,11 @@ public class ChoiceActivity extends Activity {
                 startActivity(new Intent(ChoiceActivity.this, SignUpMembreActivity.class));
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
     }
 }

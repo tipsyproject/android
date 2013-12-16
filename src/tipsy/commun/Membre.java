@@ -12,18 +12,22 @@ public class Membre extends StackMobModel implements User.TipsyUser {
     private String prenom;
     private User user;
 
-    public Membre(String username, String password, String nom, String prenom){
+    public Membre(String username, String password, String nom, String prenom) {
         super(Membre.class);
-        user = new User(username,password,TypeUser.MEMBRE);
+        user = new User(username, password, TypeUser.MEMBRE);
         this.nom = nom;
         this.prenom = prenom;
     }
 
-    public String getEmail() { return user.getEmail(); }
+    public String getEmail() {
+        return user.getEmail();
+    }
 
     public int getType() {
         return TypeUser.MEMBRE;
     }
 
-    public User getUser() { return user; }
+    public User getUser() {
+        return user;
+    }
 }

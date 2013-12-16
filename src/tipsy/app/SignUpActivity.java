@@ -15,8 +15,6 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.membre.HomeMembreActivity;
-import tipsy.app.orga.HomeOrgaActivity;
 import tipsy.commun.TypeUser;
 import tipsy.commun.User;
 
@@ -39,6 +37,7 @@ public abstract class SignUpActivity extends Activity implements Validator.Valid
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
         buttonSignup = (ImageButton) findViewById(R.id.button_signup);
@@ -55,15 +54,20 @@ public abstract class SignUpActivity extends Activity implements Validator.Valid
 
         buttonSignin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, LoginActivity.class));
+                startActivity(new Intent(SignUpActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         });
 
         buttonLater.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, HomeAnonymousActivity.class));
+                startActivity(new Intent(SignUpActivity.this, HomeAnonymousActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         });
+    }
+
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
     }
 
     protected void signUp(final User.TipsyUser tipsyUser) {
@@ -80,11 +84,10 @@ public abstract class SignUpActivity extends Activity implements Validator.Valid
                             // Direction page d'accueil
                             @Override
                             public void success() {
-                                Class dest;
                                 if (tipsyUser.getType() == TypeUser.MEMBRE)
-                                    dest = HomeMembreActivity.class;
-                                else dest = HomeOrgaActivity.class;
-                                startActivity(new Intent(SignUpActivity.this, dest));
+                                    LoginActivity.type = 1;
+                                else LoginActivity.type = 2;
+                                startActivity(new Intent(SignUpActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             }
 
                             @Override

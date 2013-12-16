@@ -1,4 +1,4 @@
-package tipsy.app.orga;
+package tipsy.app.membre;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,14 +7,16 @@ import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
@@ -28,9 +30,9 @@ import tipsy.app.R;
 import tipsy.commun.User;
 
 /**
- * Created by Valoo on 05/12/13.
+ * Created by tech on 05/12/13.
  */
-public class HomeOrgaActivity extends OrgaActivity {
+public class MembreActivity extends Activity {
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -38,23 +40,15 @@ public class HomeOrgaActivity extends OrgaActivity {
     private CharSequence mDrawerTitle;
     private CharSequence titre;
     private String[] titres_menu;
-
-    private ImageButton buttonCreerEvent;
+    private SearchView mSearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.act_orga_home);
+        setContentView(R.layout.act_user_home);
 
-        buttonCreerEvent = (ImageButton) findViewById(R.id.button_creer_event);
-
-        buttonCreerEvent.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(HomeOrgaActivity.this, EditEventActivity.class));
-            }
-        });
         titre = mDrawerTitle = getTitle();
-        titres_menu = getResources().getStringArray(R.array.menu_organisateur);
+        titres_menu = getResources().getStringArray(R.array.menu_participant);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_Layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -78,10 +72,12 @@ public class HomeOrgaActivity extends OrgaActivity {
         ) {
             public void onDrawerClosed(View view) {
                 getActionBar().setTitle(titre);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             public void onDrawerOpened(View drawerView) {
                 getActionBar().setTitle(titre);
+                invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
@@ -89,14 +85,32 @@ public class HomeOrgaActivity extends OrgaActivity {
         if (savedInstanceState == null) {
             selectItem(0);
         }
-
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(HomeOrgaActivity.this);
+                hideKeyboard(MembreActivity.this);
                 return false;
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user, menu);
+        MenuItem searchItem = menu.findItem(R.id.search);
+        mSearchView = (SearchView) searchItem.getActionView();
+        mSearchView.setQueryHint(getString(R.string.search));
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    /* Called whenever we call invalidateOptionsMenu() */
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        // If the nav drawer is open, hide action items related to the content view
+        boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -129,9 +143,9 @@ public class HomeOrgaActivity extends OrgaActivity {
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();*/
 
         // update selected item and title, then close the drawer
-        if (position == 2) {
-            startActivity(new Intent(HomeOrgaActivity.this, HelpActivity.class));
-        } else if (position == 3) {
+        if (position == 3) {
+            startActivity(new Intent(MembreActivity.this, HelpActivity.class));
+        } else if (position == 4) {
             User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
                 @Override
                 public void success(List<User> list) {
@@ -140,7 +154,7 @@ public class HomeOrgaActivity extends OrgaActivity {
                         @Override
                         public void success() {
                             Log.d("REMEMBER", "Logout");
-                            startActivity(new Intent(HomeOrgaActivity.this, LoginActivity.class));
+                            startActivity(new Intent(MembreActivity.this, LoginActivity.class));
                         }
 
                         @Override
@@ -190,6 +204,7 @@ public class HomeOrgaActivity extends OrgaActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
+
 
     /**
      * Fragment that appears in the "content_frame", shows a planet
