@@ -30,9 +30,6 @@
         <activity
             android:name=".HelpActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".ChoiceActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
 
         <activity
             android:name=".orga.SignUpOrgaActivity"
@@ -48,7 +45,7 @@
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"></activity>
 
-        <activity android:name=".HomeActivity">
+        <activity android:name=".membre.MembreActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -57,13 +54,7 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity
-            android:name=".membre.MembreActivity"
-            android:noHistory="true"></activity>
-
-        <activity
-            android:name=".orga.HomeOrgaActivity"
-            android:noHistory="true"></activity>
+        <activity android:name=".orga.OrgaActivity"></activity>
 
         <activity android:name=".orga.EditEventActivity"></activity>
 

@@ -16,13 +16,15 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import tipsy.app.membre.MembreActivity;
+import tipsy.app.orga.OrgaActivity;
 import tipsy.commun.TypeUser;
 import tipsy.commun.User;
 
 /**
  * Created by valoo on 13/12/13.
  */
-public abstract class SignUp extends FragmentActivity implements Validator.ValidationListener {
+public abstract class SignUpUser extends FragmentActivity implements Validator.ValidationListener {
 
     @Required(order = 10)
     @Email(order = 11)
@@ -41,7 +43,7 @@ public abstract class SignUp extends FragmentActivity implements Validator.Valid
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(SignUp.this);
+                hideKeyboard(SignUpUser.this);
                 return false;
             }
         });
@@ -52,7 +54,7 @@ public abstract class SignUp extends FragmentActivity implements Validator.Valid
         overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
     }
 
-    protected void signUp(final User.TipsyUser tipsyUser) {
+    protected void signUpUser(final User.TipsyUser tipsyUser) {
         // Inscription du User
         tipsyUser.getUser().save(new StackMobModelCallback() {
             //Connexion auto
@@ -67,9 +69,9 @@ public abstract class SignUp extends FragmentActivity implements Validator.Valid
                             @Override
                             public void success() {
                                 if (tipsyUser.getType() == TypeUser.MEMBRE)
-                                    LoginActivity.type = 1;
-                                else LoginActivity.type = 2;
-                                startActivity(new Intent(SignUp.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                    startActivity(new Intent(SignUpUser.this, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                else
+                                    startActivity(new Intent(SignUpUser.this, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             }
 
                             @Override

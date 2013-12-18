@@ -14,15 +14,16 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
 
+import tipsy.app.LoginActivity;
 import tipsy.app.R;
-import tipsy.app.SignUp;
+import tipsy.app.SignUpUser;
 import tipsy.app.membre.SignUpMembreActivity;
 import tipsy.commun.Organisateur;
 
 /**
  * Created by valoo on 13/12/13.
  */
-public class SignUpOrgaActivity extends SignUp implements Validator.ValidationListener {
+public class SignUpOrgaActivity extends SignUpUser implements Validator.ValidationListener {
 
     @Required(order = 1)
     protected EditText inputNom;
@@ -48,13 +49,18 @@ public class SignUpOrgaActivity extends SignUp implements Validator.ValidationLi
         super.onCreate(savedInstanceState);
     }
 
+    protected void onPause() {
+        super.onPause();
+        startActivity(new Intent(SignUpOrgaActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+    }
+
     public void onValidationSucceeded() {
         final Organisateur orga = new Organisateur(
                 inputEmail.getText().toString(),
                 inputPassword.getText().toString(),
                 inputNom.getText().toString()
         );
-        signUp(orga);
+        signUpUser(orga);
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {

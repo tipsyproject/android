@@ -22,7 +22,9 @@ import com.stackmob.sdk.exception.StackMobException;
 
 import java.util.List;
 
+import tipsy.app.membre.MembreActivity;
 import tipsy.app.membre.SignUpMembreActivity;
+import tipsy.app.orga.OrgaActivity;
 import tipsy.commun.Prefs;
 import tipsy.commun.TypeUser;
 import tipsy.commun.User;
@@ -40,7 +42,6 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     private Button buttonSignup;
     private Validator validator;
     protected Button buttonHelp;
-    public static int type = 0;
 
 
     @Override
@@ -107,11 +108,9 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                         .commit();
                 // Redirection en fonction du type utilisateur
                 if (user.getType() == TypeUser.ORGANISATEUR) {
-                    type = 2;
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    startActivity(new Intent(LoginActivity.this, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 } else if (user.getType() == TypeUser.MEMBRE) {
-                    type = 1;
-                    startActivity(new Intent(LoginActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    startActivity(new Intent(LoginActivity.this, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 } else
                     Toast.makeText(LoginActivity.this, "Connexion impossible", Toast.LENGTH_SHORT).show();
             }
@@ -160,13 +159,10 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
             @Override
             public void success(List<User> list) {
                 User user = list.get(0);
-                if (user.getType() == TypeUser.ORGANISATEUR) {
-                    type = 2;
-                    a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                } else if (user.getType() == TypeUser.MEMBRE) {
-                    type = 1;
-                    a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                }
+                if (user.getType() == TypeUser.ORGANISATEUR)
+                    a.startActivity(new Intent(a, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                else if (user.getType() == TypeUser.MEMBRE)
+                    a.startActivity(new Intent(a, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
 
             @Override
@@ -181,13 +177,11 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                     user.login(new StackMobModelCallback() {
                         @Override
                         public void success() {
-                            if (user.getType() == TypeUser.ORGANISATEUR) {
-                                type = 2;
-                                a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                            } else if (user.getType() == TypeUser.MEMBRE) {
-                                type = 1;
-                                a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                            } else
+                            if (user.getType() == TypeUser.ORGANISATEUR)
+                                a.startActivity(new Intent(a, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            else if (user.getType() == TypeUser.MEMBRE)
+                                a.startActivity(new Intent(a, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            else
                                 a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                         }
 

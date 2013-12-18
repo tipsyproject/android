@@ -18,11 +18,11 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.annotation.Required;
 
 import tipsy.app.R;
-import tipsy.app.SignUp;
+import tipsy.app.SignUpUser;
 import tipsy.app.orga.SignUpOrgaActivity;
 import tipsy.commun.Membre;
 
-public class SignUpMembreActivity extends SignUp {
+public class SignUpMembreActivity extends SignUpUser {
 
     @Required(order = 1)
     protected EditText inputNom;
@@ -58,7 +58,7 @@ public class SignUpMembreActivity extends SignUp {
                 inputNom.getText().toString(),
                 inputPrenom.getText().toString()
         );
-        signUp(membre);
+        signUpUser(membre);
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
