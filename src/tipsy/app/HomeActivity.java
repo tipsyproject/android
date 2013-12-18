@@ -60,8 +60,6 @@ public class HomeActivity extends Activity {
             titres_menu = getResources().getStringArray(R.array.menu_organisateur);
         } else if (LoginActivity.type == 1) {
             titres_menu = getResources().getStringArray(R.array.menu_participant);
-        } else {
-            titres_menu = getResources().getStringArray(R.array.menu_anonyme);
         }
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_Layout);
@@ -171,17 +169,11 @@ public class HomeActivity extends Activity {
 
         // update selected item and title, then close the drawer
 
-        if (position == 1 && LoginActivity.type == 0) {
-            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
-        } else if (position == 2 && LoginActivity.type == 0)
-            startActivity(new Intent(HomeActivity.this, ChoiceActivity.class));
-        else if (position == 2 && LoginActivity.type == 2)
+        if (position == 2 && LoginActivity.type == 2)
             startActivity(new Intent(HomeActivity.this, HelpActivity.class));
-        else if (position == 3 && LoginActivity.type == 0) {
+        else if (LoginActivity.type == 1 && position == 3 || LoginActivity.type == 2 && position == 2)
             startActivity(new Intent(HomeActivity.this, HelpActivity.class));
-        } else if (LoginActivity.type == 1 && position == 3 || LoginActivity.type == 2 && position == 2) {
-            startActivity(new Intent(HomeActivity.this, HelpActivity.class));
-        } else if (LoginActivity.type == 2 && position == 3 || LoginActivity.type == 1 && position == 4) {
+        else if (LoginActivity.type == 2 && position == 3 || LoginActivity.type == 1 && position == 4) {
             User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
                 @Override
                 public void success(List<User> list) {

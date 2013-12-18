@@ -22,6 +22,7 @@ import com.stackmob.sdk.exception.StackMobException;
 
 import java.util.List;
 
+import tipsy.app.membre.SignUpMembreActivity;
 import tipsy.commun.Prefs;
 import tipsy.commun.TypeUser;
 import tipsy.commun.User;
@@ -39,7 +40,6 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     private Button buttonSignup;
     private Validator validator;
     protected Button buttonHelp;
-    protected Button buttonLater;
     public static int type = 0;
 
 
@@ -51,7 +51,6 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         buttonSignin = (Button) findViewById(R.id.button_signin);
         buttonSignup = (Button) findViewById(R.id.button_signup);
         buttonHelp = (Button) findViewById(R.id.button_help);
-        buttonLater = (Button) findViewById(R.id.button_later);
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
 
@@ -72,7 +71,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         // Redirection inscription
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, ChoiceActivity.class));
+                startActivity(new Intent(LoginActivity.this, SignUpMembreActivity.class));
             }
         });
 
@@ -89,19 +88,11 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
             }
         });
 
-        buttonLater.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                type = 0;
-                startActivity(new Intent(LoginActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            }
-        });
-
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
     }
 
     public void onValidationSucceeded() {
@@ -184,7 +175,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                 final String username = prefs.getString(Prefs.USERNAME, null);
                 final String password = prefs.getString(Prefs.PASSWORD, null);
                 if (username == null || password == null) {
-                    a.startActivity(new Intent(a, LoginActivity.class));
+                    a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 } else {
                     final User user = new User(username, password);
                     user.login(new StackMobModelCallback() {
@@ -196,13 +187,14 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
                             } else if (user.getType() == TypeUser.MEMBRE) {
                                 type = 1;
                                 a.startActivity(new Intent(a, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                            } else a.startActivity(new Intent(a, LoginActivity.class));
+                            } else
+                                a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                         }
 
                         /* En cas d'echec, redirection vers LoginActivity */
                         @Override
                         public void failure(StackMobException e) {
-                            a.startActivity(new Intent(a, LoginActivity.class));
+                            a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                         }
                     });
                 }

@@ -3,11 +3,12 @@ package tipsy.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ImageButton;
 
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -21,46 +22,27 @@ import tipsy.commun.User;
 /**
  * Created by valoo on 13/12/13.
  */
-public abstract class SignUpActivity extends Activity implements Validator.ValidationListener {
+public abstract class SignUp extends FragmentActivity implements Validator.ValidationListener {
 
     @Required(order = 10)
     @Email(order = 11)
     protected EditText inputEmail;
     @Required(order = 12)
     protected EditText inputPassword;
-    protected ImageButton buttonSignup;
-    protected Button buttonSignin;
-    protected Button buttonLater;
-
-    protected Validator validator;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
+
         inputEmail = (EditText) findViewById(R.id.input_email);
         inputPassword = (EditText) findViewById(R.id.input_password);
-        buttonSignup = (ImageButton) findViewById(R.id.button_signup);
-        buttonSignin = (Button) findViewById(R.id.button_signin);
-        buttonLater = (Button) findViewById(R.id.button_later);
-        validator = new Validator(this);
-        validator.setValidationListener(this);
 
-        buttonSignup.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                validator.validate();
-            }
-        });
-
-        buttonSignin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            }
-        });
-
-        buttonLater.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(SignUpActivity.this, HomeAnonymousActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(SignUp.this);
+                return false;
             }
         });
     }
@@ -87,7 +69,7 @@ public abstract class SignUpActivity extends Activity implements Validator.Valid
                                 if (tipsyUser.getType() == TypeUser.MEMBRE)
                                     LoginActivity.type = 1;
                                 else LoginActivity.type = 2;
-                                startActivity(new Intent(SignUpActivity.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                startActivity(new Intent(SignUp.this, HomeActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                             }
 
                             @Override
@@ -111,5 +93,10 @@ public abstract class SignUpActivity extends Activity implements Validator.Valid
             }
 
         });
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

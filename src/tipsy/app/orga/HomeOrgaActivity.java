@@ -53,50 +53,6 @@ public class HomeOrgaActivity extends OrgaActivity {
                 startActivity(new Intent(HomeOrgaActivity.this, EditEventActivity.class));
             }
         });
-        titre = mDrawerTitle = getTitle();
-        titres_menu = getResources().getStringArray(R.array.menu_organisateur);
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_Layout);
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-        // set up the drawer's list view with items and click listener
-        mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, titres_menu));
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        // enable ActionBar app icon to behave as action to toggle nav drawer
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
-
-        // ActionBarDrawerToggle ties together the the proper interactions
-        // between the sliding drawer and the action bar app icon
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,         /* DrawerLayout object */
-                R.drawable.ic_drawer,  /* nav drawer image to replace 'Up' caret */
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
-            public void onDrawerClosed(View view) {
-                getActionBar().setTitle(titre);
-            }
-
-            public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(titre);
-            }
-        };
-        mDrawerLayout.setDrawerListener(mDrawerToggle);
-
-        if (savedInstanceState == null) {
-            selectItem(0);
-        }
-
-        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(HomeOrgaActivity.this);
-                return false;
-            }
-        });
     }
 
     @Override

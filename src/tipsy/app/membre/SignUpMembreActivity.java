@@ -5,10 +5,12 @@ package tipsy.app.membre;
  */
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -16,26 +18,34 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.annotation.Required;
 
 import tipsy.app.R;
-import tipsy.app.SignUpActivity;
+import tipsy.app.SignUp;
+import tipsy.app.orga.SignUpOrgaActivity;
 import tipsy.commun.Membre;
 
-public class SignUpMembreActivity extends SignUpActivity {
+public class SignUpMembreActivity extends SignUp {
 
     @Required(order = 1)
     protected EditText inputNom;
     @Required(order = 2)
     protected EditText inputPrenom;
+    protected Button buttonSignupOrga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_signup_membre);
         inputNom = (EditText) findViewById(R.id.input_nom);
         inputPrenom = (EditText) findViewById(R.id.input_prenom);
+        buttonSignupOrga = (Button) findViewById(R.id.buttonsignuporga);
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 hideKeyboard(SignUpMembreActivity.this);
                 return false;
+            }
+        });
+        buttonSignupOrga.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                startActivity(new Intent(SignUpMembreActivity.this, SignUpOrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
         });
         super.onCreate(savedInstanceState);

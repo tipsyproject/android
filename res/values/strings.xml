@@ -2,23 +2,21 @@
 <resources>
     <string name="app_name">Tipsy</string>
     <string-array name="menu_participant">
-        <item>Événements</item>
+        <item>Mon Compte</item>
         <item>Solde</item>
-        <item>Paramètres</item>
+        <item>Événements</item>
         <item>Aide</item>
         <item>Déconnexion</item>
     </string-array>
     <string-array name="menu_organisateur">
+        <item>Mon Compte</item>
         <item>Événements</item>
-        <item>Paramètres</item>
         <item>Aide</item>
         <item>Déconnexion</item>
     </string-array>
-    <string-array name="menu_anonyme">
-        <item>Événements</item>
-        <item>Connexion</item>
-        <item>Inscription</item>
-        <item>Aide</item>
+    <string-array name="inscription">
+        <item>Organisateur</item>
+        <item>Participant</item>
     </string-array>
     <string name="creer_event">Créer un événement</string>
     <string name="drawer_open">Ouvrir le menu déroulant</string>
@@ -29,14 +27,16 @@
     <string name="next">"Passer"</string>
     <string name="connection">"Connexion"</string>
     <string name="disconnection">"Déconnexion"</string>
+    <string name="signuporga">"Organisateur ?"</string>
+    <string name="signupmembre">"Participant ?"</string>
     <string name="inscription">"Inscription"</string>
-    <string name="anonymous_access">"Accès Anonyme"</string>
     <string name="inscription_or_connect">"Connexion ou Inscription"</string>
-    <string name="conditions">"En m'inscrivant, j'accepte les conditions générales."</string>
+    <string name="conditions">"En m'inscrivant,
+j'accepte les conditions générales."</string>
     <string name="affichermdp">"Afficher le mot de passe"</string>
+    <string name="forgotpass">"Mot de passe oublié ?"</string>
     <string name="loading">"Chargement"</string>
     <string name="failed_connexion">Email ou Mot de Passe Incorrect</string>
-    <string name="later">Plus tard</string>
     <string name="ok">OK</string>
     <string name="help">En savoir plus</string>
 </resources>
