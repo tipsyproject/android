@@ -19,6 +19,6 @@ public class MenuMembre extends MenuUser {
     public MenuMembre(Activity a) {
         super(a);
         this.titres_menu = a.getResources().getStringArray(R.array.menu_membre);
-        this.titre=titres_menu[0];
+        setTitre(titres_menu[ACCUEIL]);
     }
 }

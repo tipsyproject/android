@@ -17,7 +17,7 @@ public class MenuOrga extends MenuUser {
 
     public MenuOrga(Activity a) {
         super(a);
-        this.titres_menu = a.getResources().getStringArray(R.array.menu_organisateur);
-        this.titre=titres_menu[0];
+        titres_menu = a.getResources().getStringArray(R.array.menu_organisateur);
+        setTitre(titres_menu[ACCUEIL]);
     }
 }

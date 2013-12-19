@@ -11,7 +11,7 @@ import android.widget.ListView;
  * Created by Alexandre on 15/12/13.
  */
 public abstract class MenuUser {
-    private static int ACCUEIL = 0;
+    protected static int ACCUEIL = 0;
     protected DrawerLayout drawerLayout;
     protected ListView drawerList;
     protected ActionBarDrawerToggle drawerToggle;
@@ -51,7 +51,6 @@ public abstract class MenuUser {
             }
         };
         drawerLayout.setDrawerListener(drawerToggle);
-        drawerList.setItemChecked(ACCUEIL, true);
     }
 
     public void initAdapter(UserActivity.DrawerItemClickListener listener) {

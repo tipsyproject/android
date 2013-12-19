@@ -27,7 +27,12 @@ public abstract class UserActivity extends FragmentActivity {
                 return false;
             }
         });
+    }
 
+    protected void onStart(){
+        super.onStart();
+        setTitle(this.menu.getTitre());
+        this.menu.getDrawerList().setItemChecked(MenuUser.ACCUEIL, true);
     }
 
     // Called whenever we call invalidateOptionsMenu()
