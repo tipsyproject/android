@@ -1,6 +1,7 @@
 package tipsy.app;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.List;
 import java.util.Vector;
@@ -23,10 +25,13 @@ import tipsy.commun.User;
 public class HelpActivity extends FragmentActivity {
 
     private PagerAdapter mPagerAdapter;
+    protected ImageView focustep;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.act_help);
+
+        focustep = (ImageView) findViewById(R.id.focustep);
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();
 
@@ -71,6 +76,12 @@ public class HelpActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
+            if (position==1)
+                focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepone));
+            else if(position==2)
+                focustep.setImageDrawable(getResources().getDrawable(R.drawable.focusteptwo));
+            else if(position==3)
+                focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepthree));
             return this.fragments.get(position);
         }
 
