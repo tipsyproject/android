@@ -1177,6 +1177,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="576">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/tipsy/app/TipsyApp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="51" column="65" selection-start="1333" selection-end="1333" vertical-scroll-proportion="0.4507846" vertical-offset="458" max-vertical-offset="1386">
