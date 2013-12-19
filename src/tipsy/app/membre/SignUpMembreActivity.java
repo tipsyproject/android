@@ -45,7 +45,7 @@ public class SignUpMembreActivity extends SignUpUser {
         });
         buttonSignupOrga.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(SignUpMembreActivity.this, SignUpOrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                startActivity(new Intent(SignUpMembreActivity.this, SignUpOrgaActivity.class));
             }
         });
         super.onCreate(savedInstanceState);

@@ -43,15 +43,10 @@ public class SignUpOrgaActivity extends SignUpUser implements Validator.Validati
         });
         buttonSignupMembre.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(SignUpOrgaActivity.this, SignUpMembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                startActivity(new Intent(SignUpOrgaActivity.this, SignUpMembreActivity.class));
             }
         });
         super.onCreate(savedInstanceState);
-    }
-
-    protected void onPause() {
-        super.onPause();
-        startActivity(new Intent(SignUpOrgaActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 
     public void onValidationSucceeded() {

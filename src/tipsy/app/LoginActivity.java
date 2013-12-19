@@ -109,7 +109,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
 
             @Override
             public void failure(StackMobException e) {
-                Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Identifiants incorrects", Toast.LENGTH_SHORT).show();
             }
         });
     }
