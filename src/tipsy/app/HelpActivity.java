@@ -15,7 +15,7 @@ import android.widget.Button;
 import java.util.List;
 import java.util.Vector;
 
-import tipsy.commun.Prefs;
+import tipsy.commun.User;
 
 /**
  * Created by Alexandre on 12/12/13.
@@ -47,10 +47,9 @@ public class HelpActivity extends FragmentActivity {
         final Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                prefs.edit()
-                        .putBoolean(Prefs.SKIP_HELP, true)
-                        .commit();
-                LoginActivity.rememberMe(HelpActivity.this);
+                TipsyApp app = (TipsyApp) getApplication();
+                app.setSkipHelp(HelpActivity.this, true);
+                User.tryLogin(HelpActivity.this);
             }
         });
     }

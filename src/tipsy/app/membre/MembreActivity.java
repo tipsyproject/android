@@ -20,6 +20,7 @@ import java.util.List;
 import tipsy.app.HelpActivity;
 import tipsy.app.LoginActivity;
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
 import tipsy.commun.Prefs;
 import tipsy.commun.User;
@@ -29,6 +30,7 @@ import tipsy.commun.User;
  */
 public class MembreActivity extends UserActivity {
 
+    private TipsyApp app;
     private SearchView mSearchView;
 
     @Override
@@ -37,6 +39,8 @@ public class MembreActivity extends UserActivity {
         super.onCreate(savedInstanceState);
         this.menu = new MenuMembre(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
+
+        app = (TipsyApp) getApplication();
     }
 
     @Override
@@ -58,33 +62,7 @@ public class MembreActivity extends UserActivity {
         if (position == MenuMembre.AIDE)
             startActivity(new Intent(this, HelpActivity.class));
         else if (position == MenuMembre.DECONNEXION) {
-            User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
-                @Override
-                public void success(List<User> list) {
-                    User user = list.get(0);
-                    user.logout(new StackMobModelCallback() {
-                        @Override
-                        public void success() {
-                            Log.d("REMEMBER", "Logout");
-                            startActivity(new Intent(MembreActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                            PreferenceManager.getDefaultSharedPreferences(MembreActivity.this).edit()
-                                    .putString(Prefs.USERNAME, "")
-                                    .putString(Prefs.PASSWORD, "")
-                                    .commit();
-                        }
-
-                        @Override
-                        public void failure(StackMobException e) {
-                            Log.d("REMEMBER", "Logout failed");
-                        }
-                    });
-                }
-
-                @Override
-                public void failure(StackMobException e) {
-                }
-            });
-
+            app.logout(this);
         } else {
             this.menu.getDrawerList().setItemChecked(position, true);
             setTitle(this.menu.getTitres_menu()[position]);

@@ -14,6 +14,7 @@ import java.util.List;
 import tipsy.app.HelpActivity;
 import tipsy.app.LoginActivity;
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
 import tipsy.commun.Prefs;
 import tipsy.commun.User;
@@ -23,12 +24,18 @@ import tipsy.commun.User;
  */
 public class OrgaActivity extends UserActivity {
 
+    private TipsyApp app;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_user_menu);
         super.onCreate(savedInstanceState);
         this.menu = new MenuOrga(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
+
+        app = (TipsyApp) getApplication();
+
+        Log.d("TOUTAFAIT", app.getOrga().getEmail());
 
         /*buttonCreerEvent = (ImageButton) findViewById(R.id.button_creer_event);
 
@@ -43,32 +50,7 @@ public class OrgaActivity extends UserActivity {
         if (position == MenuOrga.AIDE)
             startActivity(new Intent(this, HelpActivity.class));
         else if (position == MenuOrga.DECONNEXION) {
-            User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
-                @Override
-                public void success(List<User> list) {
-                    User user = list.get(0);
-                    user.logout(new StackMobModelCallback() {
-                        @Override
-                        public void success() {
-                            Log.d("REMEMBER", "Logout");
-                            startActivity(new Intent(OrgaActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                            PreferenceManager.getDefaultSharedPreferences(OrgaActivity.this).edit()
-                                    .putString(Prefs.USERNAME, "")
-                                    .putString(Prefs.PASSWORD, "")
-                                    .commit();
-                        }
-
-                        @Override
-                        public void failure(StackMobException e) {
-                            Log.d("REMEMBER", "Logout failed");
-                        }
-                    });
-                }
-
-                @Override
-                public void failure(StackMobException e) {
-                }
-            });
+            app.logout(this);
 
         } else {
             this.menu.getDrawerList().setItemChecked(position, true);

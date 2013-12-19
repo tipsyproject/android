@@ -102,17 +102,9 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
             @Override
             public void success() {
                 // Sauvegarde locale des identifiants pour connexion auto
-                prefs.edit()
-                        .putString(Prefs.USERNAME, inputEmail.getText().toString())
-                        .putString(Prefs.PASSWORD, inputPassword.getText().toString())
-                        .commit();
+                User.rememberMe(LoginActivity.this,inputEmail.getText().toString(),inputPassword.getText().toString());
                 // Redirection en fonction du type utilisateur
-                if (user.getType() == TypeUser.ORGANISATEUR) {
-                    startActivity(new Intent(LoginActivity.this, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                } else if (user.getType() == TypeUser.MEMBRE) {
-                    startActivity(new Intent(LoginActivity.this, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                } else
-                    Toast.makeText(LoginActivity.this, "Connexion impossible", Toast.LENGTH_SHORT).show();
+                User.keepCalmAndWaitForGoingHome(LoginActivity.this,user);
             }
 
             @Override
@@ -137,64 +129,6 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
     public static void hideKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
-    }
-
-
-    /*
-
-    On renvoie vers la page d'accueil correspondante si l'utilisateur est encore connecté
-
-    Sinon si aucun couple username/password n'a été mémorisé,
-    l'utilisateur est redirigé vers la page de login.
-
-    Sinon il est connecté automatiquement.
-    Et en fonction du type d'utilisateur,
-    celui-ci est redirigé vers l'activité correspondante.
-    (en cas d'echec lors de la connexion auto, l'utilisateur est redirigé vers LoginActivity)
-    */
-    public static void rememberMe(Activity act) {
-        final Activity a = act;
-        // Si utilisateur est encore connecté
-        User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
-            @Override
-            public void success(List<User> list) {
-                User user = list.get(0);
-                if (user.getType() == TypeUser.ORGANISATEUR)
-                    a.startActivity(new Intent(a, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                else if (user.getType() == TypeUser.MEMBRE)
-                    a.startActivity(new Intent(a, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(a);
-                final String username = prefs.getString(Prefs.USERNAME, null);
-                final String password = prefs.getString(Prefs.PASSWORD, null);
-                if (username == null || password == null) {
-                    a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                } else {
-                    final User user = new User(username, password);
-                    user.login(new StackMobModelCallback() {
-                        @Override
-                        public void success() {
-                            if (user.getType() == TypeUser.ORGANISATEUR)
-                                a.startActivity(new Intent(a, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                            else if (user.getType() == TypeUser.MEMBRE)
-                                a.startActivity(new Intent(a, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                            else
-                                a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                        }
-
-                        /* En cas d'echec, redirection vers LoginActivity */
-                        @Override
-                        public void failure(StackMobException e) {
-                            a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                        }
-                    });
-                }
-            }
-
-        });
     }
 
 }
