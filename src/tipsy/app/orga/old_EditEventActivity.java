@@ -26,7 +26,7 @@ import tipsy.commun.Event;
  * Created by Valoo on 05/12/13.
  */
 
-public class EditEventActivity extends OrgaActivity implements ActionBar.TabListener, Validator.ValidationListener {
+public class old_EditEventActivity extends OrgaActivity implements ActionBar.TabListener, Validator.ValidationListener {
     // Nombre de colonnes
     private static final int NUM_ITEMS = 4;
     private static final int[] icones = {
@@ -101,7 +101,7 @@ public class EditEventActivity extends OrgaActivity implements ActionBar.TabList
             // Connexion automatique en cas de réussite
             @Override
             public void success() {
-                startActivity(new Intent(EditEventActivity.this, MembreActivity.class));
+                startActivity(new Intent(old_EditEventActivity.this, MembreActivity.class));
             }
 
             // En cas d'échec
