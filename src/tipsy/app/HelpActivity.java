@@ -1,6 +1,7 @@
 package tipsy.app;
 
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
@@ -9,8 +10,10 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import java.util.List;
 import java.util.Vector;
@@ -23,10 +26,15 @@ import tipsy.commun.User;
 public class HelpActivity extends FragmentActivity {
 
     private PagerAdapter mPagerAdapter;
+    protected ImageView focustep;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.act_help);
+
+        focustep = (ImageView) findViewById(R.id.focustep);
+        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepone));
+
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();
 
@@ -42,6 +50,32 @@ public class HelpActivity extends FragmentActivity {
         ViewPager pager = (ViewPager) super.findViewById(R.id.pager);
         // Affectation de l'adapter au ViewPager
         pager.setAdapter(this.mPagerAdapter);
+        pager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            public void onPageSelected(int pageNumber) {
+                switch (pageNumber) {
+                    case 0:
+                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepone));
+                        break;
+
+                    case 1:
+                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focusteptwo));
+                        break;
+
+                    case 2:
+                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepthree));
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+
+            public void onPageScrollStateChanged(int arg0) {
+            }
+        });
 
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         final Button next = (Button) findViewById(R.id.next);
