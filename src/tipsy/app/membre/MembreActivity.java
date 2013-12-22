@@ -4,26 +4,15 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
-import com.stackmob.sdk.exception.StackMobException;
-
-import java.util.List;
-
 import tipsy.app.HelpActivity;
-import tipsy.app.LoginActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
-import tipsy.commun.Prefs;
-import tipsy.commun.User;
 
 /**
  * Created by tech on 05/12/13.

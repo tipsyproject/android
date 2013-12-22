@@ -29,7 +29,7 @@ public abstract class UserActivity extends FragmentActivity {
         });
     }
 
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
         setTitle(this.menu.getTitre());
         this.menu.getDrawerList().setItemChecked(MenuUser.ACCUEIL, true);

@@ -23,6 +23,10 @@ WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 package com.sveinungkb;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.util.Base64;
+
 import java.io.UnsupportedEncodingException;
 import java.security.GeneralSecurityException;
 import java.security.InvalidAlgorithmParameterException;
@@ -33,10 +37,6 @@ import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.util.Base64;
 
 
 public class SecurePreferences {
@@ -62,13 +62,14 @@ public class SecurePreferences {
 
     /**
      * This will initialize an instance of the SecurePreferences class
-     * @param context your current context.
+     *
+     * @param context        your current context.
      * @param preferenceName name of preferences file (preferenceName.xml)
-     * @param secureKey the key used for encryption, finding a good key scheme is hard.
-     * Hardcoding your key in the application is bad, but better than plaintext preferences. Having the user enter the key upon application launch is a safe(r) alternative, but annoying to the user.
-     * @param encryptKeys settings this to false will only encrypt the values,
-     * true will encrypt both values and keys. Keys can contain a lot of information about
-     * the plaintext value of the value which can be used to decipher the value.
+     * @param secureKey      the key used for encryption, finding a good key scheme is hard.
+     *                       Hardcoding your key in the application is bad, but better than plaintext preferences. Having the user enter the key upon application launch is a safe(r) alternative, but annoying to the user.
+     * @param encryptKeys    settings this to false will only encrypt the values,
+     *                       true will encrypt both values and keys. Keys can contain a lot of information about
+     *                       the plaintext value of the value which can be used to decipher the value.
      * @throws SecurePreferencesException
      */
     public SecurePreferences(Context context, String preferenceName, String secureKey, boolean encryptKeys) throws SecurePreferencesException {
@@ -82,11 +83,9 @@ public class SecurePreferences {
             this.preferences = context.getSharedPreferences(preferenceName, Context.MODE_PRIVATE);
 
             this.encryptKeys = encryptKeys;
-        }
-        catch (GeneralSecurityException e) {
+        } catch (GeneralSecurityException e) {
             throw new SecurePreferencesException(e);
-        }
-        catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             throw new SecurePreferencesException(e);
         }
     }
@@ -122,8 +121,7 @@ public class SecurePreferences {
     public void put(String key, String value) {
         if (value == null) {
             preferences.edit().remove(toKey(key)).commit();
-        }
-        else {
+        } else {
             putValue(toKey(key), value);
         }
     }
@@ -164,8 +162,7 @@ public class SecurePreferences {
         byte[] secureValue;
         try {
             secureValue = convert(writer, value.getBytes(CHARSET));
-        }
-        catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             throw new SecurePreferencesException(e);
         }
         String secureValueEncoded = Base64.encodeToString(secureValue, Base64.NO_WRAP);
@@ -177,8 +174,7 @@ public class SecurePreferences {
         byte[] value = convert(reader, securedValue);
         try {
             return new String(value, CHARSET);
-        }
-        catch (UnsupportedEncodingException e) {
+        } catch (UnsupportedEncodingException e) {
             throw new SecurePreferencesException(e);
         }
     }
@@ -186,8 +182,7 @@ public class SecurePreferences {
     private static byte[] convert(Cipher cipher, byte[] bs) throws SecurePreferencesException {
         try {
             return cipher.doFinal(bs);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw new SecurePreferencesException(e);
         }
     }
