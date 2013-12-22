@@ -9,12 +9,12 @@ import tipsy.app.R;
  * Created by Alexandre on 18/12/13.
  */
 public class MenuMembre extends MenuUser {
-    public static int ACCUEIL = 0;
-    public static int MON_COMPTE = 1;
-    public static int SOLDE = 2;
-    public static int EVENEMENTS = 3;
-    public static int AIDE = 4;
-    public static int DECONNEXION = 5;
+    public final static int ACCUEIL = 0;
+    public final static int MON_COMPTE = 1;
+    public final static int SOLDE = 2;
+    public final static int EVENEMENTS = 3;
+    public final static int AIDE = 4;
+    public final static int DECONNEXION = 5;
 
     public MenuMembre(Activity a) {
         super(a);

@@ -7,4 +7,6 @@
     <dimen name="bar_height">48dp</dimen>
     <dimen name="ui_margin">4dp</dimen>
 
+    <dimen name="home_button_height">80dp</dimen>
+
 </resources>

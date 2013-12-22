@@ -40,5 +40,5 @@ j'accepte les conditions générales."</string>
     <string name="loading">"Chargement"</string>
     <string name="failed_connexion">Email ou Mot de Passe Incorrect</string>
     <string name="ok">OK</string>
-    <string name="help">En savoir plus</string>
+    <string name="help">En savoir plus</string><string name="stats">Statistiques</string>
 </resources>
