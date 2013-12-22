@@ -2,7 +2,6 @@ package tipsy.commun;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.stackmob.sdk.api.StackMobQuery;
@@ -45,7 +44,7 @@ public class User extends StackMobUser {
         return getUsername();
     }
 
-    public void goHome(Activity a){
+    public void goHome(Activity a) {
         if (getType() == TypeUser.ORGANISATEUR)
             a.startActivity(new Intent(a, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         else if (getType() == TypeUser.MEMBRE)
@@ -55,33 +54,33 @@ public class User extends StackMobUser {
     }
 
     // Enregistre les identifiants de l'utilisateur dans le répertoire privé de l'appli
-    public static void rememberMe(Activity a, String username, String password){
+    public static void rememberMe(Activity a, String username, String password) {
         SecurePreferences prefs = new SecurePreferences(a.getApplicationContext(), "user", "7D465F9D5EA775D1C25FEFF588848", true);
         prefs.put(Prefs.USERNAME, username);
         prefs.put(Prefs.PASSWORD, password);
     }
 
     // Supprime les identifiants de l'utilisateur dans le répertoire privé de l'appli
-    public static void forgetMe(Activity a){
+    public static void forgetMe(Activity a) {
         SecurePreferences prefs = new SecurePreferences(a.getApplicationContext(), "user", "7D465F9D5EA775D1C25FEFF588848", true);
         prefs.put(Prefs.USERNAME, "");
         prefs.put(Prefs.PASSWORD, "");
     }
 
     // Enregistre les identifiants de l'utilisateur dans le répertoire privé de l'appli
-    public static User doYouRememberMe(Activity a){
+    public static User doYouRememberMe(Activity a) {
         SecurePreferences prefs = new SecurePreferences(a.getApplicationContext(), "user", "7D465F9D5EA775D1C25FEFF588848", true);
         String username = prefs.getString(Prefs.USERNAME);
         String password = prefs.getString(Prefs.PASSWORD);
         if (username != null && password != null) {
-            return new User(username,password);
+            return new User(username, password);
         } else return null;
     }
 
-    public static void keepCalmAndWaitForGoingHome(Activity act, User u){
+    public static void keepCalmAndWaitForGoingHome(Activity act, User u) {
         final Activity a = act;
         final User user = u;
-        if (user.getType() == TypeUser.ORGANISATEUR){
+        if (user.getType() == TypeUser.ORGANISATEUR) {
             Organisateur.query(Organisateur.class,
                     new StackMobQuery().field(new StackMobQueryField("user").isEqualTo(user.getUsername())),
                     new StackMobQueryCallback<Organisateur>() {
@@ -89,7 +88,7 @@ public class User extends StackMobUser {
                         public void success(List<Organisateur> result) {
                             Log.d("TOUTAFAIT", "query ORGA OK");
                             final Organisateur orga = result.get(0);
-                            Log.d("TOUTAFAIT", "query ORGA OK"+orga.getEmail());
+                            Log.d("TOUTAFAIT", "query ORGA OK" + orga.getEmail());
                             orga.fetch(new StackMobModelCallback() {
                                 @Override
                                 public void success() {
@@ -104,14 +103,14 @@ public class User extends StackMobUser {
                                 }
                             });
                         }
+
                         @Override
                         public void failure(StackMobException e) {
                             Log.d("TOUTAFAIT", "query association user/orga:" + e.getMessage());
                         }
                     });
 
-        }
-        else if (user.getType() == TypeUser.MEMBRE){
+        } else if (user.getType() == TypeUser.MEMBRE) {
             Membre.query(Membre.class,
                     new StackMobQuery().field(new StackMobQueryField("user").isEqualTo(user.getUsername())),
                     new StackMobQueryCallback<Membre>() {
@@ -132,13 +131,13 @@ public class User extends StackMobUser {
                                 }
                             });
                         }
+
                         @Override
                         public void failure(StackMobException e) {
                             Log.d("TOUTAFAIT", "query association user/membre:" + e.getMessage());
                         }
                     });
-        }
-        else{
+        } else {
             a.startActivity(new Intent(a, LoginActivity.class));
         }
     }
@@ -147,7 +146,7 @@ public class User extends StackMobUser {
     // Sinon on regarde si on peut le reconnecter automatiquement:
     //  Si on n'y parvient pas on le redirige vers la page d'authentification
     //  Sinon...
-    public static void tryLogin(Activity act){
+    public static void tryLogin(Activity act) {
         final Activity a = act;
         User.getLoggedInUser(User.class, new StackMobQueryCallback<User>() {
             @Override
@@ -160,9 +159,9 @@ public class User extends StackMobUser {
             @Override
             public void failure(StackMobException e) {
                 final User user = doYouRememberMe(a);
-                if(user == null){
+                if (user == null) {
                     a.startActivity(new Intent(a, LoginActivity.class));
-                }else{
+                } else {
                     user.login(new StackMobModelCallback() {
                         @Override
                         public void success() {
@@ -184,9 +183,11 @@ public class User extends StackMobUser {
     }
 
 
-    public interface TipsyUser{
+    public interface TipsyUser {
         public int getType();
+
         public User getUser();
+
         public void save(StackMobCallback callback);
     }
 
