@@ -17,16 +17,9 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import java.util.List;
-
-import tipsy.app.membre.MembreActivity;
 import tipsy.app.membre.SignUpMembreActivity;
-import tipsy.app.orga.OrgaActivity;
-import tipsy.commun.Prefs;
-import tipsy.commun.TypeUser;
 import tipsy.commun.User;
 
 public class LoginActivity extends Activity implements Validator.ValidationListener {
@@ -102,9 +95,9 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
             @Override
             public void success() {
                 // Sauvegarde locale des identifiants pour connexion auto
-                User.rememberMe(LoginActivity.this,inputEmail.getText().toString(),inputPassword.getText().toString());
+                User.rememberMe(LoginActivity.this, inputEmail.getText().toString(), inputPassword.getText().toString());
                 // Redirection en fonction du type utilisateur
-                User.keepCalmAndWaitForGoingHome(LoginActivity.this,user);
+                User.keepCalmAndWaitForGoingHome(LoginActivity.this, user);
             }
 
             @Override

@@ -14,7 +14,6 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
 
-import tipsy.app.LoginActivity;
 import tipsy.app.R;
 import tipsy.app.SignUpUser;
 import tipsy.app.membre.SignUpMembreActivity;

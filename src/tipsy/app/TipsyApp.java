@@ -9,7 +9,6 @@ import android.util.Log;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.orga.OrgaActivity;
 import tipsy.commun.Membre;
 import tipsy.commun.Organisateur;
 import tipsy.commun.Prefs;
@@ -18,11 +17,11 @@ import tipsy.commun.User;
 /**
  * Created by valoo on 18/12/13.
  */
-public class TipsyApp  extends Application{
+public class TipsyApp extends Application {
     private Membre membre;
     private Organisateur orga;
 
-    public TipsyApp(){
+    public TipsyApp() {
         membre = null;
         orga = null;
     }
@@ -30,9 +29,11 @@ public class TipsyApp  extends Application{
     public Membre getMembre() {
         return membre;
     }
+
     public void setMembre(Membre membre) {
         this.membre = membre;
     }
+
     public Organisateur getOrga() {
         return orga;
     }
@@ -41,25 +42,25 @@ public class TipsyApp  extends Application{
         this.orga = orga;
     }
 
-    public boolean skipHelp(Activity a){
+    public boolean skipHelp(Activity a) {
         // retourne 'false' par défaut
         return PreferenceManager.getDefaultSharedPreferences(a)
                 .getBoolean(Prefs.SKIP_HELP, false);
     }
 
-    public static void setSkipHelp(Activity a, boolean skip){
+    public static void setSkipHelp(Activity a, boolean skip) {
         PreferenceManager.getDefaultSharedPreferences(a)
-                .edit().putBoolean(Prefs.SKIP_HELP,skip).commit();
+                .edit().putBoolean(Prefs.SKIP_HELP, skip).commit();
     }
 
-    public void logout(Activity act){
+    public void logout(Activity act) {
         final Activity a = act;
         User user;
-        if(membre != null)
+        if (membre != null)
             user = membre.getUser();
-        else if(orga != null)
+        else if (orga != null)
             user = orga.getUser();
-        else{
+        else {
             Log.d("REMEMBER", "Logout failed: user inconnu");
             return;
         }
