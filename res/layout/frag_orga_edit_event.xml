@@ -4,11 +4,41 @@
     android:layout_height="match_parent">
 
 
+
     <android.support.v4.view.ViewPager
         android:id="@+id/event_pager"
         android:layout_width="match_parent"
         android:layout_height="415dp"
         android:padding="@dimen/activity_margin" />
+    <!--
+                    <fragment
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:name="tipsy.app.orga.EditEventDescFragment"
+                        android:id="@+id/fragmentDesc"
+                        android:layout_gravity="center_horizontal" />
+
+                        <fragment
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:name="tipsy.app.orga.EditEventLocFragment"
+                            android:id="@+id/fragmentLoc"
+                            android:layout_gravity="center_horizontal" />
+
+                        <fragment
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:name="tipsy.app.orga.EditEventDateFragment"
+                            android:id="@+id/fragmentDate"
+                            android:layout_gravity="center_horizontal" />
+
+                        <fragment
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:name="tipsy.app.orga.EditEventSettingsFragment"
+                            android:id="@+id/fragmentSettings"
+                            android:layout_gravity="center_horizontal" />
+                -->
 
     <ImageButton
         android:id="@+id/button_save"

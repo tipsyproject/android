@@ -6,5 +6,5 @@ package tipsy.app.orga;
 public interface OrgaListener {
 
     public void onEventNew();
-    public void onEventSaved();
+    public void onEventEdited();
 }

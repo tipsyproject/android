@@ -1,24 +1,29 @@
 package tipsy.commun;
 
 
-import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.model.StackMobModel;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by valoo on 07/12/13.
  */
 public class Organisateur extends StackMobModel implements User.TipsyUser {
 
-    private List<Event> events;
+    private ArrayList<Event> events;
     private String nom;
     private String telephone;
     private User user;
 
+    public Organisateur(){
+        super(Organisateur.class);
+        this.events = new ArrayList<Event>();
+    }
+
     public Organisateur(String username, String password, String nom) {
         super(Organisateur.class);
         user = new User(username, password, TypeUser.ORGANISATEUR);
+        this.events = new ArrayList<Event>();
         this.nom = nom;
     }
 
@@ -26,7 +31,7 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
         return user.getEmail();
     }
 
-    public List<Event> getEvents() {
+    public ArrayList<Event> getEvents() {
         return events;
     }
 

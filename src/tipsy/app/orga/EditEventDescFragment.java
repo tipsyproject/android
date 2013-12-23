@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
@@ -16,16 +17,21 @@ import tipsy.commun.Event;
 public class EditEventDescFragment extends Fragment {
 
     private Event event;
+    private EditEventFragment parent;
 
-
-    public EditEventDescFragment(Event e){
-
+    public EditEventDescFragment(EditEventFragment frag, Event e){
+        super();
+        event = e;
+        parent = frag;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View layoutView = inflater.inflate(R.layout.frag_orga_edit_event_desc, container, false);
-        return layoutView;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.frag_orga_edit_event_desc, container, false);
+
+        EditText inputNom = (EditText) view.findViewById(R.id.input_nom);
+        inputNom.setText(event.getNom());
+        parent.onDescFragCreated(view);
+        return view;
     }
 }

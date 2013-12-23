@@ -1,5 +1,6 @@
 package tipsy.app.orga;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ public class HomeOrgaFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_orga_home, container, false);
 
+        getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         buttonNewEvent = (Button) view.findViewById(R.id.button_new_event);
 
         buttonNewEvent.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +36,7 @@ public class HomeOrgaFragment extends Fragment{
                 callback.onEventNew();
             }
         });
+
 
 
         return view;

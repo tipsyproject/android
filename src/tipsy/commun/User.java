@@ -86,9 +86,7 @@ public class User extends StackMobUser {
                     new StackMobQueryCallback<Organisateur>() {
                         @Override
                         public void success(List<Organisateur> result) {
-                            Log.d("TOUTAFAIT", "query ORGA OK");
                             final Organisateur orga = result.get(0);
-                            Log.d("TOUTAFAIT", "query ORGA OK" + orga.getEmail());
                             orga.fetch(new StackMobModelCallback() {
                                 @Override
                                 public void success() {

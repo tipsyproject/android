@@ -4,6 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.stackmob.sdk.api.StackMobOptions;
+import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.HelpActivity;
 import tipsy.app.R;
@@ -28,6 +33,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
 
         app = (TipsyApp) getApplication();
         orga = app.getOrga();
+        Log.d("TOUTAFAIT","nb events:"+Integer.toString(orga.getType()));
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, new HomeOrgaFragment());
@@ -66,15 +72,28 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
 
     public void onEventNew(){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        Event e = orga.creerEvent("Mon événément");
+        Event e = orga.creerEvent("Mon événement");
         ft.replace(R.id.content_frame, new EditEventFragment(e));
         ft.commit();
     }
 
-    public void onEventSaved(){
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, new HomeOrgaFragment());
-        ft.commit();
+    public void onEventEdited(){
+        orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
+            @Override
+            public void success() {
+                Log.d("TOUTAFAIT", "Event saved");
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                ft.replace(R.id.content_frame, new HomeOrgaFragment());
+                ft.commit();
+                Toast.makeText(OrgaActivity.this, "Evénement enregistré", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void failure(StackMobException e) {
+                Log.d("TOUTAFAIT", "Erreur sauvegarde event:" + e.getMessage());
+                Toast.makeText(OrgaActivity.this, "Erreur sauvegarde event:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 }

@@ -6,11 +6,16 @@ package tipsy.commun;
 
 import com.stackmob.sdk.model.StackMobModel;
 
+
 public class Membre extends StackMobModel implements User.TipsyUser {
 
     private String nom;
     private String prenom;
     private User user;
+
+    public Membre(){
+        super(Membre.class);
+    }
 
     public Membre(String username, String password, String nom, String prenom) {
         super(Membre.class);

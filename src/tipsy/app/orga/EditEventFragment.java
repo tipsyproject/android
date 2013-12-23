@@ -23,9 +23,7 @@ import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
-import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
-import tipsy.commun.Organisateur;
 
 /**
  * Created by valoo on 22/12/13.
@@ -46,7 +44,6 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
             R.drawable.ic_action_go_to_today,
             R.drawable.ic_action_settings
     };
-    private Fragment[] frags;
 
 
     private ActionBar actionBar;
@@ -58,15 +55,12 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     private ImageButton buttonSave;
     private Validator validator;
 
+    public EditEventFragment(){
+    }
+
     public EditEventFragment(Event e){
         super();
         event = e;
-        frags = new Fragment[]{
-                new EditEventDescFragment(e),
-                new EditEventLocFragment(e),
-                new EditEventDateFragment(e),
-                new EditEventSettingsFragment(e)
-        };
     }
 
     @Override
@@ -90,9 +84,12 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
         actionBar.setHomeButtonEnabled(false);
 
         actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        for (int icon : icones) {
-            actionBar.addTab(actionBar.newTab().setIcon(icon).setTabListener(this));
+        if(actionBar.getTabCount() != 4){
+            for (int icon : icones) {
+                actionBar.addTab(actionBar.newTab().setIcon(icon).setTabListener(this));
+            }
         }
+
 
         mPager.setOnPageChangeListener(
                 new ViewPager.SimpleOnPageChangeListener() {
@@ -104,14 +101,12 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
                 }
         );
 
-        Fragment fragInfos = mAdapter.getItem(DESC);
-        inputNom = (EditText) fragInfos.getView().findViewById(R.id.input_nom);
-        validator = new Validator(this);
-        validator.setValidationListener(this);
 
         buttonSave = (ImageButton) view.findViewById(R.id.button_save);
         buttonSave.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                validator = new Validator(EditEventFragment.this);
+                validator.setValidationListener(EditEventFragment.this);
                 // Validation du formulaire d'inscription
                 validator.validate();
             };
@@ -124,23 +119,13 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     // Sauvegarde de l'événement
     public void onValidationSucceeded() {
-        Log.d("TOUTAFAIT","Nom event:"+inputNom.getText().toString());
 
-        event.setNom(inputNom.getText().toString());
+        if(inputNom != null){
+            Log.d("TOUTAFAIT","Nom event:"+inputNom.getText().toString());
+            event.setNom(inputNom.getText().toString());
+        }
 
-        event.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
-            @Override
-            public void success() {
-                Log.d("TOUTAFAIT","Event saved");
-                callback.onEventSaved();
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT","Erreur sauvegarde event:"+e.getMessage());
-                Toast.makeText(getActivity(), "Erreur sauvegarde event:"+e.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        callback.onEventEdited();
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
@@ -182,7 +167,22 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
         // Affiche le fragment voulu en fonction de la position
         public Fragment getItem(int position) {
             // Dans l'ordre de gauche à droite
-            return frags[position];
+            switch (position) {
+                case DESC:
+                    return new EditEventDescFragment(EditEventFragment.this, event);
+                case LIEU:
+                    return new EditEventLocFragment(EditEventFragment.this, event);
+                case DATE:
+                    return new EditEventDateFragment(EditEventFragment.this, event);
+                default:
+                    return new EditEventSettingsFragment(EditEventFragment.this, event);
+            }
         }
     }
+
+
+    public void onDescFragCreated(View v){
+        inputNom = (EditText) v.findViewById(R.id.input_nom);
+    }
+
 }
