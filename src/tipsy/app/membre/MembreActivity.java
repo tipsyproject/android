@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 
 import tipsy.app.HelpActivity;
+import tipsy.app.MyProfile;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
@@ -20,7 +21,7 @@ import tipsy.app.UserActivity;
 public class MembreActivity extends UserActivity {
 
     private TipsyApp app;
-    private SearchView mSearchView;
+    private SearchView SearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,8 @@ public class MembreActivity extends UserActivity {
         MenuItem searchItem = menu.findItem(R.id.search);
         menu.findItem(R.id.search).setVisible(!this.menu.isDrawerOpen());
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        SearchView = (SearchView) searchItem.getActionView();
+        SearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -48,7 +49,9 @@ public class MembreActivity extends UserActivity {
 
         // update selected item and title, then close the drawer
 
-        if (position == MenuMembre.AIDE)
+        if (position == MenuMembre.MON_COMPTE)
+            startActivity(new Intent(this, MyProfile.class));
+        else if (position == MenuMembre.AIDE)
             startActivity(new Intent(this, HelpActivity.class));
         else if (position == MenuMembre.DECONNEXION) {
             app.logout(this);
