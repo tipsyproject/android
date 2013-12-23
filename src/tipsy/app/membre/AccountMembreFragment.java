@@ -1,27 +1,28 @@
-package tipsy.app;
+package tipsy.app.membre;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
-import com.stackmob.android.sdk.common.StackMobAndroid;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.membre.MembreActivity;
+import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.commun.Membre;
 
 /**
- * Created by tech on 23/12/13.
+ * Created by Alexandre on 23/12/13.
  */
-
-public class MyProfile extends FragmentActivity implements TextWatcher {
+public class AccountMembreFragment extends Fragment implements TextWatcher {
 
     protected EditText Nom;
     protected EditText Prenom;
@@ -29,21 +30,22 @@ public class MyProfile extends FragmentActivity implements TextWatcher {
     protected ImageButton Save;
     protected boolean change = false;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        // Initialisation de STACKMOB avec la clé publique
-        StackMobAndroid.init(getApplicationContext(), 0, "eeedff37-f59d-408a-9279-27cd8fe7062e");
-        setContentView(R.layout.act_myprofile);
-        super.onCreate(savedInstanceState);
+    public AccountMembreFragment() {
+    }
 
-        TipsyApp app = (TipsyApp) getApplication();
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View fragmentView = inflater.inflate(R.layout.frag_membre_account, container, false);
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
         final Membre membre = app.getMembre();
 
 
-        Nom = (EditText) findViewById(R.id.input_nom);
-        Prenom = (EditText) findViewById(R.id.input_prenom);
-        Email = (EditText) findViewById(R.id.input_mail);
-        Save = (ImageButton) findViewById(R.id.save);
+        Nom = (EditText) fragmentView.findViewById(R.id.input_nom);
+        Prenom = (EditText) fragmentView.findViewById(R.id.input_prenom);
+        Email = (EditText) fragmentView.findViewById(R.id.input_mail);
+        Save = (ImageButton) fragmentView.findViewById(R.id.save);
 
         Nom.setText(membre.getNom());
         Prenom.setText(membre.getPrenom());
@@ -60,33 +62,30 @@ public class MyProfile extends FragmentActivity implements TextWatcher {
                     membre.save(new StackMobModelCallback() {
                         @Override
                         public void success() {
-                            startActivity(new Intent(MyProfile.this, MembreActivity.class));
+                            startActivity(new Intent(getActivity(), MembreActivity.class));
                         }
 
                         // En cas d'échec
                         @Override
                         public void failure(StackMobException e) {
-                            Toast.makeText(MyProfile.this, "Sauvegarde échouée", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), "Sauvegarde échouée", Toast.LENGTH_SHORT).show();
                         }
                     });
-                }
-                else
-                    startActivity(new Intent(MyProfile.this, MembreActivity.class));
+                } else
+                    startActivity(new Intent(getActivity(), MembreActivity.class));
             }
         });
+        return fragmentView;
     }
 
-    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
     }
 
-    @Override
     public void onTextChanged(CharSequence s, int start, int before, int count) {
 
     }
 
-    @Override
     public void afterTextChanged(Editable s) {
         change = true;
     }

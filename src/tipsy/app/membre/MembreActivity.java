@@ -4,13 +4,16 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
 import tipsy.app.HelpActivity;
-import tipsy.app.MyProfile;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
@@ -46,19 +49,35 @@ public class MembreActivity extends UserActivity {
     }
 
     protected void selectItem(int position) {
+        Fragment fragment = null;
 
-        // update selected item and title, then close the drawer
-
-        if (position == MenuMembre.MON_COMPTE)
-            startActivity(new Intent(this, MyProfile.class));
+        if (position == MenuMembre.ACCUEIL)
+            fragment = new HomeMembreFragment();
+        else if (position == MenuMembre.MON_COMPTE)
+            fragment = new AccountMembreFragment();
+        else if (position == MenuMembre.SOLDE)
+            fragment = new SoldeMembreFragment();
+        else if (position == MenuMembre.EVENEMENTS)
+            fragment = new EventMembreFragment();
         else if (position == MenuMembre.AIDE)
             startActivity(new Intent(this, HelpActivity.class));
         else if (position == MenuMembre.DECONNEXION) {
             app.logout(this);
-        } else {
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+
+            // update selected item and title, then close the drawer
             this.menu.getDrawerList().setItemChecked(position, true);
+            this.menu.getDrawerList().setSelection(position);
             setTitle(this.menu.getTitres_menu()[position]);
             this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
+        } else {
+            // error in creating fragment
+            Log.e("MembreActivity", "Error in creating fragment");
         }
 
     }

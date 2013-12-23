@@ -50,4 +50,12 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
     public User getUser() {
         return user;
     }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
 }

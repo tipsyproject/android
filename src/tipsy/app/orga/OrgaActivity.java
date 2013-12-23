@@ -2,6 +2,9 @@ package tipsy.app.orga;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 
 import tipsy.app.HelpActivity;
@@ -26,26 +29,37 @@ public class OrgaActivity extends UserActivity {
         app = (TipsyApp) getApplication();
 
         Log.d("TOUTAFAIT", app.getOrga().getEmail());
-
-        /*buttonCreerEvent = (ImageButton) findViewById(R.id.button_creer_event);
-
-        buttonCreerEvent.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(HomeOrgaActivity.this, EditEventActivity.class));*/
     }
 
 
     protected void selectItem(int position) {
+        Fragment fragment = null;
 
-        if (position == MenuOrga.AIDE)
+        if (position == MenuOrga.ACCUEIL)
+            fragment = new HomeOrgaFragment();
+        else if (position == MenuOrga.MON_COMPTE)
+            fragment = new AccountOrgaFragment();
+        else if (position == MenuOrga.EVENEMENTS)
+            fragment = new EventOrgaFragment();
+        else if (position == MenuOrga.AIDE)
             startActivity(new Intent(this, HelpActivity.class));
         else if (position == MenuOrga.DECONNEXION) {
             app.logout(this);
+        }
 
-        } else {
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+
+            // update selected item and title, then close the drawer
             this.menu.getDrawerList().setItemChecked(position, true);
+            this.menu.getDrawerList().setSelection(position);
             setTitle(this.menu.getTitres_menu()[position]);
             this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
+        } else {
+            // error in creating fragment
+            Log.e("OrgaActivity", "Error in creating fragment");
         }
 
     }
