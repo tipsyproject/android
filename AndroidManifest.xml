@@ -34,6 +34,11 @@
             android:screenOrientation="portrait"></activity>
 
         <activity
+            android:name=".TypeSignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
             android:name=".orga.SignUpOrgaActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:noHistory="true"

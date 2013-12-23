@@ -32,19 +32,14 @@ public class SignUpOrgaActivity extends SignUpUser implements Validator.Validati
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_signup_orga);
         inputNom = (EditText) findViewById(R.id.input_nom);
-        buttonSignupMembre = (Button) findViewById(R.id.buttonsignupmembre);
-        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+            findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 hideKeyboard(SignUpOrgaActivity.this);
                 return false;
             }
         });
-        buttonSignupMembre.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(SignUpOrgaActivity.this, SignUpMembreActivity.class));
-            }
-        });
+
         super.onCreate(savedInstanceState);
     }
 
@@ -66,6 +61,14 @@ public class SignUpOrgaActivity extends SignUpUser implements Validator.Validati
         } else {
             Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    public void validateSignUp(View view){
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
+        validator.validate();
+
     }
 
     public static void hideKeyboard(Activity activity) {

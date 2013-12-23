@@ -65,7 +65,7 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         // Redirection inscription
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, SignUpMembreActivity.class));
+                startActivity(new Intent(LoginActivity.this, TypeSignUpActivity.class));
             }
         });
 
