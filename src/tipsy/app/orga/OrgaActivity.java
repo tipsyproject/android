@@ -9,6 +9,8 @@ import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
+import tipsy.commun.Event;
+import tipsy.commun.Organisateur;
 
 /**
  * Created by Valoo on 05/12/13.
@@ -16,7 +18,7 @@ import tipsy.app.UserActivity;
 public class OrgaActivity extends UserActivity implements OrgaListener{
 
     private TipsyApp app;
-
+    private Organisateur orga;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_user);
@@ -25,6 +27,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
 
         app = (TipsyApp) getApplication();
+        orga = app.getOrga();
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, new HomeOrgaFragment());
@@ -63,11 +66,12 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
 
     public void onEventNew(){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_frame, new EditEventFragment());
+        Event e = orga.creerEvent("Mon événément");
+        ft.replace(R.id.content_frame, new EditEventFragment(e));
         ft.commit();
     }
 
-    public void onEventEdit(){
+    public void onEventSaved(){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, new HomeOrgaFragment());
         ft.commit();

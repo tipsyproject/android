@@ -30,9 +30,10 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
         return events;
     }
 
-    public void creerEvent(String nom) {
-        events.add(new Event(nom));
-        save(StackMobOptions.depthOf(1));
+    public Event creerEvent(String nom) {
+        Event e = new Event(nom);
+        events.add(e);
+        return e;
     }
 
     public String getTelephone() {

@@ -4,10 +4,17 @@
     android:layout_height="match_parent">
 
 
-    <ListView
-        android:id="@android:id/list"
+    <android.support.v4.view.ViewPager
+        android:id="@+id/event_pager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:drawSelectorOnTop="true" />
+        android:layout_height="415dp"
+        android:padding="@dimen/activity_margin" />
+
+    <ImageButton
+        android:id="@+id/button_save"
+        android:src="@drawable/ic_action_done"
+        android:layout_height="@dimen/bar_height"
+        android:layout_width="match_parent"
+        android:contentDescription="Bouton Enregistrer" />
 
 </LinearLayout>

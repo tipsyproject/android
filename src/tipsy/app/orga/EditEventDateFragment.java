@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import tipsy.app.R;
+import tipsy.commun.Event;
 
 /**
  * Created by Valoo on 05/12/13.
@@ -14,21 +15,11 @@ import tipsy.app.R;
 
 public class EditEventDateFragment extends Fragment {
 
-    int fragVal;
+    private Event event;
 
-    static EditEventDateFragment init(int val) {
-        EditEventDateFragment frag = new EditEventDateFragment();
-        // Supply val input as an argument.
-        Bundle args = new Bundle();
-        args.putInt("val", val);
-        frag.setArguments(args);
-        return frag;
-    }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        fragVal = getArguments() != null ? getArguments().getInt("val") : 1;
+    public EditEventDateFragment(Event e){
+
     }
 
     @Override

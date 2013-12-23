@@ -57,8 +57,6 @@
 
         <activity android:name=".orga.OrgaActivity"></activity>
 
-        <activity android:name=".orga.old_EditEventActivity"></activity>
-
     </application>
 
 </manifest>
