@@ -8,6 +8,9 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -63,6 +66,13 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState){
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+
+    @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         callback = (OrgaListener) activity;
@@ -76,6 +86,8 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
         mAdapter = new EditEventAdapter(getChildFragmentManager());
         mPager = (ViewPager) view.findViewById(R.id.event_pager);
         mPager.setAdapter(mAdapter);
+
+
 
         // DEFINITION DES TABS
         actionBar = getActivity().getActionBar();
@@ -95,18 +107,30 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
                 }
         );
 
+        return view;
+    }
 
-        buttonSave = (ImageButton) view.findViewById(R.id.button_save);
-        buttonSave.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+
+    // Redéfinition de l'actionBar
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_orga_edit_event, menu);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_validate_event:
                 validator = new Validator(EditEventFragment.this);
                 validator.setValidationListener(EditEventFragment.this);
                 // Validation du formulaire d'inscription
                 validator.validate();
-            };
-        });
-        return view;
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
+
 
     // Envoi de la demande de sauvegarde de l'événement à l'activité
     public void onValidationSucceeded() {
