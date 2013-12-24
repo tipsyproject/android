@@ -31,7 +31,7 @@ public abstract class SignUpUser extends FragmentActivity implements Validator.V
     protected EditText inputEmail;
     @Required(order = 12)
     protected EditText inputPassword;
-
+    protected Validator validator;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

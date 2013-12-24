@@ -20,8 +20,7 @@
         android:paddingRight="50dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/imageView2"
-        android:layout_above="@+id/buttonsignuporga">
+        android:layout_below="@+id/imageView2">
 
         <EditText
             android:layout_width="wrap_content"
@@ -108,14 +107,6 @@
             android:layout_alignParentStart="true"
             android:layout_marginTop="10dp" />
     </RelativeLayout>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bar_height"
-        android:layout_weight="1"
-        android:text="@string/signuporga"
-        android:id="@+id/buttonsignuporga"
-        android:layout_alignParentBottom="true" />
 
 
 </RelativeLayout>

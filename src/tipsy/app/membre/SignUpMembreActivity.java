@@ -35,7 +35,7 @@ public class SignUpMembreActivity extends SignUpUser {
         setContentView(R.layout.act_signup_membre);
         inputNom = (EditText) findViewById(R.id.input_nom);
         inputPrenom = (EditText) findViewById(R.id.input_prenom);
-        buttonSignupOrga = (Button) findViewById(R.id.buttonsignuporga);
+
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -43,11 +43,7 @@ public class SignUpMembreActivity extends SignUpUser {
                 return false;
             }
         });
-        buttonSignupOrga.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(SignUpMembreActivity.this, SignUpOrgaActivity.class));
-            }
-        });
+
         super.onCreate(savedInstanceState);
     }
 
