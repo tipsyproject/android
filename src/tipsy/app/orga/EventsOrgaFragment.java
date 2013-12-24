@@ -1,6 +1,5 @@
 package tipsy.app.orga;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,9 +12,9 @@ import tipsy.app.R;
 /**
  * Created by Alexandre on 23/12/13.
  */
-public class EventOrgaFragment extends Fragment {
+public class EventsOrgaFragment extends Fragment {
 
-    public EventOrgaFragment() {
+    public EventsOrgaFragment() {
     }
 
     protected ImageButton buttonCreerEvent;
@@ -24,17 +23,8 @@ public class EventOrgaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View fragmentView = inflater.inflate(R.layout.frag_orga_event, container, false);
+        View fragmentView = inflater.inflate(R.layout.frag_orga_events, container, false);
 
-        buttonCreerEvent = (ImageButton) fragmentView.findViewById(R.id.button_creer_event);
-
-        buttonCreerEvent.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(getActivity(), EditEventActivity.class));
-
-
-    }
-        });
         return fragmentView;
 }
 }

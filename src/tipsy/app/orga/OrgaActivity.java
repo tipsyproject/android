@@ -6,18 +6,26 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.widget.Toast;
+
+import com.stackmob.sdk.api.StackMobOptions;
+import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
+import tipsy.commun.Event;
+import tipsy.commun.Organisateur;
 
 /**
  * Created by Valoo on 05/12/13.
  */
-public class OrgaActivity extends UserActivity {
+public class OrgaActivity extends UserActivity implements OrgaListener{
 
     private TipsyApp app;
+    private Organisateur orga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,30 +35,43 @@ public class OrgaActivity extends UserActivity {
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
 
         app = (TipsyApp) getApplication();
+        orga = app.getOrga();
 
-        Log.d("TOUTAFAIT", app.getOrga().getEmail());
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, new HomeOrgaFragment());
+        ft.addToBackStack(null);
+        ft.commit();
     }
 
 
     protected void selectItem(int position) {
         Fragment fragment = null;
 
-        if (position == MenuOrga.ACCUEIL)
+        switch(position){
+            case MenuOrga.ACCUEIL:
             fragment = new HomeOrgaFragment();
-        else if (position == MenuOrga.MON_COMPTE)
-            fragment = new AccountOrgaFragment();
-        else if (position == MenuOrga.EVENEMENTS)
-            fragment = new EventOrgaFragment();
-        else if (position == MenuOrga.AIDE)
-            startActivity(new Intent(this, HelpActivity.class));
-        else if (position == MenuOrga.DECONNEXION) {
-            app.logout(this);
+                break;
+            case MenuOrga.MON_COMPTE:
+                fragment = new AccountOrgaFragment();
+                break;
+            case MenuOrga.EVENEMENTS:
+                fragment = new EventsOrgaFragment();
+                break;
+            case MenuOrga.AIDE:
+                startActivity(new Intent(this, HelpActivity.class));
+                break;
+            case MenuOrga.DECONNEXION:
+                app.logout(this);
+                break;
         }
 
         if (fragment != null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             fragmentManager.beginTransaction()
-                    .replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+                    .replace(R.id.content, fragment)
+                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                    .addToBackStack(null)
+                    .commit();
 
             // update selected item and title, then close the drawer
             this.menu.getDrawerList().setItemChecked(position, true);
@@ -63,5 +84,40 @@ public class OrgaActivity extends UserActivity {
         }
 
     }
+
+
+    // IMPLEMENTATIONS DES LISTENERS DE LA PARTIE ORGANISATEUR
+
+    public void onEventNew(){
+        Event e = orga.creerEvent("Mon événement");
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, new EditEventFragment(e))
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    public void onEventEdited(){
+        Log.d("TOUTAFAIT", "type 5:"+Integer.toString(orga.getUser().getType()));
+        orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
+            @Override
+            public void success() {
+                Log.d("TOUTAFAIT", "Event saved");
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.content, new HomeOrgaFragment())
+                        .addToBackStack(null)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
+                Toast.makeText(OrgaActivity.this, "Evénement enregistré", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void failure(StackMobException e) {
+                Log.d("TOUTAFAIT", "Erreur sauvegarde event:" + e.getMessage());
+                Toast.makeText(OrgaActivity.this, "Erreur sauvegarde event:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
 }
