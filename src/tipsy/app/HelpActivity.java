@@ -54,11 +54,9 @@ public class HelpActivity extends FragmentActivity {
                     case 0:
                         focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepone));
                         break;
-
                     case 1:
                         focustep.setImageDrawable(getResources().getDrawable(R.drawable.focusteptwo));
                         break;
-
                     case 2:
                         focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepthree));
                         break;

@@ -1,4 +1,4 @@
-package tipsy.app.orga;
+package tipsy.app.membre;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,16 +11,16 @@ import tipsy.app.R;
 /**
  * Created by Alexandre on 23/12/13.
  */
-public class HomeOrgaFragment extends Fragment {
+public class EventMembreFragment extends Fragment {
 
-    public HomeOrgaFragment() {
+    public EventMembreFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View fragmentView = inflater.inflate(R.layout.frag_orga_home, container, false);
+        View fragmentView = inflater.inflate(R.layout.frag_membre_event, container, false);
 
         return fragmentView;
     }

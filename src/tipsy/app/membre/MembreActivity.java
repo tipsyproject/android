@@ -4,6 +4,10 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,7 +24,7 @@ import tipsy.app.UserActivity;
 public class MembreActivity extends UserActivity {
 
     private TipsyApp app;
-    private SearchView mSearchView;
+    private SearchView SearchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,23 +43,41 @@ public class MembreActivity extends UserActivity {
         MenuItem searchItem = menu.findItem(R.id.search);
         menu.findItem(R.id.search).setVisible(!this.menu.isDrawerOpen());
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        mSearchView = (SearchView) searchItem.getActionView();
-        mSearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        SearchView = (SearchView) searchItem.getActionView();
+        SearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return super.onCreateOptionsMenu(menu);
     }
 
     protected void selectItem(int position) {
+        Fragment fragment = null;
 
-        // update selected item and title, then close the drawer
-
-        if (position == MenuMembre.AIDE)
+        if (position == MenuMembre.ACCUEIL)
+            fragment = new HomeMembreFragment();
+        else if (position == MenuMembre.MON_COMPTE)
+            fragment = new AccountMembreFragment();
+        else if (position == MenuMembre.SOLDE)
+            fragment = new SoldeMembreFragment();
+        else if (position == MenuMembre.EVENEMENTS)
+            fragment = new EventMembreFragment();
+        else if (position == MenuMembre.AIDE)
             startActivity(new Intent(this, HelpActivity.class));
         else if (position == MenuMembre.DECONNEXION) {
             app.logout(this);
-        } else {
+        }
+
+        if (fragment != null) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+
+            // update selected item and title, then close the drawer
             this.menu.getDrawerList().setItemChecked(position, true);
+            this.menu.getDrawerList().setSelection(position);
             setTitle(this.menu.getTitres_menu()[position]);
             this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
+        } else {
+            // error in creating fragment
+            Log.e("MembreActivity", "Error in creating fragment");
         }
 
     }

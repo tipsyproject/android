@@ -16,13 +16,13 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:name=".TipsyApp"
-        android:theme="@style/AppTheme"
-        android:screenOrientation="portrait">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar.White"
             android:launchMode="singleTop"
-            android:noHistory="true">
+            android:noHistory="true"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -30,23 +30,34 @@
         </activity>
         <activity
             android:name=".HelpActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
+
+        <activity
+            android:name=".TypeSignUpActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".orga.SignUpOrgaActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true"></activity>
+            android:noHistory="true"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".membre.SignUpMembreActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:noHistory="true"></activity>
+            android:noHistory="true"
+            android:screenOrientation="portrait"></activity>
 
         <activity
             android:name=".LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"></activity>
 
-        <activity android:name=".membre.MembreActivity">
+        <activity
+            android:name=".membre.MembreActivity"
+            android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -55,7 +66,9 @@
                 android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".orga.OrgaActivity"></activity>
+        <activity
+            android:name=".orga.OrgaActivity"
+            android:label=""></activity>
 
     </application>
 
