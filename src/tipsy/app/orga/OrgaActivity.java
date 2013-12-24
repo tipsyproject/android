@@ -86,10 +86,11 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     }
 
 
-    // IMPLEMENTATIONS DES LISTENERS DE LA PARTIE ORGANISATEUR
+    // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
+    // Clique sur le bouton "Créer un événement"
     public void onEventNew(){
-        Event e = orga.creerEvent("Mon événement");
+        Event e = orga.creerEvent("");
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new EditEventFragment(e))
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -97,8 +98,8 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
                 .commit();
     }
 
+    // Création/Modification d'un événement terminée
     public void onEventEdited(){
-        Log.d("TOUTAFAIT", "type 5:"+Integer.toString(orga.getUser().getType()));
         orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
             @Override
             public void success() {

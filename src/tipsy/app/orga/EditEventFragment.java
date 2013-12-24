@@ -111,11 +111,13 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     }
 
 
-    // Redéfinition de l'actionBar
+    // Redéfinition de l'actionBar: Bouton de validation
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_orga_edit_event, menu);
     }
+
+    // Gestion du click sur le bouton de validation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle item selection
@@ -152,21 +154,17 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
         }
     }
 
-    // Listener de
+    // Listener des tabs
     @Override
     public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
         mPager.setCurrentItem(tab.getPosition());
     }
-
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
-    }
-
+    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
     @Override
-    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
-    }
+    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
 
-    // Gestionnaire de Fragments
+    // Gestionnaire des Fragments
     public class EditEventAdapter extends FragmentPagerAdapter {
         public EditEventAdapter(FragmentManager fm) {
             super(fm);
@@ -194,6 +192,7 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     }
 
 
+    // initialisation des inputs lors de leur affichage
     public void onDescFragCreated(View v){
         inputNom = (EditText) v.findViewById(R.id.input_nom);
     }
