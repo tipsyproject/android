@@ -33,7 +33,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
 
         app = (TipsyApp) getApplication();
         orga = app.getOrga();
-        Log.d("TOUTAFAIT","nb events:"+Integer.toString(orga.getType()));
+        Log.d("TOUTAFAIT", "type 4:"+Integer.toString(orga.getUser().getType()));
 
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_frame, new HomeOrgaFragment());
@@ -78,6 +78,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     }
 
     public void onEventEdited(){
+        Log.d("TOUTAFAIT", "type 5:"+Integer.toString(orga.getUser().getType()));
         orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
             @Override
             public void success() {

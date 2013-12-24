@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
+import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.api.StackMobQuery;
 import com.stackmob.sdk.api.StackMobQueryField;
 import com.stackmob.sdk.callback.StackMobCallback;
@@ -87,7 +88,7 @@ public class User extends StackMobUser {
                         @Override
                         public void success(List<Organisateur> result) {
                             final Organisateur orga = result.get(0);
-                            orga.fetch(new StackMobModelCallback() {
+                            orga.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
                                 @Override
                                 public void success() {
                                     TipsyApp app = (TipsyApp) a.getApplication();
