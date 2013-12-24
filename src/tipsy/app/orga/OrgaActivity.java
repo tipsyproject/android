@@ -21,7 +21,7 @@ public class OrgaActivity extends UserActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.act_user_menu);
+        setContentView(R.layout.act_user);
         super.onCreate(savedInstanceState);
         this.menu = new MenuOrga(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
