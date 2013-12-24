@@ -49,11 +49,12 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
 
         Nom.setText(membre.getNom());
         Prenom.setText(membre.getPrenom());
-        Email.setText(membre.getEmail());
+        Email.setHint(membre.getEmail());
 
         Nom.addTextChangedListener(this);
         Prenom.addTextChangedListener(this);
-        //Email.addTextChangedListener(this);
+        Email.setFocusable(false);
+        Email.setEnabled(false);
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (change) {

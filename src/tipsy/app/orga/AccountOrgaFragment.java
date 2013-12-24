@@ -46,10 +46,11 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
         Save = (ImageButton) fragmentView.findViewById(R.id.save);
 
         Orga.setText(orga.getNom());
-        Email.setText(orga.getEmail());
+        Email.setHint(orga.getEmail());
 
         Orga.addTextChangedListener(this);
-        //Email.addTextChangedListener(this);
+        Email.setFocusable(false);
+        Email.setEnabled(false);
         Save.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (change) {
