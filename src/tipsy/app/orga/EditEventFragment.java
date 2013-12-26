@@ -13,16 +13,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
+
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
@@ -54,7 +56,10 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     @Required(order = 1)
     private EditText inputNom;
-    private ImageButton buttonSave;
+
+    private Button buttonDateDebut;
+    private Button buttonTimeDebut;
+
     private Validator validator;
 
     public EditEventFragment(){
@@ -140,6 +145,15 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
             Log.d("TOUTAFAIT","Nom event:"+inputNom.getText().toString());
             event.setNom(inputNom.getText().toString());
         }
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        String dateDebut = buttonDateDebut.getText().toString() + " " + buttonTimeDebut.getText().toString();
+        try{
+            event.setDebut(f.parse(dateDebut));
+        }catch (ParseException e){}
+
+
+
+
         callback.onEventEdited();
     }
 
@@ -192,9 +206,22 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     }
 
 
-    // initialisation des inputs lors de leur affichage
+    // initialisation des inputs lors de leur affichage pour les rendre accessible au Validator
+
+    // input partie description
     public void onDescFragCreated(View v){
         inputNom = (EditText) v.findViewById(R.id.input_nom);
+        inputNom.setText(event.getNom());
+    }
+
+    // input partie date
+    public void onDateFragCreated(View v){
+        buttonDateDebut = (Button) v.findViewById(R.id.button_date_debut);
+        buttonTimeDebut = (Button) v.findViewById(R.id.button_time_debut);
+
+        // Initialisation des dates de debut et de fin
+        buttonDateDebut.setText(EditEventDateFragment.dateFormatter.format(event.getDebut()));
+        buttonTimeDebut.setText(EditEventDateFragment.timeFormatter.format(event.getDebut()));
     }
 
 }
