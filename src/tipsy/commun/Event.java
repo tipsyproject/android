@@ -37,4 +37,5 @@ public class Event extends StackMobModel {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
 }

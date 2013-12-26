@@ -8,8 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TableRow;
+import android.widget.TextView;
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
+import tipsy.commun.Event;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -17,6 +21,14 @@ import tipsy.app.R;
 public class HomeOrgaFragment extends Fragment{
     private OrgaListener callback;
     private Button buttonNewEvent;
+    TableRow resumeEvent;
+    private TextView textUpcoming;
+    private Event upcomingEvent;
+
+    public HomeOrgaFragment(){
+        super();
+        upcomingEvent = null;
+    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -30,6 +42,9 @@ public class HomeOrgaFragment extends Fragment{
 
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
+        textUpcoming = (TextView) view.findViewById(R.id.text_upcoming);
+        resumeEvent = (TableRow) view.findViewById(R.id.resume_upcoming_event);
+
         buttonNewEvent = (Button) view.findViewById(R.id.button_new_event);
         buttonNewEvent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -38,6 +53,27 @@ public class HomeOrgaFragment extends Fragment{
         });
 
         return view;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        upcomingEvent = app.getOrga().getUpcomingEvent();
+        textUpcoming.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                callback.onClickResumeEvent(upcomingEvent);
+            }
+        });
+
+        // Si aucun event n'est à venir
+        if(upcomingEvent == null)
+            textUpcoming.setText(R.string.no_upcoming_event);
+        // Sinon affichage de la miniature de l'event
+        else{
+            textUpcoming.setText(upcomingEvent.getNom());
+        }
+
     }
 
 

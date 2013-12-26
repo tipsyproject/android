@@ -16,10 +16,6 @@
         <item>Aide</item>
         <item>Déconnexion</item>
     </string-array>
-    <string-array name="inscription">
-        <item>Organisateur</item>
-        <item>Participant</item>
-    </string-array>
     <string name="creer_event">Créer un événement</string>
     <string name="drawer_open">Ouvrir le menu déroulant</string>
     <string name="drawer_close">Fermer le menu déroulant</string>
@@ -29,10 +25,7 @@
     <string name="next">"Passer"</string>
     <string name="connection">"Connexion"</string>
     <string name="disconnection">"Déconnexion"</string>
-    <string name="signuporga">"Organisateur ?"</string>
-    <string name="signupmembre">"Participant ?"</string>
     <string name="inscription">"Inscription"</string>
-    <string name="inscription_or_connect">"Connexion ou Inscription"</string>
     <string name="conditions">"En m'inscrivant,
 j'accepte les conditions générales."</string>
     <string name="affichermdp">"Afficher le mot de passe"</string>
@@ -40,5 +33,9 @@ j'accepte les conditions générales."</string>
     <string name="loading">"Chargement"</string>
     <string name="failed_connexion">Email ou Mot de Passe Incorrect</string>
     <string name="ok">OK</string>
-    <string name="help">En savoir plus</string><string name="stats">Statistiques</string>
+    <string name="help">En savoir plus</string>
+    <string name="stats">Statistiques</string>
+
+
+    <string name="no_upcoming_event">Aucun événement à venir.</string>
 </resources>

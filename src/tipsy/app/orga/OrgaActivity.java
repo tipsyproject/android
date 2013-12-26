@@ -89,6 +89,15 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
     // Clique sur le bouton "Créer un événement"
+    public void onClickResumeEvent(Event e){
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.content, new EditEventFragment(e))
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .addToBackStack(null)
+                .commit();
+    }
+
+    // Clique sur le bouton "Créer un événement"
     public void onEventNew(){
         Event e = orga.creerEvent("");
         getSupportFragmentManager().beginTransaction()

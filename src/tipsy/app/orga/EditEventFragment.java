@@ -62,9 +62,6 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     private Validator validator;
 
-    public EditEventFragment(){
-    }
-
     public EditEventFragment(Event e){
         super();
         event = e;
