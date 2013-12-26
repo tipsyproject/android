@@ -18,6 +18,7 @@ import tipsy.app.R;
 import tipsy.app.SignUpUser;
 import tipsy.app.membre.SignUpMembreActivity;
 import tipsy.commun.Organisateur;
+import tipsy.commun.User;
 
 /**
  * Created by valoo on 13/12/13.
@@ -49,6 +50,7 @@ public class SignUpOrgaActivity extends SignUpUser implements Validator.Validati
                 inputPassword.getText().toString(),
                 inputNom.getText().toString()
         );
+        User.rememberMe(this, inputEmail.getText().toString(), inputPassword.getText().toString());
         signUpUser(orga);
     }
 

@@ -21,6 +21,7 @@ import tipsy.app.R;
 import tipsy.app.SignUpUser;
 import tipsy.app.orga.SignUpOrgaActivity;
 import tipsy.commun.Membre;
+import tipsy.commun.User;
 
 public class SignUpMembreActivity extends SignUpUser {
 
@@ -54,6 +55,7 @@ public class SignUpMembreActivity extends SignUpUser {
                 inputNom.getText().toString(),
                 inputPrenom.getText().toString()
         );
+        User.rememberMe(this, inputEmail.getText().toString(), inputPassword.getText().toString());
         signUpUser(membre);
     }
 

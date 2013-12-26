@@ -151,7 +151,6 @@ public class User extends StackMobUser {
             @Override
             public void success(List<User> list) {
                 User user = list.get(0);
-                Log.d("TOUTAFAIT", "user deja connecté ");
                 User.keepCalmAndWaitForGoingHome(a, user);
             }
 

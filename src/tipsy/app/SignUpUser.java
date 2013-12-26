@@ -68,10 +68,7 @@ public abstract class SignUpUser extends FragmentActivity implements Validator.V
                             // Direction page d'accueil
                             @Override
                             public void success() {
-                                if (tipsyUser.getType() == TypeUser.MEMBRE)
-                                    startActivity(new Intent(SignUpUser.this, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-                                else
-                                    startActivity(new Intent(SignUpUser.this, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                                User.keepCalmAndWaitForGoingHome(SignUpUser.this,tipsyUser.getUser());
                             }
 
                             @Override
