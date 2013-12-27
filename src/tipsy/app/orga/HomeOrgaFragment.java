@@ -48,7 +48,9 @@ public class HomeOrgaFragment extends Fragment{
         buttonNewEvent = (Button) view.findViewById(R.id.button_new_event);
         buttonNewEvent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.onEventNew();
+                TipsyApp app = (TipsyApp) getActivity().getApplication();
+                Event e = app.getOrga().creerEvent("");
+                callback.onEventEdit(e);
             }
         });
 
@@ -60,7 +62,7 @@ public class HomeOrgaFragment extends Fragment{
         super.onStart();
         TipsyApp app = (TipsyApp) getActivity().getApplication();
         upcomingEvent = app.getOrga().getUpcomingEvent();
-        textUpcoming.setOnClickListener(new View.OnClickListener() {
+        resumeEvent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.onClickResumeEvent(upcomingEvent);
             }

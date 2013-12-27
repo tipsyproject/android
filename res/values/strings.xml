@@ -38,4 +38,8 @@ j'accepte les conditions générales."</string>
 
 
     <string name="no_upcoming_event">Aucun événement à venir.</string>
+    <string name="billetterie">Billetterie</string>
+    <string name="bar">Bar</string>
+    <string name="acces">Contrôle d'accès</string>
+    <string name="infos">Informations</string>
 </resources>

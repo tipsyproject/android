@@ -9,24 +9,27 @@
         android:layout_height="wrap_content">
 
         <TableRow
-            android:id="@+id/resume_upcoming_event"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:clickable="true">
+            android:layout_height="fill_parent">
 
-            <TextView
+
+            <Button
                 android:layout_width="0dp"
-                android:layout_height="@dimen/home_upcoming_height"
-                android:text="New Text"
-                android:id="@+id/text_upcoming"
+                android:layout_height="@dimen/home_button_height"
+                android:id="@+id/button_billetterie"
+                android:layout_weight="1"
                 android:layout_column="0"
                 android:layout_span="1"
+                android:text="@string/billetterie" />
+
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="@dimen/home_button_height"
+                android:id="@+id/button_bar"
                 android:layout_weight="1"
-                android:gravity="center_vertical|center_horizontal"
-                android:textSize="16dp"
-                android:textIsSelectable="false"
-                android:autoText="false"
-                android:editable="true" />
+                android:layout_span="1"
+                android:layout_column="1"
+                android:text="@string/bar" />
         </TableRow>
 
         <TableRow
@@ -36,20 +39,20 @@
             <Button
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
-                android:id="@+id/button_new_event"
-                android:text="@string/creer_event"
+                android:id="@+id/button_acces"
                 android:layout_weight="1"
+                android:layout_span="1"
                 android:layout_column="0"
-                android:layout_span="1" />
+                android:text="@string/acces" />
 
             <Button
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
-                android:text="@string/stats"
-                android:id="@+id/button_stats"
+                android:id="@+id/button_infos"
                 android:layout_weight="1"
+                android:layout_column="1"
                 android:layout_span="1"
-                android:layout_column="1" />
+                android:text="@string/infos" />
         </TableRow>
     </TableLayout>
 </LinearLayout>

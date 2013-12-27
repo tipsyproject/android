@@ -57,8 +57,8 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     @Required(order = 1)
     private EditText inputNom;
 
-    private Button buttonDateDebut;
-    private Button buttonTimeDebut;
+    private TextView inputDateDebut;
+    private TextView inputTimeDebut;
 
     private Validator validator;
 
@@ -142,15 +142,11 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
             Log.d("TOUTAFAIT","Nom event:"+inputNom.getText().toString());
             event.setNom(inputNom.getText().toString());
         }
-        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy hh:mm");
-        String dateDebut = buttonDateDebut.getText().toString() + " " + buttonTimeDebut.getText().toString();
+        SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
+        String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
         try{
             event.setDebut(f.parse(dateDebut));
         }catch (ParseException e){}
-
-
-
-
         callback.onEventEdited();
     }
 
@@ -213,12 +209,12 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     // input partie date
     public void onDateFragCreated(View v){
-        buttonDateDebut = (Button) v.findViewById(R.id.button_date_debut);
-        buttonTimeDebut = (Button) v.findViewById(R.id.button_time_debut);
+        inputDateDebut = (TextView) v.findViewById(R.id.input_date_debut);
+        inputTimeDebut = (TextView) v.findViewById(R.id.input_time_debut);
 
         // Initialisation des dates de debut et de fin
-        buttonDateDebut.setText(EditEventDateFragment.dateFormatter.format(event.getDebut()));
-        buttonTimeDebut.setText(EditEventDateFragment.timeFormatter.format(event.getDebut()));
+        inputDateDebut.setText(EditEventDateFragment.dateFormatter.format(event.getDebut()));
+        inputTimeDebut.setText(EditEventDateFragment.timeFormatter.format(event.getDebut()));
     }
 
 }

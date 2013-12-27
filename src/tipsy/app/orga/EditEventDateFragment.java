@@ -6,18 +6,15 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.EditText;
-import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -35,7 +32,7 @@ public class EditEventDateFragment extends Fragment {
     private Event event;
     private EditEventFragment parent;
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat ("dd-MM-yyyy");
-    public static SimpleDateFormat timeFormatter = new SimpleDateFormat ("hh:mm");
+    public static SimpleDateFormat timeFormatter = new SimpleDateFormat ("kk:mm");
 
     public EditEventDateFragment(EditEventFragment frag, Event e){
         super();
@@ -48,18 +45,18 @@ public class EditEventDateFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_orga_edit_event_date, container, false);
 
         // Instanciation des Widgets
-        final Button buttonDateDebut = (Button) view.findViewById(R.id.button_date_debut);
-        final Button buttonTimeDebut = (Button) view.findViewById(R.id.button_time_debut);
+        final TextView inputDateDebut = (TextView) view.findViewById(R.id.input_date_debut);
+        final TextView inputTimeDebut = (TextView) view.findViewById(R.id.input_time_debut);
 
         // Liaison des Date/Time Pickers aux inputs
-        buttonDateDebut.setOnClickListener(new View.OnClickListener() {
+        inputDateDebut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showDatePickerDialog(buttonDateDebut);
+                showDatePickerDialog(inputDateDebut, event.getDebut());
             }
         });
-        buttonTimeDebut.setOnClickListener(new View.OnClickListener() {
+        inputTimeDebut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                showTimePickerDialog(buttonTimeDebut);
+                showTimePickerDialog(inputTimeDebut, event.getDebut());
             }
         });
 
@@ -67,37 +64,34 @@ public class EditEventDateFragment extends Fragment {
         return view;
     }
 
-    public void showDatePickerDialog(TextView v) {
-        DialogFragment newFragment = new DatePickerFragment(v);
+    public void showDatePickerDialog(TextView v, Date date) {
+        DialogFragment newFragment = new DatePickerFragment(v,date);
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
 
-    public void showTimePickerDialog(TextView v) {
-        DialogFragment newFragment = new TimePickerFragment(v);
+    public void showTimePickerDialog(TextView v, Date date) {
+        DialogFragment newFragment = new TimePickerFragment(v,date);
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
 
 
 
 
-    public static class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+    public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
 
         private TextView viewResultat;
+        private Date date;
 
-        public DatePickerFragment(TextView resultat){
+        public DatePickerFragment(TextView resultat, Date date){
             super();
             viewResultat = resultat;
+            this.date = date;
         }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             Calendar cal = Calendar.getInstance();
-            try{
-                Date date = dateFormatter.parse(viewResultat.getText().toString());
-                cal.setTime(date);
-            }catch(ParseException e){
-                // Use the current date as the default date in the picker
-            }
+            cal.setTime(date);
             int year = cal.get(Calendar.YEAR);
             int month = cal.get(Calendar.MONTH);
             int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -112,24 +106,21 @@ public class EditEventDateFragment extends Fragment {
         }
     }
 
-    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+    public class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
 
         private TextView viewResultat;
+        private Date date;
 
-        public TimePickerFragment(TextView resultat){
+        public TimePickerFragment(TextView resultat, Date date){
             super();
             viewResultat = resultat;
+            this.date = date;
         }
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             Calendar cal = Calendar.getInstance();
-            try{
-                Date date = timeFormatter.parse(viewResultat.getText().toString());
-                cal.setTime(date);
-            }catch(ParseException e){
-                // Use the current date as the default date in the picker
-            }
+            cal.setTime(date);
             int hour = cal.get(Calendar.HOUR_OF_DAY);
             int minute = cal.get(Calendar.MINUTE);
 
@@ -139,8 +130,11 @@ public class EditEventDateFragment extends Fragment {
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             // Do something with the time chosen by the user
+            Log.d("TOUTAFAIT",Integer.toString(hourOfDay));
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
+
+            Log.d("TOUTAFAIT",Integer.toString(cal.get(Calendar.HOUR_OF_DAY)));
             cal.set(Calendar.MINUTE,minute);
             viewResultat.setText(timeFormatter.format(new Date(cal.getTimeInMillis())));
         }

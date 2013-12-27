@@ -8,6 +8,6 @@ import tipsy.commun.Event;
 public interface OrgaListener {
 
     public void onClickResumeEvent(Event e);
-    public void onEventNew();
+    public void onEventEdit(Event e);
     public void onEventEdited();
 }

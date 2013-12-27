@@ -91,15 +91,14 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     // Clique sur le bouton "Créer un événement"
     public void onClickResumeEvent(Event e){
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, new EditEventFragment(e))
+                .replace(R.id.content, new EventHomeFragment(e))
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .addToBackStack(null)
                 .commit();
     }
 
     // Clique sur le bouton "Créer un événement"
-    public void onEventNew(){
-        Event e = orga.creerEvent("");
+    public void onEventEdit(Event e){
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new EditEventFragment(e))
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -109,6 +108,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
 
     // Création/Modification d'un événement terminée
     public void onEventEdited(){
+
         orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
             @Override
             public void success() {
