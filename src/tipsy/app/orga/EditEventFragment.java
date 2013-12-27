@@ -82,14 +82,10 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-
         View view = inflater.inflate(R.layout.frag_orga_edit_event, container, false);
         mAdapter = new EditEventAdapter(getChildFragmentManager());
         mPager = (ViewPager) view.findViewById(R.id.event_pager);
         mPager.setAdapter(mAdapter);
-
-
 
         // DEFINITION DES TABS
         actionBar = getActivity().getActionBar();

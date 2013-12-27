@@ -21,7 +21,7 @@ import tipsy.commun.Event;
 public class HomeOrgaFragment extends Fragment{
     private OrgaListener callback;
     private Button buttonNewEvent;
-    TableRow resumeEvent;
+    private TableRow resumeEvent;
     private TextView textUpcoming;
     private Event upcomingEvent;
 

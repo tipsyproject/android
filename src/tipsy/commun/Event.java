@@ -8,18 +8,25 @@ import java.util.Date;
  * Created by Valentin on 07/12/13.
  */
 public class Event extends StackMobModel {
+    private Billetterie billetterie = new Billetterie();
+    private Date debut = new Date();
     private String nom = null;
-    private Date debut;
 
     public Event() {
         super(Event.class);
-        debut = new Date();
     }
 
     public Event(String nom) {
         super(Event.class);
         this.nom = nom;
-        debut = new Date();
+    }
+
+    public Billetterie getBilletterie() {
+        return billetterie;
+    }
+
+    public void setBilletterie(Billetterie billetterie) {
+        this.billetterie = billetterie;
     }
 
     public Date getDebut() {

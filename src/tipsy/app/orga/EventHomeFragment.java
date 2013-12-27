@@ -7,10 +7,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TableRow;
 
 import tipsy.app.R;
-import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
 
 /**
@@ -20,10 +20,10 @@ import tipsy.commun.Event;
 public class EventHomeFragment extends Fragment {
     private OrgaListener callback;
     private Event event;
-    private Button buttonBilleterie;
-    private Button buttonBar;
-    private Button buttonAcces;
-    private Button buttonInfos;
+    private LinearLayout buttonBilleterie;
+    private LinearLayout buttonBar;
+    private LinearLayout buttonAcces;
+    private LinearLayout buttonInfos;
 
     public EventHomeFragment(Event e){
         super();
@@ -43,11 +43,16 @@ public class EventHomeFragment extends Fragment {
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
 
-        buttonBilleterie = (Button) view.findViewById(R.id.button_billetterie);
-        buttonBar = (Button) view.findViewById(R.id.button_bar);
-        buttonAcces = (Button) view.findViewById(R.id.button_acces);
-        buttonInfos = (Button) view.findViewById(R.id.button_infos);
+        buttonBilleterie = (LinearLayout) view.findViewById(R.id.button_billetterie);
+        buttonBar = (LinearLayout) view.findViewById(R.id.button_bar);
+        buttonAcces = (LinearLayout) view.findViewById(R.id.button_acces);
+        buttonInfos = (LinearLayout) view.findViewById(R.id.button_infos);
 
+        buttonBilleterie.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                callback.onBilletterieEdit(event.getBilletterie());
+            }
+        });
         buttonInfos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.onEventEdit(event);

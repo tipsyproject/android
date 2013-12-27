@@ -16,6 +16,8 @@ import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
+import tipsy.app.billetterie.BilletterieActivity;
+import tipsy.commun.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Organisateur;
 
@@ -88,6 +90,13 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
 
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
+    // clique sur le bouton de la Billetterie
+    public void onBilletterieEdit(Billetterie b){
+        Intent intent = new Intent(this, BilletterieActivity.class);
+        intent.putExtra("BILLETTERIE_ID",b.getID());
+        startActivity(intent);
+    }
+
     // Clique sur le bouton "Créer un événement"
     public void onClickResumeEvent(Event e){
         getSupportFragmentManager().beginTransaction()
@@ -109,7 +118,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     // Création/Modification d'un événement terminée
     public void onEventEdited(){
 
-        orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
+        orga.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
             @Override
             public void success() {
                 Log.d("TOUTAFAIT", "Event saved");

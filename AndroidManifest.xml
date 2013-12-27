@@ -68,7 +68,15 @@
 
         <activity
             android:name=".orga.OrgaActivity"
-            android:label=""></activity>
+            android:label="">
+
+        </activity>
+
+        <activity
+            android:name=".billetterie.BilletterieActivity"
+            android:label="">
+
+        </activity>
 
     </application>
 

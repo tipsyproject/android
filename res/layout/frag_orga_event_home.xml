@@ -12,47 +12,121 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/button_billetterie"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
-                android:id="@+id/button_billetterie"
                 android:layout_weight="1"
                 android:layout_column="0"
                 android:layout_span="1"
-                android:text="@string/billetterie" />
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_margin="@dimen/ui_margin"
+                android:background="@color/background_menu"
+                android:baselineAligned="true">
 
-            <Button
+                <ImageView
+                    android:layout_width="@dimen/bar_height"
+                    android:layout_height="@dimen/bar_height"
+                    android:src="@drawable/ic_action_labels"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/billetterie"
+                    android:layout_gravity="center_horizontal" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/button_bar"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
-                android:id="@+id/button_bar"
                 android:layout_weight="1"
                 android:layout_span="1"
                 android:layout_column="1"
-                android:text="@string/bar" />
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_margin="@dimen/ui_margin"
+                android:background="@color/background_menu"
+                android:baselineAligned="true">
+
+                <ImageView
+                    android:layout_width="@dimen/bar_height"
+                    android:layout_height="@dimen/bar_height"
+                    android:src="@drawable/ic_action_user"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/bar"
+                    android:layout_gravity="center_horizontal" />
+            </LinearLayout>
+
         </TableRow>
 
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
                 android:id="@+id/button_acces"
                 android:layout_weight="1"
                 android:layout_span="1"
                 android:layout_column="0"
-                android:text="@string/acces" />
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_margin="@dimen/ui_margin"
+                android:background="@color/background_menu"
+                android:baselineAligned="true">
 
-            <Button
+                <ImageView
+                    android:layout_width="@dimen/bar_height"
+                    android:layout_height="@dimen/bar_height"
+                    android:src="@drawable/ic_action_paste"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/acces"
+                    android:layout_gravity="center_horizontal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
                 android:id="@+id/button_infos"
                 android:layout_weight="1"
                 android:layout_column="1"
                 android:layout_span="1"
-                android:text="@string/infos" />
+                android:layout_gravity="top"
+                android:gravity="center_vertical|center_horizontal"
+                android:layout_margin="@dimen/ui_margin"
+                android:background="@color/background_menu"
+                android:baselineAligned="true">
+
+                <ImageView
+                    android:layout_width="@dimen/bar_height"
+                    android:layout_height="@dimen/bar_height"
+                    android:src="@drawable/ic_action_about"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/infos"
+                    android:layout_gravity="center_horizontal" />
+            </LinearLayout>
         </TableRow>
     </TableLayout>
 </LinearLayout>
