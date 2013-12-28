@@ -56,7 +56,7 @@ public class EventHomeFragment extends Fragment {
 
         buttonBar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Interdit à VOMITO !", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Fermé pour cause de VOMIS #RER_B", Toast.LENGTH_LONG).show();
             }
         });
 
