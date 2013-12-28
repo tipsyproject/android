@@ -118,7 +118,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     // Création/Modification d'un événement terminée
     public void onEventEdited(){
 
-        orga.save(new StackMobModelCallback() {
+        orga.save(StackMobOptions.depthOf(1),new StackMobModelCallback() {
             @Override
             public void success() {
                 getSupportFragmentManager().beginTransaction()

@@ -62,16 +62,7 @@ public class EventHomeFragment extends Fragment {
 
         buttonBilleterie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                event.fetch(StackMobOptions.depthOf(3), new StackMobModelCallback() {
-                    @Override
-                    public void success() {
-                        callback.onBilletterieEdit(event);
-                    }
-
-                    @Override
-                    public void failure(StackMobException e) {
-                    }
-                });
+                callback.onBilletterieEdit(event);
             }
         });
         buttonInfos.setOnClickListener(new View.OnClickListener() {
