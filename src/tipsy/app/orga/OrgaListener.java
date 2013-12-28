@@ -8,7 +8,7 @@ import tipsy.commun.Event;
  */
 public interface OrgaListener {
 
-    public void onBilletterieEdit(Billetterie b);
+    public void onBilletterieEdit(Event e);
     public void onClickResumeEvent(Event e);
     public void onEventEdit(Event e);
     public void onEventEdited();

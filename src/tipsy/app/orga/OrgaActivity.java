@@ -38,11 +38,11 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
 
         app = (TipsyApp) getApplication();
         orga = app.getOrga();
-
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new HomeOrgaFragment());
         ft.addToBackStack(null);
         ft.commit();
+
     }
 
 
@@ -82,7 +82,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
             this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
         } else {
             // error in creating fragment
-            Log.e("OrgaActivity", "Error in creating fragment");
+            Log.e("TOUTAFAIT", "Error in creating fragment");
         }
 
     }
@@ -91,9 +91,9 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
     // clique sur le bouton de la Billetterie
-    public void onBilletterieEdit(Billetterie b){
+    public void onBilletterieEdit(Event e){
         Intent intent = new Intent(this, BilletterieActivity.class);
-        intent.putExtra("BILLETTERIE_ID",b.getID());
+        intent.putExtra("BILLETTERIE_ID",e.getBilletterie().getID());
         startActivity(intent);
     }
 
@@ -118,22 +118,19 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     // Création/Modification d'un événement terminée
     public void onEventEdited(){
 
-        orga.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
+        orga.save(new StackMobModelCallback() {
             @Override
             public void success() {
-                Log.d("TOUTAFAIT", "Event saved");
                 getSupportFragmentManager().beginTransaction()
                         .replace(R.id.content, new HomeOrgaFragment())
                         .addToBackStack(null)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit();
-                Toast.makeText(OrgaActivity.this, "Evénement enregistré", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT", "Erreur sauvegarde event:" + e.getMessage());
-                Toast.makeText(OrgaActivity.this, "Erreur sauvegarde event:" + e.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("TOUTAFAIT", "erreur sauvegarde Event:"+e.getMessage());
             }
         });
     }

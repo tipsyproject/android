@@ -9,6 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
+
+import com.stackmob.sdk.api.StackMobOptions;
+import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
@@ -24,6 +29,7 @@ public class EventHomeFragment extends Fragment {
     private LinearLayout buttonBar;
     private LinearLayout buttonAcces;
     private LinearLayout buttonInfos;
+
 
     public EventHomeFragment(Event e){
         super();
@@ -48,9 +54,24 @@ public class EventHomeFragment extends Fragment {
         buttonAcces = (LinearLayout) view.findViewById(R.id.button_acces);
         buttonInfos = (LinearLayout) view.findViewById(R.id.button_infos);
 
+        buttonBar.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Interdit à VOMITO !", Toast.LENGTH_LONG).show();
+            }
+        });
+
         buttonBilleterie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.onBilletterieEdit(event.getBilletterie());
+                event.fetch(StackMobOptions.depthOf(3), new StackMobModelCallback() {
+                    @Override
+                    public void success() {
+                        callback.onBilletterieEdit(event);
+                    }
+
+                    @Override
+                    public void failure(StackMobException e) {
+                    }
+                });
             }
         });
         buttonInfos.setOnClickListener(new View.OnClickListener() {

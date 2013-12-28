@@ -7,8 +7,8 @@ import com.stackmob.sdk.model.StackMobModel;
  */
 public class Billet extends StackMobModel {
 
-    private String nom = "Mon Billet";
-    private double prix = 15.0;
+    private String nom = "Mon Tarif";
+    private double prix = 1.00;
 
     public  Billet(){
         super(Billet.class);
@@ -26,7 +26,7 @@ public class Billet extends StackMobModel {
         return prix;
     }
 
-    public void setPrix(float prix) {
+    public void setPrix(double prix) {
         this.prix = prix;
     }
 }

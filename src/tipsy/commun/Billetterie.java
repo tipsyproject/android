@@ -15,7 +15,7 @@ public class Billetterie extends StackMobModel {
         super(Billetterie.class);
     }
 
-    public Billet creerBillet(String nom, float prix){
+    public Billet creerBillet(String nom, double prix){
         Billet b = new Billet();
         b.setNom(nom);
         b.setPrix(prix);

@@ -42,4 +42,12 @@ j'accepte les conditions générales."</string>
     <string name="bar">Bar</string>
     <string name="acces">Contrôle d\'accès</string>
     <string name="infos">Informations</string>
+
+    <string name="nom_billet">Nom du billet</string>
+    <string name="prix">Prix</string>
+
+    <string name="cancel">Annuler</string>
+    <string name="edit_billet_title">Mon tarif</string>
+
+
 </resources>

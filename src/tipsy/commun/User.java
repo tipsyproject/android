@@ -47,9 +47,9 @@ public class User extends StackMobUser {
 
     public void goHome(Activity a) {
         if (getType() == TypeUser.ORGANISATEUR)
-            a.startActivity(new Intent(a, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            a.startActivity(new Intent(a, OrgaActivity.class));
         else if (getType() == TypeUser.MEMBRE)
-            a.startActivity(new Intent(a, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            a.startActivity(new Intent(a, MembreActivity.class));
         else
             a.startActivity(new Intent(a, LoginActivity.class));
     }
@@ -88,7 +88,7 @@ public class User extends StackMobUser {
                         @Override
                         public void success(List<Organisateur> result) {
                             final Organisateur orga = result.get(0);
-                            orga.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
+                            orga.fetch(StackMobOptions.depthOf(3), new StackMobModelCallback() {
                                 @Override
                                 public void success() {
                                     TipsyApp app = (TipsyApp) a.getApplication();

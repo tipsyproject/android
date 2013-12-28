@@ -129,12 +129,8 @@ public class EditEventDateFragment extends Fragment {
         }
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-            // Do something with the time chosen by the user
-            Log.d("TOUTAFAIT",Integer.toString(hourOfDay));
             Calendar cal = Calendar.getInstance();
             cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
-
-            Log.d("TOUTAFAIT",Integer.toString(cal.get(Calendar.HOUR_OF_DAY)));
             cal.set(Calendar.MINUTE,minute);
             viewResultat.setText(timeFormatter.format(new Date(cal.getTimeInMillis())));
         }

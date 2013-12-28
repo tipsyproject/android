@@ -27,6 +27,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
 
 /**
@@ -61,6 +62,10 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     private TextView inputTimeDebut;
 
     private Validator validator;
+
+
+
+
 
     public EditEventFragment(Event e){
         super();
@@ -134,6 +139,11 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     // Envoi de la demande de sauvegarde de l'événement à l'activité
     public void onValidationSucceeded() {
+        // Si c'est une création d'event, on initialise l'event
+        if(event == null){
+            TipsyApp app = (TipsyApp) getActivity().getApplication();
+            event = app.getOrga().creerEvent("");
+        }
         if(inputNom != null){
             Log.d("TOUTAFAIT","Nom event:"+inputNom.getText().toString());
             event.setNom(inputNom.getText().toString());
