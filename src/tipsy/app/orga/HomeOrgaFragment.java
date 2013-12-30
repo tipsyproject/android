@@ -58,6 +58,7 @@ public class HomeOrgaFragment extends Fragment{
     @Override
     public void onStart(){
         super.onStart();
+        callback.setMenuTitle(MenuOrga.ACCUEIL);
         TipsyApp app = (TipsyApp) getActivity().getApplication();
         upcomingEvent = app.getOrga().getUpcomingEvent();
         resumeEvent.setOnClickListener(new View.OnClickListener() {

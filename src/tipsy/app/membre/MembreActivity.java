@@ -11,17 +11,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
+import tipsy.commun.Membre;
 
 /**
  * Created by tech on 05/12/13.
  */
-public class MembreActivity extends UserActivity {
+public class MembreActivity extends UserActivity implements MembreListener{
 
     private TipsyApp app;
     private SearchView SearchView;
@@ -34,6 +36,8 @@ public class MembreActivity extends UserActivity {
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
 
         app = (TipsyApp) getApplication();
+
+        selectItem(MenuMembre.ACCUEIL);
     }
 
     @Override
@@ -49,36 +53,71 @@ public class MembreActivity extends UserActivity {
     }
 
     protected void selectItem(int position) {
-        Fragment fragment = null;
-
-        if (position == MenuMembre.ACCUEIL)
-            fragment = new HomeMembreFragment();
-        else if (position == MenuMembre.MON_COMPTE)
-            fragment = new AccountMembreFragment();
-        else if (position == MenuMembre.SOLDE)
-            fragment = new SoldeMembreFragment();
-        else if (position == MenuMembre.EVENEMENTS)
-            fragment = new EventMembreFragment();
-        else if (position == MenuMembre.AIDE)
-            startActivity(new Intent(this, HelpActivity.class));
-        else if (position == MenuMembre.DECONNEXION) {
-            app.logout(this);
+        // update selected item and title, then close the drawer
+        this.menu.getDrawerList().setItemChecked(position, true);
+        this.menu.getDrawerList().setSelection(position);
+        this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
+        switch(position){
+            case MenuMembre.ACCUEIL:
+                goToTableauDeBord();
+                break;
+            case MenuMembre.MON_COMPTE:
+                goToAccount();
+                break;
+            case MenuMembre.SOLDE:
+                goToSolde();
+                break;
+            case MenuMembre.EVENEMENTS:
+                goToEvents();
+                break;
+            case MenuMembre.AIDE:
+                startActivity(new Intent(this, HelpActivity.class));
+                break;
+            case MenuMembre.DECONNEXION:
+                app.logout(this);
+                break;
         }
 
-        if (fragment != null) {
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE).commit();
+    }
 
-            // update selected item and title, then close the drawer
-            this.menu.getDrawerList().setItemChecked(position, true);
-            this.menu.getDrawerList().setSelection(position);
-            setTitle(this.menu.getTitres_menu()[position]);
-            this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
-        } else {
-            // error in creating fragment
-            Log.e("MembreActivity", "Error in creating fragment");
-        }
+    // IMPLEMENTATION DU LISTENER MEMBRE
+    public void goToAccount(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.content, new AccountMembreFragment())
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+    }
 
+    public void goToTableauDeBord(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.content, new HomeMembreFragment())
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+    }
+
+    public void goToSolde(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.content, new SoldeMembreFragment())
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+    }
+
+    public void goToEvents(){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.content, new EventMembreFragment())
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+    }
+
+    public Membre getMembre(){
+        return app.getMembre();
     }
 }

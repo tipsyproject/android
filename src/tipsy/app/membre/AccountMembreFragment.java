@@ -1,5 +1,6 @@
 package tipsy.app.membre;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -24,6 +25,7 @@ import tipsy.commun.Membre;
  */
 public class AccountMembreFragment extends Fragment implements TextWatcher {
 
+    private MembreListener callback;
     protected EditText Nom;
     protected EditText Prenom;
     protected EditText Email;
@@ -31,6 +33,12 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     protected boolean change = false;
 
     public AccountMembreFragment() {
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        callback = (MembreListener) activity;
     }
 
 
@@ -77,6 +85,12 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
             }
         });
         return fragmentView;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        callback.setMenuTitle(MenuMembre.MON_COMPTE);
     }
 
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {

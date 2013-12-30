@@ -1,5 +1,6 @@
 package tipsy.app.orga;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,7 @@ import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
+import tipsy.app.membre.MenuMembre;
 import tipsy.commun.Organisateur;
 
 /**
@@ -24,18 +26,19 @@ import tipsy.commun.Organisateur;
  */
 public class AccountOrgaFragment extends Fragment implements TextWatcher {
 
+    private OrgaListener callback;
     protected EditText Orga;
     protected EditText Email;
     protected ImageButton Save;
     protected boolean change = false;
 
-    public AccountOrgaFragment() {
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        callback = (OrgaListener) activity;
     }
 
-
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.frag_orga_account, container, false);
         TipsyApp app = (TipsyApp) getActivity().getApplication();
         final Organisateur orga = app.getOrga();
@@ -84,5 +87,11 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
 
     public void afterTextChanged(Editable s) {
         change = true;
+    }
+
+    @Override
+     public void onStart(){
+        super.onStart();
+        callback.setMenuTitle(MenuOrga.MON_COMPTE);
     }
 }

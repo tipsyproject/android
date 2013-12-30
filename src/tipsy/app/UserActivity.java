@@ -14,7 +14,7 @@ import android.widget.ListView;
 /**
  * Created by Alexandre on 18/12/13.
  */
-public abstract class UserActivity extends FragmentActivity {
+public abstract class UserActivity extends FragmentActivity implements MenuListener{
     protected MenuUser menu;
 
     @Override
@@ -71,6 +71,14 @@ public abstract class UserActivity extends FragmentActivity {
         getActionBar().setTitle(title);
     }
 
+    public void setMenuTitle(int titleId){
+        setTitle(this.menu.getTitres_menu()[titleId]);
+        this.menu.getDrawerList().setItemChecked(titleId, true);
+    }
+
+    public void setMenuTitle(String title){
+        setTitle(title);
+    }
 
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {

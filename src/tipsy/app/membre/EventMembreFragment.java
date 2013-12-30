@@ -1,5 +1,6 @@
 package tipsy.app.membre;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -13,15 +14,26 @@ import tipsy.app.R;
  */
 public class EventMembreFragment extends Fragment {
 
+    private MembreListener callback;
+
     public EventMembreFragment() {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        callback = (MembreListener) activity;
+    }
 
-        View fragmentView = inflater.inflate(R.layout.frag_membre_event, container, false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.frag_membre_event, container, false);
+        return view;
+    }
 
-        return fragmentView;
+    @Override
+    public void onStart(){
+        super.onStart();
+        callback.setMenuTitle(MenuMembre.EVENEMENTS);
     }
 }

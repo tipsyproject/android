@@ -48,6 +48,8 @@ j'accepte les conditions générales."</string>
 
     <string name="cancel">Annuler</string>
     <string name="edit_billet_title">Mon tarif</string>
+    <string name="profil">Mon Compte</string>
+    <string name="searchByDate">Rechercher par date</string>
 
 
 </resources>

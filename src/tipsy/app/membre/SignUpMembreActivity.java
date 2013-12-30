@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
 
 import tipsy.app.R;
@@ -46,6 +47,16 @@ public class SignUpMembreActivity extends SignUpUser {
         });
 
         super.onCreate(savedInstanceState);
+    }
+
+
+
+    public void validateSignUp(View view){
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
+        validator.validate();
+
     }
 
     public void onValidationSucceeded() {
