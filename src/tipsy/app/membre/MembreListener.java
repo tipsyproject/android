@@ -1,5 +1,7 @@
 package tipsy.app.membre;
 
+import java.util.Date;
+
 import tipsy.app.MenuListener;
 import tipsy.commun.Membre;
 
@@ -12,5 +14,7 @@ public interface MembreListener extends MenuListener {
     public void goToAccount();
     public void goToSolde();
     public void goToEvents();
+    public void searchEventByDate(Date d);
+    public void searchEventByKeyword(String query);
 
 }

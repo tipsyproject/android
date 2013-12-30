@@ -19,9 +19,6 @@ public class HomeMembreFragment extends Fragment {
     private MembreListener callback;
     private LinearLayout buttonAccount;
 
-    public HomeMembreFragment() {
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
