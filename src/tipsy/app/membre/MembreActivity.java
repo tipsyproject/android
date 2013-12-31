@@ -149,6 +149,16 @@ public class MembreActivity extends UserActivity implements MembreListener{
                 .commit();
     }
 
+    public void goToEvent(Event e){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.content, new EventFragment(e))
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+
+    }
+
     public Membre getMembre(){
         return app.getMembre();
     }

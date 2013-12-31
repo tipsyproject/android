@@ -57,6 +57,8 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     @Required(order = 1)
     private EditText inputNom;
+    @Required(order = 2)
+    private EditText inputLieu;
 
     private TextView inputDateDebut;
     private TextView inputTimeDebut;
@@ -145,8 +147,10 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
             event = app.getOrga().creerEvent("");
         }
         if(inputNom != null){
-            Log.d("TOUTAFAIT","Nom event:"+inputNom.getText().toString());
             event.setNom(inputNom.getText().toString());
+        }
+        if(inputLieu != null){
+            event.setLieu(inputLieu.getText().toString());
         }
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
         String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
@@ -207,13 +211,19 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     // initialisation des inputs lors de leur affichage pour les rendre accessible au Validator
 
-    // input partie description
+    // inputs partie description
     public void onDescFragCreated(View v){
         inputNom = (EditText) v.findViewById(R.id.input_nom);
         inputNom.setText(event.getNom());
     }
 
-    // input partie date
+    // inputs partie lieu
+    public void onLocFragCreated(View v){
+        inputLieu = (EditText) v.findViewById(R.id.input_lieu);
+        inputLieu.setText(event.getLieu());
+    }
+
+    // inputs partie date
     public void onDateFragCreated(View v){
         inputDateDebut = (TextView) v.findViewById(R.id.input_date_debut);
         inputTimeDebut = (TextView) v.findViewById(R.id.input_time_debut);

@@ -111,6 +111,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
             }
         });
     }
+
     public void goToTableauDeBord(){
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -119,8 +120,6 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }
-
-
 
     public void goToAccount(){
         FragmentManager fragmentManager = getSupportFragmentManager();

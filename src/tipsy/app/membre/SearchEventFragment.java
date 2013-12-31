@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -63,7 +64,7 @@ public class SearchEventFragment extends Fragment{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                callback.goToEvent(eventResults.get(position));
             }
         });
         return view;
@@ -83,8 +84,10 @@ public class SearchEventFragment extends Fragment{
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View viewEvent = inflater.inflate(R.layout.frag_event_item, parent, false);
+
             TextView nomEvent = (TextView) viewEvent.findViewById(R.id.nom_event);
             nomEvent.setText(events.get(position).getNom());
+
             return viewEvent;
         }
     }

@@ -10,6 +10,7 @@ import java.util.Date;
 public class Event extends StackMobModel {
     private Billetterie billetterie = new Billetterie();
     private Date debut = new Date();
+    private String lieu = null;
     private String nom = null;
 
     public Event() {
@@ -35,6 +36,14 @@ public class Event extends StackMobModel {
 
     public void setDebut(Date debut) {
         this.debut = debut;
+    }
+
+    public String getLieu() {
+        return lieu;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
     }
 
     public String getNom() {

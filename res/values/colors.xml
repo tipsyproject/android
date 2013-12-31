@@ -10,6 +10,6 @@
     <color name="button_red_pressed">#FFCC00</color>
     <color name="text_pressed">#354B5E</color>
     <color name="background_loading">#DCDDD8</color>
-    <color name="text_loading">#354B5E</color>
+    <color name="text_loading">#354B5E</color><color name="event_fade">#000000</color>
 
 </resources>

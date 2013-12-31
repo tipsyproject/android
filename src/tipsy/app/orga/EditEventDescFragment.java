@@ -29,8 +29,6 @@ public class EditEventDescFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_orga_edit_event_desc, container, false);
 
-        EditText inputNom = (EditText) view.findViewById(R.id.input_nom);
-
         parent.onDescFragCreated(view);
         return view;
     }
