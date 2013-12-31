@@ -6,7 +6,7 @@
     android:weightSum="1"
     android:background="@drawable/bg">
 
-    <LinearLayout
+    <RelativeLayout
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -15,21 +15,31 @@
         android:longClickable="false"
         android:measureWithLargestChild="false"
         android:gravity="center"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         android:weightSum="1">
+
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/sign_in_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"/>
 
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:onClick="OnClickInscription"
             android:layout_height="@dimen/bar_height"
             android:id="@+id/button1"
             android:drawableLeft="@drawable/ic_action_mail_add"
             android:paddingLeft="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/ui_margin"
             android:text="@string/inscription"
             android:layout_weight="0.6"
-            android:clickable="true" />
+            android:clickable="true"
+            android:layout_below="@+id/sign_in_button"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
