@@ -10,7 +10,7 @@ public class Billet extends StackMobModel {
     private String nom = "Mon Tarif";
     private double prix = 1.00;
 
-    public  Billet(){
+    public Billet() {
         super(Billet.class);
     }
 

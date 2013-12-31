@@ -22,6 +22,7 @@ public class TypeSignUpActivity extends Activity {
         startActivity(new Intent(this, SignUpMembreActivity.class));
 
     }
+
     public void OnClickOrga(View view) {
 
         startActivity(new Intent(this, SignUpOrgaActivity.class));

@@ -11,11 +11,11 @@ public class Billetterie extends StackMobModel {
 
     private ArrayList<Billet> billets = new ArrayList<Billet>();
 
-    public Billetterie(){
+    public Billetterie() {
         super(Billetterie.class);
     }
 
-    public Billet creerBillet(String nom, double prix){
+    public Billet creerBillet(String nom, double prix) {
         Billet b = new Billet();
         b.setNom(nom);
         b.setPrix(prix);

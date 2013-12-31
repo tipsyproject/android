@@ -33,7 +33,7 @@ public class SoldeMembreFragment extends Fragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         callback.setMenuTitle(MenuMembre.SOLDE);
     }

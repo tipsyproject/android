@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import tipsy.app.R;
-import tipsy.app.orga.OrgaListener;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -38,7 +37,7 @@ public class HomeMembreFragment extends Fragment {
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         callback.setMenuTitle(MenuMembre.ACCUEIL);
     }

@@ -5,7 +5,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
@@ -19,7 +18,7 @@ public class EditEventDescFragment extends Fragment {
     private Event event;
     private EditEventFragment parent;
 
-    public EditEventDescFragment(EditEventFragment frag, Event e){
+    public EditEventDescFragment(EditEventFragment frag, Event e) {
         super();
         event = e;
         parent = frag;

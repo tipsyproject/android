@@ -2,11 +2,9 @@ package tipsy.app.orga;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.callback.StackMobModelCallback;
@@ -17,15 +15,13 @@ import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
 import tipsy.app.billetterie.BilletterieActivity;
-import tipsy.app.membre.EventMembreFragment;
-import tipsy.commun.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Organisateur;
 
 /**
  * Created by Valoo on 05/12/13.
  */
-public class OrgaActivity extends UserActivity implements OrgaListener{
+public class OrgaActivity extends UserActivity implements OrgaListener {
 
     private TipsyApp app;
     private Organisateur orga;
@@ -49,7 +45,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
         this.menu.getDrawerList().setItemChecked(position, true);
         this.menu.getDrawerList().setSelection(position);
         this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
-        switch(position){
+        switch (position) {
             case MenuOrga.ACCUEIL:
                 goToTableauDeBord();
                 break;
@@ -73,14 +69,14 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
     // clique sur le bouton de la Billetterie
-    public void onBilletterieEdit(Event e){
+    public void onBilletterieEdit(Event e) {
         Intent intent = new Intent(this, BilletterieActivity.class);
-        intent.putExtra("BILLETTERIE_ID",e.getBilletterie().getID());
+        intent.putExtra("BILLETTERIE_ID", e.getBilletterie().getID());
         startActivity(intent);
     }
 
     // Clique sur le bouton "Créer un événement"
-    public void onClickResumeEvent(Event e){
+    public void onClickResumeEvent(Event e) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new EventHomeFragment(e))
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -89,7 +85,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     }
 
     // Clique sur le bouton "Créer un événement"
-    public void onEventEdit(Event e){
+    public void onEventEdit(Event e) {
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, new EditEventFragment(e))
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -98,8 +94,8 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     }
 
     // Création/Modification d'un événement terminée
-    public void onEventEdited(){
-        orga.save(StackMobOptions.depthOf(1),new StackMobModelCallback() {
+    public void onEventEdited() {
+        orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
             @Override
             public void success() {
                 goToTableauDeBord();
@@ -107,12 +103,12 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
 
             @Override
             public void failure(StackMobException e) {
-                Log.e("TOUTAFAIT", "erreur sauvegarde Event:"+e.getMessage());
+                Log.e("TOUTAFAIT", "erreur sauvegarde Event:" + e.getMessage());
             }
         });
     }
 
-    public void goToTableauDeBord(){
+    public void goToTableauDeBord() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -121,7 +117,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
                 .commit();
     }
 
-    public void goToAccount(){
+    public void goToAccount() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -131,8 +127,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener{
     }
 
 
-
-    public void goToEvents(){
+    public void goToEvents() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)

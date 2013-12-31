@@ -6,12 +6,10 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -31,10 +29,10 @@ public class EditEventDateFragment extends Fragment {
 
     private Event event;
     private EditEventFragment parent;
-    public static SimpleDateFormat dateFormatter = new SimpleDateFormat ("dd-MM-yyyy");
-    public static SimpleDateFormat timeFormatter = new SimpleDateFormat ("kk:mm");
+    public static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+    public static SimpleDateFormat timeFormatter = new SimpleDateFormat("kk:mm");
 
-    public EditEventDateFragment(EditEventFragment frag, Event e){
+    public EditEventDateFragment(EditEventFragment frag, Event e) {
         super();
         event = e;
         parent = frag;
@@ -65,16 +63,14 @@ public class EditEventDateFragment extends Fragment {
     }
 
     public void showDatePickerDialog(TextView v, Date date) {
-        DialogFragment newFragment = new DatePickerFragment(v,date);
+        DialogFragment newFragment = new DatePickerFragment(v, date);
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
 
     public void showTimePickerDialog(TextView v, Date date) {
-        DialogFragment newFragment = new TimePickerFragment(v,date);
+        DialogFragment newFragment = new TimePickerFragment(v, date);
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
     }
-
-
 
 
     public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
@@ -82,7 +78,7 @@ public class EditEventDateFragment extends Fragment {
         private TextView viewResultat;
         private Date date;
 
-        public DatePickerFragment(TextView resultat, Date date){
+        public DatePickerFragment(TextView resultat, Date date) {
             super();
             viewResultat = resultat;
             this.date = date;
@@ -101,7 +97,7 @@ public class EditEventDateFragment extends Fragment {
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            GregorianCalendar cal = new GregorianCalendar(year,month,day);
+            GregorianCalendar cal = new GregorianCalendar(year, month, day);
             viewResultat.setText(dateFormatter.format(new Date(cal.getTimeInMillis())));
         }
     }
@@ -111,7 +107,7 @@ public class EditEventDateFragment extends Fragment {
         private TextView viewResultat;
         private Date date;
 
-        public TimePickerFragment(TextView resultat, Date date){
+        public TimePickerFragment(TextView resultat, Date date) {
             super();
             viewResultat = resultat;
             this.date = date;
@@ -130,8 +126,8 @@ public class EditEventDateFragment extends Fragment {
 
         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
             Calendar cal = Calendar.getInstance();
-            cal.set(Calendar.HOUR_OF_DAY,hourOfDay);
-            cal.set(Calendar.MINUTE,minute);
+            cal.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            cal.set(Calendar.MINUTE, minute);
             viewResultat.setText(timeFormatter.format(new Date(cal.getTimeInMillis())));
         }
     }

@@ -11,5 +11,5 @@
         android:orderInCategory="2"
         android:showAsAction="always"
         android:icon="@drawable/ic_action_go_to_today"
-        android:title="@string/searchByDate"/>
+        android:title="@string/searchByDate" />
 </menu>

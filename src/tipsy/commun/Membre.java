@@ -4,6 +4,7 @@ package tipsy.commun;
  * Created by valoo on 07/12/13.
  */
 
+import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.model.StackMobModel;
 
 
@@ -12,8 +13,9 @@ public class Membre extends StackMobModel implements User.TipsyUser {
     private String nom;
     private String prenom;
     private User user;
+    private StackMobFile avatar;
 
-    public Membre(){
+    public Membre() {
         super(Membre.class);
     }
 
@@ -26,6 +28,14 @@ public class Membre extends StackMobModel implements User.TipsyUser {
 
     public String getEmail() {
         return user.getEmail();
+    }
+
+    public StackMobFile getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(StackMobFile avatar) {
+        this.avatar = avatar;
     }
 
     public int getType() {

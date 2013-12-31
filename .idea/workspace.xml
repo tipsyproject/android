@@ -1,0 +1,1427 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AndroidLayoutPreviewToolWindow">
+    <option name="state">
+      <GlobalState />
+    </option>
+  </component>
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
+  <component name="AndroidLogFilters">
+    <option name="TOOL_WINDOW_LOG_LEVEL" value="ERROR" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="09415498-4d1b-4542-9a8b-164207e7fef1" name="Default" comment="Focus step rajouté dans le Help pour savoir cb de pages il y a.">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/frag_membre_account_delivery.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/AccountMembreFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/AccountMembreFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/AccountOrgaFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/AccountOrgaFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Billet.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Billet.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Billetterie.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Billetterie.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/billetterie/BilletterieActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/billetterie/BilletterieActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDateFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDateFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDescFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventDescFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventLocFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventLocFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventSettingsFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EditEventSettingsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/EventFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/EventFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EventHomeFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EventHomeFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/EventMembreFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/EventMembreFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/EventsOrgaFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/EventsOrgaFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/HomeMembreFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/HomeMembreFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/HomeOrgaFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/HomeOrgaFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/billetterie/ListBilletsFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/billetterie/ListBilletsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/LoginActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/LoginActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Membre.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Membre.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/MembreActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/MembreActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/MembreListener.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/MembreListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/MenuListener.java" afterPath="$PROJECT_DIR$/src/tipsy/app/MenuListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/OrgaActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/OrgaActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/OrgaListener.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/OrgaListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/SearchEventFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/SearchEventFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/SignUpMembreActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/SignUpMembreActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/orga/SignUpOrgaActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/orga/SignUpOrgaActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/SignUpUser.java" afterPath="$PROJECT_DIR$/src/tipsy/app/SignUpUser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/membre/SoldeMembreFragment.java" afterPath="$PROJECT_DIR$/src/tipsy/app/membre/SoldeMembreFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/TypeSignUpActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/TypeSignUpActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/commun/User.java" afterPath="$PROJECT_DIR$/src/tipsy/commun/User.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/tipsy/app/UserActivity.java" afterPath="$PROJECT_DIR$/src/tipsy/app/UserActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/act_billetterie.xml" afterPath="$PROJECT_DIR$/res/layout/act_billetterie.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/act_typesignup.xml" afterPath="$PROJECT_DIR$/res/layout/act_typesignup.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/act_user.xml" afterPath="$PROJECT_DIR$/res/layout/act_user.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/colors.xml" afterPath="$PROJECT_DIR$/res/values/colors.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/dimens.xml" afterPath="$PROJECT_DIR$/res/values/dimens.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_billetterie_list_billets.xml" afterPath="$PROJECT_DIR$/res/layout/frag_billetterie_list_billets.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_edit_billet.xml" afterPath="$PROJECT_DIR$/res/layout/frag_edit_billet.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_edit_billet_title.xml" afterPath="$PROJECT_DIR$/res/layout/frag_edit_billet_title.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_event.xml" afterPath="$PROJECT_DIR$/res/layout/frag_event.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_membre_account.xml" afterPath="$PROJECT_DIR$/res/layout/frag_membre_account.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_membre_home.xml" afterPath="$PROJECT_DIR$/res/layout/frag_membre_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_orga_account.xml" afterPath="$PROJECT_DIR$/res/layout/frag_orga_account.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_orga_edit_event.xml" afterPath="$PROJECT_DIR$/res/layout/frag_orga_edit_event.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_orga_event_home.xml" afterPath="$PROJECT_DIR$/res/layout/frag_orga_event_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_orga_events.xml" afterPath="$PROJECT_DIR$/res/layout/frag_orga_events.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_orga_home.xml" afterPath="$PROJECT_DIR$/res/layout/frag_orga_home.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/frag_search_event.xml" afterPath="$PROJECT_DIR$/res/layout/frag_search_event.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/menu_billetterie_list_billets.xml" afterPath="$PROJECT_DIR$/res/menu/menu_billetterie_list_billets.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/menu_orga_edit_event.xml" afterPath="$PROJECT_DIR$/res/menu/menu_orga_edit_event.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/menu_user.xml" afterPath="$PROJECT_DIR$/res/menu/menu_user.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+    </list>
+    <ignored path="TipsyApp.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_rules />
+    <ui_properties />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="TipsyApp" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="MembreActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/MembreActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="124" column="42" selection-start="4283" selection-end="4283" vertical-scroll-proportion="0.33156028" vertical-offset="1377" max-vertical-offset="3451">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="l" />
+      </list>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/HomeOrgaActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/act_home.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/Menu.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/MenuUserOrga.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/SignUp.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/MenuOrga.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/MenuUser.java" />
+        <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/LoginActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/act_help.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/Help1Fragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/HelpActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/act_user_menu.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/MyAccountFragment.java" />
+        <option value="$PROJECT_DIR$/res/layout/frag_solde.xml" />
+        <option value="$PROJECT_DIR$/res/layout/frag_membre_home.xml" />
+        <option value="$PROJECT_DIR$/res/layout/frag_event.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/SoldeFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/MyAccountFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/MembreHome.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/AccountMembreFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/HomeMembreFragment.java" />
+        <option value="$PROJECT_DIR$/res/layout/frag_orga_home.xml" />
+        <option value="$PROJECT_DIR$/res/layout/frag_orga_event.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/EventOrgaFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/EventMembreFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/SoldeMembreFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/SignUpOrgaActivity.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/EditEventActivity.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/UserActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/act_typesignup.xml" />
+        <option value="$PROJECT_DIR$/res/layout/frag_membre_account_delivery.xml" />
+        <option value="$PROJECT_DIR$/res/layout/frag_membre_account.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/commun/Organisateur.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/commun/Membre.java" />
+        <option value="$PROJECT_DIR$/res/values/colors.xml" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/res/values/dimens.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/OrgaListener.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/EditEventFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/OrgaActivity.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/SignUpMembreActivity.java" />
+        <option value="$PROJECT_DIR$/res/layout/frag_orga_account.xml" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/AccountMembreFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/AccountOrgaFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/SignUpUser.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/orga/HomeOrgaFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/commun/User.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/HomeMembreFragment.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/MenuMembre.java" />
+        <option value="$PROJECT_DIR$/src/tipsy/app/membre/MembreActivity.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1382" />
+    <option name="height" value="744" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectStructureProblems">
+    <ignored-problems>
+      <problem id="library-invalid-source-javadoc-path(library:project:libs)" />
+    </ignored-problems>
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages ProjectPane="true" />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tipsy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="commun" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tipsy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tipsy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="orga" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tipsy" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="membre" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="values" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="menu" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TipsyApp" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="android" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value=".idea" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dictionaries" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="options.lastSelected" value="project.propVCSSupport.Mappings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/libs/android-saripaar-master" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="FullScreen" value="false" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="207" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="217" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="223" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1132" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="207" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="217" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="223" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1132" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="show.migrate.to.gradle.popup" value="false" />
+    <property name="UI_DESIGNER_EDITOR_MODE.PaletteToolWindowManager.STATE" value="left" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="tipsy.app" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Alexandre\AndroidStudioProjects\android\res\layout" />
+      <recent name="C:\Users\Alexandre\AndroidStudioProjects\android\src\tipsy\app\orga" />
+      <recent name="C:\Users\Alexandre\AndroidStudioProjects\android\libs" />
+      <recent name="$PROJECT_DIR$" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Alexandre\AndroidStudioProjects\android\res\drawable-xxhdpi" />
+      <recent name="C:\Users\Alexandre\AndroidStudioProjects\android\res\layout" />
+      <recent name="C:\Users\Alexandre\AndroidStudioProjects\android\src\tipsy\app" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Android Application.TipsyApp">
+    <configuration default="true" type="GroovyScriptRunConfiguration" factoryName="Groovy">
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workDir" value="" />
+      <setting name="debug" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
+      <ExternalSystemSettings>
+        <option name="externalProjectPath" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list />
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <method />
+    </configuration>
+    <configuration default="false" name="TipsyApp" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="TipsyApp" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="USB_DEVICE" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <RunnerSettings RunnerId="AndroidDebugRunner" />
+      <ConfigurationWrapper RunnerId="AndroidDebugRunner" />
+      <method />
+    </configuration>
+    <list size="1">
+      <item index="0" class="java.lang.String" itemvalue="Android Application.TipsyApp" />
+    </list>
+    <configuration name="&lt;template&gt;" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" default="true" selected="false">
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
+    </configuration>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false" SSL_PROTOCOLS="sslv3">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="09415498-4d1b-4542-9a8b-164207e7fef1" name="Default" comment="" />
+      <created>1386584536949</created>
+      <updated>1386584536949</updated>
+    </task>
+    <task id="LOCAL-00001" summary="authentification organisateur">
+      <created>1386607204250</created>
+      <updated>1386607204250</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Layout Choice &#10;">
+      <created>1386710504996</created>
+      <updated>1386710504996</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Chargement au lancement =&gt; check de l'utilisateur déjà connecté + Thème spécial (blanc). Touche Retour gérée dans les activities. Création de la page anonymous. Menu de gauche spécifique pour chaque profil. Modif design bouton. Modif vue Login. Icône ic_drawer blanc. Bouton Aide du menu marche.">
+      <created>1386833573990</created>
+      <updated>1386833573990</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Chargement au lancement =&gt; check de l'utilisateur déjà connecté + Thème spécial (blanc). Touche Retour gérée dans les activities. Création de la page anonymous. Menu de gauche spécifique pour chaque profil. Modif design bouton. Modif vue Login. Icône ic_drawer blanc. Bouton Aide du menu marche.">
+      <created>1386834106593</created>
+      <updated>1386834106593</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Bouton Passer tout en bas dans Help. Style bouton rouge créé. Ajout de boutons en savoir plus et plus tard sur LoginActivity. Historique du Bouton retour amélioré. Appel de hidekeyboard dans les inscriptions. Déconnexion go to LoginActivity.">
+      <created>1387134411001</created>
+      <updated>1387134411001</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Page HomeActivity qui gère chaque type d'user (À améliorer via une requête stackmob). Déconnexion OK même au relancement de l'appli. New Animations. Historique retour amélioré. Affichage recherche vocal OK.">
+      <created>1387172066613</created>
+      <updated>1387172066613</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Menus réorganisés en mode BG. Inscriptions BG sans choice.">
+      <created>1387409625509</created>
+      <updated>1387409625509</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Menus réorganisés en mode BG. Inscriptions BG sans choice.&#10;">
+      <created>1387409668503</created>
+      <updated>1387409668503</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Titre Tableau de bord affiché et sélectionné de base.">
+      <created>1387414075954</created>
+      <updated>1387414075954</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Correction bouton &quot;Participant ?&quot; à l'inscription">
+      <created>1387416887520</created>
+      <updated>1387416887520</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Focus step rajouté dans le Help pour savoir cb de pages il y a.">
+      <created>1387750348106</created>
+      <updated>1387750348106</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Focus step rajouté dans le Help pour savoir cb de pages il y a.">
+      <created>1387750602015</created>
+      <updated>1387750602015</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Fragments du menu drawer fonctionnels !! Tous les fragments des pages ont  été créés (Java + XML). Page Mon Compte commencée pour les orga, modif stackmob OK. Bouton Ajout Event =&gt; Page Evenement des orga.">
+      <created>1387842380799</created>
+      <updated>1387842380799</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
+    <servers />
+  </component>
+  <component name="TodoView" selected-index="3">
+    <todo-panel id="selected-file">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="default-changelist">
+      <are-packages-shown value="false" />
+      <are-modules-shown value="false" />
+      <flatten-packages value="false" />
+      <is-autoscroll-to-source value="false" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="0" width="123" height="1552" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32542372" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32094082" sideWeight="0.67938024" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23559321" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32542372" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39795917" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31525424" sideWeight="0.19772728" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2450495" sideWeight="0.31108463" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32711864" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24318182" sideWeight="0.27457628" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31694916" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41355932" sideWeight="0.80151516" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32711864" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.22727273" sideWeight="0.72542375" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2101695" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="Vcs.Log.UiProperties">
+    <option name="RECENTLY_FILTERED_USERS">
+      <collection />
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
+    <option name="myTodoPanelSettings">
+      <TodoPanelSettings />
+    </option>
+    <MESSAGE value="authentification organisateur" />
+    <MESSAGE value="Validation du formulaire d'inscription Orga et de connexion" />
+    <MESSAGE value="Layout Choice &#10;" />
+    <MESSAGE value="Chargement au lancement =&gt; check de l'utilisateur déjà connecté + Thème spécial (blanc). Touche Retour gérée dans les activities. Création de la page anonymous. Menu de gauche spécifique pour chaque profil. Modif design bouton. Modif vue Login. Icône ic_drawer blanc. Bouton Aide du menu marche." />
+    <MESSAGE value="Bouton Passer tout en bas dans Help. Style bouton rouge créé. Ajout de boutons en savoir plus et plus tard sur LoginActivity. Historique du Bouton retour amélioré. Appel de hidekeyboard dans les inscriptions. Déconnexion go to LoginActivity." />
+    <MESSAGE value="Page HomeActivity qui gère chaque type d'user (À améliorer via une requête stackmob). Déconnexion OK même au relancement de l'appli. New Animations. Historique retour amélioré. Affichage recherche vocal OK." />
+    <MESSAGE value="Menus réorganisés en mode BG. Inscriptions BG sans choice." />
+    <MESSAGE value="Menus réorganisés en mode BG. Inscriptions BG sans choice.&#10;" />
+    <MESSAGE value="Titre Tableau de bord affiché et sélectionné de base." />
+    <MESSAGE value="Correction bouton &quot;Participant ?&quot; à l'inscription" />
+    <MESSAGE value="Focus step rajouté dans le Help pour savoir cb de pages il y a." />
+    <MESSAGE value="Fragments du menu drawer fonctionnels !! Tous les fragments des pages ont  été créés (Java + XML). Page Mon Compte commencée pour les orga, modif stackmob OK. Bouton Ajout Event =&gt; Page Evenement des orga." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fragments du menu drawer fonctionnels !! Tous les fragments des pages ont  été créés (Java + XML). Page Mon Compte commencée pour les orga, modif stackmob OK. Bouton Ajout Event =&gt; Page Evenement des orga." />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/res/layout/frag_orga_home.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="4" selection-start="312" selection-end="312" vertical-scroll-proportion="0.25855514" vertical-offset="0" max-vertical-offset="526">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/EventMembreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="27" selection-start="616" selection-end="616" vertical-scroll-proportion="0.7234042" vertical-offset="0" max-vertical-offset="564">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/SoldeMembreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="27" selection-start="609" selection-end="609" vertical-scroll-proportion="0.7234042" vertical-offset="0" max-vertical-offset="564">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/commun/TypeUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="23" selection-start="90" selection-end="90" vertical-scroll-proportion="0.15070923" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/SignUpOrgaActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="28" selection-start="500" selection-end="546" vertical-scroll-proportion="0.2876344" vertical-offset="182" max-vertical-offset="1292">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/act_signup_membre.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="44" selection-start="486" selection-end="486" vertical-scroll-proportion="0.0" vertical-offset="204" max-vertical-offset="2006">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/act_signup_orga.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="38" selection-start="153" selection-end="153" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="1785">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/android/support/v4/app/FragmentActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="179" column="0" selection-start="6755" selection-end="6755" vertical-scroll-proportion="0.7835991" vertical-offset="1968" max-vertical-offset="14620" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/TypeSignUpActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="13" selection-start="277" selection-end="277" vertical-scroll-proportion="0.29528537" vertical-offset="0" max-vertical-offset="527">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/java/io/FileInputStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="73" column="11" selection-start="2287" selection-end="2287" vertical-scroll-proportion="0.0" vertical-offset="628" max-vertical-offset="3043" />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/android/graphics/BitmapFactory.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="562" column="66" selection-start="24467" selection-end="24467" vertical-scroll-proportion="0.36347517" vertical-offset="8941" max-vertical-offset="11271" />
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/android/media/ExifInterface.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="28" selection-start="3727" selection-end="3727" vertical-scroll-proportion="-7.496454" vertical-offset="5418" max-vertical-offset="7157" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Organisateur.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="5" selection-start="1079" selection-end="1079" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/colors.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="4" selection-start="605" selection-end="605" vertical-scroll-proportion="0.5862069" vertical-offset="0" max-vertical-offset="377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/themes.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1207">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/libraries/libs.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="377">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="31" column="40" selection-start="1129" selection-end="1129" vertical-scroll-proportion="0.93439716" vertical-offset="0" max-vertical-offset="1496">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/dictionaries/vquefele.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/dictionaries/Valentin.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/menu_user.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="40" selection-start="571" selection-end="571" vertical-scroll-proportion="0.39184397" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/menu_orga_edit_event.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/menu_billetterie_list_billets.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="52" selection-start="2208" selection-end="2208" vertical-scroll-proportion="0.8439716" vertical-offset="408" max-vertical-offset="1037">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/act_typesignup.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="17" selection-start="1817" selection-end="1817" vertical-scroll-proportion="0.8107607" vertical-offset="413" max-vertical-offset="952">
+          <folding>
+            <element signature="e#1471#1489#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/dimens.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="50" selection-start="533" selection-end="533" vertical-scroll-proportion="0.3617021" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/EditEventLocFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="15" selection-start="750" selection-end="766" vertical-scroll-proportion="0.0" vertical-offset="116" max-vertical-offset="544">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/EditEventFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="13" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0" vertical-offset="3057" max-vertical-offset="3621">
+          <folding>
+            <element signature="e#2943#3276#0" expanded="true" />
+            <element signature="e#3257#3258#0" expanded="true" />
+            <element signature="e#6067#6068#0" expanded="true" />
+            <element signature="e#6107#6108#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/SignUpMembreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="13" selection-start="659" selection-end="659" vertical-scroll-proportion="0.24113475" vertical-offset="0" max-vertical-offset="1258">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/frag_event.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="25" selection-start="990" selection-end="990" vertical-scroll-proportion="-16.08" vertical-offset="74" max-vertical-offset="2227">
+          <folding>
+            <element signature="e#469#496#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/frag_membre_account_delivery.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="0" selection-start="235" selection-end="235" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="1734">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/commun/Membre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="31" selection-start="686" selection-end="686" vertical-scroll-proportion="0.7925532" vertical-offset="29" max-vertical-offset="884">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/frag_membre_account.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="13" column="8" selection-start="388" selection-end="784" vertical-scroll-proportion="0.33269963" vertical-offset="46" max-vertical-offset="2227">
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/frag_orga_account.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="46" selection-start="784" selection-end="784" vertical-scroll-proportion="0.67870724" vertical-offset="0" max-vertical-offset="1819">
+          <folding>
+            <element signature="e#3085#3104#0" expanded="true" />
+            <element signature="e#3160#3181#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/AccountMembreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="144" column="5" selection-start="4808" selection-end="4808" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="3842">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3091#3446#0" expanded="true" />
+            <element signature="e#3435#3436#0" expanded="true" />
+            <element signature="e#3482#4511#0" expanded="true" />
+            <element signature="e#4500#4501#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/AccountOrgaFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="66" column="21" selection-start="2179" selection-end="2179" vertical-scroll-proportion="0.0" vertical-offset="1479" max-vertical-offset="3621">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2819#3174#0" expanded="true" />
+            <element signature="e#3163#3164#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/LoginActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="91" column="19" selection-start="3032" selection-end="3032" vertical-scroll-proportion="0.33333334" vertical-offset="883" max-vertical-offset="1768">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/HomeOrgaFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="34" selection-start="645" selection-end="645" vertical-scroll-proportion="0.45212767" vertical-offset="153" max-vertical-offset="1394">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2198#2224#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/OrgaListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="43" selection-start="221" selection-end="221" vertical-scroll-proportion="0.24113475" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/SignUpUser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="55" selection-start="2403" selection-end="2403" vertical-scroll-proportion="0.6985816" vertical-offset="439" max-vertical-offset="1462">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/sdk/sources/android-19/android/content/Intent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3603" column="28" selection-start="170168" selection-end="170168" vertical-scroll-proportion="0.33333334" vertical-offset="60264" max-vertical-offset="122876">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/commun/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="152" column="40" selection-start="6657" selection-end="6657" vertical-scroll-proportion="0.4863884" vertical-offset="1959" max-vertical-offset="2992">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/HelpActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="74" column="28" selection-start="2989" selection-end="2989" vertical-scroll-proportion="0.4574468" vertical-offset="677" max-vertical-offset="1547">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/MenuListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="16" selection-start="112" selection-end="112" vertical-scroll-proportion="0.18085106" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/libs/support-v4-19.0.0.jar!/android/support/v4/app/Fragment.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="152" column="16" selection-start="6069" selection-end="6069" vertical-scroll-proportion="0.34790874" vertical-offset="2384" max-vertical-offset="4607">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/HomeMembreFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="45" selection-start="587" selection-end="587" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="697">
+          <folding>
+            <element signature="e#916#1050#0" expanded="true" />
+            <element signature="e#1039#1040#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/orga/OrgaActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="24" column="0" selection-start="696" selection-end="696" vertical-scroll-proportion="-0.45212767" vertical-offset="391" max-vertical-offset="2210">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/UserActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="22" selection-start="441" selection-end="441" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/MenuMembre.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="39" selection-start="619" selection-end="619" vertical-scroll-proportion="0.5425532" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/MembreListener.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="28" selection-start="297" selection-end="297" vertical-scroll-proportion="0.30141845" vertical-offset="0" max-vertical-offset="564">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tipsy/app/membre/MembreActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="124" column="42" selection-start="4283" selection-end="4283" vertical-scroll-proportion="0.33156028" vertical-offset="1377" max-vertical-offset="3451">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Android</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>Android API 17 Platform</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>TipsyApp</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>Android SDK</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>libs</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
+

@@ -19,7 +19,6 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.membre.SignUpMembreActivity;
 import tipsy.commun.User;
 
 public class LoginActivity extends Activity implements Validator.ValidationListener {

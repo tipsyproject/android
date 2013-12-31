@@ -8,12 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.TableRow;
 import android.widget.Toast;
-
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
@@ -31,7 +26,7 @@ public class EventHomeFragment extends Fragment {
     private LinearLayout buttonInfos;
 
 
-    public EventHomeFragment(Event e){
+    public EventHomeFragment(Event e) {
         super();
         event = e;
     }

@@ -39,7 +39,7 @@
         android:drawableRight="@drawable/ic_action_send"
         android:drawablePadding="@dimen/activity_margin"
         android:paddingRight="@dimen/bar_height"
-        android:text="Vous êtes organisateur ?"
+        android:text="@string/orgasign"
         android:clickable="true"
         android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"

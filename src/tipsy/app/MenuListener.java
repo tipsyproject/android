@@ -5,5 +5,6 @@ package tipsy.app;
  */
 public interface MenuListener {
     public void setMenuTitle(int titleID);
+
     public void setMenuTitle(String title);
 }

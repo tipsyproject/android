@@ -1,7 +1,6 @@
 package tipsy.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -16,9 +15,6 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import tipsy.app.membre.MembreActivity;
-import tipsy.app.orga.OrgaActivity;
-import tipsy.commun.TypeUser;
 import tipsy.commun.User;
 
 /**
@@ -32,6 +28,7 @@ public abstract class SignUpUser extends FragmentActivity implements Validator.V
     @Required(order = 12)
     protected EditText inputPassword;
     protected Validator validator;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +65,7 @@ public abstract class SignUpUser extends FragmentActivity implements Validator.V
                             // Direction page d'accueil
                             @Override
                             public void success() {
-                                User.keepCalmAndWaitForGoingHome(SignUpUser.this,tipsyUser.getUser());
+                                User.keepCalmAndWaitForGoingHome(SignUpUser.this, tipsyUser.getUser());
                             }
 
                             @Override

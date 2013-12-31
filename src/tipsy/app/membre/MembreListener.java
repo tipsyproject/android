@@ -11,12 +11,19 @@ import tipsy.commun.Membre;
  */
 public interface MembreListener extends MenuListener {
     public Membre getMembre();
+
     public void goToTableauDeBord();
+
     public void goToAccount();
+
     public void goToSolde();
+
     public void goToEvents();
+
     public void searchEventByDate(Date d);
+
     public void searchEventByKeyword(String query);
+
     public void goToEvent(Event e);
 
 }

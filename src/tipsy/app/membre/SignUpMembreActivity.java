@@ -5,7 +5,6 @@ package tipsy.app.membre;
  */
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -20,7 +19,6 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 
 import tipsy.app.R;
 import tipsy.app.SignUpUser;
-import tipsy.app.orga.SignUpOrgaActivity;
 import tipsy.commun.Membre;
 import tipsy.commun.User;
 
@@ -50,8 +48,7 @@ public class SignUpMembreActivity extends SignUpUser {
     }
 
 
-
-    public void validateSignUp(View view){
+    public void validateSignUp(View view) {
         validator = new Validator(this);
         validator.setValidationListener(this);
 

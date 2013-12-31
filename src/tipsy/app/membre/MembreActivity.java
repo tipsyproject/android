@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -15,9 +14,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.DatePicker;
-import android.widget.LinearLayout;
 import android.widget.SearchView;
-import android.widget.TextView;
 
 import com.stackmob.sdk.api.StackMobQuery;
 import com.stackmob.sdk.api.StackMobQueryField;
@@ -40,7 +37,7 @@ import tipsy.commun.Membre;
 /**
  * Created by tech on 05/12/13.
  */
-public class MembreActivity extends UserActivity implements MembreListener{
+public class MembreActivity extends UserActivity implements MembreListener {
 
     private TipsyApp app;
     private SearchView SearchView;
@@ -89,7 +86,7 @@ public class MembreActivity extends UserActivity implements MembreListener{
         this.menu.getDrawerList().setItemChecked(position, true);
         this.menu.getDrawerList().setSelection(position);
         this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
-        switch(position){
+        switch (position) {
             case MenuMembre.ACCUEIL:
                 goToTableauDeBord();
                 break;
@@ -113,7 +110,7 @@ public class MembreActivity extends UserActivity implements MembreListener{
     }
 
     // IMPLEMENTATION DU LISTENER MEMBRE
-    public void goToAccount(){
+    public void goToAccount() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -122,16 +119,16 @@ public class MembreActivity extends UserActivity implements MembreListener{
                 .commit();
     }
 
-    public void goToTableauDeBord(){
+    public void goToTableauDeBord() {
         FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
         fragmentManager.beginTransaction()
-                .addToBackStack(null)
                 .replace(R.id.content, new HomeMembreFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }
 
-    public void goToSolde(){
+    public void goToSolde() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -140,7 +137,7 @@ public class MembreActivity extends UserActivity implements MembreListener{
                 .commit();
     }
 
-    public void goToEvents(){
+    public void goToEvents() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -149,7 +146,7 @@ public class MembreActivity extends UserActivity implements MembreListener{
                 .commit();
     }
 
-    public void goToEvent(Event e){
+    public void goToEvent(Event e) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -159,11 +156,11 @@ public class MembreActivity extends UserActivity implements MembreListener{
 
     }
 
-    public Membre getMembre(){
+    public Membre getMembre() {
         return app.getMembre();
     }
 
-    public void searchEventByDate(Date d){
+    public void searchEventByDate(Date d) {
         // On va definir l'intervalle de recherche de date
         //  00h00  <= date < 00h00 à J+1
         Calendar cal = Calendar.getInstance();
@@ -171,8 +168,8 @@ public class MembreActivity extends UserActivity implements MembreListener{
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        GregorianCalendar calmin = new GregorianCalendar(year,month,day);
-        GregorianCalendar calmax = new GregorianCalendar(year,month,day);
+        GregorianCalendar calmin = new GregorianCalendar(year, month, day);
+        GregorianCalendar calmax = new GregorianCalendar(year, month, day);
         calmax.add(Calendar.DAY_OF_MONTH, +1);
         Event.query(Event.class,
                 new StackMobQuery().field(new StackMobQueryField("debut")
@@ -202,7 +199,7 @@ public class MembreActivity extends UserActivity implements MembreListener{
     }
 
 
-    public void searchEventByKeyword(String query){
+    public void searchEventByKeyword(String query) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -225,7 +222,7 @@ public class MembreActivity extends UserActivity implements MembreListener{
 
         public void onDateSet(DatePicker view, int year, int month, int day) {
             // Do something with the date chosen by the user
-            GregorianCalendar cal = new GregorianCalendar(year,month,day);
+            GregorianCalendar cal = new GregorianCalendar(year, month, day);
             searchEventByDate(new Date(cal.getTimeInMillis()));
         }
     }

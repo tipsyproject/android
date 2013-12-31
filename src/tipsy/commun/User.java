@@ -47,11 +47,11 @@ public class User extends StackMobUser {
 
     public void goHome(Activity a) {
         if (getType() == TypeUser.ORGANISATEUR)
-            a.startActivity(new Intent(a, OrgaActivity.class));
+            a.startActivity(new Intent(a, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         else if (getType() == TypeUser.MEMBRE)
-            a.startActivity(new Intent(a, MembreActivity.class));
+            a.startActivity(new Intent(a, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         else
-            a.startActivity(new Intent(a, LoginActivity.class));
+            a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
     }
 
     // Enregistre les identifiants de l'utilisateur dans le répertoire privé de l'appli
@@ -137,7 +137,7 @@ public class User extends StackMobUser {
                         }
                     });
         } else {
-            a.startActivity(new Intent(a, LoginActivity.class));
+            a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
         }
     }
 
@@ -158,7 +158,7 @@ public class User extends StackMobUser {
             public void failure(StackMobException e) {
                 final User user = doYouRememberMe(a);
                 if (user == null) {
-                    a.startActivity(new Intent(a, LoginActivity.class));
+                    a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 } else {
                     user.login(new StackMobModelCallback() {
                         @Override
@@ -171,7 +171,7 @@ public class User extends StackMobUser {
                         /* En cas d'echec, redirection vers LoginActivity */
                         @Override
                         public void failure(StackMobException e) {
-                            a.startActivity(new Intent(a, LoginActivity.class));
+                            a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                         }
                     });
                 }

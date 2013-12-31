@@ -18,11 +18,12 @@ public class EditEventSettingsFragment extends Fragment {
     private Event event;
     private EditEventFragment parent;
 
-    public EditEventSettingsFragment(EditEventFragment frag, Event e){
+    public EditEventSettingsFragment(EditEventFragment frag, Event e) {
         super();
         event = e;
         parent = frag;
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View layoutView = inflater.inflate(R.layout.frag_orga_edit_event_settings, container, false);

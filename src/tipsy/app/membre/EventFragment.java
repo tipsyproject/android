@@ -1,19 +1,14 @@
 package tipsy.app.membre;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
@@ -21,12 +16,12 @@ import tipsy.commun.Event;
 /**
  * Created by Valentin on 30/12/13.
  */
-public class EventFragment extends Fragment{
+public class EventFragment extends Fragment {
 
     private Event event;
     private MembreListener callback;
 
-    public EventFragment(Event event){
+    public EventFragment(Event event) {
         super();
         this.event = event;
     }
@@ -56,7 +51,7 @@ public class EventFragment extends Fragment{
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         callback.setMenuTitle(event.getNom());
     }

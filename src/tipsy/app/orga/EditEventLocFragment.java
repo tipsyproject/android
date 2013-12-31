@@ -18,7 +18,7 @@ public class EditEventLocFragment extends Fragment {
     private Event event;
     private EditEventFragment parent;
 
-    public EditEventLocFragment(EditEventFragment frag, Event e){
+    public EditEventLocFragment(EditEventFragment frag, Event e) {
         super();
         event = e;
         parent = frag;

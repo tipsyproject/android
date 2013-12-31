@@ -1,14 +1,13 @@
 package tipsy.commun;
 
 
+import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.model.StackMobModel;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.Iterator;
-import java.util.ListIterator;
 
 /**
  * Created by valoo on 07/12/13.
@@ -19,8 +18,9 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
     private String nom;
     private String telephone;
     private User user;
+    private StackMobFile avatar;
 
-    public Organisateur(){
+    public Organisateur() {
         super(Organisateur.class);
         this.events = new ArrayList<Event>();
     }
@@ -34,6 +34,14 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
 
     public String getEmail() {
         return user.getEmail();
+    }
+
+    public StackMobFile getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(StackMobFile avatar) {
+        this.avatar = avatar;
     }
 
     public ArrayList<Event> getEvents() {
@@ -70,19 +78,19 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
         this.nom = nom;
     }
 
-    public ArrayList<Event> getEventsByDate(){
+    public ArrayList<Event> getEventsByDate() {
         Collections.sort(events, new SortEventByDate());
         return events;
     }
 
     // Retourne l'event à venir le plus proche, ou null si aucun event n'est à venir
-    public Event getUpcomingEvent(){
+    public Event getUpcomingEvent() {
         // Tri les events par date croissante
         // Et retourne le premier dont la date est "future"
         ArrayList<Event> evs = getEventsByDate();
         Date today = new Date(); // date courante
-        for(int i=0; i<evs.size(); i++){
-            if(evs.get(i).getDebut().compareTo(today) > -1){
+        for (int i = 0; i < evs.size(); i++) {
+            if (evs.get(i).getDebut().compareTo(today) > -1) {
                 return evs.get(i);
             }
         }
@@ -91,7 +99,7 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
 
 
     public class SortEventByDate implements Comparator<Event> {
-        public int compare(Event a, Event b){
+        public int compare(Event a, Event b) {
             return a.getDebut().compareTo(b.getDebut());
         }
     }

@@ -10,19 +10,13 @@ import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import java.util.ArrayList;
-import java.util.ListIterator;
-
 import tipsy.app.R;
-import tipsy.app.TipsyApp;
 import tipsy.commun.Billetterie;
-import tipsy.commun.Event;
-import tipsy.commun.Organisateur;
 
 /**
  * Created by valoo on 27/12/13.
  */
-public class BilletterieActivity extends FragmentActivity implements BilletterieListener{
+public class BilletterieActivity extends FragmentActivity implements BilletterieListener {
 
     private Billetterie billetterie = new Billetterie();
 
@@ -50,7 +44,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
     // IMPLEMENTATION DES FONCTIONS DE l'INTERFACE BilletterieListener
 
-    public void showListBillets(){
+    public void showListBillets() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new ListBilletsFragment(billetterie));
         ft.addToBackStack(null);

@@ -1,4 +1,5 @@
 package tipsy.app.orga;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,14 +7,12 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +20,6 @@ import android.widget.Toast;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
-
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -66,16 +64,13 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     private Validator validator;
 
 
-
-
-
-    public EditEventFragment(Event e){
+    public EditEventFragment(Event e) {
         super();
         event = e;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -142,21 +137,22 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     // Envoi de la demande de sauvegarde de l'événement à l'activité
     public void onValidationSucceeded() {
         // Si c'est une création d'event, on initialise l'event
-        if(event == null){
+        if (event == null) {
             TipsyApp app = (TipsyApp) getActivity().getApplication();
             event = app.getOrga().creerEvent("");
         }
-        if(inputNom != null){
+        if (inputNom != null) {
             event.setNom(inputNom.getText().toString());
         }
-        if(inputLieu != null){
+        if (inputLieu != null) {
             event.setLieu(inputLieu.getText().toString());
         }
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
         String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
-        try{
+        try {
             event.setDebut(f.parse(dateDebut));
-        }catch (ParseException e){}
+        } catch (ParseException e) {
+        }
         callback.onEventEdited();
     }
 
@@ -176,16 +172,21 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
         mPager.setCurrentItem(tab.getPosition());
     }
+
     @Override
-    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
+    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+    }
+
     @Override
-    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
+    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+    }
 
     // Gestionnaire des Fragments
     public class EditEventAdapter extends FragmentPagerAdapter {
         public EditEventAdapter(FragmentManager fm) {
             super(fm);
         }
+
         @Override
         public int getCount() {
             return NUM_ITEMS;
@@ -212,19 +213,19 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     // initialisation des inputs lors de leur affichage pour les rendre accessible au Validator
 
     // inputs partie description
-    public void onDescFragCreated(View v){
+    public void onDescFragCreated(View v) {
         inputNom = (EditText) v.findViewById(R.id.input_nom);
         inputNom.setText(event.getNom());
     }
 
     // inputs partie lieu
-    public void onLocFragCreated(View v){
+    public void onLocFragCreated(View v) {
         inputLieu = (EditText) v.findViewById(R.id.input_lieu);
         inputLieu.setText(event.getLieu());
     }
 
     // inputs partie date
-    public void onDateFragCreated(View v){
+    public void onDateFragCreated(View v) {
         inputDateDebut = (TextView) v.findViewById(R.id.input_date_debut);
         inputTimeDebut = (TextView) v.findViewById(R.id.input_time_debut);
 

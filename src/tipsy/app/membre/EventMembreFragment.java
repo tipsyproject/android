@@ -26,13 +26,13 @@ public class EventMembreFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_membre_event, container, false);
         return view;
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         callback.setMenuTitle(MenuMembre.EVENEMENTS);
     }

@@ -1,7 +1,6 @@
 package tipsy.app.orga;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
@@ -16,7 +15,6 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 
 import tipsy.app.R;
 import tipsy.app.SignUpUser;
-import tipsy.app.membre.SignUpMembreActivity;
 import tipsy.commun.Organisateur;
 import tipsy.commun.User;
 
@@ -33,7 +31,7 @@ public class SignUpOrgaActivity extends SignUpUser implements Validator.Validati
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_signup_orga);
         inputNom = (EditText) findViewById(R.id.input_nom);
-            findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 hideKeyboard(SignUpOrgaActivity.this);
@@ -65,7 +63,7 @@ public class SignUpOrgaActivity extends SignUpUser implements Validator.Validati
         }
     }
 
-    public void validateSignUp(View view){
+    public void validateSignUp(View view) {
         validator = new Validator(this);
         validator.setValidationListener(this);
 

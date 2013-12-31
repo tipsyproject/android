@@ -19,8 +19,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
@@ -46,13 +44,13 @@ public class ListBilletsFragment extends Fragment {
     private ListView listView;
     private BilletterieListener callback;
 
-    public ListBilletsFragment(Billetterie b){
+    public ListBilletsFragment(Billetterie b) {
         super();
         billetterie = b;
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
@@ -66,7 +64,7 @@ public class ListBilletsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_billetterie_list_billets, container, false);
         listView = (ListView) view.findViewById(R.id.list);
-        adapter = new BilletsArrayAdapter(getActivity(),billetterie.getBillets());
+        adapter = new BilletsArrayAdapter(getActivity(), billetterie.getBillets());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -96,7 +94,7 @@ public class ListBilletsFragment extends Fragment {
         }
     }
 
-    public void editBillet(Billet b){
+    public void editBillet(Billet b) {
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new EditBilletDialogFragment(b);
         dialog.show(getActivity().getSupportFragmentManager(), "EditBilletDialogFragment");
@@ -106,6 +104,7 @@ public class ListBilletsFragment extends Fragment {
     public class BilletsArrayAdapter extends ArrayAdapter<Billet> {
         private Context context;
         private ArrayList<Billet> billets;
+
         public BilletsArrayAdapter(Context context, ArrayList<Billet> billets) {
             super(context, R.layout.frag_billet_list, billets);
             this.context = context;
@@ -127,17 +126,17 @@ public class ListBilletsFragment extends Fragment {
 
     // Dialog Fragment permettant de créer/modifier un billet
 
-    public class EditBilletDialogFragment extends DialogFragment implements  Validator.ValidationListener{
+    public class EditBilletDialogFragment extends DialogFragment implements Validator.ValidationListener {
 
         private Billet billet = null;
-        @Required(order=1)
+        @Required(order = 1)
         private EditText inputNom;
-        @Required(order=2)
-        @NumberRule(order=3, type=NumberRule.NumberType.DOUBLE)
+        @Required(order = 2)
+        @NumberRule(order = 3, type = NumberRule.NumberType.DOUBLE)
         private EditText inputPrix;
         private Validator validator;
 
-        public EditBilletDialogFragment(Billet b){
+        public EditBilletDialogFragment(Billet b) {
             super();
             billet = b;
         }
@@ -158,7 +157,7 @@ public class ListBilletsFragment extends Fragment {
             inputPrix = (EditText) view.findViewById(R.id.input_prix);
             // Préremplissage des widgets avec les valeur du billet si c'est une modification
             // sinon rien pour une creation
-            if(billet != null){
+            if (billet != null) {
                 inputNom.setText(billet.getNom());
                 inputPrix.setText(Double.toString(billet.getPrix()));
             }
@@ -190,9 +189,9 @@ public class ListBilletsFragment extends Fragment {
             // Puis on enregistre les modifs
 
             // Si c'est une creation de billet
-            if(billet == null){
-                billetterie.creerBillet(nomBillet,prixBillet);
-            }else{
+            if (billet == null) {
+                billetterie.creerBillet(nomBillet, prixBillet);
+            } else {
                 billet.setNom(nomBillet);
                 billet.setPrix(prixBillet);
             }

@@ -18,14 +18,14 @@ import tipsy.commun.Event;
 /**
  * Created by Alexandre on 23/12/13.
  */
-public class HomeOrgaFragment extends Fragment{
+public class HomeOrgaFragment extends Fragment {
     private OrgaListener callback;
     private Button buttonNewEvent;
     private TableRow resumeEvent;
     private TextView textUpcoming;
     private Event upcomingEvent;
 
-    public HomeOrgaFragment(){
+    public HomeOrgaFragment() {
         super();
         upcomingEvent = null;
     }
@@ -56,7 +56,7 @@ public class HomeOrgaFragment extends Fragment{
     }
 
     @Override
-    public void onStart(){
+    public void onStart() {
         super.onStart();
         callback.setMenuTitle(MenuOrga.ACCUEIL);
         TipsyApp app = (TipsyApp) getActivity().getApplication();
@@ -68,10 +68,10 @@ public class HomeOrgaFragment extends Fragment{
         });
 
         // Si aucun event n'est à venir
-        if(upcomingEvent == null)
+        if (upcomingEvent == null)
             textUpcoming.setText(R.string.no_upcoming_event);
-        // Sinon affichage de la miniature de l'event
-        else{
+            // Sinon affichage de la miniature de l'event
+        else {
             textUpcoming.setText(upcomingEvent.getNom());
         }
 
