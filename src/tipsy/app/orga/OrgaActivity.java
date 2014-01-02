@@ -35,7 +35,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
         app = (TipsyApp) getApplication();
         orga = app.getOrga();
-        goToTableauDeBord();
+        goToTableauDeBord(false);
 
     }
 
@@ -47,7 +47,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
         switch (position) {
             case MenuOrga.ACCUEIL:
-                goToTableauDeBord();
+                goToTableauDeBord(true);
                 break;
             case MenuOrga.MON_COMPTE:
                 goToAccount();
@@ -98,7 +98,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
             @Override
             public void success() {
-                goToTableauDeBord();
+                goToTableauDeBord(true);
             }
 
             @Override
@@ -108,32 +108,30 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         });
     }
 
-    public void goToTableauDeBord() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.content, new HomeOrgaFragment())
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
+    public void goToTableauDeBord(boolean addToBackStack) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, new HomeOrgaFragment());
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        if(addToBackStack)
+            ft.addToBackStack(null);
+        ft.commit();
     }
 
     public void goToAccount() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.content, new AccountOrgaFragment())
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.addToBackStack(null);
+        ft.replace(R.id.content, new AccountOrgaFragment());
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 
 
     public void goToEvents() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.content, new EventsOrgaFragment())
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.addToBackStack(null);
+        ft.replace(R.id.content, new EventsOrgaFragment());
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 
 

@@ -50,8 +50,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
 
         app = (TipsyApp) getApplication();
-
-        selectItem(MenuMembre.ACCUEIL);
+        goToTableauDeBord(false);
     }
 
     @Override
@@ -88,7 +87,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
         this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
         switch (position) {
             case MenuMembre.ACCUEIL:
-                goToTableauDeBord();
+                goToTableauDeBord(true);
                 break;
             case MenuMembre.MON_COMPTE:
                 goToAccount();
@@ -119,13 +118,13 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 .commit();
     }
 
-    public void goToTableauDeBord() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-        fragmentManager.beginTransaction()
-                .replace(R.id.content, new HomeMembreFragment())
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
+    public void goToTableauDeBord(boolean addToBackStack) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, new HomeMembreFragment());
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        if(addToBackStack)
+            ft.addToBackStack(null);
+        ft.commit();
     }
 
     public void goToSolde() {

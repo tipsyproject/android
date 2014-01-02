@@ -56,7 +56,8 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait"
+            android:noHistory="true"></activity>
 
         <activity
             android:name=".membre.MembreActivity"

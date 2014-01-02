@@ -31,7 +31,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         billetterie.fetch(StackMobOptions.depthOf(2), new StackMobModelCallback() {
             @Override
             public void success() {
-                showListBillets();
+                showListBillets(false);
             }
 
             @Override
@@ -44,10 +44,11 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
     // IMPLEMENTATION DES FONCTIONS DE l'INTERFACE BilletterieListener
 
-    public void showListBillets() {
+    public void showListBillets(boolean addTobackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new ListBilletsFragment(billetterie));
-        ft.addToBackStack(null);
+        if(addTobackStack)
+            ft.addToBackStack(null);
         ft.commit();
     }
 }

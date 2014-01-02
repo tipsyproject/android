@@ -68,6 +68,8 @@ public class TipsyApp extends Application {
             @Override
             public void success() {
                 User.forgetMe(a);
+                membre = null;
+                orga = null;
                 startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
 

@@ -15,7 +15,7 @@ public interface OrgaListener extends MenuListener {
 
     public void onEventEdited();
 
-    public void goToTableauDeBord();
+    public void goToTableauDeBord(boolean addToBackStack);
 
     public void goToAccount();
 

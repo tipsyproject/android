@@ -47,11 +47,11 @@ public class User extends StackMobUser {
 
     public void goHome(Activity a) {
         if (getType() == TypeUser.ORGANISATEUR)
-            a.startActivity(new Intent(a, OrgaActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            a.startActivity(new Intent(a, OrgaActivity.class));
         else if (getType() == TypeUser.MEMBRE)
-            a.startActivity(new Intent(a, MembreActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            a.startActivity(new Intent(a, MembreActivity.class));
         else
-            a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            a.startActivity(new Intent(a, LoginActivity.class));
     }
 
     // Enregistre les identifiants de l'utilisateur dans le répertoire privé de l'appli
@@ -98,14 +98,12 @@ public class User extends StackMobUser {
 
                                 @Override
                                 public void failure(StackMobException e) {
-                                    Log.d("TOUTAFAIT", "fetch orga KO:" + e.getMessage());
                                 }
                             });
                         }
 
                         @Override
                         public void failure(StackMobException e) {
-                            Log.d("TOUTAFAIT", "query association user/orga:" + e.getMessage());
                         }
                     });
 
@@ -126,18 +124,16 @@ public class User extends StackMobUser {
 
                                 @Override
                                 public void failure(StackMobException e) {
-                                    Log.d("TOUTAFAIT", "fetch membre KO:" + e.getMessage());
                                 }
                             });
                         }
 
                         @Override
                         public void failure(StackMobException e) {
-                            Log.d("TOUTAFAIT", "query association user/membre:" + e.getMessage());
                         }
                     });
         } else {
-            a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+            a.startActivity(new Intent(a, LoginActivity.class));
         }
     }
 
@@ -158,7 +154,7 @@ public class User extends StackMobUser {
             public void failure(StackMobException e) {
                 final User user = doYouRememberMe(a);
                 if (user == null) {
-                    a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    a.startActivity(new Intent(a, LoginActivity.class));
                 } else {
                     user.login(new StackMobModelCallback() {
                         @Override
@@ -171,7 +167,8 @@ public class User extends StackMobUser {
                         /* En cas d'echec, redirection vers LoginActivity */
                         @Override
                         public void failure(StackMobException e) {
-                            a.startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                            Log.d("TOUTAFAIT","test"+e.getMessage());
+                            a.startActivity(new Intent(a, LoginActivity.class));
                         }
                     });
                 }

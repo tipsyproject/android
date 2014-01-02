@@ -12,7 +12,7 @@ import tipsy.commun.Membre;
 public interface MembreListener extends MenuListener {
     public Membre getMembre();
 
-    public void goToTableauDeBord();
+    public void goToTableauDeBord(boolean addToBackStack);
 
     public void goToAccount();
 
