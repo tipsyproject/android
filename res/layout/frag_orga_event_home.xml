@@ -24,7 +24,7 @@
                 android:layout_column="0"
                 android:layout_span="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@color/background_menu"
+                android:background="@color/text_menu"
                 android:baselineAligned="true"
                 android:layout_marginBottom="@dimen/ui_margin"
                 android:layout_marginRight="@dimen/ui_margin">
@@ -38,6 +38,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/background_menu"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/billetterie"
                     android:layout_gravity="center_horizontal" />
@@ -52,7 +53,7 @@
                 android:layout_span="1"
                 android:layout_column="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@color/background_menu"
+                android:background="@color/text_menu"
                 android:baselineAligned="true"
                 android:layout_marginBottom="@dimen/ui_margin"
                 android:layout_marginRight="@dimen/ui_margin">
@@ -66,6 +67,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/background_menu"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/bar"
                     android:layout_gravity="center_horizontal" />
@@ -86,7 +88,7 @@
                 android:layout_span="1"
                 android:layout_column="0"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@color/background_menu"
+                android:background="@color/text_menu"
                 android:baselineAligned="true"
                 android:layout_marginBottom="@dimen/ui_margin"
                 android:layout_marginRight="@dimen/ui_margin">
@@ -100,6 +102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/background_menu"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/acces"
                     android:layout_gravity="center_horizontal" />
@@ -116,7 +119,7 @@
                 android:layout_span="1"
                 android:layout_gravity="top"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@color/background_menu"
+                android:background="@color/text_menu"
                 android:baselineAligned="true"
                 android:layout_marginBottom="@dimen/ui_margin"
                 android:layout_marginRight="@dimen/ui_margin">
@@ -130,6 +133,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:textColor="@color/background_menu"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/infos"
                     android:layout_gravity="center_horizontal" />

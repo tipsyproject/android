@@ -88,7 +88,7 @@
         android:layout_height="wrap_content"
         android:text="@string/affichermdp"
         android:id="@+id/afficher_mdp_orga"
-        android:textColor="@color/text"
+        android:textColor="@color/text_menu"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/input_password_orga"
         android:layout_alignParentLeft="true"

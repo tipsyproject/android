@@ -19,7 +19,7 @@
         android:layout_height="48dp"
         android:text="@string/next"
         android:id="@+id/next"
-        android:buttonStyle="@style/Button_Style.Transparent"
+        android:buttonStyle="@style/Button_Style.Blue"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
