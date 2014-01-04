@@ -25,9 +25,13 @@
     <string name="next">"Passer"</string>
     <string name="connection">"Connexion"</string>
     <string name="disconnection">"Déconnexion"</string>
+    <string name="email">"Email"</string>
     <string name="inscription">"Inscription"</string>
     <string name="conditions">"En m'inscrivant,
 j'accepte les conditions générales."</string>
+    <string name="welcome">"Bienvenue sur Tipsy !"</string>
+    <string name="second_description">"Valentin Connard !!"</string>
+    <string name="third_description">"Valentin Connard !!"</string>
     <string name="affichermdp">"Afficher le mot de passe"</string>
     <string name="forgotpass">"Mot de passe oublié ?"</string>
     <string name="loading">"Chargement"</string>

@@ -61,7 +61,7 @@
                 <ImageView
                     android:layout_width="@dimen/bar_height"
                     android:layout_height="@dimen/bar_height"
-                    android:src="@drawable/ic_action_user"
+                    android:src="@drawable/ic_action_person"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView

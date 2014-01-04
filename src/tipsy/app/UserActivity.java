@@ -54,6 +54,7 @@ public abstract class UserActivity extends FragmentActivity implements MenuListe
     }
 
     protected void selectItem(int position) {
+
     }
 
     // The click listener for ListView in the navigation drawer

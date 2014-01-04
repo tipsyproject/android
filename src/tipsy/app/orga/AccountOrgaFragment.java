@@ -15,8 +15,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -42,10 +46,11 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
     protected EditText Orga;
     protected EditText Email;
     protected ImageButton Avatar;
-    protected ImageButton Save;
     protected boolean change = false;
     private static int RESULT_LOAD_IMAGE = 1;
     protected ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    protected TipsyApp app;
+    protected Organisateur orga;
 
     @Override
     public void onAttach(Activity activity) {
@@ -55,14 +60,12 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.frag_orga_account, container, false);
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        final Organisateur orga = app.getOrga();
-
+        app = (TipsyApp) getActivity().getApplication();
+        orga = app.getOrga();
 
         Orga = (EditText) fragmentView.findViewById(R.id.input_orga);
         Email = (EditText) fragmentView.findViewById(R.id.input_mail);
         Avatar = (ImageButton) fragmentView.findViewById(R.id.avatar);
-        Save = (ImageButton) fragmentView.findViewById(R.id.save);
 
         Orga.setText(orga.getNom());
         Email.setHint(orga.getEmail());
@@ -97,15 +100,35 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
             }
         });
 
-        Save.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        return fragmentView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    // Redéfinition de l'actionBar: Bouton de validation
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_orga_edit_event, menu);
+    }
+
+    // Gestion du click sur le bouton de validation
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        hideKeyboard(getActivity());
+        switch (item.getItemId()) {
+            case R.id.action_validate_event:
                 if (change) {
                     orga.setNom(Orga.getText().toString());
                     //orga.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
                     orga.save(new StackMobModelCallback() {
                         @Override
                         public void success() {
-                            startActivity(new Intent(getActivity(), OrgaActivity.class));
+                            callback.goToTableauDeBord(false);
                         }
 
                         // En cas d'échec
@@ -115,10 +138,11 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
                         }
                     });
                 } else
-                    startActivity(new Intent(getActivity(), OrgaActivity.class));
-            }
-        });
-        return fragmentView;
+                    callback.goToTableauDeBord(false);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -205,5 +229,10 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
         } catch (FileNotFoundException e) {
         }
         return null;
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

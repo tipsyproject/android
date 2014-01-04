@@ -46,11 +46,13 @@ public class User extends StackMobUser {
     }
 
     public void goHome(Activity a) {
-        if (getType() == TypeUser.ORGANISATEUR)
+        if (getType() == TypeUser.ORGANISATEUR) {
             a.startActivity(new Intent(a, OrgaActivity.class));
-        else if (getType() == TypeUser.MEMBRE)
+            a.finish();
+        } else if (getType() == TypeUser.MEMBRE) {
             a.startActivity(new Intent(a, MembreActivity.class));
-        else
+            a.finish();
+        } else
             a.startActivity(new Intent(a, LoginActivity.class));
     }
 
@@ -174,7 +176,7 @@ public class User extends StackMobUser {
                         /* En cas d'echec, redirection vers LoginActivity */
                         @Override
                         public void failure(StackMobException e) {
-                            Log.d("TOUTAFAIT","test"+e.getMessage());
+                            Log.d("TOUTAFAIT", "test" + e.getMessage());
                             a.startActivity(new Intent(a, LoginActivity.class));
                         }
                     });

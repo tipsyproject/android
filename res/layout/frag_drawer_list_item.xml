@@ -1,3 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@android:id/text1"
     android:layout_width="match_parent"
@@ -6,6 +9,6 @@
     android:gravity="center_vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:textColor="#fff"
-    android:background="?android:attr/activatedBackgroundIndicator"
+    android:textColor="@color/button_color"
+    android:background="@drawable/item_menu"
     android:minHeight="?android:attr/listPreferredItemHeightSmall" />

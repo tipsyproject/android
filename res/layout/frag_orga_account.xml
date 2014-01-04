@@ -15,11 +15,11 @@
             android:layout_width="115dp"
             android:layout_height="115dp"
             android:id="@+id/avatar"
-            android:background="@drawable/ic_action_user"
+            android:background="@drawable/photo_profil_vide"
             android:layout_gravity="center_horizontal|top"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="41dp" />
+            android:layout_marginTop="60dp" />
 
     </RelativeLayout>
 
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
-                android:editable="false"
+                android:textColorHint="@color/text_disable"
                 android:layout_weight="1"
                 android:id="@+id/input_mail"
                 android:layout_gravity="center" />
@@ -84,19 +84,5 @@
         </TableRow>
 
     </TableLayout>
-
-    <ImageButton
-        android:layout_width="fill_parent"
-        android:layout_height="@dimen/bar_height"
-        android:layout_weight="1"
-        android:text="@string/inscription"
-        android:id="@+id/save"
-        android:layout_span="2"
-        android:layout_column="0"
-        android:src="@drawable/ic_action_done"
-        android:background="@color/button_red_unpressed"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

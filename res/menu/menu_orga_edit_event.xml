@@ -6,7 +6,7 @@
         android:id="@+id/action_validate_event"
         android:orderInCategory="1"
         android:showAsAction="always"
-        android:icon="@drawable/ic_action_done"
+        android:icon="@drawable/ic_action_accept"
         android:title="Enregistrer" />
 
 </menu>

@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.stackmob.android.sdk.common.StackMobAndroid;
 
+import tipsy.commun.Prefs;
 import tipsy.commun.User;
 
 
@@ -17,7 +19,6 @@ import tipsy.commun.User;
 
 public class MainActivity extends Activity {
 
-    private SharedPreferences prefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class MainActivity extends Activity {
 
 
         super.onCreate(savedInstanceState);
+        final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.edit().putBoolean(Prefs.CONNECTED, false);
 
         TipsyApp app = (TipsyApp) getApplication();
         // Affichage de l'aide si elle n'a encore jamais été passée.

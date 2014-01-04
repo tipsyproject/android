@@ -47,7 +47,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
     public void showListBillets(boolean addTobackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new ListBilletsFragment(billetterie));
-        if(addTobackStack)
+        if (addTobackStack)
             ft.addToBackStack(null);
         ft.commit();
     }

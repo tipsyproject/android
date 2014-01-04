@@ -1,146 +1,245 @@
 package tipsy.app;
 
-import android.app.Activity;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.content.IntentSender;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.Toast;
 
-import tipsy.app.membre.SignUpMembreActivity;
-import tipsy.app.orga.SignUpOrgaActivity;
-import tipsy.commun.Membre;
-import tipsy.commun.User;
-
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
-import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
-import com.google.android.gms.common.Scopes;
-import com.google.android.gms.plus.PlusClient;
 import com.mobsandgeeks.saripaar.Rule;
+import com.mobsandgeeks.saripaar.Validator;
+import com.mobsandgeeks.saripaar.annotation.Email;
+import com.mobsandgeeks.saripaar.annotation.Required;
+import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.exception.StackMobException;
+
+import java.util.List;
+import java.util.Vector;
+
+import tipsy.app.membre.SignUpMembreFragment;
+import tipsy.app.orga.SignUpOrgaFragment;
+import tipsy.commun.Membre;
+import tipsy.commun.Organisateur;
+import tipsy.commun.User;
 
 /**
  * Created by fulgor on 23/12/13.
  */
-public class TypeSignUpActivity extends SignUpUser implements ConnectionCallbacks, OnConnectionFailedListener {
-    private static final int REQUEST_CODE_RESOLVE_ERR = 9000;
+public class TypeSignUpActivity extends FragmentActivity implements Validator.ValidationListener {
 
-    private ProgressDialog mConnectionProgressDialog;
-    private PlusClient mPlusClient;
-    private ConnectionResult mConnectionResult;
+    protected PagerAdapter mPagerAdapter;
+    @Required(order = 1)
+    private EditText inputNom;
+    @Required(order = 2)
+    private EditText inputPrenom;
+    @Required(order = 2)
+    @Email(order = 3)
+    protected EditText inputEmail;
+    @Required(order = 4)
+    protected EditText inputPassword;
+    protected CheckBox checkbox;
+    protected Validator validator;
+    protected boolean signup_membre = false;
+
+    protected ViewPager pager;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
+
         setContentView(R.layout.act_typesignup);
 
-        mPlusClient = new PlusClient.Builder(this, this, this)
-                .setActions("http://schemas.google.com/AddActivity", "http://schemas.google.com/BuyActivity")
-                .setScopes(Scopes.PLUS_LOGIN)  // recommended login scope for social features
-                        // .setScopes("profile")       // alternative basic login scope
-                .build();
-        // Progress bar to be displayed if the connection failure is not resolved.
-        mConnectionProgressDialog = new ProgressDialog(this);
-        mConnectionProgressDialog.setMessage("Connexion en cours...");
+        // Création de la liste de Fragments que fera défiler le PagerAdapter
+        List fragments = new Vector();
+        // Ajout des Fragments dans la liste
+        fragments.add(Fragment.instantiate(this, TypeSignUpFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, SignUpMembreFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, SignUpOrgaFragment.class.getName()));
 
-        findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                if (v.getId() == R.id.sign_in_button && !mPlusClient.isConnected()) {
-                    if (mConnectionResult == null) {
-                        mConnectionProgressDialog.show();
-                    } else {
-                        try {
-                            mConnectionResult.startResolutionForResult(TypeSignUpActivity.this, REQUEST_CODE_RESOLVE_ERR);
-                        } catch (IntentSender.SendIntentException e) {
-                            // Try connecting again.
-                            mConnectionResult = null;
-                            mPlusClient.connect();
-                        }
-                    }
-                }
+        // Création de l'adapter qui s'occupera de l'affichage de la liste de
+        // Fragments
+        this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
+
+        pager = (ViewPager) super.findViewById(R.id.pager_signup);
+        // Affectation de l'adapter au ViewPager
+        pager.setAdapter(this.mPagerAdapter);
+
+        pager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
             }
         });
     }
 
-    public void OnClickInscription(View view) {
-
-        startActivity(new Intent(this, SignUpMembreActivity.class));
-
-    }
-
-    public void OnClickOrga(View view) {
-
-        startActivity(new Intent(this, SignUpOrgaActivity.class));
-
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        mPlusClient.connect();
+    public void onBackPressed() {
+        if (pager.getCurrentItem() != 0)
+            pager.setCurrentItem(0, true);
+        else
+            super.onBackPressed(); // This will pop the Activity from the stack.
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        mPlusClient.disconnect();
+    public void validateSignUp(View view) {
+        validator = new Validator(this);
+        validator.setValidationListener(this);
+
+        validator.validate();
+
     }
 
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-        if (mConnectionProgressDialog.isShowing()) {
-            // The user clicked the sign-in button already. Start to resolve
-            // connection errors. Wait until onConnected() to dismiss the
-            // connection dialog.
-            if (result.hasResolution()) {
-                try {
-                    result.startResolutionForResult(this, REQUEST_CODE_RESOLVE_ERR);
-                } catch (IntentSender.SendIntentException e) {
-                    mPlusClient.connect();
-                }
-            }
-        }
-
-        // Save the intent so that we can start an activity when the user clicks
-        // the sign-in button.
-        mConnectionResult = result;
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int responseCode, Intent intent) {
-        if (requestCode == REQUEST_CODE_RESOLVE_ERR && responseCode == RESULT_OK) {
-            mConnectionResult = null;
-            mPlusClient.connect();
-        }
-    }
-
-    @Override
-    public void onConnected(Bundle connectionHint) {
-        final Membre membre = new Membre(
-                mPlusClient.getAccountName(),
-                null,
-                mPlusClient.getCurrentPerson().getName().getFamilyName(),
-                mPlusClient.getCurrentPerson().getName().getGivenName()
-        );
-        User.rememberMe(this, mPlusClient.getAccountName(), null);
-        signUpUser(membre);
-        Toast.makeText(this, mPlusClient.getAccountName() + " est connecté.", Toast.LENGTH_LONG).show();
-    }
-
-    @Override
-    public void onDisconnected() {
-        Log.d("Signup", "disconnected");
-    }
-
-    @Override
     public void onValidationSucceeded() {
-
+        if (pager.getCurrentItem() == 1) {
+            final Membre membre = new Membre(
+                    inputEmail.getText().toString(),
+                    inputPassword.getText().toString(),
+                    inputNom.getText().toString(),
+                    inputPrenom.getText().toString()
+            );
+            signUpUser(membre);
+        } else if (pager.getCurrentItem() == 2) {
+            final Organisateur orga = new Organisateur(
+                    inputEmail.getText().toString(),
+                    inputPassword.getText().toString(),
+                    inputNom.getText().toString()
+            );
+            signUpUser(orga);
+        }
+        User.rememberMe(this, inputEmail.getText().toString(), inputPassword.getText().toString());
     }
 
-    @Override
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
+        String message = failedRule.getFailureMessage();
 
+        if (failedView instanceof EditText) {
+            failedView.requestFocus();
+            ((EditText) failedView).setError(message);
+        } else {
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+    public class MyPagerAdapter extends FragmentStatePagerAdapter {
+
+        private List<Fragment> fragments;
+
+        //On fournit à l'adapter la liste des fragments à afficher
+        public MyPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return this.fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return this.fragments.size();
+        }
+    }
+
+    public void onClickInscription(View view) {
+        signup_membre = true;
+        pager.setCurrentItem(1, true);
+        inputNom = (EditText) findViewById(R.id.input_nom);
+        inputPrenom = (EditText) findViewById(R.id.input_prenom);
+        inputPrenom.setText(null);
+        inputEmail = (EditText) findViewById(R.id.input_email);
+        inputPassword = (EditText) findViewById(R.id.input_password);
+        checkbox = (CheckBox) findViewById(R.id.afficher_mdp);
+    }
+
+    public void onClickOrga(View view) {
+
+        pager.setCurrentItem(2, true);
+        inputNom = (EditText) findViewById(R.id.input_orga);
+        if (signup_membre)
+            inputPrenom.setText("Easy");
+        inputEmail = (EditText) findViewById(R.id.input_email_orga);
+        inputPassword = (EditText) findViewById(R.id.input_password_orga);
+        checkbox = (CheckBox) findViewById(R.id.afficher_mdp_orga);
+    }
+
+    public void onClickFb(View view) {
+
+        /*final User.TipsyUser tipsyUser = User.TipsyUser.getUser();
+        newUser.createWithFacebook(facebookToken, new StackMobModelCallback() {
+            @Override
+            public void success() {
+            }
+
+            @Override
+            public void failure(StackMobException e) {
+            }
+        });*/
+
+        Toast.makeText(this, "Faut pas rêver !", Toast.LENGTH_SHORT).show();
+    }
+
+    public void checkboxClicked(View v) {
+        //code to check if this checkbox is checked!
+        CheckBox checkBox = (CheckBox) v;
+        if (checkBox.isChecked())
+            inputPassword.setTransformationMethod(null);
+        else
+            inputPassword.setTransformationMethod(new PasswordTransformationMethod());
+        inputPassword.setSelection(inputPassword.getText().length());
+    }
+
+    protected void signUpUser(final User.TipsyUser tipsyUser) {
+        // Inscription du User
+        tipsyUser.getUser().save(new StackMobModelCallback() {
+            //Connexion auto
+            @Override
+            public void success() {
+                tipsyUser.getUser().login(new StackMobModelCallback() {
+                    //Enregistrement du tipsyUser
+                    @Override
+                    public void success() {
+                        tipsyUser.save(new StackMobModelCallback() {
+                            // Direction page d'accueil
+                            @Override
+                            public void success() {
+                                User.keepCalmAndWaitForGoingHome(TypeSignUpActivity.this, tipsyUser.getUser());
+                            }
+
+                            @Override
+                            public void failure(StackMobException e) {
+                                Log.d("TOUTAFAIT", "save orga/membre" + e.getMessage());
+                            }
+
+                        });
+                    }
+
+                    @Override
+                    public void failure(StackMobException e) {
+                        Log.d("TOUTAFAIT", "login" + e.getMessage());
+                    }
+                });
+            }
+
+            @Override
+            public void failure(StackMobException e) {
+                Log.d("TOUTAFAIT", "save user" + e.getMessage());
+            }
+
+        });
     }
 }

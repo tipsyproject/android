@@ -15,8 +15,12 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -44,10 +48,11 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     protected EditText Prenom;
     protected EditText Email;
     protected ImageButton Avatar;
-    protected ImageButton Save;
     protected boolean change = false;
     private static int RESULT_LOAD_IMAGE = 1;
     protected ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    protected TipsyApp app;
+    protected Membre membre;
 
     public AccountMembreFragment() {
     }
@@ -63,15 +68,13 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                              Bundle savedInstanceState) {
 
         View fragmentView = inflater.inflate(R.layout.frag_membre_account, container, false);
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        final Membre membre = app.getMembre();
-
+        app = (TipsyApp) getActivity().getApplication();
+        membre = app.getMembre();
 
         Nom = (EditText) fragmentView.findViewById(R.id.input_nom);
         Prenom = (EditText) fragmentView.findViewById(R.id.input_prenom);
         Email = (EditText) fragmentView.findViewById(R.id.input_mail);
         Avatar = (ImageButton) fragmentView.findViewById(R.id.avatar);
-        Save = (ImageButton) fragmentView.findViewById(R.id.save);
 
         Nom.setText(membre.getNom());
         Prenom.setText(membre.getPrenom());
@@ -108,8 +111,30 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
             }
         });
 
-        Save.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        return fragmentView;
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    // Redéfinition de l'actionBar: Bouton de validation
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.removeItem(R.id.search);
+        menu.removeItem(R.id.search_date);
+        inflater.inflate(R.menu.menu_orga_edit_event, menu);
+    }
+
+    // Gestion du click sur le bouton de validation
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        hideKeyboard(getActivity());
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_validate_event:
                 if (change) {
                     membre.setNom(Nom.getText().toString());
                     membre.setPrenom(Prenom.getText().toString());
@@ -117,7 +142,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                     membre.save(new StackMobModelCallback() {
                         @Override
                         public void success() {
-                            startActivity(new Intent(getActivity(), MembreActivity.class));
+                            callback.goToTableauDeBord(false);
                         }
 
                         // En cas d'échec
@@ -127,10 +152,11 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                         }
                     });
                 } else
-                    startActivity(new Intent(getActivity(), MembreActivity.class));
-            }
-        });
-        return fragmentView;
+                    callback.goToTableauDeBord(false);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -218,5 +244,10 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
         } catch (FileNotFoundException e) {
         }
         return null;
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

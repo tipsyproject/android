@@ -62,6 +62,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
         inflater.inflate(R.menu.menu_user, menu);
         MenuItem searchItem = menu.findItem(R.id.search);
         menu.findItem(R.id.search).setVisible(!this.menu.isDrawerOpen());
+        menu.findItem(R.id.search_date).setVisible(!this.menu.isDrawerOpen());
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView = (SearchView) searchItem.getActionView();
         SearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
@@ -125,7 +126,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new HomeMembreFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        if(addToBackStack)
+        if (addToBackStack)
             ft.addToBackStack(null);
         ft.commit();
     }

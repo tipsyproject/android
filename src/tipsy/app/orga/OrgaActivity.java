@@ -1,10 +1,14 @@
 package tipsy.app.orga;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
+import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.callback.StackMobModelCallback;
@@ -17,6 +21,7 @@ import tipsy.app.UserActivity;
 import tipsy.app.billetterie.BilletterieActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Organisateur;
+import tipsy.commun.Prefs;
 
 /**
  * Created by Valoo on 05/12/13.
@@ -39,6 +44,20 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_orga, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+    // Gestion du click sur le bouton de validation
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+         return super.onOptionsItemSelected(item);
+    }
+
 
     protected void selectItem(int position) {
         // update selected item and title, then close the drawer
@@ -56,6 +75,8 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
                 goToEvents();
                 break;
             case MenuOrga.AIDE:
+                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                prefs.edit().putBoolean(Prefs.CONNECTED, true);
                 startActivity(new Intent(this, HelpActivity.class));
                 break;
             case MenuOrga.DECONNEXION:
@@ -112,7 +133,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new HomeOrgaFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        if(addToBackStack)
+        if (addToBackStack)
             ft.addToBackStack(null);
         ft.commit();
     }
