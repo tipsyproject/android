@@ -59,14 +59,13 @@ public class HomeOrgaFragment extends Fragment {
     public void onStart() {
         super.onStart();
         callback.setMenuTitle(MenuOrga.ACCUEIL);
-
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        upcomingEvent = app.getOrga().getUpcomingEvent();
         // Si aucun event n'est à venir
         if (upcomingEvent == null)
             textUpcoming.setText(R.string.no_upcoming_event);
         // Sinon affichage de la miniature de l'event
         else {
-            TipsyApp app = (TipsyApp) getActivity().getApplication();
-            upcomingEvent = app.getOrga().getUpcomingEvent();
             resumeEvent.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     callback.onClickResumeEvent(upcomingEvent);
