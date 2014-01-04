@@ -12,9 +12,8 @@ import tipsy.commun.commerce.Panier;
 
 public class Membre extends StackMobModel implements User.TipsyUser {
 
-    private StackMobFile avatar;
+    private StackMobFile avatar = null;
     private String nom;
-    private Panier panier = new Panier();
     private String prenom;
     private User user;
 
@@ -47,10 +46,6 @@ public class Membre extends StackMobModel implements User.TipsyUser {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public Panier getPanier() {
-        return panier;
     }
 
     public String getPrenom() {

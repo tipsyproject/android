@@ -13,12 +13,14 @@ import tipsy.commun.Membre;
 import tipsy.commun.Organisateur;
 import tipsy.commun.Prefs;
 import tipsy.commun.User;
+import tipsy.commun.commerce.Panier;
 
 /**
  * Created by valoo on 18/12/13.
  */
 public class TipsyApp extends Application {
     private Membre membre;
+    private Panier panier = new Panier();
     private Organisateur orga;
 
     public TipsyApp() {
@@ -40,6 +42,10 @@ public class TipsyApp extends Application {
 
     public void setOrga(Organisateur orga) {
         this.orga = orga;
+    }
+
+    public Panier getPanier(){
+        return this.panier;
     }
 
     public boolean skipHelp(Activity a) {

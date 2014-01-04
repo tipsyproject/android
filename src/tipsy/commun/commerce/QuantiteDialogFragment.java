@@ -47,7 +47,7 @@ public class QuantiteDialogFragment extends DialogFragment {
         builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 TipsyApp app = (TipsyApp) getActivity().getApplication();
-                Panier panier = app.getMembre().getPanier();
+                Panier panier = app.getPanier();
                 panier.remove(item);
                 item.setQuantite(quantite.getValue());
 

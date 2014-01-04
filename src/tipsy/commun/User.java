@@ -110,11 +110,14 @@ public class User extends StackMobUser {
                     });
 
         } else if (user.getType() == TypeUser.MEMBRE) {
+            Log.d("TOUTAFAIT","query Membre");
             Membre.query(Membre.class,
                     new StackMobQuery().field(new StackMobQueryField("user").isEqualTo(user.getUsername())),
                     new StackMobQueryCallback<Membre>() {
                         @Override
                         public void success(List<Membre> result) {
+
+                            Log.d("TOUTAFAIT","success query Membre");
                             final Membre membre = result.get(0);
                             membre.fetch(new StackMobModelCallback() {
                                 @Override

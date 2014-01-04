@@ -1,6 +1,5 @@
 package tipsy.commun.commerce;
 
-import android.util.Log;
 import android.widget.TextView;
 
 import com.stackmob.sdk.model.StackMobModel;

@@ -43,7 +43,7 @@ public class EventBilletsFragment extends Fragment {
         super.onAttach(activity);
         callback = (MembreListener) activity;
         TipsyApp app = (TipsyApp) getActivity().getApplication();
-        panier = app.getMembre().getPanier();
+        panier = app.getPanier();
         panier.clear();
     }
 
