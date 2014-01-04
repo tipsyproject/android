@@ -117,8 +117,9 @@ public class ListBilletsFragment extends Fragment {
             View viewBillet = inflater.inflate(R.layout.frag_billet_list, parent, false);
             TextView nomBillet = (TextView) viewBillet.findViewById(R.id.nom_billet);
             TextView prixBillet = (TextView) viewBillet.findViewById(R.id.prix_billet);
-            nomBillet.setText(billets.get(position).getNom());
-            prixBillet.setText(Double.toString(billets.get(position).getPrix()));
+            Billet b = billets.get(position);
+            nomBillet.setText(b.getNom());
+            prixBillet.setText(b.getPrixToString() + b.getDevise());
             return viewBillet;
         }
     }
@@ -129,16 +130,23 @@ public class ListBilletsFragment extends Fragment {
     public class EditBilletDialogFragment extends DialogFragment implements Validator.ValidationListener {
 
         private Billet billet = null;
+        private boolean newBillet = false;
         @Required(order = 1)
         private EditText inputNom;
         @Required(order = 2)
         @NumberRule(order = 3, type = NumberRule.NumberType.DOUBLE)
         private EditText inputPrix;
+        private TextView devise;
         private Validator validator;
 
         public EditBilletDialogFragment(Billet b) {
             super();
-            billet = b;
+
+            if(b == null){
+                newBillet = true;
+                billet = new Billet();
+            }else
+                billet = b;
         }
 
         @Override
@@ -155,11 +163,13 @@ public class ListBilletsFragment extends Fragment {
 
             inputNom = (EditText) view.findViewById(R.id.input_nom);
             inputPrix = (EditText) view.findViewById(R.id.input_prix);
+            devise = (TextView) view.findViewById(R.id.devise);
             // Préremplissage des widgets avec les valeur du billet si c'est une modification
             // sinon rien pour une creation
             if (billet != null) {
                 inputNom.setText(billet.getNom());
-                inputPrix.setText(Double.toString(billet.getPrix()));
+                inputPrix.setText(billet.getPrixToString());
+                devise.setText(billet.getDevise());
             }
 
 
@@ -183,18 +193,12 @@ public class ListBilletsFragment extends Fragment {
 
         public void onValidationSucceeded() {
             // On recupère le contenu des champs
-            String nomBillet = inputNom.getText().toString();
-            double prixBillet = Double.parseDouble(inputPrix.getText().toString());
+            billet.setNom(inputNom.getText().toString());
+            billet.parsePrix(inputPrix);
+            // Dans le cas d'un nouveau billet
+            if (newBillet)
+                billetterie.getBillets().add(billet);
 
-            // Puis on enregistre les modifs
-
-            // Si c'est une creation de billet
-            if (billet == null) {
-                billetterie.creerBillet(nomBillet, prixBillet);
-            } else {
-                billet.setNom(nomBillet);
-                billet.setPrix(prixBillet);
-            }
             adapter.notifyDataSetChanged();
             billetterie.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
                 @Override

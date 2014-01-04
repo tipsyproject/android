@@ -14,11 +14,26 @@
         android:id="@+id/input_nom"
         android:hint="@string/nom_billet" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/input_prix"
-        android:hint="@string/prix" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="€"
+            android:id="@+id/devise"
+            android:layout_marginRight="@dimen/ui_margin" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="numberDecimal"
+            android:ems="10"
+            android:id="@+id/input_prix"
+            android:hint="@string/prix" />
+
+    </LinearLayout>
 </LinearLayout>

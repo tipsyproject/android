@@ -98,12 +98,14 @@ public class User extends StackMobUser {
 
                                 @Override
                                 public void failure(StackMobException e) {
+                                    Log.d("TOUTAFAIT","test"+e.getMessage());
                                 }
                             });
                         }
 
                         @Override
                         public void failure(StackMobException e) {
+                            Log.d("TOUTAFAIT","test"+e.getMessage());
                         }
                     });
 
@@ -124,12 +126,14 @@ public class User extends StackMobUser {
 
                                 @Override
                                 public void failure(StackMobException e) {
+                                    Log.d("TOUTAFAIT","test"+e.getMessage());
                                 }
                             });
                         }
 
                         @Override
                         public void failure(StackMobException e) {
+                            Log.d("TOUTAFAIT","test"+e.getMessage());
                         }
                     });
         } else {

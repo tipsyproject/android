@@ -117,8 +117,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="@dimen/bar_height"
-        android:text="Tarifs"
-        android:id="@+id/button_tarifs"
+        android:text="J'y vais"
+        android:id="@+id/button_billets"
         android:layout_gravity="center_horizontal"
         style="@style/Button_Style.Red"
         android:paddingLeft="32dp"

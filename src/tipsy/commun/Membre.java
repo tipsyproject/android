@@ -7,13 +7,16 @@ package tipsy.commun;
 import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.model.StackMobModel;
 
+import tipsy.commun.commerce.Panier;
+
 
 public class Membre extends StackMobModel implements User.TipsyUser {
 
+    private StackMobFile avatar;
     private String nom;
+    private Panier panier = new Panier();
     private String prenom;
     private User user;
-    private StackMobFile avatar;
 
     public Membre() {
         super(Membre.class);
@@ -38,14 +41,6 @@ public class Membre extends StackMobModel implements User.TipsyUser {
         this.avatar = avatar;
     }
 
-    public int getType() {
-        return TypeUser.MEMBRE;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
     public String getNom() {
         return nom;
     }
@@ -54,11 +49,23 @@ public class Membre extends StackMobModel implements User.TipsyUser {
         this.nom = nom;
     }
 
+    public Panier getPanier() {
+        return panier;
+    }
+
     public String getPrenom() {
         return prenom;
     }
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+
+    public int getType() {
+        return TypeUser.MEMBRE;
+    }
+
+    public User getUser() {
+        return user;
     }
 }

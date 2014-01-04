@@ -21,6 +21,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
@@ -189,6 +190,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
             bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true); // rotating bitmap
         } catch (Exception e) {
             Log.d("QLFCONNARD", "Rotate" + e.getMessage());
+            // --> C'est QFLC, connard !
         }
         return bitmap;
     }

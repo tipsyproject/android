@@ -12,11 +12,11 @@ import tipsy.app.R;
 /**
  * Created by Alexandre on 23/12/13.
  */
-public class EventMembreFragment extends Fragment {
+public class EventsMembreFragment extends Fragment {
 
     private MembreListener callback;
 
-    public EventMembreFragment() {
+    public EventsMembreFragment() {
     }
 
     @Override

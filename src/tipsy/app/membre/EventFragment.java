@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -40,6 +41,7 @@ public class EventFragment extends Fragment {
         TextView debutEvent = (TextView) view.findViewById(R.id.debut_event);
         TextView nomEvent = (TextView) view.findViewById(R.id.nom_event);
         TextView lieuEvent = (TextView) view.findViewById(R.id.lieu_event);
+        Button buttonBillets = (Button) view.findViewById(R.id.button_billets);
 
         SimpleDateFormat date = new SimpleDateFormat("EEE dd MMM");
         SimpleDateFormat debut = new SimpleDateFormat("kk:mm");
@@ -47,6 +49,14 @@ public class EventFragment extends Fragment {
         debutEvent.setText(debut.format(event.getDebut()));
         nomEvent.setText(event.getNom());
         lieuEvent.setText(event.getLieu());
+
+
+        // Redirection inscription
+        buttonBillets.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                callback.goToEventBillets(event.getBilletterie());
+            }
+        });
         return view;
     }
 

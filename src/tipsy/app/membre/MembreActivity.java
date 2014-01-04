@@ -16,8 +16,10 @@ import android.view.MenuItem;
 import android.widget.DatePicker;
 import android.widget.SearchView;
 
+import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.api.StackMobQuery;
 import com.stackmob.sdk.api.StackMobQueryField;
+import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
@@ -31,6 +33,7 @@ import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
+import tipsy.commun.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
 
@@ -140,16 +143,36 @@ public class MembreActivity extends UserActivity implements MembreListener {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.content, new EventMembreFragment())
+                .replace(R.id.content, new EventsMembreFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
     }
 
     public void goToEvent(Event e) {
+        final Event event = e;
+        event.fetch(StackMobOptions.depthOf(3), new StackMobModelCallback() {
+            @Override
+            public void success() {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.content, new EventFragment(event))
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                        .commit();
+            }
+
+            @Override
+            public void failure(StackMobException e) {
+            }
+        });
+
+    }
+
+    public void goToEventBillets(Billetterie b) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.content, new EventFragment(e))
+                .replace(R.id.content, new EventBilletsFragment(b))
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
 

@@ -3,6 +3,7 @@ package tipsy.app.membre;
 import java.util.Date;
 
 import tipsy.app.MenuListener;
+import tipsy.commun.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
 
@@ -25,5 +26,7 @@ public interface MembreListener extends MenuListener {
     public void searchEventByKeyword(String query);
 
     public void goToEvent(Event e);
+
+    public void goToEventBillets(Billetterie b);
 
 }

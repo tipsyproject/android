@@ -51,5 +51,7 @@ j'accepte les conditions générales."</string>
     <string name="profil">Mon Compte</string>
     <string name="searchByDate">Rechercher par date</string>
     <string name="orgasign">Vous êtes organisateur ?</string>
+    <string name="prix_total">TOTAL</string>
+    <string name="acheter">ACHETER</string>
 
 </resources>
