@@ -20,6 +20,7 @@ import tipsy.app.LoginActivity;
 import tipsy.app.TipsyApp;
 import tipsy.app.membre.MembreActivity;
 import tipsy.app.orga.OrgaActivity;
+import tipsy.commun.commerce.Wallet;
 
 
 /**
@@ -126,7 +127,20 @@ public class User extends StackMobUser {
                                 public void success() {
                                     TipsyApp app = (TipsyApp) a.getApplication();
                                     app.setMembre(membre);
-                                    user.goHome(a);
+                                    // Chargement du portefeuille du membre
+                                    app.getWallet().init( app.getWallet().new WalletInitCallback() {
+                                        @Override
+                                        public void success() {
+                                            user.goHome(a);
+                                        }
+
+                                        @Override
+                                        public void failure(StackMobException e) {
+                                            Log.d("TOUTAFAIT", "Erreur chargement Wallet: " + e.getMessage());
+                                        }
+                                    });
+
+
                                 }
 
                                 @Override

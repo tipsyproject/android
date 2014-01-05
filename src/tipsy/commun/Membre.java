@@ -7,7 +7,10 @@ package tipsy.commun;
 import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.model.StackMobModel;
 
+import java.util.ArrayList;
+
 import tipsy.commun.commerce.Panier;
+import tipsy.commun.commerce.Transaction;
 
 
 public class Membre extends StackMobModel implements User.TipsyUser {
@@ -16,6 +19,7 @@ public class Membre extends StackMobModel implements User.TipsyUser {
     private String nom;
     private String prenom;
     private User user;
+    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
     public Membre() {
         super(Membre.class);
@@ -56,6 +60,14 @@ public class Membre extends StackMobModel implements User.TipsyUser {
         this.prenom = prenom;
     }
 
+    public ArrayList<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(ArrayList<Transaction> transactions) {
+        this.transactions = transactions;
+    }
+
     public int getType() {
         return TypeUser.MEMBRE;
     }
@@ -63,4 +75,5 @@ public class Membre extends StackMobModel implements User.TipsyUser {
     public User getUser() {
         return user;
     }
+
 }

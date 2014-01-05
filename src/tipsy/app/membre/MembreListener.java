@@ -17,7 +17,7 @@ public interface MembreListener extends MenuListener {
 
     public void goToAccount();
 
-    public void goToSolde();
+    public void goToWallet();
 
     public void goToEvents();
 

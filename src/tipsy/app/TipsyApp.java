@@ -14,6 +14,7 @@ import tipsy.commun.Organisateur;
 import tipsy.commun.Prefs;
 import tipsy.commun.User;
 import tipsy.commun.commerce.Panier;
+import tipsy.commun.commerce.Wallet;
 
 /**
  * Created by valoo on 18/12/13.
@@ -22,6 +23,7 @@ public class TipsyApp extends Application {
     private Membre membre;
     private Panier panier = new Panier();
     private Organisateur orga;
+    private Wallet wallet;
 
     public TipsyApp() {
         membre = null;
@@ -34,6 +36,7 @@ public class TipsyApp extends Application {
 
     public void setMembre(Membre membre) {
         this.membre = membre;
+        this.wallet = new Wallet(membre.getUser());
     }
 
     public Organisateur getOrga() {
@@ -59,6 +62,10 @@ public class TipsyApp extends Application {
                 .edit().putBoolean(Prefs.SKIP_HELP, skip).commit();
     }
 
+    public Wallet getWallet() {
+        return wallet;
+    }
+
     public void logout(Activity act) {
         final Activity a = act;
         User user;
@@ -76,6 +83,7 @@ public class TipsyApp extends Application {
                 User.forgetMe(a);
                 membre = null;
                 orga = null;
+                wallet = null;
                 startActivity(new Intent(a, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
             }
 

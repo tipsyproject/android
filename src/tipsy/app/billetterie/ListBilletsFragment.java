@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import tipsy.app.R;
 import tipsy.commun.Billet;
 import tipsy.commun.Billetterie;
+import tipsy.commun.commerce.Commerce;
 
 /**
  * Created by valoo on 27/12/13.
@@ -119,7 +120,7 @@ public class ListBilletsFragment extends Fragment {
             TextView prixBillet = (TextView) viewBillet.findViewById(R.id.prix_billet);
             Billet b = billets.get(position);
             nomBillet.setText(b.getNom());
-            prixBillet.setText(b.getPrixToString() + b.getDevise());
+            prixBillet.setText(Commerce.prixToString(b.getPrix() + b.getDevise()));
             return viewBillet;
         }
     }
@@ -168,7 +169,7 @@ public class ListBilletsFragment extends Fragment {
             // sinon rien pour une creation
             if (billet != null) {
                 inputNom.setText(billet.getNom());
-                inputPrix.setText(billet.getPrixToString());
+                inputPrix.setText(Commerce.prixToString(billet.getPrix()));
                 devise.setText(billet.getDevise());
             }
 
@@ -194,7 +195,7 @@ public class ListBilletsFragment extends Fragment {
         public void onValidationSucceeded() {
             // On recupère le contenu des champs
             billet.setNom(inputNom.getText().toString());
-            billet.parsePrix(inputPrix);
+            billet.setPrix(Commerce.parsePrix(inputPrix));
             // Dans le cas d'un nouveau billet
             if (newBillet)
                 billetterie.getBillets().add(billet);

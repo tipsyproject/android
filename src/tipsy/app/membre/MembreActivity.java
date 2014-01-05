@@ -33,6 +33,8 @@ import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
+import tipsy.app.membre.wallet.WalletActivity;
+import tipsy.app.membre.wallet.WalletResumeFragment;
 import tipsy.commun.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
@@ -97,7 +99,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 goToAccount();
                 break;
             case MenuMembre.SOLDE:
-                goToSolde();
+                goToWallet();
                 break;
             case MenuMembre.EVENEMENTS:
                 goToEvents();
@@ -131,13 +133,9 @@ public class MembreActivity extends UserActivity implements MembreListener {
         ft.commit();
     }
 
-    public void goToSolde() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.content, new SoldeMembreFragment())
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
+    public void goToWallet() {
+        Intent intent = new Intent(this, WalletActivity.class);
+        startActivity(intent);
     }
 
     public void goToEvents() {

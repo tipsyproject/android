@@ -7,8 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
+import tipsy.commun.commerce.Article;
+import tipsy.commun.commerce.Commerce;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -16,7 +20,6 @@ import tipsy.app.R;
 public class HomeMembreFragment extends Fragment {
 
     private MembreListener callback;
-    private LinearLayout buttonAccount;
 
     @Override
     public void onAttach(Activity activity) {
@@ -27,12 +30,26 @@ public class HomeMembreFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_membre_home, container, false);
-        buttonAccount = (LinearLayout) view.findViewById(R.id.button_account);
+
+        /* Initialisation du montant du solde du Wallet Membre */
+        TextView viewSolde = (TextView) view.findViewById(R.id.solde);
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        viewSolde.setText(Commerce.prixToString(app.getWallet().getSolde(), app.getWallet().getDevise()));
+
+        LinearLayout buttonAccount = (LinearLayout) view.findViewById(R.id.button_account);
         buttonAccount.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToAccount();
             }
         });
+
+        LinearLayout buttonWallet = (LinearLayout) view.findViewById(R.id.button_wallet);
+        buttonWallet.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                callback.goToWallet();
+            }
+        });
+
         return view;
     }
 

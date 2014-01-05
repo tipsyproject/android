@@ -3,7 +3,9 @@ package tipsy.app.billetterie;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.stackmob.sdk.api.StackMobOptions;
@@ -25,6 +27,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
         // On récupère la billetterie de l'event courant
         Bundle bundle = getIntent().getExtras();
         billetterie.setID(bundle.getString("BILLETTERIE_ID"));
@@ -40,6 +43,18 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
                 Toast.makeText(BilletterieActivity.this, "Erreur Billetterie", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     // IMPLEMENTATION DES FONCTIONS DE l'INTERFACE BilletterieListener

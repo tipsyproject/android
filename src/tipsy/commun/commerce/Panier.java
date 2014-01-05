@@ -10,7 +10,16 @@ import java.util.Iterator;
  */
 public class Panier <E> extends HashSet<E> {
 
+    private int devise = Commerce.Devise.EURO;
     private TextView viewPrixTotal = null;
+
+    public int getDevise(){
+        return devise;
+    }
+
+    public void setDevise(int devise) {
+        this.devise = devise;
+    }
 
     @Override
     public boolean add(E object){
@@ -35,11 +44,7 @@ public class Panier <E> extends HashSet<E> {
 
     public void notifyItemsUpdated(){
         if(viewPrixTotal != null){
-            viewPrixTotal.setText(Article.prixToString(getPrixTotal())+getDevise());
+            viewPrixTotal.setText(Commerce.prixToString(getPrixTotal(), devise));
         }
-    }
-
-    public String getDevise(){
-        return "€";
     }
 }

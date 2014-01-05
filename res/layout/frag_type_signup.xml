@@ -61,7 +61,7 @@
         android:onClick="onClickOrga"
         android:layout_height="@dimen/bar_height"
         android:id="@+id/button2"
-        android:drawableRight="@drawable/ic_action_send_now"
+        android:drawableRight="@drawable/ic_action_next_item"
         android:drawablePadding="@dimen/activity_margin"
         android:paddingRight="@dimen/bar_height"
         android:text="@string/orgasign"
