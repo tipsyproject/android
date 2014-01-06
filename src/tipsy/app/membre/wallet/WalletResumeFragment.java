@@ -12,9 +12,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import tipsy.app.R;
-import tipsy.app.membre.MembreListener;
-import tipsy.app.membre.MenuMembre;
-import tipsy.commun.commerce.Article;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.TransactionArrayAdapter;
 import tipsy.commun.commerce.Wallet;

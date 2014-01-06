@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
-import tipsy.commun.Billetterie;
+import tipsy.commun.Billetterie.Billetterie;
 import tipsy.commun.commerce.Item;
 import tipsy.commun.commerce.ItemArrayAdapter;
 import tipsy.commun.commerce.Panier;

@@ -31,8 +31,9 @@ import com.stackmob.sdk.exception.StackMobException;
 import java.util.ArrayList;
 
 import tipsy.app.R;
-import tipsy.commun.Billet;
-import tipsy.commun.Billetterie;
+import tipsy.commun.Billetterie.Billet;
+import tipsy.commun.Billetterie.Billetterie;
+import tipsy.commun.Event;
 import tipsy.commun.commerce.Commerce;
 
 /**
@@ -41,13 +42,13 @@ import tipsy.commun.commerce.Commerce;
 public class ListBilletsFragment extends Fragment {
 
     private BilletsArrayAdapter adapter;
-    private Billetterie billetterie;
+    private Event event;
     private ListView listView;
     private BilletterieListener callback;
 
-    public ListBilletsFragment(Billetterie b) {
+    public ListBilletsFragment(Event e) {
         super();
-        billetterie = b;
+        event = e;
     }
 
     @Override
@@ -65,12 +66,12 @@ public class ListBilletsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_billetterie_list_billets, container, false);
         listView = (ListView) view.findViewById(R.id.list);
-        adapter = new BilletsArrayAdapter(getActivity(), billetterie.getBillets());
+        adapter = new BilletsArrayAdapter(getActivity(), event.getBilletterie());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editBillet(billetterie.getBillets().get(position));
+                editBillet(event.getBilletterie().get(position));
             }
         });
         return view;
@@ -120,7 +121,7 @@ public class ListBilletsFragment extends Fragment {
             TextView prixBillet = (TextView) viewBillet.findViewById(R.id.prix_billet);
             Billet b = billets.get(position);
             nomBillet.setText(b.getNom());
-            prixBillet.setText(Commerce.prixToString(b.getPrix() + b.getDevise()));
+            prixBillet.setText(Commerce.prixToString(b.getPrix(),b.getDevise()));
             return viewBillet;
         }
     }
@@ -159,7 +160,7 @@ public class ListBilletsFragment extends Fragment {
             // Definition du titre du Dialog
             builder.setCustomTitle(inflater.inflate(R.layout.frag_edit_billet_title, null));
             // Definition du contenu du Dialog
-            final View view = inflater.inflate(R.layout.frag_edit_billet, null);
+            View view = inflater.inflate(R.layout.frag_edit_billet, null);
             builder.setView(view);
 
             inputNom = (EditText) view.findViewById(R.id.input_nom);
@@ -170,7 +171,7 @@ public class ListBilletsFragment extends Fragment {
             if (billet != null) {
                 inputNom.setText(billet.getNom());
                 inputPrix.setText(Commerce.prixToString(billet.getPrix()));
-                devise.setText(billet.getDevise());
+                devise.setText(Commerce.Devise.getSymbol(billet.getDevise()));
             }
 
 
@@ -198,10 +199,10 @@ public class ListBilletsFragment extends Fragment {
             billet.setPrix(Commerce.parsePrix(inputPrix));
             // Dans le cas d'un nouveau billet
             if (newBillet)
-                billetterie.getBillets().add(billet);
+                event.getBilletterie().add(billet);
 
             adapter.notifyDataSetChanged();
-            billetterie.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
+            event.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
                 @Override
                 public void success() {
                 }

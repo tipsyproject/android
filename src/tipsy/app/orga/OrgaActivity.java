@@ -92,7 +92,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     // clique sur le bouton de la Billetterie
     public void onBilletterieEdit(Event e) {
         Intent intent = new Intent(this, BilletterieActivity.class);
-        intent.putExtra("BILLETTERIE_ID", e.getBilletterie().getID());
+        intent.putExtra("EVENT_ID", e.getID());
         startActivity(intent);
     }
 

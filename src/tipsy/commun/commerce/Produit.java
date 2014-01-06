@@ -2,19 +2,27 @@ package tipsy.commun.commerce;
 
 import com.stackmob.sdk.model.StackMobModel;
 
+import tipsy.commun.Billetterie.ParametresBillet;
+
 /**
  * Created by valoo on 04/01/14.
  */
 
 
-public abstract class Article extends StackMobModel{
+public abstract class Produit extends StackMobModel{
 
     protected String nom = "Mon Tarif";
-    protected int prix = 100;
+    protected int prix = 0;
     protected int devise = Commerce.Devise.EURO;
+    protected ParametresBillet parametresBillet = null;
+    protected int typeProduit;
 
-    protected Article(java.lang.Class c){
-        super(c);
+    public static int BILLET = 0;
+    public static int TICKET = 1;
+    public static int CONSO  = 2;
+
+    protected Produit(){
+        super(Produit.class);
     }
 
     public int getDevise() {
@@ -43,7 +51,7 @@ public abstract class Article extends StackMobModel{
 
     @Override
     public boolean equals(Object o){
-        return (this.getID() == ((Article) o).getID());
+        return (this.getID() == ((Produit) o).getID());
     }
 
 }

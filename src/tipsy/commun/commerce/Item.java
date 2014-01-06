@@ -5,20 +5,20 @@ package tipsy.commun.commerce;
  * Created by valoo on 04/01/14.
  */
 public class Item{
-    private Article article;
+    private Produit produit;
     private int quantite;
 
-    public Item(Article a, int q){
-        article = a;
+    public Item(Produit a, int q){
+        produit = a;
         quantite = q;
     }
 
-    public Article getArticle() {
-        return article;
+    public Produit getProduit() {
+        return produit;
     }
 
-    public void setArticle(Article article) {
-        this.article = article;
+    public void setProduit(Produit produit) {
+        this.produit = produit;
     }
 
     public int getQuantite() {
@@ -30,16 +30,16 @@ public class Item{
     }
 
     public int getPrixTotal(){
-        return article.getPrix() * quantite;
+        return produit.getPrix() * quantite;
     }
 
     @Override
     public boolean equals(Object o){
-        return this.article.equals(((Item) o).getArticle());
+        return this.produit.equals(((Item) o).getProduit());
     }
 
     @Override
     public int hashCode(){
-        return article.getID().hashCode();
+        return produit.getID().hashCode();
     }
 }

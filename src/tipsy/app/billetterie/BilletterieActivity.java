@@ -9,18 +9,26 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.stackmob.sdk.api.StackMobOptions;
+import com.stackmob.sdk.api.StackMobQuery;
 import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import tipsy.app.R;
-import tipsy.commun.Billetterie;
+import tipsy.commun.Billetterie.Billet;
+import tipsy.commun.Billetterie.Billetterie;
+import tipsy.commun.Event;
+import tipsy.commun.commerce.Produit;
 
 /**
  * Created by valoo on 27/12/13.
  */
 public class BilletterieActivity extends FragmentActivity implements BilletterieListener {
 
-    private Billetterie billetterie = new Billetterie();
+    private Event event = new Event();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +38,10 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         getActionBar().setDisplayHomeAsUpEnabled(true);
         // On récupère la billetterie de l'event courant
         Bundle bundle = getIntent().getExtras();
-        billetterie.setID(bundle.getString("BILLETTERIE_ID"));
-        billetterie.fetch(StackMobOptions.depthOf(2), new StackMobModelCallback() {
+        event.setID(bundle.getString("EVENT_ID"));
+
+        /* Requete Stackmob */
+        event.fetch(StackMobOptions.depthOf(2),new StackMobModelCallback() {
             @Override
             public void success() {
                 showListBillets(false);
@@ -61,7 +71,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
     public void showListBillets(boolean addTobackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new ListBilletsFragment(billetterie));
+        ft.replace(R.id.content, new ListBilletsFragment(event));
         if (addTobackStack)
             ft.addToBackStack(null);
         ft.commit();

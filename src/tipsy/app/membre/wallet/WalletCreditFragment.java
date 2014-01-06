@@ -8,22 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NumberRule;
 import com.mobsandgeeks.saripaar.annotation.Required;
-import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
-import tipsy.app.TipsyApp;
-import tipsy.commun.Membre;
-import tipsy.commun.commerce.Article;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.Transaction;
 import tipsy.commun.commerce.Wallet;

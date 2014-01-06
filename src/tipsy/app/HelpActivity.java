@@ -86,10 +86,10 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
 
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
-        final Button next = (Button) findViewById(R.id.next);
+        Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (prefs.getBoolean(Prefs.CONNECTED, true))
+                if (prefs.getBoolean(Prefs.CONNECTED, false))
                     finish();
                 else {
                     TipsyApp app = (TipsyApp) getApplication();

@@ -3,7 +3,7 @@ package tipsy.app.membre;
 import java.util.Date;
 
 import tipsy.app.MenuListener;
-import tipsy.commun.Billetterie;
+import tipsy.commun.Billetterie.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
 

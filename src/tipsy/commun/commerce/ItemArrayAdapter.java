@@ -41,8 +41,8 @@ public class ItemArrayAdapter extends ArrayAdapter<Item> {
         Item item = items.get(position);
 
         // Définition des valeurs
-        nom.setText(item.getArticle().getNom());
-        prix.setText(Commerce.prixToString(item.getArticle().getPrix(),item.getArticle().getDevise()));
+        nom.setText(item.getProduit().getNom());
+        prix.setText(Commerce.prixToString(item.getProduit().getPrix(),item.getProduit().getDevise()));
         quantite.setText(Integer.toString(item.getQuantite()));
 
         return view;

@@ -52,7 +52,7 @@ public class QuantiteDialogFragment extends DialogFragment {
                 item.setQuantite(quantite.getValue());
 
                 if(quantite.getValue() > 0){
-                    panier.add(new Item(item.getArticle(),quantite.getValue()));
+                    panier.add(new Item(item.getProduit(),quantite.getValue()));
                 }
                 adapter.notifyDataSetChanged();
                 panier.notifyItemsUpdated();

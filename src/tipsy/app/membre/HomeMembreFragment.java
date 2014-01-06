@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
-import tipsy.commun.commerce.Article;
 import tipsy.commun.commerce.Commerce;
 
 /**
