@@ -15,9 +15,8 @@ import tipsy.commun.commerce.Transaction;
 /**
  * Created by valoo on 05/01/14.
  */
-public class Wallet {
+public class Wallet<T> extends ArrayList<T> {
     private int devise = Commerce.Devise.EURO;
-    private ArrayList<Transaction> transactions;
     private User user;
 
     public Wallet(User user){
@@ -49,7 +48,10 @@ public class Wallet {
         Transaction.query(Transaction.class, query, new StackMobQueryCallback<Transaction>() {
             @Override
             public void success(List<Transaction> result) {
-                transactions = new ArrayList<Transaction>(result);
+                Iterator it = result.iterator();
+                while(it.hasNext()){
+                    add((T) it.next());
+                }
                 callback.success();
             }
 
@@ -60,20 +62,16 @@ public class Wallet {
         });
     }
 
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
-
     public Transaction credit(int montant){
         Transaction t = new Transaction(montant, user);
-        transactions.add(t);
+        add((T) t);
         return t;
     }
 
     public int getSolde(){
         int solde = 0;
         Transaction t;
-        Iterator it = transactions.iterator();
+        Iterator it = iterator();
         while (it.hasNext()){
             t = (Transaction) it.next();
             if(t.isCredit(user)){

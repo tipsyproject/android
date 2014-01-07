@@ -9,19 +9,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.api.StackMobQuery;
 import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import tipsy.app.R;
-import tipsy.commun.Billetterie.Billet;
-import tipsy.commun.Billetterie.Billetterie;
 import tipsy.commun.Event;
-import tipsy.commun.commerce.Produit;
 
 /**
  * Created by valoo on 27/12/13.

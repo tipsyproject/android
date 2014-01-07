@@ -1,7 +1,6 @@
-package tipsy.commun.Billetterie;
+package tipsy.commun.billetterie;
 
-import com.stackmob.sdk.model.StackMobModel;
-
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,7 +11,7 @@ import tipsy.commun.commerce.Produit;
 /**
  * Created by valoo on 27/12/13.
  */
-public class Billetterie<Billet> extends ArrayList<Billet>{
+public class Billetterie<Billet> extends ArrayList<Billet> implements Serializable{
 
     public void setBillets(ArrayList<Billet> billets) {
         Iterator b = billets.iterator();

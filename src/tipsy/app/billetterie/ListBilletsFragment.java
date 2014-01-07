@@ -31,8 +31,7 @@ import com.stackmob.sdk.exception.StackMobException;
 import java.util.ArrayList;
 
 import tipsy.app.R;
-import tipsy.commun.Billetterie.Billet;
-import tipsy.commun.Billetterie.Billetterie;
+import tipsy.commun.billetterie.Billet;
 import tipsy.commun.Event;
 import tipsy.commun.commerce.Commerce;
 

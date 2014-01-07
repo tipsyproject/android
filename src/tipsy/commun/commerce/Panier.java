@@ -10,7 +10,7 @@ import java.util.Iterator;
  */
 public class Panier <E> extends HashSet<E> {
 
-    private int devise = Commerce.Devise.EURO;
+    protected int devise = Commerce.Devise.EURO;
     private TextView viewPrixTotal = null;
 
     public int getDevise(){

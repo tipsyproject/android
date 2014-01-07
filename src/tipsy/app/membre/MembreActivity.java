@@ -34,9 +34,11 @@ import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
 import tipsy.app.membre.wallet.WalletActivity;
-import tipsy.commun.Billetterie.Billetterie;
+import tipsy.commun.billetterie.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
+import tipsy.commun.commerce.Commande;
+import tipsy.commun.commerce.Wallet;
 
 /**
  * Created by tech on 05/12/13.
@@ -176,6 +178,12 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     }
 
+    public void goToCommande(){
+        Intent intent = new Intent(this, WalletActivity.class);
+        intent.putExtra(WalletActivity.ACTION,WalletActivity.COMMANDE);
+        startActivity(intent);
+    }
+
     public Membre getMembre() {
         return app.getMembre();
     }
@@ -230,8 +238,10 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     // Dialog de recherche d'event par date
     public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            setRetainInstance(true);
             Calendar cal = Calendar.getInstance();
             int year = cal.get(Calendar.YEAR);
             int month = cal.get(Calendar.MONTH);

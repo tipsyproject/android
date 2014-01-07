@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,7 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/list"
-        android:choiceMode="singleChoice"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -57,7 +55,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="@dimen/bar_height"
-            android:text="@string/acheter"
+            android:text="@string/payer"
             android:id="@+id/button_pay" />
     </LinearLayout>
 

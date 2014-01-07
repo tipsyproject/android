@@ -3,9 +3,11 @@ package tipsy.app.membre;
 import java.util.Date;
 
 import tipsy.app.MenuListener;
-import tipsy.commun.Billetterie.Billetterie;
+import tipsy.commun.billetterie.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
+import tipsy.commun.commerce.Commande;
+import tipsy.commun.commerce.Wallet;
 
 /**
  * Created by Valentin on 29/12/13.
@@ -28,5 +30,7 @@ public interface MembreListener extends MenuListener {
     public void goToEvent(Event e);
 
     public void goToEventBillets(Billetterie b);
+
+    public void goToCommande();
 
 }

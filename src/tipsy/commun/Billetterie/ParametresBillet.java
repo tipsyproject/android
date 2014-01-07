@@ -1,11 +1,13 @@
-package tipsy.commun.Billetterie;
+package tipsy.commun.billetterie;
 
 import com.stackmob.sdk.model.StackMobModel;
+
+import java.io.Serializable;
 
 /**
  * Created by vquefele on 06/01/14.
  */
-public class ParametresBillet extends StackMobModel{
+public class ParametresBillet extends StackMobModel implements Serializable{
     private int nbMax = 0;
 
     public interface ParamBillet{

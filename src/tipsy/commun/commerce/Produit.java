@@ -2,14 +2,16 @@ package tipsy.commun.commerce;
 
 import com.stackmob.sdk.model.StackMobModel;
 
-import tipsy.commun.Billetterie.ParametresBillet;
+import java.io.Serializable;
+
+import tipsy.commun.billetterie.ParametresBillet;
 
 /**
  * Created by valoo on 04/01/14.
  */
 
 
-public abstract class Produit extends StackMobModel{
+public abstract class Produit extends StackMobModel implements Serializable{
 
     protected String nom = "Mon Tarif";
     protected int prix = 0;

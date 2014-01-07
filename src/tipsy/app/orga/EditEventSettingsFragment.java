@@ -16,13 +16,6 @@ import tipsy.commun.Event;
 public class EditEventSettingsFragment extends Fragment {
 
     private Event event;
-    private EditEventFragment parent;
-
-    public EditEventSettingsFragment(EditEventFragment frag, Event e) {
-        super();
-        event = e;
-        parent = frag;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

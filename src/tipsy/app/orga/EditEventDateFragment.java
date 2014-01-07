@@ -28,20 +28,22 @@ import tipsy.commun.Event;
 public class EditEventDateFragment extends Fragment {
 
     private Event event;
-    private EditEventFragment parent;
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
     public static SimpleDateFormat timeFormatter = new SimpleDateFormat("kk:mm");
 
-    public EditEventDateFragment(EditEventFragment frag, Event e) {
-        super();
-        event = e;
-        parent = frag;
+
+    public static EditEventDateFragment init(Event e){
+        EditEventDateFragment frag = new EditEventDateFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("Event",e);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_orga_edit_event_date, container, false);
-
+        event = (Event) getArguments().getSerializable("Event");
         // Instanciation des Widgets
         final TextView inputDateDebut = (TextView) view.findViewById(R.id.input_date_debut);
         final TextView inputTimeDebut = (TextView) view.findViewById(R.id.input_time_debut);
@@ -58,7 +60,7 @@ public class EditEventDateFragment extends Fragment {
             }
         });
 
-        parent.onDateFragCreated(view);
+        ((EditEventFragment)getParentFragment()).onDateFragCreated(view);
         return view;
     }
 
@@ -86,6 +88,7 @@ public class EditEventDateFragment extends Fragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            setRetainInstance(true);
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             int year = cal.get(Calendar.YEAR);
@@ -115,6 +118,7 @@ public class EditEventDateFragment extends Fragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            setRetainInstance(true);
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             int hour = cal.get(Calendar.HOUR_OF_DAY);

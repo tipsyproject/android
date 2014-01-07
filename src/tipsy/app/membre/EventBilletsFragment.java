@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -15,7 +16,8 @@ import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
-import tipsy.commun.Billetterie.Billetterie;
+import tipsy.commun.billetterie.Billetterie;
+import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Item;
 import tipsy.commun.commerce.ItemArrayAdapter;
 import tipsy.commun.commerce.Panier;
@@ -61,6 +63,13 @@ public class EventBilletsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 setNombreBillets(items.get(position));
+            }
+        });
+
+        Button buttonPay = (Button) view.findViewById(R.id.button_pay);
+        buttonPay.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                callback.goToCommande();
             }
         });
         return view;

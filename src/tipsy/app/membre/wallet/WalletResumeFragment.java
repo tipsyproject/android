@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import tipsy.app.R;
 import tipsy.commun.commerce.Commerce;
+import tipsy.commun.commerce.Transaction;
 import tipsy.commun.commerce.TransactionArrayAdapter;
 import tipsy.commun.commerce.Wallet;
 
@@ -51,12 +52,12 @@ public class WalletResumeFragment extends Fragment {
         });
 
         ListView listView = (ListView) view.findViewById(R.id.list);
-        TransactionArrayAdapter adapter = new TransactionArrayAdapter(getActivity(), wallet.getTransactions());
+        TransactionArrayAdapter adapter = new TransactionArrayAdapter(getActivity(), wallet);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callback.goToDetailsTransaction(wallet.getTransactions().get(position));
+                callback.goToDetailsTransaction((Transaction) wallet.get(position));
             }
         });
 

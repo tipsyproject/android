@@ -1,11 +1,13 @@
-package tipsy.commun.Billetterie;
+package tipsy.commun.billetterie;
+
+import java.io.Serializable;
 
 import tipsy.commun.commerce.Produit;
 
 /**
  * Created by valoo on 27/12/13.
  */
-public class Billet extends Produit implements ParametresBillet.ParamBillet {
+public class Billet extends Produit implements ParametresBillet.ParamBillet, Serializable {
 
     public Billet() {
         super();

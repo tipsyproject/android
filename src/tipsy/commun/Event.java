@@ -1,17 +1,21 @@
 package tipsy.commun;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.stackmob.sdk.model.StackMobModel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-import tipsy.commun.Billetterie.Billet;
-import tipsy.commun.Billetterie.Billetterie;
+import tipsy.commun.billetterie.Billet;
+import tipsy.commun.billetterie.Billetterie;
 
 /**
  * Created by Valentin on 07/12/13.
  */
-public class Event extends StackMobModel {
+public class Event extends StackMobModel implements Serializable {
 
     private Billetterie<Billet> billetterie = new Billetterie<Billet>();
     private Date debut = new Date();
@@ -58,5 +62,41 @@ public class Event extends StackMobModel {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
+    /*
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeString(nom);
+        dest.writeString(lieu);
+        dest.writeSerializable(debut);
+    }
+
+    public Event(Parcel in){
+        super(Event.class);
+        nom = in.readString();
+        lieu = in.readString();
+        debut = (Date) in.readSerializable();
+    }
+
+    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel source) {
+            return new Event(source);
+        }
+
+        @Override
+        public Event[] newArray(int size)
+        {
+            return new Event[size];
+        }
+    };*/
 
 }

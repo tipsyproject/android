@@ -98,17 +98,19 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
     // Clique sur le bouton "Créer un événement"
     public void onClickResumeEvent(Event e) {
+        EventHomeFragment frag = EventHomeFragment.init(e);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, new EventHomeFragment(e))
+                .replace(R.id.content, frag)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .addToBackStack(null)
                 .commit();
     }
 
-    // Clique sur le bouton "Créer un événement"
+    // Clique sur le bouton "Créer un événement" ou Modifications de l'event
     public void onEventEdit(Event e) {
+        EditEventFragment frag = EditEventFragment.init(e);
         getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, new EditEventFragment(e))
+                .replace(R.id.content, frag)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .addToBackStack(null)
                 .commit();

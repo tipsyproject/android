@@ -64,9 +64,12 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     private Validator validator;
 
 
-    public EditEventFragment(Event e) {
-        super();
-        event = e;
+    public static EditEventFragment init(Event e){
+        EditEventFragment frag = new EditEventFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("Event",e);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
@@ -85,6 +88,7 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_orga_edit_event, container, false);
+        event = (Event) getArguments().getSerializable("Event");
         mAdapter = new EditEventAdapter(getChildFragmentManager());
         mPager = (ViewPager) view.findViewById(R.id.event_pager);
         mPager.setAdapter(mAdapter);
@@ -198,13 +202,13 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
             // Dans l'ordre de gauche à droite
             switch (position) {
                 case DESC:
-                    return new EditEventDescFragment(EditEventFragment.this, event);
+                    return new EditEventDescFragment();
                 case LIEU:
-                    return new EditEventLocFragment(EditEventFragment.this, event);
+                    return new EditEventLocFragment();
                 case DATE:
-                    return new EditEventDateFragment(EditEventFragment.this, event);
+                    return EditEventDateFragment.init(event);
                 default:
-                    return new EditEventSettingsFragment(EditEventFragment.this, event);
+                    return new EditEventSettingsFragment();
             }
         }
     }
