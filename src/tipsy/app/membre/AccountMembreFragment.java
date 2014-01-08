@@ -54,9 +54,6 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     protected TipsyApp app;
     protected Membre membre;
 
-    public AccountMembreFragment() {
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

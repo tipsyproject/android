@@ -25,11 +25,15 @@ public class SearchEventFragment extends Fragment {
     private EventsArrayAdapter adapter;
     private ListView listView;
     private MembreListener callback;
-    private ArrayList<Event> eventResults = new ArrayList<Event>();
+    private ArrayList<Event> eventResults;
 
-    public SearchEventFragment(ArrayList<Event> results) {
-        super();
-        eventResults = results;
+
+    public static SearchEventFragment init(ArrayList<Event> events){
+        SearchEventFragment frag = new SearchEventFragment();
+        Bundle args = new Bundle();
+        args.putParcelableArrayList("Events",events);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
@@ -40,6 +44,7 @@ public class SearchEventFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        eventResults = getArguments().getParcelableArrayList("Events");
         View view = inflater.inflate(R.layout.frag_search_event, container, false);
         listView = (ListView) view.findViewById(R.id.list);
         if (eventResults.size() == 0) {

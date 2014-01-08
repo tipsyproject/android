@@ -22,11 +22,14 @@ public class EventFragment extends Fragment {
     private Event event;
     private MembreListener callback;
 
-    public EventFragment(Event event) {
-        super();
-        this.event = event;
-    }
 
+    public static EventFragment init(Event e){
+        EventFragment frag = new EventFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("Event", e);
+        frag.setArguments(args);
+        return frag;
+    }
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -35,6 +38,8 @@ public class EventFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        event = getArguments().getParcelable("Event");
+
         View view = inflater.inflate(R.layout.frag_event, container, false);
 
         TextView dateEvent = (TextView) view.findViewById(R.id.date_event);

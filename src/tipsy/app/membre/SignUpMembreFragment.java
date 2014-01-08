@@ -16,8 +16,7 @@ import tipsy.app.R;
  */
 public class SignUpMembreFragment extends Fragment {
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View View = inflater.inflate(R.layout.frag_signup_membre, container, false);
         View.findViewById(R.id.layout_signup_membre).setOnTouchListener(new View.OnTouchListener() {
             @Override

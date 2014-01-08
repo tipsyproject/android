@@ -121,7 +121,11 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 goToEvents();
                 break;
             case MenuMembre.AIDE:
-                startActivity(new Intent(this, HelpActivity.class));
+                Intent intent = new Intent(this, HelpActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("Connected", true);
+                intent.putExtras(b);
+                startActivity(intent);
                 break;
             case MenuMembre.DECONNEXION:
                 app.logout(this);
@@ -168,10 +172,11 @@ public class MembreActivity extends UserActivity implements MembreListener {
         event.fetch(StackMobOptions.depthOf(3), new StackMobModelCallback() {
             @Override
             public void success() {
+                EventFragment frag = EventFragment.init(event);
                 FragmentManager fragmentManager = getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .addToBackStack(null)
-                        .replace(R.id.content, new EventFragment(event))
+                        .replace(R.id.content, frag)
                         .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                         .commit();
             }
@@ -222,13 +227,14 @@ public class MembreActivity extends UserActivity implements MembreListener {
                     @Override
                     public void success(List<Event> result) {
                         ArrayList<Event> events = new ArrayList<Event>();
+                        SearchEventFragment frag = SearchEventFragment.init(events);
                         for (int i = 0; i < result.size(); ++i) {
                             events.add(result.get(i));
                         }
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         fragmentManager.beginTransaction()
                                 .addToBackStack(null)
-                                .replace(R.id.content, new SearchEventFragment(events))
+                                .replace(R.id.content, frag)
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .commit();
                     }
@@ -241,11 +247,5 @@ public class MembreActivity extends UserActivity implements MembreListener {
     }
 
     public void searchEventByKeyword(String query) {
-        /*FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.content, new SearchEventFragment(new ArrayList<Event>()))
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();*/
     }
 }

@@ -4,23 +4,22 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import java.util.ArrayList;
+import android.widget.Toast;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
-import tipsy.app.membre.MembreListener;
 import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Commerce;
-import tipsy.commun.commerce.Item;
 import tipsy.commun.commerce.ItemArrayAdapter;
-import tipsy.commun.commerce.Wallet;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -30,8 +29,11 @@ public class WalletCommandeFragment extends Fragment {
     private Commande commande;
     private WalletListener callback;
 
-    public WalletCommandeFragment() {
-        super();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
     }
 
     @Override
@@ -64,5 +66,31 @@ public class WalletCommandeFragment extends Fragment {
         });
 
         return view;
+    }
+
+
+    // Redéfinition de l'actionBar: Bouton de validation
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_wallet, menu);
+        LinearLayout walletLayout = (LinearLayout) menu.findItem(R.id.action_wallet).getActionView();
+        TextView montant = (TextView) walletLayout.findViewById(R.id.montant);
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        montant.setText(
+                Commerce.prixToString(app.getWallet().getSolde(),app.getWallet().getDevise())
+        );
+    }
+
+    // Gestion du click sur le bouton de validation
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_wallet:
+                Toast.makeText(getActivity(),"Hello World !",Toast.LENGTH_SHORT);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

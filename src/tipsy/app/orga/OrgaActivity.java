@@ -77,9 +77,11 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
                 goToEvents();
                 break;
             case MenuOrga.AIDE:
-                final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                prefs.edit().putBoolean(Prefs.CONNECTED, true);
-                startActivity(new Intent(this, HelpActivity.class));
+                Intent intent = new Intent(this, HelpActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("Connected", true);
+                intent.putExtras(b);
+                startActivity(intent);
                 break;
             case MenuOrga.DECONNEXION:
                 app.logout(this);

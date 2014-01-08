@@ -16,9 +16,6 @@ public class EventsMembreFragment extends Fragment {
 
     private MembreListener callback;
 
-    public EventsMembreFragment() {
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
