@@ -28,19 +28,20 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        setContentView(R.layout.act_wallet);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_wallet);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         app = (TipsyApp) getApplication();
         wallet = app.getWallet();
-
-        Bundle bundle = getIntent().getExtras();
-        switch(getIntent().getIntExtra(ACTION,-1)){
-            case COMMANDE:
-                goToCommande(false);
-                break;
-            default:
-                goToResume(false);
+        if(savedInstanceState == null){
+            Bundle bundle = getIntent().getExtras();
+            switch(getIntent().getIntExtra(ACTION,-1)){
+                case COMMANDE:
+                    goToCommande(false);
+                    break;
+                default:
+                    goToResume(false);
+            }
         }
     }
 
@@ -58,7 +59,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
     /* Résumé du Wallet */
     public void goToResume(boolean addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new WalletResumeFragment(wallet));
+        ft.replace(R.id.content, new WalletResumeFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         if (addToBackStack)
             ft.addToBackStack(null);
@@ -68,7 +69,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
     /* Créditer le Wallet */
     public void goToCredit(){
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new WalletCreditFragment(wallet));
+        ft.replace(R.id.content, new WalletCreditFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
         ft.commit();

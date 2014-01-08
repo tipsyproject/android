@@ -17,6 +17,7 @@ import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.Transaction;
 import tipsy.commun.commerce.Wallet;
@@ -35,10 +36,6 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
     private Validator validator;
     private Wallet wallet;
 
-    public WalletCreditFragment(Wallet wallet){
-        this.wallet = wallet;
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -48,6 +45,9 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_wallet_credit, container, false);
+
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        wallet = app.getWallet();
 
         inputMontant = (EditText) view.findViewById(R.id.input_montant);
         buttonCredit = (Button) view.findViewById(R.id.button_credit);

@@ -12,6 +12,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.Transaction;
 import tipsy.commun.commerce.TransactionArrayAdapter;
@@ -25,10 +26,6 @@ public class WalletResumeFragment extends Fragment {
     private WalletListener callback;
     private Wallet wallet;
 
-    public WalletResumeFragment(Wallet wallet){
-        this.wallet = wallet;
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -38,6 +35,8 @@ public class WalletResumeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_wallet_resume, container, false);
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        wallet = app.getWallet();
 
         /* Affichage du solde du Wallet */
         TextView viewSolde = (TextView) view.findViewById(R.id.solde);
