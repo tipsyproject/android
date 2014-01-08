@@ -15,7 +15,7 @@ import tipsy.commun.billetterie.Billetterie;
 /**
  * Created by Valentin on 07/12/13.
  */
-public class Event extends StackMobModel implements Serializable {
+public class Event extends StackMobModel implements Parcelable {
 
     private Billetterie<Billet> billetterie = new Billetterie<Billet>();
     private Date debut = new Date();
@@ -63,7 +63,7 @@ public class Event extends StackMobModel implements Serializable {
         this.nom = nom;
     }
 
-    /*
+
 
     // Implémentation de Parcelable
     @Override
@@ -74,16 +74,18 @@ public class Event extends StackMobModel implements Serializable {
     @Override
     public void writeToParcel(Parcel dest, int flags)
     {
-        dest.writeString(nom);
-        dest.writeString(lieu);
+        dest.writeString(getID());
         dest.writeSerializable(debut);
+        dest.writeString(lieu);
+        dest.writeString(nom);
     }
 
     public Event(Parcel in){
         super(Event.class);
-        nom = in.readString();
-        lieu = in.readString();
+        setID(in.readString());
         debut = (Date) in.readSerializable();
+        lieu = in.readString();
+        nom = in.readString();
     }
 
     public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
@@ -97,6 +99,6 @@ public class Event extends StackMobModel implements Serializable {
         {
             return new Event[size];
         }
-    };*/
+    };
 
 }

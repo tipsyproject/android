@@ -40,7 +40,9 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
         app = (TipsyApp) getApplication();
         orga = app.getOrga();
-        goToTableauDeBord(false);
+        if(savedInstanceState == null) {
+            goToTableauDeBord(false);
+        }
 
     }
 
@@ -92,7 +94,9 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     // clique sur le bouton de la Billetterie
     public void onBilletterieEdit(Event e) {
         Intent intent = new Intent(this, BilletterieActivity.class);
-        intent.putExtra("EVENT_ID", e.getID());
+        Bundle b = new Bundle();
+        b.putParcelable("Event", e);
+        intent.putExtras(b);
         startActivity(intent);
     }
 
@@ -107,8 +111,8 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     }
 
     // Clique sur le bouton "Créer un événement" ou Modifications de l'event
-    public void onEventEdit(Event e) {
-        EditEventFragment frag = EditEventFragment.init(e);
+    public void onEventEdit(Event e, boolean create) {
+        EditEventFragment frag = EditEventFragment.init(e,create);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, frag)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
@@ -118,7 +122,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
     // Création/Modification d'un événement terminée
     public void onEventEdited() {
-        orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
+        orga.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
             @Override
             public void success() {
                 goToTableauDeBord(true);

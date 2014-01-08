@@ -1,8 +1,9 @@
 package tipsy.commun.commerce;
 
-import com.stackmob.sdk.model.StackMobModel;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-import java.io.Serializable;
+import com.stackmob.sdk.model.StackMobModel;
 
 import tipsy.commun.billetterie.ParametresBillet;
 
@@ -11,12 +12,12 @@ import tipsy.commun.billetterie.ParametresBillet;
  */
 
 
-public abstract class Produit extends StackMobModel implements Serializable{
+public abstract class Produit extends StackMobModel implements Parcelable {
 
-    protected String nom = "Mon Tarif";
-    protected int prix = 0;
     protected int devise = Commerce.Devise.EURO;
+    private String nom = "Mon Tarif";
     protected ParametresBillet parametresBillet = null;
+    protected int prix = 0;
     protected int typeProduit;
 
     public static int BILLET = 0;
@@ -56,4 +57,32 @@ public abstract class Produit extends StackMobModel implements Serializable{
         return (this.getID() == ((Produit) o).getID());
     }
 
+
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeString(getID());
+        dest.writeInt(devise);
+        dest.writeString(nom);
+        dest.writeParcelable(parametresBillet,flags);
+        dest.writeInt(prix);
+        dest.writeInt(typeProduit);
+    }
+
+    public Produit(Parcel in){
+        super(Produit.class);
+        setID(in.readString());
+        devise = in.readInt();
+        nom = in.readString();
+        parametresBillet = in.readParcelable(ParametresBillet.class.getClassLoader());
+        prix = in.readInt();
+        typeProduit = in.readInt();
+    }
 }

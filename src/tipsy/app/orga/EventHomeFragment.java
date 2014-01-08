@@ -28,7 +28,7 @@ public class EventHomeFragment extends Fragment {
     public static EventHomeFragment init(Event e){
         EventHomeFragment frag = new EventHomeFragment();
         Bundle args = new Bundle();
-        args.putSerializable("Event",e);
+        args.putParcelable("Event",e);
         frag.setArguments(args);
         return frag;
     }
@@ -42,7 +42,7 @@ public class EventHomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_orga_event_home, container, false);
-        event = (Event) getArguments().getSerializable("Event");
+        event = getArguments().getParcelable("Event");
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
 
@@ -64,7 +64,7 @@ public class EventHomeFragment extends Fragment {
         });
         buttonInfos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.onEventEdit(event);
+                callback.onEventEdit(event, false);
             }
         });
 

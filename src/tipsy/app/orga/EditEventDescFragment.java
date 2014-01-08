@@ -15,8 +15,6 @@ import tipsy.commun.Event;
 
 public class EditEventDescFragment extends Fragment {
 
-    private Event event;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_orga_edit_event_desc, container, false);

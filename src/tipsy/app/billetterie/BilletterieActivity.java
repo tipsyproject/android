@@ -20,7 +20,7 @@ import tipsy.commun.Event;
  */
 public class BilletterieActivity extends FragmentActivity implements BilletterieListener {
 
-    private Event event = new Event();
+    private Event event;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,23 +28,21 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         super.onCreate(savedInstanceState);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        // On récupère la billetterie de l'event courant
-        Bundle bundle = getIntent().getExtras();
-        event.setID(bundle.getString("EVENT_ID"));
 
-        /* Requete Stackmob */
-        event.fetch(StackMobOptions.depthOf(2),new StackMobModelCallback() {
-            @Override
-            public void success() {
-                showListBillets(false);
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT", "Erreur billetterie:" + e.getMessage());
-                Toast.makeText(BilletterieActivity.this, "Erreur Billetterie", Toast.LENGTH_SHORT).show();
-            }
-        });
+        if(savedInstanceState == null) {
+            event = getIntent().getParcelableExtra("Event");
+            /* Requete Stackmob pour récupérer la billetterie */
+            event.fetch(StackMobOptions.depthOf(2), new StackMobModelCallback() {
+                @Override
+                public void success() {
+                    showListBillets(false);
+                }@Override
+                public void failure(StackMobException e) {
+                    Log.d("TOUTAFAIT", "Erreur billetterie:" + e.getMessage());
+                    Toast.makeText(BilletterieActivity.this, "Erreur Billetterie", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
 
@@ -62,8 +60,9 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
     // IMPLEMENTATION DES FONCTIONS DE l'INTERFACE BilletterieListener
 
     public void showListBillets(boolean addTobackStack) {
+        ListBilletsFragment frag = ListBilletsFragment.init(event);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new ListBilletsFragment(event));
+        ft.replace(R.id.content, frag);
         if (addTobackStack)
             ft.addToBackStack(null);
         ft.commit();

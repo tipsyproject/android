@@ -1,5 +1,8 @@
 package tipsy.commun.billetterie;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,7 +14,7 @@ import tipsy.commun.commerce.Produit;
 /**
  * Created by valoo on 27/12/13.
  */
-public class Billetterie<Billet> extends ArrayList<Billet> implements Serializable{
+public class Billetterie<Billet> extends ArrayList<Billet>{
 
     public void setBillets(ArrayList<Billet> billets) {
         Iterator b = billets.iterator();

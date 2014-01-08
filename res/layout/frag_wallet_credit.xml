@@ -25,7 +25,7 @@
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/input_montant"
-            android:text="0.00" />
+            android:hint="0.00" />
     </LinearLayout>
 
     <Button

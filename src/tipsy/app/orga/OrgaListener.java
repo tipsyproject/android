@@ -11,7 +11,7 @@ public interface OrgaListener extends MenuListener {
 
     public void onClickResumeEvent(Event e);
 
-    public void onEventEdit(Event e);
+    public void onEventEdit(Event e, boolean create);
 
     public void onEventEdited();
 

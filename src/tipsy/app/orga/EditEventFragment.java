@@ -35,6 +35,7 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
 
     private OrgaListener callback;
     private Event event;
+    private boolean createEvent;
 
     private static final int NUM_ITEMS = 4;
     private final static int DESC = 0;
@@ -64,10 +65,11 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     private Validator validator;
 
 
-    public static EditEventFragment init(Event e){
+    public static EditEventFragment init(Event e, boolean create){
         EditEventFragment frag = new EditEventFragment();
         Bundle args = new Bundle();
-        args.putSerializable("Event",e);
+        args.putParcelable("Event",e);
+        args.putBoolean("createEvent",create);
         frag.setArguments(args);
         return frag;
     }
@@ -88,7 +90,8 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_orga_edit_event, container, false);
-        event = (Event) getArguments().getSerializable("Event");
+        event = getArguments().getParcelable("Event");
+        createEvent = getArguments().getBoolean("createEvent");
         mAdapter = new EditEventAdapter(getChildFragmentManager());
         mPager = (ViewPager) view.findViewById(R.id.event_pager);
         mPager.setAdapter(mAdapter);
@@ -141,7 +144,7 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     // Envoi de la demande de sauvegarde de l'événement à l'activité
     public void onValidationSucceeded() {
         // Si c'est une création d'event, on initialise l'event
-        if (event == null) {
+        if (createEvent) {
             TipsyApp app = (TipsyApp) getActivity().getApplication();
             event = app.getOrga().creerEvent("");
         }
