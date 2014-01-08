@@ -2,6 +2,8 @@ package tipsy.commun;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.stackmob.sdk.api.StackMobOptions;
@@ -26,7 +28,7 @@ import tipsy.commun.commerce.Wallet;
 /**
  * Created by vquefelec on 11/12/13.
  */
-public class User extends StackMobUser {
+public class User extends StackMobUser implements Parcelable{
     protected int type;
 
     public User(String username, String password) {
@@ -208,5 +210,36 @@ public class User extends StackMobUser {
 
         public void save(StackMobCallback callback);
     }
+
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeString(getID());
+    }
+
+    public User(Parcel in){
+        super(User.class);
+        setID(in.readString());
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size)
+        {
+            return new User[size];
+        }
+    };
 
 }

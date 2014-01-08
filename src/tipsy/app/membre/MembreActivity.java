@@ -34,6 +34,7 @@ import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
 import tipsy.app.membre.wallet.WalletActivity;
+import tipsy.app.orga.EditEventFragment;
 import tipsy.commun.billetterie.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
@@ -47,6 +48,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     private TipsyApp app;
     private SearchView SearchView;
+    private DatePickerDialog.OnDateSetListener datePickerListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,9 +56,19 @@ public class MembreActivity extends UserActivity implements MembreListener {
         super.onCreate(savedInstanceState);
         this.menu = new MenuMembre(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
-
         app = (TipsyApp) getApplication();
-        goToTableauDeBord(false);
+
+        datePickerListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                GregorianCalendar cal = new GregorianCalendar(year, month, day);
+                searchEventByDate(cal);
+            }
+
+        };
+
+        if(savedInstanceState==null)
+            goToTableauDeBord(false);
     }
 
     @Override
@@ -79,8 +91,11 @@ public class MembreActivity extends UserActivity implements MembreListener {
         // handle item selection
         switch (item.getItemId()) {
             case R.id.search_date:
-                DialogFragment newFragment = new DatePickerFragment();
-                newFragment.show(getSupportFragmentManager(), "datePicker");
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+                new DatePickerDialog(this,datePickerListener, year,month,day).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -169,10 +184,11 @@ public class MembreActivity extends UserActivity implements MembreListener {
     }
 
     public void goToEventBillets(Billetterie b) {
+        EventBilletsFragment frag = EventBilletsFragment.init(b);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.content, new EventBilletsFragment(b))
+                .replace(R.id.content, frag)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
 
@@ -188,11 +204,9 @@ public class MembreActivity extends UserActivity implements MembreListener {
         return app.getMembre();
     }
 
-    public void searchEventByDate(Date d) {
+    public void searchEventByDate(Calendar cal) {
         // On va definir l'intervalle de recherche de date
         //  00h00  <= date < 00h00 à J+1
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(d);
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -226,34 +240,12 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 });
     }
 
-
     public void searchEventByKeyword(String query) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
+        /*FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.content, new SearchEventFragment(new ArrayList<Event>()))
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
-    }
-
-    // Dialog de recherche d'event par date
-    public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            setRetainInstance(true);
-            Calendar cal = Calendar.getInstance();
-            int year = cal.get(Calendar.YEAR);
-            int month = cal.get(Calendar.MONTH);
-            int day = cal.get(Calendar.DAY_OF_MONTH);
-            // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
-        }
-
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
-            GregorianCalendar cal = new GregorianCalendar(year, month, day);
-            searchEventByDate(new Date(cal.getTimeInMillis()));
-        }
+                .commit();*/
     }
 }

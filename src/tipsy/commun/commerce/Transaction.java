@@ -1,5 +1,7 @@
 package tipsy.commun.commerce;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import com.stackmob.sdk.model.StackMobModel;
@@ -11,7 +13,7 @@ import tipsy.commun.User;
 /**
  * Created by valoo on 05/01/14.
  */
-public class Transaction extends StackMobModel{
+public class Transaction extends StackMobModel implements Parcelable {
 
     private User    auteur;
     private Date    date;
@@ -83,4 +85,43 @@ public class Transaction extends StackMobModel{
     public String getMontantToString(){
         return Commerce.prixToString(montant,devise);
     }
+
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags)
+    {
+        dest.writeString(getID());
+        dest.writeParcelable(auteur,flags);
+        dest.writeSerializable(date);
+        dest.writeParcelable(destinataire,flags);
+        dest.writeInt(montant);
+    }
+
+    public Transaction(Parcel in){
+        super(Transaction.class);
+        setID(in.readString());
+        auteur = in.readParcelable(User.class.getClassLoader());
+        date = (Date) in.readSerializable();
+        destinataire = in.readParcelable(User.class.getClassLoader());
+        montant = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Transaction> CREATOR = new Parcelable.Creator<Transaction>() {
+        @Override
+        public Transaction createFromParcel(Parcel source) {
+            return new Transaction(source);
+        }
+
+        @Override
+        public Transaction[] newArray(int size)
+        {
+            return new Transaction[size];
+        }
+    };
 }

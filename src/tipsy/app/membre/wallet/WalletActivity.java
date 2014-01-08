@@ -86,8 +86,9 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
 
     /* Détails sur une transaction */
     public void goToDetailsTransaction(Transaction t){
+        WalletDetailsTransactionFragment frag = WalletDetailsTransactionFragment.init(t);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new WalletDetailsTransactionFragment(t));
+        ft.replace(R.id.content, frag);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
         ft.commit();

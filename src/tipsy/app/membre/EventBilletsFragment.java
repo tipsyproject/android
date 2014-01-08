@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
+import tipsy.commun.billetterie.Billet;
 import tipsy.commun.billetterie.Billetterie;
 import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Item;
@@ -35,9 +36,13 @@ public class EventBilletsFragment extends Fragment {
     private ListView listView;
     private MembreListener callback;
 
-    public EventBilletsFragment(Billetterie b) {
-        super();
-        this.billetterie = b;
+
+    public static EventBilletsFragment init(Billetterie<Billet> b){
+        EventBilletsFragment frag = new EventBilletsFragment();
+        Bundle args = new Bundle();
+        args.putParcelableArrayList("Billetterie", b);
+        frag.setArguments(args);
+        return frag;
     }
 
     @Override
@@ -50,13 +55,15 @@ public class EventBilletsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
+        billetterie = (Billetterie) getArguments().getParcelableArrayList("Billetterie");
+        items = billetterie.getItems(panier);
+
         View view = inflater.inflate(R.layout.frag_event_billets, container, false);
         listView = (ListView) view.findViewById(R.id.list);
 
         panier.setPrixTotalView((TextView) view.findViewById(R.id.prix_total));
 
-        items = billetterie.getItems(panier);
         adapter = new ItemArrayAdapter(getActivity(), items);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
