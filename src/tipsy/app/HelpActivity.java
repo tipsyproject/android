@@ -1,8 +1,6 @@
 package tipsy.app;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -20,7 +18,6 @@ import android.widget.ViewSwitcher;
 import java.util.List;
 import java.util.Vector;
 
-import tipsy.commun.Prefs;
 import tipsy.commun.User;
 
 /**
@@ -87,7 +84,7 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
         Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (getIntent().getBooleanExtra("Connected",false))
+                if (getIntent().getBooleanExtra("Connected", false))
                     finish();
                 else {
                     TipsyApp app = (TipsyApp) getApplication();

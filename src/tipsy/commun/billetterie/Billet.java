@@ -3,9 +3,6 @@ package tipsy.commun.billetterie;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import java.io.Serializable;
-import java.util.Date;
-
 import tipsy.commun.commerce.Produit;
 
 /**
@@ -36,7 +33,7 @@ public class Billet extends Produit implements ParametresBillet.ParamBillet {
     }
 
     /* Implementation Parcelable */
-    public Billet(Parcel in){
+    public Billet(Parcel in) {
         super(in);
     }
 
@@ -47,8 +44,7 @@ public class Billet extends Produit implements ParametresBillet.ParamBillet {
         }
 
         @Override
-        public Billet[] newArray(int size)
-        {
+        public Billet[] newArray(int size) {
             return new Billet[size];
         }
     };

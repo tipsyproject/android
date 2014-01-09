@@ -37,14 +37,14 @@ import tipsy.commun.User;
 public class TypeSignUpActivity extends FragmentActivity implements Validator.ValidationListener {
 
     protected PagerAdapter mPagerAdapter;
-    @Required(order = 1)
+    @Required(order = 1, message = "Champ requis")
     private EditText inputNom;
-    @Required(order = 2)
+    @Required(order = 2, message = "Champ requis")
     private EditText inputPrenom;
-    @Required(order = 2)
-    @Email(order = 3)
+    @Required(order = 2, message = "Champ requis")
+    @Email(order = 3, message = "Email Incorrect")
     protected EditText inputEmail;
-    @Required(order = 4)
+    @Required(order = 4, message = "Champ requis")
     protected EditText inputPassword;
     protected CheckBox checkbox;
     protected Validator validator;
@@ -161,8 +161,8 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         inputNom = (EditText) findViewById(R.id.input_nom);
         inputPrenom = (EditText) findViewById(R.id.input_prenom);
         inputPrenom.setText(null);
-        inputEmail = (EditText) findViewById(R.id.input_email);
-        inputPassword = (EditText) findViewById(R.id.input_password);
+        inputEmail = (EditText) findViewById(R.id.input_email_signup);
+        inputPassword = (EditText) findViewById(R.id.input_password_signup);
         checkbox = (CheckBox) findViewById(R.id.afficher_mdp);
     }
 

@@ -77,7 +77,7 @@ public class WalletCommandeFragment extends Fragment {
         TextView montant = (TextView) walletLayout.findViewById(R.id.montant);
         TipsyApp app = (TipsyApp) getActivity().getApplication();
         montant.setText(
-                Commerce.prixToString(app.getWallet().getSolde(),app.getWallet().getDevise())
+                Commerce.prixToString(app.getWallet().getSolde(), app.getWallet().getDevise())
         );
     }
 
@@ -87,7 +87,7 @@ public class WalletCommandeFragment extends Fragment {
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_wallet:
-                Toast.makeText(getActivity(),"Hello World !",Toast.LENGTH_SHORT);
+                Toast.makeText(getActivity(), "Hello World !", Toast.LENGTH_SHORT);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

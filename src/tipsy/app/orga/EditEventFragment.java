@@ -65,11 +65,11 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     private Validator validator;
 
 
-    public static EditEventFragment init(Event e, boolean create){
+    public static EditEventFragment init(Event e, boolean create) {
         EditEventFragment frag = new EditEventFragment();
         Bundle args = new Bundle();
-        args.putParcelable("Event",e);
-        args.putBoolean("createEvent",create);
+        args.putParcelable("Event", e);
+        args.putBoolean("createEvent", create);
         frag.setArguments(args);
         return frag;
     }

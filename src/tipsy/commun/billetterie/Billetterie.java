@@ -1,9 +1,5 @@
 package tipsy.commun.billetterie;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -14,11 +10,11 @@ import tipsy.commun.commerce.Produit;
 /**
  * Created by valoo on 27/12/13.
  */
-public class Billetterie<Billet> extends ArrayList<Billet>{
+public class Billetterie<Billet> extends ArrayList<Billet> {
 
     public void setBillets(ArrayList<Billet> billets) {
         Iterator b = billets.iterator();
-        while(b.hasNext()){
+        while (b.hasNext()) {
             add((Billet) b.next());
         }
     }
@@ -29,21 +25,21 @@ public class Billetterie<Billet> extends ArrayList<Billet>{
     auquel cas, on définie la quantité par celle définie dans le panier
     */
 
-    public ArrayList<Item> getItems(Panier panier){
+    public ArrayList<Item> getItems(Panier panier) {
         ArrayList<Item> items = new ArrayList<Item>();
         Item item;
         Iterator b = iterator();
-        while(b.hasNext()){
+        while (b.hasNext()) {
             // Quantité définie à zéro
             item = new Item((Produit) b.next(), 0);
             // Si des billets sont déjà dans le panier de l'utilisateur
-            if(panier.contains(item)){
+            if (panier.contains(item)) {
                 // On récupère l'item du panier pour avoir la quantité correspondante
                 Iterator i = panier.iterator();
                 Item itemCourant;
-                while(i.hasNext()){
+                while (i.hasNext()) {
                     itemCourant = (Item) i.next();
-                    if(itemCourant.equals(item)){
+                    if (itemCourant.equals(item)) {
                         item.setQuantite(itemCourant.getQuantite());
                         break;
                     }

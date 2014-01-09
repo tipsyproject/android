@@ -1,9 +1,7 @@
 package tipsy.app.orga;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
@@ -21,7 +19,6 @@ import tipsy.app.UserActivity;
 import tipsy.app.billetterie.BilletterieActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Organisateur;
-import tipsy.commun.Prefs;
 
 /**
  * Created by Valoo on 05/12/13.
@@ -40,7 +37,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
         app = (TipsyApp) getApplication();
         orga = app.getOrga();
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             goToTableauDeBord(false);
         }
 
@@ -57,7 +54,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     // Gestion du click sur le bouton de validation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-         return super.onOptionsItemSelected(item);
+        return super.onOptionsItemSelected(item);
     }
 
 
@@ -114,7 +111,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
     // Clique sur le bouton "Créer un événement" ou Modifications de l'event
     public void onEventEdit(Event e, boolean create) {
-        EditEventFragment frag = EditEventFragment.init(e,create);
+        EditEventFragment frag = EditEventFragment.init(e, create);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, frag)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)

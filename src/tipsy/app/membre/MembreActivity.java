@@ -1,12 +1,10 @@
 package tipsy.app.membre;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -25,7 +23,6 @@ import com.stackmob.sdk.exception.StackMobException;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -34,12 +31,9 @@ import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
 import tipsy.app.membre.wallet.WalletActivity;
-import tipsy.app.orga.EditEventFragment;
-import tipsy.commun.billetterie.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
-import tipsy.commun.commerce.Commande;
-import tipsy.commun.commerce.Wallet;
+import tipsy.commun.billetterie.Billetterie;
 
 /**
  * Created by tech on 05/12/13.
@@ -67,7 +61,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
         };
 
-        if(savedInstanceState==null)
+        if (savedInstanceState == null)
             goToTableauDeBord(false);
     }
 
@@ -95,7 +89,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
-                new DatePickerDialog(this,datePickerListener, year,month,day).show();
+                new DatePickerDialog(this, datePickerListener, year, month, day).show();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -199,9 +193,9 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     }
 
-    public void goToCommande(){
+    public void goToCommande() {
         Intent intent = new Intent(this, WalletActivity.class);
-        intent.putExtra(WalletActivity.ACTION,WalletActivity.COMMANDE);
+        intent.putExtra(WalletActivity.ACTION, WalletActivity.COMMANDE);
         startActivity(intent);
     }
 

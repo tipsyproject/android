@@ -22,14 +22,18 @@ import tipsy.app.LoginActivity;
 import tipsy.app.TipsyApp;
 import tipsy.app.membre.MembreActivity;
 import tipsy.app.orga.OrgaActivity;
-import tipsy.commun.commerce.Wallet;
 
 
 /**
  * Created by vquefelec on 11/12/13.
  */
-public class User extends StackMobUser implements Parcelable{
+public class User extends StackMobUser implements Parcelable {
     protected int type;
+    protected boolean temp_pwd = false;
+
+    public User(String username) {
+        super(User.class, username);
+    }
 
     public User(String username, String password) {
         super(User.class, username, password);
@@ -46,6 +50,14 @@ public class User extends StackMobUser implements Parcelable{
 
     public String getEmail() {
         return getUsername();
+    }
+
+    public boolean isTemp_pwd() {
+        return temp_pwd;
+    }
+
+    public void setTemp_pwd(boolean temp_pwd) {
+        this.temp_pwd = temp_pwd;
     }
 
     public void goHome(Activity a) {
@@ -103,26 +115,26 @@ public class User extends StackMobUser implements Parcelable{
 
                                 @Override
                                 public void failure(StackMobException e) {
-                                    Log.d("TOUTAFAIT","test"+e.getMessage());
+                                    Log.d("TOUTAFAIT", "test" + e.getMessage());
                                 }
                             });
                         }
 
                         @Override
                         public void failure(StackMobException e) {
-                            Log.d("TOUTAFAIT","test"+e.getMessage());
+                            Log.d("TOUTAFAIT", "test" + e.getMessage());
                         }
                     });
 
         } else if (user.getType() == TypeUser.MEMBRE) {
-            Log.d("TOUTAFAIT","query Membre");
+            Log.d("TOUTAFAIT", "query Membre");
             Membre.query(Membre.class,
                     new StackMobQuery().field(new StackMobQueryField("user").isEqualTo(user.getUsername())),
                     new StackMobQueryCallback<Membre>() {
                         @Override
                         public void success(List<Membre> result) {
 
-                            Log.d("TOUTAFAIT","success query Membre");
+                            Log.d("TOUTAFAIT", "success query Membre");
                             final Membre membre = result.get(0);
                             membre.fetch(new StackMobModelCallback() {
                                 @Override
@@ -130,7 +142,7 @@ public class User extends StackMobUser implements Parcelable{
                                     TipsyApp app = (TipsyApp) a.getApplication();
                                     app.setMembre(membre);
                                     // Chargement du portefeuille du membre
-                                    app.getWallet().init( app.getWallet().new WalletInitCallback() {
+                                    app.getWallet().init(app.getWallet().new WalletInitCallback() {
                                         @Override
                                         public void success() {
                                             user.goHome(a);
@@ -147,14 +159,14 @@ public class User extends StackMobUser implements Parcelable{
 
                                 @Override
                                 public void failure(StackMobException e) {
-                                    Log.d("TOUTAFAIT","test"+e.getMessage());
+                                    Log.d("TOUTAFAIT", "test" + e.getMessage());
                                 }
                             });
                         }
 
                         @Override
                         public void failure(StackMobException e) {
-                            Log.d("TOUTAFAIT","test"+e.getMessage());
+                            Log.d("TOUTAFAIT", "test" + e.getMessage());
                         }
                     });
         } else {
@@ -214,17 +226,16 @@ public class User extends StackMobUser implements Parcelable{
 
     // Implémentation de Parcelable
     @Override
-    public int describeContents(){
+    public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags)
-    {
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
     }
 
-    public User(Parcel in){
+    public User(Parcel in) {
         super(User.class);
         setID(in.readString());
     }
@@ -236,8 +247,7 @@ public class User extends StackMobUser implements Parcelable{
         }
 
         @Override
-        public User[] newArray(int size)
-        {
+        public User[] newArray(int size) {
             return new User[size];
         }
     };

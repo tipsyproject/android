@@ -5,21 +5,17 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.MenuItem;
-
-import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
-import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Transaction;
 import tipsy.commun.commerce.Wallet;
 
 /**
  * Created by tech on 05/12/13.
  */
-public class WalletActivity extends FragmentActivity implements WalletListener{
+public class WalletActivity extends FragmentActivity implements WalletListener {
 
     private TipsyApp app;
     private Wallet wallet;
@@ -33,9 +29,9 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
         getActionBar().setDisplayHomeAsUpEnabled(true);
         app = (TipsyApp) getApplication();
         wallet = app.getWallet();
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             Bundle bundle = getIntent().getExtras();
-            switch(getIntent().getIntExtra(ACTION,-1)){
+            switch (getIntent().getIntExtra(ACTION, -1)) {
                 case COMMANDE:
                     goToCommande(false);
                     break;
@@ -48,10 +44,10 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-        // Respond to the action bar's Up/Home button
-        case android.R.id.home:
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -67,7 +63,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
     }
 
     /* Créditer le Wallet */
-    public void goToCredit(){
+    public void goToCredit() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new WalletCreditFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -76,7 +72,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
     }
 
     /* Détails sur une transaction */
-    public void goToCommande(boolean addToBackStack){
+    public void goToCommande(boolean addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new WalletCommandeFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -86,7 +82,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener{
     }
 
     /* Détails sur une transaction */
-    public void goToDetailsTransaction(Transaction t){
+    public void goToDetailsTransaction(Transaction t) {
         WalletDetailsTransactionFragment frag = WalletDetailsTransactionFragment.init(t);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, frag);

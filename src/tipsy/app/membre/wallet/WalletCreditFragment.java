@@ -63,11 +63,10 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
     }
 
 
-
     public void onValidationSucceeded() {
         // On recupère le montant du crédit
         int montant = Commerce.parsePrix(inputMontant);
-        if(montant > 0){
+        if (montant > 0) {
             Transaction transaction = wallet.credit(montant);
             transaction.save(new StackMobModelCallback() {
                 @Override
@@ -79,8 +78,7 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
                 public void failure(StackMobException e) {
                 }
             });
-        }
-        else callback.goToResume(true);
+        } else callback.goToResume(true);
 
     }
 

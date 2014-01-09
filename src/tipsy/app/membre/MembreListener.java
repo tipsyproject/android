@@ -1,13 +1,9 @@
 package tipsy.app.membre;
 
-import java.util.Date;
-
 import tipsy.app.MenuListener;
-import tipsy.commun.billetterie.Billetterie;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
-import tipsy.commun.commerce.Commande;
-import tipsy.commun.commerce.Wallet;
+import tipsy.commun.billetterie.Billetterie;
 
 /**
  * Created by Valentin on 29/12/13.

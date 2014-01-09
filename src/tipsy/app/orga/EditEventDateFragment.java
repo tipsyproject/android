@@ -1,10 +1,8 @@
 package tipsy.app.orga;
 
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
-import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +32,7 @@ public class EditEventDateFragment extends Fragment {
     public static SimpleDateFormat timeFormatter = new SimpleDateFormat("kk:mm");
 
 
-    public static EditEventDateFragment init(Event e){
+    public static EditEventDateFragment init(Event e) {
         EditEventDateFragment frag = new EditEventDateFragment();
         Bundle args = new Bundle();
         args.putParcelable("Event", e);
@@ -65,7 +63,7 @@ public class EditEventDateFragment extends Fragment {
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
-                new DatePickerDialog(getActivity(),dpDebut, year,month,day).show();
+                new DatePickerDialog(getActivity(), dpDebut, year, month, day).show();
             }
         });
 
@@ -89,11 +87,11 @@ public class EditEventDateFragment extends Fragment {
                 cal.setTime(event.getDebut());
                 int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int min = cal.get(Calendar.MINUTE);
-                new TimePickerDialog(getActivity(),tpDebut, hour, min, true).show();
+                new TimePickerDialog(getActivity(), tpDebut, hour, min, true).show();
             }
         });
 
-        ((EditEventFragment)getParentFragment()).onDateFragCreated(view);
+        ((EditEventFragment) getParentFragment()).onDateFragCreated(view);
 
         return view;
     }

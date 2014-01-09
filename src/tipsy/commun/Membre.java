@@ -9,7 +9,6 @@ import com.stackmob.sdk.model.StackMobModel;
 
 import java.util.ArrayList;
 
-import tipsy.commun.commerce.Panier;
 import tipsy.commun.commerce.Transaction;
 
 

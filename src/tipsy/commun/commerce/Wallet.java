@@ -1,7 +1,6 @@
 package tipsy.commun.commerce;
 
 import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.api.StackMobQueryField;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
@@ -10,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import tipsy.commun.User;
-import tipsy.commun.commerce.Transaction;
 
 /**
  * Created by valoo on 05/01/14.
@@ -19,7 +17,7 @@ public class Wallet<T> extends ArrayList<T> {
     private int devise = Commerce.Devise.EURO;
     private User user;
 
-    public Wallet(User user){
+    public Wallet(User user) {
         this.user = user;
     }
 
@@ -32,7 +30,7 @@ public class Wallet<T> extends ArrayList<T> {
     }
 
     /* Récupère la liste des transactions dont fait partie le user */
-    public void init(WalletInitCallback cb){
+    public void init(WalletInitCallback cb) {
         /*
         Transactions comportant le user dans les champs destinataire et auteur
         de la plus récente à la plus ancienne
@@ -40,16 +38,16 @@ public class Wallet<T> extends ArrayList<T> {
         final WalletInitCallback callback = cb;
         StackMobQuery query =
                 new StackMobQuery().fieldIsEqualTo("destinataire", user.getUsername())
-                .or(
-                        new StackMobQuery().fieldIsEqualTo("auteur", user.getUsername())
-                );
+                        .or(
+                                new StackMobQuery().fieldIsEqualTo("auteur", user.getUsername())
+                        );
 
         /* Requete Stackmob */
         Transaction.query(Transaction.class, query, new StackMobQueryCallback<Transaction>() {
             @Override
             public void success(List<Transaction> result) {
                 Iterator it = result.iterator();
-                while(it.hasNext()){
+                while (it.hasNext()) {
                     add((T) it.next());
                 }
                 callback.success();
@@ -62,21 +60,21 @@ public class Wallet<T> extends ArrayList<T> {
         });
     }
 
-    public Transaction credit(int montant){
+    public Transaction credit(int montant) {
         Transaction t = new Transaction(montant, user);
         add((T) t);
         return t;
     }
 
-    public int getSolde(){
+    public int getSolde() {
         int solde = 0;
         Transaction t;
         Iterator it = iterator();
-        while (it.hasNext()){
+        while (it.hasNext()) {
             t = (Transaction) it.next();
-            if(t.isCredit(user)){
+            if (t.isCredit(user)) {
                 solde += t.getMontant();
-            }else solde -= t.getMontant();
+            } else solde -= t.getMontant();
         }
         return solde;
     }
@@ -86,7 +84,8 @@ public class Wallet<T> extends ArrayList<T> {
     Callback à utiliser lors du chargement du portefeuille
      */
     public abstract class WalletInitCallback {
-        public WalletInitCallback() {}
+        public WalletInitCallback() {
+        }
 
         public abstract void success();
 

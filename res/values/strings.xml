@@ -57,8 +57,9 @@ j'accepte les conditions générales."</string>
     <string name="orgasign">Vous êtes organisateur ?</string>
     <string name="prix_total">TOTAL</string>
     <string name="acheter">ACHETER</string>
-    <string name="payer">PAYER</string>
     <string name="solde">Solde</string>
     <string name="dernieres_transactions">Dernières transactions</string>
+    <string name="forget">Merci d\'entrer votre adresse email, nous vous enverrons un nouveau mot de passe.</string>
+    <string name="payer">PAYER</string>
 
 </resources>

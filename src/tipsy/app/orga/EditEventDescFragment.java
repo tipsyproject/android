@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import tipsy.app.R;
-import tipsy.commun.Event;
 
 /**
  * Created by Valoo on 05/12/13.

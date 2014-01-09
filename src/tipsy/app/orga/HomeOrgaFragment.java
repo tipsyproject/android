@@ -14,7 +14,6 @@ import android.widget.TextView;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
-import tipsy.commun.Organisateur;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -49,7 +48,7 @@ public class HomeOrgaFragment extends Fragment {
         buttonNewEvent = (Button) view.findViewById(R.id.button_new_event);
         buttonNewEvent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.onEventEdit(new Event(),true);
+                callback.onEventEdit(new Event(), true);
             }
         });
 
@@ -65,7 +64,7 @@ public class HomeOrgaFragment extends Fragment {
         // Si aucun event n'est à venir
         if (upcomingEvent == null)
             textUpcoming.setText(R.string.no_upcoming_event);
-        // Sinon affichage de la miniature de l'event
+            // Sinon affichage de la miniature de l'event
         else {
             resumeEvent.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {

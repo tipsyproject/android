@@ -23,13 +23,14 @@ public class EventFragment extends Fragment {
     private MembreListener callback;
 
 
-    public static EventFragment init(Event e){
+    public static EventFragment init(Event e) {
         EventFragment frag = new EventFragment();
         Bundle args = new Bundle();
         args.putParcelable("Event", e);
         frag.setArguments(args);
         return frag;
     }
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

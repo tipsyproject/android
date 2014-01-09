@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.stackmob.sdk.model.StackMobModel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,23 +63,21 @@ public class Event extends StackMobModel implements Parcelable {
     }
 
 
-
     // Implémentation de Parcelable
     @Override
-    public int describeContents(){
+    public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags)
-    {
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
         dest.writeSerializable(debut);
         dest.writeString(lieu);
         dest.writeString(nom);
     }
 
-    public Event(Parcel in){
+    public Event(Parcel in) {
         super(Event.class);
         setID(in.readString());
         debut = (Date) in.readSerializable();
@@ -95,8 +92,7 @@ public class Event extends StackMobModel implements Parcelable {
         }
 
         @Override
-        public Event[] newArray(int size)
-        {
+        public Event[] newArray(int size) {
             return new Event[size];
         }
     };

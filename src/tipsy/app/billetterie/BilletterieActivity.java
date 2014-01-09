@@ -29,14 +29,16 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        if(savedInstanceState == null) {
+        if (savedInstanceState == null) {
             event = getIntent().getParcelableExtra("Event");
             /* Requete Stackmob pour récupérer la billetterie */
             event.fetch(StackMobOptions.depthOf(2), new StackMobModelCallback() {
                 @Override
                 public void success() {
                     showListBillets(false);
-                }@Override
+                }
+
+                @Override
                 public void failure(StackMobException e) {
                     Log.d("TOUTAFAIT", "Erreur billetterie:" + e.getMessage());
                     Toast.makeText(BilletterieActivity.this, "Erreur Billetterie", Toast.LENGTH_SHORT).show();

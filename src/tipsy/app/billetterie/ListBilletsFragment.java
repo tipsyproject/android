@@ -6,10 +6,8 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -34,8 +32,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import tipsy.app.R;
-import tipsy.commun.billetterie.Billet;
 import tipsy.commun.Event;
+import tipsy.commun.billetterie.Billet;
 import tipsy.commun.commerce.Commerce;
 
 /**
@@ -49,8 +47,7 @@ public class ListBilletsFragment extends Fragment {
     private BilletterieListener callback;
 
 
-
-    public static ListBilletsFragment init(Event e){
+    public static ListBilletsFragment init(Event e) {
         ListBilletsFragment frag = new ListBilletsFragment();
         Bundle args = new Bundle();
         args.putParcelable("Event", e);
@@ -81,7 +78,7 @@ public class ListBilletsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editBillet(event.getBilletterie().get(position),false);
+                editBillet(event.getBilletterie().get(position), false);
             }
         });
         return view;
@@ -110,15 +107,13 @@ public class ListBilletsFragment extends Fragment {
         // Create an instance of the dialog fragment and show it
         EditBilletDialogFragment dialog = new EditBilletDialogFragment();
         Bundle args = new Bundle();
-        args.putBoolean("newBillet" , newBillet);
+        args.putBoolean("newBillet", newBillet);
         args.putParcelable("Billet", b);
         args.putParcelable("Event", event);
         args.putSerializable("Adapter", adapter);
         dialog.setArguments(args);
         dialog.show(getActivity().getSupportFragmentManager(), "EditBilletDialogFragment");
     }
-
-
 
 
     // Adapter BILLETS
@@ -140,7 +135,7 @@ public class ListBilletsFragment extends Fragment {
             TextView prixBillet = (TextView) viewBillet.findViewById(R.id.prix_billet);
             Billet b = billets.get(position);
             nomBillet.setText(b.getNom());
-            prixBillet.setText(Commerce.prixToString(b.getPrix(),b.getDevise()));
+            prixBillet.setText(Commerce.prixToString(b.getPrix(), b.getDevise()));
             return viewBillet;
         }
     }

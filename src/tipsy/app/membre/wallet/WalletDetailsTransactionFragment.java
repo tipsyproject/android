@@ -8,10 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import tipsy.app.R;
-import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.Transaction;
 
 /**
@@ -23,7 +20,7 @@ public class WalletDetailsTransactionFragment extends Fragment {
     private Transaction transaction;
 
 
-    public static WalletDetailsTransactionFragment init(Transaction t){
+    public static WalletDetailsTransactionFragment init(Transaction t) {
         WalletDetailsTransactionFragment frag = new WalletDetailsTransactionFragment();
         Bundle args = new Bundle();
         args.putParcelable("Transaction", t);

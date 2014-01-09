@@ -42,7 +42,7 @@ public class ItemArrayAdapter extends ArrayAdapter<Item> {
 
         // Définition des valeurs
         nom.setText(item.getProduit().getNom());
-        prix.setText(Commerce.prixToString(item.getProduit().getPrix(),item.getProduit().getDevise()));
+        prix.setText(Commerce.prixToString(item.getProduit().getPrix(), item.getProduit().getDevise()));
         quantite.setText(Integer.toString(item.getQuantite()));
 
         return view;

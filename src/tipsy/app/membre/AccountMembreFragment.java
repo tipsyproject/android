@@ -50,9 +50,10 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     protected ImageButton Avatar;
     protected boolean change = false;
     private static int RESULT_LOAD_IMAGE = 1;
-    protected ByteArrayOutputStream baos = new ByteArrayOutputStream();
+    protected static ByteArrayOutputStream baos = new ByteArrayOutputStream();
     protected TipsyApp app;
     protected Membre membre;
+    protected static Bitmap bitmap_avatar = null;
 
     @Override
     public void onAttach(Activity activity) {
@@ -77,15 +78,14 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
         Prenom.setText(membre.getPrenom());
         Email.setHint(membre.getEmail());
         /*URL url = null;
-        Bitmap avatar = null;
         try {
             url = new URL(membre.getAvatar().getS3Url());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
         try {
-            avatar = BitmapFactory.decodeStream(url.openConnection().getInputStream());
-            Avatar.setImageBitmap(avatar);
+            bitmap_avatar = BitmapFactory.decodeStream(url.openConnection().getInputStream());
+            Avatar.setImageBitmap(bitmap_avatar);
         } catch (IOException e) {
             e.printStackTrace();
         }*/
@@ -135,7 +135,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                 if (change) {
                     membre.setNom(Nom.getText().toString());
                     membre.setPrenom(Prenom.getText().toString());
-                    //membre.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
+                    membre.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
                     membre.save(new StackMobModelCallback() {
                         @Override
                         public void success() {
@@ -215,6 +215,8 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
             Log.d("QLFCONNARD", "Rotate" + e.getMessage());
             // --> C'est QFLC, connard !
         }
+        bitmap_avatar = bitmap;
+        bitmap_avatar.compress(Bitmap.CompressFormat.PNG, 100, baos);
         return bitmap;
     }
 

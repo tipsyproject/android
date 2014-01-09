@@ -18,7 +18,6 @@ import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.commun.billetterie.Billet;
 import tipsy.commun.billetterie.Billetterie;
-import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Item;
 import tipsy.commun.commerce.ItemArrayAdapter;
 import tipsy.commun.commerce.Panier;
@@ -37,7 +36,7 @@ public class EventBilletsFragment extends Fragment {
     private MembreListener callback;
 
 
-    public static EventBilletsFragment init(Billetterie<Billet> b){
+    public static EventBilletsFragment init(Billetterie<Billet> b) {
         EventBilletsFragment frag = new EventBilletsFragment();
         Bundle args = new Bundle();
         args.putParcelableArrayList("Billetterie", b);
@@ -55,7 +54,7 @@ public class EventBilletsFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) { 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         billetterie = (Billetterie) getArguments().getParcelableArrayList("Billetterie");
         items = billetterie.getItems(panier);
 
@@ -83,16 +82,11 @@ public class EventBilletsFragment extends Fragment {
     }
 
     // NumberPicker pour définir le nombre de billets choisis
-    public void setNombreBillets(Item item){
+    public void setNombreBillets(Item item) {
         // Create an instance of the dialog fragment and show it
-        DialogFragment dialog = new QuantiteDialogFragment(adapter,item);
+        DialogFragment dialog = new QuantiteDialogFragment(adapter, item);
         dialog.show(getActivity().getSupportFragmentManager(), "NombreBilletDialogFragment");
     }
-
-
-
-
-
 
 
 }

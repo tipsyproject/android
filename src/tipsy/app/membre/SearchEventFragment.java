@@ -28,10 +28,10 @@ public class SearchEventFragment extends Fragment {
     private ArrayList<Event> eventResults;
 
 
-    public static SearchEventFragment init(ArrayList<Event> events){
+    public static SearchEventFragment init(ArrayList<Event> events) {
         SearchEventFragment frag = new SearchEventFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList("Events",events);
+        args.putParcelableArrayList("Events", events);
         frag.setArguments(args);
         return frag;
     }

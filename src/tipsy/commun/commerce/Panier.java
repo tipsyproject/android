@@ -8,12 +8,12 @@ import java.util.Iterator;
 /**
  * Created by valoo on 04/01/14.
  */
-public class Panier <E> extends HashSet<E> {
+public class Panier<E> extends HashSet<E> {
 
     protected int devise = Commerce.Devise.EURO;
     private TextView viewPrixTotal = null;
 
-    public int getDevise(){
+    public int getDevise() {
         return devise;
     }
 
@@ -22,28 +22,28 @@ public class Panier <E> extends HashSet<E> {
     }
 
     @Override
-    public boolean add(E object){
+    public boolean add(E object) {
         boolean res = super.add(object);
         return res;
     }
 
-    public int getPrixTotal(){
+    public int getPrixTotal() {
         Iterator it = iterator();
         int prixTotal = 0;
         Item item;
-        while(it.hasNext()){
+        while (it.hasNext()) {
             item = (Item) it.next();
             prixTotal += item.getPrixTotal();
         }
         return prixTotal;
     }
 
-    public void setPrixTotalView(TextView prixTotal){
+    public void setPrixTotalView(TextView prixTotal) {
         this.viewPrixTotal = prixTotal;
     }
 
-    public void notifyItemsUpdated(){
-        if(viewPrixTotal != null){
+    public void notifyItemsUpdated() {
+        if (viewPrixTotal != null) {
             viewPrixTotal.setText(Commerce.prixToString(getPrixTotal(), devise));
         }
     }

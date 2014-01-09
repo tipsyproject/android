@@ -2,7 +2,6 @@ package tipsy.commun.commerce;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.stackmob.sdk.model.StackMobModel;
 
@@ -15,17 +14,17 @@ import tipsy.commun.User;
  */
 public class Transaction extends StackMobModel implements Parcelable {
 
-    private User    auteur;
-    private Date    date;
-    private User    destinataire;
-    private int     devise;
-    private int     montant;
+    private User auteur;
+    private Date date;
+    private User destinataire;
+    private int devise;
+    private int montant;
 
-    public Transaction(){
+    public Transaction() {
         super(Transaction.class);
     }
 
-    public Transaction(int montant, User destinataire){
+    public Transaction(int montant, User destinataire) {
         super(Transaction.class);
         this.auteur = null;
         this.date = new Date();
@@ -33,7 +32,7 @@ public class Transaction extends StackMobModel implements Parcelable {
         this.montant = montant;
     }
 
-    public Transaction(int montant, User destinataire, User auteur){
+    public Transaction(int montant, User destinataire, User auteur) {
         super(Transaction.class);
         this.auteur = auteur;
         this.date = new Date();
@@ -74,36 +73,36 @@ public class Transaction extends StackMobModel implements Parcelable {
     }
 
     /* La transaction est un crédit pour le User u si et seulement s'il en est le destinataire */
-    public boolean isCredit(User u){
+    public boolean isCredit(User u) {
         return this.destinataire.getUsername().equals(u.getUsername());
     }
+
     /* La transaction est un debit pour le User u si et seulement s'il en est l'auteur */
-    public boolean isDebit(User u){
+    public boolean isDebit(User u) {
         return this.auteur.getUsername().equals(u.getUsername());
     }
 
-    public String getMontantToString(){
-        return Commerce.prixToString(montant,devise);
+    public String getMontantToString() {
+        return Commerce.prixToString(montant, devise);
     }
 
 
     // Implémentation de Parcelable
     @Override
-    public int describeContents(){
+    public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags)
-    {
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
-        dest.writeParcelable(auteur,flags);
+        dest.writeParcelable(auteur, flags);
         dest.writeSerializable(date);
-        dest.writeParcelable(destinataire,flags);
+        dest.writeParcelable(destinataire, flags);
         dest.writeInt(montant);
     }
 
-    public Transaction(Parcel in){
+    public Transaction(Parcel in) {
         super(Transaction.class);
         setID(in.readString());
         auteur = in.readParcelable(User.class.getClassLoader());
@@ -119,8 +118,7 @@ public class Transaction extends StackMobModel implements Parcelable {
         }
 
         @Override
-        public Transaction[] newArray(int size)
-        {
+        public Transaction[] newArray(int size) {
             return new Transaction[size];
         }
     };

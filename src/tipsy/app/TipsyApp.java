@@ -48,7 +48,7 @@ public class TipsyApp extends Application {
         this.orga = orga;
     }
 
-    public Panier getPanier(){
+    public Panier getPanier() {
         return this.panier;
     }
 

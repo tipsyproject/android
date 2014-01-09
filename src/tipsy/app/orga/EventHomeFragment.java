@@ -25,10 +25,10 @@ public class EventHomeFragment extends Fragment {
     private LinearLayout buttonAcces;
     private LinearLayout buttonInfos;
 
-    public static EventHomeFragment init(Event e){
+    public static EventHomeFragment init(Event e) {
         EventHomeFragment frag = new EventHomeFragment();
         Bundle args = new Bundle();
-        args.putParcelable("Event",e);
+        args.putParcelable("Event", e);
         frag.setArguments(args);
         return frag;
     }

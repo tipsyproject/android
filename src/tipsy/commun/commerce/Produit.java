@@ -22,9 +22,9 @@ public abstract class Produit extends StackMobModel implements Parcelable {
 
     public static int BILLET = 0;
     public static int TICKET = 1;
-    public static int CONSO  = 2;
+    public static int CONSO = 2;
 
-    protected Produit(){
+    protected Produit() {
         super(Produit.class);
     }
 
@@ -53,30 +53,28 @@ public abstract class Produit extends StackMobModel implements Parcelable {
     }
 
     @Override
-    public boolean equals(Object o){
+    public boolean equals(Object o) {
         return (this.getID() == ((Produit) o).getID());
     }
 
 
-
     // Implémentation de Parcelable
     @Override
-    public int describeContents(){
+    public int describeContents() {
         return 0;
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags)
-    {
+    public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
         dest.writeInt(devise);
         dest.writeString(nom);
-        dest.writeParcelable(parametresBillet,flags);
+        dest.writeParcelable(parametresBillet, flags);
         dest.writeInt(prix);
         dest.writeInt(typeProduit);
     }
 
-    public Produit(Parcel in){
+    public Produit(Parcel in) {
         super(Produit.class);
         setID(in.readString());
         devise = in.readInt();

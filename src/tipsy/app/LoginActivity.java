@@ -1,86 +1,58 @@
 package tipsy.app;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
-import com.mobsandgeeks.saripaar.Rule;
-import com.mobsandgeeks.saripaar.Validator;
-import com.mobsandgeeks.saripaar.annotation.Email;
-import com.mobsandgeeks.saripaar.annotation.Required;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
+import java.util.List;
+import java.util.Vector;
 
-import tipsy.commun.User;
+public class LoginActivity extends FragmentActivity {
 
-public class LoginActivity extends Activity implements Validator.ValidationListener {
-
-    private SharedPreferences prefs;
-
-    @Required(order = 1)
-    @Email(order = 2)
-    private EditText inputEmail;
-    @Required(order = 3)
-    private EditText inputPassword;
-    private Button buttonSignin;
-    private Button buttonSignup;
-    private Validator validator;
-    protected Button buttonHelp;
-
+    protected SharedPreferences prefs;
+    protected PagerAdapter mPagerAdapter;
+    static ViewPager pager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
         setContentView(R.layout.act_login);
-        buttonSignin = (Button) findViewById(R.id.button_signin);
-        buttonSignup = (Button) findViewById(R.id.button_signup);
-        buttonHelp = (Button) findViewById(R.id.button_help);
-        inputEmail = (EditText) findViewById(R.id.input_email);
-        inputPassword = (EditText) findViewById(R.id.input_password);
-
-        validator = new Validator(this);
-        validator.setValidationListener(this);
 
         prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
+        // Création de la liste de Fragments que fera défiler le PagerAdapter
+        List fragments = new Vector();
+        // Ajout des Fragments dans la liste
+        fragments.add(Fragment.instantiate(this, LoginFragment.class.getName()));
+        fragments.add(Fragment.instantiate(this, ForgetPwdFragment.class.getName()));
 
-        // TENTATIVE DE CONNEXION
-        buttonSignin.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                hideKeyboard(LoginActivity.this);
-                validator.validate();
-            }
-        });
+        // Création de l'adapter qui s'occupera de l'affichage de la liste de
+        // Fragments
 
-        // Redirection inscription
-        buttonSignup.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, TypeSignUpActivity.class));
-            }
-        });
+        this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
+        pager = (ViewPager) super.findViewById(R.id.pager_login);
+        // Affectation de l'adapter au ViewPager
+        pager.setAdapter(this.mPagerAdapter);
+
+        pager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 hideKeyboard(LoginActivity.this);
-                return false;
+                return true;
             }
         });
-        buttonHelp.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this, HelpActivity.class));
-            }
-        });
-
     }
 
     @Override
@@ -88,39 +60,41 @@ public class LoginActivity extends Activity implements Validator.ValidationListe
         super.onPause();
     }
 
-    public void onValidationSucceeded() {
-        final User user = new User(inputEmail.getText().toString(), inputPassword.getText().toString());
-        user.login(new StackMobModelCallback() {
-            @Override
-            public void success() {
-                // Sauvegarde locale des identifiants pour connexion auto
-                User.rememberMe(LoginActivity.this, inputEmail.getText().toString(), inputPassword.getText().toString());
-                // Redirection en fonction du type utilisateur
-                User.keepCalmAndWaitForGoingHome(LoginActivity.this, user);
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                Toast.makeText(LoginActivity.this, "Identifiants incorrects", Toast.LENGTH_SHORT).show();
-            }
-        });
+    @Override
+    public void onBackPressed() {
+        if (pager.getCurrentItem() != 0)
+            pager.setCurrentItem(0, true);
+        else
+            super.onBackPressed(); // This will pop the Activity from the stack.
     }
 
+    public class MyPagerAdapter extends FragmentStatePagerAdapter {
 
-    public void onValidationFailed(View failedView, Rule<?> failedRule) {
-        String message = failedRule.getFailureMessage();
+        private List<Fragment> fragments;
 
-        if (failedView instanceof EditText) {
-            failedView.requestFocus();
-            ((EditText) failedView).setError(message);
-        } else {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        //On fournit à l'adapter la liste des fragments à afficher
+        public MyPagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+            super(fm);
+            this.fragments = fragments;
         }
+
+        @Override
+        public Fragment getItem(int position) {
+            return this.fragments.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return this.fragments.size();
+        }
+    }
+
+    public static ViewPager getPager() {
+        return pager;
     }
 
     public static void hideKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
-
 }
