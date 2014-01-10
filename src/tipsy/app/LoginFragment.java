@@ -59,7 +59,11 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
         });
         help.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), HelpActivity.class));
+                Intent intent = new Intent(getActivity(), HelpActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("Connected", true);
+                intent.putExtras(b);
+                startActivity(intent);
             }
         });
         forgetpwd.setOnClickListener(new View.OnClickListener() {

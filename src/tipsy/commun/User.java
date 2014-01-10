@@ -30,9 +30,15 @@ import tipsy.app.orga.OrgaActivity;
 public class User extends StackMobUser implements Parcelable {
     protected int type;
     protected boolean temp_pwd = false;
+    protected boolean social = false;
 
     public User(String username) {
         super(User.class, username);
+    }
+
+    public User(String username, int type) {
+        super(User.class, username);
+        this.type = type;
     }
 
     public User(String username, String password) {
@@ -60,6 +66,14 @@ public class User extends StackMobUser implements Parcelable {
         this.temp_pwd = temp_pwd;
     }
 
+    public boolean isSocial() {
+        return social;
+    }
+
+    public void setSocial(boolean social) {
+        this.social = social;
+    }
+
     public void goHome(Activity a) {
         if (getType() == TypeUser.ORGANISATEUR) {
             a.startActivity(new Intent(a, OrgaActivity.class));
@@ -76,6 +90,12 @@ public class User extends StackMobUser implements Parcelable {
         SecurePreferences prefs = new SecurePreferences(a.getApplicationContext(), "user", "7D465F9D5EA775D1C25FEFF588848", true);
         prefs.put(Prefs.USERNAME, username);
         prefs.put(Prefs.PASSWORD, password);
+    }
+
+    // Enregistre les identifiants de l'utilisateur social dans le répertoire privé de l'appli
+    public static void rememberMe(Activity a, String username) {
+        SecurePreferences prefs = new SecurePreferences(a.getApplicationContext(), "user", "7D465F9D5EA775D1C25FEFF588848", true);
+        prefs.put(Prefs.USERNAME, username);
     }
 
     // Supprime les identifiants de l'utilisateur dans le répertoire privé de l'appli
