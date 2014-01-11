@@ -37,5 +37,9 @@ public class Commerce {
         public static String getSymbol(int devise) {
             return devises[devise];
         }
+
+        public static int getLocale(){
+            return EURO;
+        }
     }
 }

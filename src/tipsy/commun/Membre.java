@@ -18,7 +18,6 @@ public class Membre extends StackMobModel implements User.TipsyUser {
     private String nom;
     private String prenom;
     private User user;
-    private ArrayList<Transaction> transactions = new ArrayList<Transaction>();
 
     public Membre() {
         super(Membre.class);
@@ -57,14 +56,6 @@ public class Membre extends StackMobModel implements User.TipsyUser {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
-    }
-
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
-
-    public void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
     }
 
     public int getType() {

@@ -51,7 +51,7 @@ public class WalletResumeFragment extends Fragment {
         });
 
         ListView listView = (ListView) view.findViewById(R.id.list);
-        TransactionArrayAdapter adapter = new TransactionArrayAdapter(getActivity(), wallet);
+        TransactionArrayAdapter adapter = new TransactionArrayAdapter(getActivity(), wallet, app.getMembre().getUser());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

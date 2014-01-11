@@ -145,6 +145,7 @@ public class User extends StackMobUser implements Parcelable {
                                     app.getWallet().init(app.getWallet().new WalletInitCallback() {
                                         @Override
                                         public void success() {
+                                            Log.d("TOUTAFAIT", "success query Wallet: ");
                                             user.goHome(a);
                                         }
 

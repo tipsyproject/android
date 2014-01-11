@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.stackmob.sdk.model.StackMobModel;
 
+import tipsy.commun.Event;
 import tipsy.commun.billetterie.ParametresBillet;
 
 /**
@@ -15,6 +16,7 @@ import tipsy.commun.billetterie.ParametresBillet;
 public abstract class Produit extends StackMobModel implements Parcelable {
 
     protected int devise = Commerce.Devise.EURO;
+    protected Event event;
     private String nom = "Mon Tarif";
     protected ParametresBillet parametresBillet = null;
     protected int prix = 0;
@@ -36,6 +38,14 @@ public abstract class Produit extends StackMobModel implements Parcelable {
         this.devise = devise;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
     public String getNom() {
         return nom;
     }
@@ -49,7 +59,8 @@ public abstract class Produit extends StackMobModel implements Parcelable {
     }
 
     public void setPrix(int prix) {
-        this.prix = prix;
+        if(prix < 0) throw new ArithmeticException("Le prix d'un produit ne peut être négatif.");
+        else this.prix = prix;
     }
 
     @Override
@@ -68,6 +79,7 @@ public abstract class Produit extends StackMobModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
         dest.writeInt(devise);
+        dest.writeParcelable(event,flags);
         dest.writeString(nom);
         dest.writeParcelable(parametresBillet, flags);
         dest.writeInt(prix);
@@ -78,6 +90,7 @@ public abstract class Produit extends StackMobModel implements Parcelable {
         super(Produit.class);
         setID(in.readString());
         devise = in.readInt();
+        event = in.readParcelable(Event.class.getClassLoader());
         nom = in.readString();
         parametresBillet = in.readParcelable(ParametresBillet.class.getClassLoader());
         prix = in.readInt();

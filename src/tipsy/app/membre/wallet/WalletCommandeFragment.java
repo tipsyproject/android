@@ -3,6 +3,7 @@ package tipsy.app.membre.wallet;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -20,6 +21,7 @@ import tipsy.app.TipsyApp;
 import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.ItemArrayAdapter;
+import tipsy.commun.commerce.Wallet;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -27,6 +29,7 @@ import tipsy.commun.commerce.ItemArrayAdapter;
 public class WalletCommandeFragment extends Fragment {
 
     private Commande commande;
+    private Wallet wallet;
     private WalletListener callback;
 
 
@@ -51,6 +54,7 @@ public class WalletCommandeFragment extends Fragment {
         /* On récupère le contenu de la commande */
         TipsyApp app = (TipsyApp) getActivity().getApplication();
         commande = new Commande(app.getPanier());
+        wallet = app.getWallet();
 
         ItemArrayAdapter adapter = new ItemArrayAdapter(getActivity(), commande.getItems());
         ListView listView = (ListView) view.findViewById(R.id.list);
@@ -62,6 +66,12 @@ public class WalletCommandeFragment extends Fragment {
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                try {
+                    wallet.pay(commande);
+                } catch (Wallet.WalletInsufficientFundsException e) {
+                    Log.d("TOUTAFAIT", "Echec paiement:" + e.getMessage());
+                    Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

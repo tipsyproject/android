@@ -3,6 +3,7 @@ package tipsy.app.membre;
 import tipsy.app.MenuListener;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
+import tipsy.commun.billetterie.Billet;
 import tipsy.commun.billetterie.Billetterie;
 
 /**
@@ -23,7 +24,7 @@ public interface MembreListener extends MenuListener {
 
     public void goToEvent(Event e);
 
-    public void goToEventBillets(Billetterie b);
+    public void goToEventBillets(Billetterie<Billet> b);
 
     public void goToCommande();
 

@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import tipsy.app.R;
+import tipsy.commun.User;
 
 /**
  * Created by valoo on 04/01/14.
@@ -20,11 +21,13 @@ import tipsy.app.R;
 public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
     private Context context;
     private ArrayList<Transaction> transactions;
+    private User user;
 
-    public TransactionArrayAdapter(Context context, ArrayList<Transaction> transactions) {
+    public TransactionArrayAdapter(Context context, ArrayList<Transaction> transactions, User user) {
         super(context, R.layout.frag_transaction, transactions);
         this.context = context;
         this.transactions = transactions;
+        this.user = user;
     }
 
     @Override
@@ -43,7 +46,7 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
 
         /* Montant transaction */
         TextView montant = (TextView) view.findViewById(R.id.montant);
-        montant.setText(transaction.getMontantToString());
+        montant.setText(transaction.getMontantToString(user.getUsername()));
 
         /* Date transaction */
         TextView date = (TextView) view.findViewById(R.id.date);

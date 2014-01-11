@@ -232,6 +232,7 @@ public class ListBilletsFragment extends Fragment {
                 failedView.requestFocus();
                 ((EditText) failedView).setError(message);
             } else {
+
             }
         }
     }

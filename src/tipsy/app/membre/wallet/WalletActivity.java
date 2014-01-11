@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
@@ -18,7 +19,6 @@ import tipsy.commun.commerce.Wallet;
 public class WalletActivity extends FragmentActivity implements WalletListener {
 
     private TipsyApp app;
-    private Wallet wallet;
     public final static String ACTION = "action";
     public final static int COMMANDE = 0;
 
@@ -27,10 +27,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_wallet);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        app = (TipsyApp) getApplication();
-        wallet = app.getWallet();
         if (savedInstanceState == null) {
-            Bundle bundle = getIntent().getExtras();
             switch (getIntent().getIntExtra(ACTION, -1)) {
                 case COMMANDE:
                     goToCommande(false);

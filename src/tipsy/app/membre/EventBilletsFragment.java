@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -75,7 +76,10 @@ public class EventBilletsFragment extends Fragment {
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.goToCommande();
+                if(panier.size() == 0)
+                    Toast.makeText(getActivity(),"Panier vide !",Toast.LENGTH_SHORT).show();
+                else
+                    callback.goToCommande();
             }
         });
         return view;

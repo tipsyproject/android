@@ -13,7 +13,6 @@ public class ParametresBillet extends StackMobModel implements Parcelable {
 
     public interface ParamBillet {
         public int getNbMax();
-
         public void setNbMax(int nbMax);
     }
 
@@ -52,4 +51,16 @@ public class ParametresBillet extends StackMobModel implements Parcelable {
         setID(in.readString());
         nbMax = in.readInt();
     }
+
+    public static final Parcelable.Creator<ParametresBillet> CREATOR = new Parcelable.Creator<ParametresBillet>() {
+        @Override
+        public ParametresBillet createFromParcel(Parcel source) {
+            return new ParametresBillet(source);
+        }
+
+        @Override
+        public ParametresBillet[] newArray(int size) {
+            return new ParametresBillet[size];
+        }
+    };
 }

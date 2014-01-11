@@ -42,7 +42,7 @@ public class WalletDetailsTransactionFragment extends Fragment {
         TextView montant = (TextView) view.findViewById(R.id.montant);
         montant.setText(transaction.getMontantToString());
         TextView user = (TextView) view.findViewById(R.id.destinataire);
-        user.setText(transaction.getDestinataire().getID());
+        user.setText(transaction.getDestinataire());
         return view;
     }
 }

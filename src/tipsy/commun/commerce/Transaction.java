@@ -2,6 +2,7 @@ package tipsy.commun.commerce;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.stackmob.sdk.model.StackMobModel;
 
@@ -14,9 +15,10 @@ import tipsy.commun.User;
  */
 public class Transaction extends StackMobModel implements Parcelable {
 
-    private User auteur;
+    private String auteur = null;
+    private Commande commande;
     private Date date;
-    private User destinataire;
+    private String destinataire;
     private int devise;
     private int montant;
 
@@ -24,28 +26,39 @@ public class Transaction extends StackMobModel implements Parcelable {
         super(Transaction.class);
     }
 
-    public Transaction(int montant, User destinataire) {
+    public Transaction(int montant, String destinataire, int devise) {
         super(Transaction.class);
         this.auteur = null;
         this.date = new Date();
         this.destinataire = destinataire;
+        this.devise = devise;
         this.montant = montant;
     }
 
-    public Transaction(int montant, User destinataire, User auteur) {
+    public Transaction(String auteur, int montant, Commande commande) {
         super(Transaction.class);
         this.auteur = auteur;
+        this.commande = commande;
         this.date = new Date();
-        this.destinataire = destinataire;
+        this.destinataire = commande.getDestinataire();
+        this.devise = commande.getDevise();
         this.montant = montant;
     }
 
-    public User getAuteur() {
+    public String getAuteur() {
         return auteur;
     }
 
-    public void setAuteur(User auteur) {
+    public void setAuteur(String auteur) {
         this.auteur = auteur;
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 
     public Date getDate() {
@@ -56,12 +69,20 @@ public class Transaction extends StackMobModel implements Parcelable {
         this.date = date;
     }
 
-    public User getDestinataire() {
+    public String getDestinataire() {
         return destinataire;
     }
 
-    public void setDestinataire(User destinataire) {
+    public void setDestinataire(String destinataire) {
         this.destinataire = destinataire;
+    }
+
+    public int getDevise() {
+        return devise;
+    }
+
+    public void setDevise(int devise) {
+        this.devise = devise;
     }
 
     public int getMontant() {
@@ -73,17 +94,24 @@ public class Transaction extends StackMobModel implements Parcelable {
     }
 
     /* La transaction est un crédit pour le User u si et seulement s'il en est le destinataire */
-    public boolean isCredit(User u) {
-        return this.destinataire.getUsername().equals(u.getUsername());
+    public boolean isCredit(String destinataire) {
+        if(this.destinataire == null)
+            Log.e("TOUTAFAIT", "destinataire null !!!");
+        return this.destinataire.equals(destinataire);
     }
 
     /* La transaction est un debit pour le User u si et seulement s'il en est l'auteur */
-    public boolean isDebit(User u) {
-        return this.auteur.getUsername().equals(u.getUsername());
+    public boolean isDebit(String auteur) {
+        return (this.auteur == null) ? false : this.auteur.equals(auteur);
     }
 
     public String getMontantToString() {
         return Commerce.prixToString(montant, devise);
+    }
+
+    public String getMontantToString(String auteur) {
+        String signe = isDebit(auteur) ? "-":"";
+        return signe+Commerce.prixToString(montant, devise);
     }
 
 
@@ -96,18 +124,18 @@ public class Transaction extends StackMobModel implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
-        dest.writeParcelable(auteur, flags);
+        dest.writeString(auteur);
         dest.writeSerializable(date);
-        dest.writeParcelable(destinataire, flags);
+        dest.writeString(destinataire);
         dest.writeInt(montant);
     }
 
     public Transaction(Parcel in) {
         super(Transaction.class);
         setID(in.readString());
-        auteur = in.readParcelable(User.class.getClassLoader());
+        auteur = in.readString();
         date = (Date) in.readSerializable();
-        destinataire = in.readParcelable(User.class.getClassLoader());
+        destinataire = in.readString();
         montant = in.readInt();
     }
 

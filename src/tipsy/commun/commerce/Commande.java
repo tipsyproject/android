@@ -3,7 +3,10 @@ package tipsy.commun.commerce;
 import com.stackmob.sdk.model.StackMobModel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
+
+import tipsy.commun.User;
 
 /**
  * Created by Valentin on 07/01/14.
@@ -32,15 +35,12 @@ public class Commande extends StackMobModel {
         this.items = items;
     }
 
+    public String getDestinataire(){
+        return items.get(0).getProduit().getEvent().getOrganisateur().getUser().getUsername();
+    }
+
     public int getPrixTotal() {
-        Iterator it = items.iterator();
-        int prixTotal = 0;
-        Item item;
-        while (it.hasNext()) {
-            item = (Item) it.next();
-            prixTotal += item.getPrixTotal();
-        }
-        return prixTotal;
+        return Panier.getPrixTotal(new HashSet<Item>(items));
     }
 
     public int getDevise() {

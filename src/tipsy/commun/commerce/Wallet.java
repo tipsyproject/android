@@ -1,6 +1,10 @@
 package tipsy.commun.commerce;
 
+import android.util.Log;
+
+import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.api.StackMobQuery;
+import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
@@ -60,8 +64,10 @@ public class Wallet<T> extends ArrayList<T> {
         });
     }
 
-    public Transaction credit(int montant) {
-        Transaction t = new Transaction(montant, user);
+    public Transaction credit(int montant) throws ArithmeticException{
+        if(montant <= 0)
+            throw new ArithmeticException("Le montant doit être positif.");
+        Transaction t = new Transaction(montant, user.getUsername(), Commerce.Devise.getLocale());
         add((T) t);
         return t;
     }
@@ -72,11 +78,46 @@ public class Wallet<T> extends ArrayList<T> {
         Iterator it = iterator();
         while (it.hasNext()) {
             t = (Transaction) it.next();
-            if (t.isCredit(user)) {
+            if (t.isCredit(user.getUsername())) {
                 solde += t.getMontant();
             } else solde -= t.getMontant();
         }
         return solde;
+    }
+
+    public void pay(Commande cmd) throws WalletInsufficientFundsException{
+        final Commande commande = cmd;
+        if(getSolde() < commande.getPrixTotal())
+            throw new WalletInsufficientFundsException();
+        else{
+            // Création d'une transaction du montant de la commande destinée à l'organisateur
+            final Transaction transaction = new Transaction(user.getUsername(),commande.getPrixTotal(),commande);
+
+            add((T) transaction);
+            transaction.save(StackMobOptions.depthOf(3),new StackMobModelCallback() {
+                @Override
+                public void success() {
+                    Log.d("TOUTAFAIT", "save commande ok");
+                    /*commande.getTransactions().add(transaction);
+                    commande.save(new StackMobModelCallback() {
+                        @Override
+                        public void success() {
+                            Log.d("TOUTAFAIT", "save commande ok");
+                        }
+
+                        @Override
+                        public void failure(StackMobException e) {
+                            Log.d("TOUTAFAIT", "erreur save commande: "+e.getMessage());
+                        }
+                    });*/
+                }
+
+                @Override
+                public void failure(StackMobException e) {
+                    Log.d("TOUTAFAIT", "erreur save transaction: " + e.getMessage());
+                }
+            });
+        }
     }
 
 
@@ -90,6 +131,12 @@ public class Wallet<T> extends ArrayList<T> {
         public abstract void success();
 
         public abstract void failure(com.stackmob.sdk.exception.StackMobException e);
+    }
+
+    public static class WalletInsufficientFundsException extends Exception{
+        public WalletInsufficientFundsException(){
+            super("Fonds insuffisants.");
+        }
     }
 
 }

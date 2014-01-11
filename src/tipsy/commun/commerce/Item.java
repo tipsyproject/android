@@ -1,14 +1,21 @@
 package tipsy.commun.commerce;
 
 
+import com.stackmob.sdk.model.StackMobModel;
+
 /**
  * Created by valoo on 04/01/14.
  */
-public class Item {
+public class Item  extends StackMobModel{
     private Produit produit;
     private int quantite;
 
+    public Item(){
+        super(Item.class);
+    }
+
     public Item(Produit a, int q) {
+        super(Item.class);
         produit = a;
         quantite = q;
     }

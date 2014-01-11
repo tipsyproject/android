@@ -28,14 +28,7 @@ public class Panier<E> extends HashSet<E> {
     }
 
     public int getPrixTotal() {
-        Iterator it = iterator();
-        int prixTotal = 0;
-        Item item;
-        while (it.hasNext()) {
-            item = (Item) it.next();
-            prixTotal += item.getPrixTotal();
-        }
-        return prixTotal;
+        return getPrixTotal((HashSet<Item>)this);
     }
 
     public void setPrixTotalView(TextView prixTotal) {
@@ -46,5 +39,16 @@ public class Panier<E> extends HashSet<E> {
         if (viewPrixTotal != null) {
             viewPrixTotal.setText(Commerce.prixToString(getPrixTotal(), devise));
         }
+    }
+
+    public static int getPrixTotal(HashSet<Item> items){
+        Iterator it = items.iterator();
+        int prixTotal = 0;
+        Item item;
+        while (it.hasNext()) {
+            item = (Item) it.next();
+            prixTotal += item.getPrixTotal();
+        }
+        return prixTotal;
     }
 }
