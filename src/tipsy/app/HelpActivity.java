@@ -1,5 +1,6 @@
 package tipsy.app;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -89,7 +90,7 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
                 else {
                     TipsyApp app = (TipsyApp) getApplication();
                     app.setSkipHelp(HelpActivity.this, true);
-                    User.tryLogin(HelpActivity.this);
+                    startActivity(new Intent(HelpActivity.this, LoginActivity.class));
                 }
             }
         });

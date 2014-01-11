@@ -29,11 +29,12 @@ import java.util.List;
 import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
+import tipsy.app.TypeSignUpFragment;
 import tipsy.app.UserActivity;
 import tipsy.app.membre.wallet.WalletActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
-import tipsy.commun.billetterie.Billet;
+import tipsy.commun.User;
 import tipsy.commun.billetterie.Billetterie;
 
 /**
@@ -183,7 +184,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     }
 
-    public void goToEventBillets(Billetterie<Billet> b) {
+    public void goToEventBillets(Billetterie b) {
         EventBilletsFragment frag = EventBilletsFragment.init(b);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
