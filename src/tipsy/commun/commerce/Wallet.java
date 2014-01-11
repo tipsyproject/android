@@ -64,8 +64,8 @@ public class Wallet<T> extends ArrayList<T> {
         });
     }
 
-    public Transaction credit(int montant) throws ArithmeticException{
-        if(montant <= 0)
+    public Transaction credit(int montant) throws ArithmeticException {
+        if (montant <= 0)
             throw new ArithmeticException("Le montant doit être positif.");
         Transaction t = new Transaction(montant, user.getUsername(), Commerce.Devise.getLocale());
         add((T) t);
@@ -85,16 +85,16 @@ public class Wallet<T> extends ArrayList<T> {
         return solde;
     }
 
-    public void pay(Commande cmd) throws WalletInsufficientFundsException{
+    public void pay(Commande cmd) throws WalletInsufficientFundsException {
         final Commande commande = cmd;
-        if(getSolde() < commande.getPrixTotal())
+        if (getSolde() < commande.getPrixTotal())
             throw new WalletInsufficientFundsException();
-        else{
+        else {
             // Création d'une transaction du montant de la commande destinée à l'organisateur
-            final Transaction transaction = new Transaction(user.getUsername(),commande.getPrixTotal(),commande);
+            final Transaction transaction = new Transaction(user.getUsername(), commande.getPrixTotal(), commande);
 
             add((T) transaction);
-            transaction.save(StackMobOptions.depthOf(3),new StackMobModelCallback() {
+            transaction.save(StackMobOptions.depthOf(3), new StackMobModelCallback() {
                 @Override
                 public void success() {
                     Log.d("TOUTAFAIT", "save commande ok");
@@ -133,8 +133,8 @@ public class Wallet<T> extends ArrayList<T> {
         public abstract void failure(com.stackmob.sdk.exception.StackMobException e);
     }
 
-    public static class WalletInsufficientFundsException extends Exception{
-        public WalletInsufficientFundsException(){
+    public static class WalletInsufficientFundsException extends Exception {
+        public WalletInsufficientFundsException() {
             super("Fonds insuffisants.");
         }
     }

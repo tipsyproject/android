@@ -5,7 +5,6 @@ import android.os.Parcelable;
 
 import com.stackmob.sdk.model.StackMobModel;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import tipsy.commun.billetterie.Billet;
@@ -89,7 +88,7 @@ public class Event extends StackMobModel implements Parcelable {
     public Event(Parcel in) {
         super(Event.class);
         setID(in.readString());
-        in.readList(billetterie,Billet.class.getClassLoader());
+        in.readList(billetterie, Billet.class.getClassLoader());
         debut = (Date) in.readSerializable();
         lieu = in.readString();
         nom = in.readString();

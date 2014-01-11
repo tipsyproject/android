@@ -4,33 +4,23 @@ package tipsy.app;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
 import com.google.android.gms.common.GooglePlayServicesClient.OnConnectionFailedListener;
 import com.google.android.gms.plus.PlusClient;
-
-import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.callback.StackMobCallback;
 import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
-import tipsy.commun.Membre;
-import tipsy.commun.Prefs;
-import tipsy.commun.User;
 
-import java.util.ArrayList;
-import java.util.List;
+import tipsy.commun.Membre;
+import tipsy.commun.User;
 
 /**
  * Created by Alexandre on 04/01/14.
@@ -60,9 +50,10 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
             public void onClick(View v) {
                 if (!mPlusClient.isConnected()) {
                     mPlusClient.connect();
-                    if(mConnectionResult == null)
+                    if (mConnectionResult == null) {
                         mConnectionProgressDialog.show();
-                    else {
+                        Log.d("TOUTAFAIT", "if connection result ");
+                    } else {
                         try {
                             mConnectionResult.startResolutionForResult(getActivity(), REQUEST_CODE_RESOLVE_ERR);
                             mConnectionProgressDialog.show();
@@ -74,34 +65,35 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
                     }
                     Log.d("TOUTAFAIT", "social connect ");
                 }
-        }});
+            }
+        });
         return view;
     }
 
-    public void onStop(){
+    public void onStop() {
         super.onStop();
         mConnectionProgressDialog.dismiss();
-        mPlusClient.clearDefaultAccount();
+        //mPlusClient.clearDefaultAccount();
         mPlusClient.disconnect();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        //if (mConnectionProgressDialog.isShowing()) {
-        if (result.hasResolution()) {
-            // The user clicked the sign-in button already. Start to resolve
-            // connection errors. Wait until onConnected() to dismiss the
-            // connection dialog.
-            try {
-                result.startResolutionForResult(getActivity(), REQUEST_CODE_RESOLVE_ERR);
-                Log.d("TOUTAFAIT", "try connection failed");
-            } catch (IntentSender.SendIntentException e) {
-                mPlusClient.disconnect();
-                mPlusClient.connect();
-                Log.d("TOUTAFAIT", "catch connection failed" + e.getMessage());
+        if (mConnectionProgressDialog.isShowing()) {
+            if (result.hasResolution()) {
+                // The user clicked the sign-in button already. Start to resolve
+                // connection errors. Wait until onConnected() to dismiss the
+                // connection dialog.
+                try {
+                    result.startResolutionForResult(getActivity(), REQUEST_CODE_RESOLVE_ERR);
+                    Log.d("TOUTAFAIT", "try connection failed");
+                } catch (IntentSender.SendIntentException e) {
+                    mPlusClient.disconnect();
+                    mPlusClient.connect();
+                    Log.d("TOUTAFAIT", "catch connection failed" + e.getMessage());
+                }
             }
         }
-        //}
         Log.d("TOUTAFAIT", "connection failed");
         mConnectionResult = result;
 
@@ -113,6 +105,7 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
             mConnectionResult = null;
             mPlusClient.disconnect();
             mPlusClient.connect();
+            Log.d("TOUTAFAIT", "onActivityResult");
         }
     }
 
@@ -155,6 +148,7 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
                 Log.d("TOUTAFAIT", "login social membre non existant " + e.getMessage());
             }
         });
+        Log.d("TOUTAFAIT", "onConnected ");
     }
 
     @Override

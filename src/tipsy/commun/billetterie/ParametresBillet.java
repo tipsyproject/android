@@ -13,6 +13,7 @@ public class ParametresBillet extends StackMobModel implements Parcelable {
 
     public interface ParamBillet {
         public int getNbMax();
+
         public void setNbMax(int nbMax);
     }
 

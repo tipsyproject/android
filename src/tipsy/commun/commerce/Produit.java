@@ -59,7 +59,7 @@ public abstract class Produit extends StackMobModel implements Parcelable {
     }
 
     public void setPrix(int prix) {
-        if(prix < 0) throw new ArithmeticException("Le prix d'un produit ne peut être négatif.");
+        if (prix < 0) throw new ArithmeticException("Le prix d'un produit ne peut être négatif.");
         else this.prix = prix;
     }
 
@@ -79,7 +79,7 @@ public abstract class Produit extends StackMobModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
         dest.writeInt(devise);
-        dest.writeParcelable(event,flags);
+        dest.writeParcelable(event, flags);
         dest.writeString(nom);
         dest.writeParcelable(parametresBillet, flags);
         dest.writeInt(prix);

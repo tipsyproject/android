@@ -6,12 +6,10 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.commun.commerce.Transaction;
-import tipsy.commun.commerce.Wallet;
 
 /**
  * Created by tech on 05/12/13.

@@ -19,8 +19,6 @@ import android.widget.ViewSwitcher;
 import java.util.List;
 import java.util.Vector;
 
-import tipsy.commun.User;
-
 /**
  * Created by Alexandre on 12/12/13.
  */

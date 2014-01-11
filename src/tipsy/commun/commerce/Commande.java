@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import tipsy.commun.User;
-
 /**
  * Created by Valentin on 07/01/14.
  */
@@ -35,7 +33,7 @@ public class Commande extends StackMobModel {
         this.items = items;
     }
 
-    public String getDestinataire(){
+    public String getDestinataire() {
         return items.get(0).getProduit().getEvent().getOrganisateur().getUser().getUsername();
     }
 

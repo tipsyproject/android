@@ -76,8 +76,8 @@ public class EventBilletsFragment extends Fragment {
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if(panier.size() == 0)
-                    Toast.makeText(getActivity(),"Panier vide !",Toast.LENGTH_SHORT).show();
+                if (panier.size() == 0)
+                    Toast.makeText(getActivity(), "Panier vide !", Toast.LENGTH_SHORT).show();
                 else
                     callback.goToCommande();
             }

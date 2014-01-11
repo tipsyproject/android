@@ -8,8 +8,6 @@ import com.stackmob.sdk.model.StackMobModel;
 
 import java.util.Date;
 
-import tipsy.commun.User;
-
 /**
  * Created by valoo on 05/01/14.
  */
@@ -95,7 +93,7 @@ public class Transaction extends StackMobModel implements Parcelable {
 
     /* La transaction est un crédit pour le User u si et seulement s'il en est le destinataire */
     public boolean isCredit(String destinataire) {
-        if(this.destinataire == null)
+        if (this.destinataire == null)
             Log.e("TOUTAFAIT", "destinataire null !!!");
         return this.destinataire.equals(destinataire);
     }
@@ -110,8 +108,8 @@ public class Transaction extends StackMobModel implements Parcelable {
     }
 
     public String getMontantToString(String auteur) {
-        String signe = isDebit(auteur) ? "-":"";
-        return signe+Commerce.prixToString(montant, devise);
+        String signe = isDebit(auteur) ? "-" : "";
+        return signe + Commerce.prixToString(montant, devise);
     }
 
 

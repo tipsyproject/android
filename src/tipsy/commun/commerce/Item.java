@@ -6,11 +6,11 @@ import com.stackmob.sdk.model.StackMobModel;
 /**
  * Created by valoo on 04/01/14.
  */
-public class Item  extends StackMobModel{
+public class Item extends StackMobModel {
     private Produit produit;
     private int quantite;
 
-    public Item(){
+    public Item() {
         super(Item.class);
     }
 

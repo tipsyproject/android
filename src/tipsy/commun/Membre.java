@@ -7,10 +7,6 @@ package tipsy.commun;
 import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.model.StackMobModel;
 
-import java.util.ArrayList;
-
-import tipsy.commun.commerce.Transaction;
-
 
 public class Membre extends StackMobModel implements User.TipsyUser {
 

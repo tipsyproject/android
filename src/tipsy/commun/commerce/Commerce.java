@@ -38,7 +38,7 @@ public class Commerce {
             return devises[devise];
         }
 
-        public static int getLocale(){
+        public static int getLocale() {
             return EURO;
         }
     }
