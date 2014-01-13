@@ -19,7 +19,6 @@ public class Event extends StackMobModel implements Parcelable {
     private Date debut = new Date();
     private String lieu = null;
     private String nom = null;
-    private Organisateur organisateur;
 
     public Event() {
         super(Event.class);
@@ -60,14 +59,6 @@ public class Event extends StackMobModel implements Parcelable {
 
     public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public Organisateur getOrganisateur() {
-        return organisateur;
-    }
-
-    public void setOrganisateur(Organisateur organisateur) {
-        this.organisateur = organisateur;
     }
 
     // Implémentation de Parcelable
