@@ -66,12 +66,13 @@ public class WalletCommandeFragment extends Fragment {
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
+                /*try {
+
                     wallet.pay(commande);
                 } catch (Wallet.WalletInsufficientFundsException e) {
                     Log.d("TOUTAFAIT", "Echec paiement:" + e.getMessage());
                     Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                }*/
             }
         });
 

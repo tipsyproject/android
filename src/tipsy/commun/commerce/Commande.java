@@ -34,7 +34,8 @@ public class Commande extends StackMobModel {
     }
 
     public String getDestinataire() {
-        return items.get(0).getProduit().getEvent().getOrganisateur().getUser().getUsername();
+        //return items.get(0).getProduit().getEvent().getOrganisateur().getUser().getUsername();
+        return "hello";
     }
 
     public int getPrixTotal() {

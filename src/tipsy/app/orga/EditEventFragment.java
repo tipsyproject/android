@@ -130,8 +130,8 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_validate_event:
-                validator = new Validator(EditEventFragment.this);
-                validator.setValidationListener(EditEventFragment.this);
+                validator = new Validator(this);
+                validator.setValidationListener(this);
                 // Validation du formulaire d'inscription
                 validator.validate();
                 return true;
