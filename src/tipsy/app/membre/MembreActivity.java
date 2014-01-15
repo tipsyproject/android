@@ -11,8 +11,10 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.api.StackMobQuery;
@@ -21,6 +23,7 @@ import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -72,8 +75,18 @@ public class MembreActivity extends UserActivity implements MembreListener {
         MenuItem searchItem = menu.findItem(R.id.search);
         menu.findItem(R.id.search).setVisible(!this.menu.isDrawerOpen());
         menu.findItem(R.id.search_date).setVisible(!this.menu.isDrawerOpen());
+
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
         SearchView = (SearchView) searchItem.getActionView();
+        AutoCompleteTextView searchTextView = (AutoCompleteTextView) SearchView.findViewById(SearchView.getContext().getResources().getIdentifier("android:id/search_src_text", null, null));
+        //searchTextView.setTextColor(getResources().getColor(R.color.text));
+        //searchTextView.setTextColor(getResources().getColor(R.color.text));
+        searchTextView.setHintTextColor(getResources().getColor(R.color.search_text_hint));
+        try {
+            Field mCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
+            mCursorDrawableRes.setAccessible(true);
+            mCursorDrawableRes.set(searchTextView, R.drawable.cursor);
+        } catch (Exception e) {}
         SearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return super.onCreateOptionsMenu(menu);
     }

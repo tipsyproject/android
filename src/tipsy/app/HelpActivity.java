@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
@@ -40,8 +41,8 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
         focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepone));
         switcher = (ImageSwitcher) findViewById(R.id.switcher);
         switcher.setFactory(this);
-        switcher.setInAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_in));
-        switcher.setOutAnimation(AnimationUtils.loadAnimation(this, android.R.anim.fade_out));
+        switcher.setInAnimation(AnimationUtils.loadAnimation(this, R.animator.fade_in));
+        switcher.setOutAnimation(AnimationUtils.loadAnimation(this, R.animator.fade_out));
         switcher.setImageResource(images[index]);
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
