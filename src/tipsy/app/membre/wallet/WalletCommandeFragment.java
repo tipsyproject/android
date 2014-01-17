@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
+import tipsy.commun.Event;
 import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.ItemArrayAdapter;
@@ -29,9 +30,18 @@ import tipsy.commun.commerce.Wallet;
 public class WalletCommandeFragment extends Fragment {
 
     private Commande commande;
+    private Event event;
     private Wallet wallet;
     private WalletListener callback;
 
+
+    public static WalletCommandeFragment init(Event e) {
+        WalletCommandeFragment frag = new WalletCommandeFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("Event", e);
+        frag.setArguments(args);
+        return frag;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -49,11 +59,14 @@ public class WalletCommandeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        event = (Event) getArguments().getParcelable("Event");
         View view = inflater.inflate(R.layout.frag_commande, container, false);
 
         /* On récupère le contenu de la commande */
         TipsyApp app = (TipsyApp) getActivity().getApplication();
         commande = new Commande(app.getPanier());
+        commande.setDescriptionFromEvent(event);
+        commande.setTitreFromItems();
         wallet = app.getWallet();
 
         ItemArrayAdapter adapter = new ItemArrayAdapter(getActivity(), commande.getItems());
@@ -66,13 +79,14 @@ public class WalletCommandeFragment extends Fragment {
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                /*try {
+                try {
 
-                    wallet.pay(commande);
+                    Log.d("TOUTAFAIT", "commande orga:" + event.getOrganisateur());
+                    wallet.pay(commande,event.getOrganisateur());
                 } catch (Wallet.WalletInsufficientFundsException e) {
                     Log.d("TOUTAFAIT", "Echec paiement:" + e.getMessage());
                     Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }*/
+                }
             }
         });
 

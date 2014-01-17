@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
+import tipsy.commun.Event;
 import tipsy.commun.billetterie.Billet;
 import tipsy.commun.billetterie.Billetterie;
 import tipsy.commun.commerce.Item;
@@ -31,16 +32,16 @@ public class EventBilletsFragment extends Fragment {
 
     private Panier panier;
     private ItemArrayAdapter adapter;
-    private Billetterie billetterie;
+    private Event event;
     private ArrayList<Item> items;
     private ListView listView;
     private MembreListener callback;
 
 
-    public static EventBilletsFragment init(Billetterie<Billet> b) {
+    public static EventBilletsFragment init(Event e) {
         EventBilletsFragment frag = new EventBilletsFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList("Billetterie", b);
+        args.putParcelable("Event", e);
         frag.setArguments(args);
         return frag;
     }
@@ -56,8 +57,8 @@ public class EventBilletsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        billetterie = (Billetterie) getArguments().getParcelableArrayList("Billetterie");
-        items = billetterie.getItems(panier);
+        event = (Event) getArguments().getParcelable("Event");
+        items = event.getBilletterie().getItems(panier);
 
         View view = inflater.inflate(R.layout.frag_event_billets, container, false);
         listView = (ListView) view.findViewById(R.id.list);
@@ -79,7 +80,7 @@ public class EventBilletsFragment extends Fragment {
                 if (panier.size() == 0)
                     Toast.makeText(getActivity(), "Panier vide !", Toast.LENGTH_SHORT).show();
                 else
-                    callback.goToCommande();
+                    callback.goToCommande(event);
             }
         });
         return view;

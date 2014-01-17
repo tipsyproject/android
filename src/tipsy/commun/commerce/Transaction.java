@@ -33,12 +33,12 @@ public class Transaction extends StackMobModel implements Parcelable {
         this.montant = montant;
     }
 
-    public Transaction(String auteur, int montant, Commande commande) {
+    public Transaction(String auteur, int montant, Commande commande, String destinataire) {
         super(Transaction.class);
         this.auteur = auteur;
         this.commande = commande;
         this.date = new Date();
-        this.destinataire = commande.getDestinataire();
+        this.destinataire = destinataire;
         this.devise = commande.getDevise();
         this.montant = montant;
     }

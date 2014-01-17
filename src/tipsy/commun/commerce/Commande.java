@@ -6,12 +6,17 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
+import tipsy.commun.Event;
+
 /**
  * Created by Valentin on 07/01/14.
  */
 public class Commande extends StackMobModel {
 
     private ArrayList<Item> items = new ArrayList<Item>();
+    private String description;
+    private String titre;
+
 
     public Commande() {
         super(Commande.class);
@@ -33,9 +38,39 @@ public class Commande extends StackMobModel {
         this.items = items;
     }
 
-    public String getDestinataire() {
-        //return items.get(0).getProduit().getEvent().getOrganisateur().getUser().getUsername();
-        return "hello";
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+    public void setDescriptionFromEvent(Event event) {
+        this.description = event.getNom() + " - " + event.getLieu();
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
+
+    // Le titre de la commande correspond aux noms des items qu'elle contient
+    public void setTitreFromItems() {
+        String titre = "Commande vide";
+        if(!items.isEmpty()){
+            Iterator it = items.iterator();
+            Item item = (Item) it.next();
+            titre = item.getProduit().getNom();
+            while(it.hasNext()){
+                item = (Item) it.next();
+                titre += ", " + item.getProduit().getNom();
+            }
+        }
+        this.titre = titre;
     }
 
     public int getPrixTotal() {

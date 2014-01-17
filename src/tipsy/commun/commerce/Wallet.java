@@ -9,6 +9,8 @@ import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 
@@ -47,9 +49,14 @@ public class Wallet<T> extends ArrayList<T> {
                         );
 
         /* Requete Stackmob */
-        Transaction.query(Transaction.class, query, new StackMobQueryCallback<Transaction>() {
+        Transaction.query(Transaction.class, query, StackMobOptions.depthOf(1), new StackMobQueryCallback<Transaction>() {
             @Override
             public void success(List<Transaction> result) {
+                Collections.sort(result, new Comparator<Transaction>() {
+                    public int compare(Transaction t1, Transaction t2) {
+                        return t1.getDate().before(t2.getDate())? 1 : -1;
+                    }
+                });
                 Iterator it = result.iterator();
                 while (it.hasNext()) {
                     add((T) it.next());
@@ -59,6 +66,7 @@ public class Wallet<T> extends ArrayList<T> {
 
             @Override
             public void failure(StackMobException e) {
+                Log.d("TOUTAFAIT","erreur" + e.getMessage());
                 callback.failure(e);
             }
         });
@@ -68,7 +76,7 @@ public class Wallet<T> extends ArrayList<T> {
         if (montant <= 0)
             throw new ArithmeticException("Le montant doit être positif.");
         Transaction t = new Transaction(montant, user.getUsername(), Commerce.Devise.getLocale());
-        add((T) t);
+        add(0,(T) t);
         return t;
     }
 
@@ -85,31 +93,19 @@ public class Wallet<T> extends ArrayList<T> {
         return solde;
     }
 
-    public void pay(Commande cmd) throws WalletInsufficientFundsException {
+    public void pay(Commande cmd, String destinataire) throws WalletInsufficientFundsException {
         final Commande commande = cmd;
         if (getSolde() < commande.getPrixTotal())
             throw new WalletInsufficientFundsException();
         else {
             // Création d'une transaction du montant de la commande destinée à l'organisateur
-            final Transaction transaction = new Transaction(user.getUsername(), commande.getPrixTotal(), commande);
+            final Transaction transaction = new Transaction(user.getUsername(), commande.getPrixTotal(), commande, destinataire);
 
-            add((T) transaction);
+            add(0,(T) transaction);
             transaction.save(StackMobOptions.depthOf(3), new StackMobModelCallback() {
                 @Override
                 public void success() {
                     Log.d("TOUTAFAIT", "save commande ok");
-                    /*commande.getTransactions().add(transaction);
-                    commande.save(new StackMobModelCallback() {
-                        @Override
-                        public void success() {
-                            Log.d("TOUTAFAIT", "save commande ok");
-                        }
-
-                        @Override
-                        public void failure(StackMobException e) {
-                            Log.d("TOUTAFAIT", "erreur save commande: "+e.getMessage());
-                        }
-                    });*/
                 }
 
                 @Override

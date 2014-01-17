@@ -50,6 +50,7 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
 
     public Event creerEvent(String nom) {
         Event e = new Event(nom);
+        e.setOrganisateur(getUser().getEmail());
         events.add(e);
         return e;
     }

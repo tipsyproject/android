@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
+import tipsy.commun.Event;
 import tipsy.commun.commerce.Transaction;
 
 /**
@@ -28,7 +29,8 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         if (savedInstanceState == null) {
             switch (getIntent().getIntExtra(ACTION, -1)) {
                 case COMMANDE:
-                    goToCommande(false);
+                    Event event = getIntent().getParcelableExtra("Event");
+                    goToCommande(false,event);
                     break;
                 default:
                     goToResume(false);
@@ -67,9 +69,10 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
     }
 
     /* Détails sur une transaction */
-    public void goToCommande(boolean addToBackStack) {
+    public void goToCommande(boolean addToBackStack,Event e) {
+        WalletCommandeFragment frag = WalletCommandeFragment.init(e);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new WalletCommandeFragment());
+        ft.replace(R.id.content, frag);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         if (addToBackStack)
             ft.addToBackStack(null);

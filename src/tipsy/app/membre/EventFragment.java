@@ -60,7 +60,7 @@ public class EventFragment extends Fragment {
         // Redirection inscription
         buttonBillets.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.goToEventBillets(event.getBilletterie());
+                callback.goToEventBillets(event);
             }
         });
         return view;

@@ -1,6 +1,7 @@
 package tipsy.commun.commerce;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,13 +37,17 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.frag_transaction, parent, false);
 
-        /*
-        TextView titre = (TextView) view.findViewById(R.id.titre);
-        TextView sousTitre = (TextView) view.findViewById(R.id.sous_titre);
-        */
+
 
         // Item courant
         Transaction transaction = transactions.get(position);
+
+        TextView titre = (TextView) view.findViewById(R.id.titre);
+
+        titre.setText( transaction.isCredit(user.getUsername()) ? "Rechargement" : transaction.getCommande().getTitre());
+
+        TextView sousTitre = (TextView) view.findViewById(R.id.sous_titre);
+        sousTitre.setText(transaction.isCredit(user.getUsername()) ? "" : transaction.getCommande().getDescription());
 
         /* Montant transaction */
         TextView montant = (TextView) view.findViewById(R.id.montant);

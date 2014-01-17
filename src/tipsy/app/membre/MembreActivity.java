@@ -195,8 +195,8 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     }
 
-    public void goToEventBillets(Billetterie b) {
-        EventBilletsFragment frag = EventBilletsFragment.init(b);
+    public void goToEventBillets(Event e) {
+        EventBilletsFragment frag = EventBilletsFragment.init(e);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -206,9 +206,10 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     }
 
-    public void goToCommande() {
+    public void goToCommande(Event e) {
         Intent intent = new Intent(this, WalletActivity.class);
         intent.putExtra(WalletActivity.ACTION, WalletActivity.COMMANDE);
+        intent.putExtra("Event",e);
         startActivity(intent);
     }
 
