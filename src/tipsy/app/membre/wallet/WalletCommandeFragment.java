@@ -1,6 +1,7 @@
 package tipsy.app.membre.wallet;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -23,6 +24,7 @@ import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.ItemArrayAdapter;
 import tipsy.commun.commerce.Wallet;
+import tipsy.commun.commerce.WalletCallback;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -79,14 +81,25 @@ public class WalletCommandeFragment extends Fragment {
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                try {
+                final ProgressDialog wait = Wallet.getProgressDialog(getActivity());
+                wallet.pay(commande,event.getOrganisateur(), new WalletCallback() {
+                    @Override
+                    public void onWait() {
+                        wait.show();
+                    }
 
-                    Log.d("TOUTAFAIT", "commande orga:" + event.getOrganisateur());
-                    wallet.pay(commande,event.getOrganisateur());
-                } catch (Wallet.WalletInsufficientFundsException e) {
-                    Log.d("TOUTAFAIT", "Echec paiement:" + e.getMessage());
-                    Toast.makeText(getActivity().getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
+                    @Override
+                    public void onSuccess() {
+                        wait.dismiss();
+                        callback.goToHomeMembre();
+                    }
+
+                    @Override
+                    public void onFailure(Exception e) {
+                        wait.dismiss();
+                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 

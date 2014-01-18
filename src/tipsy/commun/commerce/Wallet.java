@@ -1,5 +1,7 @@
 package tipsy.commun.commerce;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.util.Log;
 
 import com.stackmob.sdk.api.StackMobOptions;
@@ -33,6 +35,19 @@ public class Wallet<T> extends ArrayList<T> {
 
     public void setDevise(int devise) {
         this.devise = devise;
+    }
+
+    public int getSolde() {
+        int solde = 0;
+        Transaction t;
+        Iterator it = iterator();
+        while (it.hasNext()) {
+            t = (Transaction) it.next();
+            if (t.isCredit(user.getUsername())) {
+                solde += t.getMontant();
+            } else solde -= t.getMontant();
+        }
+        return solde;
     }
 
     /* Récupère la liste des transactions dont fait partie le user */
@@ -72,48 +87,63 @@ public class Wallet<T> extends ArrayList<T> {
         });
     }
 
-    public Transaction credit(int montant) throws ArithmeticException {
+    public void credit(int montant, final WalletCallback callback) {
+        callback.onWait();
+
         if (montant <= 0)
-            throw new ArithmeticException("Le montant doit être positif.");
-        Transaction t = new Transaction(montant, user.getUsername(), Commerce.Devise.getLocale());
-        add(0,(T) t);
-        return t;
-    }
-
-    public int getSolde() {
-        int solde = 0;
-        Transaction t;
-        Iterator it = iterator();
-        while (it.hasNext()) {
-            t = (Transaction) it.next();
-            if (t.isCredit(user.getUsername())) {
-                solde += t.getMontant();
-            } else solde -= t.getMontant();
-        }
-        return solde;
-    }
-
-    public void pay(Commande cmd, String destinataire) throws WalletInsufficientFundsException {
-        final Commande commande = cmd;
-        if (getSolde() < commande.getPrixTotal())
-            throw new WalletInsufficientFundsException();
-        else {
-            // Création d'une transaction du montant de la commande destinée à l'organisateur
-            final Transaction transaction = new Transaction(user.getUsername(), commande.getPrixTotal(), commande, destinataire);
-
+            callback.onFailure(new Exception("Le montant doit être positif."));
+        else{
+            Transaction transaction = new Transaction(montant, user.getUsername(), Commerce.Devise.getLocale());
             add(0,(T) transaction);
-            transaction.save(StackMobOptions.depthOf(3), new StackMobModelCallback() {
+            transaction.save(new StackMobModelCallback() {
                 @Override
                 public void success() {
-                    Log.d("TOUTAFAIT", "save commande ok");
+                    callback.onSuccess();
                 }
 
                 @Override
                 public void failure(StackMobException e) {
-                    Log.d("TOUTAFAIT", "erreur save transaction: " + e.getMessage());
+                    remove(0);
+                    callback.onFailure(e);
                 }
             });
         }
+    }
+
+    public void pay(Commande cmd, String destinataire, final WalletCallback callback){
+        // Mise en attente de l'utilisateur
+        callback.onWait();
+
+        final Commande commande = cmd;
+        if (getSolde() < commande.getPrixTotal())
+            callback.onFailure(new Exception("Fonds insuffisants."));
+        else {
+            // Création d'une transaction du montant de la commande destinée à l'organisateur
+            final Transaction transaction = new Transaction(user.getUsername(), commande.getPrixTotal(), commande, destinataire);
+
+            // ajout de la transaction en tête de liste
+            add(0,(T) transaction);
+            transaction.save(StackMobOptions.depthOf(3), new StackMobModelCallback() {
+                @Override
+                public void success() {
+                    callback.onSuccess();
+                }
+
+                @Override
+                public void failure(StackMobException e) {
+                    //Suppression de la transaction précédemment ajoutée
+                    remove(0);
+                    callback.onFailure(e);
+                }
+            });
+        }
+    }
+
+    public static ProgressDialog getProgressDialog(Context context){
+        ProgressDialog wait = new ProgressDialog(context);
+        wait.setMessage("Paiement en cours...");
+        wait.setIndeterminate(true);
+        return wait;
     }
 
 
@@ -127,12 +157,6 @@ public class Wallet<T> extends ArrayList<T> {
         public abstract void success();
 
         public abstract void failure(com.stackmob.sdk.exception.StackMobException e);
-    }
-
-    public static class WalletInsufficientFundsException extends Exception {
-        public WalletInsufficientFundsException() {
-            super("Fonds insuffisants.");
-        }
     }
 
 }

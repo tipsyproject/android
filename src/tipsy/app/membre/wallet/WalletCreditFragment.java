@@ -1,6 +1,7 @@
 package tipsy.app.membre.wallet;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
@@ -21,6 +23,7 @@ import tipsy.app.TipsyApp;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.Transaction;
 import tipsy.commun.commerce.Wallet;
+import tipsy.commun.commerce.WalletCallback;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -66,20 +69,25 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
     public void onValidationSucceeded() {
         // On recupère le montant du crédit
         int montant = Commerce.parsePrix(inputMontant);
-        if (montant > 0) {
-            Transaction transaction = wallet.credit(montant);
-            transaction.save(new StackMobModelCallback() {
-                @Override
-                public void success() {
-                    callback.goToResume(true);
-                }
+        final ProgressDialog wait = Wallet.getProgressDialog(getActivity());
+        wallet.credit(montant, new WalletCallback() {
+            @Override
+            public void onWait() {
+                wait.show();
+            }
 
-                @Override
-                public void failure(StackMobException e) {
-                }
-            });
-        } else callback.goToResume(true);
+            @Override
+            public void onSuccess() {
+                wait.dismiss();
+                callback.goToResume(true);
+            }
 
+            @Override
+            public void onFailure(Exception e) {
+                wait.dismiss();
+                Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
@@ -88,6 +96,7 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
         } else {
+            Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
         }
     }
 }

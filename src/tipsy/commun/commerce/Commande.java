@@ -64,10 +64,10 @@ public class Commande extends StackMobModel {
         if(!items.isEmpty()){
             Iterator it = items.iterator();
             Item item = (Item) it.next();
-            titre = item.getProduit().getNom();
+            titre = item.getProduit().getNom()+" x"+Integer.toString(item.getQuantite());
             while(it.hasNext()){
                 item = (Item) it.next();
-                titre += ", " + item.getProduit().getNom();
+                titre += ", " + item.getProduit().getNom()+" x"+Integer.toString(item.getQuantite());
             }
         }
         this.titre = titre;

@@ -1,6 +1,7 @@
 package tipsy.app.membre.wallet;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
+import tipsy.app.membre.MembreActivity;
 import tipsy.commun.Event;
 import tipsy.commun.commerce.Transaction;
 
@@ -87,5 +89,10 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
         ft.commit();
+    }
+
+    public void goToHomeMembre(){
+        Intent intent = new Intent(this, MembreActivity.class);
+        startActivity(intent);
     }
 }

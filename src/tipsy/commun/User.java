@@ -147,14 +147,11 @@ public class User extends StackMobUser implements Parcelable {
                     });
 
         } else if (user.getType() == TypeUser.MEMBRE) {
-            Log.d("TOUTAFAIT", "query Membre");
             Membre.query(Membre.class,
                     new StackMobQuery().field(new StackMobQueryField("user").isEqualTo(user.getUsername())),
                     new StackMobQueryCallback<Membre>() {
                         @Override
                         public void success(List<Membre> result) {
-
-                            Log.d("TOUTAFAIT", "success query Membre");
                             final Membre membre = result.get(0);
                             membre.fetch(new StackMobModelCallback() {
                                 @Override
@@ -165,7 +162,6 @@ public class User extends StackMobUser implements Parcelable {
                                     app.getWallet().init(app.getWallet().new WalletInitCallback() {
                                         @Override
                                         public void success() {
-                                            Log.d("TOUTAFAIT", "success query Wallet: ");
                                             user.goHome(a);
                                         }
 

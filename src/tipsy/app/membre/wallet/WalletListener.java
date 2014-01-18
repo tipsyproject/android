@@ -14,4 +14,6 @@ public interface WalletListener {
     public void goToDetailsTransaction(Transaction t);
 
     public void goToCommande(boolean addToBackStack, Event e);
+
+    public void goToHomeMembre();
 }
