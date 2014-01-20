@@ -121,9 +121,6 @@ public class MembreActivity extends UserActivity implements MembreListener {
             case MenuMembre.MON_COMPTE:
                 goToAccount();
                 break;
-            case MenuMembre.SOLDE:
-                goToWallet();
-                break;
             case MenuMembre.EVENEMENTS:
                 goToEvents();
                 break;

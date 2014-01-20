@@ -4,7 +4,22 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingTop="5dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="5dp"
+    android:scaleType="centerCrop" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/layout1"
+        android:paddingTop="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="30dp"
+        android:background="#22ffffff" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -26,13 +41,11 @@
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="30dp"
-        android:paddingRight="30dp"
         android:stretchColumns="1"
         android:layout_gravity="center"
         android:layout_below="@+id/layout1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="55dp"
+        android:layout_marginTop="35dp"
         android:id="@+id/tableLayout">
 
         <TableRow
@@ -46,6 +59,11 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="Organisation :"
                 android:id="@+id/orga"
+                android:textColor="@color/text_home"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="-1"
+                android:shadowDy="0"
+                android:shadowRadius="2"
                 android:layout_gravity="center_vertical" />
 
             <EditText
@@ -54,6 +72,11 @@
                 android:inputType="text"
                 android:layout_weight="1"
                 android:id="@+id/input_orga"
+                android:textColor="@color/text_home_edit"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="-1"
+                android:shadowDy="0"
+                android:shadowRadius="2"
                 android:layout_gravity="center" />
 
         </TableRow>
@@ -70,6 +93,11 @@
                 android:text="Email :"
                 android:layout_weight="0.1"
                 android:id="@+id/mail"
+                android:textColor="@color/text_home"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="-1"
+                android:shadowDy="0"
+                android:shadowRadius="2"
                 android:layout_gravity="center_vertical" />
 
             <EditText
@@ -79,10 +107,17 @@
                 android:textColorHint="@color/text_disable"
                 android:layout_weight="1"
                 android:id="@+id/input_mail"
+                android:textColor="@color/text_home_edit"
+                android:shadowColor="@android:color/black"
+                android:shadowDx="-1"
+                android:shadowDy="0"
+                android:shadowRadius="2"
                 android:layout_gravity="center" />
 
         </TableRow>
 
     </TableLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -123,13 +123,18 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
-        String message = failedRule.getFailureMessage();
+        final String message = failedRule.getFailureMessage();
 
         if (failedView instanceof EditText) {
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
         } else {
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+            TypeSignUpActivity.this.runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(TypeSignUpActivity.this, message, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

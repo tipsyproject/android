@@ -145,7 +145,12 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                         // En cas d'échec
                         @Override
                         public void failure(StackMobException e) {
-                            Toast.makeText(getActivity(), "Sauvegarde échouée", Toast.LENGTH_SHORT).show();
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(), "Sauvegarde échouée", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     });
                 } else

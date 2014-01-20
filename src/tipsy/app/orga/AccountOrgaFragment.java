@@ -25,6 +25,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
@@ -124,7 +125,7 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
             case R.id.action_validate_event:
                 if (change) {
                     orga.setNom(Orga.getText().toString());
-                    //orga.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
+                    orga.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
                     orga.save(new StackMobModelCallback() {
                         @Override
                         public void success() {
@@ -134,7 +135,12 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
                         // En cas d'échec
                         @Override
                         public void failure(StackMobException e) {
-                            Toast.makeText(getActivity(), "Sauvegarde échouée", Toast.LENGTH_SHORT).show();
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(), "Sauvegarde échouée", Toast.LENGTH_SHORT).show();
+                                }
+                            });
                         }
                     });
                 } else

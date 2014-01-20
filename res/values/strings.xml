@@ -4,7 +4,6 @@
     <string-array name="menu_membre">
         <item>Tableau de bord</item>
         <item>Mon Compte</item>
-        <item>Solde</item>
         <item>Événements</item>
         <item>Aide</item>
         <item>Déconnexion</item>

@@ -58,6 +58,7 @@ public class User extends StackMobUser implements Parcelable {
         return getUsername();
     }
 
+
     public boolean isTemp_pwd() {
         return temp_pwd;
     }

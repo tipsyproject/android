@@ -7,9 +7,9 @@
     android:id="@+id/layout">
 
     <ImageSwitcher
-        android:id="@+id/switcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:id="@+id/switcher"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:background="@drawable/first_bg_flou" />

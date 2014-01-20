@@ -77,19 +77,29 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
             @Override
             public void failure(StackMobException e) {
                 Log.d("TOUTAFAIT", "forget1" + e.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(), "Email non existant", Toast.LENGTH_SHORT).show();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "Email non existant", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
 
-    public void onValidationFailed(View failedView, Rule<?> failedRule) {
-        String message = failedRule.getFailureMessage();
+    public void onValidationFailed(View failedView, final Rule<?> failedRule) {
+        final String message = failedRule.getFailureMessage();
 
         if (failedView instanceof EditText) {
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
         } else {
-            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 }

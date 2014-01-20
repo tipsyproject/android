@@ -95,9 +95,14 @@ public class WalletCommandeFragment extends Fragment {
                     }
 
                     @Override
-                    public void onFailure(Exception e) {
+                    public void onFailure(final Exception e) {
                         wait.dismiss();
-                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                        getActivity().runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     }
                 });
             }

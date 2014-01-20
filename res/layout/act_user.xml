@@ -4,7 +4,8 @@
     android:id="@+id/drawer_Layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@drawable/bg_festival_flou"
+    android:scaleType="centerCrop">
     <!-- The main content view -->
 
     <FrameLayout

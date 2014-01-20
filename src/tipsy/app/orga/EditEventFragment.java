@@ -164,13 +164,18 @@ public class EditEventFragment extends Fragment implements ActionBar.TabListener
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
-        String message = failedRule.getFailureMessage();
+        final String message = failedRule.getFailureMessage();
 
         if (failedView instanceof EditText) {
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
         } else {
-            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
 

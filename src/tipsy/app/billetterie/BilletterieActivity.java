@@ -41,7 +41,12 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
                 @Override
                 public void failure(StackMobException e) {
                     Log.d("TOUTAFAIT", "Erreur billetterie:" + e.getMessage());
-                    Toast.makeText(BilletterieActivity.this, "Erreur Billetterie", Toast.LENGTH_SHORT).show();
+                    BilletterieActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(BilletterieActivity.this, "Erreur Billetterie", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             });
         }

@@ -11,10 +11,9 @@ import tipsy.app.R;
 public class MenuMembre extends MenuUser {
     public final static int ACCUEIL = 0;
     public final static int MON_COMPTE = 1;
-    public final static int SOLDE = 2;
-    public final static int EVENEMENTS = 3;
-    public final static int AIDE = 4;
-    public final static int DECONNEXION = 5;
+    public final static int EVENEMENTS = 2;
+    public final static int AIDE = 3;
+    public final static int DECONNEXION = 4;
 
     public MenuMembre(Activity a) {
         super(a);

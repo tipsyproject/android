@@ -118,7 +118,12 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                         @Override
                         public void failure(StackMobException e) {
                             Log.d("TOUTAFAIT", "login " + e.getMessage());
-                            Toast.makeText(getActivity().getApplicationContext(), "Identifiants incorrects", Toast.LENGTH_SHORT).show();
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(), "Identifiants incorrects", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
                     });
                 }
@@ -127,19 +132,29 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
             @Override
             public void failure(StackMobException e) {
                 Log.d("TOUTAFAIT", "forget1" + e.getMessage());
-                Toast.makeText(getActivity().getApplicationContext(), "Email non existant", Toast.LENGTH_SHORT).show();
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "Email non existant", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
-        String message = failedRule.getFailureMessage();
+        final String message = failedRule.getFailureMessage();
 
         if (failedView instanceof EditText) {
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
         } else {
-            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }
