@@ -79,7 +79,13 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
             @Override
             public void onSuccess() {
                 wait.dismiss();
-                callback.goToResume(true);
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getActivity(), "Rechargement effectué", Toast.LENGTH_LONG).show();
+                    }
+                });
+                getActivity().finish();
             }
 
             @Override

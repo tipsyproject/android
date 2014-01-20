@@ -28,6 +28,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_wallet);
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setTitle("Tipsy Wallet");
         if (savedInstanceState == null) {
             switch (getIntent().getIntExtra(ACTION, -1)) {
                 case COMMANDE:

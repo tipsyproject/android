@@ -60,5 +60,6 @@ j'accepte les conditions générales."</string>
     <string name="dernieres_transactions">Dernières transactions</string>
     <string name="forget">Merci d\'entrer votre adresse email, nous vous enverrons un nouveau mot de passe.</string>
     <string name="payer">PAYER</string>
+    <string name="entrer_solde">Veuillez entrer la valeur que vous souhaitez ajouter à votre solde :</string>
 
 </resources>
