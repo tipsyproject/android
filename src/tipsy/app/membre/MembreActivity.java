@@ -203,6 +203,17 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     }
 
+    public void goToParticiper(Event e) {
+        EventParticiperFragment frag = EventParticiperFragment.init(e);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.content, frag)
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+
+    }
+
     public void goToCommande(Event e) {
         Intent intent = new Intent(this, WalletActivity.class);
         intent.putExtra(WalletActivity.ACTION, WalletActivity.COMMANDE);

@@ -16,6 +16,7 @@ import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
+import tipsy.app.access.AccessActivity;
 import tipsy.app.billetterie.BilletterieActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Organisateur;
@@ -91,8 +92,17 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
     // clique sur le bouton de la Billetterie
-    public void onBilletterieEdit(Event e) {
+    public void goToBilletterie(Event e) {
         Intent intent = new Intent(this, BilletterieActivity.class);
+        Bundle b = new Bundle();
+        b.putParcelable("Event", e);
+        intent.putExtras(b);
+        startActivity(intent);
+    }
+
+    // clique sur le bouton de la Billetterie
+    public void goToAccess(Event e) {
+        Intent intent = new Intent(this, AccessActivity.class);
         Bundle b = new Bundle();
         b.putParcelable("Event", e);
         intent.putExtras(b);

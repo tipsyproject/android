@@ -7,7 +7,7 @@ import tipsy.commun.Event;
  * Created by valoo on 22/12/13.
  */
 public interface OrgaListener extends MenuListener {
-    public void onBilletterieEdit(Event e);
+    public void goToBilletterie(Event e);
 
     public void onClickResumeEvent(Event e);
 
@@ -20,4 +20,6 @@ public interface OrgaListener extends MenuListener {
     public void goToAccount();
 
     public void goToEvents();
+
+    public void goToAccess(Event e);
 }

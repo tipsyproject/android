@@ -45,23 +45,35 @@ public class EventHomeFragment extends Fragment {
         event = getArguments().getParcelable("Event");
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
-
-        buttonBilleterie = (LinearLayout) view.findViewById(R.id.button_billetterie);
-        buttonBar = (LinearLayout) view.findViewById(R.id.button_bar);
+        /* CONTRÔLE D'ACCES */
         buttonAcces = (LinearLayout) view.findViewById(R.id.button_acces);
-        buttonInfos = (LinearLayout) view.findViewById(R.id.button_infos);
+        buttonAcces.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                callback.goToAccess(event);
+            }
+        });
 
+
+        /* BAR */
+        buttonBar = (LinearLayout) view.findViewById(R.id.button_bar);
         buttonBar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Fermé pour cause de VOMIS #RER_B", Toast.LENGTH_LONG).show();
             }
         });
 
+        /* BILLETTERIE */
+        buttonBilleterie = (LinearLayout) view.findViewById(R.id.button_billetterie);
         buttonBilleterie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.onBilletterieEdit(event);
+                callback.goToBilletterie(event);
             }
         });
+
+
+
+        /* SETTINGS EVENT */
+        buttonInfos = (LinearLayout) view.findViewById(R.id.button_infos);
         buttonInfos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.onEventEdit(event, false);

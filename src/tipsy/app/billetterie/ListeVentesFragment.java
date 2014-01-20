@@ -132,11 +132,7 @@ public class ListeVentesFragment extends Fragment {
 
     public void loadVentes(){
 
-        final ProgressDialog wait = new ProgressDialog(getActivity());
-        wait.setMessage("Chargement...");
-        wait.setIndeterminate(true);
-        wait.setCancelable(false);
-        wait.show();
+        final ProgressDialog wait = ProgressDialog.show(getActivity(),"","Chargement...",true,false);
         ArrayList<String> idBillets = new ArrayList<String>();
         Iterator it = event.getBilletterie().iterator();
         Billet billet;

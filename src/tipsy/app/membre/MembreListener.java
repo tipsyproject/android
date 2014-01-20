@@ -24,6 +24,8 @@ public interface MembreListener extends MenuListener {
 
     public void goToEventBillets(Event e);
 
+    public void goToParticiper(Event e);
+
     public void goToCommande(Event e);
 
 }

@@ -57,7 +57,7 @@ public class EventBilletsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        event = (Event) getArguments().getParcelable("Event");
+        event = getArguments().getParcelable("Event");
         items = event.getBilletterie().getItems(panier);
 
         View view = inflater.inflate(R.layout.frag_event_billets, container, false);
@@ -80,7 +80,7 @@ public class EventBilletsFragment extends Fragment {
                 if (panier.size() == 0)
                     Toast.makeText(getActivity(), "Panier vide !", Toast.LENGTH_SHORT).show();
                 else
-                    callback.goToCommande(event);
+                    callback.goToParticiper(event);
             }
         });
         return view;
