@@ -20,7 +20,9 @@ public class Billet extends Produit {
         return "produit";
     }
 
+
     /* Implementation Parcelable */
+
     public Billet(Parcel in) {
         super(in);
     }

@@ -13,7 +13,7 @@ import tipsy.commun.billetterie.ParametresBillet;
  */
 
 
-public abstract class Produit extends StackMobModel implements Parcelable {
+public class Produit extends StackMobModel  implements Parcelable {
 
     protected int devise = Commerce.Devise.EURO;
     protected String nom = "Mon Tarif";
@@ -24,9 +24,10 @@ public abstract class Produit extends StackMobModel implements Parcelable {
     public static int TICKET = 1;
     public static int CONSO = 2;
 
-    protected Produit() {
+    public Produit() {
         super(Produit.class);
     }
+
 
     public int getDevise() {
         return devise;
@@ -36,6 +37,7 @@ public abstract class Produit extends StackMobModel implements Parcelable {
         this.devise = devise;
     }
 
+
     public String getNom() {
         return nom;
     }
@@ -43,6 +45,7 @@ public abstract class Produit extends StackMobModel implements Parcelable {
     public void setNom(String nom) {
         this.nom = nom;
     }
+
 
     public int getPrix() {
         return prix;
@@ -60,6 +63,7 @@ public abstract class Produit extends StackMobModel implements Parcelable {
     public void setTypeProduit(int typeproduit) {
         this.typeProduit = typeproduit;
     }
+
 
     @Override
     public boolean equals(Object o) {

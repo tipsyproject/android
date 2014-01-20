@@ -87,7 +87,7 @@ public class ListeBilletsFragment extends Fragment {
     // Redéfinition de l'actionBar: Bouton de validation
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_billetterie_list_billets, menu);
+        inflater.inflate(R.menu.menu_billetterie_liste_billets, menu);
     }
 
     // Gestion du click sur le bouton de validation

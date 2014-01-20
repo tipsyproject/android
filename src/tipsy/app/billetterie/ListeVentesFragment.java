@@ -3,6 +3,7 @@ package tipsy.app.billetterie;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -92,64 +93,82 @@ public class ListeVentesFragment extends Fragment {
         adapter = new BilletArrayAdapter(getActivity(), ventes);
         listView.setAdapter(adapter);
 
-        Log.d("TOUTAFAIT", "loadVentes");
-        loadVentes();
 
-        /*
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editBillet(event.getBilletterie().get(position), false);
+                //editBillet(event.getBilletterie().get(position), false);
             }
-        });*/
+        });
         return view;
+    }
+
+    public void onStart(){
+        super.onStart();
+        loadVentes();
+    }
+
+
+
+    // Redéfinition de l'actionBar: Bouton de validation
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_billetterie_liste_ventes, menu);
+    }
+
+    // Gestion du click sur le bouton de validation
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.action_update:
+                loadVentes();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
 
     public void loadVentes(){
-        StackMobQuery query =
-                new StackMobQuery().fieldIsEqualTo("titre", "Test x1");
 
-
-        Commande.query(Commande.class, query, StackMobOptions.depthOf(1),new StackMobQueryCallback<Commande>() {
-            @Override
-            public void success(List<Commande> result) {
-                Log.d("TOUTAFAIT", "nb" + Integer.toString(result.size()));
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT", "erreur" + e.getMessage());
-            }
-        });
-        /*
+        final ProgressDialog wait = new ProgressDialog(getActivity());
+        wait.setMessage("Chargement...");
+        wait.setIndeterminate(true);
+        wait.setCancelable(false);
+        wait.show();
         ArrayList<String> idBillets = new ArrayList<String>();
         Iterator it = event.getBilletterie().iterator();
         Billet billet;
         while(it.hasNext()){
             billet = (Billet) it.next();
             idBillets.add(billet.getID());
-            Log.d("TOUTAFAIT", "billet:"+billet.getID());
         }
-        //StackMobQuery query = new StackMobQuery().fieldIsIn("produit",idBillets);
-        StackMobQuery query = new StackMobQuery().fieldIsEqualTo("produit","5dd76c82cd79459b926574c92519e6a8");
-        Item.query(Item.class, query, new StackMobQueryCallback<Item>(){
+        StackMobQuery query = new StackMobQuery().fieldIsIn("produit",idBillets);
+        Item.query(Item.class, query, StackMobOptions.depthOf(1), new StackMobQueryCallback<Item>() {
             @Override
             public void success(List<Item> result) {
-                Log.d("TOUTAFAIT", "nb ventes" + Integer.toString(result.size()));
+                ventes.clear();
                 Iterator it = result.iterator();
                 while (it.hasNext()) {
                     ventes.add((Item) it.next());
                 }
-                adapter.notifyDataSetChanged();
-                nbVentes.setText(Integer.toString(result.size()));
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        adapter.notifyDataSetChanged();
+                        nbVentes.setText(Integer.toString(ventes.size()));
+                        wait.dismiss();
+                    }
+                });
             }
 
             @Override
             public void failure(StackMobException e) {
+                wait.dismiss();
                 Log.d("TOUTAFAIT", "erreur load ventes" + e.getMessage());
             }
-        });*/
+        });
 
     }
 
