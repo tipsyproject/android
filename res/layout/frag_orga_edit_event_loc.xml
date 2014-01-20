@@ -8,6 +8,11 @@
         android:id="@+id/input_lieu"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textColor="@color/text_home_edit"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="-1"
+        android:shadowDy="0"
+        android:shadowRadius="2"
         android:hint="Lieu"
         android:inputType="text" />
 </LinearLayout>

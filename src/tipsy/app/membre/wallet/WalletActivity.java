@@ -63,6 +63,15 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
     }
 
     /* Créditer le Wallet */
+    public void goToFormule() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, new WalletFormuleFragment());
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    /* Créditer le Wallet */
     public void goToCredit() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new WalletCreditFragment());

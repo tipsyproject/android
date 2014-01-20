@@ -46,7 +46,7 @@ public class WalletResumeFragment extends Fragment {
         ImageButton buttonCredit = (ImageButton) view.findViewById(R.id.button_credit);
         buttonCredit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.goToCredit();
+                callback.goToFormule();
             }
         });
 

@@ -9,6 +9,8 @@ import tipsy.commun.commerce.Transaction;
 public interface WalletListener {
     public void goToResume(boolean addToBackStack);
 
+    public void goToFormule();
+
     public void goToCredit();
 
     public void goToDetailsTransaction(Transaction t);

@@ -32,7 +32,7 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
 
     private WalletListener callback;
 
-    @Required(order = 1)
+    @Required(order = 1, message = "Champ Requis")
     @NumberRule(order = 2, type = NumberRule.NumberType.DOUBLE)
     private EditText inputMontant;
     private Button buttonCredit;

@@ -27,6 +27,9 @@
     <style name="MyActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
         <item name="android:background">@color/text_menu</item>
         <item name="android:titleTextStyle">@style/ActionBar.TitleTextStyle</item>
+        <item name="android:backgroundStacked">@color/tab_action_bar</item>
+        <item name="android:selectableItemBackground">@color/text</item>
+        <item name="android:actionBarTabStyle">@color/text</item>
     </style>
 
     <style name="ActionBar.TitleTextStyle" parent="@android:style/TextAppearance">

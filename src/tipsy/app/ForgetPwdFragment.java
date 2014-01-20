@@ -1,11 +1,13 @@
 package tipsy.app;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
         reset = (Button) view.findViewById(R.id.resetpwd);
         reset.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                hideKeyboard(getActivity());
                 validator_pwd.validate();
             }
         });
@@ -57,14 +60,27 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
                         user.save(new StackMobModelCallback() {
                             @Override
                             public void success() {
-                                LoginActivity.getPager().setCurrentItem(0, true);
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        LoginActivity.getPager().setCurrentItem(0, true);
+                                        Toast.makeText(getActivity(), "Mot de passe envoyé", Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
 
                             @Override
                             public void failure(StackMobException e) {
-
+                                Log.d("TOUTAFAIT", "forget " + e.getMessage());
+                                getActivity().runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        Toast.makeText(getActivity(), "Réinitialisation échouée", Toast.LENGTH_LONG).show();
+                                    }
+                                });
                             }
                         });
+
                     }
 
                     @Override
@@ -80,7 +96,7 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(getActivity(), "Email non existant", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "Email non existant", Toast.LENGTH_LONG).show();
                     }
                 });
             }
@@ -101,5 +117,10 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
                 }
             });
         }
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

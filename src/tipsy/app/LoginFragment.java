@@ -1,5 +1,6 @@
 package tipsy.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -35,6 +37,8 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
     protected Button signup;
     protected Button help;
     protected Button forgetpwd;
+    protected static String username;
+    protected static String pwd;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -49,11 +53,13 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
         forgetpwd = (Button) view.findViewById(R.id.forgotpass);
         signin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                hideKeyboard(getActivity());
                 validator.validate();
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                hideKeyboard(getActivity());
                 startActivity(new Intent(getActivity(), TypeSignUpActivity.class));
             }
         });
@@ -68,6 +74,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
         });
         forgetpwd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                hideKeyboard(getActivity());
                 LoginActivity.getPager().setCurrentItem(1, true);
             }
         });
@@ -80,29 +87,12 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
             @Override
             public void success() {
                 if (user.isTemp_pwd()) {
-                    user.loginResettingTemporaryPassword("connard", new StackMobModelCallback() {
+                    getActivity().runOnUiThread(new Runnable() {
                         @Override
-                        public void success() {
-                            user.setTemp_pwd(false);
-                            user.save(new StackMobModelCallback() {
-                                @Override
-                                public void success() {
-                                    // Sauvegarde locale des identifiants pour connexion auto
-                                    User.rememberMe(getActivity(), inputEmail.getText().toString(), "connard");
-                                    // Redirection en fonction du type utilisateur
-                                    User.keepCalmAndWaitForGoingHome(getActivity(), user);
-                                }
-
-                                @Override
-                                public void failure(StackMobException e) {
-
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void failure(StackMobException e) {
-                            //login failed
+                        public void run() {
+                            username = inputEmail.getText().toString();
+                            pwd = inputPassword.getText().toString();
+                            LoginActivity.getPager().setCurrentItem(2, true);
                         }
                     });
                 } else {
@@ -156,5 +146,10 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                 }
             });
         }
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

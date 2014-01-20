@@ -29,8 +29,11 @@
     <string name="conditions">"En m'inscrivant,
 j'accepte les conditions générales."</string>
     <string name="welcome">"Bienvenue sur Tipsy !"</string>
-    <string name="second_description">"Valentin Connard !!"</string>
-    <string name="third_description">"Valentin Connard !!"</string>
+    <string name="third_description">"Faciliter et unifier vos dépenses :
+        - Places
+        - Vestiaire
+        - Et Consommations"</string>
+    <string name="second_description">"Gagnez un temps d'attente considérable grâce à nos bracelets NFC !"</string>
     <string name="affichermdp">"Afficher le mot de passe"</string>
     <string name="forgotpass">"Mot de passe oublié ?"</string>
     <string name="loading">"Chargement"</string>
@@ -61,5 +64,7 @@ j'accepte les conditions générales."</string>
     <string name="forget">Merci d\'entrer votre adresse email, nous vous enverrons un nouveau mot de passe.</string>
     <string name="payer">PAYER</string>
     <string name="entrer_solde">Veuillez entrer la valeur que vous souhaitez ajouter à votre solde :</string>
+    <string name="choisir_formule">Choisissez votre formule !</string>
+    <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string>
 
 </resources>

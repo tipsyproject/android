@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <color name="background">#f0f0f0</color>
     <color name="background_menu">#ffffff</color>
     <color name="text">#ffffff</color>
     <color name="search_text_hint">#d8d8d8</color>
+    <color name="tab_action_bar">#0090cc</color>
     <color name="text_menu">#0099cc</color>
     <color name="text_home">#ffffff</color>
     <color name="text_home_edit">#f0f0f0</color>

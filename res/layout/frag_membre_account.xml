@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent" android:layout_height="fill_parent" android:fillViewport="true">
+
+    <RelativeLayout
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
@@ -19,12 +22,8 @@
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:paddingBottom="30dp"
-        android:background="#22ffffff" >
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layout1">
+        android:background="#22ffffff"
+        android:layout_alignParentEnd="true">
 
         <ImageButton
             android:layout_width="115dp"
@@ -36,14 +35,12 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="60dp" />
 
-    </RelativeLayout>
-
     <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:stretchColumns="1"
         android:layout_gravity="center"
-        android:layout_below="@+id/layout1"
+        android:layout_below="@+id/avatar"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="35dp"
         android:id="@+id/tableLayout">
@@ -155,4 +152,5 @@
 
     </RelativeLayout>
 
-</RelativeLayout>
+    </RelativeLayout>
+</ScrollView>

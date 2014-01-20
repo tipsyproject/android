@@ -10,6 +10,11 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Début de l'événement"
+        android:textColor="@color/text_home"
+        android:shadowColor="@android:color/black"
+        android:shadowDx="-1"
+        android:shadowDy="0"
+        android:shadowRadius="2"
         android:id="@+id/textView"
         android:gravity="center_horizontal" />
 
@@ -17,6 +22,7 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bar_height"
+        android:layout_marginTop="20dp"
         android:gravity="center_vertical|center_horizontal">
 
         <!--
@@ -54,6 +60,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:textColor="@color/text_home"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="-1"
+            android:shadowDy="0"
+            android:shadowRadius="2"
             style="@android:style/Widget.Holo.Spinner" />
 
         <ImageView
@@ -67,6 +78,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:textColor="@color/text_home"
+            android:shadowColor="@android:color/black"
+            android:shadowDx="-1"
+            android:shadowDy="0"
+            android:shadowRadius="2"
             style="@android:style/Widget.Holo.Spinner" />
     </LinearLayout>
 
