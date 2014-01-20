@@ -16,8 +16,7 @@ import tipsy.commun.billetterie.ParametresBillet;
 public abstract class Produit extends StackMobModel implements Parcelable {
 
     protected int devise = Commerce.Devise.EURO;
-    private String nom = "Mon Tarif";
-    protected ParametresBillet parametresBillet = null;
+    protected String nom = "Mon Tarif";
     protected int prix = 0;
     protected int typeProduit;
 
@@ -54,6 +53,14 @@ public abstract class Produit extends StackMobModel implements Parcelable {
         else this.prix = prix;
     }
 
+    public int getTypeProduit() {
+        return typeProduit;
+    }
+
+    public void setTypeProduit(int typeproduit) {
+        this.typeProduit = typeproduit;
+    }
+
     @Override
     public boolean equals(Object o) {
         return (this.getID() == ((Produit) o).getID());
@@ -71,7 +78,6 @@ public abstract class Produit extends StackMobModel implements Parcelable {
         dest.writeString(getID());
         dest.writeInt(devise);
         dest.writeString(nom);
-        dest.writeParcelable(parametresBillet, flags);
         dest.writeInt(prix);
         dest.writeInt(typeProduit);
     }
@@ -81,7 +87,6 @@ public abstract class Produit extends StackMobModel implements Parcelable {
         setID(in.readString());
         devise = in.readInt();
         nom = in.readString();
-        parametresBillet = in.readParcelable(ParametresBillet.class.getClassLoader());
         prix = in.readInt();
         typeProduit = in.readInt();
     }

@@ -29,11 +29,6 @@ public class ParametresBillet extends StackMobModel implements Parcelable {
         this.nbMax = nbMax;
     }
 
-    // Nom du schema dans Stackmob
-    public static String overrideSchemaName() {
-        return "billet";
-    }
-
 
     // Implémentation de Parcelable
     @Override

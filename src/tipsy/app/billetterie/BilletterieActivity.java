@@ -12,6 +12,7 @@ import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+
 import tipsy.app.R;
 import tipsy.commun.Event;
 
@@ -35,7 +36,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
             event.fetch(StackMobOptions.depthOf(2), new StackMobModelCallback() {
                 @Override
                 public void success() {
-                    showListBillets(false);
+                    showListeBillets(false);
                 }
 
                 @Override
@@ -66,12 +67,20 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
     // IMPLEMENTATION DES FONCTIONS DE l'INTERFACE BilletterieListener
 
-    public void showListBillets(boolean addTobackStack) {
-        ListBilletsFragment frag = ListBilletsFragment.init(event);
+    public void showListeBillets(boolean addTobackStack) {
+        ListeBilletsFragment frag = ListeBilletsFragment.init(event);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, frag);
         if (addTobackStack)
             ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    public void showListeVentes(){
+        ListeVentesFragment frag = ListeVentesFragment.init(event);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, frag);
+        ft.addToBackStack(null);
         ft.commit();
     }
 }

@@ -123,7 +123,7 @@ public class Wallet<T> extends ArrayList<T> {
 
             // ajout de la transaction en tête de liste
             add(0,(T) transaction);
-            transaction.save(StackMobOptions.depthOf(3), new StackMobModelCallback() {
+            transaction.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
                 @Override
                 public void success() {
                     callback.onSuccess();

@@ -3,8 +3,6 @@ package tipsy.app.membre;
 import tipsy.app.MenuListener;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
-import tipsy.commun.billetterie.Billet;
-import tipsy.commun.billetterie.Billetterie;
 
 /**
  * Created by Valentin on 29/12/13.
