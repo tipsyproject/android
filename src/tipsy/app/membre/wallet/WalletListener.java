@@ -1,6 +1,8 @@
 package tipsy.app.membre.wallet;
 
 import tipsy.commun.Event;
+import tipsy.commun.commerce.Commande;
+import tipsy.commun.commerce.Panier;
 import tipsy.commun.commerce.Transaction;
 
 /**
@@ -15,7 +17,7 @@ public interface WalletListener {
 
     public void goToDetailsTransaction(Transaction t);
 
-    public void goToCommande(boolean addToBackStack, Event e);
+    public void goToCommande(boolean addToBackStack, Panier p, Commande c);
 
     public void goToHomeMembre();
 }

@@ -44,6 +44,8 @@ import java.util.List;
 import tipsy.app.R;
 import tipsy.commun.Event;
 import tipsy.commun.billetterie.Billet;
+import tipsy.commun.commerce.Achat;
+import tipsy.commun.commerce.AchatArrayAdapter;
 import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.Item;
@@ -55,10 +57,10 @@ import tipsy.commun.commerce.Transaction;
  */
 public class ListeVentesFragment extends Fragment {
 
-    private BilletArrayAdapter adapter;
+    private AchatArrayAdapter adapter;
     private Event event;
     private TextView nbVentes;
-    private ArrayList<Item> ventes = new ArrayList<Item>();
+    private ArrayList<Achat> ventes = new ArrayList<Achat>();
     private ListView listView;
     private BilletterieListener callback;
 
@@ -90,9 +92,10 @@ public class ListeVentesFragment extends Fragment {
 
         listView = (ListView) view.findViewById(R.id.list);
         nbVentes = (TextView) view.findViewById(R.id.nb_billets);
-        adapter = new BilletArrayAdapter(getActivity(), ventes);
+        adapter = new AchatArrayAdapter(getActivity(), ventes);
         listView.setAdapter(adapter);
 
+        loadVentes();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -101,11 +104,6 @@ public class ListeVentesFragment extends Fragment {
             }
         });
         return view;
-    }
-
-    public void onStart(){
-        super.onStart();
-        loadVentes();
     }
 
 
@@ -141,14 +139,11 @@ public class ListeVentesFragment extends Fragment {
             idBillets.add(billet.getID());
         }
         StackMobQuery query = new StackMobQuery().fieldIsIn("produit",idBillets);
-        Item.query(Item.class, query, StackMobOptions.depthOf(1), new StackMobQueryCallback<Item>() {
+        Achat.query(Achat.class, query, StackMobOptions.depthOf(2), new StackMobQueryCallback<Achat>() {
             @Override
-            public void success(List<Item> result) {
+            public void success(List<Achat> result) {
                 ventes.clear();
-                Iterator it = result.iterator();
-                while (it.hasNext()) {
-                    ventes.add((Item) it.next());
-                }
+                ventes.addAll(result);
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {

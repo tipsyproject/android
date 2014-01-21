@@ -5,7 +5,8 @@ import java.util.ArrayList;
 import tipsy.app.MenuListener;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
-import tipsy.commun.billetterie.Participation;
+import tipsy.commun.commerce.Commande;
+import tipsy.commun.commerce.Panier;
 
 /**
  * Created by Valentin on 29/12/13.
@@ -27,8 +28,8 @@ public interface MembreListener extends MenuListener {
 
     public void goToEventBillets(Event e);
 
-    public void goToParticiper(Event e);
+    public void goToParticiper(Event e, Panier p);
 
-    public void goToCommande(Event e);
+    public void goToCommande(Panier p, Commande c);
 
 }

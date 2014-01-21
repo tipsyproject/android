@@ -1,5 +1,6 @@
 package tipsy.app.billetterie;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -29,13 +30,21 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         super.onCreate(savedInstanceState);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        event = getIntent().getParcelableExtra("Event");
 
         if (savedInstanceState == null) {
-            event = getIntent().getParcelableExtra("Event");
             /* Requete Stackmob pour récupérer la billetterie */
+
+            final ProgressDialog wait = ProgressDialog.show(this,"","Mode Billetterie...",true,false);
             event.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
                 @Override
                 public void success() {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            wait.dismiss();
+                        }
+                    });
                     showListeBillets(false);
                 }
 
@@ -45,6 +54,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
                     BilletterieActivity.this.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
+                            wait.dismiss();
                             Toast.makeText(BilletterieActivity.this, "Erreur Billetterie", Toast.LENGTH_SHORT).show();
                         }
                     });

@@ -1,4 +1,4 @@
-package tipsy.commun.billetterie;
+package tipsy.commun;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -10,6 +10,8 @@ import com.stackmob.sdk.model.StackMobModel;
  */
 public class Participant extends StackMobModel implements Parcelable {
     private String email;
+    private Event event;
+    private Membre membre = null;
     private String nom;
     private String prenom;
 
@@ -17,23 +19,40 @@ public class Participant extends StackMobModel implements Parcelable {
         super(Participant.class);
     }
 
-    public Participant(String nom, String prenom, String email){
+    public Participant(Event e){
         super(Participant.class);
-        this.nom = nom;
-        this.prenom = prenom;
-        this.email = email;
+        event = e;
     }
 
     public String getEmail() {
-        return email;
+        return membre == null ? email : membre.getEmail();
     }
 
     public void setEmail(String email) {
         this.email = email;
     }
 
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public Membre getMembre() {
+        return membre;
+    }
+
+    public void setMembre(Membre membre) {
+        this.nom = null;
+        this.prenom = null;
+        this.email = null;
+        this.membre = membre;
+    }
+
     public String getNom() {
-        return nom;
+        return membre == null ? nom : membre.getNom();
     }
 
     public void setNom(String nom) {
@@ -41,7 +60,7 @@ public class Participant extends StackMobModel implements Parcelable {
     }
 
     public String getPrenom() {
-        return prenom;
+        return membre == null ? prenom : membre.getPrenom();
     }
 
     public void setPrenom(String prenom) {
@@ -49,6 +68,9 @@ public class Participant extends StackMobModel implements Parcelable {
     }
 
 
+    public boolean isDefined(){
+        return membre != null || (nom != null && prenom != null && email != null);
+    }
 
     // Implémentation de Parcelable
     @Override
@@ -60,6 +82,8 @@ public class Participant extends StackMobModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
         dest.writeString(email);
+        dest.writeParcelable(event, flags);
+        dest.writeParcelable(membre,flags);
         dest.writeString(nom);
         dest.writeString(prenom);
     }
@@ -68,6 +92,8 @@ public class Participant extends StackMobModel implements Parcelable {
         super(Participant.class);
         setID(in.readString());
         email = in.readString();
+        event = in.readParcelable(Event.class.getClassLoader());
+        membre = in.readParcelable(Membre.class.getClassLoader());
         nom = in.readString();
         prenom = in.readString();
     }

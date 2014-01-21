@@ -37,21 +37,19 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.frag_transaction, parent, false);
 
-
-
         // Item courant
         Transaction transaction = transactions.get(position);
 
         TextView titre = (TextView) view.findViewById(R.id.titre);
-
-        titre.setText( transaction.isCredit(user.getUsername()) ? "Rechargement" : transaction.getCommande().getTitre());
+        titre.setText( transaction.getTitre() );
 
         TextView sousTitre = (TextView) view.findViewById(R.id.sous_titre);
-        sousTitre.setText(transaction.isCredit(user.getUsername()) ? "" : transaction.getCommande().getDescription());
+        sousTitre.setText( transaction.getDescription() );
 
         /* Montant transaction */
         TextView montant = (TextView) view.findViewById(R.id.montant);
-        montant.setText(transaction.getMontantToString(user.getUsername()));
+        String signe = transaction.isDepot() ? "" : "-";
+        montant.setText(signe + Commerce.prixToString(transaction.getMontant(), transaction.getDevise()));
 
         /* Date transaction */
         TextView date = (TextView) view.findViewById(R.id.date);

@@ -22,9 +22,8 @@ import tipsy.commun.commerce.Wallet;
  */
 public class TipsyApp extends Application {
     private Membre membre;
-    private Panier panier = new Panier();
     private Organisateur orga;
-    private Wallet<Transaction> wallet;
+    private Wallet wallet;
 
     public TipsyApp() {
         membre = null;
@@ -37,7 +36,7 @@ public class TipsyApp extends Application {
 
     public void setMembre(Membre membre) {
         this.membre = membre;
-        this.wallet = new Wallet<Transaction>(membre.getUser());
+        this.wallet = new Wallet(membre.getUser());
     }
 
     public Organisateur getOrga() {
@@ -46,10 +45,6 @@ public class TipsyApp extends Application {
 
     public void setOrga(Organisateur orga) {
         this.orga = orga;
-    }
-
-    public Panier getPanier() {
-        return this.panier;
     }
 
     public boolean skipHelp(Activity a) {

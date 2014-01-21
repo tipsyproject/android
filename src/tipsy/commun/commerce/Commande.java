@@ -1,84 +1,68 @@
 package tipsy.commun.commerce;
 
-import com.stackmob.sdk.model.StackMobModel;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.Iterator;
 
-import tipsy.commun.Event;
-import tipsy.commun.billetterie.Participation;
-
 /**
- * Created by Valentin on 07/01/14.
+ * Created by Valentin on 21/01/14.
  */
-public class Commande extends StackMobModel {
+public class Commande extends ArrayList<Achat> implements Parcelable {
 
-    private ArrayList<Item> items = new ArrayList<Item>();
-    private String description;
-    private String titre;
+    public Commande(){}
 
-
-    public Commande() {
-        super(Commande.class);
+    public Commande(ArrayList<Achat> achats){
+        clear();
+        for(Achat a: achats)
+            add(a);
     }
 
-    public Commande(Panier p) {
-        super(Commande.class);
-        Iterator it = p.iterator();
-        while (it.hasNext()) {
-            items.add((Item) it.next());
+    public int getPrixTotal(){
+        int prixTotal = 0;
+        for(Achat a: this)
+            prixTotal += a.getMontant();
+        return prixTotal;
+    }
+
+    public int getDevise(){
+        return get(0).getDevise();
+    }
+
+    public void setPayeur(String username){
+        for(Achat a: this)
+            a.setPayeur(username);
+    }
+
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeList(this);
+    }
+
+    public Commande(Parcel in) {
+        ArrayList<Achat> achats = new ArrayList<Achat>();
+        in.readList(achats,Achat.class.getClassLoader());
+        addAll(achats);
+    }
+
+    public static final Parcelable.Creator<Commande> CREATOR = new Parcelable.Creator<Commande>() {
+        @Override
+        public Commande createFromParcel(Parcel source) {
+            return new Commande(source);
         }
-    }
 
-    public ArrayList<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-    public void setDescriptionFromEvent(Event event) {
-        this.description = event.getNom() + " - " + event.getLieu();
-    }
-
-    public String getTitre() {
-        return titre;
-    }
-
-    public void setTitre(String titre) {
-        this.titre = titre;
-    }
-
-    // Le titre de la commande correspond aux noms des items qu'elle contient
-    public void setTitreFromItems() {
-        String titre = "Commande vide";
-        if(!items.isEmpty()){
-            Iterator it = items.iterator();
-            Item item = (Item) it.next();
-            titre = item.getProduit().getNom()+" x"+Integer.toString(item.getQuantite());
-            while(it.hasNext()){
-                item = (Item) it.next();
-                titre += ", " + item.getProduit().getNom()+" x"+Integer.toString(item.getQuantite());
-            }
+        @Override
+        public Commande[] newArray(int size) {
+            return new Commande[size];
         }
-        this.titre = titre;
-    }
-
-    public int getPrixTotal() {
-        return Panier.getPrixTotal(new HashSet<Item>(items));
-    }
-
-    public int getDevise() {
-        return (items.size() > 0) ? items.get(0).getProduit().getDevise() : Commerce.Devise.EURO;
-    }
+    };
 }

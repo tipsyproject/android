@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import tipsy.app.R;
@@ -16,14 +17,16 @@ import tipsy.app.R;
  */
 
 // Adapter Item
-public class ItemArrayAdapter extends ArrayAdapter<Item> {
+public class ItemArrayAdapter extends ArrayAdapter<Item> implements Serializable {
     private Context context;
     private ArrayList<Item> items;
+    private TextView totalView;
 
-    public ItemArrayAdapter(Context context, ArrayList<Item> items) {
+    public ItemArrayAdapter(Context context, ArrayList<Item> items, TextView total) {
         super(context, R.layout.frag_item, items);
         this.context = context;
         this.items = items;
+        this.totalView = total;
     }
 
     @Override
@@ -46,5 +49,12 @@ public class ItemArrayAdapter extends ArrayAdapter<Item> {
         quantite.setText(Integer.toString(item.getQuantite()));
 
         return view;
+    }
+
+    @Override
+    public void notifyDataSetChanged (){
+        super.notifyDataSetChanged();
+        Panier p = new Panier(items);
+        totalView.setText(Commerce.prixToString(p.getPrixTotal(), p.getDevise()));
     }
 }

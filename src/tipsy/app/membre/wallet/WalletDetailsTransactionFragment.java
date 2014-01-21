@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import tipsy.app.R;
+import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.Transaction;
 
 /**
@@ -40,9 +41,7 @@ public class WalletDetailsTransactionFragment extends Fragment {
         transaction = getArguments().getParcelable("Transaction");
 
         TextView montant = (TextView) view.findViewById(R.id.montant);
-        montant.setText(transaction.getMontantToString());
-        TextView user = (TextView) view.findViewById(R.id.destinataire);
-        user.setText(transaction.getDestinataire());
+        montant.setText(Commerce.prixToString(transaction.getMontant(), transaction.getDevise()));
         return view;
     }
 }

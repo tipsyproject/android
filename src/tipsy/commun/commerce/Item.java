@@ -1,21 +1,25 @@
 package tipsy.commun.commerce;
 
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.stackmob.sdk.model.StackMobModel;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Created by valoo on 04/01/14.
  */
-public class Item extends StackMobModel {
+public class Item implements Parcelable {
     private Produit produit;
     private int quantite;
 
     public Item() {
-        super(Item.class);
     }
 
     public Item(Produit a, int q) {
-        super(Item.class);
         produit = a;
         quantite = q;
     }
@@ -49,4 +53,34 @@ public class Item extends StackMobModel {
     public int hashCode() {
         return produit.getID().hashCode();
     }
+
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeParcelable(produit, flags);
+        dest.writeInt(quantite);
+    }
+
+    public Item(Parcel in) {
+        produit = in.readParcelable(Item.class.getClassLoader());
+        quantite = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Item> CREATOR = new Parcelable.Creator<Item>() {
+        @Override
+        public Item createFromParcel(Parcel source) {
+            return new Item(source);
+        }
+
+        @Override
+        public Item[] newArray(int size) {
+            return new Item[size];
+        }
+    };
 }

@@ -5,9 +5,6 @@ import android.os.Parcelable;
 
 import com.stackmob.sdk.model.StackMobModel;
 
-import tipsy.commun.Event;
-import tipsy.commun.billetterie.ParametresBillet;
-
 /**
  * Created by valoo on 04/01/14.
  */
@@ -94,4 +91,16 @@ public class Produit extends StackMobModel  implements Parcelable {
         prix = in.readInt();
         typeProduit = in.readInt();
     }
+
+    public static final Parcelable.Creator<Produit> CREATOR = new Parcelable.Creator<Produit>() {
+        @Override
+        public Produit createFromParcel(Parcel source) {
+            return new Produit(source);
+        }
+
+        @Override
+        public Produit[] newArray(int size) {
+            return new Produit[size];
+        }
+    };
 }

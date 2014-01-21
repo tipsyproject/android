@@ -26,10 +26,10 @@ import java.util.ArrayList;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
-import tipsy.commun.billetterie.Participation;
 import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.ItemArrayAdapter;
+import tipsy.commun.commerce.Panier;
 import tipsy.commun.commerce.Wallet;
 import tipsy.commun.commerce.WalletCallback;
 
@@ -44,10 +44,11 @@ public class WalletCommandeFragment extends Fragment {
     private WalletListener callback;
 
 
-    public static WalletCommandeFragment init(Event e) {
+    public static WalletCommandeFragment init(Panier p ,Commande c) {
         WalletCommandeFragment frag = new WalletCommandeFragment();
         Bundle args = new Bundle();
-        args.putParcelable("Event", e);
+        args.putParcelable("Panier", p);
+        args.putParcelable("Commande", c);
         frag.setArguments(args);
         return frag;
     }
@@ -62,35 +63,32 @@ public class WalletCommandeFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         callback = (WalletListener) activity;
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        commande = new Commande(app.getPanier());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        event = getArguments().getParcelable("Event");
+        commande = getArguments().getParcelable("Commande");
+        Panier panier = getArguments().getParcelable("Panier");
         View view = inflater.inflate(R.layout.frag_commande, container, false);
 
         /* On récupère le contenu de la commande */
         TipsyApp app = (TipsyApp) getActivity().getApplication();
-        commande = new Commande(app.getPanier());
-        commande.setDescriptionFromEvent(event);
-        commande.setTitreFromItems();
         wallet = app.getWallet();
-
-        ItemArrayAdapter adapter = new ItemArrayAdapter(getActivity(), commande.getItems());
-        ListView listView = (ListView) view.findViewById(R.id.list);
-        listView.setAdapter(adapter);
 
         TextView viewPrixTotal = (TextView) view.findViewById(R.id.prix_total);
         viewPrixTotal.setText(Commerce.prixToString(commande.getPrixTotal(), commande.getDevise()));
+
+        ItemArrayAdapter adapter = new ItemArrayAdapter(getActivity(), panier,viewPrixTotal);
+
+        ListView listView = (ListView) view.findViewById(R.id.list);
+        listView.setAdapter(adapter);
 
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ProgressDialog wait = Wallet.getProgressDialog(getActivity());
 
-                wallet.pay(commande,event.getOrganisateur(), new WalletCallback() {
+                wallet.pay(commande, new WalletCallback() {
                     @Override
                     public void onWait() {
                         wait.show();

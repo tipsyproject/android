@@ -5,23 +5,16 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,19 +26,17 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Iterator;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
-import tipsy.commun.billetterie.Participant;
-import tipsy.commun.billetterie.Participation;
+import tipsy.commun.Participant;
+import tipsy.commun.commerce.Achat;
+import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.Item;
-import tipsy.commun.commerce.ItemArrayAdapter;
 import tipsy.commun.commerce.Panier;
-import tipsy.commun.commerce.QuantiteDialogFragment;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -53,18 +44,19 @@ import tipsy.commun.commerce.QuantiteDialogFragment;
 public class EventParticiperFragment extends Fragment {
 
     private Panier panier;
-    private ParticipationArrayAdapter adapter;
+    private AchatArrayAdapter adapter;
     private Event event;
-    private ArrayList<Participation> participations = new ArrayList<Participation>();
+    private Commande achats;
     private int userParticipation = -1;
     private ListView listView;
     private MembreListener callback;
 
 
-    public static EventParticiperFragment init(Event e) {
+    public static EventParticiperFragment init(Event e, Panier p) {
         EventParticiperFragment frag = new EventParticiperFragment();
         Bundle args = new Bundle();
         args.putParcelable("Event", e);
+        args.putParcelable("Panier", p);
         frag.setArguments(args);
         return frag;
     }
@@ -73,22 +65,20 @@ public class EventParticiperFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         callback = (MembreListener) activity;
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        panier = app.getPanier();
     }
 
     @Override
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
-        if(bundle != null && bundle.containsKey("Participations")){
-            participations = bundle.getParcelableArrayList("Participations");
+        if(bundle != null && bundle.containsKey("Achats")){
+            achats =  bundle.getParcelable("Achats");
         }
     }
     @Override
      public void onSaveInstanceState(Bundle outState) {
         if(outState==null)
             outState = new Bundle();
-        outState.putParcelableArrayList("Participations",participations);
+        outState.putParcelable("Achats", achats);
         // Add variable to outState here
         super.onSaveInstanceState(outState);
     }
@@ -96,36 +86,32 @@ public class EventParticiperFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         event = getArguments().getParcelable("Event");
+        panier = getArguments().getParcelable("Panier");
 
         View view = inflater.inflate(R.layout.frag_event_participer, container, false);
-
         listView = (ListView) view.findViewById(R.id.list);
 
         if(savedInstanceState == null){
+            achats = new Commande();
             TipsyApp app = (TipsyApp) getActivity().getApplication();
             Membre proprietaire = app.getMembre();
-            Iterator it = panier.iterator();
-            Item item;
-            while(it.hasNext()){
-                item = (Item) it.next();
+            for(Item item : panier){
                 for(int i=0; i<item.getQuantite(); ++i){
-                    Participation p = new Participation();
-                    p.setBillet(item.getProduit());
-                    p.setEvent(event);
-                    p.setProprietaire(proprietaire);
-                    participations.add(p);
+                    Achat a = new Achat(item.getProduit());
+                    a.setParticipant(new Participant(event));
+                    achats.add(a);
                 }
             }
 
         }
 
-        adapter = new ParticipationArrayAdapter();
+        adapter = new AchatArrayAdapter();
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                editParticipant(participations.get(i));
+                editParticipant(achats.get(i));
             }
         });
 
@@ -134,8 +120,9 @@ public class EventParticiperFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Si l'utilisateur s'était déjà attribué un billet
                 if(userParticipation>=0)
-                    participations.get(userParticipation).setParticipant(null);
-                participations.get(i).setProprietaireParticipant();
+                    achats.get(userParticipation).getParticipant().setMembre(null);
+                TipsyApp app = (TipsyApp) getActivity().getApplication();
+                achats.get(i).getParticipant().setMembre(app.getMembre());
                 adapter.notifyDataSetChanged();
                 userParticipation = i;
                 return true;
@@ -159,37 +146,37 @@ public class EventParticiperFragment extends Fragment {
     }
 
     /* Affichage du dialog d'edition d'un participant */
-    public void editParticipant(Participation p) {
+    public void editParticipant(Achat a) {
         ParticipantDialogFragment dialog = new ParticipantDialogFragment();
         Bundle args = new Bundle();
-        args.putParcelable("Participation", p);
+        args.putParcelable("Achat", a);
         args.putSerializable("Adapter", adapter);
         dialog.setArguments(args);
         dialog.show(getActivity().getSupportFragmentManager(), "ParticipantDialogFragment");
     }
 
     public void validate(){
-        for(Participation p: participations){
-            if(p.getParticipant() == null){
+        for(Achat a: achats){
+            if(!a.isParticipantDefined()){
                 Toast.makeText(getActivity(),"Tous les billets sont nominatifs !",Toast.LENGTH_SHORT).show();
                 return;
             }
         }
-        callback.goToCommande(event);
+        callback.goToCommande(panier,new Commande(achats));
     }
 
 
-    public class ParticipationArrayAdapter extends ArrayAdapter<Participation> implements Serializable {
+    public class AchatArrayAdapter extends ArrayAdapter<Achat> implements Serializable {
 
-        public ParticipationArrayAdapter() {
-            super(getActivity(), R.layout.frag_event_participer_billet, participations);
+        public AchatArrayAdapter() {
+            super(getActivity(), R.layout.frag_event_participer_billet, achats);
         }
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            Participation p = participations.get(position);
+            Achat a = achats.get(position);
 
-            int layout = p.getParticipant() != null ?
+            int layout = a.isParticipantDefined() ?
                     R.layout.frag_event_participer_billet_ok :
                     R.layout.frag_event_participer_billet;
 
@@ -198,24 +185,24 @@ public class EventParticiperFragment extends Fragment {
 
             /* Nom du billet */
             TextView nom_billet = (TextView) view.findViewById(R.id.nom_billet);
-            nom_billet.setText(p.getBillet().getNom());
+            nom_billet.setText(a.getProduit().getNom());
 
             /* Prix du billet */
             TextView prix_billet = (TextView) view.findViewById(R.id.prix_billet);
-            prix_billet.setText(Commerce.prixToString(p.getBillet().getPrix(), p.getBillet().getDevise()));
+            prix_billet.setText(Commerce.prixToString(a.getProduit().getPrix(), a.getProduit().getDevise()));
 
-            if(p.getParticipant() != null){
+            if(a.isParticipantDefined()){
                 /* Prénom participant */
                 TextView prenomParticipant = (TextView) view.findViewById(R.id.prenom_participant);
-                prenomParticipant.setText(p.getParticipant().getPrenom());
+                prenomParticipant.setText(a.getParticipant().getPrenom());
 
                 /* Nom participant */
                 TextView nomParticipant = (TextView) view.findViewById(R.id.nom_participant);
-                nomParticipant.setText(p.getParticipant().getNom());
+                nomParticipant.setText(a.getParticipant().getNom());
 
                 /* Email participant */
                 TextView emailParticipant = (TextView) view.findViewById(R.id.email_participant);
-                emailParticipant.setText(p.getParticipant().getEmail());
+                emailParticipant.setText(a.getParticipant().getEmail());
             }
 
             return view;
@@ -226,8 +213,8 @@ public class EventParticiperFragment extends Fragment {
 
     public static class ParticipantDialogFragment extends DialogFragment implements Validator.ValidationListener {
 
-        private Participation participation;
-        private ParticipationArrayAdapter adapter;
+        private Achat achat;
+        private AchatArrayAdapter adapter;
         @Required(order=1, message="Champ requis")
         private EditText inputNom;
         @Required(order=2, message="Champ requis")
@@ -239,15 +226,15 @@ public class EventParticiperFragment extends Fragment {
 
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
-            participation = getArguments().getParcelable("Participation");
-            adapter = (ParticipationArrayAdapter) getArguments().getSerializable("Adapter");
+            achat = getArguments().getParcelable("Achat");
+            adapter = (AchatArrayAdapter) getArguments().getSerializable("Adapter");
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
 
             LayoutInflater inflater = getActivity().getLayoutInflater();
             // Definition du titre du Dialog
-            builder.setTitle(participation.getBillet().getNom() + " - " +
-                Commerce.prixToString(participation.getBillet().getPrix(),participation.getBillet().getDevise()));
+            builder.setTitle(achat.getProduit().getNom() + " - " +
+                Commerce.prixToString(achat.getProduit().getPrix(),achat.getProduit().getDevise()));
 
             // Definition du contenu du Dialog
             View view = inflater.inflate(R.layout.frag_event_edit_participant, null);
@@ -258,10 +245,10 @@ public class EventParticiperFragment extends Fragment {
             inputEmail = (EditText) view.findViewById(R.id.input_email);
             // Préremplissage des widgets avec les valeur du billet si c'est une modification
             // sinon rien pour une creation
-            if (participation.getParticipant() != null) {
-                inputNom.setText(participation.getParticipant().getNom());
-                inputPrenom.setText(participation.getParticipant().getPrenom());
-                inputEmail.setText(participation.getParticipant().getEmail());
+            if (achat.isParticipantDefined()) {
+                inputNom.setText(achat.getParticipant().getNom());
+                inputPrenom.setText(achat.getParticipant().getPrenom());
+                inputEmail.setText(achat.getParticipant().getEmail());
             }
 
             validator = new Validator(this);
@@ -284,12 +271,9 @@ public class EventParticiperFragment extends Fragment {
 
         public void onValidationSucceeded() {
             // On recupère le contenu des champs
-            participation.setParticipant(new Participant(
-                    inputNom.getText().toString(),
-                    inputPrenom.getText().toString(),
-                    inputEmail.getText().toString()
-            ));
-
+            achat.getParticipant().setNom(inputNom.getText().toString());
+            achat.getParticipant().setPrenom(inputPrenom.getText().toString());
+            achat.getParticipant().setEmail(inputEmail.getText().toString());
             adapter.notifyDataSetChanged();
 
         }

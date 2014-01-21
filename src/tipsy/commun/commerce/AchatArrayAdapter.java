@@ -1,4 +1,4 @@
-package tipsy.app.billetterie;
+package tipsy.commun.commerce;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,16 +10,15 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import tipsy.app.R;
-import tipsy.commun.commerce.Item;
 
 /**
  * Created by valoo on 20/01/14.
  */
-public class BilletArrayAdapter extends ArrayAdapter<Item> {
+public class AchatArrayAdapter extends ArrayAdapter<Achat> {
     private Context context;
-    private ArrayList<Item> ventes;
+    private ArrayList<Achat> ventes;
 
-    public BilletArrayAdapter(Context context, ArrayList<Item> ventes) {
+    public AchatArrayAdapter(Context context, ArrayList<Achat> ventes) {
         super(context, R.layout.frag_achat_item, ventes);
         this.context = context;
         this.ventes = ventes;
@@ -29,11 +28,13 @@ public class BilletArrayAdapter extends ArrayAdapter<Item> {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View viewVente = inflater.inflate(R.layout.frag_achat_item, parent, false);
-        TextView nomBillet = (TextView) viewVente.findViewById(R.id.nom_billet);
-        TextView quantite = (TextView) viewVente.findViewById(R.id.quantite);
-        Item item = ventes.get(position);
-        nomBillet.setText(item.getProduit().getNom());
-        quantite.setText(Integer.toString(item.getQuantite()));
+        TextView nomAchat = (TextView) viewVente.findViewById(R.id.nom_achat);
+        TextView nomParticipant = (TextView) viewVente.findViewById(R.id.nom_participant);
+        TextView prenomParticipant = (TextView) viewVente.findViewById(R.id.prenom_participant);
+        Achat achat = ventes.get(position);
+        nomAchat.setText(achat.getProduit().getNom());
+        nomParticipant.setText(achat.getParticipant().getNom());
+        prenomParticipant.setText(achat.getParticipant().getPrenom());
         return viewVente;
     }
 }

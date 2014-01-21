@@ -42,9 +42,6 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         event = getArguments().getParcelable("Event");
 
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        app.getPanier().clear();
-
         View view = inflater.inflate(R.layout.frag_event, container, false);
 
         TextView dateEvent = (TextView) view.findViewById(R.id.date_event);

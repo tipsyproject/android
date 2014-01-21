@@ -70,7 +70,7 @@ public class ListeBilletsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_billetterie_liste_billets, container, false);
         /* On récupère l'event courant */
-        event = (Event) getArguments().getParcelable("Event");
+        event = getArguments().getParcelable("Event");
 
         listView = (ListView) view.findViewById(R.id.list);
         adapter = new BilletsArrayAdapter(getActivity(), event.getBilletterie());

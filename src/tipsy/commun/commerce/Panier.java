@@ -1,17 +1,27 @@
 package tipsy.commun.commerce;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 
 /**
  * Created by valoo on 04/01/14.
  */
-public class Panier<E> extends HashSet<E> {
+public class Panier extends ArrayList<Item> implements Parcelable {
 
-    protected int devise = Commerce.Devise.EURO;
-    private TextView viewPrixTotal = null;
+    protected int devise = Commerce.Devise.getLocale();
+
+    public Panier(){}
+
+    public Panier(ArrayList<Item> items){
+        for(Item item : items)
+            add(item);
+    }
 
     public int getDevise() {
         return devise;
@@ -21,34 +31,42 @@ public class Panier<E> extends HashSet<E> {
         this.devise = devise;
     }
 
-    @Override
-    public boolean add(E object) {
-        boolean res = super.add(object);
-        return res;
-    }
-
     public int getPrixTotal() {
-        return getPrixTotal((HashSet<Item>) this);
-    }
-
-    public void setPrixTotalView(TextView prixTotal) {
-        this.viewPrixTotal = prixTotal;
-    }
-
-    public void notifyItemsUpdated() {
-        if (viewPrixTotal != null) {
-            viewPrixTotal.setText(Commerce.prixToString(getPrixTotal(), devise));
-        }
-    }
-
-    public static int getPrixTotal(HashSet<Item> items) {
-        Iterator it = items.iterator();
         int prixTotal = 0;
-        Item item;
-        while (it.hasNext()) {
-            item = (Item) it.next();
+        for(Item item : this)
             prixTotal += item.getPrixTotal();
-        }
         return prixTotal;
     }
+
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(devise);
+        dest.writeList(this);
+    }
+
+    public Panier(Parcel in) {
+        devise = in.readInt();
+        ArrayList<Item> items = new ArrayList<Item>();
+        in.readList(items,Item.class.getClassLoader());
+        addAll(items);
+    }
+
+    public static final Parcelable.Creator<Panier> CREATOR = new Parcelable.Creator<Panier>() {
+        @Override
+        public Panier createFromParcel(Parcel source) {
+            return new Panier(source);
+        }
+
+        @Override
+        public Panier[] newArray(int size) {
+            return new Panier[size];
+        }
+    };
 }

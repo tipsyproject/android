@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -36,8 +37,8 @@ import tipsy.app.UserActivity;
 import tipsy.app.membre.wallet.WalletActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
-import tipsy.commun.billetterie.Billetterie;
-import tipsy.commun.billetterie.Participation;
+import tipsy.commun.commerce.Commande;
+import tipsy.commun.commerce.Panier;
 
 /**
  * Created by tech on 05/12/13.
@@ -204,8 +205,8 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     }
 
-    public void goToParticiper(Event e) {
-        EventParticiperFragment frag = EventParticiperFragment.init(e);
+    public void goToParticiper(Event e, Panier p) {
+        EventParticiperFragment frag = EventParticiperFragment.init(e, p);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -215,10 +216,11 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     }
 
-    public void goToCommande(Event e) {
+    public void goToCommande(Panier p, Commande c) {
         Intent intent = new Intent(this, WalletActivity.class);
         intent.putExtra(WalletActivity.ACTION, WalletActivity.COMMANDE);
-        intent.putExtra("Event",e);
+        intent.putExtra("Panier",(Parcelable) p);
+        intent.putExtra("Commande",(Parcelable) c);
         startActivity(intent);
     }
 

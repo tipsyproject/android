@@ -12,6 +12,8 @@ import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.membre.MembreActivity;
 import tipsy.commun.Event;
+import tipsy.commun.commerce.Commande;
+import tipsy.commun.commerce.Panier;
 import tipsy.commun.commerce.Transaction;
 
 /**
@@ -32,8 +34,9 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         if (savedInstanceState == null) {
             switch (getIntent().getIntExtra(ACTION, -1)) {
                 case COMMANDE:
-                    Event event = getIntent().getParcelableExtra("Event");
-                    goToCommande(false,event);
+                    Panier panier = getIntent().getParcelableExtra("Panier");
+                    Commande commande = getIntent().getParcelableExtra("Commande");
+                    goToCommande(false,panier,commande);
                     break;
                 default:
                     goToResume(false);
@@ -81,8 +84,8 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
     }
 
     /* Détails sur une transaction */
-    public void goToCommande(boolean addToBackStack,Event e) {
-        WalletCommandeFragment frag = WalletCommandeFragment.init(e);
+    public void goToCommande(boolean addToBackStack, Panier p, Commande c) {
+        WalletCommandeFragment frag = WalletCommandeFragment.init(p,c);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, frag);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
