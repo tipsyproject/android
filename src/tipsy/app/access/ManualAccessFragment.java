@@ -9,9 +9,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
+import tipsy.commun.billetterie.EntreeArrayAdapter;
+import tipsy.commun.commerce.Achat;
+import tipsy.commun.commerce.AchatArrayAdapter;
 
 /**
  * Created by vquefele on 20/01/14.
@@ -19,16 +27,10 @@ import tipsy.commun.Event;
 public class ManualAccessFragment extends Fragment {
 
     private Event event;
+    private ArrayList<Achat> entrees;
     private AccessListener callback;
-
-    /*
-    public static ManualAccessFragment init(Event e) {
-        ManualAccessFragment frag = new ManualAccessFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("Event", e);
-        frag.setArguments(args);
-        return frag;
-    }*/
+    private ListView listView;
+    private EntreeArrayAdapter adapter;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,8 +46,17 @@ public class ManualAccessFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_access_manual, container, false);
-        /* On récupère l'event courant */
-        //event = getArguments().getParcelable("Event");
+
+
+        listView = (ListView) view.findViewById(R.id.list);
+        adapter = new EntreeArrayAdapter(getActivity(), callback.getEntrees());
+        listView.setAdapter(adapter);
+        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //editBillet(event.getBilletterie().get(position), false);
+            }
+        });*/
 
         return view;
     }
@@ -65,6 +76,7 @@ public class ManualAccessFragment extends Fragment {
             case R.id.action_search:
                 return true;
             case R.id.action_refresh:
+                callback.refresh(adapter);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

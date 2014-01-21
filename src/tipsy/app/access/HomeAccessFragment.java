@@ -11,8 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
+
 import tipsy.app.R;
 import tipsy.commun.Event;
+import tipsy.commun.commerce.Achat;
 
 /**
  * Created by vquefele on 20/01/14.
@@ -20,16 +23,9 @@ import tipsy.commun.Event;
 public class HomeAccessFragment extends Fragment {
 
     private Event event;
+    private ArrayList<Achat> entrees;
     private AccessListener callback;
 
-    /*
-    public static HomeAccessFragment init(Event e) {
-        HomeAccessFragment frag = new HomeAccessFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("Event", e);
-        frag.setArguments(args);
-        return frag;
-    }*/
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,13 +42,12 @@ public class HomeAccessFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_access_home, container, false);
         /* On récupère l'event courant */
-        //event = getArguments().getParcelable("Event");
 
 
         LinearLayout buttonSearch = (LinearLayout) view.findViewById(R.id.button_search);
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.goToManualAccess(event);
+                callback.goToManualAccess();
             }
         });
 
@@ -72,6 +67,7 @@ public class HomeAccessFragment extends Fragment {
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_refresh:
+                callback.refresh(null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
