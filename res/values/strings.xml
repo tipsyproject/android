@@ -65,6 +65,6 @@ j'accepte les conditions générales."</string>
     <string name="payer">PAYER</string>
     <string name="entrer_solde">Veuillez entrer la valeur que vous souhaitez ajouter à votre solde :</string>
     <string name="choisir_formule">Choisissez votre formule !</string>
-    <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string>
+    <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string><string name="nom">Nom</string><string name="prenom">Prénom</string>
 
 </resources>

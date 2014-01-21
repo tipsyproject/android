@@ -1,8 +1,11 @@
 package tipsy.app.membre;
 
+import java.util.ArrayList;
+
 import tipsy.app.MenuListener;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
+import tipsy.commun.billetterie.Participation;
 
 /**
  * Created by Valentin on 29/12/13.

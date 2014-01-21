@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 import tipsy.commun.Event;
+import tipsy.commun.billetterie.Participation;
 
 /**
  * Created by Valentin on 07/01/14.

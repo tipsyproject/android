@@ -17,9 +17,16 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.stackmob.sdk.api.StackMobOptions;
+import com.stackmob.sdk.callback.StackMobCallback;
+import com.stackmob.sdk.exception.StackMobException;
+
+import java.util.ArrayList;
+
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
+import tipsy.commun.billetterie.Participation;
 import tipsy.commun.commerce.Commande;
 import tipsy.commun.commerce.Commerce;
 import tipsy.commun.commerce.ItemArrayAdapter;
@@ -61,7 +68,7 @@ public class WalletCommandeFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        event = (Event) getArguments().getParcelable("Event");
+        event = getArguments().getParcelable("Event");
         View view = inflater.inflate(R.layout.frag_commande, container, false);
 
         /* On récupère le contenu de la commande */
@@ -82,6 +89,7 @@ public class WalletCommandeFragment extends Fragment {
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final ProgressDialog wait = Wallet.getProgressDialog(getActivity());
+
                 wallet.pay(commande,event.getOrganisateur(), new WalletCallback() {
                     @Override
                     public void onWait() {

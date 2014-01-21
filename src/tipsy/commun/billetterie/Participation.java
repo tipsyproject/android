@@ -1,5 +1,8 @@
 package tipsy.commun.billetterie;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.stackmob.sdk.model.StackMobModel;
 
 import tipsy.commun.Event;
@@ -9,10 +12,10 @@ import tipsy.commun.commerce.Produit;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class Participation extends StackMobModel {
+public class Participation extends StackMobModel  implements Parcelable {
 
     private Participant participant = null;
-    private Membre membre = null;
+    private Membre proprietaire = null;
     private Produit billet;
     private Event event;
 
@@ -44,27 +47,51 @@ public class Participation extends StackMobModel {
         this.event = event;
     }
 
-    public Membre getMembre() {
-        return membre;
+    public Membre getProprietaire() {
+        return proprietaire;
     }
 
-    public void setMembre(Membre membre) {
-        this.membre = membre;
+    public void setProprietaire(Membre proprietaire) {
+        this.proprietaire = proprietaire;
     }
 
-    public String getEmail(){
-        return membre == null ? participant.getEmail() : membre.getEmail();
+    public void setProprietaireParticipant(){
+        this.participant = new Participant(proprietaire.getNom(),proprietaire.getPrenom(),proprietaire.getEmail());
     }
 
-    public String getNom(){
-        return membre == null ? participant.getNom() : membre.getNom();
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
-    public String getPrenom(){
-        return membre == null ? participant.getPrenom() : membre.getPrenom();
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(getID());
+        dest.writeParcelable(participant,flags);
+        dest.writeParcelable(proprietaire,flags);
+        dest.writeParcelable(billet,flags);
+        dest.writeParcelable(event,flags);
     }
 
-    public boolean isParticipantDefined(){
-        return (membre != null || participant != null );
+    public Participation(Parcel in) {
+        super(Participation.class);
+        setID(in.readString());
+        participant = in.readParcelable(Participant.class.getClassLoader());
+        proprietaire = in.readParcelable(Membre.class.getClassLoader());
+        billet = in.readParcelable(Billet.class.getClassLoader());
+        event = in.readParcelable(Event.class.getClassLoader());
     }
+
+    public static final Parcelable.Creator<Participation> CREATOR = new Parcelable.Creator<Participation>() {
+        @Override
+        public Participation createFromParcel(Parcel source) {
+            return new Participation(source);
+        }
+
+        @Override
+        public Participation[] newArray(int size) {
+            return new Participation[size];
+        }
+    };
 }

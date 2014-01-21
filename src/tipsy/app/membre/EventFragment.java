@@ -12,6 +12,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
 
 /**
@@ -40,6 +41,9 @@ public class EventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         event = getArguments().getParcelable("Event");
+
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        app.getPanier().clear();
 
         View view = inflater.inflate(R.layout.frag_event, container, false);
 

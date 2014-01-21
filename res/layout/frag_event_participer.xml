@@ -9,7 +9,9 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/list"
         android:layout_above="@+id/button_pay"
-        android:layout_alignParentTop="true"></ListView>
+        android:layout_alignParentTop="true"
+        android:layout_margin="@dimen/ui_margin"
+        android:dividerHeight="@dimen/ui_margin"></ListView>
 
     <ImageButton
         android:layout_width="match_parent"

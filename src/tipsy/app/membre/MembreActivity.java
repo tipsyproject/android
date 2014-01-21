@@ -37,6 +37,7 @@ import tipsy.app.membre.wallet.WalletActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
 import tipsy.commun.billetterie.Billetterie;
+import tipsy.commun.billetterie.Participation;
 
 /**
  * Created by tech on 05/12/13.

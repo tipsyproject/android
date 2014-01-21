@@ -4,11 +4,14 @@ package tipsy.commun;
  * Created by valoo on 07/12/13.
  */
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.model.StackMobModel;
 
 
-public class Membre extends StackMobModel implements User.TipsyUser {
+public class Membre extends StackMobModel implements User.TipsyUser, Parcelable {
 
     private StackMobFile avatar = null;
     private String nom;
@@ -73,5 +76,41 @@ public class Membre extends StackMobModel implements User.TipsyUser {
     public User getUser() {
         return user;
     }
+
+
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(getID());
+        dest.writeString(nom);
+        dest.writeString(prenom);
+        dest.writeParcelable(user,flags);
+    }
+
+    public Membre(Parcel in) {
+        super(Membre.class);
+        setID(in.readString());
+        nom = in.readString();
+        prenom = in.readString();
+        user = in.readParcelable(User.class.getClassLoader());
+    }
+
+    public static final Parcelable.Creator<Membre> CREATOR = new Parcelable.Creator<Membre>() {
+        @Override
+        public Membre createFromParcel(Parcel source) {
+            return new Membre(source);
+        }
+
+        @Override
+        public Membre[] newArray(int size) {
+            return new Membre[size];
+        }
+    };
 
 }
