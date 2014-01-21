@@ -9,7 +9,7 @@ import tipsy.commun.Event;
 public interface OrgaListener extends MenuListener {
     public void goToBilletterie(Event e);
 
-    public void onClickResumeEvent(Event e);
+    public void goToResumeEvent(Event e);
 
     public void onEventEdit(Event e, boolean create);
 

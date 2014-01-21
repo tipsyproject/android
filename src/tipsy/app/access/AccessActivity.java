@@ -14,6 +14,7 @@ import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
+import tipsy.app.orga.OrgaActivity;
 import tipsy.commun.Event;
 
 /**
@@ -68,7 +69,7 @@ public class AccessActivity extends FragmentActivity implements AccessListener{
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                OrgaActivity.backToEventHome(this, event);
                 return true;
         }
         return super.onOptionsItemSelected(item);

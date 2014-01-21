@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +11,9 @@ import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
-import com.stackmob.sdk.exception.StackMobException;
-
-import java.util.List;
-
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.commun.Event;
-import tipsy.commun.commerce.Produit;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -77,7 +68,7 @@ public class HomeOrgaFragment extends Fragment {
         else {
             resumeEvent.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    callback.onClickResumeEvent(upcomingEvent);
+                    callback.goToResumeEvent(upcomingEvent);
                 }
             });
             textUpcoming.setText(upcomingEvent.getNom());

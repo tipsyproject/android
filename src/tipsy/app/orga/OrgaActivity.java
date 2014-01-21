@@ -1,5 +1,6 @@
 package tipsy.app.orga;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -38,7 +39,11 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
         app = (TipsyApp) getApplication();
         orga = app.getOrga();
-        if (savedInstanceState == null) {
+
+        if(getIntent().hasExtra("EVENT_HOME")){
+            Event e = getIntent().getParcelableExtra("EVENT_HOME");
+            goToResumeEvent(e);
+        }else if (savedInstanceState == null) {
             goToTableauDeBord(false);
         }
 
@@ -89,6 +94,14 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     }
 
 
+
+    public static void backToEventHome(Activity act, Event event){
+        Intent intent = new Intent(act, OrgaActivity.class);
+        intent.putExtra("EVENT_HOME", event);
+        act.startActivity(intent);
+
+    }
+
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
     // clique sur le bouton de la Billetterie
@@ -110,7 +123,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     }
 
     // Clique sur le bouton "Créer un événement"
-    public void onClickResumeEvent(Event e) {
+    public void goToResumeEvent(Event e) {
         EventHomeFragment frag = EventHomeFragment.init(e);
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.content, frag)
