@@ -1,4 +1,4 @@
-package tipsy.app.billetterie;
+package tipsy.app.orga.billetterie;
 
 import android.content.Context;
 import android.view.LayoutInflater;

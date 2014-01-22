@@ -72,20 +72,26 @@
         </activity>
 
         <activity
-            android:name=".billetterie.BilletterieActivity"
+            android:name=".orga.event.EventOrgaActivity"
             android:label="">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".orga.OrgaActivity" />
 
         </activity>
 
         <activity
-            android:name=".access.AccessActivity"
+            android:name=".orga.event.edit.EditEventActivity"
             android:label="">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".orga.OrgaActivity" />
+
+        </activity>
+
+        <activity
+            android:name=".orga.billetterie.BilletterieActivity"
+            android:label="">
+
+        </activity>
+
+        <activity
+            android:name=".orga.acces.AccesActivity"
+            android:label="">
 
         </activity>
 

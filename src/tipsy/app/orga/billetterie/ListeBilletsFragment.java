@@ -1,4 +1,4 @@
-package tipsy.app.billetterie;
+package tipsy.app.orga.billetterie;
 
 import android.app.Activity;
 import android.app.AlertDialog;

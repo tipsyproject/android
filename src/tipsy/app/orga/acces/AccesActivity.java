@@ -1,28 +1,26 @@
-package tipsy.app.access;
+package tipsy.app.orga.acces;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import tipsy.app.R;
 import tipsy.app.orga.OrgaActivity;
+import tipsy.app.orga.event.EventOrgaActivity;
 import tipsy.commun.Event;
 import tipsy.commun.billetterie.Billet;
 import tipsy.commun.billetterie.EntreeArrayAdapter;
@@ -31,7 +29,7 @@ import tipsy.commun.commerce.Achat;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class AccessActivity extends FragmentActivity implements AccessListener{
+public class AccesActivity extends FragmentActivity implements AccesListener {
 
     private Event event;
     private ArrayList<Achat> entrees= new ArrayList<Achat>();
@@ -40,15 +38,17 @@ public class AccessActivity extends FragmentActivity implements AccessListener{
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_access);
         super.onCreate(savedInstanceState);
-        event = getIntent().getParcelableExtra("Event");
+
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Contrôle d'accès");
 
-        if(savedInstanceState == null){
+        if(savedInstanceState != null && savedInstanceState.containsKey("Entrees")){
+            entrees =  savedInstanceState.getParcelableArrayList("Entrees");
+            event =  savedInstanceState.getParcelable("Event");
+        }else{
+            event = getIntent().getParcelableExtra("Event");
             refresh(null);
             goToHome(false);
-        }else if(savedInstanceState.containsKey("Entrees")){
-            entrees =  savedInstanceState.getParcelableArrayList("Entrees");
         }
 
     }
@@ -58,6 +58,7 @@ public class AccessActivity extends FragmentActivity implements AccessListener{
         if(outState==null)
             outState = new Bundle();
         outState.putParcelableArrayList("Entrees", entrees);
+        outState.putParcelable("Event", event);
         // Add variable to outState here
         super.onSaveInstanceState(outState);
     }
@@ -67,14 +68,20 @@ public class AccessActivity extends FragmentActivity implements AccessListener{
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                OrgaActivity.backToEventHome(this, event);
+                backToEventOrga();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    public void backToEventOrga(){
+        Intent intent = new Intent(this, EventOrgaActivity.class);
+        intent.putExtra("Event", event);
+        startActivity(intent);
+    }
+
     public void goToHome(boolean addTobackStack){
-        HomeAccessFragment frag = new HomeAccessFragment();
+        HomeAccesFragment frag = new HomeAccesFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, frag);
         if (addTobackStack)
@@ -83,7 +90,7 @@ public class AccessActivity extends FragmentActivity implements AccessListener{
     }
 
     public void goToManualAccess(){
-        ManualAccessFragment frag = new ManualAccessFragment();
+        ManualAccesFragment frag = new ManualAccesFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, frag);
         ft.addToBackStack(null);
@@ -111,7 +118,7 @@ public class AccessActivity extends FragmentActivity implements AccessListener{
                         if(adapter != null)
                             adapter.notifyDataSetChanged();
                         wait.dismiss();
-                        Toast.makeText(AccessActivity.this,"Liste des entrées mise à jour.",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(AccesActivity.this,"Liste des entrées mise à jour.",Toast.LENGTH_SHORT).show();
                     }
                 });
             }

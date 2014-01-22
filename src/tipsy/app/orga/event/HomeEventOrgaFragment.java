@@ -1,4 +1,4 @@
-package tipsy.app.orga;
+package tipsy.app.orga.event;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -11,45 +11,34 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import tipsy.app.R;
-import tipsy.commun.Event;
 
 /**
  * Created by valoo on 27/12/13.
  */
 
-public class EventHomeFragment extends Fragment {
-    private OrgaListener callback;
-    private Event event;
+public class HomeEventOrgaFragment extends Fragment {
+    private EventOrgaListener callback;
     private LinearLayout buttonBilleterie;
     private LinearLayout buttonBar;
     private LinearLayout buttonAcces;
     private LinearLayout buttonInfos;
 
-    public static EventHomeFragment init(Event e) {
-        EventHomeFragment frag = new EventHomeFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("Event", e);
-        frag.setArguments(args);
-        return frag;
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (OrgaListener) activity;
+        callback = (EventOrgaListener) activity;
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_orga_event_home, container, false);
-        event = getArguments().getParcelable("Event");
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
         /* CONTRÔLE D'ACCES */
         buttonAcces = (LinearLayout) view.findViewById(R.id.button_acces);
         buttonAcces.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.goToAccess(event);
+                callback.goToAcces();
             }
         });
 
@@ -66,7 +55,7 @@ public class EventHomeFragment extends Fragment {
         buttonBilleterie = (LinearLayout) view.findViewById(R.id.button_billetterie);
         buttonBilleterie.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.goToBilletterie(event);
+                callback.goToBilletterie();
             }
         });
 
@@ -76,7 +65,7 @@ public class EventHomeFragment extends Fragment {
         buttonInfos = (LinearLayout) view.findViewById(R.id.button_infos);
         buttonInfos.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.onEventEdit(event, false);
+                callback.goToEditEvent();
             }
         });
 

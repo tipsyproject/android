@@ -122,7 +122,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.removeItem(R.id.search);
         menu.removeItem(R.id.search_date);
-        inflater.inflate(R.menu.menu_orga_edit_event, menu);
+        inflater.inflate(R.menu.menu_edit_event, menu);
     }
 
     // Gestion du click sur le bouton de validation
@@ -131,7 +131,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
         hideKeyboard(getActivity());
         // handle item selection
         switch (item.getItemId()) {
-            case R.id.action_validate_event:
+            case R.id.action_validate:
                 if (change) {
                     membre.setNom(Nom.getText().toString());
                     membre.setPrenom(Prenom.getText().toString());

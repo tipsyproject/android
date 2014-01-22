@@ -48,7 +48,7 @@ public class HomeOrgaFragment extends Fragment {
         buttonNewEvent = (Button) view.findViewById(R.id.button_new_event);
         buttonNewEvent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.onEventEdit(new Event(), true);
+                callback.goToNewEvent();
             }
         });
 
@@ -68,7 +68,7 @@ public class HomeOrgaFragment extends Fragment {
         else {
             resumeEvent.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    callback.goToResumeEvent(upcomingEvent);
+                    callback.goToEvent(upcomingEvent);
                 }
             });
             textUpcoming.setText(upcomingEvent.getNom());

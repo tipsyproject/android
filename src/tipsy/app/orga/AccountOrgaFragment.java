@@ -113,7 +113,7 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
     // Redéfinition de l'actionBar: Bouton de validation
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_orga_edit_event, menu);
+        inflater.inflate(R.menu.menu_edit_event, menu);
     }
 
     // Gestion du click sur le bouton de validation
@@ -122,14 +122,14 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
         // handle item selection
         hideKeyboard(getActivity());
         switch (item.getItemId()) {
-            case R.id.action_validate_event:
+            case R.id.action_validate:
                 if (change) {
                     orga.setNom(Orga.getText().toString());
                     orga.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
                     orga.save(new StackMobModelCallback() {
                         @Override
                         public void success() {
-                            callback.goToTableauDeBord(false);
+                            callback.tableauDeBord(false);
                         }
 
                         // En cas d'échec
@@ -144,7 +144,7 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
                         }
                     });
                 } else
-                    callback.goToTableauDeBord(false);
+                    callback.tableauDeBord(false);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

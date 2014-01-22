@@ -1,4 +1,4 @@
-package tipsy.app.access;
+package tipsy.app.orga.acces;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -9,28 +9,23 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
-import tipsy.commun.billetterie.EntreeArrayAdapter;
 import tipsy.commun.commerce.Achat;
-import tipsy.commun.commerce.AchatArrayAdapter;
 
 /**
  * Created by vquefele on 20/01/14.
  */
-public class ManualAccessFragment extends Fragment {
+public class HomeAccesFragment extends Fragment {
 
     private Event event;
     private ArrayList<Achat> entrees;
-    private AccessListener callback;
-    private ListView listView;
-    private EntreeArrayAdapter adapter;
+    private AccesListener callback;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -41,22 +36,20 @@ public class ManualAccessFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (AccessListener) activity;
+        callback = (AccesListener) activity;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_access_manual, container, false);
+        View view = inflater.inflate(R.layout.frag_access_home, container, false);
+        /* On récupère l'event courant */
 
 
-        listView = (ListView) view.findViewById(R.id.list);
-        adapter = new EntreeArrayAdapter(getActivity(), callback.getEntrees());
-        listView.setAdapter(adapter);
-        /*listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //editBillet(event.getBilletterie().get(position), false);
+        LinearLayout buttonSearch = (LinearLayout) view.findViewById(R.id.button_search);
+        buttonSearch.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                callback.goToManualAccess();
             }
-        });*/
+        });
 
         return view;
     }
@@ -65,7 +58,7 @@ public class ManualAccessFragment extends Fragment {
     // Redéfinition de l'actionBar: Bouton de validation
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_access_manual, menu);
+        inflater.inflate(R.menu.menu_access, menu);
     }
 
     // Gestion du click sur le bouton de validation
@@ -73,14 +66,11 @@ public class ManualAccessFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle item selection
         switch (item.getItemId()) {
-            case R.id.action_search:
-                return true;
             case R.id.action_refresh:
-                callback.refresh(adapter);
+                callback.refresh(null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
-
 }

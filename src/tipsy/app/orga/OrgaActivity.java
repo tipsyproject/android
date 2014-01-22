@@ -1,6 +1,5 @@
 package tipsy.app.orga;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -17,8 +16,8 @@ import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
-import tipsy.app.access.AccessActivity;
-import tipsy.app.billetterie.BilletterieActivity;
+import tipsy.app.orga.event.edit.EditEventActivity;
+import tipsy.app.orga.event.EventOrgaActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Organisateur;
 
@@ -42,9 +41,9 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
         if(getIntent().hasExtra("EVENT_HOME")){
             Event e = getIntent().getParcelableExtra("EVENT_HOME");
-            goToResumeEvent(e);
+            goToEvent(e);
         }else if (savedInstanceState == null) {
-            goToTableauDeBord(false);
+            tableauDeBord(false);
         }
 
     }
@@ -71,13 +70,13 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         this.menu.getDrawerLayout().closeDrawer(this.menu.getDrawerList());
         switch (position) {
             case MenuOrga.ACCUEIL:
-                goToTableauDeBord(true);
+                tableauDeBord(true);
                 break;
             case MenuOrga.MON_COMPTE:
-                goToAccount();
+                account();
                 break;
             case MenuOrga.EVENEMENTS:
-                goToEvents();
+                events();
                 break;
             case MenuOrga.AIDE:
                 Intent intent = new Intent(this, HelpActivity.class);
@@ -94,70 +93,23 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     }
 
 
-
-    public static void backToEventHome(Activity act, Event event){
-        Intent intent = new Intent(act, OrgaActivity.class);
-        intent.putExtra("EVENT_HOME", event);
-        act.startActivity(intent);
-
-    }
-
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
-    // clique sur le bouton de la Billetterie
-    public void goToBilletterie(Event e) {
-        Intent intent = new Intent(this, BilletterieActivity.class);
-        Bundle b = new Bundle();
-        b.putParcelable("Event", e);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
-    // clique sur le bouton de la Billetterie
-    public void goToAccess(Event e) {
-        Intent intent = new Intent(this, AccessActivity.class);
-        Bundle b = new Bundle();
-        b.putParcelable("Event", e);
-        intent.putExtras(b);
-        startActivity(intent);
-    }
-
     // Clique sur le bouton "Créer un événement"
-    public void goToResumeEvent(Event e) {
-        EventHomeFragment frag = EventHomeFragment.init(e);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, frag)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack(null)
-                .commit();
+    public void goToEvent(Event e) {
+        Intent intent = new Intent(this, EventOrgaActivity.class);
+        intent.putExtra("Event", e);
+        startActivity(intent);
     }
 
     // Clique sur le bouton "Créer un événement" ou Modifications de l'event
-    public void onEventEdit(Event e, boolean create) {
-        EditEventFragment frag = EditEventFragment.init(e, create);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.content, frag)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .addToBackStack(null)
-                .commit();
+    public void goToNewEvent() {
+        Intent intent = new Intent(this, EditEventActivity.class);
+        intent.putExtra("NEW_EVENT",true);
+        startActivity(intent);
     }
 
-    // Création/Modification d'un événement terminée
-    public void onEventEdited() {
-        orga.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
-            @Override
-            public void success() {
-                goToTableauDeBord(true);
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                Log.e("TOUTAFAIT", "erreur sauvegarde Event:" + e.getMessage());
-            }
-        });
-    }
-
-    public void goToTableauDeBord(boolean addToBackStack) {
+    public void tableauDeBord(boolean addToBackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new HomeOrgaFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -166,7 +118,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         ft.commit();
     }
 
-    public void goToAccount() {
+    public void account() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.addToBackStack(null);
         ft.replace(R.id.content, new AccountOrgaFragment());
@@ -175,7 +127,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     }
 
 
-    public void goToEvents() {
+    public void events() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.addToBackStack(null);
         ft.replace(R.id.content, new EventsOrgaFragment());
