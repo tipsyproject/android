@@ -156,16 +156,20 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     private void onSessionStateChange(Session session, SessionState state, Exception exception) {
         // Only make changes if the activity is visible
         final Session session_connected = Session.getActiveSession();
+        Log.d("TOUTAFAIT", "onSessionState ");
         if (isResumed) {
             if (state.isOpened()) {
                 // If the session state is open:
                 // Show the authenticated fragment
+                Log.d("TOUTAFAIT", "state.isOpened ");
                 Request request = Request.newMeRequest(session, new Request.GraphUserCallback() {
                     @Override
                     public void onCompleted(final GraphUser user, Response response) {
+                        Log.d("TOUTAFAIT", "onCompleted ");
                         // If the response is successful
                         if (session_connected == Session.getActiveSession()) {
                             if (user != null) {
+                                Log.d("TOUTAFAIT", "user null ");
                                 final Membre fbuser = new Membre(
                                         (String) user.getProperty("email"),
                                         session_connected.getAccessToken(),
@@ -216,6 +220,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
             }else if (state.isClosed()) {
                 // If the session state is closed:
                 // Show the login fragment
+                Log.d("TOUTAFAIT", "state.isClosed ");
                 mConnectionProgressDialog.dismiss();
             }
         }
