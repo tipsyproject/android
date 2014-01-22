@@ -25,7 +25,6 @@ public class MenuOrga extends MenuUser {
                 R.drawable.ic_action_undo_dark
         };
         mTitles = new String[]{"Tableau de Bord", "Mon Compte", "Événements", "Aide", "Déconnexion"};
-        titres_menu = a.getResources().getStringArray(R.array.menu_organisateur);
-        setTitre(titres_menu[ACCUEIL]);
+        setTitre(mTitles[ACCUEIL]);
     }
 }

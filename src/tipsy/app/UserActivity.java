@@ -17,6 +17,11 @@ import android.widget.ListView;
 public abstract class UserActivity extends FragmentActivity implements MenuListener {
     protected MenuUser menu;
     protected TipsyApp app;
+    public final static int ACCUEIL = 0;
+    public final static int MON_COMPTE = 1;
+    public final static int EVENEMENTS = 2;
+    public final static int AIDE = 3;
+    public final static int DECONNEXION = 4;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +38,6 @@ public abstract class UserActivity extends FragmentActivity implements MenuListe
     protected void onStart() {
         super.onStart();
         setTitle(this.menu.getTitre());
-        this.menu.getDrawerList().setItemChecked(MenuUser.ACCUEIL, true);
     }
 
     // Called whenever we call invalidateOptionsMenu()
@@ -74,7 +78,7 @@ public abstract class UserActivity extends FragmentActivity implements MenuListe
     }
 
     public void setMenuTitle(int titleId) {
-        setTitle(this.menu.getTitres_menu()[titleId]);
+        setTitle(this.menu.getmTitles()[titleId]);
         this.menu.getDrawerList().setItemChecked(titleId, true);
     }
 

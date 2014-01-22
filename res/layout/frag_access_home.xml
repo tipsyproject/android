@@ -31,7 +31,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Scan NFC"
-                    android:textColor="@color/background_menu"
+                    android:textColor="@color/button_color"
                     android:textSize="48dp" />
             </LinearLayout>
 
@@ -64,7 +64,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/background_menu"
+                    android:textColor="@color/button_color"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="QR Code"
                     android:layout_gravity="center_horizontal" />
@@ -87,15 +87,14 @@
                     android:layout_height="@dimen/bar_height"
                     android:src="@drawable/ic_action_search"
                     android:layout_gravity="center_horizontal" />
-                <!--
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/background_menu"
+                    android:textColor="@color/button_color"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="Rechercher"
+                    android:text="Mode manuel"
                     android:layout_gravity="center_horizontal" />
-                -->
             </LinearLayout>
         </TableRow>
 </TableLayout>

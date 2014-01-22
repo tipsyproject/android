@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_festival_flou"
-    android:scaleType="centerCrop">
+    android:scaleType="centerCrop"
+    android:orientation="horizontal">
     <!-- The main content view -->
 
     <FrameLayout
@@ -19,9 +20,10 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        android:choiceMode="singleChoice"
         android:divider="@color/divider"
         android:dividerHeight="1dp"
-        android:listSelector="@drawable/item_menu"
+        android:listSelector="@drawable/text_menu"
         android:background="@color/background_menu" />
 
 </android.support.v4.widget.DrawerLayout>

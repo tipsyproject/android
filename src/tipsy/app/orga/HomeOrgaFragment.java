@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
@@ -20,8 +23,7 @@ import tipsy.commun.Event;
  */
 public class HomeOrgaFragment extends Fragment {
     private OrgaListener callback;
-    private Button buttonNewEvent;
-    private TableRow resumeEvent;
+    private RelativeLayout resumeEvent;
     private TextView textUpcoming;
     private Event upcomingEvent;
 
@@ -43,12 +45,19 @@ public class HomeOrgaFragment extends Fragment {
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
         textUpcoming = (TextView) view.findViewById(R.id.text_upcoming);
-        resumeEvent = (TableRow) view.findViewById(R.id.resume_upcoming_event);
+        resumeEvent = (RelativeLayout) view.findViewById(R.id.resume_upcoming_event);
 
-        buttonNewEvent = (Button) view.findViewById(R.id.button_new_event);
+        LinearLayout buttonNewEvent = (LinearLayout) view.findViewById(R.id.button_new_event);
         buttonNewEvent.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToNewEvent();
+            }
+        });
+
+        LinearLayout buttonStats = (LinearLayout) view.findViewById(R.id.button_stats);
+        buttonStats.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
             }
         });
 

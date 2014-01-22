@@ -3,9 +3,14 @@ package tipsy.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Base64;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.facebook.LoggingBehavior;
 import com.facebook.Request;
@@ -13,6 +18,9 @@ import com.facebook.Response;
 import com.facebook.Settings;
 import com.facebook.model.GraphUser;
 import com.stackmob.android.sdk.common.StackMobAndroid;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import tipsy.commun.Prefs;
 import tipsy.commun.User;
@@ -30,7 +38,6 @@ public class MainActivity extends Activity {
         // Initialisation de STACKMOB avec la clé publique
         StackMobAndroid.init(getApplicationContext(), 0, "eeedff37-f59d-408a-9279-27cd8fe7062e");
         setContentView(R.layout.act_loading);
-
 
         super.onCreate(savedInstanceState);
         final SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);

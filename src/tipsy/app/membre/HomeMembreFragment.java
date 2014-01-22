@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
@@ -41,6 +42,13 @@ public class HomeMembreFragment extends Fragment {
         buttonWallet.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToWallet();
+            }
+        });
+
+        LinearLayout buttonAccess = (LinearLayout) view.findViewById(R.id.button_access);
+        buttonAccess.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
             }
         });
 

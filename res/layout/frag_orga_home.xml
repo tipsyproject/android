@@ -5,17 +5,63 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <TableRow
+    <RelativeLayout
+        android:id="@+id/resume_upcoming_event"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/home_upcoming_height"
+        android:paddingTop="@dimen/ui_margin"
+        android:paddingLeft="@dimen/ui_margin"
+        android:paddingRight="@dimen/ui_margin">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/event_flyer_height"
+                android:id="@+id/imageView"
+                android:src="@drawable/bg_home"
+                android:scaleType="centerCrop" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/event_fade"
+                android:alpha="0.3" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="@dimen/ui_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Prochain événement :"
+                    android:id="@+id/text_next"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:gravity="left"
+                    android:textStyle="bold"
+                    android:autoText="false" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <LinearLayout
             android:id="@+id/resume_upcoming_event"
+            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:padding="@dimen/ui_margin">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="@dimen/home_upcoming_height"
                 android:text="New Text"
                 android:id="@+id/text_upcoming"
@@ -23,30 +69,76 @@
                 android:layout_span="1"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:textSize="16dp" />
-        </TableRow>
+                android:textSize="25dp" />
+        </LinearLayout>
+    </RelativeLayout>
 
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/ui_margin"
+        android:layout_marginTop="@dimen/ui_margin">
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="@dimen/home_button_height"
-                android:id="@+id/button_new_event"
-                android:text="@string/creer_event"
-                android:layout_weight="1"
-                android:layout_column="0"
-                android:layout_span="1" />
 
-            <Button
+            <LinearLayout
+                android:orientation="vertical"
+                android:id="@+id/button_new_event"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
-                android:text="@string/stats"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:background="@color/text_menu"
+                android:baselineAligned="true"
+                android:layout_marginBottom="@dimen/ui_margin"
+                android:layout_marginRight="@dimen/ui_margin"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="@dimen/bar_height"
+                    android:layout_height="@dimen/bar_height"
+                    android:src="@drawable/ic_action_person"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/background_menu"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/creer_event"
+                    android:gravity="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/home_button_height"
                 android:id="@+id/button_stats"
                 android:layout_weight="1"
-                android:layout_span="1"
-                android:layout_column="1" />
+                android:gravity="center_vertical|center_horizontal"
+                android:background="@color/text_menu"
+                android:baselineAligned="true"
+                android:layout_marginBottom="@dimen/ui_margin"
+                android:layout_marginRight="@dimen/ui_margin"
+                android:clickable="true">
+
+                <ImageView
+                    android:layout_width="@dimen/bar_height"
+                    android:layout_height="@dimen/bar_height"
+                    android:src="@drawable/ic_action_network_wifi"
+                    android:layout_gravity="center_horizontal" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/background_menu"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="@string/stats"
+                    android:layout_gravity="center_horizontal" />
+
+            </LinearLayout>
         </TableRow>
     </TableLayout>
 </LinearLayout>

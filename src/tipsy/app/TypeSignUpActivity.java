@@ -1,5 +1,7 @@
 package tipsy.app;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -20,6 +22,7 @@ import com.facebook.Request;
 import com.facebook.Response;
 import com.facebook.Session;
 import com.facebook.SessionState;
+import com.facebook.UiLifecycleHelper;
 import com.facebook.model.GraphUser;
 import com.facebook.widget.LoginButton;
 import com.mobsandgeeks.saripaar.Rule;
@@ -62,6 +65,11 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
     protected ViewPager pager;
     private String TAG = "TypeSignUpActivity";
+    private boolean isResumed = false;
+    private ProgressDialog mConnectionProgressDialog;
+    private UiLifecycleHelper uiHelper;
+    private Session.StatusCallback statusCallback =
+            new SessionStatusCallback();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,6 +98,10 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                 return true;
             }
         });
+        uiHelper = new UiLifecycleHelper(this, statusCallback);
+        uiHelper.onCreate(savedInstanceState);
+        mConnectionProgressDialog = new ProgressDialog(TypeSignUpActivity.this);
+        mConnectionProgressDialog.setMessage("Connexion en cours...");
     }
 
     @Override
@@ -108,42 +120,125 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
     }
 
-    /*public void onClickFb(View view){
-        // set permission list, Don't forget to add email
-        view.setReadPermissions(Arrays.asList("basic_info", "email"));
-        // session state call back event
-        view.setSessionStatusCallback(new Session.StatusCallback() {
+    @Override
+    public void onResume() {
+        super.onResume();
+        uiHelper.onResume();
+        isResumed = true;
+    }
 
-            @Override
-            public void call(final Session session, SessionState state, Exception exception) {
+    @Override
+    public void onPause() {
+        super.onPause();
+        uiHelper.onPause();
+        isResumed = false;
+    }
 
-                if (session.isOpened()) {
-                    Log.i(TAG, "Access Token" + session.getAccessToken());
-                    Request.executeMeRequestAsync(session,
-                            new Request.GraphUserCallback() {
-                                @Override
-                                public void onCompleted(GraphUser user, Response response) {
-                                    if (user != null) {
-                                        final User userfb = new User(String.valueOf(user.asMap().get("email")));
-                                        userfb.loginWithFacebook(session.getAccessToken(), true, String.valueOf(user.asMap().get("email")), new StackMobOptions(), new StackMobModelCallback() {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        uiHelper.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        uiHelper.onDestroy();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
+    }
+
+    private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+        // Only make changes if the activity is visible
+        final Session session_connected = Session.getActiveSession();
+        if (isResumed) {
+            if (state.isOpened()) {
+                // If the session state is open:
+                // Show the authenticated fragment
+                Request request = Request.newMeRequest(session, new Request.GraphUserCallback() {
+                    @Override
+                    public void onCompleted(final GraphUser user, Response response) {
+                        // If the response is successful
+                        if (session_connected == Session.getActiveSession()) {
+                            if (user != null) {
+                                final Membre fbuser = new Membre(
+                                        (String) user.getProperty("email"),
+                                        session_connected.getAccessToken(),
+                                        user.getFirstName(),
+                                        user.getLastName()
+                                );
+                                fbuser.getUser().loginWithFacebook(session_connected.getAccessToken(), new StackMobModelCallback() {
+                                    @Override
+                                    public void success() {
+                                        Log.d("TOUTAFAIT", "fb ok ");
+                                        TypeSignUpActivity.this.runOnUiThread(new Runnable() {
                                             @Override
-                                            public void success() {
-                                                User.keepCalmAndWaitForGoingHome(TypeSignUpActivity.this, userfb);
-
-                                            }
-
-                                            @Override
-                                            public void failure(StackMobException e) {
+                                            public void run() {
+                                                User.rememberMe(TypeSignUpActivity.this, (String) user.getProperty("email"), session_connected.getAccessToken());
+                                                User.keepCalmAndWaitForGoingHome(TypeSignUpActivity.this, fbuser.getUser());
+                                                mConnectionProgressDialog.dismiss();
                                             }
                                         });
                                     }
+
+                                    @Override
+                                    public void failure(StackMobException e) {
+                                        Log.d("TOUTAFAIT", "fb " + e.getMessage());
+                                            TypeSignUpActivity.this.runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    mConnectionProgressDialog.dismiss();
+                                                    session_connected.closeAndClearTokenInformation();
+                                                    Toast.makeText(TypeSignUpActivity.this, "Erreur.", Toast.LENGTH_LONG).show();
+                                                }
+                                            });
+                                    }
+                                });
+                            }
+                        }
+                        if (response.getError() != null) {
+                            // Handle errors, will do so later.
+                            TypeSignUpActivity.this.runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(TypeSignUpActivity.this, "Erreur Facebook !", Toast.LENGTH_LONG).show();
                                 }
                             });
-                }
-
+                        }
+                    }
+                });
+                Request.executeBatchAsync(request);
+            }else if (state.isClosed()) {
+                // If the session state is closed:
+                // Show the login fragment
+                mConnectionProgressDialog.dismiss();
             }
-        });
-    }*/
+        }
+    }
+
+    private class SessionStatusCallback implements Session.StatusCallback {
+        @Override
+        public void call(Session session, SessionState state, Exception exception) {
+            // Respond to session state changes, ex: upiew
+            session.closeAndClearTokenInformation();
+            onSessionStateChange(session, state, exception);
+        }
+    }
+
+    public void onClickFb(View view){
+        Session session = Session.getActiveSession();
+        if (!session.isOpened() && !session.isClosed()) {
+            session.openForRead(new Session.OpenRequest(this)
+                    .setPermissions(Arrays.asList("basic_info","email"))
+                    .setCallback(statusCallback));
+        } else {
+            Session.openActiveSession(TypeSignUpActivity.this, true, statusCallback);
+        }
+    }
 
     public void onValidationSucceeded() {
         final User user = new User(inputEmail.getText().toString());
