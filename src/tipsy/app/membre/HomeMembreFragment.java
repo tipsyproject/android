@@ -30,11 +30,6 @@ public class HomeMembreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_membre_home, container, false);
 
-        /* Initialisation du montant du solde du Wallet Membre */
-        TextView viewSolde = (TextView) view.findViewById(R.id.solde);
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        viewSolde.setText(Commerce.prixToString(app.getWallet().getSolde(), app.getWallet().getDevise()));
-
         LinearLayout buttonAccount = (LinearLayout) view.findViewById(R.id.button_account);
         buttonAccount.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,6 +50,10 @@ public class HomeMembreFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        /* Initialisation du montant du solde du Wallet Membre */
+        TextView viewSolde = (TextView) getView().findViewById(R.id.solde);
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        viewSolde.setText(Commerce.prixToString(app.getWallet().getSolde(), app.getWallet().getDevise()));
         callback.setMenuTitle(MenuMembre.ACCUEIL);
     }
 }

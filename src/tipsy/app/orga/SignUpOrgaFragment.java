@@ -10,27 +10,25 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 
 /**
  * Created by Alexandre on 04/01/14.
  */
 public class SignUpOrgaFragment extends Fragment {
+
+    protected TipsyApp app;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View View = inflater.inflate(R.layout.frag_signup_orga, container, false);
         View.findViewById(R.id.layout_signup_orga).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(getActivity());
+                app.hideKeyboard(getActivity());
                 return false;
             }
         });
         return View;
     }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
-    }
-
 }

@@ -17,6 +17,7 @@
     <color name="button_red_pressed">#f0ffffff</color>
     <color name="text_pressed">#0099cc</color>
     <color name="background_loading">#DCDDD8</color>
+    <color name="divider">#DCDDD8</color>
     <color name="text_loading">#354B5E</color>
     <color name="event_fade">#000000</color>
 

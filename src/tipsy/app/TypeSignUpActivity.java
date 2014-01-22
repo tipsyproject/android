@@ -15,13 +15,22 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.facebook.FacebookException;
+import com.facebook.Request;
+import com.facebook.Response;
+import com.facebook.Session;
+import com.facebook.SessionState;
+import com.facebook.model.GraphUser;
+import com.facebook.widget.LoginButton;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Required;
+import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 
@@ -49,8 +58,10 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     protected CheckBox checkbox;
     protected Validator validator;
     protected boolean signup_membre = false;
+    protected TipsyApp app;
 
     protected ViewPager pager;
+    private String TAG = "TypeSignUpActivity";
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,11 +92,6 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         });
     }
 
-    protected void onPause() {
-        super.onPause();
-        overridePendingTransition(R.animator.activity_open_close, R.animator.left_to_right);
-    }
-
     @Override
     public void onBackPressed() {
         if (pager.getCurrentItem() != 0)
@@ -102,29 +108,90 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
     }
 
+    /*public void onClickFb(View view){
+        // set permission list, Don't forget to add email
+        view.setReadPermissions(Arrays.asList("basic_info", "email"));
+        // session state call back event
+        view.setSessionStatusCallback(new Session.StatusCallback() {
+
+            @Override
+            public void call(final Session session, SessionState state, Exception exception) {
+
+                if (session.isOpened()) {
+                    Log.i(TAG, "Access Token" + session.getAccessToken());
+                    Request.executeMeRequestAsync(session,
+                            new Request.GraphUserCallback() {
+                                @Override
+                                public void onCompleted(GraphUser user, Response response) {
+                                    if (user != null) {
+                                        final User userfb = new User(String.valueOf(user.asMap().get("email")));
+                                        userfb.loginWithFacebook(session.getAccessToken(), true, String.valueOf(user.asMap().get("email")), new StackMobOptions(), new StackMobModelCallback() {
+                                            @Override
+                                            public void success() {
+                                                User.keepCalmAndWaitForGoingHome(TypeSignUpActivity.this, userfb);
+
+                                            }
+
+                                            @Override
+                                            public void failure(StackMobException e) {
+                                            }
+                                        });
+                                    }
+                                }
+                            });
+                }
+
+            }
+        });
+    }*/
+
     public void onValidationSucceeded() {
-        if (pager.getCurrentItem() == 1) {
-            final Membre membre = new Membre(
-                    inputEmail.getText().toString(),
-                    inputPassword.getText().toString(),
-                    inputNom.getText().toString(),
-                    inputPrenom.getText().toString()
-            );
-            signUpUser(membre);
-        } else if (pager.getCurrentItem() == 2) {
-            final Organisateur orga = new Organisateur(
-                    inputEmail.getText().toString(),
-                    inputPassword.getText().toString(),
-                    inputNom.getText().toString()
-            );
-            signUpUser(orga);
-        }
-        User.rememberMe(this, inputEmail.getText().toString(), inputPassword.getText().toString());
+        final User user = new User(inputEmail.getText().toString());
+        user.fetch(new StackMobModelCallback() {
+            @Override
+            public void success() {
+                TypeSignUpActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(TypeSignUpActivity.this, "Email déjà pris", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            @Override
+            public void failure(StackMobException e) {
+                if (!app.isOnline()){
+                    TypeSignUpActivity.this.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(TypeSignUpActivity.this, "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else if (pager.getCurrentItem() == 1) {
+                    final Membre membre = new Membre(
+                            inputEmail.getText().toString(),
+                            inputPassword.getText().toString(),
+                            inputNom.getText().toString(),
+                            inputPrenom.getText().toString()
+                    );
+                    signUpUser(membre);
+                } else if (pager.getCurrentItem() == 2) {
+                    final Organisateur orga = new Organisateur(
+                            inputEmail.getText().toString(),
+                            inputPassword.getText().toString(),
+                            inputNom.getText().toString()
+                    );
+                    signUpUser(orga);
+                }
+                User.rememberMe(TypeSignUpActivity.this, inputEmail.getText().toString(), inputPassword.getText().toString());
+            }
+        });
+
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
         final String message = failedRule.getFailureMessage();
-
         if (failedView instanceof EditText) {
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
@@ -132,7 +199,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
             TypeSignUpActivity.this.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(TypeSignUpActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TypeSignUpActivity.this, message, Toast.LENGTH_LONG).show();
                 }
             });
         }
@@ -180,22 +247,6 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         inputEmail = (EditText) findViewById(R.id.input_email_orga);
         inputPassword = (EditText) findViewById(R.id.input_password_orga);
         checkbox = (CheckBox) findViewById(R.id.afficher_mdp_orga);
-    }
-
-    public void onClickFb(View view) {
-
-        /*final User.TipsyUser tipsyUser = User.TipsyUser.getUser();
-        newUser.createWithFacebook(facebookToken, new StackMobModelCallback() {
-            @Override
-            public void success() {
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-            }
-        });*/
-
-        Toast.makeText(this, "Faut pas rêver !", Toast.LENGTH_SHORT).show();
     }
 
     public void checkboxClicked(View v) {

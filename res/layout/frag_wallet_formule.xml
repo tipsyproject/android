@@ -24,32 +24,36 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="30dp"
-        android:text="Recharger de 20 €"
+        android:text="20€"
         android:id="@+id/rech20"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
-        android:text="Recharger de 50 €"
+        android:text="50€"
         android:id="@+id/rech50"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
-        android:text="Recharger de 100 €"
+        android:text="100€"
         android:id="@+id/rech100"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="10dp"
-        android:text="Autres montant"
+        android:text="Autres montants"
         android:id="@+id/autres"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:textSize="25dp" />
 
 </LinearLayout>

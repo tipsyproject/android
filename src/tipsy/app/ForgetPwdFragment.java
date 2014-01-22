@@ -31,6 +31,7 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
     protected EditText inputForget;
     protected Button reset;
     protected Validator validator_pwd;
+    protected TipsyApp app;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
         reset = (Button) view.findViewById(R.id.resetpwd);
         reset.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                hideKeyboard(getActivity());
+                app.hideKeyboard(getActivity());
                 validator_pwd.validate();
             }
         });
@@ -117,10 +118,5 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
                 }
             });
         }
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

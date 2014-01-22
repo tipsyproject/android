@@ -16,6 +16,7 @@ import android.widget.ListView;
  */
 public abstract class UserActivity extends FragmentActivity implements MenuListener {
     protected MenuUser menu;
+    protected TipsyApp app;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,7 +24,7 @@ public abstract class UserActivity extends FragmentActivity implements MenuListe
         findViewById(android.R.id.content).setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(UserActivity.this);
+                app.hideKeyboard(UserActivity.this);
                 return false;
             }
         });
@@ -93,10 +94,5 @@ public abstract class UserActivity extends FragmentActivity implements MenuListe
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         this.menu.getDrawerToggle().onConfigurationChanged(newConfig);
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

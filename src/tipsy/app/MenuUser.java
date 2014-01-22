@@ -4,8 +4,12 @@ import android.app.Activity;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by Alexandre on 15/12/13.
@@ -19,6 +23,14 @@ public abstract class MenuUser {
     protected CharSequence drawerTitle;
     protected CharSequence titre;
     protected String[] titres_menu;
+    final private String ICON = "icon";
+    final private String TITLE = "title";
+    protected List<HashMap<String,String>> mList ;
+    protected SimpleAdapter mAdapter;
+    // Array of integers points to images stored in /res/drawable-ldpi/
+    protected int[] mIcons;
+    // Array of strings to initial counts
+    protected String[] mTitles;
 
     public MenuUser(Activity a) {
         activity = a;
@@ -55,8 +67,21 @@ public abstract class MenuUser {
 
     public void initAdapter(UserActivity.DrawerItemClickListener listener) {
         // set up the drawer's list view with items and click listener
-        getDrawerList().setAdapter(new ArrayAdapter<String>(activity,
-                R.layout.frag_drawer_list_item, titres_menu));
+        //getDrawerList().setAdapter(new ArrayAdapter<String>(activity, R.layout.frag_drawer_list_item, titres_menu));
+
+        // Keys used in Hashmap
+        String[] from = { ICON,TITLE };
+        // Ids of views in listview_layout
+        int[] to = { R.id.item_icon , R.id.item_title};
+        mList = new ArrayList<HashMap<String,String>>();
+        for(int i=0;i<5;i++){
+            HashMap<String, String> hm = new HashMap<String,String>();
+            hm.put(ICON, Integer.toString(mIcons[i]));
+            hm.put(TITLE, mTitles[i]);
+            mList.add(hm);
+        }
+        mAdapter = new SimpleAdapter(activity, mList, R.layout.row_menu_user, from, to);
+        getDrawerList().setAdapter(mAdapter);
         getDrawerList().setOnItemClickListener(listener);
     }
 

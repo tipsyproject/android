@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks;
@@ -32,6 +33,7 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
     private Button mSignInButton;
     private ConnectionResult mConnectionResult;
     private ProgressDialog mConnectionProgressDialog;
+    protected TipsyApp app;
 
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -177,6 +179,14 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
                             @Override
                             public void failure(StackMobException e) {
                                 Log.d("TOUTAFAIT", "save orga/membre" + e.getMessage());
+                                if (!app.isOnline()){
+                                    getActivity().runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getActivity(), "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
+                                        }
+                                    });
+                                }
                             }
 
                         });
@@ -184,6 +194,14 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
 
                     @Override
                     public void failure(StackMobException e) {
+                        if (!app.isOnline()){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(), "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
                         Log.d("TOUTAFAIT", "login" + e.getMessage());
                     }
                 });
@@ -191,6 +209,14 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
 
             @Override
             public void failure(StackMobException e) {
+                if (!app.isOnline()){
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
                 Log.d("TOUTAFAIT", "save user" + e.getMessage());
             }
 

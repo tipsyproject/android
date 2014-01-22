@@ -19,6 +19,7 @@ import java.util.Vector;
 
 public class LoginActivity extends FragmentActivity {
 
+    protected TipsyApp app;
     protected SharedPreferences prefs;
     protected PagerAdapter mPagerAdapter;
     static ViewPager pager;
@@ -50,7 +51,7 @@ public class LoginActivity extends FragmentActivity {
         pager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                hideKeyboard(LoginActivity.this);
+                app.hideKeyboard(LoginActivity.this);
                 return true;
             }
         });
@@ -92,10 +93,5 @@ public class LoginActivity extends FragmentActivity {
 
     public static ViewPager getPager() {
         return pager;
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

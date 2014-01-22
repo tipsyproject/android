@@ -39,6 +39,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
     protected Button forgetpwd;
     protected static String username;
     protected static String pwd;
+    protected TipsyApp app;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,13 +54,13 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
         forgetpwd = (Button) view.findViewById(R.id.forgotpass);
         signin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                hideKeyboard(getActivity());
+                app.hideKeyboard(getActivity());
                 validator.validate();
             }
         });
         signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                hideKeyboard(getActivity());
+                app.hideKeyboard(getActivity());
                 startActivity(new Intent(getActivity(), TypeSignUpActivity.class));
             }
         });
@@ -74,7 +75,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
         });
         forgetpwd.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                hideKeyboard(getActivity());
+                app.hideKeyboard(getActivity());
                 LoginActivity.getPager().setCurrentItem(1, true);
             }
         });
@@ -121,13 +122,24 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
 
             @Override
             public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT", "forget1" + e.getMessage());
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getActivity(), "Email non existant", Toast.LENGTH_LONG).show();
-                    }
-                });
+                if(app.isOnline()){
+                    Log.d("TOUTAFAIT", "forget1" + e.getMessage());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Email non existant", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+                else {
+                    Log.d("TOUTAFAIT", "not online " + e.getMessage());
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(getActivity(), "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
             }
         });
     }
@@ -146,10 +158,5 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                 }
             });
         }
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

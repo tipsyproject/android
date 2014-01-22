@@ -39,7 +39,10 @@
         <activity
             android:name=".TypeSignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+            <meta-data android:name="com.facebook.sdk.ApplicationId"
+                android:value="394976053981556" />
+            </activity>
 
         <activity
             android:name=".LoginActivity"

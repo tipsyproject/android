@@ -2,9 +2,13 @@ package tipsy.app;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Toast;
 
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
@@ -86,8 +90,21 @@ public class TipsyApp extends Application {
 
             @Override
             public void failure(StackMobException e) {
+                if (!isOnline()){
+                Toast.makeText(getApplicationContext(), "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
                 Log.d("REMEMBER", "Logout failed");
+                }
             }
         });
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        return cm.getActiveNetworkInfo() != null && cm.getActiveNetworkInfo().isConnectedOrConnecting();
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
@@ -31,6 +32,7 @@ public class ResetPwdFragment extends Fragment implements Validator.ValidationLi
     @Required(order = 1, message = "Mot de passe manquant")
     protected EditText newPassword;
     protected Validator validator;
+    protected TipsyApp app;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,7 +43,7 @@ public class ResetPwdFragment extends Fragment implements Validator.ValidationLi
         ok = (Button) view.findViewById(R.id.ok);
         ok.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                hideKeyboard(getActivity());
+                app.hideKeyboard(getActivity());
                 validator.validate();
             }
         });
@@ -97,13 +99,19 @@ public class ResetPwdFragment extends Fragment implements Validator.ValidationLi
                     @Override
                     public void failure(StackMobException e) {
                         Log.d("TOUTAFAIT", "resetpwd " + e.getMessage());
+                        if (!app.isOnline()){
+                            getActivity().runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getActivity(), "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
                     }
                 });
 
 
             }
-
-            final User user = new User(LoginFragment.username, LoginFragment.pwd);
 
             @Override
             public void failure(StackMobException e) {
@@ -116,10 +124,5 @@ public class ResetPwdFragment extends Fragment implements Validator.ValidationLi
     @Override
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
 
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

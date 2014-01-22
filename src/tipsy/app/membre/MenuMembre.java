@@ -17,7 +17,15 @@ public class MenuMembre extends MenuUser {
 
     public MenuMembre(Activity a) {
         super(a);
-        this.titres_menu = a.getResources().getStringArray(R.array.menu_membre);
+        mIcons = new int[]{
+                R.drawable.ic_action_view_as_grid_dark,
+                R.drawable.ic_action_person_dark,
+                R.drawable.ic_action_event_dark,
+                R.drawable.ic_action_help_dark,
+                R.drawable.ic_action_undo_dark
+        };
+        mTitles = new String[]{"Tableau de Bord", "Mon Compte", "Événements", "Aide", "Déconnexion"};
+        titres_menu = a.getResources().getStringArray(R.array.menu_membre);
         setTitre(titres_menu[ACCUEIL]);
     }
 }

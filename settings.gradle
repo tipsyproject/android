@@ -1,1 +1,1 @@
-include ':google-play-services_lib', ':google-play-services_lib'
+include ':google-play-services_lib', ':google-play-services_lib', ':libraries:facebook'

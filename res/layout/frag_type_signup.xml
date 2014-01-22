@@ -31,7 +31,6 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="@dimen/bar_height"
-            android:onClick="onClickFb"
             android:text="Facebook"
             android:id="@+id/fb"
             android:drawableLeft="@drawable/fb_icon"

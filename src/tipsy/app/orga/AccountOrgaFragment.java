@@ -120,7 +120,7 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle item selection
-        hideKeyboard(getActivity());
+        app.hideKeyboard(getActivity());
         switch (item.getItemId()) {
             case R.id.action_validate:
                 if (change) {
@@ -235,10 +235,5 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
         } catch (FileNotFoundException e) {
         }
         return null;
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }

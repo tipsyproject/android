@@ -55,6 +55,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     protected Membre membre;
     protected static Bitmap bitmap_avatar = null;
 
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -128,7 +129,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     // Gestion du click sur le bouton de validation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        hideKeyboard(getActivity());
+        app.hideKeyboard(getActivity());
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_validate:
@@ -248,10 +249,5 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
         } catch (FileNotFoundException e) {
         }
         return null;
-    }
-
-    public static void hideKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 }
