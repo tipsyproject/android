@@ -1,4 +1,4 @@
-package tipsy.app.membre;
+package tipsy.app.membre.event;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,10 +25,10 @@ import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Required;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
+import tipsy.app.membre.MembreListener;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
 import tipsy.commun.Participant;
@@ -45,17 +45,15 @@ public class EventParticiperFragment extends Fragment {
 
     private Panier panier;
     private AchatArrayAdapter adapter;
-    private Event event;
     private Commande achats;
     private int userParticipation = -1;
     private ListView listView;
-    private MembreListener callback;
+    private EventMembreListener callback;
 
 
-    public static EventParticiperFragment init(Event e, Panier p) {
+    public static EventParticiperFragment init(Panier p) {
         EventParticiperFragment frag = new EventParticiperFragment();
         Bundle args = new Bundle();
-        args.putParcelable("Event", e);
         args.putParcelable("Panier", p);
         frag.setArguments(args);
         return frag;
@@ -64,7 +62,7 @@ public class EventParticiperFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (MembreListener) activity;
+        callback = (EventMembreListener) activity;
     }
 
     @Override
@@ -85,7 +83,6 @@ public class EventParticiperFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        event = getArguments().getParcelable("Event");
         panier = getArguments().getParcelable("Panier");
 
         View view = inflater.inflate(R.layout.frag_event_participer, container, false);
@@ -98,7 +95,7 @@ public class EventParticiperFragment extends Fragment {
             for(Item item : panier){
                 for(int i=0; i<item.getQuantite(); ++i){
                     Achat a = new Achat(item.getProduit());
-                    a.setParticipant(new Participant(event));
+                    a.setParticipant(new Participant(callback.getEvent()));
                     achats.add(a);
                 }
             }
