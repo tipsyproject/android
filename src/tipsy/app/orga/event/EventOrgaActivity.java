@@ -8,6 +8,7 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.app.orga.OrgaActivity;
 import tipsy.app.orga.acces.AccesActivity;
 import tipsy.app.orga.billetterie.BilletterieActivity;
@@ -20,29 +21,21 @@ import tipsy.commun.Event;
 public class EventOrgaActivity extends FragmentActivity implements EventOrgaListener {
 
     private Event event;
+    private int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
 
-        if(savedInstanceState != null && savedInstanceState.containsKey("Event")){
-            event =  savedInstanceState.getParcelable("Event");
-        }else{
-            event = getIntent().getParcelableExtra("Event");
+        TipsyApp app = (TipsyApp) getApplication();
+        index = getIntent().getIntExtra("EVENT_INDEX",-1);
+        event = app.getOrga().getEvents().get(index);
+        if(savedInstanceState == null)
             home(false);
-        }
+
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle(event.getNom());
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
-            outState = new Bundle();
-        outState.putParcelable("Event", event);
-        // Add variable to outState here
-        super.onSaveInstanceState(outState);
     }
 
 
@@ -78,20 +71,20 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     // clique sur le bouton de la Billetterie
     public void goToAcces() {
         Intent intent = new Intent(this, AccesActivity.class);
-        intent.putExtra("Event", event);
+        intent.putExtra("EVENT_INDEX", index);
         startActivity(intent);
     }
 
     public void goToBilletterie() {
         Intent intent = new Intent(this, BilletterieActivity.class);
-        intent.putExtra("Event", event);
+        intent.putExtra("EVENT_INDEX", index);
         startActivity(intent);
     }
 
     // Modification d'un événement
     public void goToEditEvent() {
         Intent intent = new Intent(this, EditEventActivity.class);
-        intent.putExtra("Event",event);
+        intent.putExtra("EVENT_INDEX", index);
         startActivity(intent);
     }
 }

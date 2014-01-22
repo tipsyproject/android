@@ -44,6 +44,13 @@ public class HomeMembreFragment extends Fragment {
             }
         });
 
+        LinearLayout buttonBracelet = (LinearLayout) view.findViewById(R.id.button_bracelet);
+        buttonBracelet.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                callback.goToBracelet();
+            }
+        });
+
         return view;
     }
 

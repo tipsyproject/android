@@ -2,6 +2,7 @@ package tipsy.app.orga;
 
 import tipsy.app.MenuListener;
 import tipsy.commun.Event;
+import tipsy.commun.Organisateur;
 
 /**
  * Created by valoo on 22/12/13.
@@ -9,7 +10,7 @@ import tipsy.commun.Event;
 public interface OrgaListener extends MenuListener {
 
     public void goToNewEvent();
-    public void goToEvent(Event e);
+    public void goToEvent(int index);
 
     public void account();
     public void events();

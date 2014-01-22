@@ -15,6 +15,7 @@ import com.stackmob.sdk.exception.StackMobException;
 
 
 import tipsy.app.R;
+import tipsy.app.TipsyApp;
 import tipsy.app.orga.event.EventOrgaActivity;
 import tipsy.commun.Event;
 
@@ -24,6 +25,7 @@ import tipsy.commun.Event;
 public class BilletterieActivity extends FragmentActivity implements BilletterieListener {
 
     private Event event;
+    private int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,11 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         getActionBar().setTitle("Billetterie");
 
 
-        if(savedInstanceState != null && savedInstanceState.containsKey("Event")){
-            event =  savedInstanceState.getParcelable("Event");
-        }else{
-            event = getIntent().getParcelableExtra("Event");
+        TipsyApp app = (TipsyApp) getApplication();
+        index = getIntent().getIntExtra("EVENT_INDEX",-1);
+        event = app.getOrga().getEvents().get(index);
+
+        if(savedInstanceState == null){
             final ProgressDialog wait = ProgressDialog.show(this,"","Mode Billetterie...",true,false);
             event.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
                 @Override
@@ -66,15 +69,6 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
-            outState = new Bundle();
-        outState.putParcelable("Event", event);
-        // Add variable to outState here
-        super.onSaveInstanceState(outState);
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -89,7 +83,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
     public void backToEventOrga(){
         Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("Event", event);
+        intent.putExtra("EVENT_INDEX", index);
         startActivity(intent);
     }
 

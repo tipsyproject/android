@@ -17,34 +17,6 @@
 
             <LinearLayout
                 android:orientation="vertical"
-                android:id="@+id/button_event"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/home_button_height"
-                android:layout_weight="1"
-                android:gravity="center_vertical|center_horizontal"
-                android:background="@color/text_menu"
-                android:baselineAligned="true"
-                android:layout_marginBottom="@dimen/ui_margin"
-                android:layout_marginRight="@dimen/ui_margin">
-
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="My Event"
-                    android:textColor="@color/background_menu"
-                    android:id="@+id/coming_event"
-                    android:textSize="48dp"
-                    android:textIsSelectable="false" />
-            </LinearLayout>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-            <LinearLayout
-                android:orientation="vertical"
                 android:id="@+id/button_wallet"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
@@ -141,7 +113,7 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
-                android:id="@+id/button_acces"
+                android:id="@+id/button_bracelet"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
                 android:background="@color/text_menu"

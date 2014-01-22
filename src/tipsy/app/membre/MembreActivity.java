@@ -34,6 +34,7 @@ import tipsy.app.HelpActivity;
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
+import tipsy.app.membre.bracelet.BraceletActivity;
 import tipsy.app.membre.wallet.WalletActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
@@ -157,6 +158,11 @@ public class MembreActivity extends UserActivity implements MembreListener {
         if (addToBackStack)
             ft.addToBackStack(null);
         ft.commit();
+    }
+
+    public void goToBracelet() {
+        Intent intent = new Intent(this, BraceletActivity.class);
+        startActivity(intent);
     }
 
     public void goToWallet() {

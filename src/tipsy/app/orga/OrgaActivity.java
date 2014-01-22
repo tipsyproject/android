@@ -27,39 +27,21 @@ import tipsy.commun.Organisateur;
 public class OrgaActivity extends UserActivity implements OrgaListener {
 
     private TipsyApp app;
-    private Organisateur orga;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_user);
         super.onCreate(savedInstanceState);
+
         this.menu = new MenuOrga(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
 
         app = (TipsyApp) getApplication();
-        orga = app.getOrga();
 
-        if(getIntent().hasExtra("EVENT_HOME")){
-            Event e = getIntent().getParcelableExtra("EVENT_HOME");
-            goToEvent(e);
-        }else if (savedInstanceState == null) {
+        if (savedInstanceState == null) {
             tableauDeBord(false);
         }
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_orga, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-
-    // Gestion du click sur le bouton de validation
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
     }
 
 
@@ -95,10 +77,9 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
-    // Clique sur le bouton "Créer un événement"
-    public void goToEvent(Event e) {
+    public void goToEvent(int index) {
         Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("Event", e);
+        intent.putExtra("EVENT_INDEX", index);
         startActivity(intent);
     }
 

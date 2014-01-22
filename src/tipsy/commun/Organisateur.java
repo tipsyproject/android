@@ -80,28 +80,11 @@ public class Organisateur extends StackMobModel implements User.TipsyUser {
     }
 
     public ArrayList<Event> getEventsByDate() {
-        Collections.sort(events, new SortEventByDate());
-        return events;
-    }
-
-    // Retourne l'event à venir le plus proche, ou null si aucun event n'est à venir
-    public Event getUpcomingEvent() {
-        // Tri les events par date croissante
-        // Et retourne le premier dont la date est "future"
-        ArrayList<Event> evs = getEventsByDate();
-        Date today = new Date(); // date courante
-        for (int i = 0; i < evs.size(); i++) {
-            if (evs.get(i).getDebut().compareTo(today) > -1) {
-                return evs.get(i);
+        Collections.sort(events, new Comparator<Event>(){
+            public int compare(Event a, Event b) {
+                return -a.getDebut().compareTo(b.getDebut());
             }
-        }
-        return null;
-    }
-
-
-    public class SortEventByDate implements Comparator<Event> {
-        public int compare(Event a, Event b) {
-            return a.getDebut().compareTo(b.getDebut());
-        }
+        });
+        return events;
     }
 }

@@ -16,13 +16,14 @@ import java.util.ArrayList;
 
 import tipsy.app.R;
 import tipsy.commun.Event;
+import tipsy.commun.EventArrayAdapter;
 
 /**
  * Created by Valentin on 30/12/13.
  */
 public class SearchEventFragment extends Fragment {
 
-    private EventsArrayAdapter adapter;
+    private EventArrayAdapter adapter;
     private ListView listView;
     private MembreListener callback;
     private ArrayList<Event> eventResults;
@@ -51,7 +52,7 @@ public class SearchEventFragment extends Fragment {
             TextView test = (TextView) view.findViewById(R.id.no_result);
             test.setText("Aucun événement");
         }
-        adapter = new EventsArrayAdapter(getActivity(), eventResults);
+        adapter = new EventArrayAdapter(getActivity(), eventResults);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -62,28 +63,7 @@ public class SearchEventFragment extends Fragment {
         return view;
     }
 
-    // Adapter BILLETS
-    public class EventsArrayAdapter extends ArrayAdapter<Event> {
-        private Context context;
-        private ArrayList<Event> events;
 
-        public EventsArrayAdapter(Context context, ArrayList<Event> events) {
-            super(context, R.layout.frag_event_item, events);
-            this.context = context;
-            this.events = events;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View viewEvent = inflater.inflate(R.layout.frag_event_item, parent, false);
-
-            TextView nomEvent = (TextView) viewEvent.findViewById(R.id.nom_event);
-            nomEvent.setText(events.get(position).getNom());
-
-            return viewEvent;
-        }
-    }
 
     @Override
     public void onStart() {

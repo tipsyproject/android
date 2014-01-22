@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="25dp"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingBottom="25dp"
+    android:weightSum="1">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/bar_height"
+        android:text="@string/activer_bracelet"
+        android:id="@+id/button_nfc"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin"
+        android:drawableLeft="@drawable/ic_action_network_wifi"
+        android:drawablePadding="8dp"/>
+</LinearLayout>

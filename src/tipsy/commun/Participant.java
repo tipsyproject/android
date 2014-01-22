@@ -72,6 +72,10 @@ public class Participant extends StackMobModel implements Parcelable {
         return membre != null || (nom != null && prenom != null && email != null);
     }
 
+    public boolean isMembre(){
+        return membre != null;
+    }
+
     // Implémentation de Parcelable
     @Override
     public int describeContents() {

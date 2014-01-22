@@ -2,22 +2,76 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/billet_list_height"
-    android:orientation="horizontal"
+    android:layout_height="wrap_content"
     android:background="@color/background_menu"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="0dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nom_Billet"
-        android:id="@+id/nom_event"
-        android:layout_weight="1"
-        android:gravity="center_vertical|left" />
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/last_bg"
+        android:scaleType="centerCrop"
+        android:layout_marginRight="8dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mon Event"
+            android:id="@+id/nom_event"
+            android:textColor="#000000"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_marginLeft="@dimen/ui_margin" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView2"
+                android:src="@drawable/ic_action_place_dark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Mon Event"
+                android:id="@+id/lieu_event"
+                android:textColor="#66000000"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="center_vertical" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/imageView3"
+                android:src="@drawable/ic_action_go_to_today_dark" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Mon Event"
+                android:id="@+id/date_event"
+                android:textColor="#66000000"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+    </LinearLayout>
 
 </LinearLayout>

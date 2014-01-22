@@ -39,6 +39,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     private Event event;
     private boolean newEvent = false;
+    private int index;
     boolean saving = false;
 
     public static final int NUM_ITEMS = 4;
@@ -73,13 +74,22 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
         if(savedInstanceState != null){
             newEvent = savedInstanceState.getBoolean("NEW_EVENT");
-            event = savedInstanceState.getParcelable("Event");
+            if(newEvent)
+                event = savedInstanceState.getParcelable("Event");
+            else{
+                TipsyApp app = (TipsyApp) getApplication();
+                int index = savedInstanceState.getInt("EVENT_INDEX");
+                event = app.getOrga().getEvents().get(index);
+            }
         }else{
             if(getIntent().hasExtra("NEW_EVENT")){
                 newEvent = true;
                 event = new Event();
-            }else
-                event = getIntent().getParcelableExtra("Event");
+            }else{
+                TipsyApp app = (TipsyApp) getApplication();
+                index = getIntent().getIntExtra("EVENT_INDEX",-1);
+                event = app.getOrga().getEvents().get(index);
+            }
         }
 
 
@@ -114,8 +124,11 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
     public void onSaveInstanceState(Bundle outState) {
         if(outState==null)
             outState = new Bundle();
-        outState.putParcelable("Event", event);
         outState.putBoolean("NEW_EVENT", newEvent);
+        if(newEvent)
+            outState.putParcelable("Event", event);
+        else
+            outState.putInt("EVENT_INDEX", index);
         // Add variable to outState here
         super.onSaveInstanceState(outState);
     }
@@ -162,6 +175,8 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         Organisateur orga = app.getOrga();
         if (newEvent) {
             event = orga.creerEvent("");
+            index = orga.getEvents().size()-1;
+            orga.save();
         }
         if (inputNom != null) {
             event.setNom(inputNom.getText().toString());
@@ -176,7 +191,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         } catch (ParseException e) {
         }
 
-        orga.save(StackMobOptions.depthOf(1), new StackMobModelCallback() {
+        event.save(new StackMobModelCallback() {
             @Override
             public void success() {
                 saving = false;
@@ -191,6 +206,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
             @Override
             public void failure(StackMobException e) {
+                saving = false;
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -239,7 +255,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     public void backToEventOrga(){
         Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("Event", event);
+        intent.putExtra("EVENT_INDEX", index);
         startActivity(intent);
     }
 
