@@ -22,13 +22,11 @@ import tipsy.commun.User;
 public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
     private Context context;
     private ArrayList<Transaction> transactions;
-    private User user;
 
-    public TransactionArrayAdapter(Context context, ArrayList<Transaction> transactions, User user) {
+    public TransactionArrayAdapter(Context context, ArrayList<Transaction> transactions) {
         super(context, R.layout.frag_transaction, transactions);
         this.context = context;
         this.transactions = transactions;
-        this.user = user;
     }
 
     @Override
