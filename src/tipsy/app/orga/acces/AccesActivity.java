@@ -106,6 +106,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
+                                    wait.dismiss();
                                     Toast.makeText(AccesActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
                                 }
                             });
