@@ -64,12 +64,12 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     protected TipsyApp app;
 
     protected ViewPager pager;
-    /*private String TAG = "TypeSignUpActivity";
-    private boolean isResumed = false;*/
+    private String TAG = "TypeSignUpActivity";
+    private boolean isResumed = false;
     private ProgressDialog mConnectionProgressDialog;
     private UiLifecycleHelper uiHelper;
-    /*private Session.StatusCallback statusCallback =
-            new SessionStatusCallback();*/
+    private Session.StatusCallback statusCallback =
+            new SessionStatusCallback();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,8 +98,8 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                 return true;
             }
         });
-        /*uiHelper = new UiLifecycleHelper(this, statusCallback);
-        uiHelper.onCreate(savedInstanceState);*/
+        uiHelper = new UiLifecycleHelper(this, statusCallback);
+        uiHelper.onCreate(savedInstanceState);
         mConnectionProgressDialog = new ProgressDialog(TypeSignUpActivity.this);
         mConnectionProgressDialog.setMessage("Connexion en cours...");
     }
@@ -113,13 +113,14 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     }
 
     public void validateSignUp(View view) {
+        Log.d("TOUTAFAIT", "validate sign up ");
         validator = new Validator(this);
         validator.setValidationListener(this);
 
         validator.validate();
 
     }
-/*
+
     @Override
     public void onResume() {
         super.onResume();
@@ -188,14 +189,14 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                                     @Override
                                     public void failure(StackMobException e) {
                                         Log.d("TOUTAFAIT", "fb " + e.getMessage());
-                                            TypeSignUpActivity.this.runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    mConnectionProgressDialog.dismiss();
-                                                    session_connected.closeAndClearTokenInformation();
-                                                    Toast.makeText(TypeSignUpActivity.this, "Erreur.", Toast.LENGTH_LONG).show();
-                                                }
-                                            });
+                                        TypeSignUpActivity.this.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                mConnectionProgressDialog.dismiss();
+                                                session_connected.closeAndClearTokenInformation();
+                                                Toast.makeText(TypeSignUpActivity.this, "Erreur.", Toast.LENGTH_LONG).show();
+                                            }
+                                        });
                                     }
                                 });
                             }
@@ -227,28 +228,30 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
             session.closeAndClearTokenInformation();
             onSessionStateChange(session, state, exception);
         }
-    }*/
+    }
 
     public void onClickFb(View view){
-        Toast.makeText(TypeSignUpActivity.this, "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
-        /*Session session = Session.getActiveSession();
+        //Toast.makeText(TypeSignUpActivity.this, "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
+        Session session = Session.getActiveSession();
         if (!session.isOpened() && !session.isClosed()) {
             session.openForRead(new Session.OpenRequest(this)
                     .setPermissions(Arrays.asList("basic_info","email"))
                     .setCallback(statusCallback));
         } else {
             Session.openActiveSession(TypeSignUpActivity.this, true, statusCallback);
-        }*/
+        }
     }
 
     public void onValidationSucceeded() {
         final User user = new User(inputEmail.getText().toString());
+        Log.d("TOUTAFAIT", "validation succeeded ");
         user.fetch(new StackMobModelCallback() {
             @Override
             public void success() {
                 TypeSignUpActivity.this.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        Log.d("TOUTAFAIT", "Email déjà pris ");
                         Toast.makeText(TypeSignUpActivity.this, "Email déjà pris", Toast.LENGTH_LONG).show();
                     }
                 });
@@ -256,15 +259,15 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
             @Override
             public void failure(StackMobException e) {
-                if (!app.isOnline()){
-                    TypeSignUpActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+                TypeSignUpActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                /*if (!app.isOnline()){
+                            Log.d("TOUTAFAIT", "Aucune connexion Internet ");
                             Toast.makeText(TypeSignUpActivity.this, "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
-                        }
-                    });
+
                 }
-                else if (pager.getCurrentItem() == 1) {
+                else*/ if (pager.getCurrentItem() == 1) {
                     final Membre membre = new Membre(
                             inputEmail.getText().toString(),
                             inputPassword.getText().toString(),
@@ -280,14 +283,19 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                     );
                     signUpUser(orga);
                 }
+                Log.d("TOUTAFAIT", "remember me ");
                 User.rememberMe(TypeSignUpActivity.this, inputEmail.getText().toString(), inputPassword.getText().toString());
+                    }
+                });
             }
+
         });
 
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
         final String message = failedRule.getFailureMessage();
+        Log.d("TOUTAFAIT", "validation failed ");
         if (failedView instanceof EditText) {
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
@@ -369,6 +377,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                             // Direction page d'accueil
                             @Override
                             public void success() {
+                                Log.d("TOUTAFAIT", "save success ");
                                 User.keepCalmAndWaitForGoingHome(TypeSignUpActivity.this, tipsyUser.getUser());
                             }
 
