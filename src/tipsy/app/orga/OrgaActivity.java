@@ -3,14 +3,6 @@ package tipsy.app.orga;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.HelpActivity;
 import tipsy.app.R;
@@ -18,8 +10,6 @@ import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
 import tipsy.app.orga.event.edit.EditEventActivity;
 import tipsy.app.orga.event.EventOrgaActivity;
-import tipsy.commun.Event;
-import tipsy.commun.Organisateur;
 
 /**
  * Created by Valoo on 05/12/13.
@@ -58,8 +48,8 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
             case MenuOrga.MON_COMPTE:
                 account();
                 break;
-            case MenuOrga.EVENEMENTS:
-                events();
+            case MenuOrga.STATS:
+                stats();
                 break;
             case MenuOrga.AIDE:
                 Intent intent = new Intent(this, HelpActivity.class);
@@ -109,10 +99,10 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     }
 
 
-    public void events() {
+    public void stats() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.addToBackStack(null);
-        ft.replace(R.id.content, new EventsOrgaFragment());
+        ft.replace(R.id.content, new StatsOrgaFragment());
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }

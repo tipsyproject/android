@@ -15,12 +15,14 @@
     <string name="inscription">"Inscription"</string>
     <string name="conditions">"En m'inscrivant,
 j'accepte les conditions générales."</string>
-    <string name="welcome">"Bienvenue sur Tipsy !"</string>
+    <string name="welcome">"Rendez la gestion de vos
+    événements ludiques !"</string>
     <string name="third_description">"Faciliter et unifier vos dépenses :
-        - Places
-        - Vestiaire
-        - Et Consommations"</string>
-    <string name="second_description">"Gagnez un temps d'attente considérable grâce à nos bracelets NFC !"</string>
+                - Places
+                - Vestiaire
+                - Consommations"</string>
+    <string name="second_description">"Gagnez un temps d'attente considérable grâce à nos
+        bracelets NFC !"</string>
     <string name="affichermdp">"Afficher le mot de passe"</string>
     <string name="forgotpass">"Mot de passe oublié ?"</string>
     <string name="loading">"Chargement"</string>

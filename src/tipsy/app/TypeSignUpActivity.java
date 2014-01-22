@@ -64,12 +64,12 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     protected TipsyApp app;
 
     protected ViewPager pager;
-    private String TAG = "TypeSignUpActivity";
-    private boolean isResumed = false;
+    /*private String TAG = "TypeSignUpActivity";
+    private boolean isResumed = false;*/
     private ProgressDialog mConnectionProgressDialog;
     private UiLifecycleHelper uiHelper;
-    private Session.StatusCallback statusCallback =
-            new SessionStatusCallback();
+    /*private Session.StatusCallback statusCallback =
+            new SessionStatusCallback();*/
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,8 +98,8 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                 return true;
             }
         });
-        uiHelper = new UiLifecycleHelper(this, statusCallback);
-        uiHelper.onCreate(savedInstanceState);
+        /*uiHelper = new UiLifecycleHelper(this, statusCallback);
+        uiHelper.onCreate(savedInstanceState);*/
         mConnectionProgressDialog = new ProgressDialog(TypeSignUpActivity.this);
         mConnectionProgressDialog.setMessage("Connexion en cours...");
     }
@@ -119,7 +119,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         validator.validate();
 
     }
-
+/*
     @Override
     public void onResume() {
         super.onResume();
@@ -227,17 +227,18 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
             session.closeAndClearTokenInformation();
             onSessionStateChange(session, state, exception);
         }
-    }
+    }*/
 
     public void onClickFb(View view){
-        Session session = Session.getActiveSession();
+        Toast.makeText(TypeSignUpActivity.this, "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
+        /*Session session = Session.getActiveSession();
         if (!session.isOpened() && !session.isClosed()) {
             session.openForRead(new Session.OpenRequest(this)
                     .setPermissions(Arrays.asList("basic_info","email"))
                     .setCallback(statusCallback));
         } else {
             Session.openActiveSession(TypeSignUpActivity.this, true, statusCallback);
-        }
+        }*/
     }
 
     public void onValidationSucceeded() {

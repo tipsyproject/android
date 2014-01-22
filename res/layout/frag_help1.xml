@@ -25,12 +25,14 @@
         android:id="@+id/textView"
         android:textColor="@android:color/white"
         android:shadowColor="@android:color/black"
+        android:textStyle="bold"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="3"
         android:layout_gravity="center_horizontal|bottom"
         android:layout_marginTop="140dp"
         android:layout_below="@+id/logo"
+        android:gravity="center"
         android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

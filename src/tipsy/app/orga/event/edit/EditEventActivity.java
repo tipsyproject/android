@@ -94,6 +94,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setTitle(event.getNom());
 
         mAdapter = new EditEventAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.event_pager);

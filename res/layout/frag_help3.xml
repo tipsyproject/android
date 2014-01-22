@@ -1,24 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/three"
+    android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="center">
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/nfc"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:background="@drawable/nfc" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/third_description"
+        android:text="@string/second_description"
         android:id="@+id/textView"
         android:textColor="@android:color/white"
         android:shadowColor="@android:color/black"
+        android:textStyle="bold"
         android:shadowDx="1"
         android:shadowDy="1"
         android:shadowRadius="3"
-        android:layout_gravity="center_horizontal|bottom"
-        android:layout_below="@+id/logo"
+        android:layout_gravity="center_vertical|bottom"
+        android:layout_below="@+id/nfc"
         android:layout_centerInParent="true"
-        android:layout_marginTop="260dp"/>
+        android:gravity="center"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="75dp"/>
 
 </RelativeLayout>

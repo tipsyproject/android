@@ -12,7 +12,7 @@ import tipsy.app.R;
 /**
  * Created by Alexandre on 23/12/13.
  */
-public class EventsOrgaFragment extends Fragment {
+public class StatsOrgaFragment extends Fragment {
 
     private OrgaListener callback;
 
@@ -24,7 +24,7 @@ public class EventsOrgaFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View fragmentView = inflater.inflate(R.layout.frag_orga_events, container, false);
+        View fragmentView = inflater.inflate(R.layout.frag_orga_stats, container, false);
 
         return fragmentView;
     }
@@ -32,6 +32,6 @@ public class EventsOrgaFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        callback.setMenuTitle(MenuOrga.EVENEMENTS);
+        callback.setMenuTitle("Statistiques");
     }
 }
