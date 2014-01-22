@@ -56,6 +56,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
         super.onCreate(savedInstanceState);
         this.menu = new MenuMembre(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
+        menu.getDrawerList().setItemChecked(MenuMembre.ACCUEIL, true);
         app = (TipsyApp) getApplication();
 
         datePickerListener = new DatePickerDialog.OnDateSetListener() {

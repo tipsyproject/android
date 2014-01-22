@@ -35,6 +35,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
         this.menu = new MenuOrga(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
+        menu.getDrawerList().setItemChecked(MenuOrga.ACCUEIL, true);
 
         app = (TipsyApp) getApplication();
 

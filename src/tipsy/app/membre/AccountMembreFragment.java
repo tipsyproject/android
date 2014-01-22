@@ -55,7 +55,6 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     protected Membre membre;
     protected static Bitmap bitmap_avatar = null;
 
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);

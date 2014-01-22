@@ -22,7 +22,6 @@ public abstract class MenuUser {
     protected Activity activity;
     protected CharSequence drawerTitle;
     protected CharSequence titre;
-    protected String[] titres_menu;
     final private String ICON = "icon";
     final private String TITLE = "title";
     protected List<HashMap<String,String>> mList ;
@@ -89,6 +88,10 @@ public abstract class MenuUser {
         return getDrawerLayout().isDrawerOpen(getDrawerList());
     }
 
+    public String[] getmTitles() {
+        return mTitles;
+    }
+
     public DrawerLayout getDrawerLayout() {
         return drawerLayout;
     }
@@ -99,10 +102,6 @@ public abstract class MenuUser {
 
     public ActionBarDrawerToggle getDrawerToggle() {
         return drawerToggle;
-    }
-
-    public String[] getTitres_menu() {
-        return titres_menu;
     }
 
     public CharSequence getTitre() {

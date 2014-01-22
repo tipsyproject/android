@@ -35,7 +35,7 @@ public class HomeEventOrgaFragment extends Fragment {
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
         /* CONTRÔLE D'ACCES */
-        buttonAcces = (LinearLayout) view.findViewById(R.id.button_acces);
+        buttonAcces = (LinearLayout) view.findViewById(R.id.button_access);
         buttonAcces.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToAcces();
@@ -47,7 +47,7 @@ public class HomeEventOrgaFragment extends Fragment {
         buttonBar = (LinearLayout) view.findViewById(R.id.button_bar);
         buttonBar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Fermé pour cause de VOMIS #RER_B", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
             }
         });
 

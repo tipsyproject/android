@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Tipsy</string>
-    <string-array name="menu_membre">
-        <item>Tableau de bord</item>
-        <item>Mon Compte</item>
-        <item>Événements</item>
-        <item>Aide</item>
-        <item>Déconnexion</item>
-    </string-array>
-    <string-array name="menu_organisateur">
-        <item>Tableau de bord</item>
-        <item>Mon Compte</item>
-        <item>Événements</item>
-        <item>Aide</item>
-        <item>Déconnexion</item>
-    </string-array>
+    <string name="facebook_app_id">394976053981556</string>
     <string name="creer_event">Créer un événement</string>
     <string name="drawer_open">Ouvrir le menu déroulant</string>
     <string name="drawer_close">Fermer le menu déroulant</string>

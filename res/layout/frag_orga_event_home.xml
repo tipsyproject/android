@@ -83,7 +83,7 @@
                 android:orientation="vertical"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/home_button_height"
-                android:id="@+id/button_acces"
+                android:id="@+id/button_access"
                 android:layout_weight="1"
                 android:layout_span="1"
                 android:layout_column="0"
