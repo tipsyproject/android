@@ -46,7 +46,7 @@ public class SearchEventFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         eventResults = getArguments().getParcelableArrayList("Events");
-        View view = inflater.inflate(R.layout.frag_search_event, container, false);
+        View view = inflater.inflate(R.layout.frag_orga_home, container, false);
         listView = (ListView) view.findViewById(R.id.list);
         if (eventResults.size() == 0) {
             TextView test = (TextView) view.findViewById(R.id.no_result);
