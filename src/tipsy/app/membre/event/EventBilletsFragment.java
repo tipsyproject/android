@@ -1,4 +1,4 @@
-package tipsy.app.membre;
+package tipsy.app.membre.event;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import tipsy.app.R;
+import tipsy.app.membre.MembreListener;
 import tipsy.commun.Event;
 import tipsy.commun.billetterie.Billet;
 import tipsy.commun.commerce.Item;
@@ -34,24 +35,14 @@ public class EventBilletsFragment extends Fragment {
     private Panier panier = new Panier();
     private ArrayList<Item> billets;
     private ItemArrayAdapter adapter;
-    private Event event;
     private ListView listView;
     private TextView totalView;
-    private MembreListener callback;
-
-
-    public static EventBilletsFragment init(Event e) {
-        EventBilletsFragment frag = new EventBilletsFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("Event", e);
-        frag.setArguments(args);
-        return frag;
-    }
+    private EventMembreListener callback;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (MembreListener) activity;
+        callback = (EventMembreListener) activity;
     }
 
 
@@ -73,15 +64,13 @@ public class EventBilletsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        event = getArguments().getParcelable("Event");
-
         View view = inflater.inflate(R.layout.frag_event_billets, container, false);
         listView = (ListView) view.findViewById(R.id.list);
         totalView = (TextView) view.findViewById(R.id.prix_total);
 
         if(savedInstanceState == null){
             billets = new ArrayList<Item>();
-            for(Billet billet: event.getBilletterie())
+            for(Billet billet: callback.getEvent().getBilletterie())
                 billets.add(new Item(billet,0));
         }
 
@@ -107,7 +96,7 @@ public class EventBilletsFragment extends Fragment {
                 if (panier.isEmpty())
                     Toast.makeText(getActivity(), "Panier vide !", Toast.LENGTH_SHORT).show();
                 else{
-                    callback.goToParticiper(event,panier);
+                    callback.goToParticiper(panier);
                 }
             }
         });

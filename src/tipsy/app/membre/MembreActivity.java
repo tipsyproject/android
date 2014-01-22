@@ -35,6 +35,9 @@ import tipsy.app.R;
 import tipsy.app.TipsyApp;
 import tipsy.app.UserActivity;
 import tipsy.app.membre.bracelet.BraceletActivity;
+import tipsy.app.membre.event.EventBilletsFragment;
+import tipsy.app.membre.event.EventMembreActivity;
+import tipsy.app.membre.event.EventParticiperFragment;
 import tipsy.app.membre.wallet.WalletActivity;
 import tipsy.commun.Event;
 import tipsy.commun.Membre;
@@ -181,53 +184,8 @@ public class MembreActivity extends UserActivity implements MembreListener {
     }
 
     public void goToEvent(Event e) {
-        final Event event = e;
-        event.fetch(StackMobOptions.depthOf(3), new StackMobModelCallback() {
-            @Override
-            public void success() {
-                EventFragment frag = EventFragment.init(event);
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.content, frag)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                        .commit();
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-            }
-        });
-
-    }
-
-    public void goToEventBillets(Event e) {
-        EventBilletsFragment frag = EventBilletsFragment.init(e);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.content, frag)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
-
-    }
-
-    public void goToParticiper(Event e, Panier p) {
-        EventParticiperFragment frag = EventParticiperFragment.init(e, p);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.content, frag)
-                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                .commit();
-
-    }
-
-    public void goToCommande(Panier p, Commande c) {
-        Intent intent = new Intent(this, WalletActivity.class);
-        intent.putExtra(WalletActivity.ACTION, WalletActivity.COMMANDE);
-        intent.putExtra("Panier",(Parcelable) p);
-        intent.putExtra("Commande",(Parcelable) c);
+        Intent intent = new Intent(this, EventMembreActivity.class);
+        intent.putExtra("Event",e);
         startActivity(intent);
     }
 

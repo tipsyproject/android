@@ -28,10 +28,4 @@ public interface MembreListener extends MenuListener {
 
     public void goToEvent(Event e);
 
-    public void goToEventBillets(Event e);
-
-    public void goToParticiper(Event e, Panier p);
-
-    public void goToCommande(Panier p, Commande c);
-
 }
