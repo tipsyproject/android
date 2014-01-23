@@ -32,6 +32,7 @@ import tipsy.app.orga.event.EventOrgaActivity;
 import tipsy.commun.Bracelet;
 import tipsy.commun.Event;
 import tipsy.commun.billetterie.Billet;
+import tipsy.commun.billetterie.Billetterie;
 import tipsy.commun.billetterie.EntreeArrayAdapter;
 import tipsy.commun.commerce.Achat;
 
@@ -54,7 +55,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Contrôle d'accès");
         adapter = NfcAdapter.getDefaultAdapter(this);
-        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, AccesActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
         TipsyApp app = (TipsyApp) getApplication();
         index = getIntent().getIntExtra("EVENT_INDEX",-1);
@@ -195,45 +196,9 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         ft.commit();
     }
 
-    public void refresh(final EntreeArrayAdapter adapter){
-        final ProgressDialog wait = ProgressDialog.show(this,"","Chargement des entrées...",true,false);
-
-        /* Récupération des IDs des billets de l'event */
-        ArrayList<String> idBillets = new ArrayList<String>();
-        for(Billet billet : event.getBilletterie())
-            idBillets.add(billet.getID());
-
-        /* On récupère tous les achats de ces billets */
-        StackMobQuery query = new StackMobQuery().fieldIsIn("produit",idBillets);
-        Achat.query(Achat.class, query, StackMobOptions.depthOf(2), new StackMobQueryCallback<Achat>() {
-            @Override
-            public void success(List<Achat> result) {
-                entrees.clear();
-                entrees.addAll(result);
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        if(adapter != null)
-                            adapter.notifyDataSetChanged();
-                        wait.dismiss();
-                        Toast.makeText(AccesActivity.this,"Liste des entrées mise à jour.",Toast.LENGTH_SHORT).show();
-                    }
-                });
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        wait.dismiss();
-                    }
-                });
-                Log.d("TOUTAFAIT", "erreur load entrées" + e.getMessage());
-            }
-        });
-
-    };
+    public void refresh(EntreeArrayAdapter adapter){
+        Billetterie.refreshVentes(event, this, entrees, adapter, null);
+    }
 
     public Event getEvent(){
         return event;

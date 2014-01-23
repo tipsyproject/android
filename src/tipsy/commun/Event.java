@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.stackmob.sdk.model.StackMobModel;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import tipsy.commun.billetterie.Billet;
@@ -14,8 +15,7 @@ import tipsy.commun.billetterie.Billetterie;
  * Created by Valentin on 07/12/13.
  */
 public class Event extends StackMobModel implements Parcelable {
-
-    private Billetterie<Billet> billetterie = new Billetterie<Billet>();
+    private ArrayList<Billet> billetterie = new ArrayList<Billet>();
     private Date debut = new Date();
     private String lieu = null;
     private String nom = null;
@@ -30,12 +30,13 @@ public class Event extends StackMobModel implements Parcelable {
         this.nom = nom;
     }
 
-    public Billetterie<Billet> getBilletterie() {
+    public ArrayList<Billet> getBilletterie() {
         return billetterie;
     }
 
-    public void setBilletterie(Billetterie<Billet> billets) {
-        this.billetterie.setBillets(billetterie);
+    public void setBilletterie(ArrayList<Billet> billets) {
+        this.billetterie.clear();
+        this.billetterie.addAll(billets);
     }
 
     public Date getDebut() {

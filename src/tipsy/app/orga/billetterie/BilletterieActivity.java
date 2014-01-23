@@ -90,19 +90,21 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
     // IMPLEMENTATION DES FONCTIONS DE l'INTERFACE BilletterieListener
 
     public void showListeBillets(boolean addTobackStack) {
-        ListeBilletsFragment frag = ListeBilletsFragment.init(event);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, frag);
+        ft.replace(R.id.content, new BilletsCreesFragment());
         if (addTobackStack)
             ft.addToBackStack(null);
         ft.commit();
     }
 
     public void showListeVentes(){
-        ListeVentesFragment frag = ListeVentesFragment.init(event);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, frag);
+        ft.replace(R.id.content, new BilletsVendusFragment());
         ft.addToBackStack(null);
         ft.commit();
+    }
+
+    public Event getEvent(){
+        return event;
     }
 }

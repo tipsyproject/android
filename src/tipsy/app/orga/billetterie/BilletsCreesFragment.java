@@ -39,21 +39,13 @@ import tipsy.commun.commerce.Commerce;
 /**
  * Created by valoo on 27/12/13.
  */
-public class ListeBilletsFragment extends Fragment {
+public class BilletsCreesFragment extends Fragment {
 
     private BilletsArrayAdapter adapter;
     private Event event;
     private ListView listView;
     private BilletterieListener callback;
 
-
-    public static ListeBilletsFragment init(Event e) {
-        ListeBilletsFragment frag = new ListeBilletsFragment();
-        Bundle args = new Bundle();
-        args.putParcelable("Event", e);
-        frag.setArguments(args);
-        return frag;
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -70,7 +62,7 @@ public class ListeBilletsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_billetterie_liste_billets, container, false);
         /* On récupère l'event courant */
-        event = getArguments().getParcelable("Event");
+        event = callback.getEvent();
 
         listView = (ListView) view.findViewById(R.id.list);
         adapter = new BilletsArrayAdapter(getActivity(), event.getBilletterie());

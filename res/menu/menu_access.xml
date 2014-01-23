@@ -6,6 +6,6 @@
         android:id="@+id/action_refresh"
         android:showAsAction="always"
         android:icon="@drawable/ic_action_refresh"
-        android:title="Actualiser liste participants" />
+        android:title="Actualiser" />
 
 </menu>

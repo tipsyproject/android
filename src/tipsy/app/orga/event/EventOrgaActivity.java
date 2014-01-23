@@ -4,8 +4,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
+
+import com.stackmob.sdk.api.StackMobOptions;
+import com.stackmob.sdk.callback.StackMobCallback;
+import com.stackmob.sdk.exception.StackMobException;
 
 import tipsy.app.R;
 import tipsy.app.TipsyApp;
@@ -24,18 +28,29 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     private int index;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
 
         TipsyApp app = (TipsyApp) getApplication();
         index = getIntent().getIntExtra("EVENT_INDEX",-1);
         event = app.getOrga().getEvents().get(index);
-        if(savedInstanceState == null)
-            home(false);
-
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle(event.getNom());
+
+        event.fetch(StackMobOptions.depthOf(1),new StackMobCallback() {
+            @Override
+            public void success(String s) {
+                if(savedInstanceState == null)
+                    home(false);
+            }
+
+            @Override
+            public void failure(StackMobException e) {
+                Log.d("TOUTAFAIT","Erreur fetch event / EventOrgaActivity:Oncreate: "+e.getMessage());
+            }
+        });
+
     }
 
 
