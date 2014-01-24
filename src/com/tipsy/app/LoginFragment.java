@@ -93,12 +93,15 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                     else
                         startActivity(new Intent(getActivity(), OrgaActivity.class));
                 } else {
-
-                    Log.d("TOUTAFAIT","signup error: "+e.getMessage());
-                    Log.d("TOUTAFAIT", "signup error code: " + e.getCode());
-                    Toast.makeText(getActivity(),
-                            getResources().getString(R.string.erreur_connexion),
-                            Toast.LENGTH_SHORT).show();
+                    String message;
+                    switch(e.getCode()){
+                        case 101:
+                            message = getResources().getString(R.string.failed_connexion);
+                            break;
+                        default:
+                            message = getResources().getString(R.string.erreur_connexion);
+                    }
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
                 }
             }
         });

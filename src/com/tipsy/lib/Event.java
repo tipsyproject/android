@@ -1,5 +1,7 @@
 package com.tipsy.lib;
 
+import android.os.Parcelable;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
@@ -45,5 +47,44 @@ public class Event extends ParseObject {
     public void setOrganisateur(String organisateur) {
         put("organisateur",organisateur);
     }
+
+    /*
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(getID());
+        dest.writeList(billetterie);
+        dest.writeSerializable(debut);
+        dest.writeString(lieu);
+        dest.writeString(nom);
+        dest.writeString(organisateur);
+    }
+
+    public Event(Parcel in) {
+        super(Event.class);
+        setID(in.readString());
+        in.readList(billetterie, Billet.class.getClassLoader());
+        debut = (Date) in.readSerializable();
+        lieu = in.readString();
+        nom = in.readString();
+        organisateur = in.readString();
+    }
+
+    public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel source) {
+            return new Event(source);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };*/
 
 }

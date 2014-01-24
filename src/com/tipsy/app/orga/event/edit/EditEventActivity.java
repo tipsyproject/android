@@ -18,27 +18,24 @@ import android.widget.Toast;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.lib.Event_old;
-import com.tipsy.lib.Organisateur;
+import com.tipsy.lib.Event;
 
 /**
  * Created by valoo on 22/01/14.
  */
 public class EditEventActivity extends FragmentActivity implements EditEventListener, ActionBar.TabListener, Validator.ValidationListener{
 
-    private Event_old eventOld;
+    private Event event;
     private boolean newEvent = false;
-    private int index;
     boolean saving = false;
 
     public static final int NUM_ITEMS = 4;
@@ -71,29 +68,47 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         setContentView(R.layout.act_edit_event);
         super.onCreate(savedInstanceState);
 
+        if(getIntent().hasExtra("EVENT_ID")){
+            ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+            query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
+                public void done(Event myevent, ParseException e) {
+                    if (e == null) {
+                        event = myevent;
+                        Log.d("TOUTAFAIT", "Event recup:"+event.getNom());
+                    } else {
+                        Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }else{
+            event = new Event();
+            Log.d("TOUTAFAIT", "new event");
+        }
+
+
+        /*
         if(savedInstanceState != null){
             newEvent = savedInstanceState.getBoolean("NEW_EVENT");
             if(newEvent)
-                eventOld = savedInstanceState.getParcelable("Event");
+                event = savedInstanceState.getParcelable("Event");
             else{
                 TipsyApp app = (TipsyApp) getApplication();
                 int index = savedInstanceState.getInt("EVENT_INDEX");
-                //eventOld = app.getOrga().getEventOlds().get(index);
+                //event= app.getOrga().getEventOlds().get(index);
             }
         }else{
             if(getIntent().hasExtra("NEW_EVENT")){
                 newEvent = true;
-                eventOld = new Event_old();
+                event= new Event();
             }else{
-                TipsyApp app = (TipsyApp) getApplication();
-                index = getIntent().getIntExtra("EVENT_INDEX",-1);
-                //eventOld = app.getOrga().getEventOlds().get(index);
+                index = getIntent().getStringExtra("EVENT_ID");
+                event= app.getOrga().getEventOlds().get(index);
             }
-        }
+        }*/
 
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(eventOld.getNom());
+        getActionBar().setTitle(event.getNom());
 
         mAdapter = new EditEventAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.event_pager);
@@ -122,14 +137,14 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
+        /*if(outState==null)
             outState = new Bundle();
         outState.putBoolean("NEW_EVENT", newEvent);
         if(newEvent)
             outState.putParcelable("Event", eventOld);
         else
             outState.putInt("EVENT_INDEX", index);
-        // Add variable to outState here
+        // Add variable to outState here*/
         super.onSaveInstanceState(outState);
     }
 
@@ -167,14 +182,14 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     // Envoi de la demande de sauvegarde de l'événement à l'activité
     public void onValidationSucceeded() {
-        saving = true;
+        /*saving = true;
         // Si c'est une création d'eventOld, on initialise l'eventOld
         final ProgressDialog wait = ProgressDialog.show(this,"","Enregistrement...",true,false);
 
         TipsyApp app = (TipsyApp) getApplication();
         Organisateur orga = null;//app.getOrga();
         if (newEvent) {
-            eventOld = orga.creerEvent("");
+            event= orga.creerEvent("");
             index = orga.getEventOlds().size()-1;
             orga.save();
         }
@@ -215,7 +230,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
                 });
                 Log.e("TOUTAFAIT", "erreur sauvegarde Event:" + e.getMessage());
             }
-        });
+        });*/
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
@@ -249,13 +264,13 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     // EditEventListener
 
-    public Event_old getEventOld(){
-        return eventOld;
+    public Event getEvent(){
+        return event;
     }
 
     public void backToEventOrga(){
         Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_INDEX", index);
+        intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 
@@ -270,13 +285,13 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
     // inputs partie description
     public void onDescFragCreated(View v) {
         inputNom = (EditText) v.findViewById(R.id.input_nom);
-        inputNom.setText(eventOld.getNom());
+        inputNom.setText(event.getNom());
     }
 
     // inputs partie lieu
     public void onLocFragCreated(View v) {
         inputLieu = (EditText) v.findViewById(R.id.input_lieu);
-        inputLieu.setText(eventOld.getLieu());
+        inputLieu.setText(event.getLieu());
     }
 
     // inputs partie date
@@ -285,8 +300,8 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         inputTimeDebut = (TextView) v.findViewById(R.id.input_time_debut);
 
         // Initialisation des dates de debut et de fin
-        inputDateDebut.setText(EditEventDateFragment.dateFormatter.format(eventOld.getDebut()));
-        inputTimeDebut.setText(EditEventDateFragment.timeFormatter.format(eventOld.getDebut()));
+        inputDateDebut.setText(EditEventDateFragment.dateFormatter.format(event.getDebut()));
+        inputTimeDebut.setText(EditEventDateFragment.timeFormatter.format(event.getDebut()));
     }
 
 }

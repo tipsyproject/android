@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,7 @@ public class EditEventDateFragment extends Fragment {
         inputDateDebut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(callback.getEventOld().getDebut());
+                cal.setTime(callback.getEvent().getDebut());
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -85,13 +86,14 @@ public class EditEventDateFragment extends Fragment {
         inputTimeDebut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(callback.getEventOld().getDebut());
+                cal.setTime(callback.getEvent().getDebut());
                 int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int min = cal.get(Calendar.MINUTE);
                 new TimePickerDialog(getActivity(), tpDebut, hour, min, true).show();
             }
         });
 
+        Log.d("TOUTAFAIT", "date frag created");
         callback.onDateFragCreated(view);
 
         return view;
@@ -101,7 +103,7 @@ public class EditEventDateFragment extends Fragment {
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
         String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
         try {
-            callback.getEventOld().setDebut(f.parse(dateDebut));
+            callback.getEvent().setDebut(f.parse(dateDebut));
         } catch (ParseException e) {
         }
     }

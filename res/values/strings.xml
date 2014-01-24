@@ -31,7 +31,7 @@ j'accepte les conditions générales."</string>
 
     <!-- EMAIL -->
     <string name="email">"Email"</string>
-    <string name="failed_connexion">Email ou Mot de Passe Incorrect</string>
+    <string name="failed_connexion">Identifiants incorrects</string>
     <string name="email_arleady_taken">"Email déjà utilisé"</string>
     <string name="forget">Merci d\'entrer votre adresse email, nous vous enverrons un nouveau mot de passe.</string>
 
