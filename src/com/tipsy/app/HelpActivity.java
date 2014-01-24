@@ -16,6 +16,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ViewSwitcher;
 
+import com.tipsy.lib.TipsyUser;
+
 import java.util.List;
 import java.util.Vector;
 
@@ -83,7 +85,7 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
         Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (getIntent().getBooleanExtra("Connected", false))
+                if (TipsyUser.getCurrentUser()!=null)
                     finish();
                 else {
                     TipsyApp app = (TipsyApp) getApplication();

@@ -30,6 +30,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 
 import com.tipsy.app.HelpActivity;
+import com.tipsy.app.LoginActivity;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.UserActivity;
@@ -38,6 +39,7 @@ import com.tipsy.app.membre.event.EventMembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Membre;
+import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by tech on 05/12/13.
@@ -127,14 +129,12 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 goToEvents();
                 break;
             case MenuMembre.AIDE:
-                Intent intent = new Intent(this, HelpActivity.class);
-                Bundle b = new Bundle();
-                b.putBoolean("Connected", true);
-                intent.putExtras(b);
-                startActivity(intent);
+                startActivity(new Intent(this, HelpActivity.class));
                 break;
             case MenuMembre.DECONNEXION:
-                //app.logout(this);
+                TipsyUser.logOut();
+                startActivity(new Intent(this, LoginActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 break;
         }
 

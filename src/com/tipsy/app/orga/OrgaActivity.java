@@ -5,11 +5,13 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 
 import com.tipsy.app.HelpActivity;
+import com.tipsy.app.LoginActivity;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.UserActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
 import com.tipsy.app.orga.event.EventOrgaActivity;
+import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by Valoo on 05/12/13.
@@ -52,14 +54,12 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
                 stats();
                 break;
             case MenuOrga.AIDE:
-                Intent intent = new Intent(this, HelpActivity.class);
-                Bundle b = new Bundle();
-                b.putBoolean("Connected", true);
-                intent.putExtras(b);
-                startActivity(intent);
+                startActivity(new Intent(this, HelpActivity.class));
                 break;
             case MenuOrga.DECONNEXION:
-                //app.logout(this);
+                TipsyUser.logOut();
+                startActivity(new Intent(this, LoginActivity.class)
+                        .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 break;
         }
 

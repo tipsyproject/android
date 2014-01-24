@@ -230,6 +230,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         }
     }*/
 
+    /* INSCRIPTION */
     public void onValidationSucceeded() {
         TipsyUser user = new TipsyUser();
         user.setUsername(inputEmail.getText().toString());
@@ -237,8 +238,10 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         user.setEmail(inputEmail.getText().toString());
         user.setNom(inputNom.getText().toString());
         int type;
-        if (pager.getCurrentItem() == 1)
+        if (pager.getCurrentItem() == 1){
             user.setType(TipsyUser.MEMBRE);
+            user.setPrenom(inputPrenom.getText().toString());
+        }
         else user.setType(TipsyUser.ORGA);
 
         user.signUpInBackground(new SignUpCallback() {
@@ -336,49 +339,5 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         else
             inputPassword.setTransformationMethod(new PasswordTransformationMethod());
         inputPassword.setSelection(inputPassword.getText().length());
-    }
-
-    protected void signUpUser(final TipsyUser tipsyUser) {
-        // Inscription du User
-
-        /*
-        tipsyUser.getUser().save(new StackMobModelCallback() {
-            //Connexion auto
-            @Override
-            public void success() {
-                tipsyUser.getUser().login(new StackMobModelCallback() {
-                    //Enregistrement du tipsyUser
-                    @Override
-                    public void success() {
-                        tipsyUser.save(new StackMobModelCallback() {
-                            // Direction page d'accueil
-                            @Override
-                            public void success() {
-                                Log.d("TOUTAFAIT", "save success ");
-                                User.keepCalmAndWaitForGoingHome(TypeSignUpActivity.this, tipsyUser.getUser());
-                            }
-
-                            @Override
-                            public void failure(StackMobException e) {
-                                Log.d("TOUTAFAIT", "save orga/membre" + e.getMessage());
-                            }
-
-                        });
-                    }
-
-                    @Override
-                    public void failure(StackMobException e) {
-                        Log.d("TOUTAFAIT", "login" + e.getMessage());
-                    }
-                });
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT", "save user" + e.getMessage());
-            }
-
-        });
-        */
     }
 }
