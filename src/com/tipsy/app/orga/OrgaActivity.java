@@ -41,7 +41,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true);
 
         ParseQuery<Event> eventsQuery = ParseQuery.getQuery("Event");
-        eventsQuery.whereEqualTo("organisateur", TipsyUser.getCurrentUser());
+        eventsQuery.whereEqualTo("organisateur", TipsyUser.getCurrentUser().getObjectId());
         eventsQuery.findInBackground(new FindCallback<Event>() {
             public void done(List<Event> res, ParseException e) {
                 if (e == null) {
@@ -103,7 +103,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
     public void goToEvent(int index) {
         Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_INDEX", index);
+        intent.putExtra("EVENT_ID", events.get(index).getObjectId());
         startActivity(intent);
     }
 

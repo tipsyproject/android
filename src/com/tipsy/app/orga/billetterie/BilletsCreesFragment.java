@@ -3,6 +3,7 @@ package com.tipsy.app.orga.billetterie;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -19,11 +20,14 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NumberRule;
 import com.mobsandgeeks.saripaar.annotation.Required;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
@@ -32,7 +36,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.billetterie.Billet;
 import com.tipsy.lib.commerce.Commerce;
 
@@ -42,7 +46,7 @@ import com.tipsy.lib.commerce.Commerce;
 public class BilletsCreesFragment extends Fragment {
 
     private BilletsArrayAdapter adapter;
-    private Event_old eventOld;
+    private Event event;
     private ListView listView;
     private BilletterieListener callback;
 
@@ -62,15 +66,15 @@ public class BilletsCreesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_billetterie_liste_billets, container, false);
         /* On récupère l'eventOld courant */
-        eventOld = callback.getEventOld();
+        event = callback.getEvent();
 
         listView = (ListView) view.findViewById(R.id.list);
-        adapter = new BilletsArrayAdapter(getActivity(), eventOld.getBilletterie());
+        adapter = new BilletsArrayAdapter(getActivity(), callback.getBilletterie());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editBillet(eventOld.getBilletterie().get(position), false);
+                editBillet(position);
             }
         });
         return view;
@@ -88,7 +92,7 @@ public class BilletsCreesFragment extends Fragment {
         // handle item selection
         switch (item.getItemId()) {
             case R.id.action_new_billet:
-                editBillet(new Billet(), true);
+                newBillet();
                 return true;
             case R.id.action_liste_ventes:
                 callback.showListeVentes();
@@ -98,17 +102,26 @@ public class BilletsCreesFragment extends Fragment {
         }
     }
 
-    public void editBillet(Billet b, boolean newBillet) {
+    public void editBillet(int indexBillet) {
         // Create an instance of the dialog fragment and show it
         EditBilletDialogFragment dialog = new EditBilletDialogFragment();
         Bundle args = new Bundle();
-        args.putBoolean("newBillet", newBillet);
-        args.putParcelable("Billet", b);
-        args.putParcelable("Event", eventOld);
+        args.putInt("INDEX_BILLET", indexBillet);
         args.putSerializable("Adapter", adapter);
         dialog.setArguments(args);
         dialog.show(getActivity().getSupportFragmentManager(), "EditBilletDialogFragment");
     }
+
+    public void newBillet() {
+        // Create an instance of the dialog fragment and show it
+        EditBilletDialogFragment dialog = new EditBilletDialogFragment();
+        Bundle args = new Bundle();
+        args.putSerializable("Adapter", adapter);
+        dialog.setArguments(args);
+        dialog.show(getActivity().getSupportFragmentManager(), "EditBilletDialogFragment");
+    }
+
+
 
 
     // Adapter BILLETS
@@ -142,8 +155,8 @@ public class BilletsCreesFragment extends Fragment {
 
         private Billet billet;
         private boolean newBillet;
-        private Event_old eventOld;
         private BilletsArrayAdapter adapter;
+        private BilletterieListener callback;
 
         @Required(order = 1)
         private EditText inputNom;
@@ -154,12 +167,21 @@ public class BilletsCreesFragment extends Fragment {
         private TextView devise;
         private Validator validator;
 
+
+        @Override
+        public void onAttach(Activity activity) {
+            super.onAttach(activity);
+            callback = (BilletterieListener) activity;
+        }
+
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
+            newBillet = !getArguments().containsKey("INDEX_BILLET");
+            if(newBillet)
+                billet = new Billet();
+            else
+                billet = callback.getBilletterie().get(getArguments().getInt("INDEX_BILLET"));
 
-            newBillet = getArguments().getBoolean("newBillet");
-            billet = getArguments().getParcelable("Billet");
-            eventOld = getArguments().getParcelable("Event");
             adapter = (BilletsArrayAdapter) getArguments().getSerializable("Adapter");
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -181,7 +203,6 @@ public class BilletsCreesFragment extends Fragment {
                 inputPrix.setText(Commerce.prixToString(billet.getPrix()));
                 devise.setText(Commerce.Devise.getSymbol(billet.getDevise()));
             }
-
 
             validator = new Validator(this);
             validator.setValidationListener(this);
@@ -205,18 +226,18 @@ public class BilletsCreesFragment extends Fragment {
             // On recupère le contenu des champs
             billet.setNom(inputNom.getText().toString());
             billet.setPrix(Commerce.parsePrix(inputPrix));
-            // Dans le cas d'un nouveau billet
-            if (newBillet)
-                eventOld.getBilletterie().add(billet);
 
-            adapter.notifyDataSetChanged();
-            eventOld.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
-                @Override
-                public void success() {
-                }
+            final ProgressDialog wait = ProgressDialog.show(getActivity(),"","Enregistrement...",true,true);
 
+            billet.saveInBackground(new SaveCallback() {
                 @Override
-                public void failure(StackMobException e) {
+                public void done(ParseException e) {
+                    if(e==null){
+                        if (newBillet)
+                            callback.getBilletterie().add(billet);
+                        adapter.notifyDataSetChanged();
+                    }
+                    wait.dismiss();
                 }
             });
         }
@@ -227,7 +248,7 @@ public class BilletsCreesFragment extends Fragment {
                 failedView.requestFocus();
                 ((EditText) failedView).setError(message);
             } else {
-
+                Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
             }
         }
     }

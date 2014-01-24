@@ -2,6 +2,7 @@ package com.tipsy.app.orga.acces;
 
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -12,20 +13,20 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
-import com.stackmob.sdk.exception.StackMobException;
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Bracelet;
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
+import com.tipsy.lib.billetterie.Billet;
 import com.tipsy.lib.billetterie.Billetterie;
 import com.tipsy.lib.billetterie.EntreeArrayAdapter;
 import com.tipsy.lib.commerce.Achat;
@@ -35,14 +36,14 @@ import com.tipsy.lib.commerce.Achat;
  */
 public class AccesActivity extends FragmentActivity implements AccesListener {
 
-    private Event_old eventOld;
-    private int index;
+    private Event event;
+    private Billetterie billetterie;
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     NfcAdapter adapter;
     PendingIntent pendingIntent;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         setContentView(R.layout.act_access);
         super.onCreate(savedInstanceState);
 
@@ -51,16 +52,43 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         adapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, AccesActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
-        TipsyApp app = (TipsyApp) getApplication();
-        index = getIntent().getIntExtra("EVENT_INDEX",-1);
-        eventOld = null;//app.getOrga().getEventOlds().get(index);
-        if(savedInstanceState != null && savedInstanceState.containsKey("Entrees")){
-            entrees =  savedInstanceState.getParcelableArrayList("Entrees");
-        }else{
-            refresh(null);
-            goToHome(false);
-        }
 
+        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                backToEventOrga();
+            }
+        });
+        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+        query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
+            @Override
+            public void done(Event ev, ParseException e) {
+                if (ev != null) {
+                    event = ev;
+                    ParseQuery<Billet> query = ParseQuery.getQuery(Billet.class);
+                    query.whereEqualTo("event",event.getObjectId());
+                    query.findInBackground(new FindCallback<Billet>() {
+                        @Override
+                        public void done(List<Billet> billets, ParseException e) {
+                            billetterie.clear();
+                            billetterie.addAll(billets);
+                            wait.dismiss();
+                            if(savedInstanceState != null && savedInstanceState.containsKey("Entrees")){
+                                entrees =  savedInstanceState.getParcelableArrayList("Entrees");
+                            }else{
+                                refresh(null);
+                                goToHome(false);
+                            }
+                        }
+                    });
+                }
+                else{
+                    wait.dismiss();
+                    Log.d("TOUTAFAIT", "Erreur fetch event/ EventOrgaActivity:Oncreate: " + e.getMessage());
+                }
+            }
+        });
     }
 
     @Override
@@ -87,71 +115,41 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
     @Override
     protected void onNewIntent(Intent intent){
 
-        final ProgressDialog wait = ProgressDialog.show(this,"","Vérification en cours...",true,false);
+        final ProgressDialog wait = ProgressDialog.show(this,"","Vérification en cours...",true,true);
+
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String tagID = Bracelet.bytesToHex(tag.getId());
 
-        Bracelet.query(Bracelet.class, new StackMobQuery().fieldIsEqualTo("tagid", tagID), StackMobOptions.depthOf(1),
-                new StackMobQueryCallback<Bracelet>() {
-                    @Override
-                    public void success(List<Bracelet> bracelets) {
-                        Log.d("TOUTAFAIT", "success bracelet");
-                        /* Bracelet inconnu */
-                        if (bracelets.isEmpty()) {
-                            Log.d("TOUTAFAIT", "bracelet inconnu");
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    wait.dismiss();
-                                    Toast.makeText(AccesActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        } else {
-                            final Bracelet bracelet = bracelets.get(0);
-                            Log.d("TOUTAFAIT", "recherche entrée");
-
-                            Log.d("TOUTAFAIT", "entrees size: " + Integer.toString(entrees.size()));
-                            Iterator it = entrees.iterator();
-                            Achat entree;
-                            boolean found = false;
-                            while(it.hasNext() && !found) {
-                                entree = (Achat) it.next();
-                                if(bracelet.isMembre() && entree.getParticipant().isMembre())
-                                    found = bracelet.getMembre().getID().equals(entree.getParticipant().getMembre().getID());
-                                else if(bracelet.isParticipant())
-                                    found = bracelet.getParticipant().getID().equals(entree.getParticipant().getID());
-                            }
-
-                            if(found){
-                                Log.d("TOUTAFAIT","found");
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        wait.dismiss();
-                                        Toast.makeText(AccesActivity.this, "Entrée OK", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                            else{
-                                Log.d("TOUTAFAIT","not found");
-                                runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        wait.dismiss();
-                                        Toast.makeText(AccesActivity.this, "Entrée non autorisée", Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                            }
-                        }
+        ParseQuery<Bracelet> query = ParseQuery.getQuery(Bracelet.class);
+        query.include("user");
+        query.include("participant");
+        query.getInBackground(tagID,new GetCallback<Bracelet>() {
+            @Override
+            public void done(Bracelet bracelet, ParseException e) {
+                /* BRACELET ACTIVE ? */
+                if(bracelet != null){
+                    Iterator it = entrees.iterator();
+                    Achat entree;
+                    boolean found = false;
+                    while (it.hasNext() && !found) {
+                        entree = (Achat) it.next();
+                        if (bracelet.isMembre() && entree.getParticipant().isMembre())
+                            found = bracelet.getUser().getObjectId().equals(entree.getParticipant().getUser().getObjectId());
+                        else if (bracelet.isParticipant())
+                            found = bracelet.getParticipant().getObjectId().equals(entree.getParticipant().getObjectId());
                     }
 
-                    @Override
-                    public void failure(StackMobException e) {
-                        Log.d("TOUTAFAIT", "erreur query bracelet:" + e.getMessage());
-                    }
-                });
+                    String message = found ? "Entrée OK" : "Entrée non autorisée";
+                    wait.dismiss();
+                    Toast.makeText(AccesActivity.this, message, Toast.LENGTH_SHORT).show();
 
-
+                }else{ /* BRACELET INCONNU */
+                    wait.dismiss();
+                    Log.d("TOUTAFAIT", "bracelet inconnu");
+                    Toast.makeText(AccesActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
 
@@ -169,7 +167,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
 
     public void backToEventOrga(){
         Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_INDEX", index);
+        intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 
@@ -191,11 +189,14 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
     }
 
     public void refresh(EntreeArrayAdapter adapter){
-        Billetterie.refreshVentes(eventOld, this, entrees, adapter, null);
+        billetterie.refreshVentes(this, entrees, adapter, null);
     }
 
-    public Event_old getEventOld(){
-        return eventOld;
+    public Billetterie getBilletterie(){
+        return billetterie;
+    }
+    public Event getEvent(){
+        return event;
     }
 
     public ArrayList<Achat> getEntrees(){

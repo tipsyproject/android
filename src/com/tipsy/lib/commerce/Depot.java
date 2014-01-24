@@ -3,6 +3,7 @@ package com.tipsy.lib.commerce;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.parse.ParseObject;
 import com.stackmob.sdk.model.StackMobModel;
 
 import java.util.Date;
@@ -10,55 +11,52 @@ import java.util.Date;
 /**
  * Created by Valentin on 21/01/14.
  */
-public class Depot extends StackMobModel implements Transaction {
+public class Depot extends ParseObject implements Transaction {
 
     private Date date;
     private int devise;
     private int montant;
     private String username;
 
-    public Depot(){
-        super(Depot.class);
-    }
+    public Depot(){}
 
     public Depot(int montant, String username, int devise){
-        super(Depot.class);
-        this.date = new Date();
-        this.devise = devise;
-        this.montant = montant;
-        this.username = username;
+        setDate(new Date());
+        setDevise(devise);
+        setMontant(montant);
+        setUsername(username);
     }
 
     public Date getDate() {
-        return date;
+        return getDate("date");
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        put("date",date);
     }
 
     public int getDevise() {
-        return devise;
+        return getInt("devise");
     }
 
     public void setDevise(int devise) {
-        this.devise = devise;
+        put("devise",devise);
     }
 
     public int getMontant() {
-        return montant;
+        return getInt("montant");
     }
 
     public void setMontant(int montant) {
-        this.montant = montant;
+        put("montant",montant);
     }
 
     public String getUsername() {
-        return username;
+        return getString("username");
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        put("username",username);
     }
 
     public String getDescription(){
@@ -74,6 +72,7 @@ public class Depot extends StackMobModel implements Transaction {
     }
 
 
+    /*
 
     // Implémentation de Parcelable
     @Override
@@ -110,4 +109,5 @@ public class Depot extends StackMobModel implements Transaction {
             return new Depot[size];
         }
     };
+    */
 }

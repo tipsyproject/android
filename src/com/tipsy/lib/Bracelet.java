@@ -1,60 +1,57 @@
 package com.tipsy.lib;
 
-import com.stackmob.sdk.model.StackMobModel;
+import com.parse.ParseObject;
 
 /**
  * Created by valoo on 22/01/14.
  */
-public class Bracelet extends StackMobModel {
+public class Bracelet extends ParseObject {
 
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
-    private Membre membre = null;
     private Participant participant = null;
     private String tagID;
 
-    public Bracelet(){
-        super(Bracelet.class);
+    public Bracelet(){}
+
+    public TipsyUser getUser() {
+        return (TipsyUser) getParseObject("user");
     }
 
-    public Membre getMembre() {
-        return membre;
-    }
-
-    public void setMembre(Membre membre) {
-        this.membre = membre;
+    public void setUser(TipsyUser user) {
+        put("user",user);
     }
 
     public Participant getParticipant() {
-        return participant;
+        return (Participant) getParseObject("participant");
     }
 
     public void setParticipant(Participant participant) {
-        this.participant = participant;
+        put("participant",participant);
     }
 
     public String getTagID() {
-        return tagID;
+        return getString("tag");
     }
 
     protected void setTagID(String tagID) {
-        this.tagID = tagID;
+        put("tag",tagID);
     }
 
     public void setTagID(byte[] bytes) {
-        this.tagID = bytesToHex(bytes);
+        setTagID(bytesToHex(bytes));
     }
 
     public boolean isFree(){
-        return ( membre == null && participant == null );
+        return ( getUser() == null && getParticipant() == null );
     }
 
     public boolean isMembre(){
-        return membre != null;
+        return getUser() != null;
     }
 
     public boolean isParticipant(){
-        return participant != null;
+        return getParticipant() != null;
     }
 
     public static String bytesToHex(byte[] bytes) {

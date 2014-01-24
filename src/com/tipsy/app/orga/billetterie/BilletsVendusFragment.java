@@ -31,13 +31,13 @@ public class BilletsVendusFragment extends ListeVentesFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = super.onCreateView(R.layout.frag_billetterie_liste_ventes,inflater,container,savedInstanceState);
-        Billetterie.refreshVentes(getEvent(), getActivity(), getEntrees(), adapter, nbVentes);
+        callback.getBilletterie().refreshVentes(getActivity(), getEntrees(), adapter, nbVentes);
         return view;
     }
 
     @Override
-    public Event_old getEvent(){
-        return callback.getEventOld();
+    public Billetterie getBilletterie(){
+        return callback.getBilletterie();
     }
     @Override
     public ArrayList<Achat> getEntrees(){

@@ -24,6 +24,8 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
@@ -35,7 +37,7 @@ import java.io.FileNotFoundException;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Membre;
+import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -50,8 +52,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     protected boolean change = false;
     private static int RESULT_LOAD_IMAGE = 1;
     protected static ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    protected TipsyApp app;
-    protected Membre membre;
+    protected TipsyUser membre;
     protected static Bitmap bitmap_avatar = null;
 
     @Override
@@ -65,8 +66,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                              Bundle savedInstanceState) {
 
         View fragmentView = inflater.inflate(R.layout.frag_membre_account, container, false);
-        app = (TipsyApp) getActivity().getApplication();
-        //membre = app.getMembre();
+        membre = (TipsyUser) TipsyUser.getCurrentUser();
 
         Nom = (EditText) fragmentView.findViewById(R.id.input_nom);
         Prenom = (EditText) fragmentView.findViewById(R.id.input_prenom);
@@ -127,6 +127,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     // Gestion du click sur le bouton de validation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
         app.hideKeyboard(getActivity());
         // handle item selection
         switch (item.getItemId()) {
@@ -134,26 +135,18 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                 if (change) {
                     membre.setNom(Nom.getText().toString());
                     membre.setPrenom(Prenom.getText().toString());
-                    membre.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
-                    membre.save(new StackMobModelCallback() {
+                    //membre.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
+                    membre.saveInBackground(new SaveCallback() {
                         @Override
-                        public void success() {
-                            callback.goToTableauDeBord(false);
-                        }
-
-                        // En cas d'échec
-                        @Override
-                        public void failure(StackMobException e) {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getActivity(), "Sauvegarde échouée", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                        public void done(ParseException e) {
+                            if(e==null)
+                                callback.goToTableauDeBord(true);
+                            else
+                                Toast.makeText(getActivity(), getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();
                         }
                     });
                 } else
-                    callback.goToTableauDeBord(false);
+                    callback.goToTableauDeBord(true);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

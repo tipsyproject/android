@@ -48,7 +48,7 @@ public class Item implements Parcelable {
 
     @Override
     public int hashCode() {
-        return produit.getID().hashCode();
+        return produit.getObjectId().hashCode();
     }
 
 

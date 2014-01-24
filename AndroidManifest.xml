@@ -94,7 +94,7 @@
         </activity>
 
         <activity
-            android:name="com.tipsy.app.orga.event.edit.EditEventActivity"
+            android:name=".orga.event.edit.EditEventActivity"
             android:label="">
 
         </activity>

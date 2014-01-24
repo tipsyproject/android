@@ -1,5 +1,7 @@
 package com.tipsy.app.orga.event;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -7,47 +9,52 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MenuItem;
 
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.callback.StackMobCallback;
-import com.stackmob.sdk.exception.StackMobException;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.acces.AccesActivity;
 import com.tipsy.app.orga.billetterie.BilletterieActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
 
 /**
  * Created by valoo on 22/01/14.
  */
 public class EventOrgaActivity extends FragmentActivity implements EventOrgaListener {
 
-    private Event_old eventOld;
-    private int index;
+    private Event event;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
-
-        TipsyApp app = (TipsyApp) getApplication();
-        index = getIntent().getIntExtra("EVENT_INDEX",-1);
-        //eventOld = app.getOrga().getEventOlds().get(index);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(eventOld.getNom());
 
-        eventOld.fetch(StackMobOptions.depthOf(1),new StackMobCallback() {
+        /* Chargement de l'event */
+        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
-            public void success(String s) {
-                if(savedInstanceState == null)
-                    home(false);
+            public void onCancel(DialogInterface dialog) {
+                backToOrga();
             }
-
+        });
+        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+        query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
             @Override
-            public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT","Erreur fetch eventOld / EventOrgaActivity:Oncreate: "+e.getMessage());
+            public void done(Event ev, ParseException e) {
+                if (ev != null) {
+                    event = ev;
+                    wait.dismiss();
+                    getActionBar().setTitle(event.getNom());
+                    if (savedInstanceState == null) {
+                        home(false);
+                    }
+                } else {
+                    Log.d("TOUTAFAIT", "Erreur fetch event/ EventOrgaActivity:Oncreate: " + e.getMessage());
+                }
             }
         });
 
@@ -65,14 +72,13 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         return super.onOptionsItemSelected(item);
     }
 
-    public Event_old getEventOld(){
-        return eventOld;
+    public Event getEvent(){
+        return event;
     }
 
     public void home(boolean addTobackStack){
-        HomeEventOrgaFragment frag = new HomeEventOrgaFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, frag);
+        ft.replace(R.id.content, new HomeEventOrgaFragment());
         if(addTobackStack)
             ft.addToBackStack(null);
         ft.commit();
@@ -86,20 +92,20 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     // clique sur le bouton de la Billetterie
     public void goToAcces() {
         Intent intent = new Intent(this, AccesActivity.class);
-        intent.putExtra("EVENT_INDEX", index);
+        intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 
     public void goToBilletterie() {
         Intent intent = new Intent(this, BilletterieActivity.class);
-        intent.putExtra("EVENT_INDEX", index);
+        intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 
     // Modification d'un événement
     public void goToEditEvent() {
         Intent intent = new Intent(this, EditEventActivity.class);
-        intent.putExtra("EVENT_INDEX", index);
+        intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 }

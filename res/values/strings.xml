@@ -41,6 +41,11 @@ j'accepte les conditions générales."</string>
     <string name="app_not_available">Erreur</string>
     <string name="erreur_interne">Erreur interne</string>
     <string name="erreur_connexion">Erreur connexion</string>
+    <string name="erreur_save">Erreur lors de l\'enregistrement</string>
+
+    <!-- EVENT -->
+    <string name="nouvel_event">Nouvel événement</string>
+
 
 
 

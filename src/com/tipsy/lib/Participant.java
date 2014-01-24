@@ -1,80 +1,73 @@
 package com.tipsy.lib;
 
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.stackmob.sdk.model.StackMobModel;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
 
 /**
  * Created by vquefele on 20/01/14.
  */
-public class Participant extends StackMobModel implements Parcelable {
-    private String email;
-    private Event_old eventOld;
-    private Membre membre = null;
-    private String nom;
-    private String prenom;
+@ParseClassName("participant")
+public class Participant extends ParseObject implements Parcelable{
 
-    public Participant(){
-        super(Participant.class);
-    }
-
-    public Participant(Event_old e){
-        super(Participant.class);
-        eventOld = e;
-    }
+    public Participant(){}
 
     public String getEmail() {
-        return membre == null ? email : membre.getEmail();
+        return getUser() == null ? getString("email") : getUser().getEmail();
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        put("email",email);
     }
 
-    public Event_old getEventOld() {
-        return eventOld;
+    public Event getEvent() {
+        return (Event) getParseObject("event");
     }
 
-    public void setEventOld(Event_old eventOld) {
-        this.eventOld = eventOld;
+    public void setEvent(Event event) {
+        put("event",event);
     }
 
-    public Membre getMembre() {
-        return membre;
+    public TipsyUser getUser() {
+        return (TipsyUser) getParseObject("user");
     }
 
-    public void setMembre(Membre membre) {
-        this.nom = null;
-        this.prenom = null;
-        this.email = null;
-        this.membre = membre;
+    public void setUser(TipsyUser user) {
+        put("nom",null);
+        put("prenom",null);
+        put("email",null);
+        put("user",user);
     }
 
     public String getNom() {
-        return membre == null ? nom : membre.getNom();
+        return getUser() == null ? getString("nom") : getUser().getNom();
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        put("nom",nom);
     }
 
     public String getPrenom() {
-        return membre == null ? prenom : membre.getPrenom();
+        return getUser() == null ? getString("prenom") : getUser().getPrenom();
     }
 
     public void setPrenom(String prenom) {
-        this.prenom = prenom;
+        put("prenom",prenom);
     }
 
 
     public boolean isDefined(){
-        return membre != null || (nom != null && prenom != null && email != null);
+        return getUser() != null || (getNom() != null && getPrenom() != null && getEmail() != null);
     }
 
     public boolean isMembre(){
-        return membre != null;
+        return getUser() != null;
     }
+
+
 
     // Implémentation de Parcelable
     @Override
@@ -84,22 +77,21 @@ public class Participant extends StackMobModel implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getID());
-        dest.writeString(email);
-        dest.writeParcelable(eventOld, flags);
-        dest.writeParcelable(membre,flags);
-        dest.writeString(nom);
-        dest.writeString(prenom);
+        dest.writeString(getObjectId());
+        dest.writeString(getEmail());
+        dest.writeParcelable(getEvent(), flags);
+        dest.writeParcelable(getUser(),flags);
+        dest.writeString(getNom());
+        dest.writeString(getPrenom());
     }
 
     public Participant(Parcel in) {
-        super(Participant.class);
-        setID(in.readString());
-        email = in.readString();
-        eventOld = in.readParcelable(Event_old.class.getClassLoader());
-        membre = in.readParcelable(Membre.class.getClassLoader());
-        nom = in.readString();
-        prenom = in.readString();
+        setObjectId(in.readString());
+        setEmail(in.readString());
+        setEvent((Event) in.readParcelable(Event.class.getClassLoader()));
+        setUser((TipsyUser) in.readParcelable(TipsyUser.class.getClassLoader()));
+        setNom(in.readString());
+        setPrenom(in.readString());
     }
 
     public static final Parcelable.Creator<Participant> CREATOR = new Parcelable.Creator<Participant>() {
@@ -113,5 +105,4 @@ public class Participant extends StackMobModel implements Parcelable {
             return new Participant[size];
         }
     };
-
 }

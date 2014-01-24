@@ -1,5 +1,6 @@
 package com.tipsy.lib;
 
+import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.parse.ParseClassName;
@@ -12,7 +13,7 @@ import java.util.Date;
  */
 
 @ParseClassName("Event")
-public class Event extends ParseObject {
+public class Event extends ParseObject implements Parcelable{
 
     public Event() {}
 
@@ -48,7 +49,7 @@ public class Event extends ParseObject {
         put("organisateur",organisateur);
     }
 
-    /*
+
     // Implémentation de Parcelable
     @Override
     public int describeContents() {
@@ -57,22 +58,19 @@ public class Event extends ParseObject {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getID());
-        dest.writeList(billetterie);
-        dest.writeSerializable(debut);
-        dest.writeString(lieu);
-        dest.writeString(nom);
-        dest.writeString(organisateur);
+        dest.writeString(getObjectId());
+        dest.writeSerializable(getDebut());
+        dest.writeString(getLieu());
+        dest.writeString(getNom());
+        dest.writeString(getOrganisateur());
     }
 
     public Event(Parcel in) {
-        super(Event.class);
-        setID(in.readString());
-        in.readList(billetterie, Billet.class.getClassLoader());
-        debut = (Date) in.readSerializable();
-        lieu = in.readString();
-        nom = in.readString();
-        organisateur = in.readString();
+        setObjectId(in.readString());
+        setDebut((Date) in.readSerializable());
+        setLieu(in.readString());
+        setNom(in.readString());
+        setOrganisateur(in.readString());
     }
 
     public static final Parcelable.Creator<Event> CREATOR = new Parcelable.Creator<Event>() {
@@ -85,6 +83,6 @@ public class Event extends ParseObject {
         public Event[] newArray(int size) {
             return new Event[size];
         }
-    };*/
+    };
 
 }

@@ -2,30 +2,27 @@ package com.tipsy.lib.commerce;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.util.Log;
 
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
-import com.stackmob.sdk.exception.StackMobException;
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-
-import com.tipsy.lib.Participant;
-import com.tipsy.lib.User;
+import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by valoo on 05/01/14.
  */
 public class Wallet extends ArrayList<Transaction> {
     private int devise = Commerce.Devise.EURO;
-    private User user;
+    private TipsyUser user;
 
-    public Wallet(User user) {
+    public Wallet(TipsyUser user) {
         this.user = user;
     }
 
@@ -48,45 +45,39 @@ public class Wallet extends ArrayList<Transaction> {
     }
 
     /* Récupère la liste des transactions du user (Depots + Achats) */
-    public void init(WalletInitCallback cb) {
-        final WalletInitCallback callback = cb;
+    public void init(final WalletInitCallback callback) {
+        clear();
 
-        /* Requete Stackmob */
-        Depot.query(Depot.class,
-                new StackMobQuery().fieldIsEqualTo("username", user.getUsername()),
-                new StackMobQueryCallback<Depot>() {
-
+        /* LISTE DES DEPOTS DU USER */
+        ParseQuery<Depot> query = ParseQuery.getQuery(Depot.class);
+        query.whereEqualTo("username",user.getObjectId());
+        query.findInBackground(new FindCallback<Depot>() {
             @Override
-            public void success(List<Depot> result) {
-                addAll(result);
-                Achat.query(Achat.class,
-                        new StackMobQuery().fieldIsEqualTo("payeur", user.getEmail()),
-                        StackMobOptions.depthOf(2),
-                        new StackMobQueryCallback<Achat>() {
-
-                            @Override
-                            public void success(List<Achat> result) {
-                                addAll(result);
+            public void done(List<Depot> depots, ParseException e) {
+                if(e != null){
+                    addAll(depots);
+                    /* LISTE DES ACHATS USER */
+                    ParseQuery<Achat> query = ParseQuery.getQuery(Achat.class);
+                    query.include("produit");
+                    query.whereEqualTo("payeur",user.getObjectId());
+                    query.findInBackground(new FindCallback<Achat>() {
+                        @Override
+                        public void done(List<Achat> achats, ParseException e) {
+                            if(e != null){
+                                addAll(achats);
+                            /* TRI DE LA TRANSACTION LA PLUS RECENTE A LA MOINS RECENTE */
                                 Collections.sort(Wallet.this, new Comparator<Transaction>() {
                                     public int compare(Transaction t1, Transaction t2) {
                                         return t1.getDate().before(t2.getDate()) ? 1 : -1;
                                     }
                                 });
                                 callback.success();
-                            }
-
-                            @Override
-                            public void failure(StackMobException e) {
-                                Log.d("TOUTAFAIT", "erreur achats" + e.getMessage());
+                            }else
                                 callback.failure(e);
-                            }
-                        });
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT","erreur depots" + e.getMessage());
-                callback.failure(e);
+                        }
+                    });
+                }else
+                    callback.failure(e);
             }
         });
     }
@@ -97,69 +88,41 @@ public class Wallet extends ArrayList<Transaction> {
         if (montant <= 0)
             callback.onFailure(new Exception("Le montant doit être positif."));
         else{
-            Depot depot = new Depot(montant, user.getUsername(), Commerce.Devise.getLocale());
-            add(0, depot);
-            depot.save(new StackMobModelCallback() {
+            final Depot depot = new Depot(montant, user.getUsername(), Commerce.Devise.getLocale());
+            depot.saveInBackground(new SaveCallback() {
                 @Override
-                public void success() {
-                    callback.onSuccess();
-                }
-
-                @Override
-                public void failure(StackMobException e) {
-                    remove(0);
-                    callback.onFailure(e);
+                public void done(ParseException e) {
+                    if (e == null) {
+                        add(0, depot);
+                        callback.onSuccess();
+                    } else
+                        callback.onFailure(e);
                 }
             });
         }
     }
 
-    public void pay(Commande commande, final WalletCallback callback){
+    public void pay(final Commande cmd, final WalletCallback callback){
         // Mise en attente de l'utilisateur
         callback.onWait();
-
-        final Commande cmd = commande;
         if (getSolde() < cmd.getPrixTotal())
             callback.onFailure(new Exception("Fonds insuffisants."));
         else {
-            // Création d'un transaction du montant de la commande destinée à l'organisateur
             cmd.setPayeur(user.getEmail());
 
-            // ajout des achats en tête de liste
+            ArrayList<ParseObject> achats = new ArrayList<ParseObject>();
             for(Achat a: cmd)
-                add(0, a);
-            Achat.saveMultiple(cmd, new StackMobModelCallback() {
-                @Override
-                public void success() {
-                    ArrayList<Participant> participants = new ArrayList<Participant>();
-                    for(Achat a : cmd)
-                        participants.add(a.getParticipant());
-                    Participant.saveMultiple(participants, new StackMobModelCallback() {
-                        @Override
-                        public void success() {
-                            callback.onSuccess();
-                        }
+                achats.add(a);
 
-                        @Override
-                        public void failure(StackMobException e) {
-                            //Suppression de la transaction précédemment ajoutée
-                            Log.d("TOUTAFAIT", "erreur save achat multiple:" + e.getMessage());
-                            for (Achat a : cmd)
-                                remove(0);
-                            callback.onFailure(e);
-                        }
-                    });
-                }
+            try{
+                Achat.saveAll(achats);
+                addAll(0,cmd);
+                callback.onSuccess();
+            }catch(ParseException e){
+                callback.onFailure(e);
 
-                @Override
-                public void failure(StackMobException e) {
-                    //Suppression de la transaction précédemment ajoutée
-                    Log.d("TOUTAFAIT", "erreur save achat multiple:" + e.getMessage());
-                    for (Achat a : cmd)
-                        remove(0);
-                    callback.onFailure(e);
-                }
-            });
+            }
+
         }
     }
 
@@ -180,7 +143,7 @@ public class Wallet extends ArrayList<Transaction> {
 
         public abstract void success();
 
-        public abstract void failure(com.stackmob.sdk.exception.StackMobException e);
+        public abstract void failure(ParseException e);
     }
 
 }

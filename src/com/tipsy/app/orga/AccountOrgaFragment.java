@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.parse.ParseException;
 import com.stackmob.sdk.api.StackMobFile;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
@@ -35,7 +36,7 @@ import java.io.FileNotFoundException;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Organisateur;
+import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -49,8 +50,7 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
     protected boolean change = false;
     private static int RESULT_LOAD_IMAGE = 1;
     protected ByteArrayOutputStream baos = new ByteArrayOutputStream();
-    protected TipsyApp app;
-    protected Organisateur orga;
+    protected TipsyUser orga;
 
     @Override
     public void onAttach(Activity activity) {
@@ -60,8 +60,7 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.frag_orga_account, container, false);
-        app = (TipsyApp) getActivity().getApplication();
-        //orga = app.getOrga();
+        orga = (TipsyUser) TipsyUser.getCurrentUser();
 
         Orga = (EditText) fragmentView.findViewById(R.id.input_orga);
         Email = (EditText) fragmentView.findViewById(R.id.input_mail);
@@ -119,29 +118,19 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle item selection
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
         app.hideKeyboard(getActivity());
         switch (item.getItemId()) {
             case R.id.action_validate:
                 if (change) {
                     orga.setNom(Orga.getText().toString());
-                    orga.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
-                    orga.save(new StackMobModelCallback() {
-                        @Override
-                        public void success() {
-                            callback.tableauDeBord(false);
-                        }
-
-                        // En cas d'échec
-                        @Override
-                        public void failure(StackMobException e) {
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getActivity(), "Sauvegarde échouée", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-                    });
+                    //orga.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
+                    try{
+                        orga.save();
+                        callback.tableauDeBord(true);
+                    }catch(ParseException e){
+                        Toast.makeText(getActivity(), getResources().getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();
+                    }
                 } else
                     callback.tableauDeBord(false);
                 return true;

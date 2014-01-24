@@ -20,14 +20,18 @@ import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
 import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 
+import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Event;
+import com.tipsy.lib.TipsyUser;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by valoo on 22/01/14.
@@ -50,7 +54,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
             R.drawable.ic_action_settings
     };
     private ActionBar actionBar;
-    private EditEventAdapter mAdapter;
+    private EditEventPager mAdapter;
     private ViewPager mPager;
 
     @Required(order = 1)
@@ -68,49 +72,54 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         setContentView(R.layout.act_edit_event);
         super.onCreate(savedInstanceState);
 
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+
         if(getIntent().hasExtra("EVENT_ID")){
             ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-            query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
-                public void done(Event myevent, ParseException e) {
-                    if (e == null) {
-                        event = myevent;
-                        Log.d("TOUTAFAIT", "Event recup:"+event.getNom());
-                    } else {
-                        Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
+                /*
+                query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
+                    public void done(Event myevent, ParseException e) {
+                        if (e == null) {
+                            event = myevent;
+                            Log.d("TOUTAFAIT", "Event recup:"+event.getNom());
+                        } else {
+                            Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-            });
+                });*/
+            try{
+                event = query.get(getIntent().getStringExtra("EVENT_ID"));
+                getActionBar().setTitle(event.getNom());
+                Log.d("TOUTAFAIT", "Event recup:"+event.getNom());
+            }catch(ParseException e){
+                Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
+            }
         }else{
             event = new Event();
+            getActionBar().setTitle(getResources().getString(R.string.nouvel_event));
             Log.d("TOUTAFAIT", "new event");
         }
 
-
         /*
-        if(savedInstanceState != null){
-            newEvent = savedInstanceState.getBoolean("NEW_EVENT");
-            if(newEvent)
-                event = savedInstanceState.getParcelable("Event");
-            else{
-                TipsyApp app = (TipsyApp) getApplication();
-                int index = savedInstanceState.getInt("EVENT_INDEX");
-                //event= app.getOrga().getEventOlds().get(index);
+        if(savedInstanceState != null && savedInstanceState.containsKey("Event")){
+            event = savedInstanceState.getParcelable("Event");
+            Log.d("TOUTAFAIT", "Event saved:"+event.getNom());
+        }else if(getIntent().hasExtra("EVENT_ID")){
+            ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+            try{
+                event = query.get(getIntent().getStringExtra("EVENT_ID"));
+                Log.d("TOUTAFAIT", "Event recup:"+event.getNom());
+            }catch(ParseException e){
+                Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
             }
         }else{
-            if(getIntent().hasExtra("NEW_EVENT")){
-                newEvent = true;
-                event= new Event();
-            }else{
-                index = getIntent().getStringExtra("EVENT_ID");
-                event= app.getOrga().getEventOlds().get(index);
-            }
+            event = new Event();
+            event.setDebut(new Date());
+            Log.d("TOUTAFAIT", "new event");
         }*/
 
 
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(event.getNom());
-
-        mAdapter = new EditEventAdapter(getSupportFragmentManager());
+        mAdapter = new EditEventPager(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.event_pager);
         mPager.setAdapter(mAdapter);
 
@@ -130,24 +139,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
                     }
                 }
         );
-
-
-
     }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        /*if(outState==null)
-            outState = new Bundle();
-        outState.putBoolean("NEW_EVENT", newEvent);
-        if(newEvent)
-            outState.putParcelable("Event", eventOld);
-        else
-            outState.putInt("EVENT_INDEX", index);
-        // Add variable to outState here*/
-        super.onSaveInstanceState(outState);
-    }
-
 
     /* Définition de l'ACTIONBAR */
     @Override
@@ -182,55 +174,32 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     // Envoi de la demande de sauvegarde de l'événement à l'activité
     public void onValidationSucceeded() {
-        /*saving = true;
+        saving = true;
         // Si c'est une création d'eventOld, on initialise l'eventOld
         final ProgressDialog wait = ProgressDialog.show(this,"","Enregistrement...",true,false);
 
-        TipsyApp app = (TipsyApp) getApplication();
-        Organisateur orga = null;//app.getOrga();
-        if (newEvent) {
-            event= orga.creerEvent("");
-            index = orga.getEventOlds().size()-1;
-            orga.save();
-        }
-        if (inputNom != null) {
-            eventOld.setNom(inputNom.getText().toString());
-        }
-        if (inputLieu != null) {
-            eventOld.setLieu(inputLieu.getText().toString());
-        }
+        if (event.getOrganisateur() == null)
+            event.setOrganisateur(TipsyUser.getCurrentUser().getObjectId());
+        event.setNom(inputNom.getText().toString());
+        event.setLieu(inputLieu.getText().toString());
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
         String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
         try {
-            eventOld.setDebut(f.parse(dateDebut));
-        } catch (ParseException e) {
-        }
+            event.setDebut(f.parse(dateDebut));
+        } catch (java.text.ParseException e) {}
 
-        eventOld.save(new StackMobModelCallback() {
+        event.saveInBackground(new SaveCallback() {
             @Override
-            public void success() {
+            public void done(ParseException e) {
                 saving = false;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        wait.dismiss();
-                    }
-                });
-                backToEventOrga();
-            }
+                wait.dismiss();
+                if(e==null)
+                    backToEventOrga();
+                else
+                    Toast.makeText(EditEventActivity.this, getResources().getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();
 
-            @Override
-            public void failure(StackMobException e) {
-                saving = false;
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        wait.dismiss();
-                    }
-                });
-                Log.e("TOUTAFAIT", "erreur sauvegarde Event:" + e.getMessage());
             }
-        });*/
+        });
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {
@@ -240,12 +209,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
         } else {
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(EditEventActivity.this, message, Toast.LENGTH_SHORT).show();
-                }
-            });
+            Toast.makeText(EditEventActivity.this, message, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -254,7 +218,6 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
     public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
         mPager.setCurrentItem(tab.getPosition());
     }
-
     @Override
     public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
 
@@ -282,6 +245,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     // initialisation des inputs lors de leur affichage pour les rendre accessible au Validator
 
+    /*
     // inputs partie description
     public void onDescFragCreated(View v) {
         inputNom = (EditText) v.findViewById(R.id.input_nom);
@@ -303,5 +267,37 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         inputDateDebut.setText(EditEventDateFragment.dateFormatter.format(event.getDebut()));
         inputTimeDebut.setText(EditEventDateFragment.timeFormatter.format(event.getDebut()));
     }
+    */
 
+    public EditText getInputNom() {
+        return inputNom;
+    }
+
+    public void setInputNom(EditText inputNom) {
+        this.inputNom = inputNom;
+    }
+
+    public EditText getInputLieu() {
+        return inputLieu;
+    }
+
+    public void setInputLieu(EditText inputLieu) {
+        this.inputLieu = inputLieu;
+    }
+
+    public TextView getInputDateDebut() {
+        return inputDateDebut;
+    }
+
+    public void setInputDateDebut(TextView inputDateDebut) {
+        this.inputDateDebut = inputDateDebut;
+    }
+
+    public TextView getInputTimeDebut() {
+        return inputTimeDebut;
+    }
+
+    public void setInputTimeDebut(TextView inputTimeDebut) {
+        this.inputTimeDebut = inputTimeDebut;
+    }
 }

@@ -3,13 +3,15 @@ package com.tipsy.app.orga.event.edit;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 /**
  * Created by valoo on 22/01/14.
  */
 // Gestionnaire des Fragments
-public class EditEventAdapter extends FragmentPagerAdapter {
-    public EditEventAdapter(FragmentManager fm) {
+public class EditEventPager extends FragmentPagerAdapter {
+
+    public EditEventPager(FragmentManager fm) {
         super(fm);
     }
 

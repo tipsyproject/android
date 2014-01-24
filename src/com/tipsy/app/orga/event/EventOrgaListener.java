@@ -1,13 +1,13 @@
 package com.tipsy.app.orga.event;
 
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
 
 /**
  * Created by valoo on 22/01/14.
  */
 public interface EventOrgaListener {
 
-    public Event_old getEventOld();
+    public Event getEvent();
 
     public void backToOrga();
 

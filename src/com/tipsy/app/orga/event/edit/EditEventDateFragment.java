@@ -27,12 +27,9 @@ import com.tipsy.app.R;
 
 public class EditEventDateFragment extends Fragment {
 
-    private TextView inputDateDebut;
-    private TextView inputTimeDebut;
+    private Date debut;
     public static SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
     public static SimpleDateFormat timeFormatter = new SimpleDateFormat("kk:mm");
-
-
     private EditEventListener callback;
 
     @Override
@@ -43,24 +40,32 @@ public class EditEventDateFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        if(savedInstanceState != null && savedInstanceState.containsKey("DEBUT")){
+            debut = (Date) savedInstanceState.getSerializable("DEBUT");
+            Log.d("TOUTAFAIT", "date recup");
+        }else if(callback.getEvent().getDebut() != null)
+            debut = callback.getEvent().getDebut();
+        else debut = new Date();
+
         View view = inflater.inflate(R.layout.frag_edit_event_date, container, false);
 
-
         /* DATE DEBUT EVENT */
-        inputDateDebut = (TextView) view.findViewById(R.id.input_date_debut);
+        callback.setInputDateDebut((TextView) view.findViewById(R.id.input_date_debut));
         final DatePickerDialog.OnDateSetListener dpDebut = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 GregorianCalendar cal = new GregorianCalendar(year, month, day);
-                inputDateDebut.setText(dateFormatter.format(new Date(cal.getTimeInMillis())));
-                saveDateToEvent();
+                callback.getInputDateDebut().setText(dateFormatter.format(new Date(cal.getTimeInMillis())));
             }
 
         };
-        inputDateDebut.setOnClickListener(new View.OnClickListener() {
+        callback.getInputDateDebut().setText(dateFormatter.format(debut));
+
+        callback.getInputDateDebut().setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(callback.getEvent().getDebut());
+                cal.setTime(debut);
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -70,41 +75,45 @@ public class EditEventDateFragment extends Fragment {
 
 
         /* HORAIRES DEBUT EVENT */
-        inputTimeDebut = (TextView) view.findViewById(R.id.input_time_debut);
+        callback.setInputTimeDebut( (TextView) view.findViewById(R.id.input_time_debut) );
         final TimePickerDialog.OnTimeSetListener tpDebut = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hour, int min) {
                 Calendar cal = Calendar.getInstance();
                 cal.set(Calendar.HOUR_OF_DAY, hour);
                 cal.set(Calendar.MINUTE, min);
-                inputTimeDebut.setText(timeFormatter.format(new Date(cal.getTimeInMillis())));
-                saveDateToEvent();
+                callback.getInputTimeDebut().setText(timeFormatter.format(new Date(cal.getTimeInMillis())));
             }
-
         };
+
+        callback.getInputTimeDebut().setText(timeFormatter.format(debut));
+
         // Liaison des Date/Time Pickers aux inputs
-        inputTimeDebut.setOnClickListener(new View.OnClickListener() {
+        callback.getInputTimeDebut().setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(callback.getEvent().getDebut());
+                cal.setTime(debut);
                 int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int min = cal.get(Calendar.MINUTE);
                 new TimePickerDialog(getActivity(), tpDebut, hour, min, true).show();
             }
         });
 
-        Log.d("TOUTAFAIT", "date frag created");
-        callback.onDateFragCreated(view);
-
         return view;
     }
 
-    private void saveDateToEvent(){
+    // Sauvegarde des dates prédéfinies
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if(outState==null)
+            outState = new Bundle();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
-        String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
+        String dateDebut = callback.getInputDateDebut().getText().toString()
+                + " " + callback.getInputTimeDebut().getText().toString();
         try {
-            callback.getEvent().setDebut(f.parse(dateDebut));
-        } catch (ParseException e) {
-        }
+            debut = f.parse(dateDebut);
+        } catch (ParseException e) {}
+        outState.putSerializable("DEBUT", debut);
+        super.onSaveInstanceState(outState);
     }
 }

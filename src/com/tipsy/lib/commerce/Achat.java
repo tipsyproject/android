@@ -3,7 +3,8 @@ package com.tipsy.lib.commerce;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.stackmob.sdk.model.StackMobModel;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
 
 import java.util.Date;
 
@@ -12,69 +13,57 @@ import com.tipsy.lib.Participant;
 /**
  * Created by Valentin on 21/01/14.
  */
-public class Achat extends StackMobModel implements Transaction, Parcelable {
+@ParseClassName("achat")
+public class Achat extends ParseObject implements Transaction, Parcelable {
 
-    private Date date;
-    private Participant participant;
-    private String payeur;
-    private Produit produit;
-
-    public Achat(){
-        super(Achat.class);
-    }
-
-    public Achat(Produit p){
-        super(Achat.class);
-        date = new Date();
-        produit = p;
-    }
+    public Achat(){}
 
     public Date getDate() {
-        return date;
+        return getDate("date");
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        put("date",date);
     }
 
     public int getDevise(){
-        return produit.getDevise();
+        return ((Produit) getParseObject("produit")).getDevise();
     }
 
     public Participant getParticipant() {
-        return participant;
+        return (Participant) getParseObject("participant");
     }
 
     public void setParticipant(Participant participant) {
-        this.participant = participant;
+        put("participant",participant);
     }
 
     public String getPayeur() {
-        return payeur;
+        return getString("payeur");
     }
 
     public void setPayeur(String payeur) {
-        this.payeur = payeur;
+        put("payeur",payeur);
     }
 
     public Produit getProduit() {
-        return produit;
+        return (Produit) getParseObject("produit");
     }
 
     public void setProduit(Produit produit) {
-        this.produit = produit;
+        put("produit",produit);
     }
 
     public int getMontant(){
-        return produit.getPrix();
+        return ((Produit) getParseObject("produit")).getPrix();
     }
 
     public String getDescription(){
-        return participant.getEventOld().getNom() + " - " + participant.getEventOld().getLieu();
+        return getParticipant().getEvent().getNom() + " - " + getParticipant().getEvent().getLieu();
     }
 
     public String getTitre(){
-        return produit.getNom();
+        return ((Produit) getParseObject("produit")).getNom();
     }
 
     public boolean isDepot(){
@@ -86,6 +75,7 @@ public class Achat extends StackMobModel implements Transaction, Parcelable {
     }
 
 
+
     // Implémentation de Parcelable
     @Override
     public int describeContents() {
@@ -94,20 +84,19 @@ public class Achat extends StackMobModel implements Transaction, Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getID());
-        dest.writeSerializable(date);
-        dest.writeParcelable(participant, flags);
-        dest.writeString(payeur);
-        dest.writeParcelable(produit, flags);
+        dest.writeString(getObjectId());
+        dest.writeSerializable(getDate());
+        dest.writeParcelable(getParticipant(), flags);
+        dest.writeString(getPayeur());
+        dest.writeParcelable(getProduit(), flags);
     }
 
     public Achat(Parcel in) {
-        super(Achat.class);
-        setID(in.readString());
-        date = (Date) in.readSerializable();
-        participant = in.readParcelable(Participant.class.getClassLoader());
-        payeur = in.readString();
-        produit = in.readParcelable(Produit.class.getClassLoader());
+        setObjectId(in.readString());
+        setDate((Date) in.readSerializable());
+        setParticipant((Participant) in.readParcelable(Participant.class.getClassLoader()));
+        setPayeur(in.readString());
+        setProduit((Produit) in.readParcelable(Produit.class.getClassLoader()));
     }
 
     public static final Parcelable.Creator<Achat> CREATOR = new Parcelable.Creator<Achat>() {

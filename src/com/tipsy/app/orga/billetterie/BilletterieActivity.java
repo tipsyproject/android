@@ -1,6 +1,7 @@
 package com.tipsy.app.orga.billetterie;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -9,64 +10,67 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
-
+import com.parse.FindCallback;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
+import com.tipsy.lib.billetterie.Billet;
+import com.tipsy.lib.billetterie.Billetterie;
+
+import java.util.List;
 
 /**
  * Created by valoo on 27/12/13.
  */
 public class BilletterieActivity extends FragmentActivity implements BilletterieListener {
 
-    private Event_old eventOld;
-    private int index;
+    private Billetterie billetterie;
+    private Event event;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Billetterie");
 
-
-        TipsyApp app = (TipsyApp) getApplication();
-        index = getIntent().getIntExtra("EVENT_INDEX",-1);
-        eventOld = null;//app.getOrga().getEventOlds().get(index);
-
-        if(savedInstanceState == null){
-            final ProgressDialog wait = ProgressDialog.show(this,"","Mode Billetterie...",true,false);
-            eventOld.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
-                @Override
-                public void success() {
-                    runOnUiThread(new Runnable() {
+        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                backToEventOrga();
+            }
+        });
+        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+        query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
+            @Override
+            public void done(Event ev, ParseException e) {
+                if (ev != null) {
+                    event = ev;
+                    ParseQuery<Billet> query = ParseQuery.getQuery(Billet.class);
+                    query.whereEqualTo("event",event.getObjectId());
+                    query.findInBackground(new FindCallback<Billet>() {
                         @Override
-                        public void run() {
+                        public void done(List<Billet> billets, ParseException e) {
+                            billetterie.clear();
+                            billetterie.addAll(billets);
                             wait.dismiss();
-                        }
-                    });
-                    showListeBillets(false);
-                }
-
-                @Override
-                public void failure(StackMobException e) {
-                    Log.d("TOUTAFAIT", "Erreur billetterie:" + e.getMessage());
-                    BilletterieActivity.this.runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            wait.dismiss();
-                            Toast.makeText(BilletterieActivity.this, "Erreur Billetterie", Toast.LENGTH_SHORT).show();
+                            if(savedInstanceState == null)
+                                showListeBillets(false);
                         }
                     });
                 }
-            });
-        }
+                else{
+                    wait.dismiss();
+                    Log.d("TOUTAFAIT", "Erreur fetch event/ EventOrgaActivity:Oncreate: " + e.getMessage());
+                }
+            }
+        });
     }
 
 
@@ -83,7 +87,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
     public void backToEventOrga(){
         Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_INDEX", index);
+        intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 
@@ -104,7 +108,10 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         ft.commit();
     }
 
-    public Event_old getEventOld(){
-        return eventOld;
+    public Billetterie getBilletterie(){
+        return billetterie;
+    }
+    public Event getEvent(){
+        return event;
     }
 }

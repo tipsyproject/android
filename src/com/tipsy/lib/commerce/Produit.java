@@ -1,16 +1,19 @@
 package com.tipsy.lib.commerce;
 
+
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.stackmob.sdk.model.StackMobModel;
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
 
 /**
  * Created by valoo on 04/01/14.
  */
 
 
-public class Produit extends StackMobModel  implements Parcelable {
+@ParseClassName("produit")
+public class Produit extends ParseObject implements Parcelable {
 
     protected int devise = Commerce.Devise.EURO;
     protected String nom = "Mon Tarif";
@@ -21,51 +24,49 @@ public class Produit extends StackMobModel  implements Parcelable {
     public static int TICKET = 1;
     public static int CONSO = 2;
 
-    public Produit() {
-        super(Produit.class);
-    }
+    public Produit() {}
 
 
     public int getDevise() {
-        return devise;
+        return getInt("devise");
     }
 
     public void setDevise(int devise) {
-        this.devise = devise;
+        put("devise",devise);
     }
 
-
     public String getNom() {
-        return nom;
+        return getString("nom");
     }
 
     public void setNom(String nom) {
-        this.nom = nom;
+        put("nom",nom);
     }
 
 
     public int getPrix() {
-        return prix;
+        return getInt("prix");
     }
 
     public void setPrix(int prix) {
         if (prix < 0) throw new ArithmeticException("Le prix d'un produit ne peut être négatif.");
-        else this.prix = prix;
+        else put("prix",prix);
     }
 
-    public int getTypeProduit() {
-        return typeProduit;
+    public int getType() {
+        return getInt("type");
     }
 
-    public void setTypeProduit(int typeproduit) {
-        this.typeProduit = typeproduit;
+    public void setType(int type) {
+        put("type",type);
     }
 
 
     @Override
     public boolean equals(Object o) {
-        return (this.getID() == ((Produit) o).getID());
+        return (this.getObjectId() == ((Produit) o).getObjectId());
     }
+
 
 
     // Implémentation de Parcelable
@@ -76,20 +77,19 @@ public class Produit extends StackMobModel  implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getID());
-        dest.writeInt(devise);
-        dest.writeString(nom);
-        dest.writeInt(prix);
-        dest.writeInt(typeProduit);
+        dest.writeString(getObjectId());
+        dest.writeInt(getDevise());
+        dest.writeString(getNom());
+        dest.writeInt(getPrix());
+        dest.writeInt(getType());
     }
 
     public Produit(Parcel in) {
-        super(Produit.class);
-        setID(in.readString());
-        devise = in.readInt();
-        nom = in.readString();
-        prix = in.readInt();
-        typeProduit = in.readInt();
+        setObjectId(in.readString());
+        setDevise(in.readInt());
+        setNom(in.readString());
+        setPrix(in.readInt());
+        setType(in.readInt());
     }
 
     public static final Parcelable.Creator<Produit> CREATOR = new Parcelable.Creator<Produit>() {

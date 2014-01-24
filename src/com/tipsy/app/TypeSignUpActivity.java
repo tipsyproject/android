@@ -238,7 +238,6 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         TipsyUser user = new TipsyUser();
         user.setUsername(inputEmail.getText().toString());
         user.setPassword(inputPassword.getText().toString());
-        user.setEmail(inputEmail.getText().toString());
         user.setNom(inputNom.getText().toString());
         int type;
         if (pager.getCurrentItem() == 1){

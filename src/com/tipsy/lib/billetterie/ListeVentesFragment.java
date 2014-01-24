@@ -14,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.Event_old;
 import com.tipsy.lib.commerce.Achat;
 
@@ -58,7 +59,7 @@ public abstract class ListeVentesFragment extends Fragment {
 
                 return true;
             case R.id.action_update:
-                Billetterie.refreshVentes(getEvent(), getActivity(), getEntrees(), adapter, nbVentes);
+                getBilletterie().refreshVentes(getActivity(), getEntrees(), adapter, nbVentes);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -66,7 +67,7 @@ public abstract class ListeVentesFragment extends Fragment {
     }
 
 
-    public abstract Event_old getEvent();
+    public abstract Billetterie getBilletterie();
     public abstract ArrayList<Achat> getEntrees();
 
 }
