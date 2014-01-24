@@ -1,6 +1,7 @@
 package com.tipsy.app;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -24,6 +25,8 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.tipsy.app.membre.MembreActivity;
+import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.lib.TipsyUser;
 
 import java.util.List;
@@ -252,10 +255,14 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                         @Override
                         public void done(ParseUser user, ParseException e) {
                             if (user != null) {
-                                // Connexion réussie
+                                TipsyUser u = (TipsyUser) user;
+                                if(u.getType() == TipsyUser.MEMBRE)
+                                    startActivity(new Intent(TypeSignUpActivity.this, MembreActivity.class));
+                                else
+                                    startActivity(new Intent(TypeSignUpActivity.this, OrgaActivity.class));
                             } else {
                                 Toast.makeText(TypeSignUpActivity.this,
-                                        getResources().getString(R.string.internal_error),
+                                        getResources().getString(R.string.erreur_connexion),
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -269,7 +276,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                         default:
                             Log.d("TOUTAFAIT","signup error: "+e.getMessage());
                             Log.d("TOUTAFAIT", "signup error code: " + e.getCode());
-                            message = getResources().getString(R.string.internal_error);
+                            message = getResources().getString(R.string.erreur_interne);
                     }
                     Toast.makeText(TypeSignUpActivity.this, message, Toast.LENGTH_SHORT).show();
                 }

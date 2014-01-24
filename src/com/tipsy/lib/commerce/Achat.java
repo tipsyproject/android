@@ -70,7 +70,7 @@ public class Achat extends StackMobModel implements Transaction, Parcelable {
     }
 
     public String getDescription(){
-        return participant.getEvent().getNom() + " - " + participant.getEvent().getLieu();
+        return participant.getEventOld().getNom() + " - " + participant.getEventOld().getLieu();
     }
 
     public String getTitre(){

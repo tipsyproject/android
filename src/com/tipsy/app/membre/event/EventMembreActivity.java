@@ -15,7 +15,7 @@ import com.stackmob.sdk.exception.StackMobException;
 import com.tipsy.app.R;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.commerce.Commande;
 import com.tipsy.lib.commerce.Panier;
 
@@ -24,15 +24,15 @@ import com.tipsy.lib.commerce.Panier;
  */
 public class EventMembreActivity extends FragmentActivity implements EventMembreListener {
 
-    private Event event;
+    private Event_old eventOld;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
         if(savedInstanceState == null){
-            event = getIntent().getParcelableExtra("Event");
-            event.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
+            eventOld = getIntent().getParcelableExtra("Event");
+            eventOld.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
                 @Override
                 public void success() {
                     goToEventBillets();
@@ -43,17 +43,17 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
                 }
             });
         }
-        else event = savedInstanceState.getParcelable("Event");
+        else eventOld = savedInstanceState.getParcelable("Event");
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(event.getNom());
+        getActionBar().setTitle(eventOld.getNom());
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if(outState==null)
             outState = new Bundle();
-        outState.putParcelable("Event", event);
+        outState.putParcelable("Event", eventOld);
         // Add variable to outState here
         super.onSaveInstanceState(outState);
     }
@@ -70,8 +70,8 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         return super.onOptionsItemSelected(item);
     }
 
-    public Event getEvent(){
-        return event;
+    public Event_old getEventOld(){
+        return eventOld;
     }
 
     public void backToHome(){

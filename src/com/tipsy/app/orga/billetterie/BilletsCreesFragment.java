@@ -32,7 +32,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.billetterie.Billet;
 import com.tipsy.lib.commerce.Commerce;
 
@@ -42,7 +42,7 @@ import com.tipsy.lib.commerce.Commerce;
 public class BilletsCreesFragment extends Fragment {
 
     private BilletsArrayAdapter adapter;
-    private Event event;
+    private Event_old eventOld;
     private ListView listView;
     private BilletterieListener callback;
 
@@ -61,16 +61,16 @@ public class BilletsCreesFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_billetterie_liste_billets, container, false);
-        /* On récupère l'event courant */
-        event = callback.getEvent();
+        /* On récupère l'eventOld courant */
+        eventOld = callback.getEventOld();
 
         listView = (ListView) view.findViewById(R.id.list);
-        adapter = new BilletsArrayAdapter(getActivity(), event.getBilletterie());
+        adapter = new BilletsArrayAdapter(getActivity(), eventOld.getBilletterie());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                editBillet(event.getBilletterie().get(position), false);
+                editBillet(eventOld.getBilletterie().get(position), false);
             }
         });
         return view;
@@ -104,7 +104,7 @@ public class BilletsCreesFragment extends Fragment {
         Bundle args = new Bundle();
         args.putBoolean("newBillet", newBillet);
         args.putParcelable("Billet", b);
-        args.putParcelable("Event", event);
+        args.putParcelable("Event", eventOld);
         args.putSerializable("Adapter", adapter);
         dialog.setArguments(args);
         dialog.show(getActivity().getSupportFragmentManager(), "EditBilletDialogFragment");
@@ -142,7 +142,7 @@ public class BilletsCreesFragment extends Fragment {
 
         private Billet billet;
         private boolean newBillet;
-        private Event event;
+        private Event_old eventOld;
         private BilletsArrayAdapter adapter;
 
         @Required(order = 1)
@@ -159,7 +159,7 @@ public class BilletsCreesFragment extends Fragment {
 
             newBillet = getArguments().getBoolean("newBillet");
             billet = getArguments().getParcelable("Billet");
-            event = getArguments().getParcelable("Event");
+            eventOld = getArguments().getParcelable("Event");
             adapter = (BilletsArrayAdapter) getArguments().getSerializable("Adapter");
             // Use the Builder class for convenient dialog construction
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -207,10 +207,10 @@ public class BilletsCreesFragment extends Fragment {
             billet.setPrix(Commerce.parsePrix(inputPrix));
             // Dans le cas d'un nouveau billet
             if (newBillet)
-                event.getBilletterie().add(billet);
+                eventOld.getBilletterie().add(billet);
 
             adapter.notifyDataSetChanged();
-            event.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
+            eventOld.save(StackMobOptions.depthOf(2), new StackMobModelCallback() {
                 @Override
                 public void success() {
                 }

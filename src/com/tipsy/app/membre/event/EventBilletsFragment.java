@@ -68,7 +68,7 @@ public class EventBilletsFragment extends Fragment {
 
         if(savedInstanceState == null){
             billets = new ArrayList<Item>();
-            for(Billet billet: callback.getEvent().getBilletterie())
+            for(Billet billet: callback.getEventOld().getBilletterie())
                 billets.add(new Item(billet,0));
         }
 

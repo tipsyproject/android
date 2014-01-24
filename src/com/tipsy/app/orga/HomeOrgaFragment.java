@@ -11,13 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
-
-import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Event;
 import com.tipsy.lib.EventArrayAdapter;
 
 /**
@@ -27,7 +22,6 @@ public class HomeOrgaFragment extends Fragment {
     private OrgaListener callback;
     private ListView listView;
     private EventArrayAdapter adapter;
-    private ArrayList<Event> events;
 
     @Override
     public void onAttach(Activity activity) {
@@ -44,18 +38,12 @@ public class HomeOrgaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        //events = app.getOrga().getEventsByDate();
-
         View view = inflater.inflate(R.layout.frag_orga_home, container, false);
-        if (events.isEmpty()) {
-            TextView test = (TextView) view.findViewById(R.id.no_result);
-            test.setText("Aucun événement");
-        }
 
         listView = (ListView) view.findViewById(R.id.list);
-        adapter = new EventArrayAdapter(getActivity(), events);
+        adapter = new EventArrayAdapter(getActivity(), callback.getEvents());
         listView.setAdapter(adapter);
+        listView.setEmptyView(inflater.inflate(R.layout.empty_liste_event, null));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -72,8 +60,6 @@ public class HomeOrgaFragment extends Fragment {
         callback.setMenuTitle(MenuOrga.ACCUEIL);
 
     }
-
-
 
     // Redéfinition de l'actionBar: Bouton de validation
     @Override
@@ -95,6 +81,5 @@ public class HomeOrgaFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
 
 }

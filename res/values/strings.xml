@@ -39,8 +39,8 @@ j'accepte les conditions générales."</string>
 
     <!-- ERREURS -->
     <string name="app_not_available">Erreur</string>
-    <string name="internal_error">Erreur interne</string>
-    <string name="internal_error">Erreur connexion auto</string>
+    <string name="erreur_interne">Erreur interne</string>
+    <string name="erreur_connexion">Erreur connexion</string>
 
 
 
@@ -65,6 +65,6 @@ j'accepte les conditions générales."</string>
     <string name="payer">PAYER</string>
     <string name="entrer_solde">Veuillez entrer la valeur que vous souhaitez ajouter à votre solde :</string>
     <string name="choisir_formule">Choisissez votre formule !</string>
-    <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string><string name="nom">Nom</string><string name="prenom">Prénom</string><string name="activer_bracelet">Activer bracelet</string><string name="empty_vente_billet">Aucun billet vendu.</string>
+    <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string><string name="nom">Nom</string><string name="prenom">Prénom</string><string name="activer_bracelet">Activer bracelet</string><string name="empty_vente_billet">Aucun billet vendu.</string><string name="empty_liste_event">Aucun événement</string>
 
 </resources>

@@ -17,14 +17,14 @@ import com.stackmob.sdk.exception.StackMobException;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 
 /**
  * Created by valoo on 27/12/13.
  */
 public class BilletterieActivity extends FragmentActivity implements BilletterieListener {
 
-    private Event event;
+    private Event_old eventOld;
     private int index;
 
     @Override
@@ -38,11 +38,11 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
         TipsyApp app = (TipsyApp) getApplication();
         index = getIntent().getIntExtra("EVENT_INDEX",-1);
-        event = null;//app.getOrga().getEvents().get(index);
+        eventOld = null;//app.getOrga().getEventOlds().get(index);
 
         if(savedInstanceState == null){
             final ProgressDialog wait = ProgressDialog.show(this,"","Mode Billetterie...",true,false);
-            event.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
+            eventOld.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
                 @Override
                 public void success() {
                     runOnUiThread(new Runnable() {
@@ -104,7 +104,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         ft.commit();
     }
 
-    public Event getEvent(){
-        return event;
+    public Event_old getEventOld(){
+        return eventOld;
     }
 }

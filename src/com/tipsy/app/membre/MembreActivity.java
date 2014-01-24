@@ -16,10 +16,8 @@ import android.widget.DatePicker;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.api.StackMobQuery;
 import com.stackmob.sdk.api.StackMobQueryField;
-import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
@@ -37,7 +35,7 @@ import com.tipsy.app.UserActivity;
 import com.tipsy.app.membre.bracelet.BraceletActivity;
 import com.tipsy.app.membre.event.EventMembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.Membre;
 import com.tipsy.lib.TipsyUser;
 
@@ -129,7 +127,11 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 goToEvents();
                 break;
             case MenuMembre.AIDE:
-                startActivity(new Intent(this, HelpActivity.class));
+                Intent intent = new Intent(this, HelpActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("Connected", true);
+                intent.putExtras(b);
+                startActivity(intent);
                 break;
             case MenuMembre.DECONNEXION:
                 TipsyUser.logOut();
@@ -178,7 +180,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 .commit();
     }
 
-    public void goToEvent(Event e) {
+    public void goToEvent(Event_old e) {
         Intent intent = new Intent(this, EventMembreActivity.class);
         intent.putExtra("Event",e);
         startActivity(intent);
@@ -197,18 +199,18 @@ public class MembreActivity extends UserActivity implements MembreListener {
         GregorianCalendar calmin = new GregorianCalendar(year, month, day);
         GregorianCalendar calmax = new GregorianCalendar(year, month, day);
         calmax.add(Calendar.DAY_OF_MONTH, +1);
-        Event.query(Event.class,
+        Event_old.query(Event_old.class,
                 new StackMobQuery().field(new StackMobQueryField("debut")
                         .isGreaterThanOrEqualTo(calmin.getTimeInMillis())
                         .isLessThan(calmax.getTimeInMillis())
                 ),
-                new StackMobQueryCallback<Event>() {
+                new StackMobQueryCallback<Event_old>() {
                     @Override
-                    public void success(List<Event> result) {
-                        ArrayList<Event> events = new ArrayList<Event>();
-                        SearchEventFragment frag = SearchEventFragment.init(events);
+                    public void success(List<Event_old> result) {
+                        ArrayList<Event_old> eventOlds = new ArrayList<Event_old>();
+                        SearchEventFragment frag = SearchEventFragment.init(eventOlds);
                         for (int i = 0; i < result.size(); ++i) {
-                            events.add(result.get(i));
+                            eventOlds.add(result.get(i));
                         }
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         fragmentManager.beginTransaction()

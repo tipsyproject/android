@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
-import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
@@ -29,7 +28,7 @@ import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.Organisateur;
 
 /**
@@ -37,7 +36,7 @@ import com.tipsy.lib.Organisateur;
  */
 public class EditEventActivity extends FragmentActivity implements EditEventListener, ActionBar.TabListener, Validator.ValidationListener{
 
-    private Event event;
+    private Event_old eventOld;
     private boolean newEvent = false;
     private int index;
     boolean saving = false;
@@ -75,26 +74,26 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         if(savedInstanceState != null){
             newEvent = savedInstanceState.getBoolean("NEW_EVENT");
             if(newEvent)
-                event = savedInstanceState.getParcelable("Event");
+                eventOld = savedInstanceState.getParcelable("Event");
             else{
                 TipsyApp app = (TipsyApp) getApplication();
                 int index = savedInstanceState.getInt("EVENT_INDEX");
-                //event = app.getOrga().getEvents().get(index);
+                //eventOld = app.getOrga().getEventOlds().get(index);
             }
         }else{
             if(getIntent().hasExtra("NEW_EVENT")){
                 newEvent = true;
-                event = new Event();
+                eventOld = new Event_old();
             }else{
                 TipsyApp app = (TipsyApp) getApplication();
                 index = getIntent().getIntExtra("EVENT_INDEX",-1);
-                //event = app.getOrga().getEvents().get(index);
+                //eventOld = app.getOrga().getEventOlds().get(index);
             }
         }
 
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(event.getNom());
+        getActionBar().setTitle(eventOld.getNom());
 
         mAdapter = new EditEventAdapter(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.event_pager);
@@ -127,7 +126,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
             outState = new Bundle();
         outState.putBoolean("NEW_EVENT", newEvent);
         if(newEvent)
-            outState.putParcelable("Event", event);
+            outState.putParcelable("Event", eventOld);
         else
             outState.putInt("EVENT_INDEX", index);
         // Add variable to outState here
@@ -169,30 +168,30 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
     // Envoi de la demande de sauvegarde de l'événement à l'activité
     public void onValidationSucceeded() {
         saving = true;
-        // Si c'est une création d'event, on initialise l'event
+        // Si c'est une création d'eventOld, on initialise l'eventOld
         final ProgressDialog wait = ProgressDialog.show(this,"","Enregistrement...",true,false);
 
         TipsyApp app = (TipsyApp) getApplication();
         Organisateur orga = null;//app.getOrga();
         if (newEvent) {
-            event = orga.creerEvent("");
-            index = orga.getEvents().size()-1;
+            eventOld = orga.creerEvent("");
+            index = orga.getEventOlds().size()-1;
             orga.save();
         }
         if (inputNom != null) {
-            event.setNom(inputNom.getText().toString());
+            eventOld.setNom(inputNom.getText().toString());
         }
         if (inputLieu != null) {
-            event.setLieu(inputLieu.getText().toString());
+            eventOld.setLieu(inputLieu.getText().toString());
         }
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
         String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
         try {
-            event.setDebut(f.parse(dateDebut));
+            eventOld.setDebut(f.parse(dateDebut));
         } catch (ParseException e) {
         }
 
-        event.save(new StackMobModelCallback() {
+        eventOld.save(new StackMobModelCallback() {
             @Override
             public void success() {
                 saving = false;
@@ -250,8 +249,8 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     // EditEventListener
 
-    public Event getEvent(){
-        return event;
+    public Event_old getEventOld(){
+        return eventOld;
     }
 
     public void backToEventOrga(){
@@ -271,13 +270,13 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
     // inputs partie description
     public void onDescFragCreated(View v) {
         inputNom = (EditText) v.findViewById(R.id.input_nom);
-        inputNom.setText(event.getNom());
+        inputNom.setText(eventOld.getNom());
     }
 
     // inputs partie lieu
     public void onLocFragCreated(View v) {
         inputLieu = (EditText) v.findViewById(R.id.input_lieu);
-        inputLieu.setText(event.getLieu());
+        inputLieu.setText(eventOld.getLieu());
     }
 
     // inputs partie date
@@ -286,8 +285,8 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         inputTimeDebut = (TextView) v.findViewById(R.id.input_time_debut);
 
         // Initialisation des dates de debut et de fin
-        inputDateDebut.setText(EditEventDateFragment.dateFormatter.format(event.getDebut()));
-        inputTimeDebut.setText(EditEventDateFragment.timeFormatter.format(event.getDebut()));
+        inputDateDebut.setText(EditEventDateFragment.dateFormatter.format(eventOld.getDebut()));
+        inputTimeDebut.setText(EditEventDateFragment.timeFormatter.format(eventOld.getDebut()));
     }
 
 }

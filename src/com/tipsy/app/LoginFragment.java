@@ -15,6 +15,12 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Required;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.tipsy.app.membre.MembreActivity;
+import com.tipsy.app.orga.OrgaActivity;
+import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by Alexandre on 08/01/14.
@@ -55,7 +61,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
         signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 app.hideKeyboard(getActivity());
-                //startActivity(new Intent(getActivity(), TypeSignUpActivity.class));
+                startActivity(new Intent(getActivity(), TypeSignUpActivity.class));
             }
         });
         help.setOnClickListener(new View.OnClickListener() {
@@ -77,67 +83,25 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
     }
 
     public void onValidationSucceeded() {
-        /*
-        final User user = new User(inputEmail.getText().toString(), inputPassword.getText().toString());
-        user.fetch(new StackMobModelCallback() {
+        ParseUser.logInInBackground(inputEmail.getText().toString(), inputPassword.getText().toString(), new LogInCallback() {
             @Override
-            public void success() {
-                if (user.isTemp_pwd()) {
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            username = inputEmail.getText().toString();
-                            pwd = inputPassword.getText().toString();
-                            LoginActivity.getPager().setCurrentItem(2, true);
-                        }
-                    });
+            public void done(ParseUser user, ParseException e) {
+                if (user != null) {
+                    TipsyUser u = (TipsyUser) user;
+                    if (u.getType() == TipsyUser.MEMBRE)
+                        startActivity(new Intent(getActivity(), MembreActivity.class));
+                    else
+                        startActivity(new Intent(getActivity(), OrgaActivity.class));
                 } else {
-                    user.login(new StackMobModelCallback() {
-                        @Override
-                        public void success() {
-                            // Sauvegarde locale des identifiants pour connexion auto
-                            User.rememberMe(getActivity(), inputEmail.getText().toString(), inputPassword.getText().toString());
-                            // Redirection en fonction du type utilisateur
-                            User.keepCalmAndWaitForGoingHome(getActivity(), user);
-                        }
 
-                        @Override
-                        public void failure(StackMobException e) {
-                            Log.d("TOUTAFAIT", "login " + e.getMessage());
-                            getActivity().runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(getActivity(), "Identifiants incorrects", Toast.LENGTH_LONG).show();
-                                }
-                            });
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void failure(StackMobException e) {
-                if(app.isOnline()){
-                    Log.d("TOUTAFAIT", "forget1" + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getActivity(), "Email non existant", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                }
-                else {
-                    Log.d("TOUTAFAIT", "not online " + e.getMessage());
-                    getActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(getActivity(), "Aucune connexion Internet !", Toast.LENGTH_LONG).show();
-                        }
-                    });
+                    Log.d("TOUTAFAIT","signup error: "+e.getMessage());
+                    Log.d("TOUTAFAIT", "signup error code: " + e.getCode());
+                    Toast.makeText(getActivity(),
+                            getResources().getString(R.string.erreur_connexion),
+                            Toast.LENGTH_SHORT).show();
                 }
             }
         });
-        */
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {

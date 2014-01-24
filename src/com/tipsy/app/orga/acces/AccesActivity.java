@@ -8,14 +8,12 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.stackmob.sdk.api.StackMobOptions;
 import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
 import com.stackmob.sdk.exception.StackMobException;
 
@@ -27,7 +25,7 @@ import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Bracelet;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.billetterie.Billetterie;
 import com.tipsy.lib.billetterie.EntreeArrayAdapter;
 import com.tipsy.lib.commerce.Achat;
@@ -37,7 +35,7 @@ import com.tipsy.lib.commerce.Achat;
  */
 public class AccesActivity extends FragmentActivity implements AccesListener {
 
-    private Event event;
+    private Event_old eventOld;
     private int index;
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     NfcAdapter adapter;
@@ -55,7 +53,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
 
         TipsyApp app = (TipsyApp) getApplication();
         index = getIntent().getIntExtra("EVENT_INDEX",-1);
-        event = null;//app.getOrga().getEvents().get(index);
+        eventOld = null;//app.getOrga().getEventOlds().get(index);
         if(savedInstanceState != null && savedInstanceState.containsKey("Entrees")){
             entrees =  savedInstanceState.getParcelableArrayList("Entrees");
         }else{
@@ -193,11 +191,11 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
     }
 
     public void refresh(EntreeArrayAdapter adapter){
-        Billetterie.refreshVentes(event, this, entrees, adapter, null);
+        Billetterie.refreshVentes(eventOld, this, entrees, adapter, null);
     }
 
-    public Event getEvent(){
-        return event;
+    public Event_old getEventOld(){
+        return eventOld;
     }
 
     public ArrayList<Achat> getEntrees(){

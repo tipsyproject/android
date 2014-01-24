@@ -13,7 +13,7 @@ import java.util.Comparator;
  */
 public class Organisateur extends StackMobModel implements User.TipsyUserold {
 
-    private ArrayList<Event> events;
+    private ArrayList<Event_old> eventOlds;
     private String nom;
     private String telephone;
     private User user;
@@ -21,13 +21,13 @@ public class Organisateur extends StackMobModel implements User.TipsyUserold {
 
     public Organisateur() {
         super(Organisateur.class);
-        this.events = new ArrayList<Event>();
+        this.eventOlds = new ArrayList<Event_old>();
     }
 
     public Organisateur(String username, String password, String nom) {
         super(Organisateur.class);
         user = new User(username, password, TypeUser.ORGANISATEUR);
-        this.events = new ArrayList<Event>();
+        this.eventOlds = new ArrayList<Event_old>();
         this.nom = nom;
     }
 
@@ -43,14 +43,14 @@ public class Organisateur extends StackMobModel implements User.TipsyUserold {
         this.avatar = avatar;
     }
 
-    public ArrayList<Event> getEvents() {
-        return events;
+    public ArrayList<Event_old> getEventOlds() {
+        return eventOlds;
     }
 
-    public Event creerEvent(String nom) {
-        Event e = new Event(nom);
+    public Event_old creerEvent(String nom) {
+        Event_old e = new Event_old(nom);
         e.setOrganisateur(getUser().getEmail());
-        events.add(e);
+        eventOlds.add(e);
         return e;
     }
 
@@ -78,12 +78,12 @@ public class Organisateur extends StackMobModel implements User.TipsyUserold {
         this.nom = nom;
     }
 
-    public ArrayList<Event> getEventsByDate() {
-        Collections.sort(events, new Comparator<Event>(){
-            public int compare(Event a, Event b) {
+    public ArrayList<Event_old> getEventsByDate() {
+        Collections.sort(eventOlds, new Comparator<Event_old>(){
+            public int compare(Event_old a, Event_old b) {
                 return -a.getDebut().compareTo(b.getDebut());
             }
         });
-        return events;
+        return eventOlds;
     }
 }

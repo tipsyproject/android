@@ -52,14 +52,13 @@ public class MainActivity extends Activity {
         if (!app.skipHelp(this)) startActivity(new Intent(this, HelpActivity.class));
         else{
             TipsyUser user = (TipsyUser) TipsyUser.getCurrentUser();
-            if(user.getType() == TipsyUser.MEMBRE)
+            if(user == null)
+                startActivity(new Intent(this, LoginActivity.class));
+            else if(user.getType() == TipsyUser.MEMBRE)
                 //startActivity(new Intent(this, MembreActivity.class));
                 Toast.makeText(this,"connexion auto membre", Toast.LENGTH_SHORT).show();
-            else if(user.getType() == TipsyUser.ORGA)
-                //startActivity(new Intent(this, OrgaActivity.class));
-                Toast.makeText(this,"connexion auto orga", Toast.LENGTH_SHORT).show();
-            else
-                startActivity(new Intent(this, LoginActivity.class));
+            else // Orga
+                startActivity(new Intent(this, OrgaActivity.class));
         }
 
     }

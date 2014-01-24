@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.billetterie.Billetterie;
 import com.tipsy.lib.billetterie.ListeVentesFragment;
 import com.tipsy.lib.commerce.Achat;
@@ -36,8 +36,8 @@ public class BilletsVendusFragment extends ListeVentesFragment {
     }
 
     @Override
-    public Event getEvent(){
-        return callback.getEvent();
+    public Event_old getEvent(){
+        return callback.getEventOld();
     }
     @Override
     public ArrayList<Achat> getEntrees(){

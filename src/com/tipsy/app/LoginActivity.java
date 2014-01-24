@@ -18,7 +18,6 @@ import java.util.Vector;
 public class LoginActivity extends FragmentActivity {
 
     protected TipsyApp app;
-    protected SharedPreferences prefs;
     protected PagerAdapter mPagerAdapter;
     static ViewPager pager;
 
@@ -27,8 +26,6 @@ public class LoginActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
         setContentView(R.layout.act_login);
-
-        prefs = PreferenceManager.getDefaultSharedPreferences(this);
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();

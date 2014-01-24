@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.commerce.Achat;
 
 /**
@@ -66,7 +66,7 @@ public abstract class ListeVentesFragment extends Fragment {
     }
 
 
-    public abstract Event getEvent();
+    public abstract Event_old getEvent();
     public abstract ArrayList<Achat> getEntrees();
 
 }

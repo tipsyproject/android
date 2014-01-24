@@ -14,7 +14,7 @@ import com.stackmob.sdk.exception.StackMobException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.commerce.Achat;
 
 /**
@@ -22,12 +22,12 @@ import com.tipsy.lib.commerce.Achat;
  */
 public class Billetterie {// extends ArrayList<Billet> {
 
-    public static void refreshVentes(Event event, final Activity act, final ArrayList<Achat> output, final EntreeArrayAdapter adapter, final TextView viewVentes){
+    public static void refreshVentes(Event_old eventOld, final Activity act, final ArrayList<Achat> output, final EntreeArrayAdapter adapter, final TextView viewVentes){
         // Seulement si des billets sont définis
-        if(!event.getBilletterie().isEmpty()){
+        if(!eventOld.getBilletterie().isEmpty()){
             final ProgressDialog wait = ProgressDialog.show(act,"","Chargement...",true,false);
             ArrayList<String> idBillets = new ArrayList<String>();
-            for(Billet billet : event.getBilletterie())
+            for(Billet billet : eventOld.getBilletterie())
                 idBillets.add(billet.getID());
 
             StackMobQuery query = new StackMobQuery().fieldIsIn("produit",idBillets);

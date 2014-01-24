@@ -85,12 +85,12 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
         Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (TipsyUser.getCurrentUser()!=null)
+                if (getIntent().getBooleanExtra("Connected", false))
                     finish();
                 else {
                     TipsyApp app = (TipsyApp) getApplication();
                     app.setSkipHelp(HelpActivity.this, true);
-                    //startActivity(new Intent(HelpActivity.this, LoginActivity.class));
+                    startActivity(new Intent(HelpActivity.this, LoginActivity.class));
                 }
             }
         });

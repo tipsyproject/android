@@ -10,7 +10,7 @@ import com.stackmob.sdk.model.StackMobModel;
  */
 public class Participant extends StackMobModel implements Parcelable {
     private String email;
-    private Event event;
+    private Event_old eventOld;
     private Membre membre = null;
     private String nom;
     private String prenom;
@@ -19,9 +19,9 @@ public class Participant extends StackMobModel implements Parcelable {
         super(Participant.class);
     }
 
-    public Participant(Event e){
+    public Participant(Event_old e){
         super(Participant.class);
-        event = e;
+        eventOld = e;
     }
 
     public String getEmail() {
@@ -32,12 +32,12 @@ public class Participant extends StackMobModel implements Parcelable {
         this.email = email;
     }
 
-    public Event getEvent() {
-        return event;
+    public Event_old getEventOld() {
+        return eventOld;
     }
 
-    public void setEvent(Event event) {
-        this.event = event;
+    public void setEventOld(Event_old eventOld) {
+        this.eventOld = eventOld;
     }
 
     public Membre getMembre() {
@@ -86,7 +86,7 @@ public class Participant extends StackMobModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getID());
         dest.writeString(email);
-        dest.writeParcelable(event, flags);
+        dest.writeParcelable(eventOld, flags);
         dest.writeParcelable(membre,flags);
         dest.writeString(nom);
         dest.writeString(prenom);
@@ -96,7 +96,7 @@ public class Participant extends StackMobModel implements Parcelable {
         super(Participant.class);
         setID(in.readString());
         email = in.readString();
-        event = in.readParcelable(Event.class.getClassLoader());
+        eventOld = in.readParcelable(Event_old.class.getClassLoader());
         membre = in.readParcelable(Membre.class.getClassLoader());
         nom = in.readString();
         prenom = in.readString();

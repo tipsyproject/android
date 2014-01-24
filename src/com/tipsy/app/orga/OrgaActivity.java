@@ -1,27 +1,35 @@
 package com.tipsy.app.orga;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.tipsy.app.HelpActivity;
 import com.tipsy.app.LoginActivity;
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.UserActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
 import com.tipsy.app.orga.event.EventOrgaActivity;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.TipsyUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Valoo on 05/12/13.
  */
 public class OrgaActivity extends UserActivity implements OrgaListener {
 
-    private TipsyApp app;
+    private ArrayList<Event> events = new ArrayList<Event>();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         setContentView(R.layout.act_user);
         super.onCreate(savedInstanceState);
 
@@ -29,11 +37,28 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
         menu.getDrawerList().setItemChecked(MenuOrga.ACCUEIL, true);
 
-        app = (TipsyApp) getApplication();
 
-        if (savedInstanceState == null) {
-            tableauDeBord(false);
-        }
+        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true);
+
+        ParseQuery<Event> eventsQuery = ParseQuery.getQuery("Event");
+        eventsQuery.whereEqualTo("organisateur", TipsyUser.getCurrentUser());
+        eventsQuery.findInBackground(new FindCallback<Event>() {
+            public void done(List<Event> res, ParseException e) {
+                if (e == null) {
+                    events.clear();
+                    events.addAll(res);
+                    wait.dismiss();
+
+                    if (savedInstanceState == null) {
+                        tableauDeBord(false);
+                    }
+
+                } else {
+                    Log.d("evens", "Error: " + e.getMessage());
+                }
+            }
+        });
+
 
     }
 
@@ -54,7 +79,11 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
                 stats();
                 break;
             case MenuOrga.AIDE:
-                startActivity(new Intent(this, HelpActivity.class));
+                Intent intent = new Intent(this, HelpActivity.class);
+                Bundle b = new Bundle();
+                b.putBoolean("Connected", true);
+                intent.putExtras(b);
+                startActivity(intent);
                 break;
             case MenuOrga.DECONNEXION:
                 TipsyUser.logOut();
@@ -67,6 +96,10 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
 
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
+
+    public ArrayList<Event> getEvents(){
+        return events;
+    }
 
     public void goToEvent(int index) {
         Intent intent = new Intent(this, EventOrgaActivity.class);

@@ -59,7 +59,7 @@ public class EditEventDateFragment extends Fragment {
         inputDateDebut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(callback.getEvent().getDebut());
+                cal.setTime(callback.getEventOld().getDebut());
                 int year = cal.get(Calendar.YEAR);
                 int month = cal.get(Calendar.MONTH);
                 int day = cal.get(Calendar.DAY_OF_MONTH);
@@ -85,7 +85,7 @@ public class EditEventDateFragment extends Fragment {
         inputTimeDebut.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Calendar cal = Calendar.getInstance();
-                cal.setTime(callback.getEvent().getDebut());
+                cal.setTime(callback.getEventOld().getDebut());
                 int hour = cal.get(Calendar.HOUR_OF_DAY);
                 int min = cal.get(Calendar.MINUTE);
                 new TimePickerDialog(getActivity(), tpDebut, hour, min, true).show();
@@ -101,7 +101,7 @@ public class EditEventDateFragment extends Fragment {
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
         String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
         try {
-            callback.getEvent().setDebut(f.parse(dateDebut));
+            callback.getEventOld().setDebut(f.parse(dateDebut));
         } catch (ParseException e) {
         }
     }

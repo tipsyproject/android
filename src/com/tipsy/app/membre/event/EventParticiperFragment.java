@@ -28,7 +28,6 @@ import java.io.Serializable;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Membre;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.commerce.Achat;
 import com.tipsy.lib.commerce.Commande;
@@ -93,7 +92,7 @@ public class EventParticiperFragment extends Fragment {
             for(Item item : panier){
                 for(int i=0; i<item.getQuantite(); ++i){
                     Achat a = new Achat(item.getProduit());
-                    a.setParticipant(new Participant(callback.getEvent()));
+                    a.setParticipant(new Participant(callback.getEventOld()));
                     achats.add(a);
                 }
             }

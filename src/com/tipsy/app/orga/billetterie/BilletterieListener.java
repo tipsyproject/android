@@ -1,6 +1,6 @@
 package com.tipsy.app.orga.billetterie;
 
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 
 /**
  * Created by valoo on 27/12/13.
@@ -13,7 +13,7 @@ public interface BilletterieListener {
 
     public void backToEventOrga();
 
-    public Event getEvent();
+    public Event_old getEventOld();
 
 
 }

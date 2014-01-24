@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.commerce.Achat;
 
 /**
@@ -22,7 +22,7 @@ import com.tipsy.lib.commerce.Achat;
  */
 public class HomeAccesFragment extends Fragment {
 
-    private Event event;
+    private Event_old eventOld;
     private ArrayList<Achat> entrees;
     private AccesListener callback;
 
@@ -41,7 +41,7 @@ public class HomeAccesFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_access_home, container, false);
-        /* On récupère l'event courant */
+        /* On récupère l'eventOld courant */
 
 
         LinearLayout buttonSearch = (LinearLayout) view.findViewById(R.id.button_search);

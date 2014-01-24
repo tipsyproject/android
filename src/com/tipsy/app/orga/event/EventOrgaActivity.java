@@ -17,14 +17,14 @@ import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.acces.AccesActivity;
 import com.tipsy.app.orga.billetterie.BilletterieActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 
 /**
  * Created by valoo on 22/01/14.
  */
 public class EventOrgaActivity extends FragmentActivity implements EventOrgaListener {
 
-    private Event event;
+    private Event_old eventOld;
     private int index;
 
     @Override
@@ -34,11 +34,11 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
 
         TipsyApp app = (TipsyApp) getApplication();
         index = getIntent().getIntExtra("EVENT_INDEX",-1);
-        //event = app.getOrga().getEvents().get(index);
+        //eventOld = app.getOrga().getEventOlds().get(index);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(event.getNom());
+        getActionBar().setTitle(eventOld.getNom());
 
-        event.fetch(StackMobOptions.depthOf(1),new StackMobCallback() {
+        eventOld.fetch(StackMobOptions.depthOf(1),new StackMobCallback() {
             @Override
             public void success(String s) {
                 if(savedInstanceState == null)
@@ -47,7 +47,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
 
             @Override
             public void failure(StackMobException e) {
-                Log.d("TOUTAFAIT","Erreur fetch event / EventOrgaActivity:Oncreate: "+e.getMessage());
+                Log.d("TOUTAFAIT","Erreur fetch eventOld / EventOrgaActivity:Oncreate: "+e.getMessage());
             }
         });
 
@@ -65,8 +65,8 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         return super.onOptionsItemSelected(item);
     }
 
-    public Event getEvent(){
-        return event;
+    public Event_old getEventOld(){
+        return eventOld;
     }
 
     public void home(boolean addTobackStack){

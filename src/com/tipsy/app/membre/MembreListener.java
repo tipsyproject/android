@@ -1,7 +1,7 @@
 package com.tipsy.app.membre;
 
 import com.tipsy.app.MenuListener;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.Membre;
 
 /**
@@ -22,6 +22,6 @@ public interface MembreListener extends MenuListener {
 
     public void searchEventByKeyword(String query);
 
-    public void goToEvent(Event e);
+    public void goToEvent(Event_old e);
 
 }

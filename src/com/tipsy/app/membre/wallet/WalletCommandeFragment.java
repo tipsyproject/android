@@ -16,13 +16,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.callback.StackMobCallback;
-import com.stackmob.sdk.exception.StackMobException;
-
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.Event_old;
 import com.tipsy.lib.commerce.Commande;
 import com.tipsy.lib.commerce.Commerce;
 import com.tipsy.lib.commerce.ItemArrayAdapter;
@@ -36,7 +32,7 @@ import com.tipsy.lib.commerce.WalletCallback;
 public class WalletCommandeFragment extends Fragment {
 
     private Commande commande;
-    private Event event;
+    private Event_old eventOld;
     private Wallet wallet;
     private WalletListener callback;
 
