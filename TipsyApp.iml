@@ -37,7 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/support-v4-19.0.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/android-saripaar-1.0.2.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -46,7 +46,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/libs/android-saripaar-1.0.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/libs/support-v4-19.0.1.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
