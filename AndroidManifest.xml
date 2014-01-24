@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="tipsy.app"
+    package="com.tipsy.app"
     android:versionCode="1"
     android:versionName="1.0">
 
@@ -21,7 +21,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:name=".TipsyApp"
+        android:name="com.tipsy.app.TipsyApp"
         android:theme="@style/AppTheme">
 
         <activity
@@ -36,23 +36,23 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HelpActivity"
+            android:name="com.tipsy.app.HelpActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".TypeSignUpActivity"
+            android:name="com.tipsy.app.TypeSignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait">
             </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name="com.tipsy.app.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name=".membre.MembreActivity"
+            android:name="com.tipsy.app.membre.MembreActivity"
             android:label="">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -63,7 +63,7 @@
         </activity>
 
         <activity
-            android:name=".membre.wallet.WalletActivity"
+            android:name="com.tipsy.app.membre.wallet.WalletActivity"
             android:label="">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -72,41 +72,41 @@
         </activity>
 
         <activity
-            android:name=".membre.bracelet.BraceletActivity"
+            android:name="com.tipsy.app.membre.bracelet.BraceletActivity"
             android:label="">
         </activity>
 
         <activity
-            android:name=".membre.event.EventMembreActivity"
+            android:name="com.tipsy.app.membre.event.EventMembreActivity"
             android:label="">
         </activity>
 
         <activity
-            android:name=".orga.OrgaActivity"
-            android:label="">
-
-        </activity>
-
-        <activity
-            android:name=".orga.event.EventOrgaActivity"
+            android:name="com.tipsy.app.orga.OrgaActivity"
             android:label="">
 
         </activity>
 
         <activity
-            android:name=".orga.event.edit.EditEventActivity"
+            android:name="com.tipsy.app.orga.event.EventOrgaActivity"
             android:label="">
 
         </activity>
 
         <activity
-            android:name=".orga.billetterie.BilletterieActivity"
+            android:name="com.tipsy.app.orga.event.edit.EditEventActivity"
             android:label="">
 
         </activity>
 
         <activity
-            android:name=".orga.acces.AccesActivity"
+            android:name="com.tipsy.app.orga.billetterie.BilletterieActivity"
+            android:label="">
+
+        </activity>
+
+        <activity
+            android:name="com.tipsy.app.orga.acces.AccesActivity"
             android:label="">
 
         </activity>

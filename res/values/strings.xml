@@ -5,13 +5,11 @@
     <string name="creer_event">Créer un événement</string>
     <string name="drawer_open">Ouvrir le menu déroulant</string>
     <string name="drawer_close">Fermer le menu déroulant</string>
-    <string name="app_not_available">Erreur</string>
     <string name="action_settings">Options</string>
     <string name="search">"Rech. d\'événements"</string>
     <string name="next">"Passer"</string>
     <string name="connection">"Connexion"</string>
     <string name="disconnection">"Déconnexion"</string>
-    <string name="email">"Email"</string>
     <string name="inscription">"Inscription"</string>
     <string name="conditions">"En m'inscrivant,
 j'accepte les conditions générales."</string>
@@ -26,10 +24,24 @@ j'accepte les conditions générales."</string>
     <string name="affichermdp">"Afficher le mot de passe"</string>
     <string name="forgotpass">"Mot de passe oublié ?"</string>
     <string name="loading">"Chargement"</string>
-    <string name="failed_connexion">Email ou Mot de Passe Incorrect</string>
     <string name="ok">OK</string>
     <string name="help">En savoir plus</string>
     <string name="stats">Statistiques</string>
+
+
+    <!-- EMAIL -->
+    <string name="email">"Email"</string>
+    <string name="failed_connexion">Email ou Mot de Passe Incorrect</string>
+    <string name="email_arleady_taken">"Email déjà utilisé"</string>
+    <string name="forget">Merci d\'entrer votre adresse email, nous vous enverrons un nouveau mot de passe.</string>
+
+
+
+    <!-- ERREURS -->
+    <string name="app_not_available">Erreur</string>
+    <string name="internal_error">Erreur interne</string>
+    <string name="internal_error">Erreur connexion auto</string>
+
 
 
     <string name="no_upcoming_event">Aucun événement à venir.</string>
@@ -50,7 +62,6 @@ j'accepte les conditions générales."</string>
     <string name="acheter">ACHETER</string>
     <string name="solde">Solde</string>
     <string name="dernieres_transactions">Dernières transactions</string>
-    <string name="forget">Merci d\'entrer votre adresse email, nous vous enverrons un nouveau mot de passe.</string>
     <string name="payer">PAYER</string>
     <string name="entrer_solde">Veuillez entrer la valeur que vous souhaitez ajouter à votre solde :</string>
     <string name="choisir_formule">Choisissez votre formule !</string>
