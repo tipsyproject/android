@@ -101,7 +101,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                         default:
                             message = getResources().getString(R.string.erreur_connexion);
                     }
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), message, Toast.LENGTH_LONG).show();
                 }
             }
         });
