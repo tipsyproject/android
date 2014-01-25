@@ -1,4 +1,4 @@
-package com.tipsy.lib.billetterie;
+package com.tipsy.app.orga.billetterie;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.commerce.Achat;
+import com.tipsy.lib.Achat;
 
 /**
  * Created by valoo on 20/01/14.

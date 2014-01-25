@@ -12,11 +12,10 @@ import com.tipsy.lib.Bracelet;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.Prefs;
+import com.tipsy.lib.Ticket;
 import com.tipsy.lib.TipsyUser;
-import com.tipsy.lib.billetterie.Billet;
-import com.tipsy.lib.commerce.Achat;
-import com.tipsy.lib.commerce.Depot;
-import com.tipsy.lib.commerce.Produit;
+import com.tipsy.lib.Achat;
+import com.tipsy.lib.Depot;
 
 /**
  * Created by valoo on 18/12/13.
@@ -28,12 +27,11 @@ public class TipsyApp extends Application {
     @Override
     public void onCreate() {
         ParseUser.registerSubclass(Achat.class);
-        ParseUser.registerSubclass(Billet.class);
         ParseUser.registerSubclass(Bracelet.class);
         ParseUser.registerSubclass(Depot.class);
         ParseUser.registerSubclass(Event.class);
         ParseUser.registerSubclass(Participant.class);
-        ParseUser.registerSubclass(Produit.class);
+        ParseUser.registerSubclass(Ticket.class);
         ParseUser.registerSubclass(TipsyUser.class);
         Parse.initialize(this, "pcMVnVGR9jVH5yjuGbtfZYsdUfrQadWMiaHvjkYH", "GDauifCqWNi5F3ocuvgn9wYqvn63OeXNHJDw1f7S");
         ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));

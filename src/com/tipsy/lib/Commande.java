@@ -1,4 +1,4 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -29,9 +29,9 @@ public class Commande extends ArrayList<Achat> implements Parcelable {
         return get(0).getDevise();
     }
 
-    public void setPayeur(String username){
+    public void setPayeur(TipsyUser user){
         for(Achat a: this)
-            a.setPayeur(username);
+            a.setPayeur(user);
     }
 
 

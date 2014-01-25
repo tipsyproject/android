@@ -26,9 +26,6 @@ import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.SaveCallback;
-import com.stackmob.sdk.api.StackMobFile;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -121,7 +118,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.removeItem(R.id.search);
         menu.removeItem(R.id.search_date);
-        inflater.inflate(R.menu.menu_edit_event, menu);
+        inflater.inflate(R.menu.menu_edit, menu);
     }
 
     // Gestion du click sur le bouton de validation

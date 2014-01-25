@@ -9,8 +9,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.commerce.Commerce;
-import com.tipsy.lib.commerce.Transaction;
+import com.tipsy.lib.Commerce;
+import com.tipsy.lib.Transaction;
 
 /**
  * Created by Alexandre on 23/12/13.

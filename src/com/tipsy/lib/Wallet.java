@@ -1,9 +1,8 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 import android.app.ProgressDialog;
 import android.content.Context;
 
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by valoo on 05/01/14.
@@ -100,7 +98,7 @@ public class Wallet extends ArrayList<Transaction> {
         if (getSolde() < cmd.getPrixTotal())
             callback.onFailure(new Exception("Fonds insuffisants."));
         else {
-            cmd.setPayeur(user.getEmail());
+            cmd.setPayeur(user);
 
             ArrayList<ParseObject> achats = new ArrayList<ParseObject>();
             for(Achat a: cmd)

@@ -18,7 +18,6 @@ import android.widget.Toast;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -31,7 +30,6 @@ import com.tipsy.lib.Event;
 import com.tipsy.lib.TipsyUser;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by valoo on 22/01/14.
@@ -146,7 +144,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu items for use in the action bar
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_edit_event, menu);
+        inflater.inflate(R.menu.menu_edit, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

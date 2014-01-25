@@ -1,9 +1,9 @@
 package com.tipsy.app.membre.wallet;
 
-import com.tipsy.lib.commerce.Commande;
-import com.tipsy.lib.commerce.Panier;
-import com.tipsy.lib.commerce.Transaction;
-import com.tipsy.lib.commerce.Wallet;
+import com.tipsy.lib.Commande;
+import com.tipsy.lib.Panier;
+import com.tipsy.lib.Transaction;
+import com.tipsy.lib.Wallet;
 
 /**
  * Created by valoo on 04/01/14.

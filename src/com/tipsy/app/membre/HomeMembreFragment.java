@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.commerce.Commerce;
 
 /**
  * Created by Alexandre on 23/12/13.

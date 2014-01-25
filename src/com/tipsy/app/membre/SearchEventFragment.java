@@ -3,6 +3,7 @@ package com.tipsy.app.membre;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,10 +20,8 @@ import com.tipsy.lib.EventArrayAdapter;
 /**
  * Created by Valentin on 30/12/13.
  */
-public class SearchEventFragment extends Fragment {
+public class SearchEventFragment extends ListFragment {
 
-    private EventArrayAdapter adapter;
-    private ListView listView;
     private MembreListener callback;
 
     @Override
@@ -32,21 +31,21 @@ public class SearchEventFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_orga_home, container, false);
-        listView = (ListView) view.findViewById(R.id.list);
-        adapter = new EventArrayAdapter(getActivity(), callback.getSearchResults());
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callback.goToEvent(callback.getSearchResults().get(position));
-            }
-        });
-        return view;
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        EventArrayAdapter adapter = new EventArrayAdapter(getActivity(), callback.getSearchResults());
+        setListAdapter(adapter);
+        setEmptyText(getString(R.string.empty_liste_event));
     }
 
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
+    }
 
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        callback.goToEvent(callback.getSearchResults().get(position));
+    }
 
     @Override
     public void onStart() {

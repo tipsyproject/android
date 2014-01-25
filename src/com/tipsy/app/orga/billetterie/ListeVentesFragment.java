@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.acces;
+package com.tipsy.app.orga.billetterie;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,28 +10,36 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
 import com.tipsy.app.R;
-import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
+import com.tipsy.lib.Achat;
+import com.tipsy.lib.Ticket;
 
+import java.util.List;
 
 /**
- * Created by vquefele on 20/01/14.
+ * Created by valoo on 27/12/13.
  */
-public class ManualAccesFragment extends ListFragment {
 
-    private AccesListener callback;
+public class ListeVentesFragment extends ListFragment {
+
+    protected BilletterieListener callback;
+    EntreeArrayAdapter adapter;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (AccesListener) activity;
+        callback = (BilletterieListener) activity;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        setListAdapter(callback.getEntreesAdapter());
+        adapter = new EntreeArrayAdapter(getActivity(), callback.getVentes());
+        setListAdapter(adapter);
         setEmptyText(getString(R.string.empty_liste_ventes));
     }
 
@@ -54,10 +62,20 @@ public class ManualAccesFragment extends ListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case android.R.id.home:
+                callback.backToHome();
+                return true;
             case R.id.action_search:
                 return true;
             case R.id.action_update:
-                callback.loadVentes();
+                Ticket.loadVentes(callback.getBilletterie(), new FindCallback<Achat>() {
+                    @Override
+                    public void done(List<Achat> achats, ParseException e) {
+                        callback.getVentes().clear();
+                        callback.getVentes().addAll(achats);
+                        adapter.notifyDataSetChanged();
+                    }
+                });
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

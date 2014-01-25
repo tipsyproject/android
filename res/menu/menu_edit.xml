@@ -4,7 +4,6 @@
 
     <item
         android:id="@+id/action_validate"
-        android:orderInCategory="1"
         android:showAsAction="always"
         android:icon="@drawable/ic_action_accept"
         android:title="Enregistrer" />
