@@ -35,9 +35,6 @@ import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.lib.TipsyUser;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
@@ -64,11 +61,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     protected TipsyApp app;
 
     protected ViewPager pager;
-    private String TAG = "TypeSignUpActivity";
-    private boolean isResumed = false;
     private ProgressDialog mConnectionProgressDialog;
-    //private UiLifecycleHelper uiHelper;
-    //private Session.StatusCallback statusCallback = new SessionStatusCallback();
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,8 +90,6 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                 return true;
             }
         });
-        //uiHelper = new UiLifecycleHelper(this, statusCallback);
-        //uiHelper.onCreate(savedInstanceState);
         mConnectionProgressDialog = new ProgressDialog(TypeSignUpActivity.this);
         mConnectionProgressDialog.setMessage("Connexion en cours...");
 
@@ -135,7 +126,6 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     }
 
     public void onClickFb(View view){
-        //Toast.makeText(TypeSignUpActivity.this, "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
         mConnectionProgressDialog.show();
         List<String> permissions = Arrays.asList("basic_info", "email", "user_about_me",
                 "user_relationships", "user_birthday", "user_location");
