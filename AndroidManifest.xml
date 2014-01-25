@@ -113,7 +113,8 @@
 
         <activity
             android:name="com.facebook.LoginActivity"
-            android:label="" >
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:label="@string/app_name" >
         </activity>
 
         <meta-data

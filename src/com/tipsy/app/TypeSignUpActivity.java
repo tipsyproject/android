@@ -137,15 +137,15 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     public void onClickFb(View view){
         //Toast.makeText(TypeSignUpActivity.this, "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
         mConnectionProgressDialog.show();
-        List<String> permissions = Arrays.asList("basic_info", "user_about_me",
+        List<String> permissions = Arrays.asList("basic_info", "email", "user_about_me",
                 "user_relationships", "user_birthday", "user_location");
         ParseFacebookUtils.logIn(permissions, this, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException err) {
-                mConnectionProgressDialog.dismiss();
                 if (user == null) {
                     Log.d(app.TAG,
                             "Uh oh. The user cancelled the Facebook login.");
+                    Toast.makeText(TypeSignUpActivity.this, "Erreur.", Toast.LENGTH_LONG).show();
                 } else if (user.isNew()) {
                     Log.d(app.TAG,
                             "User signed up and logged in through Facebook!");
@@ -155,6 +155,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                             "User logged in through Facebook!");
                     request();
                 }
+                mConnectionProgressDialog.dismiss();
             }
         });
     }
@@ -223,7 +224,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                             } else {
                                 Toast.makeText(TypeSignUpActivity.this,
                                         getResources().getString(R.string.erreur_connexion),
-                                        Toast.LENGTH_SHORT).show();
+                                        Toast.LENGTH_LONG).show();
                             }
                         }
                     });
@@ -238,7 +239,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                             Log.d("TOUTAFAIT", "signup error code: " + e.getCode());
                             message = getResources().getString(R.string.erreur_interne);
                     }
-                    Toast.makeText(TypeSignUpActivity.this, message, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TypeSignUpActivity.this, message, Toast.LENGTH_LONG).show();
                 }
             }
         });
