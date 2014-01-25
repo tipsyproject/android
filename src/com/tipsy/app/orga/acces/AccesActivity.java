@@ -30,6 +30,7 @@ import com.tipsy.lib.billetterie.Billet;
 import com.tipsy.lib.billetterie.Billetterie;
 import com.tipsy.lib.billetterie.EntreeArrayAdapter;
 import com.tipsy.lib.commerce.Achat;
+import com.tipsy.lib.commerce.Produit;
 
 /**
  * Created by vquefele on 20/01/14.
@@ -37,7 +38,7 @@ import com.tipsy.lib.commerce.Achat;
 public class AccesActivity extends FragmentActivity implements AccesListener {
 
     private Event event;
-    private Billetterie billetterie;
+    private Billetterie billetterie = new Billetterie();
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     NfcAdapter adapter;
     PendingIntent pendingIntent;
@@ -66,9 +67,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
             public void done(Event ev, ParseException e) {
                 if (ev != null) {
                     event = ev;
-                    ParseQuery<Billet> query = ParseQuery.getQuery(Billet.class);
-                    query.whereEqualTo("event",event.getObjectId());
-                    query.findInBackground(new FindCallback<Billet>() {
+                    event.findBilletterie(new FindCallback<Billet>() {
                         @Override
                         public void done(List<Billet> billets, ParseException e) {
                             billetterie.clear();

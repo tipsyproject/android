@@ -6,7 +6,7 @@ import com.tipsy.lib.commerce.Produit;
 /**
  * Created by valoo on 27/12/13.
  */
-@ParseClassName("produit")
+@ParseClassName("Produit")
 public class Billet extends Produit {
 
     public Billet() {}

@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.commerce.Commande;
 import com.tipsy.lib.commerce.Commerce;
 import com.tipsy.lib.commerce.ItemArrayAdapter;
@@ -32,8 +32,6 @@ import com.tipsy.lib.commerce.WalletCallback;
 public class WalletCommandeFragment extends Fragment {
 
     private Commande commande;
-    private Event_old eventOld;
-    private Wallet wallet;
     private WalletListener callback;
 
 
@@ -64,10 +62,6 @@ public class WalletCommandeFragment extends Fragment {
         Panier panier = getArguments().getParcelable("Panier");
         View view = inflater.inflate(R.layout.frag_commande, container, false);
 
-        /* On récupère le contenu de la commande */
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        //wallet = app.getWallet();
-
         TextView viewPrixTotal = (TextView) view.findViewById(R.id.prix_total);
         viewPrixTotal.setText(Commerce.prixToString(commande.getPrixTotal(), commande.getDevise()));
 
@@ -81,7 +75,7 @@ public class WalletCommandeFragment extends Fragment {
             public void onClick(View v) {
                 final ProgressDialog wait = Wallet.getProgressDialog(getActivity());
 
-                wallet.pay(commande, new WalletCallback() {
+                callback.getWallet().pay(commande, new WalletCallback() {
                     @Override
                     public void onWait() {
                         wait.show();

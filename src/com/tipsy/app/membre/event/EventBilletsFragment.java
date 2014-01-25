@@ -3,10 +3,12 @@ package com.tipsy.app.membre.event;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +20,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.tipsy.app.R;
 import com.tipsy.lib.billetterie.Billet;
 import com.tipsy.lib.commerce.Item;
 import com.tipsy.lib.commerce.ItemArrayAdapter;
 import com.tipsy.lib.commerce.Panier;
+import com.tipsy.lib.commerce.Produit;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -31,7 +38,7 @@ import com.tipsy.lib.commerce.Panier;
 public class EventBilletsFragment extends Fragment {
 
     private Panier panier = new Panier();
-    private ArrayList<Item> billets;
+    private ArrayList<Item> billetItems = new ArrayList<Item>();
     private ItemArrayAdapter adapter;
     private ListView listView;
     private TextView totalView;
@@ -49,14 +56,14 @@ public class EventBilletsFragment extends Fragment {
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         if(bundle != null && bundle.containsKey("Billets")){
-            billets = bundle.getParcelableArrayList("Billets");
+            billetItems = bundle.getParcelableArrayList("Billets");
         }
     }
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if(outState==null)
             outState = new Bundle();
-        outState.putParcelableArrayList("Billets", billets);
+        outState.putParcelableArrayList("Billets", billetItems);
         super.onSaveInstanceState(outState);
     }
 
@@ -66,28 +73,42 @@ public class EventBilletsFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.list);
         totalView = (TextView) view.findViewById(R.id.prix_total);
 
-        if(savedInstanceState == null){
-            billets = new ArrayList<Item>();
-            for(Billet billet: callback.getEventOld().getBilletterie())
-                billets.add(new Item(billet,0));
-        }
-
-
-
-        adapter = new ItemArrayAdapter(getActivity(), billets, totalView);
-
+        adapter = new ItemArrayAdapter(getActivity(), billetItems, totalView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setNombreBillets(billets.get(position));
+                setNombreBillets(billetItems.get(position));
             }
         });
+
+        if(savedInstanceState == null){
+            final ProgressDialog wait = ProgressDialog.show(getActivity(), null, "Chargement...", true, true);
+            wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    callback.backToHome();
+                }
+            });
+            callback.getEvent().findBilletterie(new FindCallback<Billet>() {
+                @Override
+                public void done(List<Billet> billets, ParseException e) {
+                    if (e == null) {
+                        billetItems.clear();
+                        for (Produit billet : billets)
+                            billetItems.add(new Item(billet, 0));
+                        adapter.notifyDataSetChanged();
+                        wait.dismiss();
+                    }else
+                        Toast.makeText(getActivity(), getString(R.string.erreur_interne), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                for(Item billet : billets){
+                for(Item billet : billetItems){
                     if(billet.getQuantite() > 0)
                         panier.add(billet);
                 }
@@ -100,6 +121,7 @@ public class EventBilletsFragment extends Fragment {
         });
         return view;
     }
+
 
     // NumberPicker pour définir le nombre de billets choisis
     public void setNombreBillets(Item item) {

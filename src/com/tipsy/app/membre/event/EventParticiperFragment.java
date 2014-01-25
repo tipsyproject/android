@@ -29,6 +29,7 @@ import java.io.Serializable;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.lib.Participant;
+import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.commerce.Achat;
 import com.tipsy.lib.commerce.Commande;
 import com.tipsy.lib.commerce.Commerce;
@@ -87,12 +88,10 @@ public class EventParticiperFragment extends Fragment {
 
         if(savedInstanceState == null){
             achats = new Commande();
-            TipsyApp app = (TipsyApp) getActivity().getApplication();
-            //Membre proprietaire = app.getMembre();
             for(Item item : panier){
                 for(int i=0; i<item.getQuantite(); ++i){
                     Achat a = new Achat(item.getProduit());
-                    a.setParticipant(new Participant(callback.getEventOld()));
+                    a.setParticipant(new Participant(callback.getEvent()));
                     achats.add(a);
                 }
             }
@@ -114,9 +113,8 @@ public class EventParticiperFragment extends Fragment {
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Si l'utilisateur s'était déjà attribué un billet
                 if(userParticipation>=0)
-                    achats.get(userParticipation).getParticipant().setMembre(null);
-                TipsyApp app = (TipsyApp) getActivity().getApplication();
-                //achats.get(i).getParticipant().setMembre(app.getMembre());
+                    achats.get(userParticipation).getParticipant().setUser(null);
+                achats.get(i).getParticipant().setUser(TipsyUser.getCurrentUser());
                 adapter.notifyDataSetChanged();
                 userParticipation = i;
                 return true;
@@ -155,6 +153,9 @@ public class EventParticiperFragment extends Fragment {
                 Toast.makeText(getActivity(),"Tous les billets sont nominatifs !",Toast.LENGTH_SHORT).show();
                 return;
             }
+
+            // On définit les billets comme non utilisés
+            a.setUsed(false);
         }
         callback.goToCommande(panier,new Commande(achats));
     }

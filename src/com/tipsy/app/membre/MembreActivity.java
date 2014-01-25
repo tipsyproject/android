@@ -1,10 +1,12 @@
 package com.tipsy.app.membre;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -16,11 +18,9 @@ import android.widget.DatePicker;
 import android.widget.SearchView;
 import android.widget.TextView;
 
-import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.api.StackMobQueryField;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
-import com.stackmob.sdk.exception.StackMobException;
-
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -35,8 +35,7 @@ import com.tipsy.app.UserActivity;
 import com.tipsy.app.membre.bracelet.BraceletActivity;
 import com.tipsy.app.membre.event.EventMembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
-import com.tipsy.lib.Event_old;
-import com.tipsy.lib.Membre;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.TipsyUser;
 
 /**
@@ -44,9 +43,9 @@ import com.tipsy.lib.TipsyUser;
  */
 public class MembreActivity extends UserActivity implements MembreListener {
 
-    private TipsyApp app;
     private SearchView SearchView;
     private DatePickerDialog.OnDateSetListener datePickerListener;
+    private ArrayList<Event> eventResults = new ArrayList<Event>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +54,6 @@ public class MembreActivity extends UserActivity implements MembreListener {
         this.menu = new MenuMembre(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
         menu.getDrawerList().setItemChecked(MenuMembre.ACCUEIL, true);
-        app = (TipsyApp) getApplication();
 
         datePickerListener = new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -180,17 +178,15 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 .commit();
     }
 
-    public void goToEvent(Event_old e) {
+    public void goToEvent(Event e) {
         Intent intent = new Intent(this, EventMembreActivity.class);
-        intent.putExtra("Event",e);
+        intent.putExtra("EVENT_ID",e.getObjectId());
         startActivity(intent);
     }
 
-    public Membre getMembre() {
-        return null;//app.getMembre();
-    }
-
     public void searchEventByDate(Calendar cal) {
+        final ProgressDialog wait = ProgressDialog.show(this,null,"Recherche...",true);
+
         // On va definir l'intervalle de recherche de date
         //  00h00  <= date < 00h00 à J+1
         int year = cal.get(Calendar.YEAR);
@@ -199,34 +195,41 @@ public class MembreActivity extends UserActivity implements MembreListener {
         GregorianCalendar calmin = new GregorianCalendar(year, month, day);
         GregorianCalendar calmax = new GregorianCalendar(year, month, day);
         calmax.add(Calendar.DAY_OF_MONTH, +1);
-        Event_old.query(Event_old.class,
-                new StackMobQuery().field(new StackMobQueryField("debut")
-                        .isGreaterThanOrEqualTo(calmin.getTimeInMillis())
-                        .isLessThan(calmax.getTimeInMillis())
-                ),
-                new StackMobQueryCallback<Event_old>() {
-                    @Override
-                    public void success(List<Event_old> result) {
-                        ArrayList<Event_old> eventOlds = new ArrayList<Event_old>();
-                        SearchEventFragment frag = SearchEventFragment.init(eventOlds);
-                        for (int i = 0; i < result.size(); ++i) {
-                            eventOlds.add(result.get(i));
-                        }
-                        FragmentManager fragmentManager = getSupportFragmentManager();
-                        fragmentManager.beginTransaction()
-                                .addToBackStack(null)
-                                .replace(R.id.content, frag)
-                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-                                .commit();
-                    }
 
-                    @Override
-                    public void failure(StackMobException e) {
-                        Log.d("TOUTAFAIT", "Requete event KO:" + e.getMessage());
-                    }
-                });
+        ParseQuery<Event> eventsQuery = ParseQuery.getQuery(Event.class);
+        eventsQuery.whereGreaterThanOrEqualTo("debut",calmin.getTime());
+        eventsQuery.whereLessThan("debut",calmax.getTime());
+
+        eventsQuery.findInBackground(new FindCallback<Event>() {
+            public void done(List<Event> res, ParseException e) {
+                if (e == null) {
+                    eventResults.clear();
+                    eventResults.addAll(res);
+                    wait.dismiss();
+                    goToSearchResults();
+                } else {
+                    Log.d("TOUTAFAIT","result ko:"+e.getMessage());
+                    wait.dismiss();
+                }
+            }
+        });
     }
 
     public void searchEventByKeyword(String query) {
+    }
+
+
+
+    public void goToSearchResults() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.content, new SearchEventFragment())
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .commit();
+    }
+
+    public ArrayList<Event> getSearchResults(){
+        return eventResults;
     }
 }

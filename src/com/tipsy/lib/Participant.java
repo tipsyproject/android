@@ -10,10 +10,14 @@ import com.parse.ParseObject;
 /**
  * Created by vquefele on 20/01/14.
  */
-@ParseClassName("participant")
+@ParseClassName("Participant")
 public class Participant extends ParseObject implements Parcelable{
 
     public Participant(){}
+
+    public Participant(Event e){
+        setEvent(e);
+    }
 
     public String getEmail() {
         return getUser() == null ? getString("email") : getUser().getEmail();
@@ -36,9 +40,9 @@ public class Participant extends ParseObject implements Parcelable{
     }
 
     public void setUser(TipsyUser user) {
-        put("nom",null);
-        put("prenom",null);
-        put("email",null);
+        put("nom","");
+        put("prenom","");
+        put("email","");
         put("user",user);
     }
 

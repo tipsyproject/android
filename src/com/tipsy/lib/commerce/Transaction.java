@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * Created by valoo on 05/01/14.
  */
-public interface Transaction {
+public interface Transaction extends Parcelable{
     public Date getDate();
     public String getDescription();
     public int getDevise();

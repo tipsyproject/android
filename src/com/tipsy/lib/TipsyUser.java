@@ -44,6 +44,10 @@ public class TipsyUser extends ParseUser implements Parcelable{
         put("type",type);
     }
 
+    public static TipsyUser getCurrentUser(){
+        return (TipsyUser) ParseUser.getCurrentUser();
+    }
+
     // Implémentation de Parcelable
     @Override
     public int describeContents() {

@@ -51,12 +51,11 @@ public class MainActivity extends Activity {
         // Sinon, on essaye de reconnecter automatiquement l'utilisateur
         if (!app.skipHelp(this)) startActivity(new Intent(this, HelpActivity.class));
         else{
-            TipsyUser user = (TipsyUser) TipsyUser.getCurrentUser();
+            TipsyUser user = TipsyUser.getCurrentUser();
             if(user == null)
                 startActivity(new Intent(this, LoginActivity.class));
             else if(user.getType() == TipsyUser.MEMBRE)
-                //startActivity(new Intent(this, MembreActivity.class));
-                Toast.makeText(this,"connexion auto membre", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, MembreActivity.class));
             else // Orga
                 startActivity(new Intent(this, OrgaActivity.class));
         }

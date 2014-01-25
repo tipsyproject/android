@@ -14,6 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 import com.stackmob.sdk.api.StackMobQuery;
 import com.stackmob.sdk.callback.StackMobModelCallback;
 import com.stackmob.sdk.callback.StackMobQueryCallback;
@@ -25,6 +29,7 @@ import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.lib.Bracelet;
+import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by valoo on 22/01/14.
@@ -75,53 +80,40 @@ public class BraceletActivity extends Activity {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String tagID = Bracelet.bytesToHex(tag.getId());
 
-        Bracelet.query(Bracelet.class, new StackMobQuery().fieldIsEqualTo("tagid",tagID),
-                new StackMobQueryCallback<Bracelet>() {
-                    @Override
-                    public void success(List<Bracelet> bracelets) {
-                        Bracelet bracelet = bracelets.get(0);
+        ParseQuery<Bracelet> query = ParseQuery.getQuery(Bracelet.class);
+        query.include("user");
+        query.include("participant");
+        final ProgressDialog wait = ProgressDialog.show(this,"","Association bracelet",true,false);
+        query.getInBackground(tagID,new GetCallback<Bracelet>() {
+            @Override
+            public void done(Bracelet bracelet, ParseException e) {
+                /* BRACELET REPERTORIE */
+                if(bracelet != null){
 
-                        if(bracelet.isFree()){
-                            Log.d("TOUTAFAIT","bracelet dispo");
-                            TipsyApp app = (TipsyApp) getApplication();
-                            //bracelet.setMembre(app.getMembre());
-                            bracelet.save(new StackMobModelCallback() {
-                                @Override
-                                public void success() {
-                                    Log.d("TOUTAFAIT","save bracelet");
-                                    runOnUiThread(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            Toast.makeText(BraceletActivity.this, "Bracelet enregistré !", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
-                                }
+                    if(bracelet.isFree()){
+                        bracelet.setUser(TipsyUser.getCurrentUser());
+                        bracelet.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                wait.dismiss();
+                                if(e == null)
+                                    Toast.makeText(BraceletActivity.this, "Bracelet enregistré !", Toast.LENGTH_SHORT).show();
+                                else
+                                    Toast.makeText(BraceletActivity.this, "Erreur enregistrement bracelet", Toast.LENGTH_SHORT).show();
+                            }
+                        });
 
-                                @Override
-                                public void failure(StackMobException e) {
-                                    Log.d("TOUTAFAIT","erreur save bracelet:"+e.getMessage());
-                                }
-                            });
-                        }else{
-                            Log.d("TOUTAFAIT","bracelet utilisé");
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    Toast.makeText(BraceletActivity.this, "Bracelet déjà utilisé !", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-
+                    }else{
+                        wait.dismiss();
+                        Toast.makeText(BraceletActivity.this, "Bracelet déjà utilisé !", Toast.LENGTH_SHORT).show();
                     }
-
-                    @Override
-                    public void failure(StackMobException e) {
-                        Log.d("TOUTAFAIT","erreur query bracelet:"+e.getMessage());
-
-                    }
-                });
-
-
+                }else{ /* BRACELET INCONNU */
+                    wait.dismiss();
+                    Log.d("TOUTAFAIT", "bracelet inconnu");
+                    Toast.makeText(BraceletActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     @Override

@@ -66,7 +66,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                              Bundle savedInstanceState) {
 
         View fragmentView = inflater.inflate(R.layout.frag_membre_account, container, false);
-        membre = (TipsyUser) TipsyUser.getCurrentUser();
+        membre = TipsyUser.getCurrentUser();
 
         Nom = (EditText) fragmentView.findViewById(R.id.input_nom);
         Prenom = (EditText) fragmentView.findViewById(R.id.input_prenom);

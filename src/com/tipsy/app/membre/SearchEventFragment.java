@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.EventArrayAdapter;
 
 /**
@@ -24,16 +24,6 @@ public class SearchEventFragment extends Fragment {
     private EventArrayAdapter adapter;
     private ListView listView;
     private MembreListener callback;
-    private ArrayList<Event_old> eventOldResults;
-
-
-    public static SearchEventFragment init(ArrayList<Event_old> eventOlds) {
-        SearchEventFragment frag = new SearchEventFragment();
-        Bundle args = new Bundle();
-        args.putParcelableArrayList("Events", eventOlds);
-        frag.setArguments(args);
-        return frag;
-    }
 
     @Override
     public void onAttach(Activity activity) {
@@ -43,19 +33,14 @@ public class SearchEventFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        eventOldResults = getArguments().getParcelableArrayList("Events");
         View view = inflater.inflate(R.layout.frag_orga_home, container, false);
         listView = (ListView) view.findViewById(R.id.list);
-        if (eventOldResults.size() == 0) {
-            TextView test = (TextView) view.findViewById(R.id.no_result);
-            test.setText("Aucun événement");
-        }
-        //adapter = new EventArrayAdapter(getActivity(), eventOldResults);
+        adapter = new EventArrayAdapter(getActivity(), callback.getSearchResults());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callback.goToEvent(eventOldResults.get(position));
+                callback.goToEvent(callback.getSearchResults().get(position));
             }
         });
         return view;

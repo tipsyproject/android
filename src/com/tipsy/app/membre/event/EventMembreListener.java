@@ -1,6 +1,6 @@
 package com.tipsy.app.membre.event;
 
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.commerce.Commande;
 import com.tipsy.lib.commerce.Panier;
 
@@ -9,7 +9,7 @@ import com.tipsy.lib.commerce.Panier;
  */
 public interface EventMembreListener {
 
-    public Event_old getEventOld();
+    public Event getEvent();
 
     public void backToHome();
 

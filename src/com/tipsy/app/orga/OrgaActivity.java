@@ -40,7 +40,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
         final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true);
 
-        ParseQuery<Event> eventsQuery = ParseQuery.getQuery("Event");
+        ParseQuery<Event> eventsQuery = ParseQuery.getQuery(Event.class);
         eventsQuery.whereEqualTo("organisateur", TipsyUser.getCurrentUser().getObjectId());
         eventsQuery.findInBackground(new FindCallback<Event>() {
             public void done(List<Event> res, ParseException e) {

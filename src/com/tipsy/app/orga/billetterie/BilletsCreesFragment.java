@@ -39,6 +39,7 @@ import com.tipsy.app.R;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.billetterie.Billet;
 import com.tipsy.lib.commerce.Commerce;
+import com.tipsy.lib.commerce.Produit;
 
 /**
  * Created by valoo on 27/12/13.
@@ -71,6 +72,7 @@ public class BilletsCreesFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.list);
         adapter = new BilletsArrayAdapter(getActivity(), callback.getBilletterie());
         listView.setAdapter(adapter);
+        listView.setEmptyView( inflater.inflate(R.layout.empty_liste_billets, null));
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -177,8 +179,10 @@ public class BilletsCreesFragment extends Fragment {
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             newBillet = !getArguments().containsKey("INDEX_BILLET");
-            if(newBillet)
+            if(newBillet){
                 billet = new Billet();
+                billet.setType(Produit.BILLET);
+            }
             else
                 billet = callback.getBilletterie().get(getArguments().getInt("INDEX_BILLET"));
 
@@ -223,6 +227,9 @@ public class BilletsCreesFragment extends Fragment {
         }
 
         public void onValidationSucceeded() {
+            if(newBillet)
+                billet.setEvent(callback.getEvent());
+
             // On recupère le contenu des champs
             billet.setNom(inputNom.getText().toString());
             billet.setPrix(Commerce.parsePrix(inputPrix));

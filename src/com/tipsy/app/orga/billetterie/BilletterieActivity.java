@@ -20,6 +20,7 @@ import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.billetterie.Billet;
 import com.tipsy.lib.billetterie.Billetterie;
+import com.tipsy.lib.commerce.Produit;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
  */
 public class BilletterieActivity extends FragmentActivity implements BilletterieListener {
 
-    private Billetterie billetterie;
+    private Billetterie billetterie = new Billetterie();
     private Event event;
 
     @Override
@@ -52,16 +53,17 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
             public void done(Event ev, ParseException e) {
                 if (ev != null) {
                     event = ev;
-                    ParseQuery<Billet> query = ParseQuery.getQuery(Billet.class);
-                    query.whereEqualTo("event",event.getObjectId());
-                    query.findInBackground(new FindCallback<Billet>() {
+                    event.findBilletterie(new FindCallback<Billet>() {
                         @Override
                         public void done(List<Billet> billets, ParseException e) {
-                            billetterie.clear();
-                            billetterie.addAll(billets);
-                            wait.dismiss();
-                            if(savedInstanceState == null)
-                                showListeBillets(false);
+                            if(e==null){
+                                billetterie.clear();
+                                billetterie.addAll(billets);
+                                wait.dismiss();
+                                if(savedInstanceState == null)
+                                    showListeBillets(false);
+                            }else
+                                Toast.makeText(BilletterieActivity.this,getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

@@ -1,16 +1,15 @@
 package com.tipsy.lib;
 
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 /**
  * Created by valoo on 22/01/14.
  */
+@ParseClassName("Bracelet")
 public class Bracelet extends ParseObject {
 
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
-
-    private Participant participant = null;
-    private String tagID;
 
     public Bracelet(){}
 

@@ -45,41 +45,33 @@ public class Wallet extends ArrayList<Transaction> {
     }
 
     /* Récupère la liste des transactions du user (Depots + Achats) */
-    public void init(final WalletInitCallback callback) {
-        clear();
+    public void load() {
+        try{
+            List<Transaction> transactions = new ArrayList<Transaction>();
+            /* LISTE DES DEPOTS DU USER */
+            ParseQuery<Depot> queryD = ParseQuery.getQuery(Depot.class);
+            queryD.whereEqualTo("username",user.getObjectId());
+            List<Depot> depots = queryD.find();
+            transactions.addAll(depots);
 
-        /* LISTE DES DEPOTS DU USER */
-        ParseQuery<Depot> query = ParseQuery.getQuery(Depot.class);
-        query.whereEqualTo("username",user.getObjectId());
-        query.findInBackground(new FindCallback<Depot>() {
-            @Override
-            public void done(List<Depot> depots, ParseException e) {
-                if(e != null){
-                    addAll(depots);
-                    /* LISTE DES ACHATS USER */
-                    ParseQuery<Achat> query = ParseQuery.getQuery(Achat.class);
-                    query.include("produit");
-                    query.whereEqualTo("payeur",user.getObjectId());
-                    query.findInBackground(new FindCallback<Achat>() {
-                        @Override
-                        public void done(List<Achat> achats, ParseException e) {
-                            if(e != null){
-                                addAll(achats);
-                            /* TRI DE LA TRANSACTION LA PLUS RECENTE A LA MOINS RECENTE */
-                                Collections.sort(Wallet.this, new Comparator<Transaction>() {
-                                    public int compare(Transaction t1, Transaction t2) {
-                                        return t1.getDate().before(t2.getDate()) ? 1 : -1;
-                                    }
-                                });
-                                callback.success();
-                            }else
-                                callback.failure(e);
-                        }
-                    });
-                }else
-                    callback.failure(e);
-            }
-        });
+            /* LISTE DES ACHATS USER */
+            ParseQuery<Achat> queryA = ParseQuery.getQuery(Achat.class);
+            queryA.include("produit");
+            queryA.whereEqualTo("payeur",user.getObjectId());
+            List<Achat> achats = queryA.find();
+            transactions.addAll(achats);
+            /* TRI DE LA TRANSACTION LA PLUS RECENTE A LA MOINS RECENTE */
+            Collections.sort(transactions, new Comparator<Transaction>() {
+                public int compare(Transaction t1, Transaction t2) {
+                    return t1.getDate().before(t2.getDate()) ? 1 : -1;
+                }
+            });
+            /* On ne reinitialise qu'une fois qu'on est sûr que tout s'est bien déroulé */
+            clear();
+            addAll(transactions);
+        }catch(ParseException e){
+
+        }
     }
 
     public void credit(int montant, final WalletCallback callback) {

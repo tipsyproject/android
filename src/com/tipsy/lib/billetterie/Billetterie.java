@@ -12,8 +12,8 @@ import java.util.List;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.tipsy.lib.Event;
 import com.tipsy.lib.commerce.Achat;
+import com.tipsy.lib.commerce.Produit;
 
 /**
  * Created by valoo on 27/12/13.
@@ -24,14 +24,10 @@ public class Billetterie extends ArrayList<Billet> {
         // Seulement si des billets sont définis
         if(!isEmpty()){
             final ProgressDialog wait = ProgressDialog.show(act,"","Chargement...",true,false);
-            ArrayList<String> idBillets = new ArrayList<String>();
-            for(Billet billet : this)
-                idBillets.add(billet.getObjectId());
-
             ParseQuery<Achat> query = ParseQuery.getQuery(Achat.class);
             query.include("participant");
             query.include("produit");
-            query.whereEqualTo("produit",idBillets);
+            query.whereEqualTo("produit",this);
             query.findInBackground(new FindCallback<Achat>() {
                 public void done(List<Achat> ventes, ParseException e) {
                     if (e == null) {
@@ -45,6 +41,7 @@ public class Billetterie extends ArrayList<Billet> {
                         Toast.makeText(act, "Liste mise à jour.", Toast.LENGTH_SHORT).show();
                     } else {
                         wait.dismiss();
+                        Log.d("TOUTAFAIT", "Erreur: " + e.getMessage());
                         Toast.makeText(act, "Erreur lors de la mise à jour.", Toast.LENGTH_SHORT).show();
                     }
                 }

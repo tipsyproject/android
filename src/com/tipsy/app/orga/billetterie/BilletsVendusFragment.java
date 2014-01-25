@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Event_old;
 import com.tipsy.lib.billetterie.Billetterie;
 import com.tipsy.lib.billetterie.ListeVentesFragment;
 import com.tipsy.lib.commerce.Achat;

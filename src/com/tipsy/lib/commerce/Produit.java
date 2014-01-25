@@ -6,25 +6,25 @@ import android.os.Parcelable;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.tipsy.lib.Event;
 
 /**
  * Created by valoo on 04/01/14.
  */
 
 
-@ParseClassName("produit")
+@ParseClassName("Produit")
 public class Produit extends ParseObject implements Parcelable {
-
-    protected int devise = Commerce.Devise.EURO;
-    protected String nom = "Mon Tarif";
-    protected int prix = 0;
-    protected int typeProduit;
 
     public static int BILLET = 0;
     public static int TICKET = 1;
     public static int CONSO = 2;
 
     public Produit() {}
+
+    public Produit(int type) {
+        setType(type);
+    }
 
 
     public int getDevise() {
@@ -33,6 +33,14 @@ public class Produit extends ParseObject implements Parcelable {
 
     public void setDevise(int devise) {
         put("devise",devise);
+    }
+
+    public Event getEvent(){
+        return (Event) getParseObject("event");
+    }
+
+    public void setEvent(Event event){
+        put("event",event);
     }
 
     public String getNom() {
@@ -79,6 +87,7 @@ public class Produit extends ParseObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getObjectId());
         dest.writeInt(getDevise());
+        dest.writeParcelable(getEvent(),flags);
         dest.writeString(getNom());
         dest.writeInt(getPrix());
         dest.writeInt(getType());
@@ -87,6 +96,7 @@ public class Produit extends ParseObject implements Parcelable {
     public Produit(Parcel in) {
         setObjectId(in.readString());
         setDevise(in.readInt());
+        setEvent((Event) in.readParcelable(Event.class.getClassLoader()));
         setNom(in.readString());
         setPrix(in.readInt());
         setType(in.readInt());

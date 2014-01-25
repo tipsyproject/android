@@ -13,10 +13,15 @@ import com.tipsy.lib.Participant;
 /**
  * Created by Valentin on 21/01/14.
  */
-@ParseClassName("achat")
-public class Achat extends ParseObject implements Transaction, Parcelable {
+@ParseClassName("Achat")
+public class Achat extends ParseObject implements Transaction {
 
     public Achat(){}
+
+    public Achat(Produit p){
+        setDate(new Date());
+        setProduit(p);
+    }
 
     public Date getDate() {
         return getDate("date");
@@ -54,6 +59,14 @@ public class Achat extends ParseObject implements Transaction, Parcelable {
         put("produit",produit);
     }
 
+    public boolean isUsed() {
+        return getBoolean("used");
+    }
+
+    public void setUsed(boolean used) {
+        put("used",used);
+    }
+
     public int getMontant(){
         return ((Produit) getParseObject("produit")).getPrix();
     }
@@ -89,6 +102,7 @@ public class Achat extends ParseObject implements Transaction, Parcelable {
         dest.writeParcelable(getParticipant(), flags);
         dest.writeString(getPayeur());
         dest.writeParcelable(getProduit(), flags);
+        dest.writeValue(isUsed());
     }
 
     public Achat(Parcel in) {
@@ -97,6 +111,7 @@ public class Achat extends ParseObject implements Transaction, Parcelable {
         setParticipant((Participant) in.readParcelable(Participant.class.getClassLoader()));
         setPayeur(in.readString());
         setProduit((Produit) in.readParcelable(Produit.class.getClassLoader()));
+        setUsed((Boolean) in.readValue(Boolean.class.getClassLoader()));
     }
 
     public static final Parcelable.Creator<Achat> CREATOR = new Parcelable.Creator<Achat>() {

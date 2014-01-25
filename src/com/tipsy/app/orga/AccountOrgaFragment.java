@@ -60,7 +60,7 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View fragmentView = inflater.inflate(R.layout.frag_orga_account, container, false);
-        orga = (TipsyUser) TipsyUser.getCurrentUser();
+        orga = TipsyUser.getCurrentUser();
 
         Orga = (EditText) fragmentView.findViewById(R.id.input_orga);
         Email = (EditText) fragmentView.findViewById(R.id.input_mail);

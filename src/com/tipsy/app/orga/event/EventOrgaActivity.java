@@ -53,6 +53,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
                         home(false);
                     }
                 } else {
+                    wait.dismiss();
                     Log.d("TOUTAFAIT", "Erreur fetch event/ EventOrgaActivity:Oncreate: " + e.getMessage());
                 }
             }

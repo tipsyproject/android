@@ -3,6 +3,7 @@ package com.tipsy.lib.commerce;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.stackmob.sdk.model.StackMobModel;
 
@@ -11,12 +12,8 @@ import java.util.Date;
 /**
  * Created by Valentin on 21/01/14.
  */
+@ParseClassName("Depot")
 public class Depot extends ParseObject implements Transaction {
-
-    private Date date;
-    private int devise;
-    private int montant;
-    private String username;
 
     public Depot(){}
 
@@ -72,7 +69,7 @@ public class Depot extends ParseObject implements Transaction {
     }
 
 
-    /*
+
 
     // Implémentation de Parcelable
     @Override
@@ -82,20 +79,19 @@ public class Depot extends ParseObject implements Transaction {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(getID());
-        dest.writeSerializable(date);
-        dest.writeInt(devise);
-        dest.writeInt(montant);
-        dest.writeString(username);
+        dest.writeString(getObjectId());
+        dest.writeSerializable(getDate());
+        dest.writeInt(getDevise());
+        dest.writeInt(getMontant());
+        dest.writeString(getUsername());
     }
 
     public Depot(Parcel in) {
-        super(Produit.class);
-        setID(in.readString());
-        date = (Date) in.readSerializable();
-        devise = in.readInt();
-        montant = in.readInt();
-        username = in.readString();
+        setObjectId(in.readString());
+        setDate((Date) in.readSerializable());
+        setDevise(in.readInt());
+        setMontant(in.readInt());
+        setUsername(in.readString());
     }
 
     public static final Parcelable.Creator<Depot> CREATOR = new Parcelable.Creator<Depot>() {
@@ -109,5 +105,4 @@ public class Depot extends ParseObject implements Transaction {
             return new Depot[size];
         }
     };
-    */
 }

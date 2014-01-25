@@ -1,26 +1,35 @@
 package com.tipsy.app.membre.wallet;
 
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.membre.MembreActivity;
+import com.tipsy.lib.Event;
+import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.commerce.Commande;
 import com.tipsy.lib.commerce.Panier;
 import com.tipsy.lib.commerce.Transaction;
+import com.tipsy.lib.commerce.Wallet;
 
 /**
  * Created by tech on 05/12/13.
  */
 public class WalletActivity extends FragmentActivity implements WalletListener {
 
-    private TipsyApp app;
+    private Wallet wallet;
     public final static String ACTION = "action";
     public final static int COMMANDE = 0;
 
@@ -30,6 +39,13 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         setContentView(R.layout.act_wallet);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Tipsy Wallet");
+
+        wallet = new Wallet(TipsyUser.getCurrentUser());
+        /* Chargement du Tipsy Wallet */
+        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement du Tipsy Wallet...",true,false);
+        wallet.load();
+        wait.dismiss();
+
         if (savedInstanceState == null) {
             switch (getIntent().getIntExtra(ACTION, -1)) {
                 case COMMANDE:
@@ -53,6 +69,11 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public Wallet getWallet(){
+        return wallet;
+    }
+
 
     /* Résumé du Wallet */
     public void goToResume(boolean addToBackStack) {

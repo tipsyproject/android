@@ -1,21 +1,24 @@
 package com.tipsy.app.membre.event;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.MenuItem;
 
-import com.stackmob.sdk.api.StackMobOptions;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 
 import com.tipsy.app.R;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
-import com.tipsy.lib.Event_old;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.commerce.Commande;
 import com.tipsy.lib.commerce.Panier;
 
@@ -24,38 +27,41 @@ import com.tipsy.lib.commerce.Panier;
  */
 public class EventMembreActivity extends FragmentActivity implements EventMembreListener {
 
-    private Event_old eventOld;
+    private Event event;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
-        if(savedInstanceState == null){
-            eventOld = getIntent().getParcelableExtra("Event");
-            eventOld.fetch(StackMobOptions.depthOf(1), new StackMobModelCallback() {
-                @Override
-                public void success() {
-                    goToEventBillets();
-                }
 
-                @Override
-                public void failure(StackMobException e) {
+        /* Chargement de l'event */
+        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                backToHome();
+            }
+        });
+        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+        query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
+            @Override
+            public void done(Event ev, ParseException e) {
+                if (ev != null) {
+                    event = ev;
+                    getActionBar().setTitle(event.getNom());
+                    wait.dismiss();
+                    getActionBar().setTitle(event.getNom());
+                    if (savedInstanceState == null) {
+                        goToEventBillets();
+                    }
+                } else {
+                    wait.dismiss();
+                    Log.d("TOUTAFAIT", "Erreur: " + e.getMessage());
                 }
-            });
-        }
-        else eventOld = savedInstanceState.getParcelable("Event");
-
+            }
+        });
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle(eventOld.getNom());
-    }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
-            outState = new Bundle();
-        outState.putParcelable("Event", eventOld);
-        // Add variable to outState here
-        super.onSaveInstanceState(outState);
     }
 
 
@@ -70,8 +76,8 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         return super.onOptionsItemSelected(item);
     }
 
-    public Event_old getEventOld(){
-        return eventOld;
+    public Event getEvent(){
+        return event;
     }
 
     public void backToHome(){
@@ -80,11 +86,10 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
     }
 
     public void goToEventBillets() {
-        EventBilletsFragment frag = new EventBilletsFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.content, frag)
+                .replace(R.id.content, new EventBilletsFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
 
@@ -98,7 +103,6 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
                 .replace(R.id.content, frag)
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
-
     }
 
     public void goToCommande(Panier p, Commande c) {

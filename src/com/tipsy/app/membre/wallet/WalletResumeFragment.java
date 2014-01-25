@@ -24,7 +24,6 @@ import com.tipsy.lib.commerce.Wallet;
 public class WalletResumeFragment extends Fragment {
 
     private WalletListener callback;
-    private Wallet wallet;
 
     @Override
     public void onAttach(Activity activity) {
@@ -40,7 +39,7 @@ public class WalletResumeFragment extends Fragment {
 
         /* Affichage du solde du Wallet */
         TextView viewSolde = (TextView) view.findViewById(R.id.solde);
-        viewSolde.setText(Commerce.prixToString(wallet.getSolde(), wallet.getDevise()));
+        viewSolde.setText(Commerce.prixToString(callback.getWallet().getSolde(), callback.getWallet().getDevise()));
 
         /* Clique sur Créditer le Wallet */
         ImageButton buttonCredit = (ImageButton) view.findViewById(R.id.button_credit);
@@ -51,12 +50,12 @@ public class WalletResumeFragment extends Fragment {
         });
 
         ListView listView = (ListView) view.findViewById(R.id.list);
-        TransactionArrayAdapter adapter = new TransactionArrayAdapter(getActivity(), wallet);
+        TransactionArrayAdapter adapter = new TransactionArrayAdapter(getActivity(), callback.getWallet());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callback.goToDetailsTransaction((Transaction) wallet.get(position));
+                callback.goToDetailsTransaction((Transaction) callback.getWallet().get(position));
             }
         });
 
