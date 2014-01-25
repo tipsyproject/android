@@ -15,14 +15,12 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NumberRule;
 import com.mobsandgeeks.saripaar.annotation.Required;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.commerce.Commerce;
-import com.tipsy.lib.commerce.Wallet;
-import com.tipsy.lib.commerce.WalletCallback;
+import com.tipsy.lib.Commerce;
+import com.tipsy.lib.Wallet;
+import com.tipsy.lib.WalletCallback;
 
 /**
  * Created by Alexandre on 23/12/13.

@@ -10,12 +10,10 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.mobsandgeeks.saripaar.Validator;
-
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.commerce.Wallet;
-import com.tipsy.lib.commerce.WalletCallback;
+import com.tipsy.lib.Wallet;
+import com.tipsy.lib.WalletCallback;
 
 /**
  * Created by Alexandre on 20/01/14.

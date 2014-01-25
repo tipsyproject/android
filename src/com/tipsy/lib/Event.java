@@ -7,8 +7,6 @@ import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
-import com.tipsy.lib.billetterie.Billet;
-import com.tipsy.lib.commerce.Produit;
 
 import java.util.Date;
 
@@ -54,9 +52,10 @@ public class Event extends ParseObject implements Parcelable{
     }
 
     public void findBilletterie(FindCallback cb){
-        ParseQuery<Billet> query = ParseQuery.getQuery(Billet.class);
+        ParseQuery<Ticket> query = ParseQuery.getQuery(Ticket.class);
+        query.include("event");
         query.whereEqualTo("event",this);
-        query.whereEqualTo("type", Produit.BILLET);
+        query.whereEqualTo("type", Ticket.BILLET);
         query.findInBackground(cb);
     }
 

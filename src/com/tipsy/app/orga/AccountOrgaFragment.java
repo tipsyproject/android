@@ -25,9 +25,6 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.parse.ParseException;
-import com.stackmob.sdk.api.StackMobFile;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.exception.StackMobException;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -111,7 +108,7 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
     // Redéfinition de l'actionBar: Bouton de validation
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_edit_event, menu);
+        inflater.inflate(R.menu.menu_edit, menu);
     }
 
     // Gestion du click sur le bouton de validation

@@ -27,14 +27,13 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import java.io.Serializable;
 
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.TipsyUser;
-import com.tipsy.lib.commerce.Achat;
-import com.tipsy.lib.commerce.Commande;
-import com.tipsy.lib.commerce.Commerce;
-import com.tipsy.lib.commerce.Item;
-import com.tipsy.lib.commerce.Panier;
+import com.tipsy.lib.Achat;
+import com.tipsy.lib.Commande;
+import com.tipsy.lib.Commerce;
+import com.tipsy.lib.Item;
+import com.tipsy.lib.Panier;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -90,7 +89,7 @@ public class EventParticiperFragment extends Fragment {
             achats = new Commande();
             for(Item item : panier){
                 for(int i=0; i<item.getQuantite(); ++i){
-                    Achat a = new Achat(item.getProduit());
+                    Achat a = new Achat(item.getTicket());
                     a.setParticipant(new Participant(callback.getEvent()));
                     achats.add(a);
                 }

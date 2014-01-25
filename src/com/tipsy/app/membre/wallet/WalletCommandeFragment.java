@@ -18,13 +18,12 @@ import android.widget.Toast;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Event;
-import com.tipsy.lib.commerce.Commande;
-import com.tipsy.lib.commerce.Commerce;
-import com.tipsy.lib.commerce.ItemArrayAdapter;
-import com.tipsy.lib.commerce.Panier;
-import com.tipsy.lib.commerce.Wallet;
-import com.tipsy.lib.commerce.WalletCallback;
+import com.tipsy.lib.Commande;
+import com.tipsy.lib.Commerce;
+import com.tipsy.lib.ItemArrayAdapter;
+import com.tipsy.lib.Panier;
+import com.tipsy.lib.Wallet;
+import com.tipsy.lib.WalletCallback;
 
 /**
  * Created by Valentin on 30/12/13.

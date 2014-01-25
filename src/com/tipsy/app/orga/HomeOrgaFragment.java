@@ -2,14 +2,13 @@ package com.tipsy.app.orga;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.tipsy.app.R;
@@ -18,10 +17,8 @@ import com.tipsy.lib.EventArrayAdapter;
 /**
  * Created by Alexandre on 23/12/13.
  */
-public class HomeOrgaFragment extends Fragment {
+public class HomeOrgaFragment extends ListFragment {
     private OrgaListener callback;
-    private ListView listView;
-    private EventArrayAdapter adapter;
 
     @Override
     public void onAttach(Activity activity) {
@@ -30,37 +27,34 @@ public class HomeOrgaFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        EventArrayAdapter adapter = new EventArrayAdapter(getActivity(), callback.getEvents());
+        setListAdapter(adapter);
+        setEmptyText(getString(R.string.empty_liste_event));
+    }
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
-        View view = inflater.inflate(R.layout.frag_orga_home, container, false);
-
-        listView = (ListView) view.findViewById(R.id.list);
-        adapter = new EventArrayAdapter(getActivity(), callback.getEvents());
-        listView.setAdapter(adapter);
-        listView.setEmptyView(inflater.inflate(R.layout.empty_liste_event, null));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callback.goToEvent(position);
-            }
-        });
-
-        return view;
+    public void onListItemClick(ListView l, View v, int position, long id) {
+        // do something with the data
+        callback.goToEvent(position);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         callback.setMenuTitle(MenuOrga.ACCUEIL);
-
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
     // Redéfinition de l'actionBar: Bouton de validation
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

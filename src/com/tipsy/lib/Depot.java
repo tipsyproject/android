@@ -1,11 +1,10 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.stackmob.sdk.model.StackMobModel;
 
 import java.util.Date;
 

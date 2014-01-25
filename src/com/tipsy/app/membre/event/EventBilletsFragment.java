@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,13 +23,11 @@ import java.util.List;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.tipsy.app.R;
-import com.tipsy.lib.billetterie.Billet;
-import com.tipsy.lib.commerce.Item;
-import com.tipsy.lib.commerce.ItemArrayAdapter;
-import com.tipsy.lib.commerce.Panier;
-import com.tipsy.lib.commerce.Produit;
+import com.tipsy.lib.Item;
+import com.tipsy.lib.ItemArrayAdapter;
+import com.tipsy.lib.Panier;
+import com.tipsy.lib.Ticket;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -90,12 +87,12 @@ public class EventBilletsFragment extends Fragment {
                     callback.backToHome();
                 }
             });
-            callback.getEvent().findBilletterie(new FindCallback<Billet>() {
+            callback.getEvent().findBilletterie(new FindCallback<Ticket>() {
                 @Override
-                public void done(List<Billet> billets, ParseException e) {
+                public void done(List<Ticket> billets, ParseException e) {
                     if (e == null) {
                         billetItems.clear();
-                        for (Produit billet : billets)
+                        for (Ticket billet : billets)
                             billetItems.add(new Item(billet, 0));
                         adapter.notifyDataSetChanged();
                         wait.dismiss();

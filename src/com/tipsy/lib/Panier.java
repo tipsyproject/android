@@ -1,4 +1,4 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 import android.os.Parcel;
 import android.os.Parcelable;

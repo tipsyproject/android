@@ -1,30 +1,29 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.tipsy.lib.Event;
+import com.parse.ParseQuery;
+
+import java.util.ArrayList;
 
 /**
  * Created by valoo on 04/01/14.
  */
 
 
-@ParseClassName("Produit")
-public class Produit extends ParseObject implements Parcelable {
+@ParseClassName("Ticket")
+public class Ticket extends ParseObject implements Parcelable {
 
     public static int BILLET = 0;
-    public static int TICKET = 1;
+    public static int VESTIARE = 1;
     public static int CONSO = 2;
 
-    public Produit() {}
-
-    public Produit(int type) {
-        setType(type);
-    }
+    public Ticket() {}
 
 
     public int getDevise() {
@@ -57,7 +56,7 @@ public class Produit extends ParseObject implements Parcelable {
     }
 
     public void setPrix(int prix) {
-        if (prix < 0) throw new ArithmeticException("Le prix d'un produit ne peut être négatif.");
+        if (prix < 0) throw new ArithmeticException("Le prix d'un ticket ne peut être négatif.");
         else put("prix",prix);
     }
 
@@ -72,8 +71,23 @@ public class Produit extends ParseObject implements Parcelable {
 
     @Override
     public boolean equals(Object o) {
-        return (this.getObjectId() == ((Produit) o).getObjectId());
+        return (this.getObjectId() == ((Ticket) o).getObjectId());
     }
+
+
+    public static void loadVentes(ArrayList<Ticket> tickets, FindCallback<Achat> callback){
+        // Seulement si des billets sont définis
+        if(!tickets.isEmpty()){
+            ParseQuery<Achat> query = ParseQuery.getQuery(Achat.class);
+            query.include("participant");
+            query.include("produit");
+            query.whereEqualTo("produit", tickets);
+            query.findInBackground(callback);
+        }
+        callback.done(new ArrayList<Achat>(),null);
+    }
+
+
 
 
 
@@ -93,7 +107,7 @@ public class Produit extends ParseObject implements Parcelable {
         dest.writeInt(getType());
     }
 
-    public Produit(Parcel in) {
+    public Ticket(Parcel in) {
         setObjectId(in.readString());
         setDevise(in.readInt());
         setEvent((Event) in.readParcelable(Event.class.getClassLoader()));
@@ -102,15 +116,15 @@ public class Produit extends ParseObject implements Parcelable {
         setType(in.readInt());
     }
 
-    public static final Parcelable.Creator<Produit> CREATOR = new Parcelable.Creator<Produit>() {
+    public static final Parcelable.Creator<Ticket> CREATOR = new Parcelable.Creator<Ticket>() {
         @Override
-        public Produit createFromParcel(Parcel source) {
-            return new Produit(source);
+        public Ticket createFromParcel(Parcel source) {
+            return new Ticket(source);
         }
 
         @Override
-        public Produit[] newArray(int size) {
-            return new Produit[size];
+        public Ticket[] newArray(int size) {
+            return new Ticket[size];
         }
     };
 }

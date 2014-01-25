@@ -1,4 +1,4 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 import android.content.Context;
 import android.view.LayoutInflater;

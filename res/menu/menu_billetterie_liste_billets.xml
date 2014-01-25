@@ -2,16 +2,10 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-
     <item
-        android:id="@+id/action_liste_ventes"
+        android:id="@+id/action_new"
         android:showAsAction="always"
-        android:icon="@drawable/ic_action_view_as_list"
-        android:title="Liste des ventes" />
-    <item
-        android:id="@+id/action_new_billet"
-        android:showAsAction="always"
-        android:icon="@drawable/ic_action_new_label"
+        android:icon="@drawable/ic_action_new"
         android:title="Créer un billet" />
 
 </menu>

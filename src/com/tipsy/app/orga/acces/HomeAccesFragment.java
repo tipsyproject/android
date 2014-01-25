@@ -20,13 +20,6 @@ public class HomeAccesFragment extends Fragment {
 
     private AccesListener callback;
 
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -35,35 +28,13 @@ public class HomeAccesFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_access_home, container, false);
-
-
         LinearLayout buttonSearch = (LinearLayout) view.findViewById(R.id.button_search);
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToManualAccess();
             }
         });
-
         return view;
     }
 
-
-    // Redéfinition de l'actionBar: Bouton de validation
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_access, menu);
-    }
-
-    // Gestion du click sur le bouton de validation
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_refresh:
-                callback.refresh(null);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }

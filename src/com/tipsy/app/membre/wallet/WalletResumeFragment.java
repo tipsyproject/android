@@ -13,10 +13,9 @@ import android.widget.TextView;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.commerce.Commerce;
-import com.tipsy.lib.commerce.Transaction;
-import com.tipsy.lib.commerce.TransactionArrayAdapter;
-import com.tipsy.lib.commerce.Wallet;
+import com.tipsy.lib.Commerce;
+import com.tipsy.lib.Transaction;
+import com.tipsy.lib.TransactionArrayAdapter;
 
 /**
  * Created by Alexandre on 23/12/13.

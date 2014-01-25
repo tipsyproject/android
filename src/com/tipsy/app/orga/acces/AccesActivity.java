@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -26,11 +28,9 @@ import com.tipsy.app.R;
 import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Bracelet;
 import com.tipsy.lib.Event;
-import com.tipsy.lib.billetterie.Billet;
-import com.tipsy.lib.billetterie.Billetterie;
-import com.tipsy.lib.billetterie.EntreeArrayAdapter;
-import com.tipsy.lib.commerce.Achat;
-import com.tipsy.lib.commerce.Produit;
+import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
+import com.tipsy.lib.Achat;
+import com.tipsy.lib.Ticket;
 
 /**
  * Created by vquefele on 20/01/14.
@@ -38,8 +38,9 @@ import com.tipsy.lib.commerce.Produit;
 public class AccesActivity extends FragmentActivity implements AccesListener {
 
     private Event event;
-    private Billetterie billetterie = new Billetterie();
+    final private ArrayList<Ticket> billetterie = new ArrayList<Ticket>();
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
+    EntreeArrayAdapter entreesAdapter;
     NfcAdapter adapter;
     PendingIntent pendingIntent;
 
@@ -53,6 +54,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         adapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, AccesActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
+        entreesAdapter = new EntreeArrayAdapter(AccesActivity.this,entrees);
 
         final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
         wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
@@ -67,18 +69,19 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
             public void done(Event ev, ParseException e) {
                 if (ev != null) {
                     event = ev;
-                    event.findBilletterie(new FindCallback<Billet>() {
+                    event.findBilletterie(new FindCallback<Ticket>() {
                         @Override
-                        public void done(List<Billet> billets, ParseException e) {
+                        public void done(List<Ticket> billets, ParseException e) {
                             billetterie.clear();
                             billetterie.addAll(billets);
                             wait.dismiss();
                             if(savedInstanceState != null && savedInstanceState.containsKey("Entrees")){
                                 entrees =  savedInstanceState.getParcelableArrayList("Entrees");
                             }else{
-                                refresh(null);
+                                loadVentes();
                                 goToHome(false);
                             }
+
                         }
                     });
                 }
@@ -99,6 +102,42 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         super.onSaveInstanceState(outState);
     }
 
+    // Redéfinition de l'actionBar: Bouton de validation
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_access, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // Respond to the action bar's Up/Home button
+            case android.R.id.home:
+                backToEventOrga();
+                return true;
+            case R.id.action_refresh:
+                loadVentes();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    public void loadVentes(){
+        Ticket.loadVentes(billetterie, new FindCallback<Achat>() {
+            @Override
+            public void done(List<Achat> achats, ParseException e) {
+                entrees.clear();
+                entrees.addAll(achats);
+                entreesAdapter.notifyDataSetChanged();
+                Toast.makeText(AccesActivity.this, "Liste mise à jour", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
+
     @Override
     public void onResume() {
         super.onResume();
@@ -113,7 +152,6 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
 
     @Override
     protected void onNewIntent(Intent intent){
-
         final ProgressDialog wait = ProgressDialog.show(this,"","Vérification en cours...",true,true);
 
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -122,11 +160,11 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         ParseQuery<Bracelet> query = ParseQuery.getQuery(Bracelet.class);
         query.include("user");
         query.include("participant");
-        query.getInBackground(tagID,new GetCallback<Bracelet>() {
+        query.getInBackground(tagID, new GetCallback<Bracelet>() {
             @Override
             public void done(Bracelet bracelet, ParseException e) {
                 /* BRACELET ACTIVE ? */
-                if(bracelet != null){
+                if (bracelet != null) {
                     Iterator it = entrees.iterator();
                     Achat entree;
                     boolean found = false;
@@ -142,7 +180,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
                     wait.dismiss();
                     Toast.makeText(AccesActivity.this, message, Toast.LENGTH_SHORT).show();
 
-                }else{ /* BRACELET INCONNU */
+                } else { /* BRACELET INCONNU */
                     wait.dismiss();
                     Log.d("TOUTAFAIT", "bracelet inconnu");
                     Toast.makeText(AccesActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
@@ -151,18 +189,6 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         });
     }
 
-
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                backToEventOrga();
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     public void backToEventOrga(){
         Intent intent = new Intent(this, EventOrgaActivity.class);
@@ -187,18 +213,16 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         ft.commit();
     }
 
-    public void refresh(EntreeArrayAdapter adapter){
-        billetterie.refreshVentes(this, entrees, adapter, null);
-    }
-
-    public Billetterie getBilletterie(){
+    public ArrayList<Ticket> getBilletterie(){
         return billetterie;
     }
     public Event getEvent(){
         return event;
     }
-
     public ArrayList<Achat> getEntrees(){
         return entrees;
+    }
+    public EntreeArrayAdapter getEntreesAdapter(){
+        return entreesAdapter;
     }
 }

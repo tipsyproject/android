@@ -1,4 +1,4 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -44,8 +44,8 @@ public class ItemArrayAdapter extends ArrayAdapter<Item> implements Serializable
         Item item = items.get(position);
 
         // Définition des valeurs
-        nom.setText(item.getProduit().getNom());
-        prix.setText(Commerce.prixToString(item.getProduit().getPrix(), item.getProduit().getDevise()));
+        nom.setText(item.getTicket().getNom());
+        prix.setText(Commerce.prixToString(item.getTicket().getPrix(), item.getTicket().getDevise()));
         quantite.setText(Integer.toString(item.getQuantite()));
 
         return view;

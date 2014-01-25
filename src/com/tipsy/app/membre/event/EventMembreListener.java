@@ -1,8 +1,8 @@
 package com.tipsy.app.membre.event;
 
 import com.tipsy.lib.Event;
-import com.tipsy.lib.commerce.Commande;
-import com.tipsy.lib.commerce.Panier;
+import com.tipsy.lib.Commande;
+import com.tipsy.lib.Panier;
 
 /**
  * Created by valoo on 22/01/14.

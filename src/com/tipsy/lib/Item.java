@@ -1,32 +1,30 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
-import com.stackmob.sdk.model.StackMobModel;
-
 /**
  * Created by valoo on 04/01/14.
  */
 public class Item implements Parcelable {
-    private Produit produit;
+    private Ticket ticket;
     private int quantite;
 
     public Item() {
     }
 
-    public Item(Produit a, int q) {
-        produit = a;
+    public Item(Ticket a, int q) {
+        ticket = a;
         quantite = q;
     }
 
-    public Produit getProduit() {
-        return produit;
+    public Ticket getTicket() {
+        return ticket;
     }
 
-    public void setProduit(Produit produit) {
-        this.produit = produit;
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 
     public int getQuantite() {
@@ -38,17 +36,17 @@ public class Item implements Parcelable {
     }
 
     public int getPrixTotal() {
-        return produit.getPrix() * quantite;
+        return ticket.getPrix() * quantite;
     }
 
     @Override
     public boolean equals(Object o) {
-        return this.produit.equals(((Item) o).getProduit());
+        return this.ticket.equals(((Item) o).getTicket());
     }
 
     @Override
     public int hashCode() {
-        return produit.getObjectId().hashCode();
+        return ticket.getObjectId().hashCode();
     }
 
 
@@ -60,12 +58,12 @@ public class Item implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeParcelable(produit, flags);
+        dest.writeParcelable(ticket, flags);
         dest.writeInt(quantite);
     }
 
     public Item(Parcel in) {
-        produit = in.readParcelable(Item.class.getClassLoader());
+        ticket = in.readParcelable(Ticket.class.getClassLoader());
         quantite = in.readInt();
     }
 

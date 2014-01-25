@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.commerce.Item;
+import com.tipsy.lib.Item;
 
 /**
  * Created by valoo on 20/01/14.
@@ -32,7 +32,7 @@ public class BilletArrayAdapter extends ArrayAdapter<Item> {
         TextView nomBillet = (TextView) viewVente.findViewById(R.id.nom_billet);
         TextView quantite = (TextView) viewVente.findViewById(R.id.quantite);
         Item item = ventes.get(position);
-        nomBillet.setText(item.getProduit().getNom());
+        nomBillet.setText(item.getTicket().getNom());
         quantite.setText(Integer.toString(item.getQuantite()));
         return viewVente;
     }

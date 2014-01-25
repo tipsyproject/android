@@ -1,4 +1,4 @@
-package com.tipsy.lib.commerce;
+package com.tipsy.lib;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -8,8 +8,6 @@ import com.parse.ParseObject;
 
 import java.util.Date;
 
-import com.tipsy.lib.Participant;
-
 /**
  * Created by Valentin on 21/01/14.
  */
@@ -18,7 +16,7 @@ public class Achat extends ParseObject implements Transaction {
 
     public Achat(){}
 
-    public Achat(Produit p){
+    public Achat(Ticket p){
         setDate(new Date());
         setProduit(p);
     }
@@ -32,7 +30,7 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public int getDevise(){
-        return ((Produit) getParseObject("produit")).getDevise();
+        return ((Ticket) getParseObject("produit")).getDevise();
     }
 
     public Participant getParticipant() {
@@ -43,20 +41,20 @@ public class Achat extends ParseObject implements Transaction {
         put("participant",participant);
     }
 
-    public String getPayeur() {
-        return getString("payeur");
+    public TipsyUser getPayeur() {
+        return (TipsyUser) getParseObject("payeur");
     }
 
-    public void setPayeur(String payeur) {
+    public void setPayeur(TipsyUser payeur) {
         put("payeur",payeur);
     }
 
-    public Produit getProduit() {
-        return (Produit) getParseObject("produit");
+    public Ticket getProduit() {
+        return (Ticket) getParseObject("produit");
     }
 
-    public void setProduit(Produit produit) {
-        put("produit",produit);
+    public void setProduit(Ticket ticket) {
+        put("ticket", ticket);
     }
 
     public boolean isUsed() {
@@ -68,7 +66,7 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public int getMontant(){
-        return ((Produit) getParseObject("produit")).getPrix();
+        return ((Ticket) getParseObject("produit")).getPrix();
     }
 
     public String getDescription(){
@@ -76,7 +74,7 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public String getTitre(){
-        return ((Produit) getParseObject("produit")).getNom();
+        return ((Ticket) getParseObject("produit")).getNom();
     }
 
     public boolean isDepot(){
@@ -100,7 +98,7 @@ public class Achat extends ParseObject implements Transaction {
         dest.writeString(getObjectId());
         dest.writeSerializable(getDate());
         dest.writeParcelable(getParticipant(), flags);
-        dest.writeString(getPayeur());
+        dest.writeParcelable(getPayeur(), flags);
         dest.writeParcelable(getProduit(), flags);
         dest.writeValue(isUsed());
     }
@@ -109,8 +107,8 @@ public class Achat extends ParseObject implements Transaction {
         setObjectId(in.readString());
         setDate((Date) in.readSerializable());
         setParticipant((Participant) in.readParcelable(Participant.class.getClassLoader()));
-        setPayeur(in.readString());
-        setProduit((Produit) in.readParcelable(Produit.class.getClassLoader()));
+        setPayeur((TipsyUser) in.readParcelable(TipsyUser.class.getClassLoader()));
+        setProduit((Ticket) in.readParcelable(Ticket.class.getClassLoader()));
         setUsed((Boolean) in.readValue(Boolean.class.getClassLoader()));
     }
 

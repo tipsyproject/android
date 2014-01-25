@@ -45,7 +45,13 @@ j'accepte les conditions générales."</string>
 
     <!-- EVENT -->
     <string name="nouvel_event">Nouvel événement</string>
+    <string name="empty_liste_event">Aucun événement</string>
 
+
+    <!-- BILLETTERIE -->
+    <string name="empty_liste_billets">Aucun billet défini.</string>
+    <string name="vendre_billet">Vendre un billet</string>
+    <string name="empty_liste_ventes">Aucun billet vendu.</string>
 
 
 
@@ -70,6 +76,9 @@ j'accepte les conditions générales."</string>
     <string name="payer">PAYER</string>
     <string name="entrer_solde">Veuillez entrer la valeur que vous souhaitez ajouter à votre solde :</string>
     <string name="choisir_formule">Choisissez votre formule !</string>
-    <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string><string name="nom">Nom</string><string name="prenom">Prénom</string><string name="activer_bracelet">Activer bracelet</string><string name="empty_vente_billet">Aucun billet vendu.</string><string name="empty_liste_event">Aucun événement</string>
+    <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prénom</string>
+    <string name="activer_bracelet">Activer bracelet</string>
 
 </resources>

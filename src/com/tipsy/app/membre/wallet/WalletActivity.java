@@ -2,27 +2,20 @@ package com.tipsy.app.membre.wallet;
 
 
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.membre.MembreActivity;
-import com.tipsy.lib.Event;
 import com.tipsy.lib.TipsyUser;
-import com.tipsy.lib.commerce.Commande;
-import com.tipsy.lib.commerce.Panier;
-import com.tipsy.lib.commerce.Transaction;
-import com.tipsy.lib.commerce.Wallet;
+import com.tipsy.lib.Commande;
+import com.tipsy.lib.Panier;
+import com.tipsy.lib.Transaction;
+import com.tipsy.lib.Wallet;
 
 /**
  * Created by tech on 05/12/13.
