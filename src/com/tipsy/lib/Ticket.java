@@ -84,7 +84,7 @@ public class Ticket extends ParseObject implements Parcelable {
             query.whereEqualTo("produit", tickets);
             query.findInBackground(callback);
         }
-        callback.done(new ArrayList<Achat>(),null);
+        else callback.done(new ArrayList<Achat>(),null);
     }
 
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -32,11 +33,10 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.act_billetterie);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Billetterie");
-
 
         /* On récupère l'event, la billetterie et les billets vendus */
         if(savedInstanceState == null){
@@ -51,6 +51,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
                             @Override
                             public void done(List<Ticket> billets, ParseException e) {
                                 if(e==null){
+                                    Log.d("TOUTAFAIT", "find ");
                                     billetterie.clear();
                                     billetterie.addAll(billets);
                                     Ticket.loadVentes(billetterie, new FindCallback<Achat>() {

@@ -38,28 +38,33 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         menu.getDrawerList().setItemChecked(MenuOrga.ACCUEIL, true);
 
 
-        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true);
+        if(savedInstanceState == null){
+            final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true);
 
-        ParseQuery<Event> eventsQuery = ParseQuery.getQuery(Event.class);
-        eventsQuery.whereEqualTo("organisateur", TipsyUser.getCurrentUser().getObjectId());
-        eventsQuery.findInBackground(new FindCallback<Event>() {
-            public void done(List<Event> res, ParseException e) {
-                if (e == null) {
-                    events.clear();
-                    events.addAll(res);
-                    wait.dismiss();
-
-                    if (savedInstanceState == null) {
+            ParseQuery<Event> eventsQuery = ParseQuery.getQuery(Event.class);
+            eventsQuery.whereEqualTo("organisateur", TipsyUser.getCurrentUser().getObjectId());
+            eventsQuery.findInBackground(new FindCallback<Event>() {
+                public void done(List<Event> res, ParseException e) {
+                    if (e == null) {
+                        events.clear();
+                        events.addAll(res);
+                        wait.dismiss();
                         tableauDeBord(false);
+                    } else {
+                        Log.d("evens", "Error: " + e.getMessage());
                     }
-
-                } else {
-                    Log.d("evens", "Error: " + e.getMessage());
                 }
-            }
-        });
+            });
+        }else
+            events = savedInstanceState.getParcelableArrayList("Events");
+    }
 
-
+    @Override
+    public void onSaveInstanceState(Bundle outState){
+        if(outState == null)
+            outState = new Bundle();
+        outState.putParcelableArrayList("Events", events);
+        super.onSaveInstanceState(outState);
     }
 
 

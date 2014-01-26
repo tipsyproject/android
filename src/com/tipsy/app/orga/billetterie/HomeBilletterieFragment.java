@@ -3,6 +3,7 @@ package com.tipsy.app.orga.billetterie;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,9 +28,8 @@ public class HomeBilletterieFragment extends Fragment{
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        Log.d("TOUTAFAIT", "createview");
         View view = inflater.inflate(R.layout.frag_billetterie_home, container, false);
-
-
         /* Bouton VENDRE BILLET */
         Button buttonVendre = (Button) view.findViewById(R.id.button_vendre);
         buttonVendre.setOnClickListener(new View.OnClickListener() {
@@ -37,7 +37,6 @@ public class HomeBilletterieFragment extends Fragment{
                 callback.goToVendreBillet();
             }
         });
-
         return view;
     }
 

@@ -128,10 +128,12 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         Ticket.loadVentes(billetterie, new FindCallback<Achat>() {
             @Override
             public void done(List<Achat> achats, ParseException e) {
-                entrees.clear();
-                entrees.addAll(achats);
-                entreesAdapter.notifyDataSetChanged();
-                Toast.makeText(AccesActivity.this, "Liste mise à jour", Toast.LENGTH_SHORT).show();
+                if(e == null){
+                    entrees.clear();
+                    entrees.addAll(achats);
+                    entreesAdapter.notifyDataSetChanged();
+                    Toast.makeText(AccesActivity.this, "Liste mise à jour", Toast.LENGTH_SHORT).show();
+                }else Toast.makeText(AccesActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
