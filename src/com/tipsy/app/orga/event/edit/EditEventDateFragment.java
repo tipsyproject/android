@@ -40,10 +40,8 @@ public class EditEventDateFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
         if(savedInstanceState != null && savedInstanceState.containsKey("DEBUT")){
             debut = (Date) savedInstanceState.getSerializable("DEBUT");
-            Log.d("TOUTAFAIT", "date recup");
         }else if(callback.getEvent().getDebut() != null)
             debut = callback.getEvent().getDebut();
         else debut = new Date();

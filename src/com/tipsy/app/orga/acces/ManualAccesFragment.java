@@ -48,7 +48,8 @@ public class ManualAccesFragment extends ListFragment {
     }
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_billetterie_liste_ventes, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+        menu.add("Rechercher").setIcon(R.drawable.ic_action_search);
     }
     // Gestion du click sur le bouton de validation
     @Override

@@ -3,8 +3,13 @@ package com.tipsy.app;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Base64;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.parse.Parse;
@@ -12,6 +17,9 @@ import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.lib.Prefs;
 import com.tipsy.lib.TipsyUser;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  * Created by vquefele on 23/01/14.

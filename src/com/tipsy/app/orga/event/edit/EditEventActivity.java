@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 
@@ -51,7 +52,6 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
             R.drawable.ic_action_go_to_today,
             R.drawable.ic_action_settings
     };
-    private ActionBar actionBar;
     private EditEventPager mAdapter;
     private ViewPager mPager;
 
@@ -71,72 +71,43 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         super.onCreate(savedInstanceState);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
+        // DEFINITION DES TABS
+        getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
         if(getIntent().hasExtra("EVENT_ID")){
+            final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
             ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-                /*
-                query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
-                    public void done(Event myevent, ParseException e) {
-                        if (e == null) {
-                            event = myevent;
-                            Log.d("TOUTAFAIT", "Event recup:"+event.getNom());
-                        } else {
-                            Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
-            try{
-                event = query.get(getIntent().getStringExtra("EVENT_ID"));
-                getActionBar().setTitle(event.getNom());
-                Log.d("TOUTAFAIT", "Event recup:"+event.getNom());
-            }catch(ParseException e){
-                Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
-            }
+            query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
+                public void done(Event myevent, ParseException e) {
+                    if (e == null) {
+                        event = myevent;
+                        getActionBar().setTitle(event.getNom());
+                        initPager();
+                        wait.dismiss();
+                    } else
+                        Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
+                }
+            });
         }else{
             event = new Event();
             getActionBar().setTitle(getResources().getString(R.string.nouvel_event));
-            Log.d("TOUTAFAIT", "new event");
+            initPager();
         }
+    }
 
-        /*
-        if(savedInstanceState != null && savedInstanceState.containsKey("Event")){
-            event = savedInstanceState.getParcelable("Event");
-            Log.d("TOUTAFAIT", "Event saved:"+event.getNom());
-        }else if(getIntent().hasExtra("EVENT_ID")){
-            ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-            try{
-                event = query.get(getIntent().getStringExtra("EVENT_ID"));
-                Log.d("TOUTAFAIT", "Event recup:"+event.getNom());
-            }catch(ParseException e){
-                Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
-            }
-        }else{
-            event = new Event();
-            event.setDebut(new Date());
-            Log.d("TOUTAFAIT", "new event");
-        }*/
-
-
+    public void initPager(){
         mAdapter = new EditEventPager(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.event_pager);
         mPager.setAdapter(mAdapter);
+        mPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            @Override
+            public void onPageSelected(int position) {
+                getActionBar().setSelectedNavigationItem(position);
+            }
+        });
 
-        // DEFINITION DES TABS
-        actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        actionBar.removeAllTabs();
         for (int icon : icones)
-            actionBar.addTab(actionBar.newTab().setIcon(icon).setTabListener(this));
-
-        mPager.setOnPageChangeListener(
-                new ViewPager.SimpleOnPageChangeListener() {
-                    @Override
-                    public void onPageSelected(int position) {
-                        // When swiping between pages, select the corresponding tab.
-                        actionBar.setSelectedNavigationItem(position);
-                    }
-                }
-        );
+            getActionBar().addTab(getActionBar().newTab().setIcon(icon).setTabListener(this));
     }
 
     /* Définition de l'ACTIONBAR */
@@ -239,33 +210,6 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         Intent intent = new Intent(this, OrgaActivity.class);
         startActivity(intent);
     }
-
-
-    // initialisation des inputs lors de leur affichage pour les rendre accessible au Validator
-
-    /*
-    // inputs partie description
-    public void onDescFragCreated(View v) {
-        inputNom = (EditText) v.findViewById(R.id.input_nom);
-        inputNom.setText(event.getNom());
-    }
-
-    // inputs partie lieu
-    public void onLocFragCreated(View v) {
-        inputLieu = (EditText) v.findViewById(R.id.input_lieu);
-        inputLieu.setText(event.getLieu());
-    }
-
-    // inputs partie date
-    public void onDateFragCreated(View v) {
-        inputDateDebut = (TextView) v.findViewById(R.id.input_date_debut);
-        inputTimeDebut = (TextView) v.findViewById(R.id.input_time_debut);
-
-        // Initialisation des dates de debut et de fin
-        inputDateDebut.setText(EditEventDateFragment.dateFormatter.format(event.getDebut()));
-        inputTimeDebut.setText(EditEventDateFragment.timeFormatter.format(event.getDebut()));
-    }
-    */
 
     public EditText getInputNom() {
         return inputNom;
