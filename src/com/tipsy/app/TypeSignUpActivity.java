@@ -68,8 +68,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
-
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_typesignup);
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
@@ -120,8 +119,10 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     public void onBackPressed() {
         if (pager.getCurrentItem() != 0)
             pager.setCurrentItem(0, true);
-        else
+        else{
             super.onBackPressed(); // This will pop the Activity from the stack.
+            overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+        }
     }
 
     public void validateSignUp(View view) {

@@ -1,8 +1,6 @@
 package com.tipsy.app;
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -25,7 +23,7 @@ public class LoginActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_login);
         fa = this;
 

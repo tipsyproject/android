@@ -29,6 +29,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -59,6 +60,12 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
 

@@ -46,6 +46,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_access);
         super.onCreate(savedInstanceState);
 
@@ -91,6 +92,12 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
                 }
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
     @Override

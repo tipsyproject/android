@@ -29,6 +29,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_wallet);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Tipsy Wallet");
@@ -50,6 +51,12 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
                     goToResume(false);
             }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
     @Override

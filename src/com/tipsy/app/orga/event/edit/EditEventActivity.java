@@ -67,6 +67,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_edit_event);
         super.onCreate(savedInstanceState);
 
@@ -93,6 +94,12 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
             getActionBar().setTitle(getResources().getString(R.string.nouvel_event));
             initPager();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
     public void initPager(){

@@ -79,13 +79,7 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
         if (failedView instanceof EditText) {
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
-        } else {
-            getActivity().runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+        } else
+            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -42,6 +42,7 @@ public class BraceletActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_bracelet);
         super.onCreate(savedInstanceState);
 
@@ -71,6 +72,12 @@ public class BraceletActivity extends Activity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
     @Override

@@ -36,6 +36,7 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         super.setContentView(R.layout.act_help);
 
         focustep = (ImageView) findViewById(R.id.focustep);
@@ -92,13 +93,15 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
                     app.setSkipHelp(HelpActivity.this, true);
                     startActivity(new Intent(HelpActivity.this, LoginActivity.class));
                 }
+                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
             }
         });
     }
 
     @Override
-    protected void onPause() {
-        super.onPause();
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
     public class MyPagerAdapter extends FragmentStatePagerAdapter {

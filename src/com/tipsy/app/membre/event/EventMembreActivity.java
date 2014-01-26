@@ -31,6 +31,7 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
 
@@ -62,6 +63,12 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         });
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
 

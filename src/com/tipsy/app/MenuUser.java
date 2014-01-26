@@ -33,7 +33,7 @@ public abstract class MenuUser {
 
     public MenuUser(Activity a) {
         activity = a;
-        activity.overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
+        activity.overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
 
         drawerLayout = (DrawerLayout) activity.findViewById(R.id.drawer_Layout);
         drawerList = (ListView) activity.findViewById(R.id.left_drawer);

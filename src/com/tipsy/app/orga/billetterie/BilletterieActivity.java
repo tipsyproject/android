@@ -34,6 +34,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_billetterie);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Billetterie");
@@ -78,6 +79,12 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
             event = savedInstanceState.getParcelable("Event");
             billetterie = savedInstanceState.getParcelableArrayList("Billetterie");
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
     @Override
