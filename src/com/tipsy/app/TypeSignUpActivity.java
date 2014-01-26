@@ -64,6 +64,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     protected ViewPager pager;
     private ProgressDialog mConnectionProgressDialog;
     private ProgressDialog mConnectionProgressDialog_signup;
+    protected boolean fb = false;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -132,10 +133,12 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
+        if (fb)
+            ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
     }
 
     public void onClickFb(View view){
+        fb = true;
         mConnectionProgressDialog.show();
         List<String> permissions = Arrays.asList("basic_info", "email", "user_about_me",
                 "user_relationships", "user_birthday", "user_location");
