@@ -63,6 +63,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
     protected ViewPager pager;
     private ProgressDialog mConnectionProgressDialog;
+    private ProgressDialog mConnectionProgressDialog_signup;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -93,6 +94,8 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         });
         mConnectionProgressDialog = new ProgressDialog(TypeSignUpActivity.this);
         mConnectionProgressDialog.setMessage("Connexion en cours...");
+        mConnectionProgressDialog_signup = new ProgressDialog(TypeSignUpActivity.this);
+        mConnectionProgressDialog_signup.setMessage("Inscription en cours...");
 
         // Check if there is a currently logged in user
         // and they are linked to a Facebook account.
@@ -109,6 +112,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     public void onDestroy(){
         super.onDestroy();
         mConnectionProgressDialog.dismiss();
+        mConnectionProgressDialog_signup.dismiss();
     }
 
     @Override
@@ -220,7 +224,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
     /* INSCRIPTION */
     public void onValidationSucceeded() {
-        mConnectionProgressDialog.show();
+        mConnectionProgressDialog_signup.show();
         TipsyUser user = new TipsyUser();
         user.setUsername(inputEmail.getText().toString());
         user.setPassword(inputPassword.getText().toString());
@@ -246,7 +250,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                                 else
                                     startActivity(new Intent(TypeSignUpActivity.this, OrgaActivity.class));
                             } else {
-                                mConnectionProgressDialog.dismiss();
+                                mConnectionProgressDialog_signup.dismiss();
                                 Toast.makeText(TypeSignUpActivity.this,
                                         getResources().getString(R.string.erreur_connexion),
                                         Toast.LENGTH_LONG).show();
@@ -264,7 +268,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                             Log.d("TOUTAFAIT", "signup error code: " + e.getCode());
                             message = getResources().getString(R.string.erreur_interne);
                     }
-                    mConnectionProgressDialog.dismiss();
+                    mConnectionProgressDialog_signup.dismiss();
                     Toast.makeText(TypeSignUpActivity.this, message, Toast.LENGTH_LONG).show();
                 }
             }

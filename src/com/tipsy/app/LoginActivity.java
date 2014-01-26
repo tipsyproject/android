@@ -32,7 +32,6 @@ public class LoginActivity extends FragmentActivity {
         // Ajout des Fragments dans la liste
         fragments.add(Fragment.instantiate(this, LoginFragment.class.getName()));
         fragments.add(Fragment.instantiate(this, ForgetPwdFragment.class.getName()));
-        fragments.add(Fragment.instantiate(this, ResetPwdFragment.class.getName()));
 
         // Création de l'adapter qui s'occupera de l'affichage de la liste de
         // Fragments
