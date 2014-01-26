@@ -93,7 +93,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
 
     public void onValidationSucceeded() {
         mConnectionProgressDialog.show();
-        ParseUser.logInInBackground(inputEmail.getText().toString(), inputPassword.getText().toString(), new LogInCallback() {
+        ParseUser.logInInBackground(inputEmail.getText().toString().trim(), inputPassword.getText().toString().trim(), new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
@@ -102,6 +102,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                         startActivity(new Intent(getActivity(), MembreActivity.class));
                     else
                         startActivity(new Intent(getActivity(), OrgaActivity.class));
+                    getActivity().finish();
                 } else {
                     String message;
                     switch(e.getCode()){

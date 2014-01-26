@@ -178,6 +178,8 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                                 currentUser.setType(TipsyUser.MEMBRE);
                                 currentUser.saveInBackground();
                                 startActivity(new Intent(TypeSignUpActivity.this, MembreActivity.class));
+                                TypeSignUpActivity.this.finish();
+                                LoginActivity.fa.finish();
 
                         } else if (response.getError() != null) {
                             if ((response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_RETRY)
@@ -218,6 +220,8 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                     currentUser.setType(TipsyUser.MEMBRE);
                     currentUser.saveInBackground();
                     startActivity(new Intent(TypeSignUpActivity.this, MembreActivity.class));
+                    TypeSignUpActivity.this.finish();
+                    LoginActivity.fa.finish();
                 } else {
                     Log.d(app.TAG, "User logged in through Twitter!");
                 }
@@ -229,13 +233,13 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     public void onValidationSucceeded() {
         mConnectionProgressDialog_signup.show();
         TipsyUser user = new TipsyUser();
-        user.setUsername(inputEmail.getText().toString());
-        user.setPassword(inputPassword.getText().toString());
-        user.setNom(inputNom.getText().toString());
+        user.setUsername(inputEmail.getText().toString().trim());
+        user.setPassword(inputPassword.getText().toString().trim());
+        user.setNom(inputNom.getText().toString().trim());
         int type;
         if (pager.getCurrentItem() == 1){
             user.setType(TipsyUser.MEMBRE);
-            user.setPrenom(inputPrenom.getText().toString());
+            user.setPrenom(inputPrenom.getText().toString().trim());
         }
         else user.setType(TipsyUser.ORGA);
 
@@ -243,7 +247,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
             public void done(ParseException e) {
                 if (e == null) {
                     // Inscription réussi = connexion auto
-                    ParseUser.logInInBackground(inputEmail.getText().toString(), inputPassword.getText().toString(), new LogInCallback() {
+                    ParseUser.logInInBackground(inputEmail.getText().toString().trim(), inputPassword.getText().toString().trim(), new LogInCallback() {
                         @Override
                         public void done(ParseUser user, ParseException e) {
                             if (user != null) {
@@ -252,6 +256,8 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                                     startActivity(new Intent(TypeSignUpActivity.this, MembreActivity.class));
                                 else
                                     startActivity(new Intent(TypeSignUpActivity.this, OrgaActivity.class));
+                                TypeSignUpActivity.this.finish();
+                                LoginActivity.fa.finish();
                             } else {
                                 mConnectionProgressDialog_signup.dismiss();
                                 Toast.makeText(TypeSignUpActivity.this,

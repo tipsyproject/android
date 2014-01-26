@@ -20,12 +20,14 @@ public class LoginActivity extends FragmentActivity {
     protected TipsyApp app;
     protected PagerAdapter mPagerAdapter;
     static ViewPager pager;
+    public static FragmentActivity fa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.animator.right_to_left, R.animator.activity_close_scale);
         setContentView(R.layout.act_login);
+        fa = this;
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();

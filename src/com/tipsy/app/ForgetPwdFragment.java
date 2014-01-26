@@ -3,6 +3,7 @@ package com.tipsy.app;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,7 +54,7 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
 
     public void onValidationSucceeded() {
         mConnectionProgressDialog.show();
-        ParseUser.requestPasswordResetInBackground(inputForget.getText().toString(),
+        ParseUser.requestPasswordResetInBackground(inputForget.getText().toString().trim(),
                 new RequestPasswordResetCallback() {
                     public void done(ParseException e) {
                         if (e == null) {

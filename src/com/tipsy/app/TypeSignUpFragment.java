@@ -170,6 +170,8 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
                                 newUser.setType(TipsyUser.MEMBRE);
                                 newUser.saveInBackground();
                                 startActivity(new Intent(getActivity(), MembreActivity.class));
+                                getActivity().finish();
+                                LoginActivity.fa.finish();
                             } else {
                                 // The token could not be validated.
                                 Log.d(app.TAG, e.getMessage());
@@ -193,6 +195,8 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
                                     public void done(ParseUser user, ParseException e) {
                                         if (user != null) {
                                             startActivity(new Intent(getActivity(), MembreActivity.class));
+                                            getActivity().finish();
+                                            LoginActivity.fa.finish();
                                         } else {
                                             mConnectionProgressDialog.dismiss();
                                             Toast.makeText(getActivity(),

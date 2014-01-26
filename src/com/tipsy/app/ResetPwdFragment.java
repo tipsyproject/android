@@ -64,7 +64,7 @@ public class ResetPwdFragment extends Fragment implements Validator.ValidationLi
 
             @Override
             public void success() {
-                user.loginResettingTemporaryPassword(newPassword.getText().toString(), new StackMobModelCallback() {
+                user.loginResettingTemporaryPassword(newPassword.getText().toString().trim(), new StackMobModelCallback() {
 
                     @Override
                     public void success() {
@@ -76,7 +76,7 @@ public class ResetPwdFragment extends Fragment implements Validator.ValidationLi
                                     @Override
                                     public void success() {
                                         // Sauvegarde locale des identifiants pour connexion auto
-                                        User.rememberMe(getActivity(), LoginFragment.username, newPassword.getText().toString());
+                                        User.rememberMe(getActivity(), LoginFragment.username, newPassword.getText().toString().trim());
                                         // Redirection en fonction du type utilisateur
                                         User.keepCalmAndWaitForGoingHome(getActivity(), user);
                                     }
