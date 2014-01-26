@@ -1,5 +1,6 @@
 package com.tipsy.app;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
     protected Button reset;
     protected Validator validator_pwd;
     protected TipsyApp app;
+    private ProgressDialog mConnectionProgressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,10 +44,18 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
                 validator_pwd.validate();
             }
         });
+        mConnectionProgressDialog = new ProgressDialog(getActivity());
+        mConnectionProgressDialog.setMessage("Chargement en cours...");
         return view;
     }
 
+    public void onDestroy(){
+        super.onDestroy();
+        mConnectionProgressDialog.dismiss();
+    }
+
     public void onValidationSucceeded() {
+        mConnectionProgressDialog.show();
         /*
         final User user = new User(inputForget.getText().toString());
         user.fetch(new StackMobModelCallback() {

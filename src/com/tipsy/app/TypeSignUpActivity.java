@@ -29,6 +29,7 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.tipsy.app.membre.MembreActivity;
@@ -105,6 +106,11 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         }
     }
 
+    public void onDestroy(){
+        super.onDestroy();
+        mConnectionProgressDialog.dismiss();
+    }
+
     @Override
     public void onBackPressed() {
         if (pager.getCurrentItem() != 0)
@@ -135,6 +141,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                 if (user == null) {
                     Log.d(app.TAG,
                             "Uh oh. The user cancelled the Facebook login.");
+                    mConnectionProgressDialog.dismiss();
                     Toast.makeText(TypeSignUpActivity.this, "Erreur.", Toast.LENGTH_LONG).show();
                 } else if (user.isNew()) {
                     Log.d(app.TAG,
@@ -145,7 +152,6 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                             "User logged in through Facebook!");
                     request();
                 }
-                mConnectionProgressDialog.dismiss();
             }
         });
     }
@@ -178,6 +184,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                                                 + response.getError()
                                                 .getErrorMessage());
                             }
+                            mConnectionProgressDialog.dismiss();
                         }
                     }
                 });
@@ -185,8 +192,35 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
     }
 
+    public void onClickTwt(View view){
+        mConnectionProgressDialog.show();
+        ParseTwitterUtils.logIn(this, new LogInCallback() {
+            @Override
+            public void done(ParseUser user, ParseException err) {
+                if (user == null) {
+                    Log.d(app.TAG, "Uh oh. The user cancelled the Twitter login.");
+                    mConnectionProgressDialog.dismiss();
+                } else if (user.isNew()) {
+                    Log.d(app.TAG, "User signed up and logged in through Twitter!");
+                    // Save the user
+                    TipsyUser currentUser = TipsyUser
+                            .getCurrentUser();
+                    currentUser.setPrenom(ParseTwitterUtils.getTwitter().getScreenName());
+                    currentUser.setNom("");
+                    currentUser.setUsername(ParseTwitterUtils.getTwitter().getUserId());
+                    currentUser.setType(TipsyUser.MEMBRE);
+                    currentUser.saveInBackground();
+                    startActivity(new Intent(TypeSignUpActivity.this, MembreActivity.class));
+                } else {
+                    Log.d(app.TAG, "User logged in through Twitter!");
+                }
+            }
+        });
+    }
+
     /* INSCRIPTION */
     public void onValidationSucceeded() {
+        mConnectionProgressDialog.show();
         TipsyUser user = new TipsyUser();
         user.setUsername(inputEmail.getText().toString());
         user.setPassword(inputPassword.getText().toString());
@@ -212,6 +246,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                                 else
                                     startActivity(new Intent(TypeSignUpActivity.this, OrgaActivity.class));
                             } else {
+                                mConnectionProgressDialog.dismiss();
                                 Toast.makeText(TypeSignUpActivity.this,
                                         getResources().getString(R.string.erreur_connexion),
                                         Toast.LENGTH_LONG).show();
@@ -229,6 +264,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                             Log.d("TOUTAFAIT", "signup error code: " + e.getCode());
                             message = getResources().getString(R.string.erreur_interne);
                     }
+                    mConnectionProgressDialog.dismiss();
                     Toast.makeText(TypeSignUpActivity.this, message, Toast.LENGTH_LONG).show();
                 }
             }

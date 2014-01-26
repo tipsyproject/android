@@ -41,13 +41,27 @@
             android:clickable="true"
             android:onClick="onClickFb"/>
 
+        <!--<Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bar_height"
+            android:text="Twitter"
+            android:id="@+id/twitter"
+            android:drawableLeft="@drawable/twitter_icon"
+            android:layout_marginTop="@dimen/ui_margin"
+            android:paddingLeft="@dimen/activity_margin"
+            android:layout_below="@+id/fb"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:onClick="onClickTwt"/>-->
+
         <Button
             android:layout_width="match_parent"
             android:onClick="onClickInscription"
             android:layout_height="@dimen/bar_height"
             android:id="@+id/button1"
             android:drawableLeft="@drawable/ic_action_new_email"
-            android:paddingLeft="@dimen/activity_margin"
+            android:paddingLeft="20dp"
+            android:paddingRight="4dp"
             android:layout_marginTop="@dimen/ui_margin"
             android:layout_below="@+id/fb"
             android:text="@string/email"

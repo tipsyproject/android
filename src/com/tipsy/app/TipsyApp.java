@@ -7,6 +7,7 @@ import android.view.inputmethod.InputMethodManager;
 
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
+import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 import com.tipsy.lib.Bracelet;
 import com.tipsy.lib.Event;
@@ -35,6 +36,7 @@ public class TipsyApp extends Application {
         ParseUser.registerSubclass(TipsyUser.class);
         Parse.initialize(this, "pcMVnVGR9jVH5yjuGbtfZYsdUfrQadWMiaHvjkYH", "GDauifCqWNi5F3ocuvgn9wYqvn63OeXNHJDw1f7S");
         ParseFacebookUtils.initialize(getString(R.string.facebook_app_id));
+        ParseTwitterUtils.initialize("3RUMZQ8xHisk5fHMUAcaIg", "eSYhVIAAwxirYCeJgu2Xu7nuw2oTZLJEIHNBAHjwE");
 
     }
 

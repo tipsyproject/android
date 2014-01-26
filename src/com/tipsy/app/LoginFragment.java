@@ -1,5 +1,6 @@
 package com.tipsy.app;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -40,6 +41,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
     protected static String username;
     protected static String pwd;
     protected TipsyApp app;
+    private ProgressDialog mConnectionProgressDialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -79,10 +81,18 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                 LoginActivity.getPager().setCurrentItem(1, true);
             }
         });
+        mConnectionProgressDialog = new ProgressDialog(getActivity());
+        mConnectionProgressDialog.setMessage("Connexion en cours...");
         return view;
     }
 
+    public void onDestroy(){
+        super.onDestroy();
+        mConnectionProgressDialog.dismiss();
+    }
+
     public void onValidationSucceeded() {
+        mConnectionProgressDialog.show();
         ParseUser.logInInBackground(inputEmail.getText().toString(), inputPassword.getText().toString(), new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
