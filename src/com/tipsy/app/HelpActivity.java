@@ -16,8 +16,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ViewSwitcher;
 
-import com.tipsy.lib.TipsyUser;
-
 import java.util.List;
 import java.util.Vector;
 

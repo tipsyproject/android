@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -21,8 +20,6 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
-
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.OrgaActivity;
@@ -35,7 +32,7 @@ import java.text.SimpleDateFormat;
 /**
  * Created by valoo on 22/01/14.
  */
-public class EditEventActivity extends FragmentActivity implements EditEventListener, ActionBar.TabListener, Validator.ValidationListener{
+public class EditEventActivity extends FragmentActivity implements EditEventListener, ActionBar.TabListener, Validator.ValidationListener {
 
     private Event event;
     private boolean newEvent = false;
@@ -75,8 +72,8 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         // DEFINITION DES TABS
         getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
-        if(getIntent().hasExtra("EVENT_ID")){
-            final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        if (getIntent().hasExtra("EVENT_ID")) {
+            final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
             ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
             query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
                 public void done(Event myevent, ParseException e) {
@@ -86,10 +83,10 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
                         initPager();
                         wait.dismiss();
                     } else
-                        Toast.makeText(EditEventActivity.this,getResources().getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(EditEventActivity.this, getResources().getString(R.string.erreur_interne), Toast.LENGTH_SHORT).show();
                 }
             });
-        }else{
+        } else {
             event = new Event();
             getActionBar().setTitle(getResources().getString(R.string.nouvel_event));
             initPager();
@@ -102,7 +99,7 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
-    public void initPager(){
+    public void initPager() {
         mAdapter = new EditEventPager(getSupportFragmentManager());
         mPager = (ViewPager) findViewById(R.id.event_pager);
         mPager.setAdapter(mAdapter);
@@ -132,11 +129,11 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                if(newEvent) backToOrga();
+                if (newEvent) backToOrga();
                 else backToEventOrga();
                 return true;
             case R.id.action_validate:
-                if(!saving){
+                if (!saving) {
                     validator = new Validator(this);
                     validator.setValidationListener(this);
                     validator.validate();
@@ -147,12 +144,11 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
     }
 
 
-
     // Envoi de la demande de sauvegarde de l'événement à l'activité
     public void onValidationSucceeded() {
         saving = true;
         // Si c'est une création d'eventOld, on initialise l'eventOld
-        final ProgressDialog wait = ProgressDialog.show(this,"","Enregistrement...",true,false);
+        final ProgressDialog wait = ProgressDialog.show(this, "", "Enregistrement...", true, false);
 
         if (event.getOrganisateur() == null)
             event.setOrganisateur(TipsyUser.getCurrentUser().getObjectId());
@@ -162,14 +158,15 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         String dateDebut = inputDateDebut.getText().toString() + " " + inputTimeDebut.getText().toString();
         try {
             event.setDebut(f.parse(dateDebut));
-        } catch (java.text.ParseException e) {}
+        } catch (java.text.ParseException e) {
+        }
 
         event.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 saving = false;
                 wait.dismiss();
-                if(e==null)
+                if (e == null)
                     backToEventOrga();
                 else
                     Toast.makeText(EditEventActivity.this, getResources().getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();
@@ -194,26 +191,29 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
     public void onTabSelected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
         mPager.setCurrentItem(tab.getPosition());
     }
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
 
     @Override
-    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {}
+    public void onTabUnselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+    }
+
+    @Override
+    public void onTabReselected(ActionBar.Tab tab, android.app.FragmentTransaction fragmentTransaction) {
+    }
 
 
     // EditEventListener
 
-    public Event getEvent(){
+    public Event getEvent() {
         return event;
     }
 
-    public void backToEventOrga(){
+    public void backToEventOrga() {
         Intent intent = new Intent(this, EventOrgaActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 
-    public void backToOrga(){
+    public void backToOrga() {
         Intent intent = new Intent(this, OrgaActivity.class);
         startActivity(intent);
     }

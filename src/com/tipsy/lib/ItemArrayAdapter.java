@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.tipsy.app.R;
+
 import java.io.Serializable;
 import java.util.ArrayList;
-
-import com.tipsy.app.R;
 
 /**
  * Created by valoo on 04/01/14.
@@ -52,7 +52,7 @@ public class ItemArrayAdapter extends ArrayAdapter<Item> implements Serializable
     }
 
     @Override
-    public void notifyDataSetChanged (){
+    public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
         Panier p = new Panier(items);
         totalView.setText(Commerce.prixToString(p.getPrixTotal(), p.getDevise()));

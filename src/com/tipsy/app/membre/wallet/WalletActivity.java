@@ -11,9 +11,9 @@ import android.view.MenuItem;
 
 import com.tipsy.app.R;
 import com.tipsy.app.membre.MembreActivity;
-import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.Commande;
 import com.tipsy.lib.Panier;
+import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.Transaction;
 import com.tipsy.lib.Wallet;
 
@@ -36,7 +36,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
 
         wallet = new Wallet(TipsyUser.getCurrentUser());
         /* Chargement du Tipsy Wallet */
-        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement du Tipsy Wallet...",true,false);
+        final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement du Tipsy Wallet...", true, false);
         wallet.load();
         wait.dismiss();
 
@@ -45,7 +45,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
                 case COMMANDE:
                     Panier panier = getIntent().getParcelableExtra("Panier");
                     Commande commande = getIntent().getParcelableExtra("Commande");
-                    goToCommande(false,panier,commande);
+                    goToCommande(false, panier, commande);
                     break;
                 default:
                     goToResume(false);
@@ -70,7 +70,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         return super.onOptionsItemSelected(item);
     }
 
-    public Wallet getWallet(){
+    public Wallet getWallet() {
         return wallet;
     }
 
@@ -105,7 +105,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
 
     /* Détails sur une transaction */
     public void goToCommande(boolean addToBackStack, Panier p, Commande c) {
-        WalletCommandeFragment frag = WalletCommandeFragment.init(p,c);
+        WalletCommandeFragment frag = WalletCommandeFragment.init(p, c);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, frag);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -124,7 +124,7 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         ft.commit();
     }
 
-    public void goToHomeMembre(){
+    public void goToHomeMembre() {
         Intent intent = new Intent(this, MembreActivity.class);
         startActivity(intent);
     }

@@ -25,15 +25,14 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.parse.ParseException;
+import com.tipsy.app.R;
+import com.tipsy.app.TipsyApp;
+import com.tipsy.lib.TipsyUser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -122,10 +121,10 @@ public class AccountOrgaFragment extends Fragment implements TextWatcher {
                 if (change) {
                     orga.setNom(Orga.getText().toString());
                     //orga.setAvatar(new StackMobFile("image/jpeg", "avatar.jpg", baos.toByteArray()));
-                    try{
+                    try {
                         orga.save();
                         callback.tableauDeBord(true);
-                    }catch(ParseException e){
+                    } catch (ParseException e) {
                         Toast.makeText(getActivity(), getResources().getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();
                     }
                 } else

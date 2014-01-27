@@ -109,7 +109,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         }
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         mConnectionProgressDialog.dismiss();
         mConnectionProgressDialog_signup.dismiss();
@@ -119,7 +119,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
     public void onBackPressed() {
         if (pager.getCurrentItem() != 0)
             pager.setCurrentItem(0, true);
-        else{
+        else {
             super.onBackPressed(); // This will pop the Activity from the stack.
             overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
         }
@@ -131,14 +131,14 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         validator.validate();
     }
 
-@Override
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (fb)
             ParseFacebookUtils.finishAuthentication(requestCode, resultCode, data);
     }
 
-    public void onClickFb(View view){
+    public void onClickFb(View view) {
         fb = true;
         mConnectionProgressDialog.show();
         List<String> permissions = Arrays.asList("basic_info", "email", "user_about_me",
@@ -170,17 +170,17 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                     @Override
                     public void onCompleted(GraphUser user, Response response) {
                         if (user != null) {
-                                // Save the user
-                                TipsyUser currentUser = TipsyUser
-                                        .getCurrentUser();
-                                currentUser.setPrenom(user.getFirstName());
-                                currentUser.setNom(user.getLastName());
-                                currentUser.setUsername(user.asMap().get("email").toString());
-                                currentUser.setType(TipsyUser.MEMBRE);
-                                currentUser.saveInBackground();
-                                startActivity(new Intent(TypeSignUpActivity.this, MembreActivity.class));
-                                TypeSignUpActivity.this.finish();
-                                LoginActivity.fa.finish();
+                            // Save the user
+                            TipsyUser currentUser = TipsyUser
+                                    .getCurrentUser();
+                            currentUser.setPrenom(user.getFirstName());
+                            currentUser.setNom(user.getLastName());
+                            currentUser.setUsername(user.asMap().get("email").toString());
+                            currentUser.setType(TipsyUser.MEMBRE);
+                            currentUser.saveInBackground();
+                            startActivity(new Intent(TypeSignUpActivity.this, MembreActivity.class));
+                            TypeSignUpActivity.this.finish();
+                            LoginActivity.fa.finish();
 
                         } else if (response.getError() != null) {
                             if ((response.getError().getCategory() == FacebookRequestError.Category.AUTHENTICATION_RETRY)
@@ -202,7 +202,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
 
     }
 
-    public void onClickTwt(View view){
+    public void onClickTwt(View view) {
         mConnectionProgressDialog.show();
         ParseTwitterUtils.logIn(this, new LogInCallback() {
             @Override
@@ -238,11 +238,10 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
         user.setPassword(inputPassword.getText().toString().trim());
         user.setNom(inputNom.getText().toString().trim());
         int type;
-        if (pager.getCurrentItem() == 1){
+        if (pager.getCurrentItem() == 1) {
             user.setType(TipsyUser.MEMBRE);
             user.setPrenom(inputPrenom.getText().toString().trim());
-        }
-        else user.setType(TipsyUser.ORGA);
+        } else user.setType(TipsyUser.ORGA);
 
         user.signUpInBackground(new SignUpCallback() {
             public void done(ParseException e) {
@@ -253,7 +252,7 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                         public void done(ParseUser user, ParseException e) {
                             if (user != null) {
                                 TipsyUser u = (TipsyUser) user;
-                                if(u.getType() == TipsyUser.MEMBRE)
+                                if (u.getType() == TipsyUser.MEMBRE)
                                     startActivity(new Intent(TypeSignUpActivity.this, MembreActivity.class));
                                 else
                                     startActivity(new Intent(TypeSignUpActivity.this, OrgaActivity.class));
@@ -269,12 +268,12 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                     });
                 } else {
                     String message;
-                    switch(e.getCode()){
+                    switch (e.getCode()) {
                         case 202:// Email déjà pris
                             message = getResources().getString(R.string.email_arleady_taken);
                             break;
                         default:
-                            Log.d("TOUTAFAIT","signup error: "+e.getMessage());
+                            Log.d("TOUTAFAIT", "signup error: " + e.getMessage());
                             Log.d("TOUTAFAIT", "signup error code: " + e.getCode());
                             message = getResources().getString(R.string.erreur_interne);
                     }

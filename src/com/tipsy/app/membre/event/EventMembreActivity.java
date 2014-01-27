@@ -14,12 +14,11 @@ import android.view.MenuItem;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
 import com.tipsy.app.R;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
-import com.tipsy.lib.Event;
 import com.tipsy.lib.Commande;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.Panier;
 
 /**
@@ -36,7 +35,7 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         super.onCreate(savedInstanceState);
 
         /* Chargement de l'event */
-        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
         wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -83,11 +82,11 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         return super.onOptionsItemSelected(item);
     }
 
-    public Event getEvent(){
+    public Event getEvent() {
         return event;
     }
 
-    public void backToHome(){
+    public void backToHome() {
         Intent intent = new Intent(this, MembreActivity.class);
         startActivity(intent);
     }
@@ -116,7 +115,7 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         Intent intent = new Intent(this, WalletActivity.class);
         intent.putExtra(WalletActivity.ACTION, WalletActivity.COMMANDE);
         intent.putExtra("Panier", (Parcelable) p);
-        intent.putExtra("Commande",(Parcelable) c);
+        intent.putExtra("Commande", (Parcelable) c);
         startActivity(intent);
     }
 }

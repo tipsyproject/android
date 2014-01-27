@@ -14,9 +14,10 @@ import java.util.Date;
 @ParseClassName("Depot")
 public class Depot extends ParseObject implements Transaction {
 
-    public Depot(){}
+    public Depot() {
+    }
 
-    public Depot(int montant, String username, int devise){
+    public Depot(int montant, String username, int devise) {
         setDate(new Date());
         setDevise(devise);
         setMontant(montant);
@@ -28,7 +29,7 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setDate(Date date) {
-        put("date",date);
+        put("date", date);
     }
 
     public int getDevise() {
@@ -36,7 +37,7 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setDevise(int devise) {
-        put("devise",devise);
+        put("devise", devise);
     }
 
     public int getMontant() {
@@ -44,7 +45,7 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setMontant(int montant) {
-        put("montant",montant);
+        put("montant", montant);
     }
 
     public String getUsername() {
@@ -52,22 +53,20 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setUsername(String username) {
-        put("username",username);
+        put("username", username);
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return "";
     }
 
-    public String getTitre(){
+    public String getTitre() {
         return "Rechargement";
     }
 
-    public boolean isDepot(){
+    public boolean isDepot() {
         return true;
     }
-
-
 
 
     // Implémentation de Parcelable

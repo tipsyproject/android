@@ -15,16 +15,17 @@ import java.util.Date;
  */
 
 @ParseClassName("Event")
-public class Event extends ParseObject implements Parcelable{
+public class Event extends ParseObject implements Parcelable {
 
-    public Event() {}
+    public Event() {
+    }
 
     public Date getDebut() {
         return getDate("debut");
     }
 
     public void setDebut(Date debut) {
-        put("debut",debut);
+        put("debut", debut);
     }
 
     public String getLieu() {
@@ -32,7 +33,7 @@ public class Event extends ParseObject implements Parcelable{
     }
 
     public void setLieu(String lieu) {
-        put("lieu",lieu);
+        put("lieu", lieu);
     }
 
     public String getNom() {
@@ -40,7 +41,7 @@ public class Event extends ParseObject implements Parcelable{
     }
 
     public void setNom(String nom) {
-        put("nom",nom);
+        put("nom", nom);
     }
 
     public String getOrganisateur() {
@@ -48,13 +49,13 @@ public class Event extends ParseObject implements Parcelable{
     }
 
     public void setOrganisateur(String organisateur) {
-        put("organisateur",organisateur);
+        put("organisateur", organisateur);
     }
 
-    public void findBilletterie(FindCallback cb){
+    public void findBilletterie(FindCallback cb) {
         ParseQuery<Ticket> query = ParseQuery.getQuery(Ticket.class);
         query.include("event");
-        query.whereEqualTo("event",this);
+        query.whereEqualTo("event", this);
         query.whereEqualTo("type", Ticket.BILLET);
         query.findInBackground(cb);
     }

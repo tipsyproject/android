@@ -12,11 +12,10 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
 import com.tipsy.app.R;
 import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.lib.Event;
 import com.tipsy.lib.Achat;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.Ticket;
 
 import java.util.ArrayList;
@@ -40,8 +39,8 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         getActionBar().setTitle("Billetterie");
 
         /* On récupère l'event, la billetterie et les billets vendus */
-        if(savedInstanceState == null){
-            final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        if (savedInstanceState == null) {
+            final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
             ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
             query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
                 @Override
@@ -51,7 +50,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
                         event.findBilletterie(new FindCallback<Ticket>() {
                             @Override
                             public void done(List<Ticket> billets, ParseException e) {
-                                if(e==null){
+                                if (e == null) {
                                     Log.d("TOUTAFAIT", "find ");
                                     billetterie.clear();
                                     billetterie.addAll(billets);
@@ -65,17 +64,16 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
                                             ft.commit();
                                         }
                                     });
-                                }else
-                                    Toast.makeText(BilletterieActivity.this,getString(R.string.erreur_interne),Toast.LENGTH_SHORT).show();
+                                } else
+                                    Toast.makeText(BilletterieActivity.this, getString(R.string.erreur_interne), Toast.LENGTH_SHORT).show();
                             }
                         });
-                    }
-                    else{
+                    } else {
                         wait.dismiss();
                     }
                 }
             });
-        }else{
+        } else {
             event = savedInstanceState.getParcelable("Event");
             billetterie = savedInstanceState.getParcelableArrayList("Billetterie");
         }
@@ -88,10 +86,10 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState){
-        if(outState == null)
+    public void onSaveInstanceState(Bundle outState) {
+        if (outState == null)
             outState = new Bundle();
-        outState.putParcelable("Event",event);
+        outState.putParcelable("Event", event);
         outState.putParcelableArrayList("Billetterie", billetterie);
         super.onSaveInstanceState(outState);
     }
@@ -101,13 +99,15 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
       */
 
     /* GETTERS */
-    public ArrayList<Ticket> getBilletterie(){
+    public ArrayList<Ticket> getBilletterie() {
         return billetterie;
     }
-    public Event getEvent(){
+
+    public Event getEvent() {
         return event;
     }
-    public ArrayList<Achat> getVentes(){
+
+    public ArrayList<Achat> getVentes() {
         return ventes;
     }
 
@@ -136,7 +136,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         ft.commit();
     }
 
-    public void goToListeVentes(){
+    public void goToListeVentes() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new ListeVentesFragment());
         ft.addToBackStack(null);
@@ -150,7 +150,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         ft.commit();
     }
 
-    public void goToVendreBillet(){
+    public void goToVendreBillet() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new VendreBilletFragment());
         ft.addToBackStack(null);
@@ -158,7 +158,7 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
     }
 
     /* retour à l'Activité parente */
-    public void backToEventOrga(){
+    public void backToEventOrga() {
         Intent intent = new Intent(this, EventOrgaActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);

@@ -23,7 +23,8 @@ public class Ticket extends ParseObject implements Parcelable {
     public static int VESTIARE = 1;
     public static int CONSO = 2;
 
-    public Ticket() {}
+    public Ticket() {
+    }
 
 
     public int getDevise() {
@@ -31,15 +32,15 @@ public class Ticket extends ParseObject implements Parcelable {
     }
 
     public void setDevise(int devise) {
-        put("devise",devise);
+        put("devise", devise);
     }
 
-    public Event getEvent(){
+    public Event getEvent() {
         return (Event) getParseObject("event");
     }
 
-    public void setEvent(Event event){
-        put("event",event);
+    public void setEvent(Event event) {
+        put("event", event);
     }
 
     public String getNom() {
@@ -47,7 +48,7 @@ public class Ticket extends ParseObject implements Parcelable {
     }
 
     public void setNom(String nom) {
-        put("nom",nom);
+        put("nom", nom);
     }
 
 
@@ -57,7 +58,7 @@ public class Ticket extends ParseObject implements Parcelable {
 
     public void setPrix(int prix) {
         if (prix < 0) throw new ArithmeticException("Le prix d'un ticket ne peut être négatif.");
-        else put("prix",prix);
+        else put("prix", prix);
     }
 
     public int getType() {
@@ -65,7 +66,7 @@ public class Ticket extends ParseObject implements Parcelable {
     }
 
     public void setType(int type) {
-        put("type",type);
+        put("type", type);
     }
 
 
@@ -75,20 +76,16 @@ public class Ticket extends ParseObject implements Parcelable {
     }
 
 
-    public static void loadVentes(ArrayList<Ticket> tickets, FindCallback<Achat> callback){
+    public static void loadVentes(ArrayList<Ticket> tickets, FindCallback<Achat> callback) {
         // Seulement si des billets sont définis
-        if(!tickets.isEmpty()){
+        if (!tickets.isEmpty()) {
             ParseQuery<Achat> query = ParseQuery.getQuery(Achat.class);
             query.include("participant");
             query.include("produit");
             query.whereEqualTo("produit", tickets);
             query.findInBackground(callback);
-        }
-        else callback.done(new ArrayList<Achat>(),null);
+        } else callback.done(new ArrayList<Achat>(), null);
     }
-
-
-
 
 
     // Implémentation de Parcelable
@@ -101,7 +98,7 @@ public class Ticket extends ParseObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getObjectId());
         dest.writeInt(getDevise());
-        dest.writeParcelable(getEvent(),flags);
+        dest.writeParcelable(getEvent(), flags);
         dest.writeString(getNom());
         dest.writeInt(getPrix());
         dest.writeInt(getType());

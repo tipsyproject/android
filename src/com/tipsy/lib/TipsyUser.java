@@ -8,14 +8,16 @@ import com.parse.ParseUser;
 /**
  * Created by vquefele on 23/01/14.
  */
-public class TipsyUser extends ParseUser implements Parcelable{
+public class TipsyUser extends ParseUser implements Parcelable {
 
     public static int MEMBRE = 1;
     public static int ORGA = 2;
-    public TipsyUser(){}
+
+    public TipsyUser() {
+    }
 
     @Override
-    public void setUsername(String username){
+    public void setUsername(String username) {
         super.setUsername(username);
         super.setEmail(username);
     }
@@ -25,7 +27,7 @@ public class TipsyUser extends ParseUser implements Parcelable{
     }
 
     public void setNom(String nom) {
-        put("nom",nom);
+        put("nom", nom);
     }
 
     public String getPrenom() {
@@ -33,7 +35,7 @@ public class TipsyUser extends ParseUser implements Parcelable{
     }
 
     public void setPrenom(String prenom) {
-        put("prenom",prenom);
+        put("prenom", prenom);
     }
 
     public int getType() {
@@ -41,10 +43,10 @@ public class TipsyUser extends ParseUser implements Parcelable{
     }
 
     public void setType(int type) {
-        put("type",type);
+        put("type", type);
     }
 
-    public static TipsyUser getCurrentUser(){
+    public static TipsyUser getCurrentUser() {
         return (TipsyUser) ParseUser.getCurrentUser();
     }
 

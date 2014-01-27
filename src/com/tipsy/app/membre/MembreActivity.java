@@ -6,7 +6,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
@@ -21,22 +20,21 @@ import android.widget.TextView;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.List;
-
 import com.tipsy.app.HelpActivity;
 import com.tipsy.app.LoginActivity;
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.UserActivity;
 import com.tipsy.app.membre.bracelet.BraceletActivity;
 import com.tipsy.app.membre.event.EventMembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.TipsyUser;
+
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 /**
  * Created by tech on 05/12/13.
@@ -86,7 +84,8 @@ public class MembreActivity extends UserActivity implements MembreListener {
             Field mCursorDrawableRes = TextView.class.getDeclaredField("mCursorDrawableRes");
             mCursorDrawableRes.setAccessible(true);
             mCursorDrawableRes.set(searchTextView, R.drawable.cursor);
-        } catch (Exception e) {}
+        } catch (Exception e) {
+        }
         SearchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         return super.onCreateOptionsMenu(menu);
     }
@@ -180,12 +179,12 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     public void goToEvent(Event e) {
         Intent intent = new Intent(this, EventMembreActivity.class);
-        intent.putExtra("EVENT_ID",e.getObjectId());
+        intent.putExtra("EVENT_ID", e.getObjectId());
         startActivity(intent);
     }
 
     public void searchEventByDate(Calendar cal) {
-        final ProgressDialog wait = ProgressDialog.show(this,null,"Recherche...",true);
+        final ProgressDialog wait = ProgressDialog.show(this, null, "Recherche...", true);
 
         // On va definir l'intervalle de recherche de date
         //  00h00  <= date < 00h00 à J+1
@@ -197,8 +196,8 @@ public class MembreActivity extends UserActivity implements MembreListener {
         calmax.add(Calendar.DAY_OF_MONTH, +1);
 
         ParseQuery<Event> eventsQuery = ParseQuery.getQuery(Event.class);
-        eventsQuery.whereGreaterThanOrEqualTo("debut",calmin.getTime());
-        eventsQuery.whereLessThan("debut",calmax.getTime());
+        eventsQuery.whereGreaterThanOrEqualTo("debut", calmin.getTime());
+        eventsQuery.whereLessThan("debut", calmax.getTime());
 
         eventsQuery.findInBackground(new FindCallback<Event>() {
             public void done(List<Event> res, ParseException e) {
@@ -208,7 +207,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
                     wait.dismiss();
                     goToSearchResults();
                 } else {
-                    Log.d("TOUTAFAIT","result ko:"+e.getMessage());
+                    Log.d("TOUTAFAIT", "result ko:" + e.getMessage());
                     wait.dismiss();
                 }
             }
@@ -217,7 +216,6 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
     public void searchEventByKeyword(String query) {
     }
-
 
 
     public void goToSearchResults() {
@@ -229,7 +227,7 @@ public class MembreActivity extends UserActivity implements MembreListener {
                 .commit();
     }
 
-    public ArrayList<Event> getSearchResults(){
+    public ArrayList<Event> getSearchResults() {
         return eventResults;
     }
 }

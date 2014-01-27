@@ -19,5 +19,5 @@
         android:paddingLeft="@dimen/activity_margin"
         android:paddingRight="@dimen/activity_margin"
         android:drawableLeft="@drawable/ic_action_network_wifi"
-        android:drawablePadding="8dp"/>
+        android:drawablePadding="8dp" />
 </LinearLayout>

@@ -26,7 +26,6 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 import com.tipsy.app.membre.MembreActivity;
-import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.lib.TipsyUser;
 
 import java.io.IOException;
@@ -207,12 +206,12 @@ public class TypeSignUpFragment extends Fragment implements ConnectionCallbacks,
                                 });
                             } else {
                                 String message;
-                                switch(e.getCode()){
+                                switch (e.getCode()) {
                                     case 202:// Email déjà pris
                                         message = getResources().getString(R.string.email_arleady_taken);
                                         break;
                                     default:
-                                        Log.d("TOUTAFAIT","signup error: "+e.getMessage());
+                                        Log.d("TOUTAFAIT", "signup error: " + e.getMessage());
                                         Log.d("TOUTAFAIT", "signup error code: " + e.getCode());
                                         message = getResources().getString(R.string.erreur_interne);
                                 }

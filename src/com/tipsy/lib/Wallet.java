@@ -34,7 +34,7 @@ public class Wallet extends ArrayList<Transaction> {
 
     public int getSolde() {
         int solde = 0;
-        for(Transaction t: this){
+        for (Transaction t : this) {
             if (t.isDepot())
                 solde += t.getMontant();
             else solde -= t.getMontant();
@@ -44,18 +44,18 @@ public class Wallet extends ArrayList<Transaction> {
 
     /* Récupère la liste des transactions du user (Depots + Achats) */
     public void load() {
-        try{
+        try {
             List<Transaction> transactions = new ArrayList<Transaction>();
             /* LISTE DES DEPOTS DU USER */
             ParseQuery<Depot> queryD = ParseQuery.getQuery(Depot.class);
-            queryD.whereEqualTo("username",user.getObjectId());
+            queryD.whereEqualTo("username", user.getObjectId());
             List<Depot> depots = queryD.find();
             transactions.addAll(depots);
 
             /* LISTE DES ACHATS USER */
             ParseQuery<Achat> queryA = ParseQuery.getQuery(Achat.class);
             queryA.include("produit");
-            queryA.whereEqualTo("payeur",user.getObjectId());
+            queryA.whereEqualTo("payeur", user.getObjectId());
             List<Achat> achats = queryA.find();
             transactions.addAll(achats);
             /* TRI DE LA TRANSACTION LA PLUS RECENTE A LA MOINS RECENTE */
@@ -67,7 +67,7 @@ public class Wallet extends ArrayList<Transaction> {
             /* On ne reinitialise qu'une fois qu'on est sûr que tout s'est bien déroulé */
             clear();
             addAll(transactions);
-        }catch(ParseException e){
+        } catch (ParseException e) {
 
         }
     }
@@ -77,7 +77,7 @@ public class Wallet extends ArrayList<Transaction> {
 
         if (montant <= 0)
             callback.onFailure(new Exception("Le montant doit être positif."));
-        else{
+        else {
             final Depot depot = new Depot(montant, user.getUsername(), Commerce.Devise.getLocale());
             depot.saveInBackground(new SaveCallback() {
                 @Override
@@ -92,7 +92,7 @@ public class Wallet extends ArrayList<Transaction> {
         }
     }
 
-    public void pay(final Commande cmd, final WalletCallback callback){
+    public void pay(final Commande cmd, final WalletCallback callback) {
         // Mise en attente de l'utilisateur
         callback.onWait();
         if (getSolde() < cmd.getPrixTotal())
@@ -101,14 +101,14 @@ public class Wallet extends ArrayList<Transaction> {
             cmd.setPayeur(user);
 
             ArrayList<ParseObject> achats = new ArrayList<ParseObject>();
-            for(Achat a: cmd)
+            for (Achat a : cmd)
                 achats.add(a);
 
-            try{
+            try {
                 Achat.saveAll(achats);
-                addAll(0,cmd);
+                addAll(0, cmd);
                 callback.onSuccess();
-            }catch(ParseException e){
+            } catch (ParseException e) {
                 callback.onFailure(e);
 
             }
@@ -116,7 +116,7 @@ public class Wallet extends ArrayList<Transaction> {
         }
     }
 
-    public static ProgressDialog getProgressDialog(Context context){
+    public static ProgressDialog getProgressDialog(Context context) {
         ProgressDialog wait = new ProgressDialog(context);
         wait.setMessage("Paiement en cours...");
         wait.setIndeterminate(true);

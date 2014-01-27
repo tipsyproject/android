@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -19,18 +18,17 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.tipsy.app.R;
+import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
+import com.tipsy.app.orga.event.EventOrgaActivity;
+import com.tipsy.lib.Achat;
+import com.tipsy.lib.Bracelet;
+import com.tipsy.lib.Event;
+import com.tipsy.lib.Ticket;
 
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import com.tipsy.app.R;
-import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.lib.Bracelet;
-import com.tipsy.lib.Event;
-import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
-import com.tipsy.lib.Achat;
-import com.tipsy.lib.Ticket;
 
 /**
  * Created by vquefele on 20/01/14.
@@ -55,9 +53,9 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         adapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, AccesActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
-        entreesAdapter = new EntreeArrayAdapter(AccesActivity.this,entrees);
+        entreesAdapter = new EntreeArrayAdapter(AccesActivity.this, entrees);
 
-        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
         wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -76,17 +74,16 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
                             billetterie.clear();
                             billetterie.addAll(billets);
                             wait.dismiss();
-                            if(savedInstanceState != null && savedInstanceState.containsKey("Entrees")){
-                                entrees =  savedInstanceState.getParcelableArrayList("Entrees");
-                            }else{
+                            if (savedInstanceState != null && savedInstanceState.containsKey("Entrees")) {
+                                entrees = savedInstanceState.getParcelableArrayList("Entrees");
+                            } else {
                                 loadVentes();
                                 goToHome(false);
                             }
 
                         }
                     });
-                }
-                else{
+                } else {
                     wait.dismiss();
                     Log.d("TOUTAFAIT", "Erreur fetch event/ EventOrgaActivity:Oncreate: " + e.getMessage());
                 }
@@ -102,7 +99,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
+        if (outState == null)
             outState = new Bundle();
         outState.putParcelableArrayList("Entrees", entrees);
         // Add variable to outState here
@@ -131,20 +128,20 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
     }
 
 
-    public void loadVentes(){
+    public void loadVentes() {
         Ticket.loadVentes(billetterie, new FindCallback<Achat>() {
             @Override
             public void done(List<Achat> achats, ParseException e) {
-                if(e == null){
+                if (e == null) {
                     entrees.clear();
                     entrees.addAll(achats);
                     entreesAdapter.notifyDataSetChanged();
                     Toast.makeText(AccesActivity.this, "Liste mise à jour", Toast.LENGTH_SHORT).show();
-                }else Toast.makeText(AccesActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(AccesActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
-
 
 
     @Override
@@ -154,14 +151,14 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
     }
 
     @Override
-    public void onPause(){
+    public void onPause() {
         adapter.disableForegroundDispatch(this);
         super.onPause();
     }
 
     @Override
-    protected void onNewIntent(Intent intent){
-        final ProgressDialog wait = ProgressDialog.show(this,"","Vérification en cours...",true,true);
+    protected void onNewIntent(Intent intent) {
+        final ProgressDialog wait = ProgressDialog.show(this, "", "Vérification en cours...", true, true);
 
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String tagID = Bracelet.bytesToHex(tag.getId());
@@ -199,13 +196,13 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
     }
 
 
-    public void backToEventOrga(){
+    public void backToEventOrga() {
         Intent intent = new Intent(this, EventOrgaActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 
-    public void goToHome(boolean addTobackStack){
+    public void goToHome(boolean addTobackStack) {
         HomeAccesFragment frag = new HomeAccesFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, frag);
@@ -214,7 +211,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         ft.commit();
     }
 
-    public void goToManualAccess(){
+    public void goToManualAccess() {
         ManualAccesFragment frag = new ManualAccesFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, frag);
@@ -222,16 +219,19 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         ft.commit();
     }
 
-    public ArrayList<Ticket> getBilletterie(){
+    public ArrayList<Ticket> getBilletterie() {
         return billetterie;
     }
-    public Event getEvent(){
+
+    public Event getEvent() {
         return event;
     }
-    public ArrayList<Achat> getEntrees(){
+
+    public ArrayList<Achat> getEntrees() {
         return entrees;
     }
-    public EntreeArrayAdapter getEntreesAdapter(){
+
+    public EntreeArrayAdapter getEntreesAdapter() {
         return entreesAdapter;
     }
 }

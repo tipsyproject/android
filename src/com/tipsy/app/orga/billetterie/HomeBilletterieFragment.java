@@ -17,7 +17,7 @@ import com.tipsy.app.R;
 /**
  * Created by valoo on 25/01/14.
  */
-public class HomeBilletterieFragment extends Fragment{
+public class HomeBilletterieFragment extends Fragment {
 
     private BilletterieListener callback;
 
@@ -46,10 +46,12 @@ public class HomeBilletterieFragment extends Fragment{
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_billetterie_home, menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle item selection

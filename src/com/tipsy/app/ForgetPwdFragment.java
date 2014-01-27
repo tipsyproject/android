@@ -3,8 +3,6 @@ package com.tipsy.app;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,10 +59,9 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
                             // An email was successfully sent with reset instructions.
                             LoginActivity.getPager().setCurrentItem(0, true);
                             Toast.makeText(getActivity(), "Email envoyé", Toast.LENGTH_LONG).show();
-                        } else if (e.getCode() == e.EMAIL_NOT_FOUND || e.getCode() == e.OBJECT_NOT_FOUND){
+                        } else if (e.getCode() == e.EMAIL_NOT_FOUND || e.getCode() == e.OBJECT_NOT_FOUND) {
                             Toast.makeText(getActivity(), "Email non existant", Toast.LENGTH_LONG).show();
-                        }
-                        else {
+                        } else {
                             // Something went wrong. Look at the ParseException to see what's up.
                             Toast.makeText(getActivity(), "Réinitialisation échouée", Toast.LENGTH_LONG).show();
                         }

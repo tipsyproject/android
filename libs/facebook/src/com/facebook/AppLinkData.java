@@ -24,10 +24,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+
 import com.facebook.internal.NativeProtocol;
 import com.facebook.internal.PlatformServiceClient;
 import com.facebook.internal.Utility;
 import com.facebook.internal.Validate;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -59,7 +61,8 @@ public class AppLinkData {
     /**
      * Asynchronously fetches app link information that might have been stored for use
      * after installation of the app
-     * @param context The context
+     *
+     * @param context           The context
      * @param completionHandler CompletionHandler to be notified with the AppLinkData object or null if none is
      *                          available.  Must not be null.
      */
@@ -70,8 +73,9 @@ public class AppLinkData {
     /**
      * Asynchronously fetches app link information that might have been stored for use
      * after installation of the app
-     * @param context The context
-     * @param applicationId Facebook application Id. If null, it is taken from the manifest
+     *
+     * @param context           The context
+     * @param applicationId     Facebook application Id. If null, it is taken from the manifest
      * @param completionHandler CompletionHandler to be notified with the AppLinkData object or null if none is
      *                          available.  Must not be null.
      */
@@ -127,6 +131,7 @@ public class AppLinkData {
 
     /**
      * Parses out any app link data from the Intent of the Activity passed in.
+     *
      * @param activity Activity that was started because of an app link
      * @return AppLinkData if found. null if not.
      */
@@ -149,7 +154,7 @@ public class AppLinkData {
     }
 
     private static AppLinkData createFromJson(String jsonString) {
-        if (jsonString  == null) {
+        if (jsonString == null) {
             return null;
         }
 
@@ -193,7 +198,7 @@ public class AppLinkData {
 
         // TODO : Try old-school deep linking
         // Task : #2583027
-       return null;
+        return null;
     }
 
     private AppLinkData() {
@@ -201,6 +206,7 @@ public class AppLinkData {
 
     /**
      * TargetUri for this App Link
+     *
      * @return targetUri
      */
     public Uri getTargetUri() {
@@ -209,6 +215,7 @@ public class AppLinkData {
 
     /**
      * Ref for this App Link
+     *
      * @return ref
      */
     public String[] getRef() {
@@ -218,6 +225,7 @@ public class AppLinkData {
     /**
      * The full set of arguments for this app link. Properties like TargetUri & Ref are typically
      * picked out of this set of arguments.
+     *
      * @return JSONObject property bag.
      */
     public JSONObject getArguments() {
@@ -231,6 +239,7 @@ public class AppLinkData {
         /**
          * This method is called when deferred app link data has been fetched. If no app link data was found,
          * this method is called with null
+         *
          * @param appLinkData The app link data that was fetched. Null if none was found.
          */
         void onDeferredAppLinkDataFetched(AppLinkData appLinkData);

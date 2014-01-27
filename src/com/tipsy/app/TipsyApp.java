@@ -9,14 +9,14 @@ import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
+import com.tipsy.lib.Achat;
 import com.tipsy.lib.Bracelet;
+import com.tipsy.lib.Depot;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.Prefs;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.TipsyUser;
-import com.tipsy.lib.Achat;
-import com.tipsy.lib.Depot;
 
 /**
  * Created by valoo on 18/12/13.

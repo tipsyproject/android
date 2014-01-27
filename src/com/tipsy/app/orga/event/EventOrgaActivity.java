@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-
 import com.tipsy.app.R;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.acces.AccesActivity;
@@ -35,7 +34,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         /* Chargement de l'event */
-        final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true,true);
+        final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
         wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -80,19 +79,19 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         return super.onOptionsItemSelected(item);
     }
 
-    public Event getEvent(){
+    public Event getEvent() {
         return event;
     }
 
-    public void home(boolean addTobackStack){
+    public void home(boolean addTobackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new HomeEventOrgaFragment());
-        if(addTobackStack)
+        if (addTobackStack)
             ft.addToBackStack(null);
         ft.commit();
     }
 
-    public void backToOrga(){
+    public void backToOrga() {
         Intent intent = new Intent(this, OrgaActivity.class);
         startActivity(intent);
     }

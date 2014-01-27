@@ -29,15 +29,27 @@ import android.net.Uri;
 import android.net.http.SslError;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.view.*;
+import android.view.Display;
+import android.view.Gravity;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.webkit.SslErrorHandler;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import com.facebook.*;
-import com.facebook.android.*;
+
+import com.facebook.FacebookDialogException;
+import com.facebook.FacebookException;
+import com.facebook.FacebookOperationCanceledException;
+import com.facebook.FacebookRequestError;
+import com.facebook.FacebookServiceException;
+import com.facebook.Session;
+import com.facebook.android.R;
+import com.facebook.android.Util;
 import com.facebook.internal.Logger;
 import com.facebook.internal.ServerProtocol;
 import com.facebook.internal.Utility;
@@ -127,7 +139,7 @@ public class WebDialog extends Dialog {
      * @param action     the portion of the dialog URL following "dialog/"
      * @param parameters parameters which will be included as part of the URL
      * @param theme      identifier of a theme to pass to the Dialog class
-     * @param listener the listener to notify, or null if no notification is desired
+     * @param listener   the listener to notify, or null if no notification is desired
      */
     public WebDialog(Context context, String action, Bundle parameters, int theme, OnCompleteListener listener) {
         super(context, theme);
@@ -263,9 +275,10 @@ public class WebDialog extends Dialog {
 
     /**
      * Returns a scaled size (either width or height) based on the parameters passed.
-     * @param screenSize a pixel dimension of the screen (either width or height)
-     * @param density density of the screen
-     * @param noPaddingSize the size at which there's no padding for the dialog
+     *
+     * @param screenSize     a pixel dimension of the screen (either width or height)
+     * @param density        density of the screen
+     * @param noPaddingSize  the size at which there's no padding for the dialog
      * @param maxPaddingSize the size at which to apply maximum padding for the dialog
      * @return a scaled size.
      */
@@ -404,7 +417,7 @@ public class WebDialog extends Dialog {
 
         @Override
         public void onReceivedError(WebView view, int errorCode,
-                String description, String failingUrl) {
+                                    String description, String failingUrl) {
             super.onReceivedError(view, errorCode, description, failingUrl);
             sendErrorToListener(new FacebookDialogException(description, errorCode, failingUrl));
             WebDialog.this.dismiss();
@@ -559,11 +572,11 @@ public class WebDialog extends Dialog {
         /**
          * Constructor that builds a dialog for an authenticated user.
          *
-         * @param context the Context within which the dialog will be shown.
-         * @param session the Session representing an authenticating user to use for
-         *                showing the dialog; must not be null, and must be opened.
-         * @param action the portion of the dialog URL following www.facebook.com/dialog/.
-         *               See https://developers.facebook.com/docs/reference/dialogs/ for details.
+         * @param context    the Context within which the dialog will be shown.
+         * @param session    the Session representing an authenticating user to use for
+         *                   showing the dialog; must not be null, and must be opened.
+         * @param action     the portion of the dialog URL following www.facebook.com/dialog/.
+         *                   See https://developers.facebook.com/docs/reference/dialogs/ for details.
          * @param parameters a Bundle containing parameters to pass as part of the URL.
          */
         public Builder(Context context, Session session, String action, Bundle parameters) {
@@ -573,11 +586,11 @@ public class WebDialog extends Dialog {
         /**
          * Constructor that builds a dialog without an authenticated user.
          *
-         * @param context the Context within which the dialog will be shown.
+         * @param context       the Context within which the dialog will be shown.
          * @param applicationId the application ID to be included in the dialog URL.
-         * @param action the portion of the dialog URL following www.facebook.com/dialog/.
-         *               See https://developers.facebook.com/docs/reference/dialogs/ for details.
-         * @param parameters a Bundle containing parameters to pass as part of the URL.
+         * @param action        the portion of the dialog URL following www.facebook.com/dialog/.
+         *                      See https://developers.facebook.com/docs/reference/dialogs/ for details.
+         * @param parameters    a Bundle containing parameters to pass as part of the URL.
          */
         public Builder(Context context, String applicationId, String action, Bundle parameters) {
             super(context, applicationId, action, parameters);

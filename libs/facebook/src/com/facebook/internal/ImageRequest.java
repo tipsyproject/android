@@ -28,6 +28,7 @@ public class ImageRequest {
         /**
          * This method should always be called on the UI thread. ImageDownloader makes
          * sure to do this when it is responsible for issuing the ImageResponse
+         *
          * @param response
          */
         void onCompleted(ImageResponse response);

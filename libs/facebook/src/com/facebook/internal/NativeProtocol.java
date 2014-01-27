@@ -19,15 +19,27 @@ package com.facebook.internal;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.*;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.content.pm.Signature;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import com.facebook.*;
 
-import java.util.*;
+import com.facebook.FacebookException;
+import com.facebook.FacebookOperationCanceledException;
+import com.facebook.Session;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 /**
  * com.facebook.internal is solely for the use of other packages within the Facebook SDK for Android. Use of
@@ -124,7 +136,7 @@ public final class NativeProtocol {
     }
 
     public static Intent createProxyAuthIntent(Context context, String applicationId, List<String> permissions,
-            String e2e) {
+                                               String e2e) {
         Intent intent = new Intent()
                 .setClassName(FACEBOOK_PACKAGE, FACEBOOK_PROXY_AUTH_ACTIVITY)
                 .putExtra(FACEBOOK_PROXY_AUTH_APP_ID_KEY, applicationId);
@@ -162,11 +174,11 @@ public final class NativeProtocol {
 
     // Messages supported by PlatformService:
     public static final int MESSAGE_GET_ACCESS_TOKEN_REQUEST = 0x10000;
-    public static final int MESSAGE_GET_ACCESS_TOKEN_REPLY   = 0x10001;
+    public static final int MESSAGE_GET_ACCESS_TOKEN_REPLY = 0x10001;
     static final int MESSAGE_GET_PROTOCOL_VERSIONS_REQUEST = 0x10002;
-    static final int MESSAGE_GET_PROTOCOL_VERSIONS_REPLY   = 0x10003;
+    static final int MESSAGE_GET_PROTOCOL_VERSIONS_REPLY = 0x10003;
     public static final int MESSAGE_GET_INSTALL_DATA_REQUEST = 0x10004;
-    public static final int MESSAGE_GET_INSTALL_DATA_REPLY   = 0x10005;
+    public static final int MESSAGE_GET_INSTALL_DATA_REPLY = 0x10005;
 
     // MESSAGE_ERROR_REPLY data keys:
     // See STATUS_*
@@ -291,17 +303,17 @@ public final class NativeProtocol {
     }
 
     public static Intent createLoginDialog20121101Intent(Context context, String applicationId, ArrayList<String> permissions,
-            String audience) {
+                                                         String audience) {
         Intent intent = new Intent()
-                    .setAction(INTENT_ACTION_PLATFORM_ACTIVITY)
-                    .setPackage(FACEBOOK_PACKAGE)
-                    .addCategory(Intent.CATEGORY_DEFAULT)
-                    .putExtra(EXTRA_PROTOCOL_VERSION, PROTOCOL_VERSION_20121101)
-                    .putExtra(EXTRA_PROTOCOL_ACTION, ACTION_LOGIN_DIALOG)
-                    .putExtra(EXTRA_APPLICATION_ID, applicationId)
-                    .putStringArrayListExtra(EXTRA_PERMISSIONS, ensureDefaultPermissions(permissions))
-                    .putExtra(EXTRA_PROTOCOL_CALL_ID, generateCallId())
-                    .putExtra(EXTRA_WRITE_PRIVACY, ensureDefaultAudience(audience));
+                .setAction(INTENT_ACTION_PLATFORM_ACTIVITY)
+                .setPackage(FACEBOOK_PACKAGE)
+                .addCategory(Intent.CATEGORY_DEFAULT)
+                .putExtra(EXTRA_PROTOCOL_VERSION, PROTOCOL_VERSION_20121101)
+                .putExtra(EXTRA_PROTOCOL_ACTION, ACTION_LOGIN_DIALOG)
+                .putExtra(EXTRA_APPLICATION_ID, applicationId)
+                .putStringArrayListExtra(EXTRA_PERMISSIONS, ensureDefaultPermissions(permissions))
+                .putExtra(EXTRA_PROTOCOL_CALL_ID, generateCallId())
+                .putExtra(EXTRA_WRITE_PRIVACY, ensureDefaultAudience(audience));
         return validateKatanaActivityIntent(context, intent);
     }
 
@@ -367,7 +379,7 @@ public final class NativeProtocol {
     public static int getLatestAvailableProtocolVersion(Context context, final int minimumVersion) {
         ContentResolver contentResolver = context.getContentResolver();
 
-        String [] projection = new String[]{ PLATFORM_PROVIDER_VERSION_COLUMN };
+        String[] projection = new String[]{PLATFORM_PROVIDER_VERSION_COLUMN};
         Cursor c = contentResolver.query(PLATFORM_PROVIDER_VERSIONS_URI, projection, null, null, null);
         if (c == null) {
             return NO_PROTOCOL_AVAILABLE;

@@ -36,7 +36,6 @@ j'accepte les conditions générales."</string>
     <string name="forget">Merci d\'entrer votre adresse email, nous vous enverrons un email afin de réinitialiser votre mot de passe.</string>
 
 
-
     <!-- ERREURS -->
     <string name="app_not_available">Erreur</string>
     <string name="erreur_interne">Erreur interne</string>
@@ -52,7 +51,6 @@ j'accepte les conditions générales."</string>
     <string name="empty_liste_billets">Aucun billet défini.</string>
     <string name="vendre_billet">Vendre un billet</string>
     <string name="empty_liste_ventes">Aucun billet vendu.</string>
-
 
 
     <string name="no_upcoming_event">Aucun événement à venir.</string>

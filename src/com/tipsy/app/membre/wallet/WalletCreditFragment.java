@@ -15,7 +15,6 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.NumberRule;
 import com.mobsandgeeks.saripaar.annotation.Required;
-
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.lib.Commerce;
@@ -88,7 +87,7 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
             @Override
             public void onFailure(Exception e) {
                 wait.dismiss();
-                Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -99,7 +98,7 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
         } else {
-            Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
         }
     }
 }

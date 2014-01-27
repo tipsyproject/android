@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Handler;
 import android.os.Looper;
+
 import com.facebook.FacebookException;
 
 import java.io.IOException;
@@ -30,7 +31,8 @@ import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ImageDownloader {
     private static final int DOWNLOAD_QUEUE_MAX_CONCURRENT = WorkQueue.DEFAULT_MAX_CONCURRENT;
@@ -44,6 +46,7 @@ public class ImageDownloader {
     /**
      * Downloads the image specified in the passed in request.
      * If a callback is specified, it is guaranteed to be invoked on the calling thread.
+     *
      * @param request Request to process
      */
     public static void downloadAsync(ImageRequest request) {
@@ -311,7 +314,7 @@ public class ImageDownloader {
             boolean isEqual = false;
 
             if (o != null && o instanceof RequestKey) {
-                RequestKey compareTo = (RequestKey)o;
+                RequestKey compareTo = (RequestKey) o;
                 isEqual = compareTo.uri == uri && compareTo.tag == tag;
             }
 

@@ -49,16 +49,16 @@ public class EditBilletFragment extends Fragment implements Validator.Validation
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(savedInstanceState == null){
-            if(getArguments() != null && getArguments().containsKey("BILLET_INDEX")){
+        if (savedInstanceState == null) {
+            if (getArguments() != null && getArguments().containsKey("BILLET_INDEX")) {
                 index = getArguments().getInt("BILLET_INDEX");
                 billet = callback.getBilletterie().get(index);
-            }else{
+            } else {
                 index = -1;
                 billet = new Ticket();
                 billet.setType(Ticket.BILLET);
             }
-        }else{
+        } else {
             index = savedInstanceState.getInt("index");
             billet = savedInstanceState.getParcelable("Billet");
         }
@@ -70,7 +70,7 @@ public class EditBilletFragment extends Fragment implements Validator.Validation
         devise = (TextView) view.findViewById(R.id.devise);
         // Préremplissage des widgets avec les valeur du billet si c'est une modification
         // sinon rien pour une creation
-        if (index >=0) {
+        if (index >= 0) {
             inputNom.setText(billet.getNom());
             inputPrix.setText(Commerce.prixToString(billet.getPrix()));
             devise.setText(Commerce.Devise.getSymbol(billet.getDevise()));
@@ -83,10 +83,10 @@ public class EditBilletFragment extends Fragment implements Validator.Validation
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState){
-        if(outState == null)
+    public void onSaveInstanceState(Bundle outState) {
+        if (outState == null)
             outState = new Bundle();
-        outState.putParcelable("Billet",billet);
+        outState.putParcelable("Billet", billet);
         outState.putInt("index", index);
         super.onSaveInstanceState(outState);
     }
@@ -96,10 +96,12 @@ public class EditBilletFragment extends Fragment implements Validator.Validation
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_edit, menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle item selection
@@ -117,25 +119,25 @@ public class EditBilletFragment extends Fragment implements Validator.Validation
 
     public void onValidationSucceeded() {
         // Si billet nouveau
-        if(index < 0)
+        if (index < 0)
             billet.setEvent(callback.getEvent());
         // On recupère le contenu des champs
         billet.setNom(inputNom.getText().toString());
         billet.setPrix(Commerce.parsePrix(inputPrix));
 
-        final ProgressDialog wait = ProgressDialog.show(getActivity(),"","Enregistrement...",true,true);
+        final ProgressDialog wait = ProgressDialog.show(getActivity(), "", "Enregistrement...", true, true);
 
         billet.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if(e==null){
+                if (e == null) {
                     // Si billet nouveau
                     if (index < 0)
                         callback.getBilletterie().add(billet);
                     else
                         callback.getBilletterie().set(index, billet);
                     callback.goToListeBillets();
-                }else
+                } else
                     Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                 wait.dismiss();
             }
@@ -147,6 +149,6 @@ public class EditBilletFragment extends Fragment implements Validator.Validation
         if (failedView instanceof EditText) {
             failedView.requestFocus();
             ((EditText) failedView).setError(message);
-        }else Toast.makeText(getActivity(),message,Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 }

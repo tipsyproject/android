@@ -4,7 +4,6 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +85,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
         return view;
     }
 
-    public void onDestroy(){
+    public void onDestroy() {
         super.onDestroy();
         mConnectionProgressDialog.dismiss();
     }
@@ -105,7 +104,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                     getActivity().finish();
                 } else {
                     String message;
-                    switch(e.getCode()){
+                    switch (e.getCode()) {
                         case 101:
                             message = getResources().getString(R.string.failed_connexion);
                             break;

@@ -3,7 +3,6 @@ package com.tipsy.app.orga.acces;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tipsy.app.R;
-import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
 
 
 /**
@@ -36,7 +34,7 @@ public class ManualAccesFragment extends ListFragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater,container,savedInstanceState);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     /* DEFINITION DE L'ACTION BAR */
@@ -46,11 +44,13 @@ public class ManualAccesFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
         menu.add("Rechercher").setIcon(R.drawable.ic_action_search);
     }
+
     // Gestion du click sur le bouton de validation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

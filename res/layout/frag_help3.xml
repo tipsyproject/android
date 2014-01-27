@@ -31,6 +31,6 @@
         android:layout_centerInParent="true"
         android:gravity="center"
         android:layout_marginTop="25dp"
-        android:layout_marginBottom="75dp"/>
+        android:layout_marginBottom="75dp" />
 
 </RelativeLayout>

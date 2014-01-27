@@ -18,9 +18,6 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.tipsy.app.R;
@@ -28,6 +25,9 @@ import com.tipsy.lib.Item;
 import com.tipsy.lib.ItemArrayAdapter;
 import com.tipsy.lib.Panier;
 import com.tipsy.lib.Ticket;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -48,17 +48,17 @@ public class EventBilletsFragment extends Fragment {
     }
 
 
-
     @Override
-    public void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        if(bundle != null && bundle.containsKey("Billets")){
+        if (bundle != null && bundle.containsKey("Billets")) {
             billetItems = bundle.getParcelableArrayList("Billets");
         }
     }
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
+        if (outState == null)
             outState = new Bundle();
         outState.putParcelableArrayList("Billets", billetItems);
         super.onSaveInstanceState(outState);
@@ -79,7 +79,7 @@ public class EventBilletsFragment extends Fragment {
             }
         });
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             final ProgressDialog wait = ProgressDialog.show(getActivity(), null, "Chargement...", true, true);
             wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
@@ -96,7 +96,7 @@ public class EventBilletsFragment extends Fragment {
                             billetItems.add(new Item(billet, 0));
                         adapter.notifyDataSetChanged();
                         wait.dismiss();
-                    }else
+                    } else
                         Toast.makeText(getActivity(), getString(R.string.erreur_interne), Toast.LENGTH_SHORT).show();
                 }
             });
@@ -105,13 +105,13 @@ public class EventBilletsFragment extends Fragment {
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                for(Item billet : billetItems){
-                    if(billet.getQuantite() > 0)
+                for (Item billet : billetItems) {
+                    if (billet.getQuantite() > 0)
                         panier.add(billet);
                 }
                 if (panier.isEmpty())
                     Toast.makeText(getActivity(), "Panier vide !", Toast.LENGTH_SHORT).show();
-                else{
+                else {
                     callback.goToParticiper(panier);
                 }
             }

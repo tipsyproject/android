@@ -55,6 +55,7 @@ public class HomeOrgaFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     // Redéfinition de l'actionBar: Bouton de validation
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

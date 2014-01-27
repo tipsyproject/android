@@ -12,10 +12,11 @@ public class Panier extends ArrayList<Item> implements Parcelable {
 
     protected int devise = Commerce.Devise.getLocale();
 
-    public Panier(){}
+    public Panier() {
+    }
 
-    public Panier(ArrayList<Item> items){
-        for(Item item : items)
+    public Panier(ArrayList<Item> items) {
+        for (Item item : items)
             add(item);
     }
 
@@ -29,7 +30,7 @@ public class Panier extends ArrayList<Item> implements Parcelable {
 
     public int getPrixTotal() {
         int prixTotal = 0;
-        for(Item item : this)
+        for (Item item : this)
             prixTotal += item.getPrixTotal();
         return prixTotal;
     }
@@ -50,7 +51,7 @@ public class Panier extends ArrayList<Item> implements Parcelable {
     public Panier(Parcel in) {
         devise = in.readInt();
         ArrayList<Item> items = new ArrayList<Item>();
-        in.readList(items,Item.class.getClassLoader());
+        in.readList(items, Item.class.getClassLoader());
         addAll(items);
     }
 

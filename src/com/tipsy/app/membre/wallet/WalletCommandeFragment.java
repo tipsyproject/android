@@ -34,7 +34,7 @@ public class WalletCommandeFragment extends Fragment {
     private WalletListener callback;
 
 
-    public static WalletCommandeFragment init(Panier p ,Commande c) {
+    public static WalletCommandeFragment init(Panier p, Commande c) {
         WalletCommandeFragment frag = new WalletCommandeFragment();
         Bundle args = new Bundle();
         args.putParcelable("Panier", p);
@@ -64,7 +64,7 @@ public class WalletCommandeFragment extends Fragment {
         TextView viewPrixTotal = (TextView) view.findViewById(R.id.prix_total);
         viewPrixTotal.setText(Commerce.prixToString(commande.getPrixTotal(), commande.getDevise()));
 
-        ItemArrayAdapter adapter = new ItemArrayAdapter(getActivity(), panier,viewPrixTotal);
+        ItemArrayAdapter adapter = new ItemArrayAdapter(getActivity(), panier, viewPrixTotal);
 
         ListView listView = (ListView) view.findViewById(R.id.list);
         listView.setAdapter(adapter);
@@ -92,7 +92,7 @@ public class WalletCommandeFragment extends Fragment {
                         getActivity().runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

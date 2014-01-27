@@ -27,7 +27,7 @@ public class EditEventLocFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_edit_event_loc, container, false);
-        callback.setInputLieu( (EditText) view.findViewById(R.id.input_lieu) );
+        callback.setInputLieu((EditText) view.findViewById(R.id.input_lieu));
         callback.getInputLieu().setText(callback.getEvent().getLieu());
         return view;
     }

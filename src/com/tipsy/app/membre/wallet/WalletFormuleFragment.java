@@ -58,21 +58,21 @@ public class WalletFormuleFragment extends Fragment {
         @Override
         public void onClick(View v) {
             int montant = 0;
-            switch(v.getId()) {
-                case R.id.rech20 :
-                    montant=2000;
+            switch (v.getId()) {
+                case R.id.rech20:
+                    montant = 2000;
                     break;
-                case R.id.rech50 :
-                    montant=5000;
+                case R.id.rech50:
+                    montant = 5000;
                     break;
-                case R.id.rech100 :
-                    montant=10000;
+                case R.id.rech100:
+                    montant = 10000;
                     break;
-                case R.id.autres :
+                case R.id.autres:
                     callback.goToCredit();
                     break;
             }
-            if (v.getId() != R.id.autres){
+            if (v.getId() != R.id.autres) {
                 final ProgressDialog wait = Wallet.getProgressDialog(getActivity());
                 wallet.credit(montant, new WalletCallback() {
                     @Override
@@ -95,7 +95,7 @@ public class WalletFormuleFragment extends Fragment {
                     @Override
                     public void onFailure(Exception e) {
                         wait.dismiss();
-                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

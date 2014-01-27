@@ -32,14 +32,24 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ListView;
-import com.facebook.*;
+
+import com.facebook.AppEventsLogger;
+import com.facebook.FacebookException;
+import com.facebook.LoggingBehavior;
+import com.facebook.Request;
+import com.facebook.Session;
 import com.facebook.android.R;
 import com.facebook.internal.AnalyticsEvents;
-import com.facebook.model.GraphPlace;
 import com.facebook.internal.Logger;
 import com.facebook.internal.Utility;
+import com.facebook.model.GraphPlace;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class PlacePickerFragment extends PickerFragment<GraphPlace> {
     /**
@@ -280,7 +290,7 @@ public class PlacePickerFragment extends PickerFragment<GraphPlace> {
         super.onAttach(activity);
 
         if (searchBox != null) {
-            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.showSoftInput(searchBox, InputMethodManager.SHOW_IMPLICIT);
         }
     }
@@ -290,7 +300,7 @@ public class PlacePickerFragment extends PickerFragment<GraphPlace> {
         super.onDetach();
 
         if (searchBox != null) {
-            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(searchBox.getWindowToken(), 0);
         }
     }
@@ -383,8 +393,8 @@ public class PlacePickerFragment extends PickerFragment<GraphPlace> {
     }
 
     private Request createRequest(Location location, int radiusInMeters, int resultsLimit, String searchText,
-            Set<String> extraFields,
-            Session session) {
+                                  Set<String> extraFields,
+                                  Session session) {
         Request request = Request.newPlacesSearchRequest(session, location, radiusInMeters, resultsLimit, searchText,
                 null);
 
@@ -490,7 +500,7 @@ public class PlacePickerFragment extends PickerFragment<GraphPlace> {
 
         @Override
         protected void onLoadFinished(GraphObjectPagingLoader<GraphPlace> loader,
-                SimpleGraphObjectCursor<GraphPlace> data) {
+                                      SimpleGraphObjectCursor<GraphPlace> data) {
             super.onLoadFinished(loader, data);
 
             // We could be called in this state if we are clearing data or if we are being re-attached

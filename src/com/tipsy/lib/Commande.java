@@ -10,27 +10,28 @@ import java.util.ArrayList;
  */
 public class Commande extends ArrayList<Achat> implements Parcelable {
 
-    public Commande(){}
+    public Commande() {
+    }
 
-    public Commande(ArrayList<Achat> achats){
+    public Commande(ArrayList<Achat> achats) {
         clear();
-        for(Achat a: achats)
+        for (Achat a : achats)
             add(a);
     }
 
-    public int getPrixTotal(){
+    public int getPrixTotal() {
         int prixTotal = 0;
-        for(Achat a: this)
+        for (Achat a : this)
             prixTotal += a.getMontant();
         return prixTotal;
     }
 
-    public int getDevise(){
+    public int getDevise() {
         return get(0).getDevise();
     }
 
-    public void setPayeur(TipsyUser user){
-        for(Achat a: this)
+    public void setPayeur(TipsyUser user) {
+        for (Achat a : this)
             a.setPayeur(user);
     }
 
@@ -48,7 +49,7 @@ public class Commande extends ArrayList<Achat> implements Parcelable {
 
     public Commande(Parcel in) {
         ArrayList<Achat> achats = new ArrayList<Achat>();
-        in.readList(achats,Achat.class.getClassLoader());
+        in.readList(achats, Achat.class.getClassLoader());
         addAll(achats);
     }
 

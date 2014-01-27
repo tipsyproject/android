@@ -5,7 +5,6 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +12,13 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.tipsy.app.R;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import com.tipsy.app.R;
 
 /**
  * Created by Valoo on 05/12/13.
@@ -40,9 +39,9 @@ public class EditEventDateFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(savedInstanceState != null && savedInstanceState.containsKey("DEBUT")){
+        if (savedInstanceState != null && savedInstanceState.containsKey("DEBUT")) {
             debut = (Date) savedInstanceState.getSerializable("DEBUT");
-        }else if(callback.getEvent().getDebut() != null)
+        } else if (callback.getEvent().getDebut() != null)
             debut = callback.getEvent().getDebut();
         else debut = new Date();
 
@@ -73,7 +72,7 @@ public class EditEventDateFragment extends Fragment {
 
 
         /* HORAIRES DEBUT EVENT */
-        callback.setInputTimeDebut( (TextView) view.findViewById(R.id.input_time_debut) );
+        callback.setInputTimeDebut((TextView) view.findViewById(R.id.input_time_debut));
         final TimePickerDialog.OnTimeSetListener tpDebut = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hour, int min) {
@@ -103,14 +102,15 @@ public class EditEventDateFragment extends Fragment {
     // Sauvegarde des dates prédéfinies
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
+        if (outState == null)
             outState = new Bundle();
         SimpleDateFormat f = new SimpleDateFormat("dd-MM-yyyy kk:mm");
         String dateDebut = callback.getInputDateDebut().getText().toString()
                 + " " + callback.getInputTimeDebut().getText().toString();
         try {
             debut = f.parse(dateDebut);
-        } catch (ParseException e) {}
+        } catch (ParseException e) {
+        }
         outState.putSerializable("DEBUT", debut);
         super.onSaveInstanceState(outState);
     }

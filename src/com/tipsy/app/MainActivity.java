@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.parse.Parse;
 import com.tipsy.app.membre.MembreActivity;
@@ -38,11 +37,11 @@ public class MainActivity extends Activity {
         prefs.edit().putBoolean(Prefs.CONNECTED, false);
 
         try {
-            PackageInfo info =     getPackageManager().getPackageInfo("com.tipsy.app",     PackageManager.GET_SIGNATURES);
+            PackageInfo info = getPackageManager().getPackageInfo("com.tipsy.app", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
                 MessageDigest md = MessageDigest.getInstance("SHA");
                 md.update(signature.toByteArray());
-                String sign= Base64.encodeToString(md.digest(), Base64.DEFAULT);
+                String sign = Base64.encodeToString(md.digest(), Base64.DEFAULT);
                 Log.e("MY KEY HASH:", sign);
             }
         } catch (PackageManager.NameNotFoundException e) {
@@ -53,11 +52,11 @@ public class MainActivity extends Activity {
         // Affichage de l'aide si elle n'a encore jamais été passée.
         // Sinon, on essaye de reconnecter automatiquement l'utilisateur
         if (!app.skipHelp(this)) startActivity(new Intent(this, HelpActivity.class));
-        else{
+        else {
             TipsyUser user = TipsyUser.getCurrentUser();
-            if(user == null)
+            if (user == null)
                 startActivity(new Intent(this, LoginActivity.class));
-            else if(user.getType() == TipsyUser.MEMBRE)
+            else if (user.getType() == TipsyUser.MEMBRE)
                 startActivity(new Intent(this, MembreActivity.class));
             else // Orga
                 startActivity(new Intent(this, OrgaActivity.class));

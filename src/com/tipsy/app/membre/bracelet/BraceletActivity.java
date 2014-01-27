@@ -18,15 +18,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
-import com.stackmob.sdk.api.StackMobQuery;
-import com.stackmob.sdk.callback.StackMobModelCallback;
-import com.stackmob.sdk.callback.StackMobQueryCallback;
-import com.stackmob.sdk.exception.StackMobException;
-
-import java.util.List;
-
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.lib.Bracelet;
 import com.tipsy.lib.TipsyUser;
@@ -55,7 +47,7 @@ public class BraceletActivity extends Activity {
         Button buttonNFC = (Button) findViewById(R.id.button_nfc);
         buttonNFC.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                scanning = ProgressDialog.show(BraceletActivity.this,"","Approchez le bracelet de l'arrière du téléphone",true,true);
+                scanning = ProgressDialog.show(BraceletActivity.this, "", "Approchez le bracelet de l'arrière du téléphone", true, true);
                 scanning.setOnCancelListener(new DialogInterface.OnCancelListener() {
                     @Override
                     public void onCancel(DialogInterface dialogInterface) {
@@ -81,7 +73,7 @@ public class BraceletActivity extends Activity {
     }
 
     @Override
-    protected void onNewIntent(Intent intent){
+    protected void onNewIntent(Intent intent) {
         scanning.dismiss();
 
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
@@ -90,31 +82,31 @@ public class BraceletActivity extends Activity {
         ParseQuery<Bracelet> query = ParseQuery.getQuery(Bracelet.class);
         query.include("user");
         query.include("participant");
-        final ProgressDialog wait = ProgressDialog.show(this,"","Association bracelet",true,false);
-        query.getInBackground(tagID,new GetCallback<Bracelet>() {
+        final ProgressDialog wait = ProgressDialog.show(this, "", "Association bracelet", true, false);
+        query.getInBackground(tagID, new GetCallback<Bracelet>() {
             @Override
             public void done(Bracelet bracelet, ParseException e) {
                 /* BRACELET REPERTORIE */
-                if(bracelet != null){
+                if (bracelet != null) {
 
-                    if(bracelet.isFree()){
+                    if (bracelet.isFree()) {
                         bracelet.setUser(TipsyUser.getCurrentUser());
                         bracelet.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(ParseException e) {
                                 wait.dismiss();
-                                if(e == null)
+                                if (e == null)
                                     Toast.makeText(BraceletActivity.this, "Bracelet enregistré !", Toast.LENGTH_SHORT).show();
                                 else
                                     Toast.makeText(BraceletActivity.this, "Erreur enregistrement bracelet", Toast.LENGTH_SHORT).show();
                             }
                         });
 
-                    }else{
+                    } else {
                         wait.dismiss();
                         Toast.makeText(BraceletActivity.this, "Bracelet déjà utilisé !", Toast.LENGTH_SHORT).show();
                     }
-                }else{ /* BRACELET INCONNU */
+                } else { /* BRACELET INCONNU */
                     wait.dismiss();
                     Log.d("TOUTAFAIT", "bracelet inconnu");
                     Toast.makeText(BraceletActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
@@ -134,7 +126,7 @@ public class BraceletActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void backToMembre(){
+    public void backToMembre() {
         Intent intent = new Intent(this, MembreActivity.class);
         startActivity(intent);
     }

@@ -11,11 +11,12 @@ import com.parse.ParseObject;
  * Created by vquefele on 20/01/14.
  */
 @ParseClassName("Participant")
-public class Participant extends ParseObject implements Parcelable{
+public class Participant extends ParseObject implements Parcelable {
 
-    public Participant(){}
+    public Participant() {
+    }
 
-    public Participant(Event e){
+    public Participant(Event e) {
         setEvent(e);
     }
 
@@ -24,7 +25,7 @@ public class Participant extends ParseObject implements Parcelable{
     }
 
     public void setEmail(String email) {
-        put("email",email);
+        put("email", email);
     }
 
     public Event getEvent() {
@@ -32,7 +33,7 @@ public class Participant extends ParseObject implements Parcelable{
     }
 
     public void setEvent(Event event) {
-        put("event",event);
+        put("event", event);
     }
 
     public TipsyUser getUser() {
@@ -40,10 +41,10 @@ public class Participant extends ParseObject implements Parcelable{
     }
 
     public void setUser(TipsyUser user) {
-        put("nom","");
-        put("prenom","");
-        put("email","");
-        put("user",user);
+        put("nom", "");
+        put("prenom", "");
+        put("email", "");
+        put("user", user);
     }
 
     public String getNom() {
@@ -51,7 +52,7 @@ public class Participant extends ParseObject implements Parcelable{
     }
 
     public void setNom(String nom) {
-        put("nom",nom);
+        put("nom", nom);
     }
 
     public String getPrenom() {
@@ -59,18 +60,17 @@ public class Participant extends ParseObject implements Parcelable{
     }
 
     public void setPrenom(String prenom) {
-        put("prenom",prenom);
+        put("prenom", prenom);
     }
 
 
-    public boolean isDefined(){
+    public boolean isDefined() {
         return getUser() != null || (getNom() != null && getPrenom() != null && getEmail() != null);
     }
 
-    public boolean isMembre(){
+    public boolean isMembre() {
         return getUser() != null;
     }
-
 
 
     // Implémentation de Parcelable
@@ -84,7 +84,7 @@ public class Participant extends ParseObject implements Parcelable{
         dest.writeString(getObjectId());
         dest.writeString(getEmail());
         dest.writeParcelable(getEvent(), flags);
-        dest.writeParcelable(getUser(),flags);
+        dest.writeParcelable(getUser(), flags);
         dest.writeString(getNom());
         dest.writeString(getPrenom());
     }

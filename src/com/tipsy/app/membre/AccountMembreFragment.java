@@ -26,15 +26,14 @@ import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.SaveCallback;
+import com.tipsy.app.R;
+import com.tipsy.app.TipsyApp;
+import com.tipsy.lib.TipsyUser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-
-import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.TipsyUser;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -136,7 +135,7 @@ public class AccountMembreFragment extends Fragment implements TextWatcher {
                     membre.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
-                            if(e==null)
+                            if (e == null)
                                 callback.goToTableauDeBord(true);
                             else
                                 Toast.makeText(getActivity(), getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();

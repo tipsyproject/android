@@ -24,7 +24,7 @@ public abstract class MenuUser {
     protected CharSequence titre;
     final private String ICON = "icon";
     final private String TITLE = "title";
-    protected List<HashMap<String,String>> mList ;
+    protected List<HashMap<String, String>> mList;
     protected SimpleAdapter mAdapter;
     // Array of integers points to images stored in /res/drawable-ldpi/
     protected int[] mIcons;
@@ -69,12 +69,12 @@ public abstract class MenuUser {
         //getDrawerList().setAdapter(new ArrayAdapter<String>(activity, R.layout.frag_drawer_list_item, titres_menu));
 
         // Keys used in Hashmap
-        String[] from = { ICON,TITLE };
+        String[] from = {ICON, TITLE};
         // Ids of views in listview_layout
-        int[] to = { R.id.item_icon , R.id.item_title};
-        mList = new ArrayList<HashMap<String,String>>();
-        for(int i=0;i<5;i++){
-            HashMap<String, String> hm = new HashMap<String,String>();
+        int[] to = {R.id.item_icon, R.id.item_title};
+        mList = new ArrayList<HashMap<String, String>>();
+        for (int i = 0; i < 5; i++) {
+            HashMap<String, String> hm = new HashMap<String, String>();
             hm.put(ICON, Integer.toString(mIcons[i]));
             hm.put(TITLE, mTitles[i]);
             mList.add(hm);

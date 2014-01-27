@@ -14,9 +14,10 @@ import java.util.Date;
 @ParseClassName("Achat")
 public class Achat extends ParseObject implements Transaction {
 
-    public Achat(){}
+    public Achat() {
+    }
 
-    public Achat(Ticket p){
+    public Achat(Ticket p) {
         setDate(new Date());
         setProduit(p);
     }
@@ -26,10 +27,10 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setDate(Date date) {
-        put("date",date);
+        put("date", date);
     }
 
-    public int getDevise(){
+    public int getDevise() {
         return ((Ticket) getParseObject("produit")).getDevise();
     }
 
@@ -38,7 +39,7 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setParticipant(Participant participant) {
-        put("participant",participant);
+        put("participant", participant);
     }
 
     public TipsyUser getPayeur() {
@@ -46,7 +47,7 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setPayeur(TipsyUser payeur) {
-        put("payeur",payeur);
+        put("payeur", payeur);
     }
 
     public Ticket getProduit() {
@@ -62,29 +63,28 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setUsed(boolean used) {
-        put("used",used);
+        put("used", used);
     }
 
-    public int getMontant(){
+    public int getMontant() {
         return ((Ticket) getParseObject("produit")).getPrix();
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return getParticipant().getEvent().getNom() + " - " + getParticipant().getEvent().getLieu();
     }
 
-    public String getTitre(){
+    public String getTitre() {
         return ((Ticket) getParseObject("produit")).getNom();
     }
 
-    public boolean isDepot(){
+    public boolean isDepot() {
         return false;
     }
 
-    public boolean isParticipantDefined(){
+    public boolean isParticipantDefined() {
         return getParticipant().isDefined();
     }
-
 
 
     // Implémentation de Parcelable

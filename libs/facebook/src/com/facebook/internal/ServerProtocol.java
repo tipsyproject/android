@@ -17,7 +17,6 @@
 package com.facebook.internal;
 
 import com.facebook.Settings;
-import com.facebook.internal.Utility;
 
 import java.util.Collection;
 

@@ -7,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import com.tipsy.app.R;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-import com.tipsy.app.R;
 
 /**
  * Created by valoo on 04/01/14.
@@ -37,10 +37,10 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
         Transaction transaction = transactions.get(position);
 
         TextView titre = (TextView) view.findViewById(R.id.titre);
-        titre.setText( transaction.getTitre() );
+        titre.setText(transaction.getTitre());
 
         TextView sousTitre = (TextView) view.findViewById(R.id.sous_titre);
-        sousTitre.setText( transaction.getDescription() );
+        sousTitre.setText(transaction.getDescription());
 
         /* Montant transaction */
         TextView montant = (TextView) view.findViewById(R.id.montant);

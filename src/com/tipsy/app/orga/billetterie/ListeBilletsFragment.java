@@ -14,12 +14,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-
 import com.tipsy.app.R;
 import com.tipsy.lib.Commerce;
 import com.tipsy.lib.Ticket;
+
+import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Created by valoo on 27/12/13.
@@ -52,10 +52,12 @@ public class ListeBilletsFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_billetterie_liste_billets, menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

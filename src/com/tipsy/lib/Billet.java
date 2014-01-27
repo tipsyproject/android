@@ -8,6 +8,7 @@ import com.parse.ParseClassName;
 @ParseClassName("Ticket")
 public class Billet extends Ticket {
 
-    public Billet() {}
+    public Billet() {
+    }
 
 }

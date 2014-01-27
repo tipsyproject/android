@@ -3,14 +3,12 @@ package com.tipsy.app.orga.billetterie;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -44,7 +42,7 @@ public class ListeVentesFragment extends ListFragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater,container,savedInstanceState);
+        return super.onCreateView(inflater, container, savedInstanceState);
     }
 
     /* DEFINITION DE L'ACTION BAR */
@@ -54,10 +52,12 @@ public class ListeVentesFragment extends ListFragment {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_billetterie_liste_ventes, menu);
     }
+
     // Gestion du click sur le bouton de validation
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

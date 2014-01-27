@@ -1,7 +1,7 @@
 package com.tipsy.app.membre.event;
 
-import com.tipsy.lib.Event;
 import com.tipsy.lib.Commande;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.Panier;
 
 /**

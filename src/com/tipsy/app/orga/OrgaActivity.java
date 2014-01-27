@@ -13,8 +13,8 @@ import com.tipsy.app.HelpActivity;
 import com.tipsy.app.LoginActivity;
 import com.tipsy.app.R;
 import com.tipsy.app.UserActivity;
-import com.tipsy.app.orga.event.edit.EditEventActivity;
 import com.tipsy.app.orga.event.EventOrgaActivity;
+import com.tipsy.app.orga.event.edit.EditEventActivity;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.TipsyUser;
 
@@ -38,8 +38,8 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         menu.getDrawerList().setItemChecked(MenuOrga.ACCUEIL, true);
 
 
-        if(savedInstanceState == null){
-            final ProgressDialog wait = ProgressDialog.show(this,null,"Chargement...",true);
+        if (savedInstanceState == null) {
+            final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true);
 
             ParseQuery<Event> eventsQuery = ParseQuery.getQuery(Event.class);
             eventsQuery.whereEqualTo("organisateur", TipsyUser.getCurrentUser().getObjectId());
@@ -55,13 +55,13 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
                     }
                 }
             });
-        }else
+        } else
             events = savedInstanceState.getParcelableArrayList("Events");
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState){
-        if(outState == null)
+    public void onSaveInstanceState(Bundle outState) {
+        if (outState == null)
             outState = new Bundle();
         outState.putParcelableArrayList("Events", events);
         super.onSaveInstanceState(outState);
@@ -102,7 +102,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
     // IMPLEMENTATIONS DES LISTENERS DU MODULE ORGANISATEUR
 
-    public ArrayList<Event> getEvents(){
+    public ArrayList<Event> getEvents() {
         return events;
     }
 
@@ -115,7 +115,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     // Clique sur le bouton "Créer un événement" ou Modifications de l'event
     public void goToNewEvent() {
         Intent intent = new Intent(this, EditEventActivity.class);
-        intent.putExtra("NEW_EVENT",true);
+        intent.putExtra("NEW_EVENT", true);
         startActivity(intent);
     }
 

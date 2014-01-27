@@ -23,17 +23,16 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Required;
-
-import java.io.Serializable;
-
 import com.tipsy.app.R;
-import com.tipsy.lib.Participant;
-import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Commande;
 import com.tipsy.lib.Commerce;
 import com.tipsy.lib.Item;
 import com.tipsy.lib.Panier;
+import com.tipsy.lib.Participant;
+import com.tipsy.lib.TipsyUser;
+
+import java.io.Serializable;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -63,15 +62,16 @@ public class EventParticiperFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        if(bundle != null && bundle.containsKey("Achats")){
-            achats =  bundle.getParcelable("Achats");
+        if (bundle != null && bundle.containsKey("Achats")) {
+            achats = bundle.getParcelable("Achats");
         }
     }
+
     @Override
-     public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
+    public void onSaveInstanceState(Bundle outState) {
+        if (outState == null)
             outState = new Bundle();
         outState.putParcelable("Achats", achats);
         // Add variable to outState here
@@ -85,10 +85,10 @@ public class EventParticiperFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_event_participer, container, false);
         listView = (ListView) view.findViewById(R.id.list);
 
-        if(savedInstanceState == null){
+        if (savedInstanceState == null) {
             achats = new Commande();
-            for(Item item : panier){
-                for(int i=0; i<item.getQuantite(); ++i){
+            for (Item item : panier) {
+                for (int i = 0; i < item.getQuantite(); ++i) {
                     Achat a = new Achat(item.getTicket());
                     a.setParticipant(new Participant(callback.getEvent()));
                     achats.add(a);
@@ -111,7 +111,7 @@ public class EventParticiperFragment extends Fragment {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 // Si l'utilisateur s'était déjà attribué un billet
-                if(userParticipation>=0)
+                if (userParticipation >= 0)
                     achats.get(userParticipation).getParticipant().setUser(null);
                 achats.get(i).getParticipant().setUser(TipsyUser.getCurrentUser());
                 adapter.notifyDataSetChanged();
@@ -131,9 +131,9 @@ public class EventParticiperFragment extends Fragment {
 
     /* Message d'infos sur long click billet user */
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState){
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Toast.makeText(getActivity(),"Appuyez longtemps sur votre propre billet !",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Appuyez longtemps sur votre propre billet !", Toast.LENGTH_SHORT).show();
     }
 
     /* Affichage du dialog d'edition d'un participant */
@@ -146,17 +146,17 @@ public class EventParticiperFragment extends Fragment {
         dialog.show(getActivity().getSupportFragmentManager(), "ParticipantDialogFragment");
     }
 
-    public void validate(){
-        for(Achat a: achats){
-            if(!a.isParticipantDefined()){
-                Toast.makeText(getActivity(),"Tous les billets sont nominatifs !",Toast.LENGTH_SHORT).show();
+    public void validate() {
+        for (Achat a : achats) {
+            if (!a.isParticipantDefined()) {
+                Toast.makeText(getActivity(), "Tous les billets sont nominatifs !", Toast.LENGTH_SHORT).show();
                 return;
             }
 
             // On définit les billets comme non utilisés
             a.setUsed(false);
         }
-        callback.goToCommande(panier,new Commande(achats));
+        callback.goToCommande(panier, new Commande(achats));
     }
 
 
@@ -175,7 +175,7 @@ public class EventParticiperFragment extends Fragment {
                     R.layout.frag_event_participer_billet;
 
             LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(layout, parent,false);
+            View view = inflater.inflate(layout, parent, false);
 
             /* Nom du billet */
             TextView nom_billet = (TextView) view.findViewById(R.id.nom_billet);
@@ -185,7 +185,7 @@ public class EventParticiperFragment extends Fragment {
             TextView prix_billet = (TextView) view.findViewById(R.id.prix_billet);
             prix_billet.setText(Commerce.prixToString(a.getProduit().getPrix(), a.getProduit().getDevise()));
 
-            if(a.isParticipantDefined()){
+            if (a.isParticipantDefined()) {
                 /* Prénom participant */
                 TextView prenomParticipant = (TextView) view.findViewById(R.id.prenom_participant);
                 prenomParticipant.setText(a.getParticipant().getPrenom());
@@ -204,17 +204,16 @@ public class EventParticiperFragment extends Fragment {
     }
 
 
-
     public static class ParticipantDialogFragment extends DialogFragment implements Validator.ValidationListener {
 
         private Achat achat;
         private AchatArrayAdapter adapter;
-        @Required(order=1, message="Champ requis")
+        @Required(order = 1, message = "Champ requis")
         private EditText inputNom;
-        @Required(order=2, message="Champ requis")
+        @Required(order = 2, message = "Champ requis")
         private EditText inputPrenom;
-        @Required(order=3, message="Champ requis")
-        @Email(order=4, message="Email incorrect")
+        @Required(order = 3, message = "Champ requis")
+        @Email(order = 4, message = "Email incorrect")
         private EditText inputEmail;
         private Validator validator;
 
@@ -228,7 +227,7 @@ public class EventParticiperFragment extends Fragment {
             LayoutInflater inflater = getActivity().getLayoutInflater();
             // Definition du titre du Dialog
             builder.setTitle(achat.getProduit().getNom() + " - " +
-                Commerce.prixToString(achat.getProduit().getPrix(),achat.getProduit().getDevise()));
+                    Commerce.prixToString(achat.getProduit().getPrix(), achat.getProduit().getDevise()));
 
             // Definition du contenu du Dialog
             View view = inflater.inflate(R.layout.frag_event_edit_participant, null);
@@ -276,7 +275,7 @@ public class EventParticiperFragment extends Fragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(),"Formulaire incomplet...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Formulaire incomplet...", Toast.LENGTH_SHORT).show();
                 }
             });
         }
