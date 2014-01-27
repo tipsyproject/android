@@ -19,8 +19,6 @@ public interface AccesListener {
 
     public EntreeArrayAdapter getEntreesAdapter();
 
-    public void backToEventOrga();
-
     public void goToHome(boolean addTobackStack);
 
     public void goToManualAccess();

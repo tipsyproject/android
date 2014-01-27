@@ -39,7 +39,7 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                backToHome();
+                finish();
             }
         });
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
@@ -76,7 +76,12 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                backToHome();
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    finish();
+                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -84,11 +89,6 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
 
     public Event getEvent() {
         return event;
-    }
-
-    public void backToHome() {
-        Intent intent = new Intent(this, MembreActivity.class);
-        startActivity(intent);
     }
 
     public void goToEventBillets() {

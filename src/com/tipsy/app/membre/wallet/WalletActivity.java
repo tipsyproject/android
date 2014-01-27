@@ -64,7 +64,12 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    finish();
+                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -122,10 +127,5 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.addToBackStack(null);
         ft.commit();
-    }
-
-    public void goToHomeMembre() {
-        Intent intent = new Intent(this, MembreActivity.class);
-        startActivity(intent);
     }
 }

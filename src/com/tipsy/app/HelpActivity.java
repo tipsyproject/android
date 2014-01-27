@@ -1,5 +1,6 @@
 package com.tipsy.app;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,12 +9,16 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
 import java.util.List;
@@ -28,8 +33,9 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
     protected ImageView focustep;
     protected RelativeLayout layout;
     protected ImageSwitcher switcher;
-    protected int index = 0;
-    protected final int[] images = {R.drawable.first_bg_flou, R.drawable.second_bg_flou,
+    protected ViewPager pager;
+    protected TextView swipe;
+    protected final int[] images = {R.drawable.first_bg_flou, R.drawable.bg_ville_flou,
             R.drawable.last_bg_flou};
 
     public void onCreate(Bundle savedInstanceState) {
@@ -43,7 +49,7 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
         switcher.setFactory(this);
         switcher.setInAnimation(AnimationUtils.loadAnimation(this, R.animator.fade_in));
         switcher.setOutAnimation(AnimationUtils.loadAnimation(this, R.animator.fade_out));
-        switcher.setImageResource(images[index]);
+        swipe = (TextView) findViewById(R.id.swipe);
 
         // Création de la liste de Fragments que fera défiler le PagerAdapter
         List fragments = new Vector();
@@ -57,31 +63,10 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
         // Fragments
         this.mPagerAdapter = new MyPagerAdapter(super.getSupportFragmentManager(), fragments);
 
-        ViewPager pager = (ViewPager) super.findViewById(R.id.pager);
+        pager = (ViewPager) super.findViewById(R.id.pager);
         // Affectation de l'adapter au ViewPager
         pager.setAdapter(this.mPagerAdapter);
-        pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            public void onPageSelected(int position) {
-                switch (position) {
-                    case 0:
-                        switcher.setImageResource(images[0]);
-                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepone));
-                        break;
-                    case 1:
-                        switcher.setImageResource(images[1]);
-                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focusteptwo));
-                        break;
-                    case 2:
-                        switcher.setImageResource(images[2]);
-                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepthree));
-                        break;
-                    default:
-                        break;
-                }
-            }
-        });
-
-        Button next = (Button) findViewById(R.id.next);
+        final Button next = (Button) findViewById(R.id.next);
         next.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (getIntent().getBooleanExtra("Connected", false))
@@ -94,6 +79,34 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
                 overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
             }
         });
+        pager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
+            public void onPageSelected(int position) {
+                switch (position) {
+                    case 0:
+                        switcher.setImageResource(images[0]);
+                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepone));
+                        next.setVisibility(View.INVISIBLE);
+                        swipe.setVisibility(View.VISIBLE);
+                        break;
+                    case 1:
+                        switcher.setImageResource(images[1]);
+                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focusteptwo));
+                        next.setVisibility(View.INVISIBLE);
+                        swipe.setVisibility(View.VISIBLE);
+                        break;
+                    case 2:
+                        switcher.setImageResource(images[2]);
+                        focustep.setImageDrawable(getResources().getDrawable(R.drawable.focustepthree));
+                        next.setVisibility(View.VISIBLE);
+                        swipe.setVisibility(View.INVISIBLE);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
+
+
     }
 
     @Override
@@ -131,5 +144,4 @@ public class HelpActivity extends FragmentActivity implements ViewSwitcher.ViewF
                 RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
         return imageView;
     }
-
 }

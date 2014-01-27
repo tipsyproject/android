@@ -38,7 +38,8 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                backToOrga();
+                finish();
+                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
             }
         });
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
@@ -73,7 +74,12 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                backToOrga();
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    finish();
+                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                }
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -89,11 +95,6 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         if (addTobackStack)
             ft.addToBackStack(null);
         ft.commit();
-    }
-
-    public void backToOrga() {
-        Intent intent = new Intent(this, OrgaActivity.class);
-        startActivity(intent);
     }
 
     // clique sur le bouton de la Billetterie

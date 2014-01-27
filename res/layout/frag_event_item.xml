@@ -11,7 +11,7 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:id="@+id/imageView"
-        android:src="@drawable/last_bg"
+        android:src="@drawable/last_bg_flou"
         android:scaleType="centerCrop"
         android:layout_marginRight="8dp" />
 

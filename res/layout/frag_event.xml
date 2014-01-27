@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/event_flyer_height"
             android:id="@+id/imageView"
-            android:src="@drawable/bg_home"
+            android:src="@drawable/bg_home_flou"
             android:scaleType="centerCrop" />
 
         <FrameLayout

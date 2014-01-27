@@ -56,9 +56,6 @@ public class HomeBilletterieFragment extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle item selection
         switch (item.getItemId()) {
-            case android.R.id.home:
-                callback.backToEventOrga();
-                return true;
             case R.id.action_liste_billets:
                 callback.goToListeBillets();
                 return true;

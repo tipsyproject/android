@@ -129,8 +129,8 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                if (newEvent) backToOrga();
-                else backToEventOrga();
+                finish();
+                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
                 return true;
             case R.id.action_validate:
                 if (!saving) {
@@ -166,9 +166,10 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
             public void done(ParseException e) {
                 saving = false;
                 wait.dismiss();
-                if (e == null)
-                    backToEventOrga();
-                else
+                if (e == null){
+                    finish();
+                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                }else
                     Toast.makeText(EditEventActivity.this, getResources().getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();
 
             }
@@ -205,17 +206,6 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     public Event getEvent() {
         return event;
-    }
-
-    public void backToEventOrga() {
-        Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_ID", event.getObjectId());
-        startActivity(intent);
-    }
-
-    public void backToOrga() {
-        Intent intent = new Intent(this, OrgaActivity.class);
-        startActivity(intent);
     }
 
     public EditText getInputNom() {

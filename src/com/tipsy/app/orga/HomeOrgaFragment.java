@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.tipsy.app.R;
+import com.tipsy.app.UserActivity;
 import com.tipsy.lib.EventArrayAdapter;
 
 /**
@@ -71,6 +72,9 @@ public class HomeOrgaFragment extends ListFragment {
                 callback.goToNewEvent();
                 return true;
             case R.id.action_stats:
+                callback.stats();
+                UserActivity.getMenu().getDrawerList().setItemChecked(MenuOrga.STATS, true);
+                OrgaActivity.getMenu().getDrawerList().setSelection(MenuOrga.STATS);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -83,7 +83,8 @@ public class WalletCommandeFragment extends Fragment {
                     @Override
                     public void onSuccess() {
                         wait.dismiss();
-                        callback.goToHomeMembre();
+                        getActivity().finish();
+                        getActivity().overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
                     }
 
                     @Override

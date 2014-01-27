@@ -30,7 +30,5 @@ public interface BilletterieListener {
 
     public void goToVendreBillet();
 
-    public void backToEventOrga();
-
 
 }

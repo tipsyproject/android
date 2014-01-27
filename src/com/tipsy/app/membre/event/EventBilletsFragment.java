@@ -84,7 +84,8 @@ public class EventBilletsFragment extends Fragment {
             wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    callback.backToHome();
+                    getActivity().finish();
+                    getActivity().overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
                 }
             });
             callback.getEvent().findBilletterie(new FindCallback<Ticket>() {

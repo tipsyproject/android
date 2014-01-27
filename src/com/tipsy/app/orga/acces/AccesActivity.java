@@ -59,7 +59,8 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
-                backToEventOrga();
+                finish();
+                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
             }
         });
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
@@ -118,7 +119,12 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                backToEventOrga();
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    finish();
+                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                }
                 return true;
             case R.id.action_refresh:
                 loadVentes();
@@ -193,13 +199,6 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
                 }
             }
         });
-    }
-
-
-    public void backToEventOrga() {
-        Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_ID", event.getObjectId());
-        startActivity(intent);
     }
 
     public void goToHome(boolean addTobackStack) {

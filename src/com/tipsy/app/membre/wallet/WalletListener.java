@@ -21,6 +21,4 @@ public interface WalletListener {
     public void goToDetailsTransaction(Transaction t);
 
     public void goToCommande(boolean addToBackStack, Panier p, Commande c);
-
-    public void goToHomeMembre();
 }

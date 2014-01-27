@@ -13,7 +13,7 @@ import android.widget.ListView;
  * Created by Alexandre on 18/12/13.
  */
 public abstract class UserActivity extends FragmentActivity implements MenuListener {
-    protected MenuUser menu;
+    protected static MenuUser menu;
     protected TipsyApp app;
     public final static int ACCUEIL = 0;
     public final static int MON_COMPTE = 1;
@@ -96,5 +96,9 @@ public abstract class UserActivity extends FragmentActivity implements MenuListe
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         this.menu.getDrawerToggle().onConfigurationChanged(newConfig);
+    }
+
+    public static MenuUser getMenu() {
+        return menu;
     }
 }

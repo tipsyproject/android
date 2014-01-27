@@ -16,6 +16,8 @@ public interface OrgaListener extends MenuListener {
 
     public void goToEvent(int index);
 
+    public void stats();
+
     public void account();
 
     public void tableauDeBord(boolean addToBackStack);

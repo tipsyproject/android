@@ -120,14 +120,10 @@ public class BraceletActivity extends Activity {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                backToMembre();
+                finish();
+                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void backToMembre() {
-        Intent intent = new Intent(this, MembreActivity.class);
-        startActivity(intent);
     }
 }

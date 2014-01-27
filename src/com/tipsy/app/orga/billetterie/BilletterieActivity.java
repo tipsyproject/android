@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -86,6 +87,23 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                    getSupportFragmentManager().popBackStack();
+                } else {
+                    finish();
+                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                }
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         if (outState == null)
             outState = new Bundle();
@@ -155,12 +173,5 @@ public class BilletterieActivity extends FragmentActivity implements Billetterie
         ft.replace(R.id.content, new VendreBilletFragment());
         ft.addToBackStack(null);
         ft.commit();
-    }
-
-    /* retour à l'Activité parente */
-    public void backToEventOrga() {
-        Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_ID", event.getObjectId());
-        startActivity(intent);
     }
 }

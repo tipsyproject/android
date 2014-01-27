@@ -28,8 +28,4 @@ public interface EditEventListener {
 
     public void setInputTimeDebut(TextView inputTimeDebut);
 
-    public void backToEventOrga();
-
-    public void backToOrga();
-
 }

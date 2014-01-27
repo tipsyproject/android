@@ -33,7 +33,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         setContentView(R.layout.act_user);
         super.onCreate(savedInstanceState);
 
-        this.menu = new MenuOrga(this);
+        menu = new MenuOrga(this);
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
         menu.getDrawerList().setItemChecked(MenuOrga.ACCUEIL, true);
 
@@ -144,6 +144,4 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
-
-
 }

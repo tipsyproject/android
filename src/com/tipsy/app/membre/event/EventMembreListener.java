@@ -11,8 +11,6 @@ public interface EventMembreListener {
 
     public Event getEvent();
 
-    public void backToHome();
-
     public void goToEventBillets();
 
     public void goToParticiper(Panier p);

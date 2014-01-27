@@ -9,8 +9,6 @@ public interface EventOrgaListener {
 
     public Event getEvent();
 
-    public void backToOrga();
-
     public void goToAcces();
 
     public void goToBilletterie();
