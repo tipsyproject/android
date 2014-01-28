@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
+import com.tipsy.lib.util.Commerce;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -59,7 +60,7 @@ public class HomeMembreFragment extends Fragment {
         /* Initialisation du montant du solde du Wallet Membre */
         TextView viewSolde = (TextView) getView().findViewById(R.id.solde);
         TipsyApp app = (TipsyApp) getActivity().getApplication();
-        //viewSolde.setText(Commerce.prixToString(app.getWallet().getSolde(), app.getWallet().getDevise()));
+        viewSolde.setText(Commerce.prixToString(app.getWallet().getSolde(), app.getWallet().getDevise()));
         callback.setMenuTitle(MenuMembre.ACCUEIL);
     }
 }
