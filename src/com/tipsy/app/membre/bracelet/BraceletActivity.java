@@ -75,41 +75,33 @@ public class BraceletActivity extends Activity {
     @Override
     protected void onNewIntent(Intent intent) {
         scanning.dismiss();
-
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        String tagID = Bracelet.bytesToHex(tag.getId());
+        final String tagID = Bracelet.bytesToHex(tag.getId());
 
-        ParseQuery<Bracelet> query = ParseQuery.getQuery(Bracelet.class);
-        query.include("user");
-        query.include("participant");
-        final ProgressDialog wait = ProgressDialog.show(this, "", "Association bracelet", true, false);
-        query.getInBackground(tagID, new GetCallback<Bracelet>() {
+        final ProgressDialog wait = ProgressDialog.show(this, "", "Association bracelet...", true);
+        Bracelet.isKnown(tagID,new Bracelet.GetBraceletCallback() {
             @Override
             public void done(Bracelet bracelet, ParseException e) {
-                /* BRACELET REPERTORIE */
-                if (bracelet != null) {
-
-                    if (bracelet.isFree()) {
-                        bracelet.setUser(TipsyUser.getCurrentUser());
-                        bracelet.saveInBackground(new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                wait.dismiss();
-                                if (e == null)
-                                    Toast.makeText(BraceletActivity.this, "Bracelet enregistré !", Toast.LENGTH_SHORT).show();
-                                else
-                                    Toast.makeText(BraceletActivity.this, "Erreur enregistrement bracelet", Toast.LENGTH_SHORT).show();
-                            }
-                        });
-
-                    } else {
-                        wait.dismiss();
-                        Toast.makeText(BraceletActivity.this, "Bracelet déjà utilisé !", Toast.LENGTH_SHORT).show();
-                    }
-                } else { /* BRACELET INCONNU */
+                /* BRACELET DEJA UTILISE */
+                if(bracelet != null && !bracelet.isFree()){
                     wait.dismiss();
-                    Log.d("TOUTAFAIT", "bracelet inconnu");
-                    Toast.makeText(BraceletActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BraceletActivity.this, "Bracelet déjà utilisé !", Toast.LENGTH_SHORT).show();
+                }else{
+                    /* CREATION DU NOUVEAU BRACELET */
+                    if(bracelet == null)
+                        bracelet = new Bracelet(tagID);
+                    /* ASSOCIATION AVEC LE USER */
+                    bracelet.setUser(TipsyUser.getCurrentUser());
+                    bracelet.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            wait.dismiss();
+                            if (e == null)
+                                Toast.makeText(BraceletActivity.this, "Bracelet enregistré !", Toast.LENGTH_SHORT).show();
+                            else
+                                Toast.makeText(BraceletActivity.this, "Erreur enregistrement bracelet", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });

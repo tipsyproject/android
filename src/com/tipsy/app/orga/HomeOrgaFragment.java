@@ -13,7 +13,7 @@ import android.widget.ListView;
 
 import com.tipsy.app.R;
 import com.tipsy.app.UserActivity;
-import com.tipsy.lib.EventArrayAdapter;
+import com.tipsy.lib.util.EventArrayAdapter;
 
 /**
  * Created by Alexandre on 23/12/13.

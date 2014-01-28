@@ -3,7 +3,6 @@ package com.tipsy.app.membre.event;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -18,16 +17,12 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
 import com.tipsy.app.R;
-import com.tipsy.lib.Item;
-import com.tipsy.lib.ItemArrayAdapter;
-import com.tipsy.lib.Panier;
+import com.tipsy.lib.util.Commande;
+import com.tipsy.lib.util.Item;
+import com.tipsy.lib.util.ItemArrayAdapter;
+import com.tipsy.lib.util.Panier;
 import com.tipsy.lib.Ticket;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -35,7 +30,6 @@ import java.util.List;
 public class EventBilletsFragment extends Fragment {
 
     private Panier panier = new Panier();
-    private ArrayList<Item> billetItems = new ArrayList<Item>();
     private ItemArrayAdapter adapter;
     private ListView listView;
     private TextView totalView;
@@ -47,74 +41,46 @@ public class EventBilletsFragment extends Fragment {
         callback = (EventMembreListener) activity;
     }
 
-
-    @Override
-    public void onCreate(Bundle bundle) {
-        super.onCreate(bundle);
-        if (bundle != null && bundle.containsKey("Billets")) {
-            billetItems = bundle.getParcelableArrayList("Billets");
-        }
-    }
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (outState == null)
             outState = new Bundle();
-        outState.putParcelableArrayList("Billets", billetItems);
+        outState.putParcelable("Panier", panier);
         super.onSaveInstanceState(outState);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        if (savedInstanceState == null) {
+            panier = new Panier();
+            for(Ticket t : callback.getBilletterie()){
+                panier.add(new Item(t,0));
+            }
+        }else{
+            panier = savedInstanceState.getParcelable("Panier");
+        }
+
         View view = inflater.inflate(R.layout.frag_event_billets, container, false);
         listView = (ListView) view.findViewById(R.id.list);
         totalView = (TextView) view.findViewById(R.id.prix_total);
 
-        adapter = new ItemArrayAdapter(getActivity(), billetItems, totalView);
+        adapter = new ItemArrayAdapter(getActivity(), panier, totalView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                setNombreBillets(billetItems.get(position));
+                setNombreBillets(panier.get(position));
             }
         });
-
-        if (savedInstanceState == null) {
-            final ProgressDialog wait = ProgressDialog.show(getActivity(), null, "Chargement...", true, true);
-            wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    getActivity().finish();
-                    getActivity().overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-                }
-            });
-            callback.getEvent().findBilletterie(new FindCallback<Ticket>() {
-                @Override
-                public void done(List<Ticket> billets, ParseException e) {
-                    if (e == null) {
-                        billetItems.clear();
-                        for (Ticket billet : billets)
-                            billetItems.add(new Item(billet, 0));
-                        adapter.notifyDataSetChanged();
-                        wait.dismiss();
-                    } else
-                        Toast.makeText(getActivity(), getString(R.string.erreur_interne), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
 
         Button buttonPay = (Button) view.findViewById(R.id.button_pay);
         buttonPay.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                for (Item billet : billetItems) {
-                    if (billet.getQuantite() > 0)
-                        panier.add(billet);
-                }
                 if (panier.isEmpty())
                     Toast.makeText(getActivity(), "Panier vide !", Toast.LENGTH_SHORT).show();
-                else {
-                    callback.goToParticiper(panier);
-                }
+                else
+                    callback.goToParticiper(new Commande(panier));
             }
         });
         return view;

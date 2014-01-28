@@ -1,4 +1,4 @@
-package com.tipsy.app;
+package com.tipsy.app.login;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -18,6 +18,10 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.tipsy.app.R;
+import com.tipsy.app.TipsyApp;
+import com.tipsy.app.signup.TypeSignUpActivity;
+import com.tipsy.app.help.HelpActivity;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.lib.TipsyUser;

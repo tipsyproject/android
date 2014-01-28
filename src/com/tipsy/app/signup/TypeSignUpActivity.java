@@ -1,4 +1,4 @@
-package com.tipsy.app;
+package com.tipsy.app.signup;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -32,6 +32,9 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
+import com.tipsy.app.R;
+import com.tipsy.app.TipsyApp;
+import com.tipsy.app.login.LoginActivity;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.lib.TipsyUser;

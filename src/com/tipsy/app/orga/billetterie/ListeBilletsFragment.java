@@ -15,7 +15,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Commerce;
+import com.tipsy.lib.util.Commerce;
 import com.tipsy.lib.Ticket;
 
 import java.io.Serializable;

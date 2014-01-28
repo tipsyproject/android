@@ -18,13 +18,16 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
-import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Bracelet;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Ticket;
+import com.tipsy.lib.TipsyUser;
+import com.tipsy.lib.util.EventActivity;
+import com.tipsy.lib.util.QueryCallback;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -33,10 +36,7 @@ import java.util.List;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class AccesActivity extends FragmentActivity implements AccesListener {
-
-    private Event event;
-    final private ArrayList<Ticket> billetterie = new ArrayList<Ticket>();
+public class AccesActivity extends EventActivity implements AccesListener {
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     EntreeArrayAdapter entreesAdapter;
     NfcAdapter adapter;
@@ -55,41 +55,32 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
 
         entreesAdapter = new EntreeArrayAdapter(AccesActivity.this, entrees);
 
-        final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
-        wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                finish();
-                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-            }
-        });
-        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-        query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
-            @Override
-            public void done(Event ev, ParseException e) {
-                if (ev != null) {
-                    event = ev;
-                    event.findBilletterie(new FindCallback<Ticket>() {
-                        @Override
-                        public void done(List<Ticket> billets, ParseException e) {
-                            billetterie.clear();
-                            billetterie.addAll(billets);
-                            wait.dismiss();
-                            if (savedInstanceState != null && savedInstanceState.containsKey("Entrees")) {
-                                entrees = savedInstanceState.getParcelableArrayList("Entrees");
-                            } else {
-                                loadVentes();
-                                goToHome(false);
-                            }
-
-                        }
-                    });
-                } else {
-                    wait.dismiss();
-                    Log.d("TOUTAFAIT", "Erreur fetch event/ EventOrgaActivity:Oncreate: " + e.getMessage());
+        if (savedInstanceState == null) {
+            final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
+            wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    finish();
+                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
                 }
-            }
-        });
+            });
+            ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
+            loadEventBilletterie(getIntent().getStringExtra("EVENT_ID"),new QueryCallback() {
+                @Override
+                public void done(Exception e) {
+                    if(e==null){
+                        wait.dismiss();
+                        if (savedInstanceState != null && savedInstanceState.containsKey("Entrees")) {
+                            entrees = savedInstanceState.getParcelableArrayList("Entrees");
+                        } else {
+                            loadVentes();
+                            goToHome(false);
+                        }
+                    }
+                }
+            });
+        }else
+            entrees = savedInstanceState.getParcelableArrayList("Entrees");
     }
 
     @Override
@@ -135,7 +126,7 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
 
 
     public void loadVentes() {
-        Ticket.loadVentes(billetterie, new FindCallback<Achat>() {
+        Ticket.loadVentes(getBilletterie(), new FindCallback<Achat>() {
             @Override
             public void done(List<Achat> achats, ParseException e) {
                 if (e == null) {
@@ -143,8 +134,9 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
                     entrees.addAll(achats);
                     entreesAdapter.notifyDataSetChanged();
                     Toast.makeText(AccesActivity.this, "Liste mise à jour", Toast.LENGTH_SHORT).show();
-                } else
+                } else{
                     Toast.makeText(AccesActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -169,32 +161,28 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         String tagID = Bracelet.bytesToHex(tag.getId());
 
-        ParseQuery<Bracelet> query = ParseQuery.getQuery(Bracelet.class);
-        query.include("user");
-        query.include("participant");
-        query.getInBackground(tagID, new GetCallback<Bracelet>() {
+        Bracelet.isKnown(tagID,new Bracelet.GetBraceletCallback() {
             @Override
             public void done(Bracelet bracelet, ParseException e) {
-                /* BRACELET ACTIVE ? */
+                // BRACELET ACTIVE ? //
                 if (bracelet != null) {
                     Iterator it = entrees.iterator();
                     Achat entree;
                     boolean found = false;
                     while (it.hasNext() && !found) {
                         entree = (Achat) it.next();
-                        if (bracelet.isMembre() && entree.getParticipant().isMembre())
-                            found = bracelet.getUser().getObjectId().equals(entree.getParticipant().getUser().getObjectId());
-                        else if (bracelet.isParticipant())
+                        if (bracelet.getParticipant() != null && entree.getParticipant() != null)
                             found = bracelet.getParticipant().getObjectId().equals(entree.getParticipant().getObjectId());
+                        else if (bracelet.getUser() != null && entree.getUser() != null)
+                            found = bracelet.getUser().getObjectId().equals(entree.getUser().getObjectId());
                     }
 
                     String message = found ? "Entrée OK" : "Entrée non autorisée";
                     wait.dismiss();
                     Toast.makeText(AccesActivity.this, message, Toast.LENGTH_SHORT).show();
 
-                } else { /* BRACELET INCONNU */
+                } else { // BRACELET INCONNU
                     wait.dismiss();
-                    Log.d("TOUTAFAIT", "bracelet inconnu");
                     Toast.makeText(AccesActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -216,14 +204,6 @@ public class AccesActivity extends FragmentActivity implements AccesListener {
         ft.replace(R.id.content, frag);
         ft.addToBackStack(null);
         ft.commit();
-    }
-
-    public ArrayList<Ticket> getBilletterie() {
-        return billetterie;
-    }
-
-    public Event getEvent() {
-        return event;
     }
 
     public ArrayList<Achat> getEntrees() {

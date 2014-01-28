@@ -5,8 +5,7 @@ import android.os.Parcelable;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-
-import java.util.Date;
+import com.tipsy.lib.util.Transaction;
 
 /**
  * Created by Valentin on 21/01/14.
@@ -14,22 +13,18 @@ import java.util.Date;
 @ParseClassName("Depot")
 public class Depot extends ParseObject implements Transaction {
 
-    public Depot() {
-    }
+    public Depot(){}
 
-    public Depot(int montant, String username, int devise) {
-        setDate(new Date());
+    public Depot(int montant, TipsyUser user, int devise){
         setDevise(devise);
         setMontant(montant);
-        setUsername(username);
+        setUser(user);
     }
 
-    public Date getDate() {
-        return getDate("date");
-    }
-
-    public void setDate(Date date) {
-        put("date", date);
+    public Depot(int montant, Participant participant, int devise){
+        setDevise(devise);
+        setMontant(montant);
+        setParticipant(participant);
     }
 
     public int getDevise() {
@@ -37,7 +32,7 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setDevise(int devise) {
-        put("devise", devise);
+        put("devise",devise);
     }
 
     public int getMontant() {
@@ -45,28 +40,48 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setMontant(int montant) {
-        put("montant", montant);
+        put("montant",montant);
     }
 
-    public String getUsername() {
-        return getString("username");
+    public Participant getParticipant() {
+        return (Participant) getParseObject("participant");
     }
 
-    public void setUsername(String username) {
-        put("username", username);
+    public void setParticipant(Participant participant) {
+        if(participant == null)
+            remove("participant");
+        else{
+            remove("user");
+            put("participant", participant);
+        }
     }
 
-    public String getDescription() {
+    public TipsyUser getUser() {
+        return (TipsyUser) getParseObject("user");
+    }
+
+    public void setUser(TipsyUser user) {
+        if(user == null)
+            remove("user");
+        else{
+            remove("participant");
+            put("user",user);
+        }
+    }
+
+    public String getDescription(){
         return "";
     }
 
-    public String getTitre() {
+    public String getTitre(){
         return "Rechargement";
     }
 
-    public boolean isDepot() {
+    public boolean isDepot(){
         return true;
     }
+
+
 
 
     // Implémentation de Parcelable
@@ -78,18 +93,16 @@ public class Depot extends ParseObject implements Transaction {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getObjectId());
-        dest.writeSerializable(getDate());
         dest.writeInt(getDevise());
         dest.writeInt(getMontant());
-        dest.writeString(getUsername());
+        dest.writeParcelable(getUser(),flags);
     }
 
     public Depot(Parcel in) {
         setObjectId(in.readString());
-        setDate((Date) in.readSerializable());
         setDevise(in.readInt());
         setMontant(in.readInt());
-        setUsername(in.readString());
+        setUser((TipsyUser) in.readParcelable(TipsyUser.class.getClassLoader()));
     }
 
     public static final Parcelable.Creator<Depot> CREATOR = new Parcelable.Creator<Depot>() {

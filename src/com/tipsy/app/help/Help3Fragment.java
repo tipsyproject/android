@@ -1,10 +1,12 @@
-package com.tipsy.app;
+package com.tipsy.app.help;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.tipsy.app.R;
 
 /**
  * Created by Alexandre on 10/12/13.

@@ -1,8 +1,10 @@
-package com.tipsy.lib;
+package com.tipsy.lib.util;
 
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.tipsy.lib.Ticket;
 
 /**
  * Created by valoo on 04/01/14.

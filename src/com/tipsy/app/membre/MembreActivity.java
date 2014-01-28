@@ -16,12 +16,14 @@ import android.widget.AutoCompleteTextView;
 import android.widget.DatePicker;
 import android.widget.SearchView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.tipsy.app.HelpActivity;
-import com.tipsy.app.LoginActivity;
+import com.tipsy.app.TipsyApp;
+import com.tipsy.app.help.HelpActivity;
+import com.tipsy.app.login.LoginActivity;
 import com.tipsy.app.R;
 import com.tipsy.app.UserActivity;
 import com.tipsy.app.membre.bracelet.BraceletActivity;
@@ -29,6 +31,8 @@ import com.tipsy.app.membre.event.EventMembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.TipsyUser;
+import com.tipsy.lib.util.QueryCallback;
+import com.tipsy.lib.util.Wallet;
 
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -62,8 +66,20 @@ public class MembreActivity extends UserActivity implements MembreListener {
 
         };
 
-        if (savedInstanceState == null)
-            goToTableauDeBord(false);
+        if (savedInstanceState == null){
+            /* Chargement du TipsyWallet */
+            TipsyApp app = (TipsyApp) getApplication();
+            final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement du Tipsy Wallet...", true, false);
+            app.loadWallet(new QueryCallback() {
+                @Override
+                public void done(Exception e) {
+                    wait.dismiss();
+                    goToTableauDeBord(false);
+                    if(e!=null)
+                        Toast.makeText(MembreActivity.this,"Erreur initialisation du wallet",Toast.LENGTH_SHORT);
+                }
+            });
+        }
     }
 
     @Override

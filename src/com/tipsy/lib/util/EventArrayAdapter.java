@@ -1,4 +1,4 @@
-package com.tipsy.lib;
+package com.tipsy.lib.util;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
+import com.tipsy.lib.Event;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

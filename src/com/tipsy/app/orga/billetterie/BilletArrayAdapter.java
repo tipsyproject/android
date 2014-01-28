@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Item;
+import com.tipsy.lib.util.Item;
 
 import java.util.ArrayList;
 

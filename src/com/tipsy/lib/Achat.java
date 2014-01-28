@@ -4,9 +4,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
-
-import java.util.Date;
+import com.tipsy.lib.util.Transaction;
 
 /**
  * Created by Valentin on 21/01/14.
@@ -14,24 +14,15 @@ import java.util.Date;
 @ParseClassName("Achat")
 public class Achat extends ParseObject implements Transaction {
 
-    public Achat() {
+    public Achat(){}
+
+    public Achat(Ticket t){
+        setTicket(t);
+        setUsed(false);
     }
 
-    public Achat(Ticket p) {
-        setDate(new Date());
-        setProduit(p);
-    }
-
-    public Date getDate() {
-        return getDate("date");
-    }
-
-    public void setDate(Date date) {
-        put("date", date);
-    }
-
-    public int getDevise() {
-        return ((Ticket) getParseObject("produit")).getDevise();
+    public int getDevise(){
+        return getTicket().getDevise();
     }
 
     public Participant getParticipant() {
@@ -39,23 +30,49 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setParticipant(Participant participant) {
-        put("participant", participant);
+        if(participant == null)
+            remove("participant");
+        else{
+            remove("user");
+            put("participant", participant);
+        }
     }
 
-    public TipsyUser getPayeur() {
-        return (TipsyUser) getParseObject("payeur");
+    public TipsyUser getPaiementUser() {
+        return (TipsyUser) getParseObject("paiementuser");
     }
 
-    public void setPayeur(TipsyUser payeur) {
-        put("payeur", payeur);
+    public void setPaiementUser(TipsyUser payeur) {
+        if(payeur != null) put("paiementuser",payeur);
     }
 
-    public Ticket getProduit() {
-        return (Ticket) getParseObject("produit");
+    public Participant getPaiementParticipant() {
+        return (Participant) getParseObject("paiementparticipant");
     }
 
-    public void setProduit(Ticket ticket) {
+    public void setPaiementParticipant(Participant payeur) {
+        if(payeur != null) put("paiementparticipant",payeur);
+    }
+
+    public Ticket getTicket() {
+        return (Ticket) getParseObject("ticket");
+    }
+
+    public void setTicket(Ticket ticket) {
         put("ticket", ticket);
+    }
+
+    public TipsyUser getUser() {
+        return (TipsyUser) getParseObject("user");
+    }
+
+    public void setUser(TipsyUser user) {
+        if(user == null)
+            remove("user");
+        else{
+            remove("participant");
+            put("user",user);
+        }
     }
 
     public boolean isUsed() {
@@ -63,27 +80,42 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setUsed(boolean used) {
-        put("used", used);
+        put("used",used);
     }
 
-    public int getMontant() {
-        return ((Ticket) getParseObject("produit")).getPrix();
+    public int getMontant(){
+        return getTicket().getPrix();
     }
 
-    public String getDescription() {
-        return getParticipant().getEvent().getNom() + " - " + getParticipant().getEvent().getLieu();
+    public String getDescription(){
+        return getTicket().getEvent().getNom() + " - " + getTicket().getEvent().getLieu();
     }
 
-    public String getTitre() {
-        return ((Ticket) getParseObject("produit")).getNom();
+    public String getTitre(){
+        return getTicket().getNom();
     }
 
-    public boolean isDepot() {
+    public String getPrenom(){
+        return isTipsyUser() ? getUser().getPrenom() : getParticipant().getPrenom();
+    }
+
+    public String getNom(){
+        return isTipsyUser() ? getUser().getNom() : getParticipant().getNom();
+    }
+
+    public String getEmail(){
+        return isTipsyUser() ? getUser().getEmail() : getParticipant().getEmail();
+    }
+
+    public boolean isDepot(){
         return false;
+    } 
+    public boolean isUserDefined(){
+        return getUser() != null || getParticipant() != null;
     }
 
-    public boolean isParticipantDefined() {
-        return getParticipant().isDefined();
+    public boolean isTipsyUser(){
+        return getUser() != null;
     }
 
 
@@ -96,19 +128,21 @@ public class Achat extends ParseObject implements Transaction {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getObjectId());
-        dest.writeSerializable(getDate());
+        dest.writeParcelable(getUser(), flags);
         dest.writeParcelable(getParticipant(), flags);
-        dest.writeParcelable(getPayeur(), flags);
-        dest.writeParcelable(getProduit(), flags);
+        dest.writeParcelable(getPaiementUser(), flags);
+        dest.writeParcelable(getPaiementParticipant(), flags);
+        dest.writeParcelable(getTicket(), flags);
         dest.writeValue(isUsed());
     }
 
     public Achat(Parcel in) {
         setObjectId(in.readString());
-        setDate((Date) in.readSerializable());
+        setUser((TipsyUser) in.readParcelable(TipsyUser.class.getClassLoader()));
         setParticipant((Participant) in.readParcelable(Participant.class.getClassLoader()));
-        setPayeur((TipsyUser) in.readParcelable(TipsyUser.class.getClassLoader()));
-        setProduit((Ticket) in.readParcelable(Ticket.class.getClassLoader()));
+        setPaiementUser((TipsyUser) in.readParcelable(TipsyUser.class.getClassLoader()));
+        setPaiementParticipant((Participant) in.readParcelable(Participant.class.getClassLoader()));
+        setTicket((Ticket) in.readParcelable(Ticket.class.getClassLoader()));
         setUsed((Boolean) in.readValue(Boolean.class.getClassLoader()));
     }
 

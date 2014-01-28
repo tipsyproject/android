@@ -17,9 +17,9 @@ import com.mobsandgeeks.saripaar.annotation.NumberRule;
 import com.mobsandgeeks.saripaar.annotation.Required;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Commerce;
-import com.tipsy.lib.Wallet;
-import com.tipsy.lib.WalletCallback;
+import com.tipsy.lib.util.Commerce;
+import com.tipsy.lib.util.QueryCallback;
+import com.tipsy.lib.util.Wallet;
 
 /**
  * Created by Alexandre on 23/12/13.
@@ -66,28 +66,16 @@ public class WalletCreditFragment extends Fragment implements Validator.Validati
         // On recupère le montant du crédit
         int montant = Commerce.parsePrix(inputMontant);
         final ProgressDialog wait = Wallet.getProgressDialog(getActivity());
-        wallet.credit(montant, new WalletCallback() {
+        wait.show();
+        TipsyApp app = (TipsyApp) getActivity().getApplication();
+        app.getWallet().credit(montant, new QueryCallback() {
             @Override
-            public void onWait() {
-                wait.show();
-            }
-
-            @Override
-            public void onSuccess() {
+            public void done(Exception e) {
                 wait.dismiss();
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(getActivity(), "Rechargement effectué", Toast.LENGTH_LONG).show();
-                    }
-                });
-                getActivity().finish();
-            }
-
-            @Override
-            public void onFailure(Exception e) {
-                wait.dismiss();
-                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                if(e==null){
+                    Toast.makeText(getActivity(), "Rechargement effectué", Toast.LENGTH_LONG).show();
+                    getActivity().finish();
+                }else Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

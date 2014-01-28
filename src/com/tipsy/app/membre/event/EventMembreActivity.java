@@ -11,56 +11,51 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.tipsy.app.R;
-import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.membre.wallet.WalletActivity;
-import com.tipsy.lib.Commande;
+import com.tipsy.lib.util.Commande;
 import com.tipsy.lib.Event;
-import com.tipsy.lib.Panier;
+import com.tipsy.lib.util.EventActivity;
+import com.tipsy.lib.util.Panier;
+import com.tipsy.lib.Ticket;
+import com.tipsy.lib.util.QueryCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by valoo on 22/01/14.
  */
-public class EventMembreActivity extends FragmentActivity implements EventMembreListener {
-
-    private Event event;
+public class EventMembreActivity extends EventActivity implements EventMembreListener {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_billetterie);
-        super.onCreate(savedInstanceState);
-
-        /* Chargement de l'event */
-        final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
-        wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                finish();
-            }
-        });
-        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-        query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
-            @Override
-            public void done(Event ev, ParseException e) {
-                if (ev != null) {
-                    event = ev;
-                    getActionBar().setTitle(event.getNom());
-                    wait.dismiss();
-                    getActionBar().setTitle(event.getNom());
-                    if (savedInstanceState == null) {
-                        goToEventBillets();
-                    }
-                } else {
-                    wait.dismiss();
-                    Log.d("TOUTAFAIT", "Erreur: " + e.getMessage());
-                }
-            }
-        });
         getActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (savedInstanceState == null) {
+        /* Chargement de l'event */
+            final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
+            wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    finish();
+                }
+            });
+            loadEventBilletterie(getIntent().getStringExtra("EVENT_ID"), new QueryCallback() {
+                @Override
+                public void done(Exception e) {
+                    wait.dismiss();
+                    goToEventBillets();
+                }
+            });
+        }
 
     }
 
@@ -87,10 +82,6 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
         return super.onOptionsItemSelected(item);
     }
 
-    public Event getEvent() {
-        return event;
-    }
-
     public void goToEventBillets() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
@@ -101,8 +92,11 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
 
     }
 
-    public void goToParticiper(Panier p) {
-        EventParticiperFragment frag = EventParticiperFragment.init(p);
+    public void goToParticiper(Commande c) {
+        EventParticiperFragment frag = new EventParticiperFragment();
+        Bundle args = new Bundle();
+        args.putParcelable("Commande", c);
+        frag.setArguments(args);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .addToBackStack(null)
@@ -111,10 +105,8 @@ public class EventMembreActivity extends FragmentActivity implements EventMembre
                 .commit();
     }
 
-    public void goToCommande(Panier p, Commande c) {
+    public void goToCommande(Commande c) {
         Intent intent = new Intent(this, WalletActivity.class);
-        intent.putExtra(WalletActivity.ACTION, WalletActivity.COMMANDE);
-        intent.putExtra("Panier", (Parcelable) p);
         intent.putExtra("Commande", (Parcelable) c);
         startActivity(intent);
     }

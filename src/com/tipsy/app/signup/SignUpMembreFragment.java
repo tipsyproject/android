@@ -1,4 +1,4 @@
-package com.tipsy.app.membre;
+package com.tipsy.app.signup;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

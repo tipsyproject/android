@@ -1,4 +1,4 @@
-package com.tipsy.app;
+package com.tipsy.app.help;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.tipsy.app.R;
+
 /**
  * Created by Alexandre on 10/12/13.
  */
-public class Help2Fragment extends Fragment {
+public class Help1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_help2, container, false);
+        return inflater.inflate(R.layout.frag_help1, container, false);
     }
 }

@@ -28,7 +28,6 @@ public class HomeBilletterieFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d("TOUTAFAIT", "createview");
         View view = inflater.inflate(R.layout.frag_billetterie_home, container, false);
         /* Bouton VENDRE BILLET */
         Button buttonVendre = (Button) view.findViewById(R.id.button_vendre);

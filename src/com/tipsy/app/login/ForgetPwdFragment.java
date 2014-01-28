@@ -1,4 +1,4 @@
-package com.tipsy.app;
+package com.tipsy.app.login;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -17,6 +17,8 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.RequestPasswordResetCallback;
+import com.tipsy.app.R;
+import com.tipsy.app.TipsyApp;
 
 
 /**

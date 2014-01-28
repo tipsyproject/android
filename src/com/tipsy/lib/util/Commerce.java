@@ -1,4 +1,4 @@
-package com.tipsy.lib;
+package com.tipsy.lib.util;
 
 import android.widget.TextView;
 

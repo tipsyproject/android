@@ -1,6 +1,5 @@
 package com.tipsy.lib;
 
-
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,47 +7,23 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 /**
- * Created by vquefele on 20/01/14.
+ * Created by valoo on 27/01/14.
  */
 @ParseClassName("Participant")
 public class Participant extends ParseObject implements Parcelable {
 
-    public Participant() {
-    }
-
-    public Participant(Event e) {
-        setEvent(e);
-    }
+    public Participant(){}
 
     public String getEmail() {
-        return getUser() == null ? getString("email") : getUser().getEmail();
+        return getString("email");
     }
 
     public void setEmail(String email) {
         put("email", email);
     }
 
-    public Event getEvent() {
-        return (Event) getParseObject("event");
-    }
-
-    public void setEvent(Event event) {
-        put("event", event);
-    }
-
-    public TipsyUser getUser() {
-        return (TipsyUser) getParseObject("user");
-    }
-
-    public void setUser(TipsyUser user) {
-        put("nom", "");
-        put("prenom", "");
-        put("email", "");
-        put("user", user);
-    }
-
     public String getNom() {
-        return getUser() == null ? getString("nom") : getUser().getNom();
+        return getString("nom");
     }
 
     public void setNom(String nom) {
@@ -56,21 +31,13 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public String getPrenom() {
-        return getUser() == null ? getString("prenom") : getUser().getPrenom();
+        return getString("prenom");
     }
 
     public void setPrenom(String prenom) {
         put("prenom", prenom);
     }
 
-
-    public boolean isDefined() {
-        return getUser() != null || (getNom() != null && getPrenom() != null && getEmail() != null);
-    }
-
-    public boolean isMembre() {
-        return getUser() != null;
-    }
 
 
     // Implémentation de Parcelable
@@ -83,8 +50,6 @@ public class Participant extends ParseObject implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getObjectId());
         dest.writeString(getEmail());
-        dest.writeParcelable(getEvent(), flags);
-        dest.writeParcelable(getUser(), flags);
         dest.writeString(getNom());
         dest.writeString(getPrenom());
     }
@@ -92,8 +57,6 @@ public class Participant extends ParseObject implements Parcelable {
     public Participant(Parcel in) {
         setObjectId(in.readString());
         setEmail(in.readString());
-        setEvent((Event) in.readParcelable(Event.class.getClassLoader()));
-        setUser((TipsyUser) in.readParcelable(TipsyUser.class.getClassLoader()));
         setNom(in.readString());
         setPrenom(in.readString());
     }

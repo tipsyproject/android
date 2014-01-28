@@ -1,4 +1,4 @@
-package com.tipsy.app;
+package com.tipsy.app.login;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +13,8 @@ import android.widget.EditText;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Required;
+import com.tipsy.app.R;
+import com.tipsy.app.TipsyApp;
 
 /**
  * Created by Alexandre on 20/01/14.

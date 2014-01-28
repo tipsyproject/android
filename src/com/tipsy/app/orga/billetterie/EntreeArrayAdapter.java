@@ -33,13 +33,13 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> {
         Achat entree = entrees.get(position);
 
         TextView prenomParticipant = (TextView) view.findViewById(R.id.prenom_participant);
-        prenomParticipant.setText(entree.getParticipant().getPrenom());
+        prenomParticipant.setText(entree.getPrenom());
 
         TextView nomParticipant = (TextView) view.findViewById(R.id.nom_participant);
-        nomParticipant.setText(entree.getParticipant().getNom());
+        nomParticipant.setText(entree.getNom());
 
         TextView nomBillet = (TextView) view.findViewById(R.id.nom_billet);
-        nomBillet.setText(entree.getProduit().getNom());
+        nomBillet.setText(entree.getTicket().getNom());
         return view;
     }
 }

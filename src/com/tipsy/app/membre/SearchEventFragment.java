@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.EventArrayAdapter;
+import com.tipsy.lib.util.EventArrayAdapter;
 
 /**
  * Created by Valentin on 30/12/13.

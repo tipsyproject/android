@@ -81,8 +81,10 @@ public class Ticket extends ParseObject implements Parcelable {
         if (!tickets.isEmpty()) {
             ParseQuery<Achat> query = ParseQuery.getQuery(Achat.class);
             query.include("participant");
-            query.include("produit");
-            query.whereEqualTo("produit", tickets);
+            query.include("paiementuser");
+            query.include("user");
+            query.include("ticket");
+            query.whereContainedIn("ticket", tickets);
             query.findInBackground(callback);
         } else callback.done(new ArrayList<Achat>(), null);
     }

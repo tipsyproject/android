@@ -1,7 +1,11 @@
-package com.tipsy.lib;
+package com.tipsy.lib.util;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.tipsy.lib.Achat;
+import com.tipsy.lib.Participant;
+import com.tipsy.lib.TipsyUser;
 
 import java.util.ArrayList;
 
@@ -13,10 +17,10 @@ public class Commande extends ArrayList<Achat> implements Parcelable {
     public Commande() {
     }
 
-    public Commande(ArrayList<Achat> achats) {
-        clear();
-        for (Achat a : achats)
-            add(a);
+    public Commande(Panier panier) {
+        for (Item item : panier)
+            for(int i=0; i<item.getQuantite(); ++i)
+                add(new Achat(item.getTicket()));
     }
 
     public int getPrixTotal() {
@@ -32,7 +36,12 @@ public class Commande extends ArrayList<Achat> implements Parcelable {
 
     public void setPayeur(TipsyUser user) {
         for (Achat a : this)
-            a.setPayeur(user);
+            a.setPaiementUser(user);
+    }
+
+    public void setPayeur(Participant user) {
+        for (Achat a : this)
+            a.setPaiementParticipant(user);
     }
 
 

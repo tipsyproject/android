@@ -12,8 +12,8 @@ import android.widget.Toast;
 
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Wallet;
-import com.tipsy.lib.WalletCallback;
+import com.tipsy.lib.util.QueryCallback;
+import com.tipsy.lib.util.Wallet;
 
 /**
  * Created by Alexandre on 20/01/14.
@@ -24,8 +24,6 @@ public class WalletFormuleFragment extends Fragment {
     private Button button50;
     private Button button100;
     private Button buttonAutres;
-
-    private Wallet wallet;
     private WalletListener callback;
 
     @Override
@@ -37,9 +35,6 @@ public class WalletFormuleFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_wallet_formule, container, false);
-
-        TipsyApp app = (TipsyApp) getActivity().getApplication();
-        //wallet = app.getWallet();
 
         button20 = (Button) view.findViewById(R.id.rech20);
         button50 = (Button) view.findViewById(R.id.rech50);
@@ -74,28 +69,17 @@ public class WalletFormuleFragment extends Fragment {
             }
             if (v.getId() != R.id.autres) {
                 final ProgressDialog wait = Wallet.getProgressDialog(getActivity());
-                wallet.credit(montant, new WalletCallback() {
-                    @Override
-                    public void onWait() {
-                        wait.show();
-                    }
+                wait.show();
 
+                TipsyApp app = (TipsyApp) getActivity().getApplication();
+                app.getWallet().credit(montant, new QueryCallback() {
                     @Override
-                    public void onSuccess() {
+                    public void done(Exception e) {
                         wait.dismiss();
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                Toast.makeText(getActivity(), "Rechargement effectué", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                        getActivity().finish();
-                    }
-
-                    @Override
-                    public void onFailure(Exception e) {
-                        wait.dismiss();
-                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
+                        if(e==null){
+                            Toast.makeText(getActivity(), "Rechargement effectué", Toast.LENGTH_LONG).show();
+                            getActivity().finish();
+                        }else Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

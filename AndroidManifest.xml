@@ -36,18 +36,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.tipsy.app.HelpActivity"
+            android:name=".help.HelpActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:noHistory="true"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name="com.tipsy.app.TypeSignUpActivity"
+            android:name=".signup.TypeSignUpActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"></activity>
 
         <activity
-            android:name="com.tipsy.app.LoginActivity"
+            android:name=".login.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"></activity>
 

@@ -2,14 +2,21 @@ package com.tipsy.lib;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
+import com.parse.FindCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import java.util.List;
 
 /**
  * Created by vquefele on 23/01/14.
  */
 public class TipsyUser extends ParseUser implements Parcelable {
-
     public static int MEMBRE = 1;
     public static int ORGA = 2;
 
@@ -19,7 +26,6 @@ public class TipsyUser extends ParseUser implements Parcelable {
     @Override
     public void setUsername(String username) {
         super.setUsername(username);
-        super.setEmail(username);
     }
 
     public String getNom() {
@@ -49,6 +55,13 @@ public class TipsyUser extends ParseUser implements Parcelable {
     public static TipsyUser getCurrentUser() {
         return (TipsyUser) ParseUser.getCurrentUser();
     }
+
+
+
+
+
+
+
 
     // Implémentation de Parcelable
     @Override

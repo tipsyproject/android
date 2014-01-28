@@ -1,4 +1,4 @@
-package com.tipsy.lib;
+package com.tipsy.lib.util;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
+import com.tipsy.lib.util.Commerce;
+import com.tipsy.lib.util.Transaction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -50,7 +52,7 @@ public class TransactionArrayAdapter extends ArrayAdapter<Transaction> {
         /* Date transaction */
         TextView date = (TextView) view.findViewById(R.id.date);
         SimpleDateFormat ft = new SimpleDateFormat("dd MMM");
-        date.setText(ft.format(transaction.getDate()));
+        date.setText(ft.format(transaction.getCreatedAt()));
 
         return view;
     }

@@ -14,16 +14,19 @@ import com.tipsy.lib.Bracelet;
 import com.tipsy.lib.Depot;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Participant;
-import com.tipsy.lib.Prefs;
+import com.tipsy.lib.util.Prefs;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.TipsyUser;
+import com.tipsy.lib.util.QueryCallback;
+import com.tipsy.lib.util.Wallet;
 
 /**
  * Created by valoo on 18/12/13.
  */
 public class TipsyApp extends Application {
 
-    static final String TAG = "Cestpasfaux";
+    public static final String TAG = "Cestpasfaux";
+    private Wallet wallet;
 
     @Override
     public void onCreate() {
@@ -54,5 +57,14 @@ public class TipsyApp extends Application {
     public static void hideKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    public Wallet getWallet(){
+        return wallet;
+    }
+
+    public void loadWallet(QueryCallback cb){
+        wallet = new Wallet(TipsyUser.getCurrentUser());
+        wallet.load(cb);
     }
 }

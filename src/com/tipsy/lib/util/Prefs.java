@@ -1,4 +1,4 @@
-package com.tipsy.lib;
+package com.tipsy.lib.util;
 
 /**
  * Created by valoo on 12/12/13.

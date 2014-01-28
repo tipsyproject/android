@@ -25,7 +25,6 @@ import java.util.List;
 public class ListeVentesFragment extends ListFragment {
 
     protected BilletterieListener callback;
-    EntreeArrayAdapter adapter;
 
     @Override
     public void onAttach(Activity activity) {
@@ -36,8 +35,7 @@ public class ListeVentesFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        adapter = new EntreeArrayAdapter(getActivity(), callback.getVentes());
-        setListAdapter(adapter);
+        setListAdapter(callback.getVentesAdapter());
         setEmptyText(getString(R.string.empty_liste_ventes));
     }
 
@@ -71,9 +69,11 @@ public class ListeVentesFragment extends ListFragment {
                 Ticket.loadVentes(callback.getBilletterie(), new FindCallback<Achat>() {
                     @Override
                     public void done(List<Achat> achats, ParseException e) {
-                        callback.getVentes().clear();
-                        callback.getVentes().addAll(achats);
-                        adapter.notifyDataSetChanged();
+                        if(achats != null){
+                            callback.getVentes().clear();
+                            callback.getVentes().addAll(achats);
+                            callback.getVentesAdapter().notifyDataSetChanged();
+                        }
                     }
                 });
                 return true;

@@ -1,22 +1,17 @@
 package com.tipsy.app.orga.billetterie;
 
 import com.tipsy.lib.Achat;
-import com.tipsy.lib.Event;
-import com.tipsy.lib.Ticket;
+import com.tipsy.lib.util.EventModule;
 
 import java.util.ArrayList;
 
 /**
  * Created by valoo on 27/12/13.
  */
-public interface BilletterieListener {
-
-
-    public Event getEvent();
-
-    public ArrayList<Ticket> getBilletterie();
+public interface BilletterieListener extends EventModule {
 
     public ArrayList<Achat> getVentes();
+    public EntreeArrayAdapter getVentesAdapter();
 
     public void backToHome();
 

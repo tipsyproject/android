@@ -1,4 +1,4 @@
-package com.tipsy.lib;
+package com.tipsy.lib.util;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -35,6 +35,14 @@ public class Panier extends ArrayList<Item> implements Parcelable {
         return prixTotal;
     }
 
+    @Override
+    public boolean isEmpty(){
+        for(Item item : this)
+            if(item.getQuantite()>0)
+                return false;
+        return true;
+    }
+
 
     // Implémentation de Parcelable
     @Override
@@ -50,9 +58,7 @@ public class Panier extends ArrayList<Item> implements Parcelable {
 
     public Panier(Parcel in) {
         devise = in.readInt();
-        ArrayList<Item> items = new ArrayList<Item>();
-        in.readList(items, Item.class.getClassLoader());
-        addAll(items);
+        in.readList(this, Item.class.getClassLoader());
     }
 
     public static final Parcelable.Creator<Panier> CREATOR = new Parcelable.Creator<Panier>() {
