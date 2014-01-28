@@ -167,7 +167,7 @@ public class AccesActivity extends EventActivity implements AccesListener {
                 // BRACELET ACTIVE ? //
                 if (bracelet != null) {
                     Iterator it = entrees.iterator();
-                    Achat entree;
+                    Achat entree = null;
                     boolean found = false;
                     while (it.hasNext() && !found) {
                         entree = (Achat) it.next();
@@ -176,8 +176,16 @@ public class AccesActivity extends EventActivity implements AccesListener {
                         else if (bracelet.getUser() != null && entree.getUser() != null)
                             found = bracelet.getUser().getObjectId().equals(entree.getUser().getObjectId());
                     }
-
-                    String message = found ? "Entrée OK" : "Entrée non autorisée";
+                    String message;
+                    if(found){
+                        if(entree != null && !entree.isUsed()){
+                            message="Entrée OK";
+                            entree.setUsed(true);
+                            entree.saveInBackground();
+                        }
+                        else
+                            message="Entrée déjà validée";
+                    }else message = "Entrée non autorisée";
                     wait.dismiss();
                     Toast.makeText(AccesActivity.this, message, Toast.LENGTH_SHORT).show();
 
