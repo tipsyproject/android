@@ -68,7 +68,7 @@
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="textCapWords"
                         android:textColor="@color/text_home_edit"
                         android:shadowColor="@android:color/black"
                         android:shadowDx="-1"
@@ -102,7 +102,7 @@
                     <EditText
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:inputType="text"
+                        android:inputType="textCapWords"
                         android:layout_weight="1"
                         android:textColor="@color/text_home_edit"
                         android:shadowColor="@android:color/black"

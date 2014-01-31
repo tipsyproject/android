@@ -165,15 +165,15 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
             @Override
             public void done(ParseException e) {
                 saving = false;
-                wait.dismiss();
                 if (e == null){
                     finish();
                     overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
                 }else
                     Toast.makeText(EditEventActivity.this, getResources().getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();
-
+                wait.dismiss();
             }
         });
+
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {

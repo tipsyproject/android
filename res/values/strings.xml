@@ -46,6 +46,7 @@ j'accepte les conditions générales."</string>
     <!-- EVENT -->
     <string name="nouvel_event">Nouvel événement</string>
     <string name="empty_liste_event">Aucun événement</string>
+    <string name="delete">Supprimer</string>
 
 
     <!-- BILLETTERIE -->

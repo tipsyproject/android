@@ -9,10 +9,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.parse.ParseObject;
 import com.tipsy.app.R;
 import com.tipsy.app.UserActivity;
+import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.util.EventArrayAdapter;
 
 /**
@@ -20,6 +25,7 @@ import com.tipsy.lib.util.EventArrayAdapter;
  */
 public class HomeOrgaFragment extends ListFragment {
     private OrgaListener callback;
+    protected EventArrayAdapter adapter;
 
     @Override
     public void onAttach(Activity activity) {
@@ -30,8 +36,9 @@ public class HomeOrgaFragment extends ListFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        EventArrayAdapter adapter = new EventArrayAdapter(getActivity(), callback.getEvents());
+        final EventArrayAdapter adapter = new EventArrayAdapter(getActivity(), callback.getEvents());
         setListAdapter(adapter);
+
         setEmptyText(getString(R.string.empty_liste_event));
     }
 
@@ -49,6 +56,7 @@ public class HomeOrgaFragment extends ListFragment {
     public void onStart() {
         super.onStart();
         callback.setMenuTitle(MenuOrga.ACCUEIL);
+
     }
 
     @Override

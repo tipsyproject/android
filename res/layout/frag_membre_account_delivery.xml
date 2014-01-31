@@ -35,7 +35,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textCapWords"
                 android:layout_weight="1"
                 android:id="@+id/input_nom"
                 android:layout_gravity="center" />
@@ -59,7 +59,7 @@
             <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="textCapWords"
                 android:layout_weight="1"
                 android:id="@+id/input_prenom"
                 android:layout_gravity="center" />

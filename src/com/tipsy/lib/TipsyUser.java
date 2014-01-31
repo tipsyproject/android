@@ -28,6 +28,11 @@ public class TipsyUser extends ParseUser implements Parcelable {
         super.setUsername(username);
     }
 
+    @Override
+    public String getEmail() {
+        return getUsername();
+    }
+
     public String getNom() {
         return getString("nom");
     }

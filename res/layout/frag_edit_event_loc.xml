@@ -14,5 +14,5 @@
         android:shadowDy="0"
         android:shadowRadius="2"
         android:hint="Lieu"
-        android:inputType="text" />
+        android:inputType="textCapWords" />
 </LinearLayout>

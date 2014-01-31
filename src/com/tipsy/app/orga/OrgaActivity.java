@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.view.View;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -27,6 +28,7 @@ import java.util.List;
 public class OrgaActivity extends UserActivity implements OrgaListener {
 
     private ArrayList<Event> events = new ArrayList<Event>();
+    protected boolean bundle =false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -37,8 +39,16 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         menu.initAdapter(new UserActivity.DrawerItemClickListener());
         menu.getDrawerList().setItemChecked(MenuOrga.ACCUEIL, true);
 
+        if (savedInstanceState == null)
+            bundle=true;
+        else
+            events = savedInstanceState.getParcelableArrayList("Events");
+    }
 
-        if (savedInstanceState == null) {
+    @Override
+    public void onResume(){
+        super.onResume();
+        if (bundle) {
             final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true);
 
             ParseQuery<Event> eventsQuery = ParseQuery.getQuery(Event.class);
@@ -55,8 +65,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
                     }
                 }
             });
-        } else
-            events = savedInstanceState.getParcelableArrayList("Events");
+        }
     }
 
     @Override

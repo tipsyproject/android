@@ -14,7 +14,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords"
         android:hint="Nom"
         android:ems="10"
         android:id="@+id/input_nom"
@@ -30,7 +30,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords"
         android:hint="Prenom"
         android:ems="10"
         android:id="@+id/input_prenom"

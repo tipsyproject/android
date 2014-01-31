@@ -18,13 +18,13 @@ public class MenuOrga extends MenuUser {
     public MenuOrga(Activity a) {
         super(a);
         mIcons = new int[]{
-                R.drawable.ic_action_view_as_grid_dark,
+                R.drawable.ic_action_event_dark,
                 R.drawable.ic_action_person_dark,
                 R.drawable.ic_action_network_cell_dark,
                 R.drawable.ic_action_help_dark,
                 R.drawable.ic_action_undo_dark
         };
-        mTitles = new String[]{"Tableau de Bord", "Mon Compte", "Statistiques", "Aide", "Déconnexion"};
+        mTitles = new String[]{"Événements", "Mon Compte", "Statistiques", "Aide", "Déconnexion"};
         setTitre(mTitles[ACCUEIL]);
     }
 }

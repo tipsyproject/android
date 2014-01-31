@@ -9,7 +9,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
+        android:inputType="textCapWords"
         android:ems="10"
         android:id="@+id/input_nom"
         android:hint="@string/nom_billet" />
