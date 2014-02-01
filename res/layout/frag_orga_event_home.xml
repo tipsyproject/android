@@ -104,7 +104,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/background_menu"
                     android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/acces"
+                    android:text="@string/mode_entree"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>

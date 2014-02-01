@@ -11,4 +11,5 @@ import java.util.ArrayList;
 public interface EventModule {
     public Event getEvent();
     public ArrayList<Ticket> getBilletterie();
+    public void loadEventBilletterie(String eventId, QueryCallback callback);
 }

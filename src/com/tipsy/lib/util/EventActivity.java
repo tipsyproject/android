@@ -42,7 +42,7 @@ public abstract class EventActivity extends FragmentActivity implements EventMod
         super.onSaveInstanceState(outState);
     }
 
-    protected void loadEventBilletterie(String eventId, final QueryCallback callback){
+    public void loadEventBilletterie(String eventId, final QueryCallback callback){
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
         query.getInBackground(eventId, new GetCallback<Event>() {
             @Override

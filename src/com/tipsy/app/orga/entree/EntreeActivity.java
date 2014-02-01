@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.acces;
+package com.tipsy.app.orga.entree;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -7,11 +7,10 @@ import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -19,6 +18,7 @@ import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
+import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.util.Bracelet;
 import com.tipsy.lib.Ticket;
@@ -32,11 +32,11 @@ import java.util.List;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class AccesActivity extends EventActivity implements AccesListener {
+public class EntreeActivity extends EventActivity implements EntreeListener {
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
-    EntreeArrayAdapter entreesAdapter;
-    ProgressBar progressBar;
-    TextView progressText;
+    private ProgressDialog initDialog;
+    private ControleNFCFragment controleNfcFragment;
+    private ControleManuelFragment controleManuelFragment;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -45,37 +45,27 @@ public class AccesActivity extends EventActivity implements AccesListener {
         super.onCreate(savedInstanceState);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle("Entrées");
+        getActionBar().setTitle("Mode Entrée");
 
-        entreesAdapter = new EntreeArrayAdapter(AccesActivity.this, entrees);
 
-        if (savedInstanceState == null) {
-            final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
-            wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
+        FragmentManager fm = getSupportFragmentManager();
+        InitEntreeFragment initEntreeFragment = (InitEntreeFragment) fm.findFragmentByTag("init");
+        if(initEntreeFragment == null){
+            initDialog = ProgressDialog.show(this, null, "Chargement...", true, true);
+            initDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    finish();
-                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                    getSupportFragmentManager().popBackStack();
+                    backToEvent();
                 }
             });
-            loadEventBilletterie(getIntent().getStringExtra("EVENT_ID"),new QueryCallback() {
-                @Override
-                public void done(Exception e) {
-                    if(e==null){
-                        wait.dismiss();
-                        if (savedInstanceState != null && savedInstanceState.containsKey("Entrees")) {
-                            entrees = savedInstanceState.getParcelableArrayList("Entrees");
-                        } else {
-                            loadVentes(new QueryCallback() {
-                                @Override
-                                public void done(Exception e) {
-                                    goToNFC(false);
-                                }
-                            });
-                        }
-                    }
-                }
-            });
+            initEntreeFragment = new InitEntreeFragment();
+            Bundle args = new Bundle();
+            args.putString("EVENT_ID",getIntent().getStringExtra("EVENT_ID"));
+            initEntreeFragment.setArguments(args);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(initEntreeFragment,"init");
+            ft.commit();
         }else
             entrees = savedInstanceState.getParcelableArrayList("Entrees");
     }
@@ -91,11 +81,9 @@ public class AccesActivity extends EventActivity implements AccesListener {
         if (outState == null)
             outState = new Bundle();
         outState.putParcelableArrayList("Entrees", entrees);
-        // Add variable to outState here
         super.onSaveInstanceState(outState);
     }
 
-    // Redéfinition de l'actionBar: Bouton de validation
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_access, menu);
@@ -110,49 +98,51 @@ public class AccesActivity extends EventActivity implements AccesListener {
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
                 builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                            getSupportFragmentManager().popBackStack();
-                        } else {
-                            finish();
-                            overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-                        }
+                        backToEvent();
                     }
                 });
                 builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
-                builder.setMessage("Vous allez quitter le mode Entrées.");
+                builder.setMessage("Vous allez quitter le mode Entrée.");
                 builder.show();
                 return true;
             case R.id.action_refresh:
-                loadVentes(new QueryCallback() {
-                    @Override
-                    public void done(Exception e) {
-                        updateProgress();
-                    }
-                });
-
+                updateEntrees(null);
                 return true;
             case R.id.action_add:
-                //goToVendre();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
+    public void init() {
+        if(initDialog != null)
+            initDialog.dismiss();
+        controleNfcFragment = new ControleNFCFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, controleNfcFragment);
+        ft.commit();
+    }
 
-    public void loadVentes(final QueryCallback cb) {
+
+    public void updateEntrees(final QueryCallback cb) {
         Ticket.loadVentes(getBilletterie(), new FindCallback<Achat>() {
             @Override
             public void done(List<Achat> achats, ParseException e) {
                 if (e == null) {
                     entrees.clear();
                     entrees.addAll(achats);
-                    entreesAdapter.notifyDataSetChanged();
-                    Toast.makeText(AccesActivity.this, "Liste mise à jour", Toast.LENGTH_SHORT).show();
+                    if(controleNfcFragment != null)
+                        controleNfcFragment.updateProgress();
+                    if(controleManuelFragment != null){
+                        EntreeArrayAdapter adapter = (EntreeArrayAdapter) controleManuelFragment.getListAdapter();
+                        adapter.notifyDataSetChanged();
+                    }
+                    Toast.makeText(EntreeActivity.this, "Mise à jour effectuée", Toast.LENGTH_SHORT).show();
                 } else{
-                    Toast.makeText(AccesActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EntreeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 if(cb!=null){
                     cb.done(e);
@@ -189,7 +179,8 @@ public class AccesActivity extends EventActivity implements AccesListener {
                 entree.saveInBackground(new SaveCallback() {
                     @Override
                     public void done(ParseException e) {
-                        updateProgress();
+                        if(controleNfcFragment != null)
+                            controleNfcFragment.updateProgress();
                     }
                 });
             }
@@ -200,51 +191,32 @@ public class AccesActivity extends EventActivity implements AccesListener {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
-    public void updateProgress(){
-        int entreesValidees = 0;
-        for(Achat entree : entrees)
-            if(entree.isUsed())
-                entreesValidees++;
-        progressBar.setMax(entrees.size());
-        progressBar.setProgress(entreesValidees);
-        progressText.setText("" + entreesValidees + "/" + entrees.size());
-    }
 
-    public void goToNFC(boolean addTobackStack) {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new NFCAccesFragment());
-        if (addTobackStack)
-            ft.addToBackStack(null);
-        ft.commit();
-    }
 
-    public void goToManualAccess() {
-        ManualAccesFragment frag = new ManualAccesFragment();
+    public void goToNFC() {
+        controleNfcFragment = new ControleNFCFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, frag);
+        ft.replace(R.id.content, controleNfcFragment);
         ft.addToBackStack(null);
         ft.commit();
     }
 
+    public void goToManualAccess() {
+        controleManuelFragment = new ControleManuelFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, controleManuelFragment);
+        ft.addToBackStack(null);
+        ft.commit();
+    }
+
+    public void backToEvent(){
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+        Intent intent = new Intent(this, EventOrgaActivity.class);
+        intent.putExtra("EVENT_ID",event.getObjectId());
+        startActivity(intent);
+    }
+
     public ArrayList<Achat> getEntrees() {
         return entrees;
-    }
-
-    public EntreeArrayAdapter getEntreesAdapter() {
-        return entreesAdapter;
-    }
-
-    public ProgressBar getProgressBar(){
-        return progressBar;
-    }
-    public void setProgressBar(ProgressBar pb){
-        progressBar = pb;
-    }
-
-    public TextView getProgressText(){
-        return progressText;
-    }
-    public void setProgressText(TextView tv){
-        progressText = tv;
     }
 }

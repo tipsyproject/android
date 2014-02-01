@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.acces;
+package com.tipsy.app.orga.entree;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -19,23 +19,25 @@ import com.tipsy.lib.Achat;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class NFCAccesFragment extends Fragment {
+public class ControleNFCFragment extends Fragment {
 
-    private AccesListener callback;
+    private EntreeListener callback;
     NfcAdapter adapter;
     PendingIntent pendingIntent;
+    private ProgressBar progressBar;
+    private TextView progressText;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (AccesListener) activity;
+        callback = (EntreeListener) activity;
     }
 
     @Override
     public void onCreate(Bundle bundle){
         super.onCreate(bundle);
         adapter = NfcAdapter.getDefaultAdapter(getActivity());
-        pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(getActivity(), AccesActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(getActivity(), EntreeActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
     }
 
     @Override
@@ -52,8 +54,8 @@ public class NFCAccesFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_access_nfc, container, false);
-        callback.setProgressText( (TextView) view.findViewById(R.id.progressText) );
-        callback.setProgressBar( (ProgressBar) view.findViewById(R.id.progressBar) );
+        progressText = (TextView) view.findViewById(R.id.progressText);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         Button buttonQrcode = (Button) view.findViewById(R.id.button_qrcode);
         buttonQrcode.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -63,11 +65,21 @@ public class NFCAccesFragment extends Fragment {
         Button buttonSearch = (Button) view.findViewById(R.id.button_search);
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
+                callback.goToManualAccess();
             }
         });
-        callback.updateProgress();
+        updateProgress();
         return view;
+    }
+
+    public void updateProgress(){
+        int entreesValidees = 0;
+        for(Achat entree : callback.getEntrees())
+            if(entree.isUsed())
+                entreesValidees++;
+        progressBar.setMax(callback.getEntrees().size());
+        progressBar.setProgress(entreesValidees);
+        progressText.setText("" + entreesValidees + "/" + callback.getEntrees().size());
     }
 
 }

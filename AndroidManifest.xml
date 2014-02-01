@@ -108,7 +108,7 @@
         </activity>
 
         <activity
-            android:name="com.tipsy.app.orga.acces.AccesActivity"
+            android:name=".orga.entree.EntreeActivity"
             android:label="">
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED"/>

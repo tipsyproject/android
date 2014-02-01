@@ -83,7 +83,7 @@ public class Ticket extends ParseObject implements Parcelable {
             query.include("participant");
             query.include("paiementuser");
             query.include("user");
-            query.include("ticket");
+            query.include("ticket.event");
             query.whereContainedIn("ticket", tickets);
             query.findInBackground(callback);
         } else callback.done(new ArrayList<Achat>(), null);

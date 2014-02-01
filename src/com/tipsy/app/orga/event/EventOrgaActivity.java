@@ -11,7 +11,7 @@ import android.view.MenuItem;
 
 import com.tipsy.app.R;
 import com.tipsy.app.orga.OrgaActivity;
-import com.tipsy.app.orga.acces.AccesActivity;
+import com.tipsy.app.orga.entree.EntreeActivity;
 import com.tipsy.app.orga.billetterie.BilletterieActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
 import com.tipsy.lib.Event;
@@ -23,7 +23,6 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
 
     private Event event;
     private ProgressDialog initDialog;
-    private InitEventFragment initEventFragment;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -33,17 +32,17 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
         FragmentManager fm = getSupportFragmentManager();
-        initEventFragment = (InitEventFragment) fm.findFragmentByTag("init");
+        InitEventFragment initEventFragment = (InitEventFragment) fm.findFragmentByTag("init");
 
         if(initEventFragment == null){
             initDialog = ProgressDialog.show(this, null, "Chargement...", true, true);
-            /*initDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            initDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
                 public void onCancel(DialogInterface dialog) {
-                    getActivity().getSupportFragmentManager().popBackStack();
-                    callback.backToOrga();
+                    getSupportFragmentManager().popBackStack();
+                    backToOrga();
                 }
-            });*/
+            });
             initEventFragment = new InitEventFragment();
             Bundle args = new Bundle();
             args.putString("EVENT_ID",getIntent().getStringExtra("EVENT_ID"));
@@ -105,7 +104,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
 
     // clique sur le bouton de la Billetterie
     public void goToAcces() {
-        Intent intent = new Intent(this, AccesActivity.class);
+        Intent intent = new Intent(this, EntreeActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
