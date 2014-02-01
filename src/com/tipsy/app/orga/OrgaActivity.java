@@ -69,6 +69,10 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
     }
 
     @Override
+    public void onBackPressed(){
+    }
+
+    @Override
     public void onSaveInstanceState(Bundle outState) {
         if (outState == null)
             outState = new Bundle();
