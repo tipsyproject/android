@@ -5,13 +5,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.acces.AccesActivity;
@@ -25,41 +22,46 @@ import com.tipsy.lib.Event;
 public class EventOrgaActivity extends FragmentActivity implements EventOrgaListener {
 
     private Event event;
+    private ProgressDialog initDialog;
+    private InitEventFragment initEventFragment;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
+        //overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_billetterie);
         super.onCreate(savedInstanceState);
         getActionBar().setDisplayHomeAsUpEnabled(true);
 
-        /* Chargement de l'event */
-        final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
-        wait.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                finish();
-                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-            }
-        });
-        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-        query.getInBackground(getIntent().getStringExtra("EVENT_ID"), new GetCallback<Event>() {
-            @Override
-            public void done(Event ev, ParseException e) {
-                if (ev != null) {
-                    event = ev;
-                    wait.dismiss();
-                    getActionBar().setTitle(event.getNom());
-                    if (savedInstanceState == null) {
-                        home(false);
-                    }
-                } else {
-                    wait.dismiss();
-                    Log.d("TOUTAFAIT", "Erreur fetch event/ EventOrgaActivity:Oncreate: " + e.getMessage());
-                }
-            }
-        });
+        FragmentManager fm = getSupportFragmentManager();
+        initEventFragment = (InitEventFragment) fm.findFragmentByTag("init");
 
+        if(initEventFragment == null){
+            initDialog = ProgressDialog.show(this, null, "Chargement...", true, true);
+            /*initDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+                @Override
+                public void onCancel(DialogInterface dialog) {
+                    getActivity().getSupportFragmentManager().popBackStack();
+                    callback.backToOrga();
+                }
+            });*/
+            initEventFragment = new InitEventFragment();
+            Bundle args = new Bundle();
+            args.putString("EVENT_ID",getIntent().getStringExtra("EVENT_ID"));
+            initEventFragment.setArguments(args);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.add(initEventFragment,"init");
+            ft.commit();
+        }else
+            event = savedInstanceState.getParcelable("Event");
+
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (outState == null)
+            outState = new Bundle();
+        outState.putParcelable("Event", event);
+        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -72,17 +74,21 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getSupportFragmentManager().popBackStack();
-                } else {
-                    finish();
-                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-                }
+                backToOrga();
                 return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void init(Event e) {
+        event = e;
+        getActionBar().setTitle(event.getNom());
+        if(initDialog != null)
+            initDialog.dismiss();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, new TDBEventFragment());
+        ft.commit();
     }
 
     public Event getEvent() {
@@ -91,7 +97,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
 
     public void home(boolean addTobackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new HomeEventOrgaFragment());
+        ft.replace(R.id.content, new TDBEventFragment());
         if (addTobackStack)
             ft.addToBackStack(null);
         ft.commit();
@@ -114,6 +120,12 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     public void goToEditEvent() {
         Intent intent = new Intent(this, EditEventActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
+        startActivity(intent);
+    }
+
+    public void backToOrga(){
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+        Intent intent = new Intent(this, OrgaActivity.class);
         startActivity(intent);
     }
 }

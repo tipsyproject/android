@@ -1,7 +1,6 @@
 package com.tipsy.app.orga.acces;
 
 import android.app.AlertDialog;
-import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,13 +16,11 @@ import android.widget.Toast;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
 import com.tipsy.lib.Achat;
-import com.tipsy.lib.Bracelet;
-import com.tipsy.lib.Event;
+import com.tipsy.lib.util.Bracelet;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.EventActivity;
 import com.tipsy.lib.util.QueryCallback;
@@ -125,7 +122,7 @@ public class AccesActivity extends EventActivity implements AccesListener {
                     public void onClick(DialogInterface dialog, int id) {
                     }
                 });
-                builder.setMessage("Vous allez quittez le mode Entrées.");
+                builder.setMessage("Vous allez quitter le mode Entrées.");
                 builder.show();
                 return true;
             case R.id.action_refresh:
@@ -200,7 +197,7 @@ public class AccesActivity extends EventActivity implements AccesListener {
                 message="Entrée déjà validée";
         }else message = "Entrée non autorisée";
         wait.dismiss();
-        Toast.makeText(AccesActivity.this, message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     public void updateProgress(){
@@ -210,7 +207,7 @@ public class AccesActivity extends EventActivity implements AccesListener {
                 entreesValidees++;
         progressBar.setMax(entrees.size());
         progressBar.setProgress(entreesValidees);
-        progressText.setText(""+entreesValidees+"/"+entrees.size());
+        progressText.setText("" + entreesValidees + "/" + entrees.size());
     }
 
     public void goToNFC(boolean addTobackStack) {

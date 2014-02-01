@@ -7,6 +7,8 @@ import com.tipsy.lib.Event;
  */
 public interface EventOrgaListener {
 
+    public void init(Event e);
+
     public Event getEvent();
 
     public void goToAcces();
@@ -14,6 +16,8 @@ public interface EventOrgaListener {
     public void goToBilletterie();
 
     public void goToEditEvent();
+
+    public void backToOrga();
 
     public void home(boolean addTobackStack);
 }

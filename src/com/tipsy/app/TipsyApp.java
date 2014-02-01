@@ -10,7 +10,6 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseTwitterUtils;
 import com.parse.ParseUser;
 import com.tipsy.lib.Achat;
-import com.tipsy.lib.Bracelet;
 import com.tipsy.lib.Depot;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Participant;

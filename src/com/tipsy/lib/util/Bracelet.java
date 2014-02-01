@@ -1,10 +1,12 @@
-package com.tipsy.lib;
+package com.tipsy.lib.util;
 
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.tipsy.lib.Participant;
+import com.tipsy.lib.TipsyUser;
 
 import java.util.List;
 

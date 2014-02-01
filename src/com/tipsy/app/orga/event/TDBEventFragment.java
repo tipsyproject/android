@@ -2,21 +2,28 @@ package com.tipsy.app.orga.event;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseQuery;
 import com.tipsy.app.R;
+import com.tipsy.lib.Event;
 
 /**
  * Created by valoo on 27/12/13.
  */
 
-public class HomeEventOrgaFragment extends Fragment {
+public class TDBEventFragment extends Fragment {
     private EventOrgaListener callback;
     private LinearLayout buttonBilleterie;
     private LinearLayout buttonBar;
@@ -27,6 +34,12 @@ public class HomeEventOrgaFragment extends Fragment {
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         callback = (EventOrgaListener) activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        callback = null;
     }
 
     @Override
@@ -58,7 +71,6 @@ public class HomeEventOrgaFragment extends Fragment {
                 callback.goToBilletterie();
             }
         });
-
 
 
         /* SETTINGS EVENT */

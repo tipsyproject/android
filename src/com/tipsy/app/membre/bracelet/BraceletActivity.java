@@ -14,13 +14,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
-import com.tipsy.app.membre.MembreActivity;
-import com.tipsy.lib.Bracelet;
+import com.tipsy.lib.util.Bracelet;
 import com.tipsy.lib.TipsyUser;
 
 /**
@@ -90,7 +87,8 @@ public class BraceletActivity extends Activity {
                     /* ASSOCIATION AVEC LE USER */
                     TipsyUser user = TipsyUser.getCurrentUser();
                     try {
-                        user.setBracelet(tagID);user.saveInBackground(new SaveCallback() {
+                        user.setBracelet(tagID);
+                        user.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(ParseException e) {
                                 wait.dismiss();

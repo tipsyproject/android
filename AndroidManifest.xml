@@ -75,9 +75,6 @@
         <activity
             android:name="com.tipsy.app.membre.bracelet.BraceletActivity"
             android:label="">
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
-            </intent-filter>
 
             </activity>
 
@@ -93,7 +90,8 @@
 
         <activity
             android:name="com.tipsy.app.orga.event.EventOrgaActivity"
-            android:label="">
+            android:label=""
+            android:configChanges="orientation|keyboardHidden">
 
         </activity>
 
@@ -112,7 +110,9 @@
         <activity
             android:name="com.tipsy.app.orga.acces.AccesActivity"
             android:label="">
-
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+            </intent-filter>
         </activity>
 
         <activity

@@ -19,8 +19,8 @@ import java.util.List;
  */
 public abstract class EventActivity extends FragmentActivity implements EventModule{
 
-    private ArrayList<Ticket> billetterie = new ArrayList<Ticket>();
-    private Event event;
+    protected ArrayList<Ticket> billetterie = new ArrayList<Ticket>();
+    protected Event event;
 
 
     @Override
