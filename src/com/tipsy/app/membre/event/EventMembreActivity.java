@@ -85,7 +85,6 @@ public class EventMembreActivity extends EventActivity implements EventMembreLis
     public void goToEventBillets() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
-                .addToBackStack(null)
                 .replace(R.id.content, new EventBilletsFragment())
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .commit();
