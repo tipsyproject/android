@@ -58,7 +58,7 @@ public class ManualAccesFragment extends ListFragment {
             case R.id.action_search:
                 return true;
             case R.id.action_update:
-                callback.loadVentes();
+                callback.loadVentes(null);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

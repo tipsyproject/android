@@ -31,7 +31,6 @@ public class TipsyApp extends Application {
     @Override
     public void onCreate() {
         ParseUser.registerSubclass(Achat.class);
-        ParseUser.registerSubclass(Bracelet.class);
         ParseUser.registerSubclass(Depot.class);
         ParseUser.registerSubclass(Event.class);
         ParseUser.registerSubclass(Participant.class);

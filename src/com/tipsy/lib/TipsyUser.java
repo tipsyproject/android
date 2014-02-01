@@ -23,6 +23,16 @@ public class TipsyUser extends ParseUser implements Parcelable {
     public TipsyUser() {
     }
 
+    public String getBracelet(){
+        return getString("bracelet");
+    }
+
+    public void setBracelet(String bracelet) throws Exception{
+        if(getBracelet() != null)
+            throw new Exception("Un bracelet est déjà attribué.");
+        else put("bracelet",bracelet);
+    }
+
     @Override
     public void setUsername(String username) {
         super.setUsername(username);

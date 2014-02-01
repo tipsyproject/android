@@ -79,29 +79,33 @@ public class BraceletActivity extends Activity {
         final String tagID = Bracelet.bytesToHex(tag.getId());
 
         final ProgressDialog wait = ProgressDialog.show(this, "", "Association bracelet...", true);
-        Bracelet.isKnown(tagID,new Bracelet.GetBraceletCallback() {
+        Bracelet.isUsed(tagID, new Bracelet.GetBraceletCallback() {
             @Override
-            public void done(Bracelet bracelet, ParseException e) {
+            public void done(boolean used, ParseException e) {
                 /* BRACELET DEJA UTILISE */
-                if(bracelet != null && !bracelet.isFree()){
+                if (used) {
                     wait.dismiss();
                     Toast.makeText(BraceletActivity.this, "Bracelet déjà utilisé !", Toast.LENGTH_SHORT).show();
-                }else{
-                    /* CREATION DU NOUVEAU BRACELET */
-                    if(bracelet == null)
-                        bracelet = new Bracelet(tagID);
+                } else {
                     /* ASSOCIATION AVEC LE USER */
-                    bracelet.setUser(TipsyUser.getCurrentUser());
-                    bracelet.saveInBackground(new SaveCallback() {
-                        @Override
-                        public void done(ParseException e) {
-                            wait.dismiss();
-                            if (e == null)
-                                Toast.makeText(BraceletActivity.this, "Bracelet enregistré !", Toast.LENGTH_SHORT).show();
-                            else
-                                Toast.makeText(BraceletActivity.this, "Erreur enregistrement bracelet", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    TipsyUser user = TipsyUser.getCurrentUser();
+                    try {
+                        user.setBracelet(tagID);user.saveInBackground(new SaveCallback() {
+                            @Override
+                            public void done(ParseException e) {
+                                wait.dismiss();
+                                if (e == null)
+                                    Toast.makeText(BraceletActivity.this, "Bracelet enregistré !", Toast.LENGTH_SHORT).show();
+                                else {
+                                    Log.d("TOUTAFAIT", "Erreur bracelet:" + e.getMessage());
+                                    Toast.makeText(BraceletActivity.this, "Erreur enregistrement bracelet", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        });
+                    } catch (Exception ex) {
+                        wait.dismiss();
+                        Toast.makeText(BraceletActivity.this, "Vous possedez déjà un bracelet", Toast.LENGTH_SHORT).show();
+                    }
                 }
             }
         });

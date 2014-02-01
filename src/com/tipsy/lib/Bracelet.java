@@ -11,49 +11,12 @@ import java.util.List;
 /**
  * Created by valoo on 22/01/14.
  */
-@ParseClassName("Bracelet")
-public class Bracelet extends ParseObject {
+
+public class Bracelet{
 
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
 
-    public Bracelet(){}
 
-    public Bracelet(String tagID){
-        setTagID(tagID);
-    }
-
-    public Participant getParticipant() {
-        return (Participant) getParseObject("participant");
-    }
-
-    public void setParticipant(Participant participant) {
-        put("participant", participant);
-    }
-
-    public TipsyUser getUser() {
-        return (TipsyUser) getParseObject("user");
-    }
-
-    public void setUser(TipsyUser user) {
-        put("user",user);
-    }
-
-    public String getTagID() {
-        return getString("tag");
-    }
-
-    protected void setTagID(String tagID) {
-        put("tag",tagID);
-    }
-
-    public boolean isFree(){
-        return getUser() == null && getParticipant() == null;
-    }
-
-    public void giveMeMyFreedom(){
-        remove("user");
-        remove("participant");
-    }
 
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
@@ -67,17 +30,27 @@ public class Bracelet extends ParseObject {
 
 
     /* Recherche un bracelet par son tagID */
-    public static void isKnown(String tagID, final GetBraceletCallback callback){
-        ParseQuery<Bracelet> query = ParseQuery.getQuery(Bracelet.class);
-        query.include("user");
-        query.include("participant");
-        query.whereEqualTo("tag",tagID);
-        query.findInBackground(new FindCallback<Bracelet>() {
+    public static void isUsed(final String tagID, final GetBraceletCallback callback){
+        ParseQuery<Participant> query = ParseQuery.getQuery(Participant.class);
+        query.whereEqualTo("bracelet",tagID);
+        query.findInBackground(new FindCallback<Participant>() {
             @Override
-            public void done(List<Bracelet> bracelets, ParseException e) {
-                if(bracelets != null && !bracelets.isEmpty()){
-                    callback.done(bracelets.get(0), e);
-                }else callback.done(null, e);
+            public void done(List<Participant> participants, ParseException e) {
+                if(participants != null && !participants.isEmpty()){
+                    callback.done(true, e);
+                }else{
+                    ParseQuery<TipsyUser> query = ParseQuery.getQuery(TipsyUser.class);
+                    query.whereEqualTo("bracelet",tagID);
+                    query.findInBackground(new FindCallback<TipsyUser>() {
+                        @Override
+                        public void done(List<TipsyUser> users, ParseException e) {
+                            if(users != null && !users.isEmpty()){
+                                callback.done(true, e);
+                            }else callback.done(false, e);
+                        }
+                    });
+
+                }
             }
         });
 
@@ -85,6 +58,6 @@ public class Bracelet extends ParseObject {
 
 
     public static abstract class GetBraceletCallback {
-        public abstract void done(Bracelet bracelet, ParseException e);
+        public abstract void done(boolean used, ParseException e);
     }
 }

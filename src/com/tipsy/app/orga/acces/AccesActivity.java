@@ -1,5 +1,6 @@
 package com.tipsy.app.orga.acces;
 
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -7,15 +8,14 @@ import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
@@ -25,7 +25,6 @@ import com.tipsy.lib.Achat;
 import com.tipsy.lib.Bracelet;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Ticket;
-import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.util.EventActivity;
 import com.tipsy.lib.util.QueryCallback;
 
@@ -39,8 +38,8 @@ import java.util.List;
 public class AccesActivity extends EventActivity implements AccesListener {
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     EntreeArrayAdapter entreesAdapter;
-    NfcAdapter adapter;
-    PendingIntent pendingIntent;
+    ProgressBar progressBar;
+    TextView progressText;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -49,9 +48,7 @@ public class AccesActivity extends EventActivity implements AccesListener {
         super.onCreate(savedInstanceState);
 
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle("Contrôle d'accès");
-        adapter = NfcAdapter.getDefaultAdapter(this);
-        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, AccesActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        getActionBar().setTitle("Entrées");
 
         entreesAdapter = new EntreeArrayAdapter(AccesActivity.this, entrees);
 
@@ -64,7 +61,6 @@ public class AccesActivity extends EventActivity implements AccesListener {
                     overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
                 }
             });
-            ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
             loadEventBilletterie(getIntent().getStringExtra("EVENT_ID"),new QueryCallback() {
                 @Override
                 public void done(Exception e) {
@@ -73,8 +69,12 @@ public class AccesActivity extends EventActivity implements AccesListener {
                         if (savedInstanceState != null && savedInstanceState.containsKey("Entrees")) {
                             entrees = savedInstanceState.getParcelableArrayList("Entrees");
                         } else {
-                            loadVentes();
-                            goToHome(false);
+                            loadVentes(new QueryCallback() {
+                                @Override
+                                public void done(Exception e) {
+                                    goToNFC(false);
+                                }
+                            });
                         }
                     }
                 }
@@ -108,24 +108,44 @@ public class AccesActivity extends EventActivity implements AccesListener {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
+            // Confirmation avant de quitter le mode Entrées
             case android.R.id.home:
-                if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
-                    getSupportFragmentManager().popBackStack();
-                } else {
-                    finish();
-                    overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-                }
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                            getSupportFragmentManager().popBackStack();
+                        } else {
+                            finish();
+                            overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                        }
+                    }
+                });
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+                builder.setMessage("Vous allez quittez le mode Entrées.");
+                builder.show();
                 return true;
             case R.id.action_refresh:
-                loadVentes();
+                loadVentes(new QueryCallback() {
+                    @Override
+                    public void done(Exception e) {
+                        updateProgress();
+                    }
+                });
+
+                return true;
+            case R.id.action_add:
+                //goToVendre();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-    public void loadVentes() {
+    public void loadVentes(final QueryCallback cb) {
         Ticket.loadVentes(getBilletterie(), new FindCallback<Achat>() {
             @Override
             public void done(List<Achat> achats, ParseException e) {
@@ -137,70 +157,65 @@ public class AccesActivity extends EventActivity implements AccesListener {
                 } else{
                     Toast.makeText(AccesActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
-            }
-        });
-    }
-
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        adapter.enableForegroundDispatch(this, pendingIntent, null, null);
-    }
-
-    @Override
-    public void onPause() {
-        adapter.disableForegroundDispatch(this);
-        super.onPause();
-    }
-
-    @Override
-    protected void onNewIntent(Intent intent) {
-        final ProgressDialog wait = ProgressDialog.show(this, "", "Vérification en cours...", true, true);
-
-        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        String tagID = Bracelet.bytesToHex(tag.getId());
-
-        Bracelet.isKnown(tagID,new Bracelet.GetBraceletCallback() {
-            @Override
-            public void done(Bracelet bracelet, ParseException e) {
-                // BRACELET ACTIVE ? //
-                if (bracelet != null) {
-                    Iterator it = entrees.iterator();
-                    Achat entree = null;
-                    boolean found = false;
-                    while (it.hasNext() && !found) {
-                        entree = (Achat) it.next();
-                        if (bracelet.getParticipant() != null && entree.getParticipant() != null)
-                            found = bracelet.getParticipant().getObjectId().equals(entree.getParticipant().getObjectId());
-                        else if (bracelet.getUser() != null && entree.getUser() != null)
-                            found = bracelet.getUser().getObjectId().equals(entree.getUser().getObjectId());
-                    }
-                    String message;
-                    if(found){
-                        if(entree != null && !entree.isUsed()){
-                            message="Entrée OK";
-                            entree.setUsed(true);
-                            entree.saveInBackground();
-                        }
-                        else
-                            message="Entrée déjà validée";
-                    }else message = "Entrée non autorisée";
-                    wait.dismiss();
-                    Toast.makeText(AccesActivity.this, message, Toast.LENGTH_SHORT).show();
-
-                } else { // BRACELET INCONNU
-                    wait.dismiss();
-                    Toast.makeText(AccesActivity.this, "Bracelet inconnu !", Toast.LENGTH_SHORT).show();
+                if(cb!=null){
+                    cb.done(e);
                 }
             }
         });
     }
 
-    public void goToHome(boolean addTobackStack) {
-        HomeAccesFragment frag = new HomeAccesFragment();
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+
+        final ProgressDialog wait = ProgressDialog.show(this, "", "Vérification en cours...", true, true);
+
+        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        final String tagID = Bracelet.bytesToHex(tag.getId());
+
+        Iterator it = entrees.iterator();
+        Achat entree = null;
+        boolean found = false;
+        while (it.hasNext() && !found) {
+            entree = (Achat) it.next();
+            if (entree.getParticipant() != null && entree.getParticipant().getBracelet() != null)
+                found = entree.getParticipant().getBracelet().equals(tagID);
+            else if (entree.getUser() != null && entree.getUser().getBracelet() != null )
+                found = entree.getUser().getBracelet().equals(tagID);
+        }
+        String message;
+        if(found){
+            if(entree != null && !entree.isUsed()){
+                message="Entrée OK";
+                entree.setUsed(true);
+                entree.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        updateProgress();
+                    }
+                });
+            }
+            else
+                message="Entrée déjà validée";
+        }else message = "Entrée non autorisée";
+        wait.dismiss();
+        Toast.makeText(AccesActivity.this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    public void updateProgress(){
+        int entreesValidees = 0;
+        for(Achat entree : entrees)
+            if(entree.isUsed())
+                entreesValidees++;
+        progressBar.setMax(entrees.size());
+        progressBar.setProgress(entreesValidees);
+        progressText.setText(""+entreesValidees+"/"+entrees.size());
+    }
+
+    public void goToNFC(boolean addTobackStack) {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, frag);
+        ft.replace(R.id.content, new NFCAccesFragment());
         if (addTobackStack)
             ft.addToBackStack(null);
         ft.commit();
@@ -220,5 +235,19 @@ public class AccesActivity extends EventActivity implements AccesListener {
 
     public EntreeArrayAdapter getEntreesAdapter() {
         return entreesAdapter;
+    }
+
+    public ProgressBar getProgressBar(){
+        return progressBar;
+    }
+    public void setProgressBar(ProgressBar pb){
+        progressBar = pb;
+    }
+
+    public TextView getProgressText(){
+        return progressText;
+    }
+    public void setProgressText(TextView tv){
+        progressText = tv;
     }
 }

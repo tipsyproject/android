@@ -14,6 +14,16 @@ public class Participant extends ParseObject implements Parcelable {
 
     public Participant(){}
 
+    public String getBracelet(){
+        return getString("bracelet");
+    }
+
+    public void setBracelet(String bracelet) throws Exception{
+        if(getBracelet() != null)
+            throw new Exception("Un bracelet est déjà attribué.");
+        else put("bracelet",bracelet);
+    }
+
     public String getEmail() {
         return getString("email");
     }

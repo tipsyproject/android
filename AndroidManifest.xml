@@ -76,11 +76,8 @@
             android:name="com.tipsy.app.membre.bracelet.BraceletActivity"
             android:label="">
             <intent-filter>
-                <action android:name="android.nfc.action.TECH_DISCOVERED"/>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
             </intent-filter>
-
-            <meta-data android:name="android.nfc.action.TECH_DISCOVERED"
-                android:resource="@xml/nfc_tech_filter" />
 
             </activity>
 

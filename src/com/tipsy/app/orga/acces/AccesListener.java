@@ -1,8 +1,13 @@
 package com.tipsy.app.orga.acces;
 
+import android.nfc.NfcAdapter;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import com.tipsy.app.orga.billetterie.EntreeArrayAdapter;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.util.EventModule;
+import com.tipsy.lib.util.QueryCallback;
 
 import java.util.ArrayList;
 
@@ -12,7 +17,12 @@ import java.util.ArrayList;
 public interface AccesListener extends EventModule {
     public ArrayList<Achat> getEntrees();
     public EntreeArrayAdapter getEntreesAdapter();
-    public void goToHome(boolean addTobackStack);
+    public ProgressBar getProgressBar();
+    public void setProgressBar(ProgressBar pb);
+    public TextView getProgressText();
+    public void setProgressText(TextView tv);
+    public void updateProgress();
+    public void goToNFC(boolean addTobackStack);
     public void goToManualAccess();
-    public void loadVentes();
+    public void loadVentes(QueryCallback cb);
 }
