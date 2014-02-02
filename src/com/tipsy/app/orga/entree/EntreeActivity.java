@@ -59,7 +59,6 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         /* BARRE DE SUIVI DES ENTREES */
         progressText = (TextView) findViewById(R.id.progressText);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
-        if(entrees != null) updateProgress();
 
         /*  INITIALISATION MENU MODE CONTROLE */
         buttonControleNFC = (Button) findViewById(R.id.button_nfc);
@@ -98,6 +97,8 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
             ft.commit();
         }else
             entrees = savedInstanceState.getParcelableArrayList("Entrees");
+
+        if(entrees != null) updateProgress();
     }
 
     @Override
@@ -159,7 +160,11 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
 
     public void updateEntrees(final QueryCallback cb) {
         final boolean closeDialog;
-        if(!initDialog.isShowing()){
+        if(initDialog == null){
+            initDialog = ProgressDialog.show(this,null,getString(R.string.update_entrees),true,true);
+            closeDialog = true;
+        }
+        else if(!initDialog.isShowing()){
             initDialog = ProgressDialog.show(this,null,getString(R.string.update_entrees),true,true);
             closeDialog = true;
         } else{
