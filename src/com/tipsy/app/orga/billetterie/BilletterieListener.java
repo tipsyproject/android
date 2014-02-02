@@ -1,5 +1,6 @@
 package com.tipsy.app.orga.billetterie;
 
+import com.tipsy.app.orga.entree.EntreeArrayAdapter;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.util.EventModule;
 

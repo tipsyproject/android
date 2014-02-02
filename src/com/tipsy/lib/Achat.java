@@ -8,6 +8,8 @@ import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.tipsy.lib.util.Transaction;
 
+import java.util.Comparator;
+
 /**
  * Created by Valentin on 21/01/14.
  */
@@ -117,6 +119,13 @@ public class Achat extends ParseObject implements Transaction {
     public boolean isTipsyUser(){
         return getUser() != null;
     }
+
+    /* Tri par ordre alphabetique */
+    public static Comparator<Achat> SORT_BY_NAME = new Comparator<Achat>() {
+        public int compare(Achat one, Achat other) {
+            return one.getNom().compareTo(other.getNom());
+        }
+    };
 
 
     // Implémentation de Parcelable

@@ -22,4 +22,17 @@
     <color name="text_loading">#354B5E</color>
     <color name="event_fade">#000000</color>
 
+
+    <!-- Definition des couleurs du theme -->
+    <color name="primary">#14B9D6</color>
+    <color name="secondary">#5E6D81</color>
+    <color name="background_dark">#323A45</color>
+    <color name="background_light">#EAEDF1</color>
+
+    <!-- Couleurs des textes -->
+    <color name="text_normal_dark">@color/background_light</color>
+    <color name="text_normal_light">@color/background_dark</color>
+    <color name="text_not_important_dark">@color/secondary</color>
+
+
 </resources>

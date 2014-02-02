@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#323A45"
+    android:clickable="true">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="@dimen/activity_margin"
+        android:weightSum="1"
+        android:id="@+id/linearLayout2">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView"
+            android:src="@drawable/ic_action_group"
+            android:layout_marginRight="@dimen/activity_margin" />
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="50/100"
+                android:id="@+id/progressText"
+                android:gravity="center"
+                android:textColor="#FFFFFF" />
+
+            <ProgressBar
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/ui_margin"
+                android:id="@+id/progressBar"
+                android:progress="50"
+                android:indeterminate="false" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/menu_mode">
+
+        <Button
+            style="@style/ButtonCurrentMode"
+            android:text="@string/nfc"
+            android:id="@+id/button_nfc"
+            android:drawableTop="@drawable/ic_action_network_wifi" />
+
+        <Button
+            style="@style/ButtonOtherMode"
+            android:text="@string/qrcode"
+            android:id="@+id/button_qrcode"
+            android:drawableTop="@drawable/ic_action_location_found" />
+
+        <Button
+            style="@style/ButtonOtherMode"
+            android:text="@string/liste"
+            android:id="@+id/button_manuel"
+            android:drawableTop="@drawable/ic_action_paste" />
+    </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/menu_mode"
+        android:layout_below="@+id/linearLayout2"
+        android:id="@+id/content"></FrameLayout>
+
+</RelativeLayout>

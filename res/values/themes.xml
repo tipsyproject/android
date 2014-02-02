@@ -61,4 +61,22 @@
         <item name="android:gravity">center_vertical|center_horizontal</item>
     </style>
 
+
+    <!-- MENU DU MODE ENTREE -->
+    <style name="ButtonModeMenu">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:paddingTop">@dimen/activity_margin</item>
+        <item name="android:paddingBottom">@dimen/activity_margin</item>
+    </style>
+    <!-- Bouton mode courant-->
+    <style name="ButtonCurrentMode" parent="ButtonModeMenu">
+        <item name="android:background">@color/primary</item>
+    </style>
+    <!-- Boutons autres modes-->
+    <style name="ButtonOtherMode" parent="ButtonModeMenu">
+        <item name="android:background">@color/secondary</item>
+    </style>
+
 </resources>

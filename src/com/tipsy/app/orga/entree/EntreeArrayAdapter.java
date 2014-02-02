@@ -1,10 +1,11 @@
-package com.tipsy.app.orga.billetterie;
+package com.tipsy.app.orga.entree;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
@@ -38,8 +39,11 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> {
         TextView nomParticipant = (TextView) view.findViewById(R.id.nom_participant);
         nomParticipant.setText(entree.getNom());
 
-        TextView nomBillet = (TextView) view.findViewById(R.id.nom_billet);
+        TextView nomBillet = (TextView) view.findViewById(R.id.nom_ticket);
         nomBillet.setText(entree.getTicket().getNom());
+
+        CheckBox checkboxEntree = (CheckBox) view.findViewById(R.id.checkbox_entree);
+        checkboxEntree.setChecked(entree.isUsed());
         return view;
     }
 }

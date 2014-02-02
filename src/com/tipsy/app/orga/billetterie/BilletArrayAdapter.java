@@ -20,7 +20,7 @@ public class BilletArrayAdapter extends ArrayAdapter<Item> {
     private ArrayList<Item> ventes;
 
     public BilletArrayAdapter(Context context, ArrayList<Item> ventes) {
-        super(context, R.layout.frag_achat_item, ventes);
+        super(context, R.layout.frag_entree, ventes);
         this.context = context;
         this.ventes = ventes;
     }
@@ -28,7 +28,7 @@ public class BilletArrayAdapter extends ArrayAdapter<Item> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View viewVente = inflater.inflate(R.layout.frag_achat_item, parent, false);
+        View viewVente = inflater.inflate(R.layout.frag_entree, parent, false);
         TextView nomBillet = (TextView) viewVente.findViewById(R.id.nom_billet);
         TextView quantite = (TextView) viewVente.findViewById(R.id.quantite);
         Item item = ventes.get(position);

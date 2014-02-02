@@ -2,19 +2,15 @@ package com.tipsy.app.orga.billetterie;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.tipsy.app.R;
+import com.tipsy.app.orga.entree.EntreeArrayAdapter;
 import com.tipsy.lib.Achat;
-import com.tipsy.lib.Event;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.EventActivity;
 import com.tipsy.lib.util.QueryCallback;

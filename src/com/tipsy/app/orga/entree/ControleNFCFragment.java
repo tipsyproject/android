@@ -24,8 +24,6 @@ public class ControleNFCFragment extends Fragment {
     private EntreeListener callback;
     NfcAdapter adapter;
     PendingIntent pendingIntent;
-    private ProgressBar progressBar;
-    private TextView progressText;
 
     @Override
     public void onAttach(Activity activity) {
@@ -53,33 +51,9 @@ public class ControleNFCFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_access_nfc, container, false);
-        progressText = (TextView) view.findViewById(R.id.progressText);
-        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
-        Button buttonQrcode = (Button) view.findViewById(R.id.button_qrcode);
-        buttonQrcode.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        View view = inflater.inflate(R.layout.frag_entree_nfc, container, false);
 
-            }
-        });
-        Button buttonSearch = (Button) view.findViewById(R.id.button_search);
-        buttonSearch.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                callback.goToManualAccess();
-            }
-        });
-        updateProgress();
         return view;
-    }
-
-    public void updateProgress(){
-        int entreesValidees = 0;
-        for(Achat entree : callback.getEntrees())
-            if(entree.isUsed())
-                entreesValidees++;
-        progressBar.setMax(callback.getEntrees().size());
-        progressBar.setProgress(entreesValidees);
-        progressText.setText("" + entreesValidees + "/" + callback.getEntrees().size());
     }
 
 }

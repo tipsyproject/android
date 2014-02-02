@@ -54,6 +54,9 @@ j'accepte les conditions générales."</string>
     <string name="vendre_billet">Vendre un billet</string>
     <string name="empty_liste_ventes">Aucun billet vendu.</string>
 
+    <!-- MODE ENTREE -->
+    <string name="update_entrees">Mise à jour des entrées...</string>
+
 
     <string name="no_upcoming_event">Aucun événement à venir.</string>
     <string name="billetterie">Billetterie</string>
@@ -79,6 +82,6 @@ j'accepte les conditions générales."</string>
     <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string>
     <string name="nom">Nom</string>
     <string name="prenom">Prénom</string>
-    <string name="activer_bracelet">Activer bracelet</string><string name="qrcode">QR Code</string><string name="liste">Liste</string><string name="mode_entree">Mode Entrée</string>
+    <string name="activer_bracelet">Activer bracelet</string><string name="qrcode">QR Code</string><string name="liste">Liste</string><string name="mode_entree">Mode Entrée</string><string name="nfc">NFC</string>
 
 </resources>
