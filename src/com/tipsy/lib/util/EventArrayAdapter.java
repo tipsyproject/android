@@ -45,7 +45,6 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         delete = (Button) viewEvent.findViewById(R.id.delete);
         delete.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Log.d(TipsyApp.TAG,"sisimagueule");
                 final ProgressDialog wait = ProgressDialog.show(getContext(), null, "Suppression...", true);
                 ParseObject.createWithoutData("Event", events.get(position).getObjectId()).deleteEventually();
                 events.remove(events.get(position));

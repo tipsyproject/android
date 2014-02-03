@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:id="@+id/layout_frag_item"
-    android:background="@color/background_menu"
-    android:orientation="horizontal"
-    android:padding="8dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginLeft="6dp"
-    android:layout_marginRight="6dp"
-    android:layout_marginBottom="4dp">
+    android:orientation="horizontal">
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_marginTop="4dp"
+        android:layout_marginLeft="6dp"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="4dp"
+        android:scaleType="centerCrop">
 
 
     <LinearLayout
+        android:background="@android:color/white"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -97,5 +103,5 @@
             android:drawablePadding="@dimen/ui_margin"
             android:layout_marginTop="@dimen/activity_margin"
             android:layout_centerInParent="true" />
-
+    </RelativeLayout>
 </RelativeLayout>

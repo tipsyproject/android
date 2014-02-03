@@ -59,10 +59,6 @@
                         android:textAppearance="?android:attr/textAppearanceMedium"
                         android:text="Organisation :"
                         android:id="@+id/orga"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="-1"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
                         android:layout_gravity="center_vertical" />
 
                     <EditText
@@ -72,10 +68,6 @@
                         android:layout_weight="1"
                         android:id="@+id/input_orga"
                         android:textColor="@android:color/black"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="-1"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
                         android:layout_gravity="center" />
 
                 </TableRow>
@@ -92,10 +84,6 @@
                         android:text="Email :"
                         android:layout_weight="0.1"
                         android:id="@+id/mail"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="-1"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
                         android:layout_gravity="center_vertical" />
 
                     <EditText
@@ -106,10 +94,6 @@
                         android:layout_weight="1"
                         android:id="@+id/input_mail"
                         android:textColor="@android:color/black"
-                        android:shadowColor="@android:color/black"
-                        android:shadowDx="-1"
-                        android:shadowDy="0"
-                        android:shadowRadius="2"
                         android:layout_gravity="center" />
 
                 </TableRow>
