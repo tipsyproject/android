@@ -256,7 +256,6 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         buttonControleManuel.setBackgroundResource(R.color.secondary);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new ControleNFCFragment());
-        ft.addToBackStack(null);
         ft.commit();
     }
 
@@ -267,7 +266,6 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         controleManuelFragment = new ControleManuelFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, controleManuelFragment);
-        ft.addToBackStack(null);
         ft.commit();
     }
 

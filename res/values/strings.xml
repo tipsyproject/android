@@ -53,6 +53,7 @@ j'accepte les conditions générales."</string>
     <string name="empty_liste_billets">Aucun billet défini.</string>
     <string name="vendre_billet">Vendre un billet</string>
     <string name="empty_liste_ventes">Aucun billet vendu.</string>
+    <string name="disable_infos">Désactiver les infos participant</string>
 
     <!-- MODE ENTREE -->
     <string name="update_entrees">Mise à jour des entrées...</string>

@@ -79,7 +79,6 @@ public class HomeOrgaFragment extends ListFragment {
 
     public void onBackPressed() {
         //if (delete.getVisibility() == View.VISIBLE)
-            onResume();
     }
 
     @Override
