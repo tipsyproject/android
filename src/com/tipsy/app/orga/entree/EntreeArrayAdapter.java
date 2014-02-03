@@ -39,11 +39,11 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> {
         TextView nomParticipant = (TextView) view.findViewById(R.id.nom_participant);
         nomParticipant.setText(entree.getNom());
 
-        TextView nomBillet = (TextView) view.findViewById(R.id.nom_ticket);
-        nomBillet.setText(entree.getTicket().getNom());
+        if(entree.isUsed()){
+            prenomParticipant.setTextColor(view.getResources().getColor(R.color.text_not_important_dark));
+            nomParticipant.setTextColor(view.getResources().getColor(R.color.text_not_important_dark));
+        }
 
-        CheckBox checkboxEntree = (CheckBox) view.findViewById(R.id.checkbox_entree);
-        checkboxEntree.setChecked(entree.isUsed());
         return view;
     }
 }

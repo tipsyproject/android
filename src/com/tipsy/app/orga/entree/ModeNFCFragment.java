@@ -19,7 +19,7 @@ import com.tipsy.lib.Achat;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class ControleNFCFragment extends Fragment {
+public class ModeNFCFragment extends Fragment {
 
     private EntreeListener callback;
     NfcAdapter adapter;

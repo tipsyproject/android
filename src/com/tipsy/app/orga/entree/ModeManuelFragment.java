@@ -13,7 +13,7 @@ import com.tipsy.app.R;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class ControleManuelFragment extends ListFragment {
+public class ModeManuelFragment extends ListFragment {
 
     private EntreeListener callback;
     private EntreeArrayAdapter entreesAdapter;
