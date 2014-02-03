@@ -5,8 +5,12 @@
     android:layout_height="wrap_content"
     android:id="@+id/layout_frag_item"
     android:background="@color/background_menu"
+    android:orientation="horizontal"
     android:padding="8dp"
-    android:orientation="horizontal">
+    android:layout_marginTop="4dp"
+    android:layout_marginLeft="6dp"
+    android:layout_marginRight="6dp"
+    android:layout_marginBottom="4dp">
 
 
     <LinearLayout
