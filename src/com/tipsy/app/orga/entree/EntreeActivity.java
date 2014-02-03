@@ -274,7 +274,6 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         setMode(MODE_NFC);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new ModeNFCFragment());
-        ft.addToBackStack(null);
         ft.commit();
     }
 
@@ -283,7 +282,6 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         modeManuelFragment = new ModeManuelFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, modeManuelFragment);
-        ft.addToBackStack(null);
         ft.commit();
     }
 
