@@ -5,50 +5,27 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:background="@color/background_dark"
-    android:padding="8dp"
-    android:gravity="center_vertical">
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/checkbox_entree"
-        android:checked="false"
-        android:enabled="true"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:clickable="false" />
+    android:gravity="center_vertical"
+    android:padding="@dimen/activity_margin">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/nom_participant"
         android:text="Lennie"
         android:textColor="@color/text_normal_dark"
         android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/checkbox_entree"
         android:layout_marginRight="@dimen/ui_margin" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/prenom_participant"
         android:text="Bar"
         android:textColor="@color/text_normal_dark"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/nom_participant" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:id="@+id/nom_ticket"
-        android:text="Entrée normale"
-        android:textColor="@color/text_not_important_dark"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>

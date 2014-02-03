@@ -9,6 +9,7 @@ import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,7 +30,6 @@ import com.tipsy.lib.util.EventActivity;
 import com.tipsy.lib.util.QueryCallback;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -40,17 +40,22 @@ import java.util.List;
 public class EntreeActivity extends EventActivity implements EntreeListener {
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     private ProgressDialog initDialog;
-    private ControleNFCFragment controleNfcFragment;
-    private ControleManuelFragment controleManuelFragment;
-    private Button buttonControleNFC;
-    private Button buttonControleQRCode;
-    private Button buttonControleManuel;
+    private ModeNFCFragment modeNfcFragment;
+    private ModeManuelFragment modeManuelFragment;
     private ProgressBar progressBar;
     private TextView progressText;
+    private static int MODE_NFC = 0;
+    private static int MODE_QRCODE = 1;
+    private static int MODE_MANUEL = 2;
+    private Button buttonNFC;
+    private Button buttonQRCode;
+    private Button buttonManuel;
+    private int currentMode = MODE_NFC;
+
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
-        //overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_entree);
         getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -61,22 +66,22 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         /*  INITIALISATION MENU MODE CONTROLE */
-        buttonControleNFC = (Button) findViewById(R.id.button_nfc);
-        buttonControleQRCode = (Button) findViewById(R.id.button_qrcode);
-        buttonControleManuel = (Button) findViewById(R.id.button_manuel);
-        buttonControleNFC.setOnClickListener(new View.OnClickListener() {
+        buttonNFC = (Button) findViewById(R.id.button_nfc);
+        buttonQRCode = (Button) findViewById(R.id.button_qrcode);
+        buttonManuel = (Button) findViewById(R.id.button_manuel);
+        buttonNFC.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 modeNFC();
             }
         });
-        buttonControleManuel.setOnClickListener(new View.OnClickListener() {
+        buttonManuel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 modeManuel();
             }
         });
 
 
-
+        /* Chargement des données */
         FragmentManager fm = getSupportFragmentManager();
         InitEntreeFragment initEntreeFragment = (InitEntreeFragment) fm.findFragmentByTag("init");
         if(initEntreeFragment == null){
@@ -95,9 +100,13 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(initEntreeFragment,"init");
             ft.commit();
-        }else
+        }else{
             entrees = savedInstanceState.getParcelableArrayList("Entrees");
+            currentMode = savedInstanceState.getInt("MODE");
+            setMode(currentMode);
+        }
 
+        /* Mise à jour de la barre de progression */
         if(entrees != null) updateProgress();
     }
 
@@ -112,6 +121,7 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         if (outState == null)
             outState = new Bundle();
         outState.putParcelableArrayList("Entrees", entrees);
+        outState.putInt("MODE", currentMode);
         super.onSaveInstanceState(outState);
     }
 
@@ -151,9 +161,10 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
     public void init() {
         if(initDialog != null)
             initDialog.dismiss();
-        controleNfcFragment = new ControleNFCFragment();
+        setMode(MODE_NFC);
+        modeNfcFragment = new ModeNFCFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, controleNfcFragment);
+        ft.replace(R.id.content, modeNfcFragment);
         ft.commit();
     }
 
@@ -180,8 +191,8 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
                     Collections.sort(entrees,Achat.SORT_BY_NAME);
                     // Mise à jour de la progressBar
                     updateProgress();
-                    if(controleManuelFragment != null){
-                        EntreeArrayAdapter adapter = (EntreeArrayAdapter) controleManuelFragment.getListAdapter();
+                    if(modeManuelFragment != null){
+                        EntreeArrayAdapter adapter = (EntreeArrayAdapter) modeManuelFragment.getListAdapter();
                         adapter.notifyDataSetChanged();
                     }
                     Toast.makeText(EntreeActivity.this, "Mise à jour effectuée", Toast.LENGTH_SHORT).show();
@@ -189,10 +200,10 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
                     Toast.makeText(EntreeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 // Fermeture de la progressDialog si elle a été affichée depuis cette fonction
-                if(closeDialog && initDialog != null) initDialog.dismiss();
-                if(cb!=null){
+                if(closeDialog && initDialog != null)
+                    initDialog.dismiss();
+                if(cb!=null)
                     cb.done(e);
-                }
             }
         });
     }
@@ -207,6 +218,15 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         progressBar.setMax(entrees.size());
         progressBar.setProgress(entreesValidees);
         progressText.setText("" + entreesValidees + "/" + entrees.size());
+    }
+
+
+    /* Mise à jour de l'onglet courant du menu Mode */
+    public void setMode(int mode){
+        currentMode = mode;
+        buttonNFC.setBackgroundResource( mode==MODE_NFC ? R.color.primary : R.color.secondary);
+        buttonQRCode.setBackgroundResource( mode==MODE_QRCODE ? R.color.primary : R.color.secondary);
+        buttonManuel.setBackgroundResource( mode==MODE_MANUEL ? R.color.primary : R.color.secondary);
     }
 
 
@@ -251,22 +271,18 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
 
 
     public void modeNFC() {
-        buttonControleNFC.setBackgroundResource(R.color.primary);
-        buttonControleQRCode.setBackgroundResource(R.color.secondary);
-        buttonControleManuel.setBackgroundResource(R.color.secondary);
+        setMode(MODE_NFC);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new ControleNFCFragment());
+        ft.replace(R.id.content, new ModeNFCFragment());
         ft.addToBackStack(null);
         ft.commit();
     }
 
     public void modeManuel() {
-        buttonControleNFC.setBackgroundResource(R.color.secondary);
-        buttonControleQRCode.setBackgroundResource(R.color.secondary);
-        buttonControleManuel.setBackgroundResource(R.color.primary);
-        controleManuelFragment = new ControleManuelFragment();
+        setMode(MODE_MANUEL);
+        modeManuelFragment = new ModeManuelFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, controleManuelFragment);
+        ft.replace(R.id.content, modeManuelFragment);
         ft.addToBackStack(null);
         ft.commit();
     }
