@@ -3,12 +3,24 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:paddingLeft="50dp"
-    android:paddingRight="50dp"
+    android:paddingTop="4dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="4dp"
     android:gravity="center"
     android:id="@+id/layout_signup_orga"
     android:layout_alignParentLeft="true"
     android:layout_alignParentStart="true">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout1"
+        android:paddingTop="10dp"
+        android:paddingLeft="30dp"
+        android:paddingRight="30dp"
+        android:paddingBottom="30dp"
+        android:background="@drawable/bg_card_transp">
 
     <EditText
         android:layout_width="wrap_content"
@@ -18,6 +30,7 @@
         android:ems="10"
         android:id="@+id/input_orga"
         android:layout_gravity="center"
+        android:textColor="@color/text_menu"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
@@ -34,6 +47,7 @@
         android:id="@+id/input_email_orga"
         android:layout_gravity="center"
         android:hint="Email"
+        android:textColor="@color/text_menu"
         android:layout_below="@+id/input_orga"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -49,6 +63,7 @@
         android:id="@+id/input_password_orga"
         android:layout_gravity="center"
         android:hint="Mot de passe"
+        android:textColor="@color/text_menu"
         android:layout_below="@+id/input_email_orga"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
@@ -95,6 +110,6 @@
         android:layout_alignParentStart="true"
         android:checked="false"
         android:onClick="checkboxClicked" />
-
+    </RelativeLayout>
 </RelativeLayout>
 

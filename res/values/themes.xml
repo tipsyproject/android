@@ -8,8 +8,8 @@
         <!--   <item name="android:checkboxStyle">@color/text_menu</item>-->
         <item name="android:textColor">@color/text_menu</item>
         <item name="android:buttonStyle">@style/Button_Style.Blue</item>
-        <item name="android:textColorHint">@color/text_hint</item>
-        <item name="android:editTextColor">@color/text_menu</item>
+        <item name="android:textColorHint">@android:color/darker_gray</item>
+        <item name="android:editTextColor">@color/secondary</item>
         <item name="android:windowBackground">@color/background</item>
     </style>
 
@@ -70,10 +70,12 @@
         <item name="android:paddingTop">@dimen/activity_margin</item>
         <item name="android:paddingBottom">@dimen/activity_margin</item>
     </style>
+
     <!-- Bouton mode courant-->
     <style name="ButtonCurrentMode" parent="ButtonModeMenu">
         <item name="android:background">@color/primary</item>
     </style>
+
     <!-- Boutons autres modes-->
     <style name="ButtonOtherMode" parent="ButtonModeMenu">
         <item name="android:background">@color/secondary</item>

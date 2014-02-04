@@ -30,7 +30,6 @@ import com.tipsy.lib.util.EventArrayAdapter;
 public class HomeOrgaFragment extends ListFragment {
     private OrgaListener callback;
     protected EventArrayAdapter adapter;
-    protected Button delete;
 
     @Override
     public void onAttach(Activity activity) {
@@ -43,17 +42,19 @@ public class HomeOrgaFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         adapter = new EventArrayAdapter(getActivity(), callback.getEvents());
         setListAdapter(adapter);
+
         //delete = (Button) getListView().findViewById(R.id.delete);
         getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+                final LinearLayout layout_color = (LinearLayout) view.findViewById(R.id.layout_color);
                 final Button delete = (Button) view.findViewById(R.id.delete);
                 if (delete.getVisibility() == View.VISIBLE) {
-                    view.setBackgroundResource(R.color.background_menu);
+                    layout_color.setBackgroundResource(R.color.background_light);
                     view.setAlpha(1f);
                     delete.setVisibility(View.GONE);
                 } else {
-                    view.setBackgroundResource(R.drawable.event_fade);
+                    layout_color.setBackgroundResource(R.drawable.event_fade);
                     view.setAlpha(0.4f);
                     delete.setVisibility(View.VISIBLE);
                 }

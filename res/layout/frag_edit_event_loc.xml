@@ -2,17 +2,26 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:paddingTop="4dp"
+    android:paddingLeft="6dp"
+    android:paddingRight="6dp"
+    android:paddingBottom="4dp"
+    android:gravity="center_horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Lieu de l'événement :"
+        android:id="@+id/textView"
+        android:gravity="center_horizontal" />
 
     <EditText
         android:id="@+id/input_lieu"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/text_home_edit"
-        android:shadowColor="@android:color/black"
-        android:shadowDx="-1"
-        android:shadowDy="0"
-        android:shadowRadius="2"
+        android:layout_marginTop="10dp"
         android:hint="Lieu"
         android:inputType="textCapWords" />
 </LinearLayout>

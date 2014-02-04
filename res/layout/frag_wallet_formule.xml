@@ -27,7 +27,7 @@
         android:text="20€"
         android:id="@+id/rech20"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp" />
+        android:textSize="23dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -36,7 +36,7 @@
         android:text="50€"
         android:id="@+id/rech50"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp" />
+        android:textSize="23dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -45,7 +45,7 @@
         android:text="100€"
         android:id="@+id/rech100"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp" />
+        android:textSize="23dp" />
 
     <Button
         android:layout_width="match_parent"
@@ -54,6 +54,6 @@
         android:text="Autres montants"
         android:id="@+id/autres"
         android:layout_centerHorizontal="true"
-        android:textSize="25dp" />
+        android:textSize="23dp" />
 
 </LinearLayout>

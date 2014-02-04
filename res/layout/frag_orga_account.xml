@@ -16,16 +16,15 @@
         android:scaleType="centerCrop">
 
 
-
         <ImageButton
             android:layout_width="115dp"
             android:layout_height="115dp"
             android:id="@+id/avatar"
-            android:background="@drawable/photo_profil_vide"
+            android:background="@drawable/avatar"
             android:layout_gravity="center_horizontal|top"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp" />
 
         <RelativeLayout
@@ -37,7 +36,7 @@
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:paddingBottom="30dp"
-            android:background="@drawable/bg_card">
+            android:background="@drawable/bg_card_white">
 
             <TableLayout
                 android:layout_width="fill_parent"
@@ -67,7 +66,6 @@
                         android:inputType="textCapWords"
                         android:layout_weight="1"
                         android:id="@+id/input_orga"
-                        android:textColor="@android:color/black"
                         android:layout_gravity="center" />
 
                 </TableRow>
@@ -90,10 +88,8 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
-                        android:textColorHint="@android:color/darker_gray"
                         android:layout_weight="1"
                         android:id="@+id/input_mail"
-                        android:textColor="@android:color/black"
                         android:layout_gravity="center" />
 
                 </TableRow>

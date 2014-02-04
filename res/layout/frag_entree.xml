@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="@color/background_dark"
+    android:background="@color/background_light"
     android:gravity="center_vertical"
     android:padding="@dimen/activity_margin">
 
@@ -14,7 +14,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/nom_participant"
         android:text="Lennie"
-        android:textColor="@color/text_normal_dark"
         android:layout_centerVertical="true"
         android:layout_marginRight="@dimen/ui_margin" />
 
@@ -24,7 +23,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/prenom_participant"
         android:text="Bar"
-        android:textColor="@color/text_normal_dark"
         android:layout_centerVertical="true"
         android:layout_toRightOf="@+id/nom_participant" />
 

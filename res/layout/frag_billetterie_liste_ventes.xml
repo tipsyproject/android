@@ -15,26 +15,25 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingTop="10dp"
-        android:paddingLeft="30dp"
+        android:paddingLeft="110dp"
         android:paddingRight="30dp"
         android:paddingBottom="30dp"
-        android:background="#22ffffff">
+        android:background="@color/background_light"
+        android:layout_centerInParent="true">
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Billets vendus:"
-            android:id="@+id/textView"
-            android:layout_weight="1" />
+            android:text="Billets vendus : "
+            android:id="@+id/textView"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="0"
-            android:id="@+id/nb_billets"
-            android:layout_weight="1" />
+            android:id="@+id/nb_billets" />
     </LinearLayout>
 
     <ListView

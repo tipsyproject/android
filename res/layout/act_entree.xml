@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#323A45"
+    android:background="@color/background_light"
     android:clickable="true">
 
     <LinearLayout
@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/imageView"
-            android:src="@drawable/ic_action_group"
+            android:src="@drawable/ic_action_group_dark"
             android:layout_marginRight="@dimen/activity_margin" />
 
         <LinearLayout
@@ -33,8 +33,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="50/100"
                 android:id="@+id/progressText"
-                android:gravity="center"
-                android:textColor="#FFFFFF" />
+                android:gravity="center"/>
 
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"

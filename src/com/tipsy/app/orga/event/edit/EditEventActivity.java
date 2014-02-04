@@ -2,7 +2,6 @@ package com.tipsy.app.orga.event.edit;
 
 import android.app.ActionBar;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -10,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,8 +22,6 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
-import com.tipsy.app.orga.OrgaActivity;
-import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.TipsyUser;
 
@@ -59,6 +57,8 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
     private TextView inputDateDebut;
     private TextView inputTimeDebut;
+
+    private Button next;
 
     private Validator validator;
 
@@ -165,10 +165,10 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
             @Override
             public void done(ParseException e) {
                 saving = false;
-                if (e == null){
+                if (e == null) {
                     finish();
                     overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-                }else
+                } else
                     Toast.makeText(EditEventActivity.this, getResources().getString(R.string.erreur_save), Toast.LENGTH_SHORT).show();
                 wait.dismiss();
             }
