@@ -58,10 +58,19 @@
             android:text="Prix :"
             android:id="@+id/prenom" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="€"
+            android:textColor="@color/secondary"
+            android:id="@+id/devise" />
+
         <EditText
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="17dp"
+            android:layout_marginLeft="0dp"
             android:inputType="numberDecimal"
             android:ems="10"
             android:id="@+id/input_prix"

@@ -135,7 +135,6 @@ public class BilletterieActivity extends EventActivity implements BilletterieLis
     public void goToNouveauBillet() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new EditBilletFragment());
-        ft.addToBackStack(null);
         ft.commit();
     }
 

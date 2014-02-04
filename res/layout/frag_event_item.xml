@@ -19,7 +19,7 @@
 
 
     <LinearLayout
-        android:background="@android:color/white"
+        android:background="@android:color/background_light"
         android:orientation="horizontal"
         android:id="@+id/layout_color"
         android:layout_width="match_parent"

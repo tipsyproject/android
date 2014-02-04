@@ -18,7 +18,6 @@
         android:paddingLeft="110dp"
         android:paddingRight="30dp"
         android:paddingBottom="30dp"
-        android:background="@color/background_light"
         android:layout_centerInParent="true">
 
         <TextView
