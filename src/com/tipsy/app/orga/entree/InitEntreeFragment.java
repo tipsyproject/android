@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 
+import com.parse.ParseException;
+import com.tipsy.lib.Achat;
 import com.tipsy.lib.util.QueryCallback;
 
 /**
@@ -29,6 +31,12 @@ public class InitEntreeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        if(getArguments().containsKey("PREVENTE")){
+            Achat prevente = getArguments().getParcelable("PREVENTE");
+            try{
+                prevente.save();
+            }catch (ParseException e){}
+        }
         /* Chargement de l'event et de la billetterie */
         callback.loadEventBilletterie(getArguments().getString("EVENT_ID"), new QueryCallback() {
             @Override

@@ -108,6 +108,12 @@
         </activity>
 
         <activity
+            android:name="com.tipsy.app.orga.prevente.PreventeActivity"
+            android:label="">
+
+        </activity>
+
+        <activity
             android:name=".orga.entree.EntreeActivity"
             android:label="">
             <intent-filter>

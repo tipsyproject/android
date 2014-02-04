@@ -34,6 +34,13 @@
         android:id="@+id/input_email"
         android:hint="@string/email" />
 
+    <Button
+        android:layout_width="84dp"
+        android:layout_height="match_parent"
+        android:text="Terminer"
+        android:id="@+id/button_validate"
+        android:layout_gravity="center_horizontal" />
+    <!--
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -43,5 +50,6 @@
         android:id="@+id/checkBox"
         android:checked="false"
         android:layout_gravity="center_horizontal" />
+        -->
 
 </LinearLayout>

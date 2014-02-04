@@ -50,9 +50,10 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(initEventFragment,"init");
             ft.commit();
-        }else
+        }else{
             event = savedInstanceState.getParcelable("Event");
-
+            getActionBar().setTitle(event.getNom());
+        }
     }
 
     @Override

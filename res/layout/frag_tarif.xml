@@ -9,8 +9,7 @@
     android:layout_marginBottom="0dp"
     android:layout_marginLeft="8dp"
     android:layout_marginRight="8dp"
-    android:paddingRight="15dp"
-    android:paddingLeft="30dp">
+    android:padding="8dp">
 
     <TextView
         android:layout_width="0dp"

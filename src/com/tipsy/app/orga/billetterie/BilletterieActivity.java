@@ -10,6 +10,7 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.entree.EntreeArrayAdapter;
+import com.tipsy.app.orga.prevente.TarifsFragment;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.EventActivity;
@@ -140,7 +141,7 @@ public class BilletterieActivity extends EventActivity implements BilletterieLis
 
     public void goToVendreBillet() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new VendreBilletFragment());
+        ft.replace(R.id.content, new TarifsFragment());
         ft.addToBackStack(null);
         ft.commit();
     }

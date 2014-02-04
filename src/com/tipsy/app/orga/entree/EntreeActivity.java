@@ -23,6 +23,7 @@ import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.event.EventOrgaActivity;
+import com.tipsy.app.orga.prevente.PreventeActivity;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.util.Bracelet;
 import com.tipsy.lib.Ticket;
@@ -96,6 +97,8 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
             initEntreeFragment = new InitEntreeFragment();
             Bundle args = new Bundle();
             args.putString("EVENT_ID",getIntent().getStringExtra("EVENT_ID"));
+            if(getIntent().hasExtra("PREVENTE"))
+                args.putParcelable("PREVENTE",getIntent().getParcelableExtra("PREVENTE"));
             initEntreeFragment.setArguments(args);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.add(initEntreeFragment,"init");
@@ -153,6 +156,7 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
                 updateEntrees(null);
                 return true;
             case R.id.action_add:
+                goToPrevente();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -283,6 +287,14 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, modeManuelFragment);
         ft.commit();
+    }
+
+    public void goToPrevente(){
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+        Intent intent = new Intent(this, PreventeActivity.class);
+        intent.putExtra("EVENT_ID",event.getObjectId());
+        intent.putExtra("Billetterie",billetterie);
+        startActivity(intent);
     }
 
     public void backToEvent(){

@@ -84,7 +84,7 @@ public class ListeBilletsFragment extends ListFragment {
         private ArrayList<Ticket> billets;
 
         public BilletsArrayAdapter(Context context, ArrayList<Ticket> billets) {
-            super(context, R.layout.frag_billet_list, billets);
+            super(context, R.layout.frag_tarif, billets);
             this.context = context;
             this.billets = billets;
         }
@@ -92,7 +92,7 @@ public class ListeBilletsFragment extends ListFragment {
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View viewBillet = inflater.inflate(R.layout.frag_billet_list, parent, false);
+            View viewBillet = inflater.inflate(R.layout.frag_tarif, parent, false);
             TextView nomBillet = (TextView) viewBillet.findViewById(R.id.nom_billet);
             TextView prixBillet = (TextView) viewBillet.findViewById(R.id.prix_billet);
             Ticket b = billets.get(position);

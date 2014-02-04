@@ -116,6 +116,10 @@ public class Achat extends ParseObject implements Transaction {
         return getUser() != null || getParticipant() != null;
     }
 
+    public boolean isValid(){
+        return isUserDefined() && getTicket() != null;
+    }
+
     public boolean isTipsyUser(){
         return getUser() != null;
     }

@@ -62,6 +62,7 @@ public class Participant extends ParseObject implements Parcelable {
         dest.writeString(getEmail());
         dest.writeString(getNom());
         dest.writeString(getPrenom());
+        dest.writeString(getBracelet());
     }
 
     public Participant(Parcel in) {
@@ -69,6 +70,9 @@ public class Participant extends ParseObject implements Parcelable {
         setEmail(in.readString());
         setNom(in.readString());
         setPrenom(in.readString());
+        try{
+            setBracelet(in.readString());
+        }catch (Exception e){}
     }
 
     public static final Parcelable.Creator<Participant> CREATOR = new Parcelable.Creator<Participant>() {
