@@ -6,8 +6,8 @@
     android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:padding="@dimen/activity_margin"
-    android:background="#FFFFFF"
-    android:baselineAligned="true">
+    android:baselineAligned="false"
+    android:paddingRight="@dimen/activity_margin">
 
 
     <EditText
@@ -35,12 +35,14 @@
         android:hint="@string/email" />
 
     <Button
-        android:layout_width="84dp"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/bar_height"
         android:layout_marginTop="10dp"
         android:text="Terminer"
         android:id="@+id/button_validate"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="@dimen/activity_margin"
+        android:paddingRight="@dimen/activity_margin" />
     <!--
     <CheckBox
         android:layout_width="wrap_content"

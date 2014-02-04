@@ -35,17 +35,4 @@
             android:id="@+id/nb_billets" />
     </LinearLayout>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/bar_height"
-        android:text="@string/vendre_billet"
-        android:id="@+id/button_vendre"
-        android:layout_gravity="center_horizontal"
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:drawableLeft="@drawable/ic_action_add_person"
-        android:drawablePadding="@dimen/ui_margin"
-        android:layout_marginTop="@dimen/activity_margin" />
-
-
 </LinearLayout>

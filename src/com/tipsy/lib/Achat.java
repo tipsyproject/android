@@ -127,7 +127,10 @@ public class Achat extends ParseObject implements Transaction {
     /* Tri par ordre alphabetique */
     public static Comparator<Achat> SORT_BY_NAME = new Comparator<Achat>() {
         public int compare(Achat one, Achat other) {
-            return one.getNom().compareTo(other.getNom());
+            // les participants sans nom ni prenom doivent être mis à la fin
+            if(one.getNom().equals("") && one.getPrenom().equals(""))
+                return 1;
+            else return one.getNom().compareTo(other.getNom());
         }
     };
 

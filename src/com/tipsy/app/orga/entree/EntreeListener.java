@@ -13,5 +13,6 @@ public interface EntreeListener extends EventModule {
     public ArrayList<Achat> getEntrees();
     public void init();
     public void updateEntrees(QueryCallback cb);
+    public void updateProgress();
     public void backToEvent();
 }
