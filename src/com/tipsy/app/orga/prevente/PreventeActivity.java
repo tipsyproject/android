@@ -133,9 +133,7 @@ public class PreventeActivity extends FragmentActivity implements PreventeListen
         final String tagID = Bracelet.bytesToHex(tag.getId());
         Participant p = new Participant();
         try{
-            Log.d("TOUTAFAIT","set bracelet:"+tagID);
             p.setBracelet(tagID);
-            Log.d("TOUTAFAIT","get bracelet:"+p.getBracelet());
         }catch (Exception e){}
         prevente.setParticipant(p);
         wait.dismiss();
