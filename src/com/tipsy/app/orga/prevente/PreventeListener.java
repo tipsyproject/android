@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public interface PreventeListener {
     public Achat getPrevente();
     public ArrayList<Ticket> getBilletterie();
-    public void backToEntrees();
+    public void backToEntrees(boolean includePrevente);
     public void goToScan();
     public void goToTarifs();
     public void goToParticipant();

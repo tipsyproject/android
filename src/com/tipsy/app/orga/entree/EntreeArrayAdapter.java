@@ -34,10 +34,15 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> {
         Achat entree = entrees.get(position);
 
         TextView prenomParticipant = (TextView) view.findViewById(R.id.prenom_participant);
-        prenomParticipant.setText(entree.getPrenom());
-
         TextView nomParticipant = (TextView) view.findViewById(R.id.nom_participant);
-        nomParticipant.setText(entree.getNom());
+
+        if(entree.getPrenom().equals("") && entree.getNom().equals("")){
+            nomParticipant.setText("Participant");
+            prenomParticipant.setText("Inconnu");
+        }else{
+            prenomParticipant.setText(entree.getPrenom());
+            nomParticipant.setText(entree.getNom());
+        }
 
         if(entree.isUsed()){
             prenomParticipant.setTextColor(view.getResources().getColor(R.color.text_not_important_dark));

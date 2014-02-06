@@ -2,30 +2,29 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/billet_list_height"
-    android:orientation="horizontal"
-    android:background="@color/background_menu"
-    android:layout_marginTop="8dp"
-    android:layout_marginBottom="0dp"
-    android:layout_marginLeft="8dp"
-    android:layout_marginRight="8dp"
-    android:padding="8dp">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    style="@style/Tarif">
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Nom_Billet"
+        android:text="Entrée Normale"
         android:id="@+id/nom_billet"
-        android:layout_weight="3"
-        android:gravity="center_vertical|left" />
+        android:layout_weight="1"
+        android:gravity="center"
+        android:textColor="#FFFFFF"
+        android:textSize="32dp" />
 
     <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Prix €"
+        android:text="20 €"
         android:id="@+id/prix_billet"
-        android:layout_weight="1"
-        android:gravity="center_vertical|left" />
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textSize="48dp"
+        android:textColor="#FFFFFF" />
 </LinearLayout>

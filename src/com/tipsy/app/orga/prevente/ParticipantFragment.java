@@ -67,7 +67,7 @@ public class ParticipantFragment extends Fragment implements Validator.Validatio
         callback.getPrevente().getParticipant().setNom(inputNom.getText().toString());
         callback.getPrevente().getParticipant().setPrenom(inputPrenom.getText().toString());
         callback.getPrevente().getParticipant().setEmail(inputEmail.getText().toString());
-        callback.backToEntrees();
+        callback.backToEntrees(true);
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {

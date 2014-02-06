@@ -90,39 +90,16 @@ public class PreventeActivity extends FragmentActivity implements PreventeListen
         super.onSaveInstanceState(outState);
     }
 
-    /*
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_access, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Confirmation avant de quitter le mode Entrées
             case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        backToEvent();
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-                builder.setMessage("Vous allez quitter le mode Prévente.");
-                builder.show();
-                return true;
-            case R.id.action_refresh:
-                updateEntrees(null);
-                return true;
-            case R.id.action_add:
+                backToEntrees(false);
                 return true;
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
 
 
@@ -161,11 +138,11 @@ public class PreventeActivity extends FragmentActivity implements PreventeListen
         ft.commit();
     }
 
-    public void backToEntrees(){
+    public void backToEntrees(boolean includePrevente){
         overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
         Intent intent = new Intent(this, EntreeActivity.class);
         intent.putExtra("EVENT_ID",EVENT_ID);
-        if(prevente.isValid())
+        if(includePrevente)
             intent.putExtra("PREVENTE",prevente);
         startActivity(intent);
     }

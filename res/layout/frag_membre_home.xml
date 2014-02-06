@@ -22,7 +22,7 @@
                 android:layout_height="@dimen/home_button_height"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/bg_card_white"
+                android:background="@drawable/bg_card_blue"
                 android:baselineAligned="true"
                 android:layout_marginBottom="@dimen/ui_margin"
                 android:layout_marginRight="@dimen/ui_margin">
@@ -34,6 +34,7 @@
                     android:text="0€"
                     android:id="@+id/solde"
                     android:textSize="48dp"
+                    android:textColor="@color/background_light"
                     android:textIsSelectable="false" />
 
                 <TextView
@@ -41,6 +42,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/solde"
+                    android:textColor="@color/background_light"
                     android:id="@+id/textView2" />
             </LinearLayout>
             <!--
@@ -86,7 +88,7 @@
                 android:layout_height="@dimen/home_button_height"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/bg_card_white"
+                android:background="@drawable/bg_card_blue"
                 android:baselineAligned="true"
                 android:layout_marginBottom="@dimen/ui_margin"
                 android:layout_marginRight="@dimen/ui_margin"
@@ -95,7 +97,7 @@
                 <ImageView
                     android:layout_width="@dimen/bar_height"
                     android:layout_height="@dimen/bar_height"
-                    android:src="@drawable/ic_action_person_dark"
+                    android:src="@drawable/ic_action_person"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
@@ -103,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="@string/profil"
+                    android:textColor="@color/background_light"
                     android:layout_gravity="center_horizontal" />
             </LinearLayout>
 
@@ -113,7 +116,7 @@
                 android:id="@+id/button_bracelet"
                 android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal"
-                android:background="@drawable/bg_card_white"
+                android:background="@drawable/bg_card_blue"
                 android:baselineAligned="true"
                 android:layout_marginBottom="@dimen/ui_margin"
                 android:layout_marginRight="@dimen/ui_margin">
@@ -121,7 +124,7 @@
                 <ImageView
                     android:layout_width="@dimen/bar_height"
                     android:layout_height="@dimen/bar_height"
-                    android:src="@drawable/ic_action_network_wifi_dark"
+                    android:src="@drawable/ic_action_network_wifi"
                     android:layout_gravity="center_horizontal" />
 
                 <TextView
@@ -129,6 +132,7 @@
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceLarge"
                     android:text="Bracelet"
+                    android:textColor="@color/background_light"
                     android:layout_gravity="center_horizontal" />
 
             </LinearLayout>

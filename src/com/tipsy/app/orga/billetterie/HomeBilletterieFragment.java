@@ -29,13 +29,6 @@ public class HomeBilletterieFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_billetterie_home, container, false);
-        /* Bouton VENDRE BILLET */
-        Button buttonVendre = (Button) view.findViewById(R.id.button_vendre);
-        buttonVendre.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                callback.goToVendreBillet();
-            }
-        });
         return view;
     }
 
