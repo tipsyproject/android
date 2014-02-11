@@ -4,20 +4,7 @@
         <shape android:shape="rectangle"
             android:dither="true">
 
-            <corners android:radius="2dp"/>
-
-            <solid android:color="#000000" />
-
-        </shape>
-    </item>
-
-    <item android:bottom="2dp">
-        <shape android:shape="rectangle"
-            android:dither="true">
-
-            <corners android:radius="2dp" />
-
-            <solid android:color="#ffffff" />
+            <solid android:color="@color/background_light" />
 
             <padding android:bottom="8dp"
                 android:left="8dp"

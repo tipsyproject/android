@@ -1,6 +1,7 @@
 package com.tipsy.app.orga.event.edit;
 
 import android.app.ActionBar;
+import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -11,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -112,7 +114,9 @@ public class EditEventActivity extends FragmentActivity implements EditEventList
 
         for (int icon : icones)
             getActionBar().addTab(getActionBar().newTab().setIcon(icon).setTabListener(this));
+
     }
+
 
     /* Définition de l'ACTIONBAR */
     @Override

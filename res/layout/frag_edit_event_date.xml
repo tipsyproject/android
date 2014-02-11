@@ -48,19 +48,20 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_action_go_to_today" />
+            android:src="@drawable/ic_action_go_to_today_dark" />
 
         <TextView
             android:id="@+id/input_date_debut"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="3"
+            android:textColor="@color/secondary"
             style="@android:style/Widget.Holo.Spinner" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_action_time"
+            android:src="@drawable/ic_action_time_dark"
             android:layout_marginLeft="@dimen/activity_margin" />
 
         <TextView
@@ -68,6 +69,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
+            android:textColor="@color/secondary"
             style="@android:style/Widget.Holo.Spinner" />
     </LinearLayout>
 
