@@ -41,8 +41,9 @@ import java.util.List;
 public class EntreeActivity extends EventActivity implements EntreeListener {
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     private ProgressDialog initDialog;
-    private ModeNFCFragment modeNfcFragment;
-    private ModeManuelFragment modeManuelFragment;
+    protected ModeNFCFragment modeNfcFragment;
+    protected ModeManuelFragment modeManuelFragment;
+    protected ModeQRCodeFragment modeQRCodeFragment;
     private ProgressBar progressBar;
     private TextView progressText;
     private static int MODE_NFC = 0;
@@ -78,6 +79,11 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         buttonManuel.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 modeManuel();
+            }
+        });
+        buttonQRCode.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                modeQRCode();
             }
         });
 
@@ -286,6 +292,14 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         modeManuelFragment = new ModeManuelFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, modeManuelFragment);
+        ft.commit();
+    }
+
+    public void modeQRCode() {
+        setMode(MODE_QRCODE);
+        modeQRCodeFragment = new ModeQRCodeFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content, modeQRCodeFragment);
         ft.commit();
     }
 
