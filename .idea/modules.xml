@@ -3,10 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/TipsyApp.iml" filepath="$PROJECT_DIR$/TipsyApp.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/android-integration/src/main/android-integration.iml" filepath="$PROJECT_DIR$/libs/android-integration/src/main/android-integration.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/facebook/facebook.iml" filepath="$PROJECT_DIR$/libs/facebook/facebook.iml" />
       <module fileurl="file://$PROJECT_DIR$/libs/google-play-services_lib/google-play-services_lib.iml" filepath="$PROJECT_DIR$/libs/google-play-services_lib/google-play-services_lib.iml" />
-      <module fileurl="file://$PROJECT_DIR$/libs/zxing-2.3.0/zxing-2.3.0.iml" filepath="$PROJECT_DIR$/libs/zxing-2.3.0/zxing-2.3.0.iml" />
     </modules>
   </component>
 </project>

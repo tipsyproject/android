@@ -18,6 +18,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.abhi.barcode.frag.libv2.BarcodeFragment;
+import com.abhi.barcode.frag.libv2.IScanResultHandler;
+import com.abhi.barcode.frag.libv2.ScanResult;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
@@ -38,12 +41,13 @@ import java.util.List;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class EntreeActivity extends EventActivity implements EntreeListener {
+public class EntreeActivity extends EventActivity implements EntreeListener, IScanResultHandler  {
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     private ProgressDialog initDialog;
     protected ModeNFCFragment modeNfcFragment;
     protected ModeManuelFragment modeManuelFragment;
     protected ModeQRCodeFragment modeQRCodeFragment;
+    protected BarcodeFragment brf;
     private ProgressBar progressBar;
     private TextView progressText;
     private static int MODE_NFC = 0;
@@ -62,7 +66,8 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         setContentView(R.layout.act_entree);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Mode Entrée");
-
+        brf = (BarcodeFragment) getSupportFragmentManager().findFragmentById(R.id.sample);
+        brf.getView().setVisibility(View.GONE);
         /* BARRE DE SUIVI DES ENTREES */
         progressText = (TextView) findViewById(R.id.progressText);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -285,14 +290,15 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new ModeNFCFragment());
         ft.commit();
+        brf.getView().setVisibility(View.GONE);
     }
 
     public void modeManuel() {
         setMode(MODE_MANUEL);
-        modeManuelFragment = new ModeManuelFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, modeManuelFragment);
+        ft.replace(R.id.content, new ModeManuelFragment());
         ft.commit();
+        brf.getView().setVisibility(View.GONE);
     }
 
     public void modeQRCode() {
@@ -301,6 +307,18 @@ public class EntreeActivity extends EventActivity implements EntreeListener {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, modeQRCodeFragment);
         ft.commit();
+        brf.getView().setVisibility(View.VISIBLE);
+        brf.setScanResultHandler(this);
+    }
+
+    @Override
+    public void scanResult(ScanResult result) {
+        Toast.makeText(this, result.getRawResult().getText(), Toast.LENGTH_LONG).show();
+        try{
+            brf.restart();
+        }catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void goToPrevente(){

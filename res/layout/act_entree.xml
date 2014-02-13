@@ -81,6 +81,15 @@
         android:layout_alignParentStart="true"
         android:layout_above="@+id/menu_mode"
         android:layout_below="@+id/linearLayout2"
-        android:id="@+id/content"></FrameLayout>
+        android:id="@+id/content">
+
+        <fragment
+            android:id="@+id/sample"
+            android:name="com.abhi.barcode.frag.libv2.BarcodeFragment"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:layout_below="@+id/text"
+            android:layout_gravity="center"/>
+    </FrameLayout>
 
 </RelativeLayout>
