@@ -7,13 +7,15 @@ import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,13 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
     protected ModeManuelFragment modeManuelFragment;
     protected ModeQRCodeFragment modeQRCodeFragment;
     protected BarcodeFragment brf;
+    protected LinearLayout layoutOk;
+    protected LinearLayout layoutAlready;
+    private static TextView typeEntreeOk;
+    private static TextView nomOk;
+    private static TextView entreeAlready;
+    private static TextView nomAlready;
+    protected static Achat entree = null;
     private ProgressBar progressBar;
     private TextView progressText;
     private static int MODE_NFC = 0;
@@ -64,10 +73,18 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_entree);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Mode Entrée");
         brf = (BarcodeFragment) getSupportFragmentManager().findFragmentById(R.id.sample);
         brf.getView().setVisibility(View.GONE);
+        layoutOk = (LinearLayout) findViewById(R.id.layout_ok);
+        typeEntreeOk = (TextView) findViewById(R.id.type_entree_ok);
+        nomOk = (TextView) findViewById(R.id.nom_ok);
+        layoutAlready = (LinearLayout) findViewById(R.id.layout_already);
+        entreeAlready = (TextView) findViewById(R.id.entree_already);
+        nomAlready = (TextView) findViewById(R.id.nom_already);
+
         /* BARRE DE SUIVI DES ENTREES */
         progressText = (TextView) findViewById(R.id.progressText);
         progressBar = (ProgressBar) findViewById(R.id.progressBar);
@@ -267,7 +284,9 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         String message;
         if(found){
             if(entree != null && !entree.isUsed()){
-                message="Entrée OK";
+                typeEntreeOk.setText(entree.getTitre());
+                nomOk.setText(entree.getNom() + " " + entree.getPrenom());
+                layoutOk.setVisibility(View.VISIBLE);
                 entree.setUsed(true);
                 entree.saveInBackground(new SaveCallback() {
                     @Override
@@ -275,12 +294,55 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
                         updateProgress();
                     }
                 });
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layoutOk.setVisibility(View.GONE);
+                        brf.getView().setVisibility(View.VISIBLE);
+                    }
+                }, 4000);
             }
-            else
-                message="Entrée déjà validée";
-        }else message = "Entrée non autorisée";
+            else {
+                entreeAlready.setText("Entrée déjà validée");
+                nomAlready.setText(entree.getNom() + " " + entree.getPrenom());
+                layoutAlready.setVisibility(View.VISIBLE);
+                entree.setUsed(true);
+                entree.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        updateProgress();
+                    }
+                });
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layoutAlready.setVisibility(View.GONE);
+                    }
+                }, 4000);
+            }
+        }else {
+            entreeAlready.setText("Entrée non autorisée");
+            nomAlready.setVisibility(View.GONE);
+            layoutAlready.setVisibility(View.VISIBLE);
+            entree.setUsed(true);
+            entree.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    updateProgress();
+                }
+            });
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    layoutAlready.setVisibility(View.GONE);
+                    nomAlready.setVisibility(View.VISIBLE);
+                }
+            }, 4000);
+        }
         wait.dismiss();
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
 
@@ -313,11 +375,96 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
 
     @Override
     public void scanResult(ScanResult result) {
-        Toast.makeText(this, result.getRawResult().getText(), Toast.LENGTH_LONG).show();
-        try{
-            brf.restart();
-        }catch (Exception e) {
-            e.printStackTrace();
+        Iterator it = entrees.iterator();
+        boolean found = false;
+        while (it.hasNext() && !found) {
+            entree = (Achat) it.next();
+            if (entree.getObjectId().equals(result.getRawResult().getText())){
+                found = true;
+            }
+        }
+        if(found){
+            if(entree != null && !entree.isUsed()){
+                typeEntreeOk.setText(entree.getTitre());
+                nomOk.setText(entree.getNom() + " " + entree.getPrenom());
+                layoutOk.setVisibility(View.VISIBLE);
+                //brf.getView().setVisibility(View.GONE);
+                brf.onDestroy();
+                entree.setUsed(true);
+                entree.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        updateProgress();
+                    }
+                });
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layoutOk.setVisibility(View.GONE);
+                        brf.getView().setVisibility(View.VISIBLE);
+                        try{
+                            brf.restart();
+                        }catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, 4000);
+            }
+            else {
+                entreeAlready.setText("Entrée déjà validée");
+                nomAlready.setText(entree.getNom() + " " + entree.getPrenom());
+                layoutAlready.setVisibility(View.VISIBLE);
+                //brf.getView().setVisibility(View.GONE);
+                brf.onDestroy();
+                entree.setUsed(true);
+                entree.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        updateProgress();
+                    }
+                });
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        layoutAlready.setVisibility(View.GONE);
+                        brf.getView().setVisibility(View.VISIBLE);
+                        try{
+                            brf.restart();
+                        }catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, 4000);
+            }
+        }else {
+            entreeAlready.setText("Entrée non autorisée");
+            nomAlready.setVisibility(View.GONE);
+            layoutAlready.setVisibility(View.VISIBLE);
+            //brf.getView().setVisibility(View.GONE);
+            brf.onDestroy();
+            entree.setUsed(true);
+            entree.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    updateProgress();
+                }
+            });
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    layoutAlready.setVisibility(View.GONE);
+                    brf.getView().setVisibility(View.VISIBLE);
+                    nomAlready.setVisibility(View.VISIBLE);
+                    try{
+                        brf.restart();
+                    }catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }, 4000);
         }
     }
 
@@ -339,4 +486,5 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
     public ArrayList<Achat> getEntrees() {
         return entrees;
     }
+
 }

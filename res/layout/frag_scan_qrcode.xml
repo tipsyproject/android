@@ -11,12 +11,5 @@
     tools:context=".BarcodeFragmentExampleActivity"
     android:gravity="center">
 
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Scannez le QRCode à activer"
-        android:id="@+id/text"
-        android:layout_gravity="center_horizontal" />-->
 
 </RelativeLayout>
