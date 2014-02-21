@@ -4,13 +4,10 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.parse.FindCallback;
-import com.parse.GetCallback;
 import com.parse.ParseClassName;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**

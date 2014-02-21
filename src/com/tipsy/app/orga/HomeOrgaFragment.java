@@ -1,10 +1,8 @@
 package com.tipsy.app.orga;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,13 +13,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
-import com.parse.ParseObject;
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
 import com.tipsy.app.UserActivity;
-import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.util.EventArrayAdapter;
 
 /**
@@ -75,7 +69,7 @@ public class HomeOrgaFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id) {
         // do something with the data
         //if(delete.getVisibility() == View.GONE)
-            callback.goToEvent(position);
+        callback.goToEvent(position);
     }
 
     public void onBackPressed() {

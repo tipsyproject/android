@@ -16,8 +16,8 @@ import com.tipsy.app.help.HelpActivity;
 import com.tipsy.app.login.LoginActivity;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.orga.OrgaActivity;
-import com.tipsy.lib.util.Prefs;
 import com.tipsy.lib.TipsyUser;
+import com.tipsy.lib.util.Prefs;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -56,13 +56,13 @@ public class MainActivity extends Activity {
         // Affichage de l'aide si elle n'a encore jamais été passée.
         // Sinon, on essaye de reconnecter automatiquement l'utilisateur
         if (!app.skipHelp(this)) startActivity(new Intent(this, HelpActivity.class));
-        else{
+        else {
             TipsyUser user = TipsyUser.getCurrentUser();
-            if(user == null)
+            if (user == null)
                 startActivity(new Intent(this, LoginActivity.class));
-            else if(user.getType() == TipsyUser.MEMBRE)
+            else if (user.getType() == TipsyUser.MEMBRE)
                 startActivity(new Intent(this, MembreActivity.class));
-            else if(user.getType() == TipsyUser.ORGA)// Orga
+            else if (user.getType() == TipsyUser.ORGA)// Orga
                 startActivity(new Intent(this, OrgaActivity.class));
             else
                 startActivity(new Intent(this, LoginActivity.class));

@@ -33,7 +33,7 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="50/100"
                 android:id="@+id/progressText"
-                android:gravity="center"/>
+                android:gravity="center" />
 
             <ProgressBar
                 style="?android:attr/progressBarStyleHorizontal"
@@ -89,7 +89,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/text"
-            android:layout_gravity="center"/>
+            android:layout_gravity="center" />
     </FrameLayout>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"

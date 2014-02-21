@@ -83,6 +83,10 @@ j'accepte les conditions générales."</string>
     <string name="reset">Merci d\'entrer votre nouveau mot de passe.</string>
     <string name="nom">Nom</string>
     <string name="prenom">Prénom</string>
-    <string name="activer_bracelet">Activer bracelet</string><string name="qrcode">QR Code</string><string name="liste">Liste</string><string name="mode_entree">Mode Entrée</string><string name="nfc">NFC</string>
+    <string name="activer_bracelet">Activer bracelet</string>
+    <string name="qrcode">QR Code</string>
+    <string name="liste">Liste</string>
+    <string name="mode_entree">Mode Entrée</string>
+    <string name="nfc">NFC</string>
 
 </resources>

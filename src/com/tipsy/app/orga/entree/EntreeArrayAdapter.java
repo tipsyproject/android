@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
@@ -36,15 +35,15 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> {
         TextView prenomParticipant = (TextView) view.findViewById(R.id.prenom_participant);
         TextView nomParticipant = (TextView) view.findViewById(R.id.nom_participant);
 
-        if(entree.getPrenom().equals("") && entree.getNom().equals("")){
+        if (entree.getPrenom().equals("") && entree.getNom().equals("")) {
             nomParticipant.setText("Participant");
             prenomParticipant.setText("Inconnu");
-        }else{
+        } else {
             prenomParticipant.setText(entree.getPrenom());
             nomParticipant.setText(entree.getNom());
         }
 
-        if(entree.isUsed()){
+        if (entree.isUsed()) {
             prenomParticipant.setTextColor(view.getResources().getColor(R.color.text_not_important_dark));
             nomParticipant.setTextColor(view.getResources().getColor(R.color.text_not_important_dark));
         }

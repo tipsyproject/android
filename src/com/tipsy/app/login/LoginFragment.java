@@ -20,10 +20,10 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.app.signup.TypeSignUpActivity;
 import com.tipsy.app.help.HelpActivity;
 import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.orga.OrgaActivity;
+import com.tipsy.app.signup.TypeSignUpActivity;
 import com.tipsy.lib.TipsyUser;
 
 /**

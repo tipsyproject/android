@@ -30,8 +30,8 @@ import com.tipsy.app.R;
 import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.app.orga.prevente.PreventeActivity;
 import com.tipsy.lib.Achat;
-import com.tipsy.lib.util.Bracelet;
 import com.tipsy.lib.Ticket;
+import com.tipsy.lib.util.Bracelet;
 import com.tipsy.lib.util.EventActivity;
 import com.tipsy.lib.util.QueryCallback;
 
@@ -43,7 +43,7 @@ import java.util.List;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class EntreeActivity extends EventActivity implements EntreeListener, IScanResultHandler  {
+public class EntreeActivity extends EventActivity implements EntreeListener, IScanResultHandler {
     private ArrayList<Achat> entrees = new ArrayList<Achat>();
     private ProgressDialog initDialog;
     protected ModeNFCFragment modeNfcFragment;
@@ -113,7 +113,7 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         /* Chargement des données */
         FragmentManager fm = getSupportFragmentManager();
         InitEntreeFragment initEntreeFragment = (InitEntreeFragment) fm.findFragmentByTag("init");
-        if(initEntreeFragment == null){
+        if (initEntreeFragment == null) {
             initDialog = ProgressDialog.show(this, null, "Chargement...", true, true);
             initDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
@@ -124,21 +124,21 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
             });
             initEntreeFragment = new InitEntreeFragment();
             Bundle args = new Bundle();
-            args.putString("EVENT_ID",getIntent().getStringExtra("EVENT_ID"));
-            if(getIntent().hasExtra("PREVENTE"))
-                args.putParcelable("PREVENTE",getIntent().getParcelableExtra("PREVENTE"));
+            args.putString("EVENT_ID", getIntent().getStringExtra("EVENT_ID"));
+            if (getIntent().hasExtra("PREVENTE"))
+                args.putParcelable("PREVENTE", getIntent().getParcelableExtra("PREVENTE"));
             initEntreeFragment.setArguments(args);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(initEntreeFragment,"init");
+            ft.add(initEntreeFragment, "init");
             ft.commit();
-        }else{
+        } else {
             entrees = savedInstanceState.getParcelableArrayList("Entrees");
             currentMode = savedInstanceState.getInt("MODE");
             setMode(currentMode);
         }
 
         /* Mise à jour de la barre de progression */
-        if(entrees != null) updateProgress();
+        if (entrees != null) updateProgress();
     }
 
     @Override
@@ -191,7 +191,7 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
     }
 
     public void init() {
-        if(initDialog != null)
+        if (initDialog != null)
             initDialog.dismiss();
         setMode(MODE_NFC);
         modeNfcFragment = new ModeNFCFragment();
@@ -203,14 +203,13 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
 
     public void updateEntrees(final QueryCallback cb) {
         final boolean closeDialog;
-        if(initDialog == null){
-            initDialog = ProgressDialog.show(this,null,getString(R.string.update_entrees),true,true);
+        if (initDialog == null) {
+            initDialog = ProgressDialog.show(this, null, getString(R.string.update_entrees), true, true);
             closeDialog = true;
-        }
-        else if(!initDialog.isShowing()){
-            initDialog = ProgressDialog.show(this,null,getString(R.string.update_entrees),true,true);
+        } else if (!initDialog.isShowing()) {
+            initDialog = ProgressDialog.show(this, null, getString(R.string.update_entrees), true, true);
             closeDialog = true;
-        } else{
+        } else {
             initDialog.setMessage(getString(R.string.update_entrees));
             closeDialog = false;
         }
@@ -220,21 +219,21 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
                 if (e == null) {
                     entrees.clear();
                     entrees.addAll(achats);
-                    Collections.sort(entrees,Achat.SORT_BY_NAME);
+                    Collections.sort(entrees, Achat.SORT_BY_NAME);
                     // Mise à jour de la progressBar
                     updateProgress();
-                    if(modeManuelFragment != null){
+                    if (modeManuelFragment != null) {
                         EntreeArrayAdapter adapter = (EntreeArrayAdapter) modeManuelFragment.getListAdapter();
                         adapter.notifyDataSetChanged();
                     }
                     Toast.makeText(EntreeActivity.this, "Mise à jour effectuée", Toast.LENGTH_SHORT).show();
-                } else{
+                } else {
                     Toast.makeText(EntreeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                 }
                 // Fermeture de la progressDialog si elle a été affichée depuis cette fonction
-                if(closeDialog && initDialog != null)
+                if (closeDialog && initDialog != null)
                     initDialog.dismiss();
-                if(cb!=null)
+                if (cb != null)
                     cb.done(e);
             }
         });
@@ -242,10 +241,10 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
 
 
     /* MISE A JOUR DE LA BARRE DE PROGRESSION */
-    public void updateProgress(){
+    public void updateProgress() {
         int entreesValidees = 0;
-        for(Achat entree : entrees)
-            if(entree.isUsed())
+        for (Achat entree : entrees)
+            if (entree.isUsed())
                 entreesValidees++;
         progressBar.setMax(entrees.size());
         progressBar.setProgress(entreesValidees);
@@ -254,13 +253,12 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
 
 
     /* Mise à jour de l'onglet courant du menu Mode */
-    public void setMode(int mode){
+    public void setMode(int mode) {
         currentMode = mode;
-        buttonNFC.setBackgroundResource( mode==MODE_NFC ? R.color.primary : R.color.secondary);
-        buttonQRCode.setBackgroundResource( mode==MODE_QRCODE ? R.color.primary : R.color.secondary);
-        buttonManuel.setBackgroundResource( mode==MODE_MANUEL ? R.color.primary : R.color.secondary);
+        buttonNFC.setBackgroundResource(mode == MODE_NFC ? R.color.primary : R.color.secondary);
+        buttonQRCode.setBackgroundResource(mode == MODE_QRCODE ? R.color.primary : R.color.secondary);
+        buttonManuel.setBackgroundResource(mode == MODE_MANUEL ? R.color.primary : R.color.secondary);
     }
-
 
 
     @Override
@@ -278,12 +276,12 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
             entree = (Achat) it.next();
             if (entree.getParticipant() != null && entree.getParticipant().getBracelet() != null)
                 found = entree.getParticipant().getBracelet().equals(tagID);
-            else if (entree.getUser() != null && entree.getUser().getBracelet() != null )
+            else if (entree.getUser() != null && entree.getUser().getBracelet() != null)
                 found = entree.getUser().getBracelet().equals(tagID);
         }
         String message;
-        if(found){
-            if(entree != null && !entree.isUsed()){
+        if (found) {
+            if (entree != null && !entree.isUsed()) {
                 typeEntreeOk.setText(entree.getTitre());
                 nomOk.setText(entree.getNom() + " " + entree.getPrenom());
                 layoutOk.setVisibility(View.VISIBLE);
@@ -302,8 +300,7 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
                         brf.getView().setVisibility(View.VISIBLE);
                     }
                 }, 4000);
-            }
-            else {
+            } else {
                 entreeAlready.setText("Entrée déjà validée");
                 nomAlready.setText(entree.getNom() + " " + entree.getPrenom());
                 layoutAlready.setVisibility(View.VISIBLE);
@@ -322,7 +319,7 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
                     }
                 }, 4000);
             }
-        }else {
+        } else {
             entreeAlready.setText("Entrée non autorisée");
             nomAlready.setVisibility(View.GONE);
             layoutAlready.setVisibility(View.VISIBLE);
@@ -344,7 +341,6 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         }
         wait.dismiss();
     }
-
 
 
     public void modeNFC() {
@@ -379,12 +375,12 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         boolean found = false;
         while (it.hasNext() && !found) {
             entree = (Achat) it.next();
-            if (entree.getObjectId().equals(result.getRawResult().getText())){
+            if (entree.getObjectId().equals(result.getRawResult().getText())) {
                 found = true;
             }
         }
-        if(found){
-            if(entree != null && !entree.isUsed()){
+        if (found) {
+            if (entree != null && !entree.isUsed()) {
                 typeEntreeOk.setText(entree.getTitre());
                 nomOk.setText(entree.getNom() + " " + entree.getPrenom());
                 layoutOk.setVisibility(View.VISIBLE);
@@ -403,15 +399,14 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
                     public void run() {
                         layoutOk.setVisibility(View.GONE);
                         brf.getView().setVisibility(View.VISIBLE);
-                        try{
+                        try {
                             brf.restart();
-                        }catch (Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }, 4000);
-            }
-            else {
+            } else {
                 entreeAlready.setText("Entrée déjà validée");
                 nomAlready.setText(entree.getNom() + " " + entree.getPrenom());
                 layoutAlready.setVisibility(View.VISIBLE);
@@ -430,15 +425,15 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
                     public void run() {
                         layoutAlready.setVisibility(View.GONE);
                         brf.getView().setVisibility(View.VISIBLE);
-                        try{
+                        try {
                             brf.restart();
-                        }catch (Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
                 }, 4000);
             }
-        }else {
+        } else {
             entreeAlready.setText("Entrée non autorisée");
             nomAlready.setVisibility(View.GONE);
             layoutAlready.setVisibility(View.VISIBLE);
@@ -458,9 +453,9 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
                     layoutAlready.setVisibility(View.GONE);
                     brf.getView().setVisibility(View.VISIBLE);
                     nomAlready.setVisibility(View.VISIBLE);
-                    try{
+                    try {
                         brf.restart();
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
@@ -468,18 +463,18 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         }
     }
 
-    public void goToPrevente(){
+    public void goToPrevente() {
         overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
         Intent intent = new Intent(this, PreventeActivity.class);
-        intent.putExtra("EVENT_ID",event.getObjectId());
-        intent.putExtra("Billetterie",billetterie);
+        intent.putExtra("EVENT_ID", event.getObjectId());
+        intent.putExtra("Billetterie", billetterie);
         startActivity(intent);
     }
 
-    public void backToEvent(){
+    public void backToEvent() {
         overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
         Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_ID",event.getObjectId());
+        intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
 

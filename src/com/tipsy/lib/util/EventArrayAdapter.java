@@ -2,22 +2,15 @@ package com.tipsy.lib.util;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.parse.ParseObject;
 import com.tipsy.app.R;
-import com.tipsy.app.TipsyApp;
-import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Event;
 
 import java.text.SimpleDateFormat;

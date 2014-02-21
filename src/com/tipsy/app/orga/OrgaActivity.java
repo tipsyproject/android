@@ -5,15 +5,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.view.View;
 
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.tipsy.app.help.HelpActivity;
-import com.tipsy.app.login.LoginActivity;
 import com.tipsy.app.R;
 import com.tipsy.app.UserActivity;
+import com.tipsy.app.help.HelpActivity;
+import com.tipsy.app.login.LoginActivity;
 import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
 import com.tipsy.lib.Event;
@@ -28,7 +27,7 @@ import java.util.List;
 public class OrgaActivity extends UserActivity implements OrgaListener {
 
     private ArrayList<Event> events = new ArrayList<Event>();
-    protected boolean bundle =false;
+    protected boolean bundle = false;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -40,13 +39,13 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         menu.getDrawerList().setItemChecked(MenuOrga.ACCUEIL, true);
 
         if (savedInstanceState == null)
-            bundle=true;
+            bundle = true;
         else
             events = savedInstanceState.getParcelableArrayList("Events");
     }
 
     @Override
-    public void onResume(){
+    public void onResume() {
         super.onResume();
         if (bundle) {
             final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true);

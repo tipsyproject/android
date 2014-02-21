@@ -28,14 +28,15 @@ public class InitEntreeFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        if(getArguments().containsKey("PREVENTE")){
+        if (getArguments().containsKey("PREVENTE")) {
             Achat prevente = getArguments().getParcelable("PREVENTE");
-            try{
+            try {
                 prevente.save();
-            }catch (ParseException e){}
+            } catch (ParseException e) {
+            }
         }
         /* Chargement de l'event et de la billetterie */
         callback.loadEventBilletterie(getArguments().getString("EVENT_ID"), new QueryCallback() {
@@ -45,14 +46,14 @@ public class InitEntreeFragment extends Fragment {
                     callback.updateEntrees(new QueryCallback() {
                         @Override
                         public void done(Exception e) {
-                            if(e==null) callback.init();
-                            else{
+                            if (e == null) callback.init();
+                            else {
                                 getActivity().getSupportFragmentManager().popBackStack();
                                 callback.backToEvent();
                             }
                         }
                     });
-                }else{
+                } else {
                     getActivity().getSupportFragmentManager().popBackStack();
                     callback.backToEvent();
                 }

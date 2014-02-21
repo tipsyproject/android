@@ -8,8 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.util.Commerce;
-import com.tipsy.lib.util.Transaction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

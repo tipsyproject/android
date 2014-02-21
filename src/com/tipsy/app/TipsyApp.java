@@ -13,9 +13,9 @@ import com.tipsy.lib.Achat;
 import com.tipsy.lib.Depot;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Participant;
-import com.tipsy.lib.util.Prefs;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.TipsyUser;
+import com.tipsy.lib.util.Prefs;
 import com.tipsy.lib.util.QueryCallback;
 import com.tipsy.lib.util.Wallet;
 
@@ -57,11 +57,11 @@ public class TipsyApp extends Application {
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
-    public Wallet getWallet(){
+    public Wallet getWallet() {
         return wallet;
     }
 
-    public void loadWallet(QueryCallback cb){
+    public void loadWallet(QueryCallback cb) {
         wallet = new Wallet(TipsyUser.getCurrentUser());
         wallet.load(cb);
     }

@@ -11,8 +11,8 @@ import android.view.MenuItem;
 
 import com.tipsy.app.R;
 import com.tipsy.app.orga.OrgaActivity;
-import com.tipsy.app.orga.entree.EntreeActivity;
 import com.tipsy.app.orga.billetterie.BilletterieActivity;
+import com.tipsy.app.orga.entree.EntreeActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
 import com.tipsy.lib.Event;
 
@@ -34,7 +34,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         FragmentManager fm = getSupportFragmentManager();
         InitEventFragment initEventFragment = (InitEventFragment) fm.findFragmentByTag("init");
 
-        if(initEventFragment == null){
+        if (initEventFragment == null) {
             initDialog = ProgressDialog.show(this, null, "Chargement...", true, true);
             initDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
                 @Override
@@ -45,12 +45,12 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
             });
             initEventFragment = new InitEventFragment();
             Bundle args = new Bundle();
-            args.putString("EVENT_ID",getIntent().getStringExtra("EVENT_ID"));
+            args.putString("EVENT_ID", getIntent().getStringExtra("EVENT_ID"));
             initEventFragment.setArguments(args);
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(initEventFragment,"init");
+            ft.add(initEventFragment, "init");
             ft.commit();
-        }else{
+        } else {
             event = savedInstanceState.getParcelable("Event");
             getActionBar().setTitle(event.getNom());
         }
@@ -84,7 +84,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     public void init(Event e) {
         event = e;
         getActionBar().setTitle(event.getNom());
-        if(initDialog != null)
+        if (initDialog != null)
             initDialog.dismiss();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new TDBEventFragment());
@@ -123,7 +123,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         startActivity(intent);
     }
 
-    public void backToOrga(){
+    public void backToOrga() {
         overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
         Intent intent = new Intent(this, OrgaActivity.class);
         startActivity(intent);

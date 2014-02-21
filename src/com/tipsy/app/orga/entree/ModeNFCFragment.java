@@ -9,12 +9,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Achat;
 
 /**
  * Created by vquefele on 20/01/14.
@@ -32,7 +28,7 @@ public class ModeNFCFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         adapter = NfcAdapter.getDefaultAdapter(getActivity());
         pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(getActivity(), EntreeActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);

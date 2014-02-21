@@ -11,8 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.tipsy.app.R;
-import com.tipsy.app.orga.entree.EntreeActivity;
-import com.tipsy.app.orga.entree.EntreeListener;
 
 /**
  * Created by vquefele on 20/01/14.
@@ -30,7 +28,7 @@ public class ScanFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         adapter = NfcAdapter.getDefaultAdapter(getActivity());
         pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(getActivity(), PreventeActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);

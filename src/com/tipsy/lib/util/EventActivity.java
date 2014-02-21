@@ -2,7 +2,6 @@ package com.tipsy.lib.util;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 
 import com.parse.FindCallback;
 import com.parse.GetCallback;
@@ -17,7 +16,7 @@ import java.util.List;
 /**
  * Created by valoo on 27/01/14.
  */
-public abstract class EventActivity extends FragmentActivity implements EventModule{
+public abstract class EventActivity extends FragmentActivity implements EventModule {
 
     protected ArrayList<Ticket> billetterie = new ArrayList<Ticket>();
     protected Event event;
@@ -42,7 +41,7 @@ public abstract class EventActivity extends FragmentActivity implements EventMod
         super.onSaveInstanceState(outState);
     }
 
-    public void loadEventBilletterie(String eventId, final QueryCallback callback){
+    public void loadEventBilletterie(String eventId, final QueryCallback callback) {
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
         query.getInBackground(eventId, new GetCallback<Event>() {
             @Override

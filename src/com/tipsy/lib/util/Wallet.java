@@ -44,7 +44,7 @@ public class Wallet extends ArrayList<Transaction> {
 
     public int getSolde() {
         int solde = 0;
-        for(Transaction t: this){
+        for (Transaction t : this) {
             if (t.isDepot())
                 solde += t.getMontant();
             else solde -= t.getMontant();
@@ -57,27 +57,27 @@ public class Wallet extends ArrayList<Transaction> {
         final List<Transaction> transactions = new ArrayList<Transaction>();
         /* LISTE DES DEPOTS DU USER */
         ParseQuery<Depot> queryD = ParseQuery.getQuery(Depot.class);
-        if(isTipsyUser())
-            queryD.whereEqualTo("user",user);
+        if (isTipsyUser())
+            queryD.whereEqualTo("user", user);
         else
             queryD.whereEqualTo("participant", participant);
 
         queryD.findInBackground(new FindCallback<Depot>() {
             @Override
             public void done(List<Depot> depots, ParseException e) {
-                if(e==null){
+                if (e == null) {
                     transactions.addAll(depots);
                     /* LISTE DES ACHATS USER */
                     ParseQuery<Achat> queryA = ParseQuery.getQuery(Achat.class);
                     queryA.include("ticket.event");
-                    if(isTipsyUser())
-                        queryA.whereEqualTo("paiementuser",user);
+                    if (isTipsyUser())
+                        queryA.whereEqualTo("paiementuser", user);
                     else
                         queryA.whereEqualTo("paiementparticipant", participant);
                     queryA.findInBackground(new FindCallback<Achat>() {
                         @Override
                         public void done(List<Achat> achats, ParseException e) {
-                            if(e==null){
+                            if (e == null) {
                                 transactions.addAll(achats);
 
                                     /* TRI DE LA TRANSACTION LA PLUS RECENTE A LA MOINS RECENTE */
@@ -90,10 +90,10 @@ public class Wallet extends ArrayList<Transaction> {
                                 clear();
                                 addAll(transactions);
                                 callback.done(null);
-                            }else callback.done(e);
+                            } else callback.done(e);
                         }
                     });
-                }else callback.done(e);
+                } else callback.done(e);
 
             }
         });
@@ -103,7 +103,7 @@ public class Wallet extends ArrayList<Transaction> {
 
         if (montant <= 0)
             callback.done(new Exception("Le montant doit être positif."));
-        else{
+        else {
             final Depot depot = new Depot(montant, user, Commerce.Devise.getLocale());
             depot.saveInBackground(new SaveCallback() {
                 @Override
@@ -118,7 +118,7 @@ public class Wallet extends ArrayList<Transaction> {
         }
     }
 
-    public void pay(final Commande cmd, final QueryCallback callback){
+    public void pay(final Commande cmd, final QueryCallback callback) {
         // Mise en attente de l'utilisateur
         if (getSolde() < cmd.getPrixTotal())
             callback.done(new Exception("Fonds insuffisants."));
@@ -126,27 +126,27 @@ public class Wallet extends ArrayList<Transaction> {
             cmd.setPayeur(user);
 
             ArrayList<ParseObject> achats = new ArrayList<ParseObject>();
-            for(Achat a: cmd)
+            for (Achat a : cmd)
                 achats.add(a);
 
-            Achat.saveAllInBackground(achats,new SaveCallback() {
+            Achat.saveAllInBackground(achats, new SaveCallback() {
                 @Override
                 public void done(ParseException e) {
-                    if(e==null){
-                        addAll(0,cmd);
+                    if (e == null) {
+                        addAll(0, cmd);
                         callback.done(null);
-                    }else callback.done(e);
+                    } else callback.done(e);
                 }
             });
 
         }
     }
 
-    public boolean isTipsyUser(){
+    public boolean isTipsyUser() {
         return user != null;
     }
 
-    public static ProgressDialog getProgressDialog(Context context){
+    public static ProgressDialog getProgressDialog(Context context) {
         ProgressDialog wait = new ProgressDialog(context);
         wait.setMessage("Paiement en cours...");
         wait.setIndeterminate(true);

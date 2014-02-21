@@ -13,15 +13,16 @@ import com.tipsy.lib.util.Transaction;
 @ParseClassName("Depot")
 public class Depot extends ParseObject implements Transaction {
 
-    public Depot(){}
+    public Depot() {
+    }
 
-    public Depot(int montant, TipsyUser user, int devise){
+    public Depot(int montant, TipsyUser user, int devise) {
         setDevise(devise);
         setMontant(montant);
         setUser(user);
     }
 
-    public Depot(int montant, Participant participant, int devise){
+    public Depot(int montant, Participant participant, int devise) {
         setDevise(devise);
         setMontant(montant);
         setParticipant(participant);
@@ -32,7 +33,7 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setDevise(int devise) {
-        put("devise",devise);
+        put("devise", devise);
     }
 
     public int getMontant() {
@@ -40,7 +41,7 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setMontant(int montant) {
-        put("montant",montant);
+        put("montant", montant);
     }
 
     public Participant getParticipant() {
@@ -48,9 +49,9 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setParticipant(Participant participant) {
-        if(participant == null)
+        if (participant == null)
             remove("participant");
-        else{
+        else {
             remove("user");
             put("participant", participant);
         }
@@ -61,27 +62,25 @@ public class Depot extends ParseObject implements Transaction {
     }
 
     public void setUser(TipsyUser user) {
-        if(user == null)
+        if (user == null)
             remove("user");
-        else{
+        else {
             remove("participant");
-            put("user",user);
+            put("user", user);
         }
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return "";
     }
 
-    public String getTitre(){
+    public String getTitre() {
         return "Rechargement";
     }
 
-    public boolean isDepot(){
+    public boolean isDepot() {
         return true;
     }
-
-
 
 
     // Implémentation de Parcelable
@@ -95,7 +94,7 @@ public class Depot extends ParseObject implements Transaction {
         dest.writeString(getObjectId());
         dest.writeInt(getDevise());
         dest.writeInt(getMontant());
-        dest.writeParcelable(getUser(),flags);
+        dest.writeParcelable(getUser(), flags);
     }
 
     public Depot(Parcel in) {

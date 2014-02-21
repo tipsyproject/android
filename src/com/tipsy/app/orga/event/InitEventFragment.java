@@ -29,7 +29,7 @@ public class InitEventFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         /* Chargement de l'event */
@@ -39,7 +39,7 @@ public class InitEventFragment extends Fragment {
             public void done(Event event, ParseException e) {
                 if (event != null)
                     callback.init(event);
-                else{
+                else {
                     getActivity().getSupportFragmentManager().popBackStack();
                     callback.backToOrga();
                 }

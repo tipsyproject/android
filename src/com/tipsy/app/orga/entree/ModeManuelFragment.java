@@ -42,7 +42,6 @@ public class ModeManuelFragment extends ListFragment {
     }
 
 
-
     @Override
     public void onListItemClick(ListView l, View v, final int position, long id) {
         final Achat entree = callback.getEntrees().get(position);
@@ -62,7 +61,7 @@ public class ModeManuelFragment extends ListFragment {
         });
         builder.setIcon(R.drawable.ic_action_person);
 
-        if(entree.getPrenom().equals("") && entree.getNom().equals(""))
+        if (entree.getPrenom().equals("") && entree.getNom().equals(""))
             builder.setTitle("Participant inconnu");
         else builder.setTitle(entree.getNom() + " " + entree.getPrenom());
         builder.setTitle(entree.getNom() + " " + entree.getPrenom());
@@ -71,7 +70,7 @@ public class ModeManuelFragment extends ListFragment {
     }
 
 
-    public void updateListe(){
+    public void updateListe() {
         entreesAdapter.notifyDataSetChanged();
     }
 

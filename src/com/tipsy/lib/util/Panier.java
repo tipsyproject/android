@@ -36,9 +36,9 @@ public class Panier extends ArrayList<Item> implements Parcelable {
     }
 
     @Override
-    public boolean isEmpty(){
-        for(Item item : this)
-            if(item.getQuantite()>0)
+    public boolean isEmpty() {
+        for (Item item : this)
+            if (item.getQuantite() > 0)
                 return false;
         return true;
     }

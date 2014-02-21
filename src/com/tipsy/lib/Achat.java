@@ -4,7 +4,6 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.parse.ParseClassName;
-import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.tipsy.lib.util.Transaction;
 
@@ -16,14 +15,15 @@ import java.util.Comparator;
 @ParseClassName("Achat")
 public class Achat extends ParseObject implements Transaction {
 
-    public Achat(){}
+    public Achat() {
+    }
 
-    public Achat(Ticket t){
+    public Achat(Ticket t) {
         setTicket(t);
         setUsed(false);
     }
 
-    public int getDevise(){
+    public int getDevise() {
         return getTicket().getDevise();
     }
 
@@ -32,9 +32,9 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setParticipant(Participant participant) {
-        if(participant == null)
+        if (participant == null)
             remove("participant");
-        else{
+        else {
             remove("user");
             put("participant", participant);
         }
@@ -45,7 +45,7 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setPaiementUser(TipsyUser payeur) {
-        if(payeur != null) put("paiementuser",payeur);
+        if (payeur != null) put("paiementuser", payeur);
     }
 
     public Participant getPaiementParticipant() {
@@ -53,7 +53,7 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setPaiementParticipant(Participant payeur) {
-        if(payeur != null) put("paiementparticipant",payeur);
+        if (payeur != null) put("paiementparticipant", payeur);
     }
 
     public Ticket getTicket() {
@@ -69,11 +69,11 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setUser(TipsyUser user) {
-        if(user == null)
+        if (user == null)
             remove("user");
-        else{
+        else {
             remove("participant");
-            put("user",user);
+            put("user", user);
         }
     }
 
@@ -82,45 +82,46 @@ public class Achat extends ParseObject implements Transaction {
     }
 
     public void setUsed(boolean used) {
-        put("used",used);
+        put("used", used);
     }
 
-    public int getMontant(){
+    public int getMontant() {
         return getTicket().getPrix();
     }
 
-    public String getDescription(){
+    public String getDescription() {
         return getTicket().getEvent().getNom() + " - " + getTicket().getEvent().getLieu();
     }
 
-    public String getTitre(){
+    public String getTitre() {
         return getTicket().getNom();
     }
 
-    public String getPrenom(){
+    public String getPrenom() {
         return isTipsyUser() ? getUser().getPrenom() : getParticipant().getPrenom();
     }
 
-    public String getNom(){
+    public String getNom() {
         return isTipsyUser() ? getUser().getNom() : getParticipant().getNom();
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return isTipsyUser() ? getUser().getEmail() : getParticipant().getEmail();
     }
 
-    public boolean isDepot(){
+    public boolean isDepot() {
         return false;
-    } 
-    public boolean isUserDefined(){
+    }
+
+    public boolean isUserDefined() {
         return getUser() != null || getParticipant() != null;
     }
 
-    public boolean isValid(){
+    public boolean isValid() {
         return isUserDefined() && getTicket() != null;
     }
 
-    public boolean isTipsyUser(){
+    public boolean isTipsyUser() {
         return getUser() != null;
     }
 
@@ -128,7 +129,7 @@ public class Achat extends ParseObject implements Transaction {
     public static Comparator<Achat> SORT_BY_NAME = new Comparator<Achat>() {
         public int compare(Achat one, Achat other) {
             // les participants sans nom ni prenom doivent être mis à la fin
-            if(one.getNom().equals("") && one.getPrenom().equals(""))
+            if (one.getNom().equals("") && one.getPrenom().equals(""))
                 return 1;
             else return one.getNom().compareTo(other.getNom());
         }

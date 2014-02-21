@@ -1,7 +1,6 @@
 package com.tipsy.app.membre.wallet;
 
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
@@ -9,10 +8,7 @@ import android.view.MenuItem;
 
 import com.tipsy.app.R;
 import com.tipsy.lib.util.Commande;
-import com.tipsy.lib.util.Panier;
-import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.util.Transaction;
-import com.tipsy.lib.util.Wallet;
 
 /**
  * Created by tech on 05/12/13.
@@ -38,11 +34,11 @@ public class WalletActivity extends FragmentActivity implements WalletListener {
         getActionBar().setTitle("Tipsy Wallet");
 
         if (savedInstanceState == null) {
-            if(getIntent().hasExtra("Commande")){
+            if (getIntent().hasExtra("Commande")) {
                 commande = getIntent().getParcelableExtra("Commande");
                 goToCommande(false);
-            }else goToResume(false);
-        }else{
+            } else goToResume(false);
+        } else {
             commande = savedInstanceState.getParcelable("Commande");
         }
     }

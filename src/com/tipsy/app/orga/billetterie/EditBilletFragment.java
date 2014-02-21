@@ -21,8 +21,8 @@ import com.mobsandgeeks.saripaar.annotation.Required;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
-import com.tipsy.lib.util.Commerce;
 import com.tipsy.lib.Ticket;
+import com.tipsy.lib.util.Commerce;
 
 /**
  * Created by valoo on 25/01/14.

@@ -19,7 +19,7 @@ public class Commande extends ArrayList<Achat> implements Parcelable {
 
     public Commande(Panier panier) {
         for (Item item : panier)
-            for(int i=0; i<item.getQuantite(); ++i)
+            for (int i = 0; i < item.getQuantite(); ++i)
                 add(new Achat(item.getTicket()));
     }
 

@@ -13,10 +13,11 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <uses-feature
         android:name="android.hardware.camera"
         android:required="false" />
@@ -92,7 +93,7 @@
             android:name="com.tipsy.app.membre.bracelet.BraceletActivity"
             android:label="">
 
-            </activity>
+        </activity>
 
         <activity
             android:name="com.tipsy.app.membre.event.EventMembreActivity"
@@ -133,7 +134,7 @@
             android:name=".orga.entree.EntreeActivity"
             android:label="">
             <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+                <action android:name="android.nfc.action.TAG_DISCOVERED" />
             </intent-filter>
         </activity>
 

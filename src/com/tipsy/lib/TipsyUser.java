@@ -2,16 +2,8 @@ package com.tipsy.lib;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
-import com.parse.FindCallback;
-import com.parse.ParseException;
-import com.parse.ParseObject;
-import com.parse.ParseQuery;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
-
-import java.util.List;
 
 /**
  * Created by vquefele on 23/01/14.
@@ -23,14 +15,14 @@ public class TipsyUser extends ParseUser implements Parcelable {
     public TipsyUser() {
     }
 
-    public String getBracelet(){
+    public String getBracelet() {
         return getString("bracelet");
     }
 
-    public void setBracelet(String bracelet) throws Exception{
-        if(getBracelet() != null)
+    public void setBracelet(String bracelet) throws Exception {
+        if (getBracelet() != null)
             throw new Exception("Un bracelet est déjà attribué.");
-        else put("bracelet",bracelet);
+        else put("bracelet", bracelet);
     }
 
     @Override
@@ -70,12 +62,6 @@ public class TipsyUser extends ParseUser implements Parcelable {
     public static TipsyUser getCurrentUser() {
         return (TipsyUser) ParseUser.getCurrentUser();
     }
-
-
-
-
-
-
 
 
     // Implémentation de Parcelable

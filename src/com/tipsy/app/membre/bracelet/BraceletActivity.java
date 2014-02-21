@@ -17,8 +17,8 @@ import android.widget.Toast;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
-import com.tipsy.lib.util.Bracelet;
 import com.tipsy.lib.TipsyUser;
+import com.tipsy.lib.util.Bracelet;
 
 /**
  * Created by valoo on 22/01/14.

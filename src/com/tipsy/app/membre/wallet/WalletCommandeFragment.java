@@ -16,11 +16,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.ParseException;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.lib.Achat;
-import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.util.Commerce;
 import com.tipsy.lib.util.QueryCallback;
 import com.tipsy.lib.util.Wallet;
@@ -65,10 +62,10 @@ public class WalletCommandeFragment extends Fragment {
                     @Override
                     public void done(Exception e) {
                         wait.dismiss();
-                        if(e==null){
+                        if (e == null) {
                             getActivity().finish();
                             getActivity().overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-                        }else{
+                        } else {
                             Log.d("TOUTAFAIT", "erreur pay: " + e.getMessage());
                             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                         }

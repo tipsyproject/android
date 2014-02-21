@@ -25,17 +25,14 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.mobsandgeeks.saripaar.annotation.Required;
-
-import java.io.Serializable;
-
 import com.tipsy.app.R;
+import com.tipsy.lib.Achat;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.TipsyUser;
-import com.tipsy.lib.Achat;
 import com.tipsy.lib.util.Commande;
 import com.tipsy.lib.util.Commerce;
-import com.tipsy.lib.util.Item;
-import com.tipsy.lib.util.Panier;
+
+import java.io.Serializable;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -74,8 +71,8 @@ public class EventParticiperFragment extends ListFragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        if(savedInstanceState == null)
-            commande =  getArguments().getParcelable("Commande");
+        if (savedInstanceState == null)
+            commande = getArguments().getParcelable("Commande");
         else commande = savedInstanceState.getParcelable("Commande");
         return super.onCreateView(inflater, container, savedInstanceState);
     }
@@ -87,14 +84,16 @@ public class EventParticiperFragment extends ListFragment {
     }
 
     @Override
-    public void onCreate(Bundle bundle){
+    public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setHasOptionsMenu(true);
     }
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_edit, menu);
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // handle item selection
@@ -109,7 +108,7 @@ public class EventParticiperFragment extends ListFragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        if(outState==null)
+        if (outState == null)
             outState = new Bundle();
         outState.putParcelable("Commande", commande);
         super.onSaveInstanceState(outState);
@@ -125,10 +124,10 @@ public class EventParticiperFragment extends ListFragment {
         dialog.show(getActivity().getSupportFragmentManager(), "ParticipantDialogFragment");
     }
 
-    public void validate(){
-        for(Achat a: commande){
-            if(!a.isUserDefined()){
-                Toast.makeText(getActivity(),"Tous les billets sont nominatifs !",Toast.LENGTH_SHORT).show();
+    public void validate() {
+        for (Achat a : commande) {
+            if (!a.isUserDefined()) {
+                Toast.makeText(getActivity(), "Tous les billets sont nominatifs !", Toast.LENGTH_SHORT).show();
                 return;
             }
         }
@@ -139,7 +138,7 @@ public class EventParticiperFragment extends ListFragment {
     public class AchatArrayAdapter extends ArrayAdapter<Achat> implements Serializable {
 
         public AchatArrayAdapter() {
-            super(getActivity(), R.layout.frag_event_participer_billet,commande);
+            super(getActivity(), R.layout.frag_event_participer_billet, commande);
         }
 
         @Override
@@ -151,7 +150,7 @@ public class EventParticiperFragment extends ListFragment {
                     R.layout.frag_event_participer_billet;
 
             LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            View view = inflater.inflate(layout, parent,false);
+            View view = inflater.inflate(layout, parent, false);
 
             /* Nom du billet */
             TextView nom_billet = (TextView) view.findViewById(R.id.nom_billet);
@@ -161,7 +160,7 @@ public class EventParticiperFragment extends ListFragment {
             TextView prix_billet = (TextView) view.findViewById(R.id.prix_billet);
             prix_billet.setText(Commerce.prixToString(a.getTicket().getPrix(), a.getTicket().getDevise()));
 
-            if(a.isUserDefined()){
+            if (a.isUserDefined()) {
                 /* Prénom participant */
                 TextView prenomParticipant = (TextView) view.findViewById(R.id.prenom_participant);
                 prenomParticipant.setText(a.getPrenom());
@@ -180,17 +179,16 @@ public class EventParticiperFragment extends ListFragment {
     }
 
 
-
     public static class ParticipantDialogFragment extends DialogFragment implements Validator.ValidationListener {
 
         private Achat achat;
         private AchatArrayAdapter adapter;
-        @Required(order=1, message="Champ requis")
+        @Required(order = 1, message = "Champ requis")
         private EditText inputNom;
-        @Required(order=2, message="Champ requis")
+        @Required(order = 2, message = "Champ requis")
         private EditText inputPrenom;
-        @Required(order=3, message="Champ requis")
-        @Email(order=4, message="Email incorrect")
+        @Required(order = 3, message = "Champ requis")
+        @Email(order = 4, message = "Email incorrect")
         private EditText inputEmail;
         private Validator validator;
 
@@ -204,7 +202,7 @@ public class EventParticiperFragment extends ListFragment {
             LayoutInflater inflater = getActivity().getLayoutInflater();
             // Definition du titre du Dialog
             builder.setTitle(achat.getTicket().getNom() + " - " +
-                Commerce.prixToString(achat.getTicket().getPrix(),achat.getTicket().getDevise()));
+                    Commerce.prixToString(achat.getTicket().getPrix(), achat.getTicket().getDevise()));
 
             // Definition du contenu du Dialog
             View view = inflater.inflate(R.layout.frag_event_edit_participant, null);
@@ -254,7 +252,7 @@ public class EventParticiperFragment extends ListFragment {
             getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    Toast.makeText(getActivity(),"Formulaire incomplet...",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "Formulaire incomplet...", Toast.LENGTH_SHORT).show();
                 }
             });
         }

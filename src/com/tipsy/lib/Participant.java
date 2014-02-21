@@ -12,16 +12,17 @@ import com.parse.ParseObject;
 @ParseClassName("Participant")
 public class Participant extends ParseObject implements Parcelable {
 
-    public Participant(){}
+    public Participant() {
+    }
 
-    public String getBracelet(){
+    public String getBracelet() {
         return getString("bracelet");
     }
 
-    public void setBracelet(String bracelet) throws Exception{
-        if(getBracelet() != null)
+    public void setBracelet(String bracelet) throws Exception {
+        if (getBracelet() != null)
             throw new Exception("Un bracelet est déjà attribué.");
-        else put("bracelet",bracelet);
+        else put("bracelet", bracelet);
     }
 
     public String getEmail() {
@@ -49,7 +50,6 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
 
-
     // Implémentation de Parcelable
     @Override
     public int describeContents() {
@@ -70,9 +70,10 @@ public class Participant extends ParseObject implements Parcelable {
         setEmail(in.readString());
         setNom(in.readString());
         setPrenom(in.readString());
-        try{
+        try {
             setBracelet(in.readString());
-        }catch (Exception e){}
+        } catch (Exception e) {
+        }
     }
 
     public static final Parcelable.Creator<Participant> CREATOR = new Parcelable.Creator<Participant>() {

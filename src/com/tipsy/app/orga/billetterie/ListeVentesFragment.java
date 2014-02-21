@@ -69,7 +69,7 @@ public class ListeVentesFragment extends ListFragment {
                 Ticket.loadVentes(callback.getBilletterie(), new FindCallback<Achat>() {
                     @Override
                     public void done(List<Achat> achats, ParseException e) {
-                        if(achats != null){
+                        if (achats != null) {
                             callback.getVentes().clear();
                             callback.getVentes().addAll(achats);
                             callback.getVentesAdapter().notifyDataSetChanged();

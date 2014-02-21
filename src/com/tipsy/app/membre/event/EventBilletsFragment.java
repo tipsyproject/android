@@ -18,11 +18,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tipsy.app.R;
+import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.Commande;
 import com.tipsy.lib.util.Item;
 import com.tipsy.lib.util.ItemArrayAdapter;
 import com.tipsy.lib.util.Panier;
-import com.tipsy.lib.Ticket;
 
 /**
  * Created by Valentin on 30/12/13.
@@ -54,10 +54,10 @@ public class EventBilletsFragment extends Fragment {
 
         if (savedInstanceState == null) {
             panier = new Panier();
-            for(Ticket t : callback.getBilletterie()){
-                panier.add(new Item(t,0));
+            for (Ticket t : callback.getBilletterie()) {
+                panier.add(new Item(t, 0));
             }
-        }else{
+        } else {
             panier = savedInstanceState.getParcelable("Panier");
         }
 

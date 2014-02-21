@@ -18,52 +18,52 @@
         android:paddingBottom="30dp"
         android:background="@drawable/bg_card_white">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:gravity="center"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/entrer_solde"
-        android:id="@+id/text" />
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_below="@+id/text"
-        android:id="@+id/layout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_centerHorizontal="true">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="€"
-            android:id="@+id/devise" />
+            android:text="@string/entrer_solde"
+            android:id="@+id/text" />
 
-        <EditText
-            android:layout_width="100dp"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_below="@+id/text"
+            android:id="@+id/layout1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="numberDecimal"
-            android:ems="10"
-            android:id="@+id/input_montant"
-            android:hint="0.00"
-            android:gravity="center" />
-    </LinearLayout>
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/bar_height"
-        android:text="Valider"
-        android:id="@+id/button_credit"
-        android:layout_below="@+id/layout1"
-        android:paddingLeft="@dimen/activity_margin"
-        android:paddingRight="@dimen/activity_margin"
-        android:layout_marginTop="@dimen/activity_margin"
-        android:layout_centerHorizontal="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="€"
+                android:id="@+id/devise" />
+
+            <EditText
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:ems="10"
+                android:id="@+id/input_montant"
+                android:hint="0.00"
+                android:gravity="center" />
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/bar_height"
+            android:text="Valider"
+            android:id="@+id/button_credit"
+            android:layout_below="@+id/layout1"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_centerHorizontal="true" />
 
     </RelativeLayout>
 

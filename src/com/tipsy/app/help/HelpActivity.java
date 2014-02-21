@@ -17,9 +17,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
-import com.tipsy.app.login.LoginActivity;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
+import com.tipsy.app.login.LoginActivity;
 
 import java.util.List;
 import java.util.Vector;

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Created by valoo on 27/12/13.
  */
-public class BilletterieActivity extends EventActivity implements BilletterieListener{
+public class BilletterieActivity extends EventActivity implements BilletterieListener {
 
     private ArrayList<Achat> ventes = new ArrayList<Achat>();
     EntreeArrayAdapter ventesAdapter;
@@ -44,7 +44,7 @@ public class BilletterieActivity extends EventActivity implements BilletterieLis
             loadEventBilletterie(getIntent().getStringExtra("EVENT_ID"), new QueryCallback() {
                 @Override
                 public void done(Exception e) {
-                    if(e==null)
+                    if (e == null)
                         Ticket.loadVentes(getBilletterie(), new FindCallback<Achat>() {
                             @Override
                             public void done(List<Achat> achats, ParseException e) {
@@ -55,7 +55,7 @@ public class BilletterieActivity extends EventActivity implements BilletterieLis
                                 ft.commit();
                             }
                         });
-                    else{
+                    else {
                         Toast.makeText(BilletterieActivity.this, getString(R.string.erreur_interne), Toast.LENGTH_SHORT).show();
                         wait.dismiss();
                     }
@@ -96,6 +96,7 @@ public class BilletterieActivity extends EventActivity implements BilletterieLis
     public ArrayList<Achat> getVentes() {
         return ventes;
     }
+
     public EntreeArrayAdapter getVentesAdapter() {
         return ventesAdapter;
     }

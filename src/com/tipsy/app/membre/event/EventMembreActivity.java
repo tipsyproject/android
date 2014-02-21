@@ -5,27 +5,15 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.MenuItem;
 
-import com.parse.FindCallback;
-import com.parse.GetCallback;
-import com.parse.ParseException;
-import com.parse.ParseQuery;
 import com.tipsy.app.R;
 import com.tipsy.app.membre.wallet.WalletActivity;
 import com.tipsy.lib.util.Commande;
-import com.tipsy.lib.Event;
 import com.tipsy.lib.util.EventActivity;
-import com.tipsy.lib.util.Panier;
-import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.QueryCallback;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by valoo on 22/01/14.

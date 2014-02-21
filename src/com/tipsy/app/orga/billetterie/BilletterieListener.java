@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public interface BilletterieListener extends EventModule {
 
     public ArrayList<Achat> getVentes();
+
     public EntreeArrayAdapter getVentesAdapter();
 
     public void backToHome();
