@@ -23,6 +23,7 @@ public class TDBEventFragment extends Fragment {
     private EventOrgaListener callback;
     private LinearLayout buttonBilleterie;
     private LinearLayout buttonBar;
+    private LinearLayout buttonVestiaire;
     private LinearLayout buttonAcces;
     private LinearLayout buttonInfos;
 
@@ -66,11 +67,19 @@ public class TDBEventFragment extends Fragment {
         });
 
 
+        /* VESTIAIRE */
+        buttonVestiaire = (LinearLayout) view.findViewById(R.id.button_vestiaire);
+        buttonVestiaire.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
+            }
+        });
+
         /* BAR */
         buttonBar = (LinearLayout) view.findViewById(R.id.button_bar);
         buttonBar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
+                callback.goToBar();
             }
         });
 

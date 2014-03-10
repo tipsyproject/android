@@ -75,7 +75,7 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         setContentView(R.layout.act_entree);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setTitle("Mode Entrée");
+        getActionBar().setTitle("Entrée");
         brf = (BarcodeFragment) getSupportFragmentManager().findFragmentById(R.id.sample);
         brf.getView().setVisibility(View.GONE);
         layoutOk = (LinearLayout) findViewById(R.id.layout_ok);

@@ -144,6 +144,7 @@
             android:background="@drawable/bg_card_white"
             android:baselineAligned="true"
             android:paddingRight="40dp"
+            android:visibility="gone"
             android:layout_marginBottom="14dp">
 
             <TextView
@@ -159,11 +160,11 @@
 
         <LinearLayout
             android:orientation="vertical"
+            android:id="@+id/button_access"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:id="@+id/button_access"
             android:gravity="center_vertical|center_horizontal"
-            android:background="@drawable/bg_card_blue"
+            android:background="@drawable/bg_card_white"
             android:baselineAligned="true"
             android:paddingRight="40dp"
             android:layout_marginBottom="14dp">
@@ -174,6 +175,28 @@
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/mode_entree"
                 android:gravity="center"
+                android:textColor="@color/background_dark"
+                android:drawableLeft="@drawable/ic_action_labels_dark"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/button_bar"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/bg_card_blue"
+            android:baselineAligned="true"
+            android:paddingRight="40dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/bar"
+                android:gravity="center"
                 android:textColor="@color/background_light"
                 android:drawableLeft="@drawable/ic_action_paste"
                 android:layout_gravity="center_horizontal" />
@@ -182,7 +205,7 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:id="@+id/button_bar"
+            android:id="@+id/button_vestiaire"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:gravity="center_vertical|center_horizontal"
@@ -195,7 +218,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/bar"
+                android:text="Vestiaire"
                 android:gravity="center"
                 android:textColor="@color/background_light"
                 android:drawableLeft="@drawable/ic_action_view_as_list"
@@ -212,6 +235,7 @@
             android:background="@drawable/bg_card_white"
             android:baselineAligned="true"
             android:paddingRight="40dp"
+            android:visibility="gone"
             android:layout_marginBottom="@dimen/ui_margin">
 
             <TextView

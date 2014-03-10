@@ -13,6 +13,10 @@ public interface EventOrgaListener {
 
     public void goToAcces();
 
+    public void goToBar();
+
+    public void goToVestiaire();
+
     public void goToBilletterie();
 
     public void goToEditEvent();

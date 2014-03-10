@@ -106,7 +106,7 @@
         <ImageView
             android:layout_width="111dp"
             android:layout_height="111dp"
-            android:id="@+id/imageView"
+            android:id="@+id/ok"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/ok" />
 
@@ -152,7 +152,7 @@
         <ImageView
             android:layout_width="111dp"
             android:layout_height="111dp"
-            android:id="@+id/imageView"
+            android:id="@+id/error"
             android:layout_gravity="center_horizontal"
             android:background="@drawable/cross" />
 

@@ -11,9 +11,11 @@ import android.view.MenuItem;
 
 import com.tipsy.app.R;
 import com.tipsy.app.orga.OrgaActivity;
+import com.tipsy.app.orga.bar.BarActivity;
 import com.tipsy.app.orga.billetterie.BilletterieActivity;
 import com.tipsy.app.orga.entree.EntreeActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
+import com.tipsy.app.orga.vestiaire.VestiaireActivity;
 import com.tipsy.lib.Event;
 
 /**
@@ -106,6 +108,18 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     // clique sur le bouton de la Billetterie
     public void goToAcces() {
         Intent intent = new Intent(this, EntreeActivity.class);
+        intent.putExtra("EVENT_ID", event.getObjectId());
+        startActivity(intent);
+    }
+
+    public void goToBar() {
+        Intent intent = new Intent(this, BarActivity.class);
+        intent.putExtra("EVENT_ID", event.getObjectId());
+        startActivity(intent);
+    }
+
+    public void goToVestiaire() {
+        Intent intent = new Intent(this, VestiaireActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }
