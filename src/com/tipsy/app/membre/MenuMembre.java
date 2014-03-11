@@ -18,11 +18,11 @@ public class MenuMembre extends MenuUser {
     public MenuMembre(Activity a) {
         super(a);
         mIcons = new int[]{
-                R.drawable.ic_action_view_as_grid_dark,
-                R.drawable.ic_action_person_dark,
-                R.drawable.ic_action_event_dark,
-                R.drawable.ic_action_help_dark,
-                R.drawable.ic_action_undo_dark
+                R.drawable.ic_action_view_as_grid,
+                R.drawable.ic_action_person,
+                R.drawable.ic_action_event,
+                R.drawable.ic_action_help,
+                R.drawable.ic_action_undo
         };
         mTitles = new String[]{"Tableau de Bord", "Mon Compte", "Événements", "Aide", "Déconnexion"};
         setTitre(mTitles[ACCUEIL]);

@@ -3,7 +3,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:background="@drawable/text_menu">
+    android:background="@drawable/bg_menu">
 
     <!-- icon -->
     <ImageView
@@ -14,7 +14,7 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:src="@drawable/ic_action_help_dark" />
+        android:src="@drawable/ic_action_help" />
 
     <!-- title -->
     <TextView

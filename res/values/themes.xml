@@ -11,12 +11,14 @@
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:editTextColor">@color/secondary</item>
         <item name="android:windowBackground">@color/background</item>
+        <item name="android:windowContentOverlay">@drawable/shadow_action</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:buttonStyle">@style/Button_Style.Blue</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <style name="AppTheme.NoActionBar.White" parent="AppTheme.NoActionBar">
@@ -25,7 +27,7 @@
     </style>
 
     <style name="MyActionBar" parent="android:style/Widget.Holo.Light.ActionBar">
-        <item name="android:background">@color/background_dark</item>
+        <item name="android:background">@drawable/action_bar_background</item>
         <item name="android:titleTextStyle">@style/ActionBar.TitleTextStyle</item>
         <item name="android:backgroundStacked">@color/tab_action_bar</item>
         <item name="android:selectableItemBackground">@color/text</item>
