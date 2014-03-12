@@ -9,12 +9,16 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.Ticket;
+import com.tipsy.lib.util.QueryCallback;
+
+import java.util.ArrayList;
 
 /**
  * Created by tech on 10/03/14.
  */
-public class BarActivity extends FragmentActivity {
+public class BarActivity extends FragmentActivity implements BarListener {
 
     public final static int HARD = 0;
     public final static int SOFT = 1;
@@ -29,6 +33,7 @@ public class BarActivity extends FragmentActivity {
 
         Bundle args = new Bundle();
         args.putString("EVENT_ID", getIntent().getStringExtra("EVENT_ID"));
+        goToHomeBar();
     }
 
     @Override
@@ -49,18 +54,38 @@ public class BarActivity extends FragmentActivity {
     public void goToHomeBar() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new BarHomeFragment());
-        ft.addToBackStack(null);
         ft.commit();
     }
 
     public void goToConso(int index) {
         BarConsoFragment fragment = new BarConsoFragment();
         Bundle args = new Bundle();
-        args.putInt("BILLET_INDEX", index);
+        args.putInt("CONSO_INDEX", index);
+        args.putString("EVENT_ID", getIntent().getStringExtra("EVENT_ID"));
         fragment.setArguments(args);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, fragment);
         ft.addToBackStack(null);
         ft.commit();
+    }
+
+    @Override
+    public Event getEvent() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Ticket> getBilletterie() {
+        return null;
+    }
+
+    @Override
+    public ArrayList<Ticket> getConso() {
+        return null;
+    }
+
+    @Override
+    public void loadEventBilletterie(String eventId, QueryCallback callback) {
+
     }
 }

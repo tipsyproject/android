@@ -9,7 +9,5 @@ public interface BarListener extends EventModule {
 
     public void goToHomeBar();
 
-    public void goToSoft();
-
-    public void goToHard();
+    public void goToConso(int index);
 }

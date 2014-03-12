@@ -13,5 +13,7 @@ public interface EventModule {
 
     public ArrayList<Ticket> getBilletterie();
 
+    public ArrayList<Ticket> getConso();
+
     public void loadEventBilletterie(String eventId, QueryCallback callback);
 }

@@ -19,6 +19,7 @@ import java.util.List;
 public abstract class EventActivity extends FragmentActivity implements EventModule {
 
     protected ArrayList<Ticket> billetterie = new ArrayList<Ticket>();
+    protected ArrayList<Ticket> conso = new ArrayList<Ticket>();
     protected Event event;
 
 
@@ -67,6 +68,10 @@ public abstract class EventActivity extends FragmentActivity implements EventMod
 
     public ArrayList<Ticket> getBilletterie() {
         return billetterie;
+    }
+
+    public ArrayList<Ticket> getConso() {
+        return conso;
     }
 
     public Event getEvent() {
