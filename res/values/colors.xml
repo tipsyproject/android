@@ -28,6 +28,10 @@
     <color name="secondary">#5E6D81</color>
     <color name="background_dark">#323A45</color>
     <color name="background_light">#EAEDF1</color>
+    <color name="success">#1EBBA6</color>
+    <color name="warning">#EE7836</color>
+    <color name="danger">#D9534F</color>
+    <color name="background_dark_light">#3b434f</color>
 
     <!-- Couleurs des textes -->
     <color name="text_normal_dark">@color/background_light</color>

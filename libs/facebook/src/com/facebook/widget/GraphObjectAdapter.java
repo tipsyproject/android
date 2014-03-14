@@ -766,7 +766,8 @@ class GraphObjectAdapter<T extends GraphObject> extends BaseAdapter implements S
                                 public void onCompleted(ImageResponse response) {
                                     processImageResponse(response, profileId, imageView);
                                 }
-                            });
+                            }
+                    );
 
             ImageRequest newRequest = builder.build();
             pendingRequests.put(profileId, newRequest);

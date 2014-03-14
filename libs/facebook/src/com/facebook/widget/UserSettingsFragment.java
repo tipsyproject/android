@@ -420,7 +420,8 @@ public class UserSettingsFragment extends FacebookFragment {
                     ImageRequest.getProfilePictureUrl(
                             user.getId(),
                             getResources().getDimensionPixelSize(R.dimen.com_facebook_usersettingsfragment_profile_picture_width),
-                            getResources().getDimensionPixelSize(R.dimen.com_facebook_usersettingsfragment_profile_picture_height)));
+                            getResources().getDimensionPixelSize(R.dimen.com_facebook_usersettingsfragment_profile_picture_height))
+            );
 
             request = requestBuilder.setCallerTag(this)
                     .setCallback(
@@ -429,7 +430,8 @@ public class UserSettingsFragment extends FacebookFragment {
                                 public void onCompleted(ImageResponse response) {
                                     processImageResponse(user.getId(), response);
                                 }
-                            })
+                            }
+                    )
                     .build();
         } catch (URISyntaxException e) {
         }

@@ -6,15 +6,18 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -76,6 +79,29 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Entrée");
+
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            // Get the content view
+            View contentView = findViewById(android.R.id.content);
+
+            // Make sure it's a valid instance of a FrameLayout
+            if (contentView instanceof FrameLayout) {
+                TypedValue tv = new TypedValue();
+
+                // Get the windowContentOverlay value of the current theme
+                if (getTheme().resolveAttribute(
+                        android.R.attr.windowContentOverlay, tv, true)) {
+
+                    // If it's a valid resource, set it as the foreground drawable
+                    // for the content view
+                    if (tv.resourceId != 0) {
+                        ((FrameLayout) contentView).setForeground(
+                                getResources().getDrawable(tv.resourceId));
+                    }
+                }
+            }
+        }
+
         brf = (BarcodeFragment) getSupportFragmentManager().findFragmentById(R.id.sample);
         brf.getView().setVisibility(View.GONE);
         layoutOk = (LinearLayout) findViewById(R.id.layout_ok);

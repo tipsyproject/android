@@ -61,8 +61,6 @@ public class Event extends ParseObject implements Parcelable {
     }
 
 
-
-
     // Implémentation de Parcelable
     @Override
     public int describeContents() {

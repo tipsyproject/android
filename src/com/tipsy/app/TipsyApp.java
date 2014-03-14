@@ -57,6 +57,7 @@ public class TipsyApp extends Application {
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
     }
 
+
     public Wallet getWallet() {
         return wallet;
     }

@@ -445,7 +445,8 @@ public class ProfilePictureView extends FrameLayout {
                                 public void onCompleted(ImageResponse response) {
                                     processResponse(response);
                                 }
-                            })
+                            }
+                    )
                     .build();
 
             // Make sure to cancel the old request before sending the new one to prevent

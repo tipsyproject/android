@@ -10,5 +10,5 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:id="@+id/content"
-        android:background="@color/background_dark"></FrameLayout>
+        android:background="@color/background_dark_light"></FrameLayout>
 </LinearLayout>

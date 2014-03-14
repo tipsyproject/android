@@ -69,7 +69,8 @@ public class ForgetPwdFragment extends Fragment implements Validator.ValidationL
                         }
                         mConnectionProgressDialog.dismiss();
                     }
-                });
+                }
+        );
     }
 
     public void onValidationFailed(View failedView, final Rule<?> failedRule) {

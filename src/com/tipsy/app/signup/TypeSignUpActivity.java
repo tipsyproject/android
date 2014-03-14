@@ -195,12 +195,14 @@ public class TypeSignUpActivity extends FragmentActivity implements Validator.Va
                                 Log.d(app.TAG,
                                         "Some other error: "
                                                 + response.getError()
-                                                .getErrorMessage());
+                                                .getErrorMessage()
+                                );
                             }
                             mConnectionProgressDialog.dismiss();
                         }
                     }
-                });
+                }
+        );
         request.executeAsync();
 
     }

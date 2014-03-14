@@ -191,7 +191,8 @@ public final class FacebookRequestError {
         this(INVALID_HTTP_STATUS_CODE, INVALID_ERROR_CODE, INVALID_ERROR_CODE,
                 null, null, null, null, null, connection,
                 (exception instanceof FacebookException) ?
-                        (FacebookException) exception : new FacebookException(exception));
+                        (FacebookException) exception : new FacebookException(exception)
+        );
     }
 
     public FacebookRequestError(int errorCode, String errorType, String errorMessage) {
@@ -397,7 +398,8 @@ public final class FacebookRequestError {
                             singleResult.has(BODY_KEY) ?
                                     (JSONObject) Utility.getStringPropertyAsJSON(
                                             singleResult, BODY_KEY, Response.NON_JSON_RESPONSE_PROPERTY) : null,
-                            singleResult, batchResult, connection);
+                            singleResult, batchResult, connection
+                    );
                 }
             }
         } catch (JSONException e) {

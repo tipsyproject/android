@@ -247,7 +247,8 @@ public final class AccessToken implements Serializable {
 
         return new AccessToken(bundle.getString(TokenCachingStrategy.TOKEN_KEY), TokenCachingStrategy.getDate(bundle,
                 TokenCachingStrategy.EXPIRATION_DATE_KEY), permissions, TokenCachingStrategy.getSource(bundle),
-                TokenCachingStrategy.getDate(bundle, TokenCachingStrategy.LAST_REFRESH_DATE_KEY));
+                TokenCachingStrategy.getDate(bundle, TokenCachingStrategy.LAST_REFRESH_DATE_KEY)
+        );
     }
 
     Bundle toCacheBundle() {

@@ -625,7 +625,8 @@ public class FacebookDialog {
             if (action.getProperty(previewPropertyName) == null) {
                 throw new IllegalArgumentException(
                         "A property named \"" + previewPropertyName + "\" was not found on the action.  The name of " +
-                                "the preview property must match the name of an action property.");
+                                "the preview property must match the name of an action property."
+                );
             }
             String typeOnAction = action.getType();
             if (!Utility.isNullOrEmpty(typeOnAction) && !typeOnAction.equals(actionType)) {
@@ -658,7 +659,8 @@ public class FacebookDialog {
             if (action.getProperty(previewPropertyName) == null) {
                 throw new IllegalArgumentException(
                         "A property named \"" + previewPropertyName + "\" was not found on the action.  The name of " +
-                                "the preview property must match the name of an action property.");
+                                "the preview property must match the name of an action property."
+                );
             }
 
             this.action = action;

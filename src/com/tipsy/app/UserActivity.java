@@ -1,12 +1,15 @@
 package com.tipsy.app;
 
 import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.TypedValue;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 
 /**
@@ -31,6 +34,27 @@ public abstract class UserActivity extends FragmentActivity implements MenuListe
                 return false;
             }
         });
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            // Get the content view
+            View contentView = findViewById(android.R.id.content);
+
+            // Make sure it's a valid instance of a FrameLayout
+            if (contentView instanceof FrameLayout) {
+                TypedValue tv = new TypedValue();
+
+                // Get the windowContentOverlay value of the current theme
+                if (getTheme().resolveAttribute(
+                        android.R.attr.windowContentOverlay, tv, true)) {
+
+                    // If it's a valid resource, set it as the foreground drawable
+                    // for the content view
+                    if (tv.resourceId != 0) {
+                        ((FrameLayout) contentView).setForeground(
+                                getResources().getDrawable(tv.resourceId));
+                    }
+                }
+            }
+        }
     }
 
     protected void onStart() {

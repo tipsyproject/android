@@ -196,7 +196,8 @@ public class AppEventsLogger {
         {
             put(AppEventsConstants.EVENT_NAME_ACTIVATED_APP,
                     new EventSuppression(APP_ACTIVATE_SUPPRESSION_PERIOD_IN_SECONDS,
-                            SuppressionTimeoutBehavior.RESET_TIMEOUT_WHEN_LOG_ATTEMPTED));
+                            SuppressionTimeoutBehavior.RESET_TIMEOUT_WHEN_LOG_ATTEMPTED)
+            );
         }
     };
 
@@ -628,7 +629,8 @@ public class AppEventsLogger {
                     }
                 },
                 0,  // start immediately
-                FLUSH_PERIOD_IN_SECONDS * 1000);
+                FLUSH_PERIOD_IN_SECONDS * 1000
+        );
 
         supportsAttributionRecheckTimer.schedule(
                 new TimerTask() {
@@ -646,7 +648,8 @@ public class AppEventsLogger {
                     }
                 },
                 0,   // start immediately
-                APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD_IN_SECONDS * 1000);
+                APP_SUPPORTS_ATTRIBUTION_ID_RECHECK_PERIOD_IN_SECONDS * 1000
+        );
     }
 
     private void logEvent(String eventName, Double valueToSum, Bundle parameters, boolean isImplicitlyLogged) {
@@ -1118,7 +1121,8 @@ public class AppEventsLogger {
                         if (!(value instanceof String) && !(value instanceof Number)) {
                             throw new FacebookException(
                                     String.format("Parameter value '%s' for key '%s' should be a string or a numeric type.",
-                                            value, key));
+                                            value, key)
+                            );
                         }
 
                         jsonObject.put(key, value.toString());
@@ -1185,8 +1189,10 @@ public class AppEventsLogger {
                 } else {
                     throw new FacebookException(
                             String.format("Skipping event named '%s' due to illegal name - must be under 40 chars " +
-                                    "and alphanumeric, _, - or space, and not start with a space or hyphen.",
-                                    identifier));
+                                            "and alphanumeric, _, - or space, and not start with a space or hyphen.",
+                                    identifier
+                            )
+                    );
                 }
             }
 

@@ -7,17 +7,16 @@
         <item name="android:actionBarStyle">@style/MyActionBar</item>
         <!--   <item name="android:checkboxStyle">@color/text_menu</item>-->
         <item name="android:textColor">@color/text_menu</item>
-        <item name="android:buttonStyle">@style/Button_Style.Blue</item>
+        <item name="android:buttonStyle">@style/Button_Style.Green</item>
         <item name="android:textColorHint">@android:color/darker_gray</item>
         <item name="android:editTextColor">@color/secondary</item>
         <item name="android:windowBackground">@color/background</item>
-        <item name="android:windowContentOverlay">@drawable/shadow_action</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:buttonStyle">@style/Button_Style.Blue</item>
+        <item name="android:buttonStyle">@style/Button_Style.Green</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
@@ -45,6 +44,11 @@
 
     <style name="Button_Style.Blue">
         <item name="android:background">@drawable/button_blue</item>
+        <item name="android:textColor">@color/button_color</item>
+    </style>
+
+    <style name="Button_Style.Green">
+        <item name="android:background">@drawable/button_green</item>
         <item name="android:textColor">@color/button_color</item>
     </style>
 

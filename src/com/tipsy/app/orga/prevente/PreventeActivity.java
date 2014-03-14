@@ -4,10 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.TypedValue;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
 
 import com.tipsy.app.R;
 import com.tipsy.app.orga.entree.EntreeActivity;
@@ -34,6 +38,27 @@ public class PreventeActivity extends FragmentActivity implements PreventeListen
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Mode Prévente");
 
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            // Get the content view
+            View contentView = findViewById(android.R.id.content);
+
+            // Make sure it's a valid instance of a FrameLayout
+            if (contentView instanceof FrameLayout) {
+                TypedValue tv = new TypedValue();
+
+                // Get the windowContentOverlay value of the current theme
+                if (getTheme().resolveAttribute(
+                        android.R.attr.windowContentOverlay, tv, true)) {
+
+                    // If it's a valid resource, set it as the foreground drawable
+                    // for the content view
+                    if (tv.resourceId != 0) {
+                        ((FrameLayout) contentView).setForeground(
+                                getResources().getDrawable(tv.resourceId));
+                    }
+                }
+            }
+        }
 
         if (savedInstanceState == null) {
             EVENT_ID = getIntent().getStringExtra("EVENT_ID");

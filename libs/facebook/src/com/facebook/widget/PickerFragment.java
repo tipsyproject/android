@@ -877,7 +877,8 @@ public abstract class PickerFragment<T extends GraphObject> extends Fragment {
                             }
                             LoadingStrategy.this.onLoadReset((GraphObjectPagingLoader<T>) loader);
                         }
-                    });
+                    }
+            );
 
             loader.setOnErrorListener(new GraphObjectPagingLoader.OnErrorListener() {
                 @Override

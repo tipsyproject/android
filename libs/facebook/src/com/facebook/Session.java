@@ -1079,14 +1079,16 @@ public class Session implements Serializable {
                     throw new FacebookException(
                             String.format(
                                     "Cannot pass a publish or manage permission (%s) to a request for read authorization",
-                                    permission));
+                                    permission)
+                    );
                 }
             } else {
                 if (SessionAuthorizationType.PUBLISH.equals(authType)) {
                     Log.w(TAG,
                             String.format(
                                     "Should not pass a read permission (%s) to a request for publish or manage authorization",
-                                    permission));
+                                    permission)
+                    );
                 }
             }
         }

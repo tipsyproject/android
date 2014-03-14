@@ -21,8 +21,7 @@ public class Ticket extends ParseObject implements Parcelable {
 
     public static int BILLET = 0;
     public static int VESTIAIRE = 1;
-    public static int CONSO_HARD = 2;
-    public static int CONSO_SOFT = 3;
+    public static int CONSO = 2;
 
     public Ticket() {
     }

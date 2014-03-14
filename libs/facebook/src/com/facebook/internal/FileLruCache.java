@@ -410,7 +410,8 @@ public final class FileLruCache {
                 if (readCount < 1) {
                     Logger.log(LoggingBehavior.CACHE, TAG,
                             "readHeader: stream.read stopped at " + Integer.valueOf(count) + " when expected "
-                                    + headerBytes.length);
+                                    + headerBytes.length
+                    );
                     return null;
                 }
                 count += readCount;
