@@ -34,9 +34,14 @@ public class BarPanierFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
         PanierArrayAdapter adapter = new PanierArrayAdapter(getActivity(), callback.getPanier());
         setListAdapter(adapter);
-        setEmptyText("Aucune consommation définie.");
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_bar_panier, container, false);
 

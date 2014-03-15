@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.GridView;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
+import com.tipsy.app.TipsyApp;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.Commerce;
 
@@ -24,10 +26,8 @@ import java.util.ArrayList;
  */
 public class BarConsoFragment extends Fragment {
 
-    /*private BarListener callback;
-    private Ticket conso;
-    private GridView gridView;
-    private ConsosArrayAdapter gridAdapter;
+    protected BarListener callback;
+    protected GridView gridView;
 
     @Override
     public void onAttach(Activity activity) {
@@ -38,30 +38,36 @@ public class BarConsoFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        gridAdapter = new ConsosArrayAdapter(getActivity(), callback.getConso());
+        ConsosArrayAdapter gridAdapter = new ConsosArrayAdapter(getActivity(), callback.getConso());
         if (gridView != null) {
             gridView.setAdapter(gridAdapter);
             //gridView.setEmptyView();
         }
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 //callback.goToQuantity();
             }
 
-        });
+        });*/
     }
-*/
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_bar_conso, container, false);
 
-        //gridView = (GridView) view.findViewById(R.id.gridConso);
+        gridView = (GridView) view.findViewById(R.id.gridConso);
         //conso = callback.getConso().get(Ticket.CONSO);
 
         return view;
     }
-/*
+
     // Adapter CONSOS
     public class ConsosArrayAdapter extends ArrayAdapter<Ticket> implements Serializable {
         private Context context;
@@ -85,5 +91,5 @@ public class BarConsoFragment extends Fragment {
             return viewConso;
         }
     }
-*/
+
 }

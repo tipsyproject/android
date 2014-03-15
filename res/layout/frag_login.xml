@@ -66,6 +66,7 @@
             android:layout_below="@+id/input_password"
             android:gravity="right"
             android:textColor="@color/text_menu"
+            android:textSize="18dp"
             android:background="@android:color/transparent"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"

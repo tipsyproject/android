@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_dark_light">
 
     <LinearLayout
         android:orientation="vertical"
@@ -14,24 +16,27 @@
         android:layout_alignParentTop="true">
 
         <fragment
+            class="com.tipsy.app.orga.bar.BarConsoFragment"
             android:id="@+id/frag_conso"
-            android:name="com.tipsy.app.orga.bar.BarConsoFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.57"
-            android:layout_gravity="center" />
-
-        <fragment
-            android:id="@+id/frag_panier"
-            android:name="com.tipsy.app.orga.bar.BarPanierFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.43"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            tools:layout="@layout/frag_bar_conso" />
+
+        <fragment
+            class="com.tipsy.app.orga.bar.BarPanierFragment"
+            android:id="@+id/frag_panier"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.57"
+            android:layout_gravity="center"
+            tools:layout="@layout/frag_bar_panier" />
 
     </LinearLayout>
 
     <Button
+        style="@style/Button_Style.Green"
         android:layout_width="fill_parent"
         android:layout_height="@dimen/bar_height"
         android:text="Valider"

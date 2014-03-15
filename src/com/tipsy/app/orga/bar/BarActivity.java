@@ -35,11 +35,11 @@ public class BarActivity extends FragmentActivity implements BarListener {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_bar);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Bar");
-        super.onCreate(savedInstanceState);
 
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR2) {
             // Get the content view
