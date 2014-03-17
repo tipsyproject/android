@@ -16,7 +16,7 @@
     <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
-        <item name="android:buttonStyle">@style/Button_Style.Green</item>
+        <item name="android:buttonStyle">@style/Button_Style.Blue</item>
         <item name="android:windowContentOverlay">@null</item>
     </style>
 
