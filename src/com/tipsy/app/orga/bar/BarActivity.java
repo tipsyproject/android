@@ -100,6 +100,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
                             if (e == null) {
                                 getConso().clear();
                                 getConso().addAll(consos);
+                                BarConsoFragment.gridAdapter.notifyDataSetChanged();
                             }
                             callback_e.done(e);
                         }

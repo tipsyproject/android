@@ -28,6 +28,7 @@ public class BarConsoFragment extends Fragment {
 
     protected BarListener callback;
     protected GridView gridView;
+    protected static ConsosArrayAdapter gridAdapter;
 
     @Override
     public void onAttach(Activity activity) {
@@ -38,7 +39,7 @@ public class BarConsoFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ConsosArrayAdapter gridAdapter = new ConsosArrayAdapter(getActivity(), callback.getConso());
+        gridAdapter = new ConsosArrayAdapter(getActivity(), callback.getConso());
         if (gridView != null) {
             gridView.setAdapter(gridAdapter);
             //gridView.setEmptyView();
