@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Ticket;
+import com.tipsy.lib.util.Item;
 import com.tipsy.lib.util.Panier;
 import com.tipsy.lib.util.QueryCallback;
 
@@ -32,6 +34,8 @@ public class BarActivity extends FragmentActivity implements BarListener {
 
     private Panier panier = new Panier();
     private ArrayList<Ticket> conso = new ArrayList<Ticket>();
+    private BarPanierFragment fragPanier;
+    private BarQuantiteFragment fragQuantite;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -78,6 +82,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
                 }
             });
         }
+
     }
 
     public void findConso(Event ev, FindCallback cb) {
@@ -118,15 +123,33 @@ public class BarActivity extends FragmentActivity implements BarListener {
         overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
-    public void goToQuantity() {
-        BarConsoFragment fragment = new BarConsoFragment();
-        Bundle args = new Bundle();
-        args.putString("EVENT_ID", getIntent().getStringExtra("EVENT_ID"));
-        fragment.setArguments(args);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, fragment);
-        ft.addToBackStack(null);
-        ft.commit();
+    public void goToQuantity(Ticket ticket) {
+        int index = -1;
+        // Init item à quantité = 1
+        Item item = new Item(ticket,1);
+        /* On récupère l'index de l'item dans le panier s'il y est présent (sinon -1) */
+        index = panier.indexOf(item);
+
+        /* Si le panier ne contient pas l'item (index = -1)
+         * passage de l'item nouvellement créé et initialisé avec une quantité de 1
+         */
+        if(index == -1){
+            fragQuantite.setItem(item);
+        }else{ // Sinon passage de l'item du panier
+            fragQuantite.setItem(panier.get(index));
+        }
+        fragQuantite.getView().setVisibility(View.VISIBLE);
+    }
+
+    public void addItemToPanier(Item item){
+        /* Si le panier ne contient pas déjà l'item,
+         * on ajoute l'item au panier
+         */
+        if(!panier.contains(item))
+            panier.add(item);
+        /* Mise à jour du PanierAdapter */
+        ((ArrayAdapter<Item>)fragPanier.getListAdapter()).notifyDataSetChanged();
+        fragQuantite.getView().setVisibility(View.GONE);
     }
 
     public Panier getPanier() {

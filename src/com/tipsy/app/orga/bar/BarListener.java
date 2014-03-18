@@ -2,6 +2,7 @@ package com.tipsy.app.orga.bar;
 
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.EventModule;
+import com.tipsy.lib.util.Item;
 import com.tipsy.lib.util.Panier;
 
 import java.util.ArrayList;
@@ -15,5 +16,7 @@ public interface BarListener extends EventModule {
 
     public ArrayList<Ticket> getConso();
 
-    public void goToQuantity();
+    public void goToQuantity(Ticket ticket);
+
+    public void addItemToPanier(Item item);
 }

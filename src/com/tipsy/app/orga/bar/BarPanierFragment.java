@@ -23,6 +23,7 @@ public class BarPanierFragment extends ListFragment {
 
     private BarListener callback;
 
+
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
