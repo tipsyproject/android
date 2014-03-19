@@ -1,6 +1,7 @@
 package com.tipsy.app.orga.entree;
 
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -70,6 +71,8 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
     private Button buttonManuel;
     private int currentMode = MODE_NFC;
 
+    private NfcAdapter adapter;
+    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -79,6 +82,10 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Entrée");
+
+        /* Initialisation écoute NFC */
+        adapter = NfcAdapter.getDefaultAdapter(this);
+        pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, EntreeActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR2) {
             // Get the content view
@@ -165,6 +172,21 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
 
         /* Mise à jour de la barre de progression */
         if (entrees != null) updateProgress();
+
+    }
+
+    /* Activation de l'écoute NFC */
+    @Override
+    public void onResume() {
+        super.onResume();
+        adapter.enableForegroundDispatch(this, pendingIntent, null, null);
+    }
+
+    /* Désactivation de l'écoute NFC */
+    @Override
+    protected void onPause (){
+        adapter.disableForegroundDispatch(this);
+        super.onStop();
     }
 
     @Override
