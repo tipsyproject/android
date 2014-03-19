@@ -42,7 +42,7 @@ public class BarQuantiteFragment extends Fragment {
         buttonPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                item.setQuantite(item.getQuantite()+1);
+                item.setQuantite(item.getQuantite() + 1);
                 textQuantite.setText(Integer.toString(item.getQuantite()));
             }
         });
@@ -51,7 +51,7 @@ public class BarQuantiteFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 /* La quantité doit être supérieure à 0 */
-                if(item.getQuantite()>1) {
+                if (item.getQuantite() > 1) {
                     item.setQuantite(item.getQuantite() - 1);
                     textQuantite.setText(Integer.toString(item.getQuantite()));
                 }
@@ -69,7 +69,7 @@ public class BarQuantiteFragment extends Fragment {
     }
 
     /* Passage de l'item courant */
-    public void setItem(Item item){
+    public void setItem(Item item) {
         this.item = item;
         this.textQuantite.setText(Integer.toString(item.getQuantite()));
     }

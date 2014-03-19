@@ -69,4 +69,23 @@
 
     </LinearLayout>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_dark_light"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/layout_nfc"
+        android:visibility="gone">
+
+        <fragment
+            class="com.tipsy.app.orga.entree.ModeNFCFragment"
+            android:id="@+id/frag_nfc"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            tools:layout="@layout/frag_entree_nfc" />
+
+    </LinearLayout>
+
 </RelativeLayout>

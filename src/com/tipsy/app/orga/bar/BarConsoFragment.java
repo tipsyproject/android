@@ -48,7 +48,7 @@ public class BarConsoFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TipsyApp.TAG,callback.getConso().get(position).getNom());
+                Log.d(TipsyApp.TAG, callback.getConso().get(position).getNom());
                 callback.goToQuantity(callback.getConso().get(position));
             }
 

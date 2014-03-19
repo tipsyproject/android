@@ -4,6 +4,7 @@ import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.EventModule;
 import com.tipsy.lib.util.Item;
 import com.tipsy.lib.util.Panier;
+import com.tipsy.lib.util.QueryCallback;
 
 import java.util.ArrayList;
 
@@ -17,6 +18,8 @@ public interface BarListener extends EventModule {
     public ArrayList<Ticket> getConso();
 
     public void goToQuantity(Ticket ticket);
+
+    public void loadEventConso(String eventId, final QueryCallback callback_e);
 
     public void addItemToPanier(Item item);
 }
