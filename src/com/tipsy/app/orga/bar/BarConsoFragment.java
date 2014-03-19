@@ -44,14 +44,15 @@ public class BarConsoFragment extends Fragment {
             gridView.setAdapter(gridAdapter);
             //gridView.setEmptyView();
         }
-        /*gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //callback.goToQuantity();
+                Log.d(TipsyApp.TAG,callback.getConso().get(position).getNom());
+                callback.goToQuantity(callback.getConso().get(position));
             }
 
-        });*/
+        });
     }
 
     @Override

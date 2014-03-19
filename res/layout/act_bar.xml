@@ -19,7 +19,7 @@
             class="com.tipsy.app.orga.bar.BarConsoFragment"
             android:id="@+id/frag_conso"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.43"
             android:layout_gravity="center"
             tools:layout="@layout/frag_bar_conso" />
@@ -28,7 +28,7 @@
             class="com.tipsy.app.orga.bar.BarPanierFragment"
             android:id="@+id/frag_panier"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.57"
             android:layout_gravity="center"
             tools:layout="@layout/frag_bar_panier" />
@@ -49,5 +49,24 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_dark_light"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:id="@+id/layout_quantite"
+        android:visibility="gone">
+
+        <fragment
+            class="com.tipsy.app.orga.bar.BarQuantiteFragment"
+            android:id="@+id/frag_quantite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            tools:layout="@layout/frag_bar_quantite" />
+
+    </LinearLayout>
 
 </RelativeLayout>

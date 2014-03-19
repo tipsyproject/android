@@ -10,6 +10,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -32,10 +33,11 @@ import java.util.List;
  */
 public class BarActivity extends FragmentActivity implements BarListener {
 
-    private Panier panier = new Panier();
-    private ArrayList<Ticket> conso = new ArrayList<Ticket>();
-    private BarPanierFragment fragPanier;
-    private BarQuantiteFragment fragQuantite;
+    protected Panier panier = new Panier();
+    protected ArrayList<Ticket> conso = new ArrayList<Ticket>();
+    protected BarPanierFragment fragPanier;
+    protected BarQuantiteFragment fragQuantite;
+    protected LinearLayout layoutQuantite;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -66,6 +68,8 @@ public class BarActivity extends FragmentActivity implements BarListener {
                 }
             }
         }
+        fragQuantite = (BarQuantiteFragment) getSupportFragmentManager().findFragmentById(R.id.frag_quantite);
+        layoutQuantite = (LinearLayout) findViewById(R.id.layout_quantite);
         if (savedInstanceState == null) {
             final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
             loadEventConso(getIntent().getStringExtra("EVENT_ID"), new QueryCallback() {
@@ -138,7 +142,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
         }else{ // Sinon passage de l'item du panier
             fragQuantite.setItem(panier.get(index));
         }
-        fragQuantite.getView().setVisibility(View.VISIBLE);
+        layoutQuantite.setVisibility(View.VISIBLE);
     }
 
     public void addItemToPanier(Item item){
@@ -149,7 +153,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
             panier.add(item);
         /* Mise à jour du PanierAdapter */
         ((ArrayAdapter<Item>)fragPanier.getListAdapter()).notifyDataSetChanged();
-        fragQuantite.getView().setVisibility(View.GONE);
+        layoutQuantite.setVisibility(View.GONE);
     }
 
     public Panier getPanier() {

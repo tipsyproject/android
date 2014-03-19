@@ -1,30 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    style="@style/Tarif">
+    android:layout_height="100dp"
+    android:gravity="center"
+    style="@style/Conso">
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Le Tomorrowland"
         android:id="@+id/nom_conso"
-        android:layout_weight="1"
+        android:layout_weight="0.5"
         android:gravity="center"
         android:textColor="#FFFFFF"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="10 €"
         android:id="@+id/prix_conso"
-        android:layout_weight="2"
+        android:layout_weight="0.5"
         android:gravity="center"
-        android:textSize="25dp"
-        android:textColor="#FFFFFF" />
-</LinearLayout>
+        android:textSize="22dp"
+        android:textColor="#FFFFFF"
+        android:layout_below="@+id/nom_conso"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

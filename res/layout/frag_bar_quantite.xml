@@ -54,6 +54,7 @@
     </LinearLayout>
 
     <Button
+        style="@style/Button_Style.Green"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/bar_height"
         android:id="@+id/button_validate"
