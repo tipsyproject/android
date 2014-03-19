@@ -18,9 +18,10 @@ import com.tipsy.app.R;
 public class ModeNFCFragment extends Fragment {
 
     private EntreeListener callback;
+    /*
     NfcAdapter adapter;
     PendingIntent pendingIntent;
-
+    */
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -30,19 +31,21 @@ public class ModeNFCFragment extends Fragment {
     @Override
     public void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+        /*
         adapter = NfcAdapter.getDefaultAdapter(getActivity());
         pendingIntent = PendingIntent.getActivity(getActivity(), 0, new Intent(getActivity(), EntreeActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        */
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        adapter.enableForegroundDispatch(getActivity(), pendingIntent, null, null);
+        /*adapter.enableForegroundDispatch(getActivity(), pendingIntent, null, null);*/
     }
 
     @Override
     public void onPause() {
-        adapter.disableForegroundDispatch(getActivity());
+        /*adapter.disableForegroundDispatch(getActivity());*/
         super.onPause();
     }
 
