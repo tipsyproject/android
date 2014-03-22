@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/gridConso"
         android:numColumns="2"
-        android:verticalSpacing="@dimen/ui_margin"
-        android:horizontalSpacing="@dimen/ui_margin"
-        android:layout_margin="@dimen/ui_margin" />
+        android:verticalSpacing="1dp"
+        android:horizontalSpacing="1dp"/>
 
 </LinearLayout>
