@@ -270,6 +270,11 @@ public class BarActivity extends FragmentActivity implements BarListener {
         arrayPanier.remove(arrayPanier.getItem(position));
         arrayPanier.notifyDataSetChanged();
         prixTotal.setText(Commerce.prixToString(panier.getPrixTotal()));
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        getSupportFragmentManager().popBackStack();
+        ft.hide(fragQuantite);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
     }
 
     public Panier getPanier() {
