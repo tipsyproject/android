@@ -169,11 +169,11 @@ public class BarActivity extends FragmentActivity implements BarListener {
         });
     }
 
-    /*@Override
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-    }*/
+    }
 
     @Override
     protected void onNewIntent(Intent intent) {
