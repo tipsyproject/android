@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -42,7 +43,7 @@ public class WalletResumeFragment extends Fragment {
         viewSolde.setText(Commerce.prixToString(wallet.getSolde(), wallet.getDevise()));
 
         /* Clique sur Créditer le Wallet */
-        ImageButton buttonCredit = (ImageButton) view.findViewById(R.id.button_credit);
+        Button buttonCredit = (Button) view.findViewById(R.id.button_credit);
         buttonCredit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToFormule();

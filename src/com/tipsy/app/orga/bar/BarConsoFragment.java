@@ -5,11 +5,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
 
@@ -85,11 +88,9 @@ public class BarConsoFragment extends Fragment {
         public View getView(int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View viewConso = inflater.inflate(R.layout.frag_bar_conso_item, parent, false);
-            TextView nomConso = (TextView) viewConso.findViewById(R.id.nom_conso);
-            TextView prixConso = (TextView) viewConso.findViewById(R.id.prix_conso);
+            Button buttonConso = (Button) viewConso.findViewById(R.id.button_conso);
             Ticket c = consos.get(position);
-            nomConso.setText(c.getNom());
-            prixConso.setText(Commerce.prixToString(c.getPrix(), c.getDevise()));
+            buttonConso.setText(c.getNom()+"\n"+Commerce.prixToString(c.getPrix(), c.getDevise()));
             return viewConso;
         }
     }

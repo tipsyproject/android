@@ -4,34 +4,114 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/layout"
     android:background="@color/background_dark_light">
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/grid"
-        android:weightSum="1"
+        android:layout_height="fill_parent"
+        android:id="@+id/content"
         android:layout_above="@+id/button_signup"
+        android:weightSum="1"
         android:layout_alignParentTop="true">
 
-        <fragment
-            class="com.tipsy.app.orga.bar.BarConsoFragment"
-            android:id="@+id/frag_conso"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Consommations"
+            android:id="@+id/titre_conso"
+            android:layout_above="@+id/frag_conso"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border_orange"
+            android:textColor="@color/background_light"
+            android:gravity="center"/>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.43"
-            android:layout_gravity="center"
-            tools:layout="@layout/frag_bar_conso" />
+            android:layout_weight="0.355"
+            android:layout_gravity="center">
+            <fragment
+                class="com.tipsy.app.orga.bar.BarConsoFragment"
+                android:id="@+id/frag_conso"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:layout="@layout/frag_bar_conso" />
+            </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:text="Commande"
+            android:id="@+id/titre_panier"
+            android:layout_above="@+id/frag_panier"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/border_orange"
+            android:textColor="@color/background_light"
+            android:gravity="center" />
 
         <fragment
             class="com.tipsy.app.orga.bar.BarPanierFragment"
             android:id="@+id/frag_panier"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.57"
+            android:layout_weight="0.645"
             android:layout_gravity="center"
             tools:layout="@layout/frag_bar_panier" />
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/total"
+            android:stretchColumns="2"
+            android:shrinkColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingRight="4dp"
+                android:gravity="right"
+                android:background="@color/background_light">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_column="0"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Total :"
+                    android:id="@+id/nom"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_column="1">
+
+                    <TextView
+                        android:layout_width="48dp"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:id="@+id/prix_total"
+                        android:gravity="right"
+                        android:text="0" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="€"
+                        android:id="@+id/devise_hard" />
+
+                </LinearLayout>
+            </TableRow>
+
+        </TableLayout>
 
     </LinearLayout>
 
@@ -42,50 +122,20 @@
         android:text="Valider"
         android:id="@+id/button_signup"
         android:textSize="23dp"
-        android:layout_span="2"
-        android:layout_column="0"
         android:src="@drawable/ic_action_accept"
         android:clickable="true"
+        android:onClick="onClickOk"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_dark_light"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:id="@+id/layout_quantite"
-        android:visibility="gone">
-
         <fragment
             class="com.tipsy.app.orga.bar.BarQuantiteFragment"
             android:id="@+id/frag_quantite"
+            android:visibility="invisible"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             tools:layout="@layout/frag_bar_quantite" />
-
-    </LinearLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/background_dark_light"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:id="@+id/layout_nfc"
-        android:visibility="gone">
-
-        <fragment
-            class="com.tipsy.app.orga.bar.BarNFCFragment"
-            android:id="@+id/frag_nfc"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            tools:layout="@layout/frag_entree_nfc" />
-
-    </LinearLayout>
 
 </RelativeLayout>

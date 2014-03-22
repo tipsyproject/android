@@ -4,14 +4,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
+import com.tipsy.app.TipsyApp;
 import com.tipsy.lib.util.Item;
 
 import java.io.Serializable;
@@ -50,12 +55,6 @@ public class BarPanierFragment extends ListFragment {
         return view;
     }
 
-    @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        // do something with the data
-        callback.goToQuantity(callback.getPanier().get(position).getTicket());
-    }
-
     // Adapter PANIER
     public class PanierArrayAdapter extends ArrayAdapter<Item> implements Serializable {
         private Context context;
@@ -68,14 +67,24 @@ public class BarPanierFragment extends ListFragment {
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             View viewConso = inflater.inflate(R.layout.frag_bar_panier_item, parent, false);
+            LinearLayout layoutItem = (LinearLayout) viewConso.findViewById(R.id.layout_item);
             TextView nomConso = (TextView) viewConso.findViewById(R.id.nom_conso);
             TextView quantiteConso = (TextView) viewConso.findViewById(R.id.quantite_conso);
+            ImageButton remove = (ImageButton)  viewConso.findViewById(R.id.remove);
             Item c = consos.get(position);
             nomConso.setText(c.getTicket().getNom());
             quantiteConso.setText(Integer.toString(c.getQuantite()));
+            remove.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    callback.onRemove(position);
+                }});
+            layoutItem.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    callback.goToQuantity(callback.getPanier().get(position).getTicket());
+                }});
             return viewConso;
         }
     }

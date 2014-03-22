@@ -22,4 +22,6 @@ public interface BarListener extends EventModule {
     public void loadEventConso(String eventId, final QueryCallback callback_e);
 
     public void addItemToPanier(Item item);
+
+    public void onRemove(int position);
 }
