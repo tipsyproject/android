@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.entree;
+package com.tipsy.app.orga.entree.stats;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,12 +10,13 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
+import com.tipsy.app.orga.entree.EntreeListener;
 import com.tipsy.lib.Achat;
 
 /**
  * Created by tech on 12/02/14.
  */
-public class EntreeStatsFragment extends Fragment {
+public class ModeStatsFragment extends Fragment {
 
     private ProgressBar progressBar;
     private TextView progressText;

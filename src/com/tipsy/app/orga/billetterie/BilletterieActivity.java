@@ -13,7 +13,7 @@ import android.widget.Toast;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.tipsy.app.R;
-import com.tipsy.app.orga.entree.EntreeArrayAdapter;
+import com.tipsy.app.orga.entree.liste.EntreeArrayAdapter;
 import com.tipsy.app.orga.prevente.TarifsFragment;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Ticket;

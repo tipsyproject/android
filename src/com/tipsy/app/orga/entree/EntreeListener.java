@@ -1,6 +1,9 @@
 package com.tipsy.app.orga.entree;
 
 import com.tipsy.lib.Achat;
+import com.tipsy.lib.Participant;
+import com.tipsy.lib.Ticket;
+import com.tipsy.lib.util.Bracelet;
 import com.tipsy.lib.util.EventModule;
 import com.tipsy.lib.util.QueryCallback;
 
@@ -11,27 +14,20 @@ import java.util.ArrayList;
  */
 public interface EntreeListener {
 
-
-    /*
-    public void init();
-
-    public void updateEntrees(QueryCallback cb);
-
-
-    public void backToEvent();
-    */
     public ArrayList<Achat> getEntrees();
-    public void setCurrentEntree(Achat entree);
+    public ArrayList<Ticket> getBilletterie();
+    public EntreeNFCFragment getFragNFC();
+    public void setNFCCallback(NFCCallback cb);
+    public void updateProgress();
+    public int findBracelet(Bracelet b);
+    public void activationManuelle(final Achat entree);
+    public void setTarifVente(Ticket ticket);
+    public void setParticipantInfos(Participant p);
 
     public void modeStats();
     public void modeQRCode();
     public void modeListe();
     public void modeVente();
-    public void modeNFC();
-    public void backToEvent();
-    public void setNFCMode(int mode);
-
-
-    public void updateProgress();
-
+    public void OK(String m1, String m2);
+    public void KO(String m1, String m2);
 }

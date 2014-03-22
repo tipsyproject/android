@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.entree;
+package com.tipsy.app.orga.entree.liste;
 
 import android.content.Context;
 import android.view.LayoutInflater;

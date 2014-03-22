@@ -19,7 +19,7 @@ public class Participant extends ParseObject implements Parcelable {
         return getString("bracelet");
     }
 
-    public void setBracelet(String bracelet) throws Exception {
+    public void setBracelet(String bracelet) {
         put("bracelet", bracelet);
     }
 

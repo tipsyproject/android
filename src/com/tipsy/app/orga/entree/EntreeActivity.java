@@ -16,15 +16,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
-import com.abhi.barcode.frag.libv2.BarcodeFragment;
-import com.abhi.barcode.frag.libv2.IScanResultHandler;
-import com.abhi.barcode.frag.libv2.ScanResult;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
+import com.tipsy.app.orga.entree.liste.ModeListeFragment;
+import com.tipsy.app.orga.entree.qrcode.ModeQRCodeFragment;
+import com.tipsy.app.orga.entree.stats.ModeStatsFragment;
+import com.tipsy.app.orga.entree.vente.ModeVenteFragment;
 import com.tipsy.app.orga.event.EventOrgaActivity;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Event;
+import com.tipsy.lib.Participant;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.Bracelet;
 
@@ -34,31 +36,31 @@ import java.util.Iterator;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class EntreeActivity extends FragmentActivity implements EntreeListener, IScanResultHandler {
+public class EntreeActivity extends FragmentActivity implements EntreeListener {
 
     private String eventId;
 
     /* Fragments */
     private EntreeModelFragment model;
     private EntreeMenuFragment fragMenu;
-    private EntreeStatsFragment fragStats;
-    private BarcodeFragment fragQRCode;
-    private EntreeListeFragment fragListe;
-    private EntreeVenteFragment fragVente;
+    private ModeStatsFragment fragStats;
+    private ModeQRCodeFragment fragQRCode;
+    private ModeListeFragment fragListe;
+    private ModeVenteFragment fragVente;
     private EntreeNFCFragment fragScanNFC;
-    private EntreeOKFragment fragOK;
-    private EntreeKOFragment fragKO;
-    private EntreeKOMessageFragment fragKOMessage;
+    private KOFragment fragKO;
+    private OKFragment fragOK;
 
     /* Scan NFC */
     private NfcAdapter adapter;
     private PendingIntent pendingIntent;
+    private NFCCallback nfcCallback;
+
+    /*
     public static final int MODE_ACTIVATION = 0;
     public static final int MODE_CONTROLE = 1;
     private int mode = MODE_CONTROLE;
-
-    /*private EntreeTarifsFragment fragTarifs;
-    private EntreeParticipantFragment fragParticipant;*/
+    */
 
     private Achat currentEntree;
 
@@ -86,22 +88,18 @@ public class EntreeActivity extends FragmentActivity implements EntreeListener, 
         /* Chargement des fragments */
         FragmentManager fm = getSupportFragmentManager();
         fragMenu = (EntreeMenuFragment) fm.findFragmentById(R.id.frag_entree_menu);
-        fragOK = (EntreeOKFragment) fm.findFragmentById(R.id.frag_entree_ok);
-        fragKO = (EntreeKOFragment) fm.findFragmentById(R.id.frag_entree_ko);
-        fragKOMessage = (EntreeKOMessageFragment) fm.findFragmentById(R.id.frag_entree_bracelet_used);
-        fragStats = new EntreeStatsFragment();
-        fragQRCode = new BarcodeFragment();
-        fragListe = new EntreeListeFragment();
-        fragVente = new EntreeVenteFragment();
+        fragOK = (OKFragment) fm.findFragmentById(R.id.frag_ok);
+        fragKO = (KOFragment) fm.findFragmentById(R.id.frag_ko);
+        fragStats = new ModeStatsFragment();
+        fragQRCode = new ModeQRCodeFragment();
+        fragListe = new ModeListeFragment();
+        fragVente = new ModeVenteFragment();
         fragScanNFC = new EntreeNFCFragment();
 
-        /* Association du fragment QRCode avec l'activité */
-        fragQRCode.setScanResultHandler(this);
 
         /* Mise en arrière plan des fragments */
         fragOK.hide();
         fragKO.hide();
-        fragKOMessage.hide();
 
         /* Chargement des données si premier lancement */
         model = (EntreeModelFragment) fm.findFragmentByTag("init");
@@ -118,6 +116,8 @@ public class EntreeActivity extends FragmentActivity implements EntreeListener, 
                 modeQRCode();
             else if (fragMenu.getCurrentMode() == EntreeMenuFragment.MODE_LISTE)
                 modeListe();
+            else if (fragMenu.getCurrentMode() == EntreeMenuFragment.MODE_VENTE)
+                modeVente();
             else
                 modeStats();
         }
@@ -150,91 +150,50 @@ public class EntreeActivity extends FragmentActivity implements EntreeListener, 
     protected void onNewIntent(Intent intent) {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         Bracelet bracelet = new Bracelet(tag);
-        Iterator it = getEntrees().iterator();
-        Achat entree = null;
-        boolean found = false;
-        while (it.hasNext() && !found) {
-            entree = (Achat) it.next();
-            if (entree.getParticipant() != null && entree.getParticipant().getBracelet() != null)
-                found = entree.getParticipant().getBracelet().equals(bracelet.getTag());
-        }
 
-        /* Contrôle d'accès */
-        if (mode == MODE_CONTROLE) {
-            validateEntree((found ? entree : null));
+        /* Bracelet utilisé pour une autre action que le controle d'accès */
+        if(nfcCallback != null){
+            nfcCallback.onScan(bracelet);
         }
-        /* Vérification que le bracelet n'est pas déjà associé durant cet event */
-        else if (mode == MODE_ACTIVATION) {
-            /* Bracelet déjà utilisé... */
-            if (found) {
-                fragKOMessage.show("Bracelet déjà attribué","Veuillez en utiliser un autre");
-                return;
-            } else {
-                try {
-                    currentEntree.getParticipant().setBracelet(bracelet.getTag());
-                    currentEntree.saveInBackground();
-                    setCurrentEntree(null);
-                    /* Retour au mode précédent */
-                    mode = MODE_CONTROLE; // NFC en écoute globale
-                    backToMode();
-
-                }catch(Exception e){
-                    Log.d("TOUTAFAIT",e.getMessage());
-                    fragKOMessage.show("Cette entrée correspond déjà à un bracelet","");
+        /* CONTROLE D'ACCES */
+        else{
+            int found = findBracelet(bracelet);
+            /* Bracelet inconnu */
+            if(found == -1){
+                fragKO.show("Entrée non autorisée", "Bracelet inconnu");
+            }else{
+                Achat entree = getEntrees().get(found);
+                // Bracelet autorisé
+                if (!entree.isUsed()) {
+                    entree.setUsed(true);
+                    entree.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            updateProgress();
+                        }
+                    });
+                    fragOK.show(entree.getTicket().getNom(),entree.getPrenom() + " " + entree.getNom());
+                }
+                // Bracelet déjà passé
+                else {
+                    fragKO.show("Entrée déjà validée",entree.getPrenom() + " " + entree.getNom());
                 }
             }
         }
     }
 
-    /* RESULTAT SCAN QRCODE */
-    public void scanResult(ScanResult result) {
-        fragQRCode.onDestroy();
-        String entreeID = result.getRawResult().getText();
 
-        Iterator it = getEntrees().iterator();
+    /* Retourne l'index de l'entree correspondante au bracelet dans la liste des entrees
+    *  Retourne -1 si le bracelet n'est associé à aucune entree  */
+    public int findBracelet(Bracelet bracelet){
         Achat entree = null;
-        boolean found = false;
-        while (it.hasNext() && !found) {
-            entree = (Achat) it.next();
-            if (entree.getObjectId().equals(entreeID)) {
-                found = true;
-            }
+        for(int i=0; i<getEntrees().size(); ++i){
+            entree = getEntrees().get(i);
+            if (entree.getParticipant() != null && entree.getParticipant().getBracelet() != null)
+                if(entree.getParticipant().getBracelet().equals(bracelet.getTag()))
+                    return i;
         }
-        boolean validate = validateEntree(found ? entree : null);
-        /* Activation d'un bracelet si entrée valide */
-        if(validate) {
-            modeNFC();
-            setCurrentEntree(entree);
-        }
-    }
-
-
-    public boolean validateEntree(Achat entree){
-        boolean validate = false;
-        // Bracelet non reconnu
-        if (entree == null) {
-            fragKO.show(null);
-            validate = false;
-        }else{
-            // Bracelet autorisé
-            if (!entree.isUsed()) {
-                entree.setUsed(true);
-                entree.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        updateProgress();
-                    }
-                });
-                fragOK.show(entree);
-                validate = true;
-            }
-            // Bracelet déjà passé
-            else {
-                fragKO.show(entree);
-                validate = false;
-            }
-        }
-        return validate;
+        return -1;
     }
 
     public Event getEvent(){
@@ -246,8 +205,21 @@ public class EntreeActivity extends FragmentActivity implements EntreeListener, 
     public ArrayList<Ticket> getBilletterie(){
         return model.getBilletterie();
     }
-    public void setCurrentEntree(Achat entree){
-        currentEntree = entree;
+    public EntreeNFCFragment getFragNFC(){
+        return this.fragScanNFC;
+    }
+
+
+    public void activationManuelle(final Achat entree){
+        fragListe.activationManuelle(entree);
+    }
+
+    public void setTarifVente(Ticket t){
+        fragVente.setTarifVente(t);
+    }
+
+    public void setParticipantInfos(Participant p){
+        fragVente.setParticipantInfos(p);
     }
 
     /* AFFICHAGE DU MODE STATS */
@@ -282,17 +254,16 @@ public class EntreeActivity extends FragmentActivity implements EntreeListener, 
         ft.commit();
     }
 
-    /* AFFICHAGE DE L'ECOUTE NFC */
-    public void modeNFC(){
-        mode = MODE_ACTIVATION;
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.replace(R.id.mode_container, fragScanNFC);
-        ft.commit();
+    public void KO(String m1, String m2){
+        fragKO.show(m1,m2);
     }
 
-    public void setNFCMode(int mode){
-        this.mode = mode;
+    public void OK(String m1, String m2){
+        fragOK.show(m1,m2);
+    }
+
+    public void setNFCCallback(NFCCallback cb){
+        nfcCallback = cb;
     }
 
     public void backToMode(){

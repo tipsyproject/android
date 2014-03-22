@@ -15,7 +15,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,7 +25,6 @@ import com.parse.ParseQuery;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
-import com.tipsy.app.orga.entree.EntreeArrayAdapter;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Participant;
@@ -39,8 +37,6 @@ import com.tipsy.lib.util.Panier;
 import com.tipsy.lib.util.QueryCallback;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 /**

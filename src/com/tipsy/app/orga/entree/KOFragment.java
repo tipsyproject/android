@@ -8,19 +8,18 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Achat;
 
 /**
  * Created by valoo on 21/03/14.
  */
-public class EntreeKOFragment extends Fragment {
-    private TextView textTicket;
-    private TextView textParticipant;
+public class KOFragment extends Fragment {
+    private TextView text1;
+    private TextView text2;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_entree_ko, container, false);
-        textTicket = (TextView) view.findViewById(R.id.text_ticket);
-        textParticipant = (TextView) view.findViewById(R.id.text_participant);
+        View view = inflater.inflate(R.layout.frag_ko, container, false);
+        text1 = (TextView) view.findViewById(R.id.text_1);
+        text2 = (TextView) view.findViewById(R.id.text_2);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,14 +29,9 @@ public class EntreeKOFragment extends Fragment {
         return view;
     }
 
-    public void show(Achat entree){
-        if(entree == null){
-            textTicket.setText("Entrée non autorisée");
-            textParticipant.setText("Bracelet inconnu");
-        }else {
-            textTicket.setText("Entrée déjà validée");
-            textParticipant.setText(entree.getPrenom() + " " + entree.getNom());
-        }
+    public void show(String m1, String m2){
+        text1.setText(m1);
+        text2.setText(m2);
         this.getView().setVisibility(View.VISIBLE);
     }
 

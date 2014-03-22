@@ -92,6 +92,7 @@ public class EntreeMenuFragment extends Fragment {
         buttonStats.setBackgroundResource(mode == MODE_STATS ? R.color.primary : R.color.secondary);
         buttonQRCode.setBackgroundResource(mode == MODE_QRCODE ? R.color.primary : R.color.secondary);
         buttonListe.setBackgroundResource(mode == MODE_LISTE ? R.color.primary : R.color.secondary);
+        buttonVente.setBackgroundResource(mode == MODE_VENTE ? R.color.primary : R.color.secondary);
         currentMode = mode;
     }
 

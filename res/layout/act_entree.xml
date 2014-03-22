@@ -24,24 +24,16 @@
 
     <!-- Entrée OK -->
     <fragment
-        android:id="@+id/frag_entree_ok"
-        android:name="com.tipsy.app.orga.entree.EntreeOKFragment"
+        android:id="@+id/frag_ok"
+        android:name="com.tipsy.app.orga.entree.OKFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center" />
 
     <!-- Entrée KO -->
     <fragment
-        android:id="@+id/frag_entree_ko"
-        android:name="com.tipsy.app.orga.entree.EntreeKOFragment"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_gravity="center" />
-
-    <!-- Bracelet déjà attribué -->
-    <fragment
-        android:id="@+id/frag_entree_bracelet_used"
-        android:name="com.tipsy.app.orga.entree.EntreeKOMessageFragment"
+        android:id="@+id/frag_ko"
+        android:name="com.tipsy.app.orga.entree.KOFragment"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_gravity="center" />

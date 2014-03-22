@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.entree;
+package com.tipsy.app.orga.entree.liste;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,13 +12,14 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.tipsy.app.R;
+import com.tipsy.app.orga.entree.EntreeListener;
 import com.tipsy.lib.Achat;
 
 
 /**
  * Created by vquefele on 20/01/14.
  */
-public class EntreeListeFragment extends ListFragment {
+public class ListeFragment extends ListFragment {
 
     private EntreeListener callback;
     private EntreeArrayAdapter entreesAdapter;
@@ -48,12 +49,7 @@ public class EntreeListeFragment extends ListFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(getActivity(), android.R.style.Theme_Holo_Dialog));
         builder.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
-                entree.setUsed(true);
-                callback.setCurrentEntree(entree);
-                callback.modeNFC();
-                //entree.saveInBackground();
-                callback.updateProgress();
-                entreesAdapter.notifyDataSetChanged();
+                callback.activationManuelle(entree);
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -73,13 +69,10 @@ public class EntreeListeFragment extends ListFragment {
 
     @Override
     public void onResume(){
-        updateListe();
+        entreesAdapter.notifyDataSetChanged();
         super.onResume();
     }
 
 
-    public void updateListe() {
-        entreesAdapter.notifyDataSetChanged();
-    }
 
 }
