@@ -187,7 +187,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
         Ticket.loadParticipants(tagID, new FindCallback<Participant>() {
             @Override
             public void done(List<Participant> participants, ParseException e) {
-                if (e == null) {
+                if (e == null && participants.size()>0) {
                     Commande commande = new Commande();
                     for (Item item : panier)
                         for (int i = 0; i < item.getQuantite(); ++i) {
@@ -218,7 +218,6 @@ public class BarActivity extends FragmentActivity implements BarListener {
                     ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
                     ft.commit();
                 } else {
-                    Log.d(TipsyApp.TAG, e.getMessage());
                     Toast.makeText(BarActivity.this, "Participant inexistant", Toast.LENGTH_SHORT).show();
                 }
             }
