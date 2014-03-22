@@ -79,7 +79,7 @@
         android:visibility="gone">
 
         <fragment
-            class="com.tipsy.app.orga.entree.ModeNFCFragment"
+            class="com.tipsy.app.orga.bar.BarNFCFragment"
             android:id="@+id/frag_nfc"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

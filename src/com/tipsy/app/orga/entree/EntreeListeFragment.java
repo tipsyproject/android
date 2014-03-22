@@ -18,7 +18,7 @@ import com.tipsy.lib.Achat;
 /**
  * Created by vquefele on 20/01/14.
  */
-public class ModeManuelFragment extends ListFragment {
+public class EntreeListeFragment extends ListFragment {
 
     private EntreeListener callback;
     private EntreeArrayAdapter entreesAdapter;
@@ -49,7 +49,9 @@ public class ModeManuelFragment extends ListFragment {
         builder.setPositiveButton("Valider", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
                 entree.setUsed(true);
-                entree.saveInBackground();
+                callback.setCurrentEntree(entree);
+                callback.modeNFC();
+                //entree.saveInBackground();
                 callback.updateProgress();
                 entreesAdapter.notifyDataSetChanged();
             }
@@ -67,6 +69,12 @@ public class ModeManuelFragment extends ListFragment {
         builder.setTitle(entree.getNom() + " " + entree.getPrenom());
         builder.setMessage(entree.getTicket().getNom());
         builder.create().show();
+    }
+
+    @Override
+    public void onResume(){
+        updateListe();
+        super.onResume();
     }
 
 

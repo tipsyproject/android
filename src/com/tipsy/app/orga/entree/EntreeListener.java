@@ -9,14 +9,29 @@ import java.util.ArrayList;
 /**
  * Created by vquefele on 20/01/14.
  */
-public interface EntreeListener extends EventModule {
-    public ArrayList<Achat> getEntrees();
+public interface EntreeListener {
 
+
+    /*
     public void init();
 
     public void updateEntrees(QueryCallback cb);
 
-    public void updateProgress();
 
     public void backToEvent();
+    */
+    public ArrayList<Achat> getEntrees();
+    public void setCurrentEntree(Achat entree);
+
+    public void modeStats();
+    public void modeQRCode();
+    public void modeListe();
+    public void modeVente();
+    public void modeNFC();
+    public void backToEvent();
+    public void setNFCMode(int mode);
+
+
+    public void updateProgress();
+
 }

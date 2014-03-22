@@ -6,10 +6,12 @@ import android.os.Parcelable;
 
 import com.parse.FindCallback;
 import com.parse.ParseClassName;
+import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by valoo on 04/01/14.
@@ -19,9 +21,9 @@ import java.util.ArrayList;
 @ParseClassName("Ticket")
 public class Ticket extends ParseObject implements Parcelable {
 
-    public static int BILLET = 0;
-    public static int VESTIAIRE = 1;
-    public static int CONSO = 2;
+    public static final int BILLET = 0;
+    public static final int VESTIAIRE = 1;
+    public static final int CONSO = 2;
 
     public Ticket() {
     }

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageButton
+        style="@style/ButtonCurrentMode"
+        android:id="@+id/button_stats"
+        android:src="@drawable/ic_action_network_cell" />
+
+    <ImageButton
+        style="@style/ButtonOtherMode"
+        android:id="@+id/button_qrcode"
+        android:src="@drawable/ic_action_location_found" />
+
+    <ImageButton
+        style="@style/ButtonOtherMode"
+        android:id="@+id/button_liste"
+        android:src="@drawable/ic_action_group" />
+
+    <ImageButton
+        style="@style/ButtonOtherMode"
+        android:id="@+id/button_vente"
+        android:src="@drawable/ic_action_add_person" />
+
+</LinearLayout>

@@ -40,7 +40,7 @@ public class MainActivity extends Activity {
 
 
         TipsyApp app = (TipsyApp) getApplication();
-
+        /*
         try {
             PackageInfo info = getPackageManager().getPackageInfo("com.tipsy.app", PackageManager.GET_SIGNATURES);
             for (Signature signature : info.signatures) {
@@ -51,7 +51,7 @@ public class MainActivity extends Activity {
             }
         } catch (PackageManager.NameNotFoundException e) {
         } catch (NoSuchAlgorithmException e) {
-        }
+        }*/
 
         // Affichage de l'aide si elle n'a encore jamais été passée.
         // Sinon, on essaye de reconnecter automatiquement l'utilisateur

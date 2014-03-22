@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:alpha="0.8"
+    android:id="@+id/layout_already"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="111dp"
+        android:layout_height="111dp"
+        android:id="@+id/error"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/cross" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/background_light"
+        android:text="Entrée Normale"
+        android:id="@+id/text_ticket"
+        android:textSize="35dp"
+        android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:id="@+id/text_participant"
+        android:text="Ella Danloss"
+        android:textColor="@color/background_light"
+        android:drawableLeft="@drawable/ic_action_person"
+        android:textSize="20dp"
+        android:gravity="center"
+        android:layout_below="@+id/type_entree"
+        android:layout_centerHorizontal="true" />
+
+</LinearLayout>

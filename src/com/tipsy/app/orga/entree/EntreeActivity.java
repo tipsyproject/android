@@ -1,192 +1,316 @@
 package com.tipsy.app.orga.entree;
 
+
 import android.app.AlertDialog;
 import android.app.PendingIntent;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.TypedValue;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.FrameLayout;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.abhi.barcode.frag.libv2.BarcodeFragment;
 import com.abhi.barcode.frag.libv2.IScanResultHandler;
 import com.abhi.barcode.frag.libv2.ScanResult;
-import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.app.orga.prevente.PreventeActivity;
 import com.tipsy.lib.Achat;
+import com.tipsy.lib.Event;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.util.Bracelet;
-import com.tipsy.lib.util.EventActivity;
-import com.tipsy.lib.util.QueryCallback;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 
 /**
  * Created by vquefele on 20/01/14.
  */
-public class EntreeActivity extends EventActivity implements EntreeListener, IScanResultHandler {
-    private ArrayList<Achat> entrees = new ArrayList<Achat>();
-    private ProgressDialog initDialog;
-    protected ModeNFCFragment modeNfcFragment;
-    protected ModeManuelFragment modeManuelFragment;
-    protected ModeQRCodeFragment modeQRCodeFragment;
-    protected BarcodeFragment brf;
-    protected LinearLayout layoutOk;
-    protected LinearLayout layoutAlready;
-    private static TextView typeEntreeOk;
-    private static TextView nomOk;
-    private static TextView entreeAlready;
-    private static TextView nomAlready;
-    protected static Achat entree = null;
-    private ProgressBar progressBar;
-    private TextView progressText;
-    private static int MODE_NFC = 0;
-    private static int MODE_QRCODE = 1;
-    private static int MODE_MANUEL = 2;
-    private Button buttonNFC;
-    private Button buttonQRCode;
-    private Button buttonManuel;
-    private int currentMode = MODE_NFC;
+public class EntreeActivity extends FragmentActivity implements EntreeListener, IScanResultHandler {
 
+    private String eventId;
+
+    /* Fragments */
+    private EntreeModelFragment model;
+    private EntreeMenuFragment fragMenu;
+    private EntreeStatsFragment fragStats;
+    private BarcodeFragment fragQRCode;
+    private EntreeListeFragment fragListe;
+    private EntreeVenteFragment fragVente;
+    private EntreeNFCFragment fragScanNFC;
+    private EntreeOKFragment fragOK;
+    private EntreeKOFragment fragKO;
+    private EntreeKOMessageFragment fragKOMessage;
+
+    /* Scan NFC */
     private NfcAdapter adapter;
     private PendingIntent pendingIntent;
+    public static final int MODE_ACTIVATION = 0;
+    public static final int MODE_CONTROLE = 1;
+    private int mode = MODE_CONTROLE;
 
-    @Override
+    /*private EntreeTarifsFragment fragTarifs;
+    private EntreeParticipantFragment fragParticipant;*/
+
+    private Achat currentEntree;
+
+
+
+
     protected void onCreate(final Bundle savedInstanceState) {
         overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_entree);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+        /* Home Button */
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Entrée");
+
+        /* Ecran constamment allumé */
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         /* Initialisation écoute NFC */
         adapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, EntreeActivity.class).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            // Get the content view
-            View contentView = findViewById(android.R.id.content);
 
-            // Make sure it's a valid instance of a FrameLayout
-            if (contentView instanceof FrameLayout) {
-                TypedValue tv = new TypedValue();
+        eventId = getIntent().getStringExtra("EVENT_ID");
 
-                // Get the windowContentOverlay value of the current theme
-                if (getTheme().resolveAttribute(
-                        android.R.attr.windowContentOverlay, tv, true)) {
-
-                    // If it's a valid resource, set it as the foreground drawable
-                    // for the content view
-                    if (tv.resourceId != 0) {
-                        ((FrameLayout) contentView).setForeground(
-                                getResources().getDrawable(tv.resourceId));
-                    }
-                }
-            }
-        }
-
-        brf = (BarcodeFragment) getSupportFragmentManager().findFragmentById(R.id.sample);
-        brf.getView().setVisibility(View.GONE);
-        layoutOk = (LinearLayout) findViewById(R.id.layout_ok);
-        typeEntreeOk = (TextView) findViewById(R.id.type_entree_ok);
-        nomOk = (TextView) findViewById(R.id.nom_ok);
-        layoutAlready = (LinearLayout) findViewById(R.id.layout_already);
-        entreeAlready = (TextView) findViewById(R.id.entree_already);
-        nomAlready = (TextView) findViewById(R.id.nom_already);
-
-        /* BARRE DE SUIVI DES ENTREES */
-        progressText = (TextView) findViewById(R.id.progressText);
-        progressBar = (ProgressBar) findViewById(R.id.progressBar);
-
-        /*  INITIALISATION MENU MODE CONTROLE */
-        buttonNFC = (Button) findViewById(R.id.button_nfc);
-        buttonQRCode = (Button) findViewById(R.id.button_qrcode);
-        buttonManuel = (Button) findViewById(R.id.button_manuel);
-        buttonNFC.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                modeNFC();
-            }
-        });
-        buttonManuel.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                modeManuel();
-            }
-        });
-        buttonQRCode.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                modeQRCode();
-            }
-        });
-
-
-        /* Chargement des données */
+        /* Chargement des fragments */
         FragmentManager fm = getSupportFragmentManager();
-        InitEntreeFragment initEntreeFragment = (InitEntreeFragment) fm.findFragmentByTag("init");
-        if (initEntreeFragment == null) {
-            initDialog = ProgressDialog.show(this, null, "Chargement...", true, true);
-            initDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-                @Override
-                public void onCancel(DialogInterface dialog) {
-                    getSupportFragmentManager().popBackStack();
-                    backToEvent();
-                }
-            });
-            initEntreeFragment = new InitEntreeFragment();
-            Bundle args = new Bundle();
-            args.putString("EVENT_ID", getIntent().getStringExtra("EVENT_ID"));
-            if (getIntent().hasExtra("PREVENTE"))
-                args.putParcelable("PREVENTE", getIntent().getParcelableExtra("PREVENTE"));
-            initEntreeFragment.setArguments(args);
+        fragMenu = (EntreeMenuFragment) fm.findFragmentById(R.id.frag_entree_menu);
+        fragOK = (EntreeOKFragment) fm.findFragmentById(R.id.frag_entree_ok);
+        fragKO = (EntreeKOFragment) fm.findFragmentById(R.id.frag_entree_ko);
+        fragKOMessage = (EntreeKOMessageFragment) fm.findFragmentById(R.id.frag_entree_bracelet_used);
+        fragStats = new EntreeStatsFragment();
+        fragQRCode = new BarcodeFragment();
+        fragListe = new EntreeListeFragment();
+        fragVente = new EntreeVenteFragment();
+        fragScanNFC = new EntreeNFCFragment();
+
+        /* Association du fragment QRCode avec l'activité */
+        fragQRCode.setScanResultHandler(this);
+
+        /* Mise en arrière plan des fragments */
+        fragOK.hide();
+        fragKO.hide();
+        fragKOMessage.hide();
+
+        /* Chargement des données si premier lancement */
+        model = (EntreeModelFragment) fm.findFragmentByTag("init");
+        if (model == null) {
+            loadModel();
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.add(initEntreeFragment, "init");
+            ft.add(R.id.mode_container, fragStats);
             ft.commit();
-        } else {
-            entrees = savedInstanceState.getParcelableArrayList("Entrees");
-            currentMode = savedInstanceState.getInt("MODE");
-            setMode(currentMode);
+        }
+        /* Ou affichage du dernier mode affiché */
+        else {
+            eventId = savedInstanceState.getString("EventID");
+            if (fragMenu.getCurrentMode() == EntreeMenuFragment.MODE_QRCODE)
+                modeQRCode();
+            else if (fragMenu.getCurrentMode() == EntreeMenuFragment.MODE_LISTE)
+                modeListe();
+            else
+                modeStats();
+        }
+    }
+
+    public void loadModel(){
+        /* Lancement du fragment d'init */
+        model = new EntreeModelFragment();
+        Bundle args = new Bundle();
+        args.putString("EVENT_ID", eventId);
+        model.setArguments(args);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        /* Suppression de l'ancien model */
+        EntreeModelFragment oldModel = (EntreeModelFragment) getSupportFragmentManager().findFragmentByTag("init");
+        if(oldModel != null)
+            ft.remove(oldModel);
+
+        ft.add(model, "init");
+        ft.commit();
+    }
+
+    /* Mise à jour de la barre de progression des stats */
+    public void updateProgress(){
+        fragStats.updateProgress();
+    }
+
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
+        Bracelet bracelet = new Bracelet(tag);
+        Iterator it = getEntrees().iterator();
+        Achat entree = null;
+        boolean found = false;
+        while (it.hasNext() && !found) {
+            entree = (Achat) it.next();
+            if (entree.getParticipant() != null && entree.getParticipant().getBracelet() != null)
+                found = entree.getParticipant().getBracelet().equals(bracelet.getTag());
         }
 
-        /* Mise à jour de la barre de progression */
-        if (entrees != null) updateProgress();
+        /* Contrôle d'accès */
+        if (mode == MODE_CONTROLE) {
+            validateEntree((found ? entree : null));
+        }
+        /* Vérification que le bracelet n'est pas déjà associé durant cet event */
+        else if (mode == MODE_ACTIVATION) {
+            /* Bracelet déjà utilisé... */
+            if (found) {
+                fragKOMessage.show("Bracelet déjà attribué","Veuillez en utiliser un autre");
+                return;
+            } else {
+                try {
+                    currentEntree.getParticipant().setBracelet(bracelet.getTag());
+                    currentEntree.saveInBackground();
+                    setCurrentEntree(null);
+                    /* Retour au mode précédent */
+                    mode = MODE_CONTROLE; // NFC en écoute globale
+                    backToMode();
 
+                }catch(Exception e){
+                    Log.d("TOUTAFAIT",e.getMessage());
+                    fragKOMessage.show("Cette entrée correspond déjà à un bracelet","");
+                }
+            }
+        }
     }
 
-    /* Activation de l'écoute NFC */
-    @Override
-    public void onResume() {
-        super.onResume();
-        adapter.enableForegroundDispatch(this, pendingIntent, null, null);
+    /* RESULTAT SCAN QRCODE */
+    public void scanResult(ScanResult result) {
+        fragQRCode.onDestroy();
+        String entreeID = result.getRawResult().getText();
+
+        Iterator it = getEntrees().iterator();
+        Achat entree = null;
+        boolean found = false;
+        while (it.hasNext() && !found) {
+            entree = (Achat) it.next();
+            if (entree.getObjectId().equals(entreeID)) {
+                found = true;
+            }
+        }
+        boolean validate = validateEntree(found ? entree : null);
+        /* Activation d'un bracelet si entrée valide */
+        if(validate) {
+            modeNFC();
+            setCurrentEntree(entree);
+        }
     }
 
-    /* Désactivation de l'écoute NFC */
-    @Override
-    protected void onPause (){
-        adapter.disableForegroundDispatch(this);
-        super.onStop();
+
+    public boolean validateEntree(Achat entree){
+        boolean validate = false;
+        // Bracelet non reconnu
+        if (entree == null) {
+            fragKO.show(null);
+            validate = false;
+        }else{
+            // Bracelet autorisé
+            if (!entree.isUsed()) {
+                entree.setUsed(true);
+                entree.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        updateProgress();
+                    }
+                });
+                fragOK.show(entree);
+                validate = true;
+            }
+            // Bracelet déjà passé
+            else {
+                fragKO.show(entree);
+                validate = false;
+            }
+        }
+        return validate;
+    }
+
+    public Event getEvent(){
+        return model.getEvent();
+    }
+    public ArrayList<Achat> getEntrees(){
+        return model.getEntrees();
+    }
+    public ArrayList<Ticket> getBilletterie(){
+        return model.getBilletterie();
+    }
+    public void setCurrentEntree(Achat entree){
+        currentEntree = entree;
+    }
+
+    /* AFFICHAGE DU MODE STATS */
+    public void modeStats(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.replace(R.id.mode_container, fragStats);
+        ft.commit();
+    }
+
+    /* AFFICHAGE DU MODE QRCODE */
+    public void modeQRCode(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.replace(R.id.mode_container, fragQRCode);
+        ft.commit();
+    }
+
+    /* AFFICHAGE DU MODE LISTE */
+    public void modeListe(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.replace(R.id.mode_container, fragListe);
+        ft.commit();
+    }
+
+    /* AFFICHAGE DU MODE LISTE */
+    public void modeVente(){
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.replace(R.id.mode_container, fragVente);
+        ft.commit();
+    }
+
+    /* AFFICHAGE DE L'ECOUTE NFC */
+    public void modeNFC(){
+        mode = MODE_ACTIVATION;
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.replace(R.id.mode_container, fragScanNFC);
+        ft.commit();
+    }
+
+    public void setNFCMode(int mode){
+        this.mode = mode;
+    }
+
+    public void backToMode(){
+        if(fragMenu.getCurrentMode() == EntreeMenuFragment.MODE_STATS){
+            modeStats();
+        }else if(fragMenu.getCurrentMode() == EntreeMenuFragment.MODE_QRCODE){
+            modeQRCode();
+        }else if(fragMenu.getCurrentMode() == EntreeMenuFragment.MODE_LISTE){
+            modeListe();
+        }
+    }
+
+    /* Retour à l'activity Event */
+    public void backToEvent() {
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+        Intent intent = new Intent(this, EventOrgaActivity.class);
+        intent.putExtra("EVENT_ID", model.getEvent().getObjectId());
+        startActivity(intent);
     }
 
     @Override
@@ -199,8 +323,7 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
     public void onSaveInstanceState(Bundle outState) {
         if (outState == null)
             outState = new Bundle();
-        outState.putParcelableArrayList("Entrees", entrees);
-        outState.putInt("MODE", currentMode);
+        outState.putString("EventID", eventId);
         super.onSaveInstanceState(outState);
     }
 
@@ -229,305 +352,28 @@ public class EntreeActivity extends EventActivity implements EntreeListener, ISc
                 builder.show();
                 return true;
             case R.id.action_refresh:
-                updateEntrees(null);
-                return true;
-            case R.id.action_add:
-                goToPrevente();
+                loadModel();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void init() {
-        if (initDialog != null)
-            initDialog.dismiss();
-        setMode(MODE_NFC);
-        modeNfcFragment = new ModeNFCFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, modeNfcFragment);
-        ft.commit();
-    }
 
-
-    public void updateEntrees(final QueryCallback cb) {
-        final boolean closeDialog;
-        if (initDialog == null) {
-            initDialog = ProgressDialog.show(this, null, getString(R.string.update_entrees), true, true);
-            closeDialog = true;
-        } else if (!initDialog.isShowing()) {
-            initDialog = ProgressDialog.show(this, null, getString(R.string.update_entrees), true, true);
-            closeDialog = true;
-        } else {
-            initDialog.setMessage(getString(R.string.update_entrees));
-            closeDialog = false;
-        }
-        Ticket.loadVentes(getBilletterie(), new FindCallback<Achat>() {
-            @Override
-            public void done(List<Achat> achats, ParseException e) {
-                if (e == null) {
-                    entrees.clear();
-                    entrees.addAll(achats);
-                    Collections.sort(entrees, Achat.SORT_BY_NAME);
-                    // Mise à jour de la progressBar
-                    updateProgress();
-                    if (modeManuelFragment != null) {
-                        EntreeArrayAdapter adapter = (EntreeArrayAdapter) modeManuelFragment.getListAdapter();
-                        adapter.notifyDataSetChanged();
-                    }
-                    Toast.makeText(EntreeActivity.this, "Mise à jour effectuée", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(EntreeActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-                // Fermeture de la progressDialog si elle a été affichée depuis cette fonction
-                if (closeDialog && initDialog != null)
-                    initDialog.dismiss();
-                if (cb != null)
-                    cb.done(e);
-            }
-        });
-    }
-
-
-    /* MISE A JOUR DE LA BARRE DE PROGRESSION */
-    public void updateProgress() {
-        int entreesValidees = 0;
-        for (Achat entree : entrees)
-            if (entree.isUsed())
-                entreesValidees++;
-        progressBar.setMax(entrees.size());
-        progressBar.setProgress(entreesValidees);
-        progressText.setText("" + entreesValidees + "/" + entrees.size());
-    }
-
-
-    /* Mise à jour de l'onglet courant du menu Mode */
-    public void setMode(int mode) {
-        currentMode = mode;
-        buttonNFC.setBackgroundResource(mode == MODE_NFC ? R.color.primary : R.color.secondary);
-        buttonQRCode.setBackgroundResource(mode == MODE_QRCODE ? R.color.primary : R.color.secondary);
-        buttonManuel.setBackgroundResource(mode == MODE_MANUEL ? R.color.primary : R.color.secondary);
-    }
-
-
+    /* Activation de l'écoute NFC */
     @Override
-    protected void onNewIntent(Intent intent) {
-
-        final ProgressDialog wait = ProgressDialog.show(this, "", "Vérification en cours...", true, true);
-
-        Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-        final String tagID = Bracelet.bytesToHex(tag.getId());
-
-        Iterator it = entrees.iterator();
-        Achat entree = null;
-        boolean found = false;
-        while (it.hasNext() && !found) {
-            entree = (Achat) it.next();
-            if (entree.getParticipant() != null && entree.getParticipant().getBracelet() != null)
-                found = entree.getParticipant().getBracelet().equals(tagID);
-            else if (entree.getUser() != null && entree.getUser().getBracelet() != null)
-                found = entree.getUser().getBracelet().equals(tagID);
-        }
-        String message;
-        if (found) {
-            if (entree != null && !entree.isUsed()) {
-                typeEntreeOk.setText(entree.getTitre());
-                nomOk.setText(entree.getNom() + " " + entree.getPrenom());
-                layoutOk.setVisibility(View.VISIBLE);
-                entree.setUsed(true);
-                entree.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        updateProgress();
-                    }
-                });
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        layoutOk.setVisibility(View.GONE);
-                        brf.getView().setVisibility(View.VISIBLE);
-                    }
-                }, 4000);
-            } else {
-                entreeAlready.setText("Entrée déjà validée");
-                nomAlready.setText(entree.getNom() + " " + entree.getPrenom());
-                layoutAlready.setVisibility(View.VISIBLE);
-                entree.setUsed(true);
-                entree.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        updateProgress();
-                    }
-                });
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        layoutAlready.setVisibility(View.GONE);
-                    }
-                }, 4000);
-            }
-        } else {
-            entreeAlready.setText("Entrée non autorisée");
-            nomAlready.setVisibility(View.GONE);
-            layoutAlready.setVisibility(View.VISIBLE);
-            entree.setUsed(true);
-            entree.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    updateProgress();
-                }
-            });
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    layoutAlready.setVisibility(View.GONE);
-                    nomAlready.setVisibility(View.VISIBLE);
-                }
-            }, 4000);
-        }
-        wait.dismiss();
+    public void onResume() {
+        super.onResume();
+        adapter.enableForegroundDispatch(this, pendingIntent, null, null);
+        Log.d("TOUTAFAIT", "NFC Actif");
     }
 
-
-    public void modeNFC() {
-        setMode(MODE_NFC);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new ModeNFCFragment());
-        ft.commit();
-        brf.getView().setVisibility(View.GONE);
-    }
-
-    public void modeManuel() {
-        setMode(MODE_MANUEL);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, new ModeManuelFragment());
-        ft.commit();
-        brf.getView().setVisibility(View.GONE);
-    }
-
-    public void modeQRCode() {
-        setMode(MODE_QRCODE);
-        modeQRCodeFragment = new ModeQRCodeFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content, modeQRCodeFragment);
-        ft.commit();
-        brf.getView().setVisibility(View.VISIBLE);
-        brf.setScanResultHandler(this);
-    }
-
+    /* Désactivation de l'écoute NFC */
     @Override
-    public void scanResult(ScanResult result) {
-        Iterator it = entrees.iterator();
-        boolean found = false;
-        while (it.hasNext() && !found) {
-            entree = (Achat) it.next();
-            if (entree.getObjectId().equals(result.getRawResult().getText())) {
-                found = true;
-            }
-        }
-        if (found) {
-            if (entree != null && !entree.isUsed()) {
-                typeEntreeOk.setText(entree.getTitre());
-                nomOk.setText(entree.getNom() + " " + entree.getPrenom());
-                layoutOk.setVisibility(View.VISIBLE);
-                //brf.getView().setVisibility(View.GONE);
-                brf.onDestroy();
-                entree.setUsed(true);
-                entree.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        updateProgress();
-                    }
-                });
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        layoutOk.setVisibility(View.GONE);
-                        brf.getView().setVisibility(View.VISIBLE);
-                        try {
-                            brf.restart();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, 4000);
-            } else {
-                entreeAlready.setText("Entrée déjà validée");
-                nomAlready.setText(entree.getNom() + " " + entree.getPrenom());
-                layoutAlready.setVisibility(View.VISIBLE);
-                //brf.getView().setVisibility(View.GONE);
-                brf.onDestroy();
-                entree.setUsed(true);
-                entree.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        updateProgress();
-                    }
-                });
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        layoutAlready.setVisibility(View.GONE);
-                        brf.getView().setVisibility(View.VISIBLE);
-                        try {
-                            brf.restart();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, 4000);
-            }
-        } else {
-            entreeAlready.setText("Entrée non autorisée");
-            nomAlready.setVisibility(View.GONE);
-            layoutAlready.setVisibility(View.VISIBLE);
-            //brf.getView().setVisibility(View.GONE);
-            brf.onDestroy();
-            entree.setUsed(true);
-            entree.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    updateProgress();
-                }
-            });
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    layoutAlready.setVisibility(View.GONE);
-                    brf.getView().setVisibility(View.VISIBLE);
-                    nomAlready.setVisibility(View.VISIBLE);
-                    try {
-                        brf.restart();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-            }, 4000);
-        }
+    public void onPause() {
+        adapter.disableForegroundDispatch(this);
+        Log.d("TOUTAFAIT", "NFC Inactif");
+        super.onPause();
     }
 
-    public void goToPrevente() {
-        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-        Intent intent = new Intent(this, PreventeActivity.class);
-        intent.putExtra("EVENT_ID", event.getObjectId());
-        intent.putExtra("Billetterie", billetterie);
-        startActivity(intent);
-    }
-
-    public void backToEvent() {
-        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-        Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_ID", event.getObjectId());
-        startActivity(intent);
-    }
-
-    public ArrayList<Achat> getEntrees() {
-        return entrees;
-    }
 
 }

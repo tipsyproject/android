@@ -1,5 +1,7 @@
 package com.tipsy.lib.util;
 
+import android.nfc.Tag;
+
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -15,7 +17,20 @@ import java.util.List;
 public class Bracelet {
 
     final protected static char[] hexArray = "0123456789ABCDEF".toCharArray();
+    private String tag;
 
+    public Bracelet(){
+    }
+    public Bracelet(Tag tag){
+        this.setTag(tag);
+    }
+
+    public String getTag(){
+        return tag;
+    }
+    public void setTag(Tag tag){
+        this.tag = bytesToHex(tag.getId());
+    }
 
     public static String bytesToHex(byte[] bytes) {
         char[] hexChars = new char[bytes.length * 2];
