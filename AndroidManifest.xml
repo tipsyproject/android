@@ -131,7 +131,8 @@
 
         <activity
             android:name=".orga.entree.EntreeActivity"
-            android:label="">
+            android:label=""
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
             </intent-filter>
