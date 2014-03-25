@@ -1,8 +1,6 @@
-package com.tipsy.app.orga.entree.qrcode;
+package com.tipsy.app.orga.entree.old.qrcode;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,11 +11,9 @@ import com.abhi.barcode.frag.libv2.BarcodeFragment;
 import com.abhi.barcode.frag.libv2.IScanResultHandler;
 import com.abhi.barcode.frag.libv2.ScanResult;
 import com.tipsy.app.R;
-import com.tipsy.app.orga.entree.EntreeListener;
-import com.tipsy.app.orga.entree.EntreeNFCFragment;
-import com.tipsy.app.orga.entree.ModeFragment;
-import com.tipsy.app.orga.entree.NFCCallback;
-import com.tipsy.app.orga.entree.liste.ListeFragment;
+import com.tipsy.app.orga.entree.old.EntreeNFCFragment;
+import com.tipsy.app.orga.entree.old.ModeFragment;
+import com.tipsy.app.orga.entree.old.NFCCallback;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.util.Bracelet;
 

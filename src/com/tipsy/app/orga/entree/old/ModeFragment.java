@@ -1,15 +1,13 @@
-package com.tipsy.app.orga.entree;
+package com.tipsy.app.orga.entree.old;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.tipsy.app.R;
-import com.tipsy.app.orga.entree.liste.ListeFragment;
 
 import java.lang.reflect.Field;
 

@@ -21,7 +21,6 @@ import java.text.SimpleDateFormat;
 
 public class TDBEventFragment extends Fragment {
     private EventOrgaListener callback;
-    private LinearLayout buttonBilleterie;
     private LinearLayout buttonBar;
     private LinearLayout buttonVestiaire;
     private LinearLayout buttonAcces;
@@ -83,13 +82,6 @@ public class TDBEventFragment extends Fragment {
             }
         });
 
-        /* BILLETTERIE */
-        buttonBilleterie = (LinearLayout) view.findViewById(R.id.button_billetterie);
-        buttonBilleterie.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                callback.goToBilletterie();
-            }
-        });
 
 
         /* SETTINGS EVENT */

@@ -125,13 +125,22 @@ public class Achat extends ParseObject implements Transaction {
         return getUser() != null;
     }
 
-    /* Tri par ordre alphabetique */
+    /* Tri par ordre alphabetique des noms */
     public static Comparator<Achat> SORT_BY_NAME = new Comparator<Achat>() {
         public int compare(Achat one, Achat other) {
             // les participants sans nom ni prenom doivent être mis à la fin
             if (one.getNom().equals("") && one.getPrenom().equals(""))
                 return 1;
             else return one.getNom().compareTo(other.getNom());
+        }
+    };
+    /* Tri par ordre alphabetique des prénoms */
+    public static Comparator<Achat> SORT_BY_FIRSTNAME = new Comparator<Achat>() {
+        public int compare(Achat one, Achat other) {
+            // les participants sans nom ni prenom doivent être mis à la fin
+            if (one.getNom().equals("") && one.getPrenom().equals(""))
+                return 1;
+            else return one.getPrenom().compareTo(other.getPrenom());
         }
     };
 

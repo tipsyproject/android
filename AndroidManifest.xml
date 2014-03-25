@@ -112,30 +112,27 @@
         </activity>
 
         <activity
-            android:name=".orga.event.edit.EditEventActivity"
-            android:label="">
-
-        </activity>
-
-        <activity
-            android:name="com.tipsy.app.orga.billetterie.BilletterieActivity"
-            android:label="">
-
-        </activity>
-
-        <activity
-            android:name="com.tipsy.app.orga.prevente.PreventeActivity"
-            android:label="">
-
-        </activity>
-
-        <activity
-            android:name=".orga.entree.EntreeActivity"
+            android:name=".orga.entree.stats.ModeStatsActivity"
             android:label=""
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.nfc.action.TAG_DISCOVERED" />
-            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".orga.entree.qrcode.ModeQRCodeActivity"
+            android:label=""
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".orga.entree.liste.ModeListeActivity"
+            android:label=""
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity
+            android:name=".orga.entree.vente.ModeVenteActivity"
+            android:label=""
+            android:screenOrientation="portrait">
         </activity>
 
         <activity

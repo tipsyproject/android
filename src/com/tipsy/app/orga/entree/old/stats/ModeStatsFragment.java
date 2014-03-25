@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.entree.stats;
+package com.tipsy.app.orga.entree.old.stats;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
-import com.tipsy.app.orga.entree.EntreeListener;
+import com.tipsy.app.orga.entree.old.EntreeListener;
 import com.tipsy.lib.Achat;
 
 /**

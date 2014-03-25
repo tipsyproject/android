@@ -1,30 +1,20 @@
-package com.tipsy.app.orga.entree.liste;
+package com.tipsy.app.orga.entree.old.liste;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.tipsy.app.R;
-import com.tipsy.app.orga.entree.EntreeListener;
-import com.tipsy.app.orga.entree.EntreeNFCFragment;
-import com.tipsy.app.orga.entree.ModeFragment;
-import com.tipsy.app.orga.entree.NFCCallback;
-import com.tipsy.app.orga.entree.liste.EntreeArrayAdapter;
+import com.tipsy.app.orga.entree.liste.ListeFragment;
+import com.tipsy.app.orga.entree.old.EntreeNFCFragment;
+import com.tipsy.app.orga.entree.old.ModeFragment;
+import com.tipsy.app.orga.entree.old.NFCCallback;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.util.Bracelet;
-
-import java.lang.reflect.Field;
 
 
 /**
@@ -80,7 +70,7 @@ public class ModeListeFragment extends ModeFragment {
             }
         });
         //entree.saveInBackground();
-        ((ArrayAdapter) fragListe.getListAdapter()).notifyDataSetChanged();
+        //((ArrayAdapter) fragListe.getListAdapter()).notifyDataSetChanged();
     }
 
 }

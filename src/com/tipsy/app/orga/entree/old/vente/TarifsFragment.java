@@ -1,9 +1,8 @@
-package com.tipsy.app.orga.prevente;
+package com.tipsy.app.orga.entree.old.vente;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.tipsy.app.R;
+import com.tipsy.app.orga.entree.old.EntreeListener;
 import com.tipsy.lib.util.TarifGridAdapter;
 
 /**
@@ -18,14 +18,14 @@ import com.tipsy.lib.util.TarifGridAdapter;
  */
 public class TarifsFragment extends Fragment {
 
-    private PreventeListener callback;
+    private EntreeListener callback;
     private GridView gridView;
     private TarifGridAdapter adapter;
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (PreventeListener) activity;
+        callback = (EntreeListener) activity;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -37,9 +37,7 @@ public class TarifsFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Log.d("TOUTAFAIT", "click listener");
-                callback.getPrevente().setTicket(callback.getBilletterie().get(i));
-                callback.goToParticipant();
+                callback.setTarifVente(callback.getBilletterie().get(i));
             }
         });
         return view;

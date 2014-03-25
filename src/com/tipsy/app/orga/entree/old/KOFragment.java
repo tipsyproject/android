@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.entree;
+package com.tipsy.app.orga.entree.old;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

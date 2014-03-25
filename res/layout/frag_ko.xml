@@ -2,44 +2,42 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@android:color/black"
-    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
     android:gravity="center"
-    android:alpha="0.8"
-    android:id="@+id/layout_already"
     android:weightSum="1">
 
-    <ImageView
-        android:layout_width="111dp"
-        android:layout_height="111dp"
-        android:id="@+id/error"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/cross" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:layout_marginTop="30dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="@color/background_light"
-        android:text="Texte 1"
-        android:id="@+id/text_1"
-        android:textSize="35dp"
-        android:textIsSelectable="false" />
+        android:background="@color/danger"
+        android:alpha="0.8"
+        android:layout_margin="8dp"
+        android:padding="@dimen/activity_margin">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/text_2"
-        android:text="Texte 2"
-        android:textColor="@color/background_light"
-        android:textSize="20dp"
-        android:gravity="center"
-        android:layout_below="@+id/type_entree"
-        android:layout_centerHorizontal="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/background_light"
+            android:text="Entrée Normale"
+            android:id="@+id/text_1"
+            android:textIsSelectable="false"
+            android:textStyle="bold"
+            android:gravity="center_vertical|left" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:id="@+id/text_2"
+            android:text="Eddy Donmarcel"
+            android:textColor="@color/background_light"
+            android:layout_below="@+id/type_entree"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_vertical|right" />
+    </LinearLayout>
 
 </LinearLayout>

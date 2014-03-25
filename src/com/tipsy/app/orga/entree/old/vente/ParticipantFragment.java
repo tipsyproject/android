@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.prevente;
+package com.tipsy.app.orga.entree.old.vente;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,13 +14,15 @@ import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
 import com.tipsy.app.R;
+import com.tipsy.app.orga.entree.old.EntreeListener;
+import com.tipsy.lib.Participant;
 
 /**
  * Created by valoo on 25/01/14.
  */
 public class ParticipantFragment extends Fragment implements Validator.ValidationListener {
 
-    private PreventeListener callback;
+    private EntreeListener callback;
     private EditText inputNom;
     private EditText inputPrenom;
     @Email(order = 4, message = "Email incorrect")
@@ -30,7 +32,7 @@ public class ParticipantFragment extends Fragment implements Validator.Validatio
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        callback = (PreventeListener) activity;
+        callback = (EntreeListener) activity;
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -52,10 +54,11 @@ public class ParticipantFragment extends Fragment implements Validator.Validatio
 
     public void onValidationSucceeded() {
         // On recupère le contenu des champs
-        callback.getPrevente().getParticipant().setNom(inputNom.getText().toString());
-        callback.getPrevente().getParticipant().setPrenom(inputPrenom.getText().toString());
-        callback.getPrevente().getParticipant().setEmail(inputEmail.getText().toString());
-        callback.backToEntrees(true);
+        Participant p = new Participant();
+        p.setNom(inputNom.getText().toString());
+        p.setPrenom(inputPrenom.getText().toString());
+        p.setEmail(inputEmail.getText().toString());
+        callback.setParticipantInfos(p);
     }
 
     public void onValidationFailed(View failedView, Rule<?> failedRule) {

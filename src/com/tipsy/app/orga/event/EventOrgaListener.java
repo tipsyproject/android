@@ -17,8 +17,6 @@ public interface EventOrgaListener {
 
     public void goToVestiaire();
 
-    public void goToBilletterie();
-
     public void goToEditEvent();
 
     public void backToOrga();

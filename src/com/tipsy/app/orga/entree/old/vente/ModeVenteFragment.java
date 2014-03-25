@@ -1,23 +1,19 @@
-package com.tipsy.app.orga.entree.vente;
+package com.tipsy.app.orga.entree.old.vente;
 
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
-import com.tipsy.app.orga.entree.EntreeListener;
-import com.tipsy.app.orga.entree.EntreeNFCFragment;
-import com.tipsy.app.orga.entree.ModeFragment;
-import com.tipsy.app.orga.entree.NFCCallback;
+import com.tipsy.app.orga.entree.old.EntreeNFCFragment;
+import com.tipsy.app.orga.entree.old.ModeFragment;
+import com.tipsy.app.orga.entree.old.NFCCallback;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.Ticket;

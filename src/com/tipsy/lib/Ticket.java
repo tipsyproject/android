@@ -86,6 +86,7 @@ public class Ticket extends ParseObject implements Parcelable {
             query.include("paiementuser");
             query.include("user");
             query.include("ticket.event");
+            query.setLimit(1000); // Maximum limit...
             query.whereContainedIn("ticket", tickets);
             query.findInBackground(callback);
         } else callback.done(new ArrayList<Achat>(), null);

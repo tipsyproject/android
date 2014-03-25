@@ -1,22 +1,14 @@
-package com.tipsy.app.orga.entree;
+package com.tipsy.app.orga.entree.old;
 
 import android.app.Activity;
-import android.app.PendingIntent;
-import android.content.Intent;
-import android.nfc.NfcAdapter;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.tipsy.app.R;
-import com.tipsy.lib.Achat;
-import com.tipsy.lib.util.Bracelet;
-
-import java.util.Iterator;
 
 /**
  * Created by vquefele on 20/01/14.

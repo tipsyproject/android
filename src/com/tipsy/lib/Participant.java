@@ -28,7 +28,8 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public void setEmail(String email) {
-        put("email", email);
+        if(email != null)
+            put("email", email);
     }
 
     public String getNom() {
@@ -36,7 +37,8 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public void setNom(String nom) {
-        put("nom", nom);
+        if(nom != null)
+            put("nom", nom);
     }
 
     public String getPrenom() {
@@ -44,7 +46,8 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public void setPrenom(String prenom) {
-        put("prenom", prenom);
+        if(prenom != null)
+            put("prenom", prenom);
     }
 
 

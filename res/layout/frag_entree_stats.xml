@@ -1,31 +1,32 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ProgressWheel="http://schemas.android.com/apk/res-auto"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/frag_stats"
-    android:background="@color/background_dark_light">
+    android:background="@color/background_dark_light"
+    android:orientation="vertical">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:padding="@dimen/activity_margin"
-        android:weightSum="1"
-        android:id="@+id/linearLayout2">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:src="@drawable/ic_action_group"
-            android:layout_marginRight="@dimen/activity_margin" />
+        <com.todddavies.components.progressbar.ProgressWheel
+            android:id="@+id/progressBar"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_centerInParent="true"
+            ProgressWheel:rimColor="@color/secondary"
+            ProgressWheel:barLength="60dp"
+            ProgressWheel:barColor="@color/primary"
+            ProgressWheel:barWidth="10dp"
+            ProgressWheel:rimWidth="10dp" />
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center">
 
             <TextView
                 android:layout_width="match_parent"
@@ -35,15 +36,12 @@
                 android:id="@+id/progressText"
                 android:gravity="center" />
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleHorizontal"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/ui_margin"
-                android:id="@+id/progressBar"
-                android:progress="0"
-                android:indeterminate="false" />
-
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageView"
+                android:src="@drawable/ic_action_group" />
         </LinearLayout>
-    </LinearLayout>
 
-</FrameLayout>
+    </RelativeLayout>
+</LinearLayout>

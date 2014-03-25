@@ -1,9 +1,7 @@
-package com.tipsy.app.orga.entree;
+package com.tipsy.app.orga.entree.old;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +12,7 @@ import com.tipsy.app.R;
 /**
  * Created by valoo on 21/03/14.
  */
-public class OKFragment extends EntreeFragment {
+public class OKFragment extends Fragment {
     private TextView text1;
     private TextView text2;
 
@@ -32,10 +30,12 @@ public class OKFragment extends EntreeFragment {
     }
 
     public void show(String m1, String m2){
-        //text1.setText(m1);
-        //text2.setText(m2);
+        text1.setText(m1);
+        text2.setText(m2);
+        this.getView().setVisibility(View.VISIBLE);
     }
 
     public void hide(){
+        this.getView().setVisibility(View.GONE);
     }
 }
