@@ -42,7 +42,7 @@ public class BarNFCFragment extends Fragment {
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.frag_scan_nfc, container, false);
+        View view = inflater.inflate(R.layout.frag_bar_nfc, container, false);
 
         return view;
     }
