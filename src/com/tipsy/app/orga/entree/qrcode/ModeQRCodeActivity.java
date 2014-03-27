@@ -83,4 +83,7 @@ public class ModeQRCodeActivity extends EntreeActivity implements IScanResultHan
     public int getCurrentMode(){
         return EntreeMenuFragment.MODE_QRCODE;
     }
+
+    /* Rien à actualiser */
+    public void modelUpdated(){}
 }

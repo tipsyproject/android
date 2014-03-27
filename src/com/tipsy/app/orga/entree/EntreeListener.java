@@ -22,8 +22,12 @@ public interface EntreeListener {
     public ArrayList<Ticket> getBilletterie();
     public int getCurrentMode();
 
+    public void modelUpdated();
+
+
     public void OK(String m1, String m2);
     public void KO(String m1, String m2);
+
     /*
     public EntreeNFCFragment getFragNFC();
     public void setNFCCallback(NFCCallback cb);

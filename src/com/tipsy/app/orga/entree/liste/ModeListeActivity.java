@@ -23,6 +23,10 @@ public class ModeListeActivity extends EntreeActivity {
         ft.commit();
     }
 
+    public void modelUpdated(){
+        fragListe.getEntreeAdapter().notifyDataSetChanged();
+    }
+
     /* Permet au fragment EntreeMenuFragment d'afficher le bon onglet */
     public int getCurrentMode(){
         return EntreeMenuFragment.MODE_LISTE;

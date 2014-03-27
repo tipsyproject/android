@@ -11,7 +11,7 @@ import com.tipsy.app.orga.entree.EntreeFragment;
 /**
  * Created by tech on 12/02/14.
  */
-public class TestFragment extends EntreeFragment {
+public class WaitFragment extends EntreeFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_entree_mode_vente, container, false);

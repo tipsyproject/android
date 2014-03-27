@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.tipsy.app.R;
@@ -41,6 +42,12 @@ public class ListeFragment extends EntreeFragment {
                             //callback.activationManuelle(entree);
                         }
                     });
+                }else{
+                    builder.setPositiveButton("Désactiver", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            //callback.activationManuelle(entree);
+                        }
+                    });
                 }
 
                 /* Annuler */
@@ -66,6 +73,10 @@ public class ListeFragment extends EntreeFragment {
     public void onResume(){
         super.onResume();
         entreesAdapter.notifyDataSetChanged();
+    }
+
+    public EntreeArrayAdapter getEntreeAdapter(){
+        return entreesAdapter;
     }
 
 

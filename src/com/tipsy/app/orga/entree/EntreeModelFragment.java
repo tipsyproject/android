@@ -22,6 +22,8 @@ public class EntreeModelFragment extends EntreeFragment {
 
     /* Progress Dialog */
     private ProgressDialog initDialog;
+
+
     @Override
     public void onDetach() {
         super.onDetach();
@@ -58,6 +60,7 @@ public class EntreeModelFragment extends EntreeFragment {
                                             callback.getEntrees().addAll(achats);
                                             Collections.sort(callback.getEntrees(), Achat.SORT_BY_FIRSTNAME);
                                             Toast.makeText(getActivity(), "Mise à jour effectuée", Toast.LENGTH_SHORT).show();
+                                            callback.modelUpdated();
                                         } else {
                                             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }

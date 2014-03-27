@@ -13,9 +13,10 @@ import com.tipsy.app.R;
 /**
  * Created by valoo on 21/03/14.
  */
-public class OKFragment extends AlertFragment {
+public class KOFragment extends AlertFragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(R.layout.frag_ok,inflater,container,savedInstanceState);
+        return super.onCreateView(R.layout.frag_ko,inflater,container,savedInstanceState);
     }
+
 }

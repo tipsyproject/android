@@ -7,15 +7,19 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 
 import com.parse.ParseException;
 import com.parse.SaveCallback;
@@ -38,9 +42,12 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
     protected String eventId;
     protected ArrayList<Ticket> billetterie = new ArrayList<Ticket>();
     protected ArrayList<Achat> entrees = new ArrayList<Achat>();
+    protected boolean modePrevente;
 
-    /* Fragments */
+    /* Modèle */
     protected EntreeModelFragment model;
+    protected OKFragment fragOK;
+    protected KOFragment fragKO;
 
     /* Scan NFC */
     protected NfcAdapter adapter;
@@ -58,13 +65,39 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
         /* Ecran constamment allumé */
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        /*
+        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR2) {
+            // Get the content view
+            View contentView = findViewById(android.R.id.content);
+
+            // Make sure it's a valid instance of a FrameLayout
+            if (contentView instanceof FrameLayout) {
+                TypedValue tv = new TypedValue();
+
+                // Get the windowContentOverlay value of the current theme
+                if (getTheme().resolveAttribute(
+                        android.R.attr.windowContentOverlay, tv, true)) {
+
+                    // If it's a valid resource, set it as the foreground drawable
+                    // for the content view
+                    if (tv.resourceId != 0) {
+                        ((FrameLayout) contentView).setForeground(
+                                getResources().getDrawable(tv.resourceId));
+                    }
+                }
+            }
+        }*/
 
         /* Initialisation écoute NFC */
         adapter = NfcAdapter.getDefaultAdapter(this);
         pendingIntent = PendingIntent.getActivity(this, 0, new Intent(this, child).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
         /* Chargement des fragments */
-        //FragmentManager fm = getSupportFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
+        fragOK = (OKFragment) fm.findFragmentById(R.id.frag_ok);
+        fragKO = (KOFragment) fm.findFragmentById(R.id.frag_ko);
+        fragOK.hide();
+        fragKO.hide();
 
 
         /* On récupère la liste des entrées, la billetterie et l'event
@@ -107,8 +140,6 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
     protected void onNewIntent(Intent intent) {
         Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
         Bracelet bracelet = new Bracelet(tag);
-        Log.d("TOUTAFAIT", "OPE");
-        OK("SISI", "#SEUM");
         /* Bracelet utilisé pour une autre action que le controle d'accès */
         if(nfcCallback != null){
             nfcCallback.onScan(bracelet);
@@ -118,8 +149,7 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
             int found = findBracelet(bracelet);
             /* Bracelet inconnu */
             if(found == -1){
-                //fragKO.show("Entrée non autorisée", "Bracelet inconnu");
-                //OK("Entrée non autorisée", "Bracelet inconnu");
+                KO("Entrée non autorisée", "Bracelet inconnu");
             }else{
                 final Achat entree = getEntrees().get(found);
                 // Bracelet autorisé
@@ -135,12 +165,11 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
                             }
                         }
                     });
-                    //OK(entree.getTicket().getNom(),entree.getPrenom() + " " + entree.getNom());
+                    OK(entree.getTicket().getNom(),entree.getPrenom() + " " + entree.getNom());
                 }
                 // Bracelet déjà passé
                 else {
-                    //fragKO.show("Entrée déjà validée",entree.getPrenom() + " " + entree.getNom());
-                    //OK("Entrée déjà validée",entree.getPrenom() + " " + entree.getNom());
+                    KO("Entrée déjà validée", entree.getPrenom() + " " + entree.getNom());
                 }
             }
         }
@@ -179,25 +208,10 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
     }
 
     public void OK(String m1, String m2){
-        final OKFragment fragOK = new OKFragment();
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.add(R.id.mode_container,fragOK);
-        ft.commit();
-        fragOK.show(m1,m2);
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-                ft.remove(fragOK);
-                ft.commit();
-            }
-        }, 3000);
+        fragOK.show(m1, m2);
     }
     public void KO(String m1, String m2){
-        //fragOK.show(m1,m2);
+        fragKO.show(m1, m2);
     }
 
 
@@ -216,8 +230,7 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
 
     @Override
     public void onBackPressed() {
-        /*super.onBackPressed();
-        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);*/
+        /* Aucun action sur retour */
     }
 
     @Override
@@ -230,6 +243,7 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
         outState.putParcelableArrayList("entrees",entrees);
         super.onSaveInstanceState(outState);
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

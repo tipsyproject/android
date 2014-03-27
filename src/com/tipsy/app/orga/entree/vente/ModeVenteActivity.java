@@ -12,11 +12,12 @@ import com.tipsy.app.orga.entree.EntreeMenuFragment;
  */
 public class ModeVenteActivity extends EntreeActivity {
 
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(ModeVenteActivity.class, savedInstanceState);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.mode_container, new TestFragment());
+        ft.add(R.id.mode_container, new WaitFragment());
         ft.commit();
     }
 
@@ -24,4 +25,7 @@ public class ModeVenteActivity extends EntreeActivity {
     public int getCurrentMode(){
         return EntreeMenuFragment.MODE_VENTE;
     }
+
+    /* Rien à actualiser */
+    public void modelUpdated(){}
 }

@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/background_dark_light"
+    android:background="@color/background_dark"
     android:id="@+id/layout_entree">
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -11,6 +11,20 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/frag_entree_menu">
     </FrameLayout>
+
+    <fragment
+        android:id="@+id/frag_ok"
+        android:name="com.tipsy.app.orga.entree.OKFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/frag_ok" />
+
+    <fragment
+        android:id="@+id/frag_ko"
+        android:name="com.tipsy.app.orga.entree.KOFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:layout="@layout/frag_ok" />
 
     <fragment
         android:id="@+id/frag_entree_menu"
