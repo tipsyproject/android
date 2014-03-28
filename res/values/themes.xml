@@ -58,6 +58,11 @@
         <item name="android:textColor">@color/menu_color</item>
     </style>
 
+    <style name="Button_Style.Danger">
+        <item name="android:background">@drawable/button_danger</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
     <style name="Checkbox_Style">
         <item name="android:textColor">@color/text_hint</item>
 

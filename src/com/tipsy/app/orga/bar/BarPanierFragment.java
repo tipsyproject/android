@@ -1,10 +1,8 @@
 package com.tipsy.app.orga.bar;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -46,7 +43,7 @@ public class BarPanierFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_bar_panier, container, false);
         panierAdapter = new PanierArrayAdapter(getActivity(), callback.getPanier());
-        listView = (ListView) view.findViewById(R.id.list);
+        listView = (ListView) view.findViewById(R.id.listPanier);
         textTotal = (TextView) view.findViewById(R.id.text_total);
         listView.setAdapter(panierAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,7 +67,7 @@ public class BarPanierFragment extends Fragment {
     public void update(){
         for(Item item : callback.getPanier())
             Log.d("TOUTAFAIT", item.getTicket().getNom() + ": " + item.getQuantite());
-        panierAdapter.notifyDataSetChanged();
+        ((ArrayAdapter<Item>) listView.getAdapter()).notifyDataSetChanged();
         textTotal.setText(Commerce.prixToString(callback.getPanier().getPrixTotal()));
     }
 }

@@ -8,14 +8,14 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="376dp"
+        android:layout_height="wrap_content"
         android:layout_above="@+id/linearLayout"
         android:layout_alignParentTop="true">
 
         <com.todddavies.components.progressbar.ProgressWheel
             android:id="@+id/progressBar"
-            android:layout_width="320dp"
-            android:layout_height="320dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
             android:layout_centerInParent="true"
             ProgressWheel:rimColor="@color/secondary"
             ProgressWheel:barLength="60dp"

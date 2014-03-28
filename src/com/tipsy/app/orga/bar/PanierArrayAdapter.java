@@ -9,14 +9,12 @@ import android.widget.TextView;
 
 import com.tipsy.app.R;
 import com.tipsy.lib.util.Item;
-
-import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * Created by kef on 28/03/14.
  */
-public class PanierArrayAdapter  extends ArrayAdapter<Item> {
+public class PanierArrayAdapter extends ArrayAdapter<Item> {
     private Context context;
     private ArrayList<Item> consos;
 

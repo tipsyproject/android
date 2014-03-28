@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.tipsy.app.R;
 
@@ -20,8 +21,9 @@ import com.tipsy.app.R;
 
 public class BarNFCFragment extends Fragment {
 
-    NfcAdapter adapter;
-    PendingIntent pendingIntent;
+    private NfcAdapter adapter;
+    private PendingIntent pendingIntent;
+
 
     @Override
     public void onCreate(Bundle bundle) {
@@ -44,6 +46,14 @@ public class BarNFCFragment extends Fragment {
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_bar_nfc, container, false);
+        Button buttonCancel = (Button) view.findViewById(R.id.button_cancel);
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hide();
+            }
+        });
+
         return view;
     }
 

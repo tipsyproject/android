@@ -199,16 +199,27 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
 
 
     /* Retour à l'activity Event */
-    public void backToEvent() {
-        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-        Intent intent = new Intent(this, EventOrgaActivity.class);
-        intent.putExtra("EVENT_ID", eventId);
-        startActivity(intent);
+    public void quitMode() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                Intent intent = new Intent(EntreeActivity.this, EventOrgaActivity.class);
+                intent.putExtra("EVENT_ID", eventId);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        builder.setMessage("Vous allez quitter le mode Entrée.");
+        builder.show();
     }
 
     @Override
     public void onBackPressed() {
-        /* Aucun action sur retour */
+        quitMode();
     }
 
     @Override
@@ -234,18 +245,7 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
         switch (item.getItemId()) {
             // Confirmation avant de quitter le mode Entrées
             case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        backToEvent();
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-                builder.setMessage("Vous allez quitter le mode Entrée.");
-                builder.show();
+                quitMode();
                 return true;
             case R.id.action_refresh:
                 loadModel();

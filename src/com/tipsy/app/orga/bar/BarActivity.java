@@ -50,7 +50,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
 
     private String eventId;
     private ArrayList<Participant> entrees = new ArrayList<Participant>();
-    protected Panier panier = new Panier();
+    protected Panier panier = new Panier(new ArrayList<Item>());
     protected ArrayList<Ticket> conso = new ArrayList<Ticket>();
     protected BarConsoFragment fragConsos;
     protected BarPanierFragment fragPanier;
@@ -66,7 +66,6 @@ public class BarActivity extends FragmentActivity implements BarListener {
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setTitle("Bar");
 
-        panier = new Panier(new ArrayList<Item>());
         FragmentManager fm = getSupportFragmentManager();
         fragPanier = (BarPanierFragment) fm.findFragmentById(R.id.frag_panier);
         fragConsos = (BarConsoFragment) fm.findFragmentById(R.id.frag_conso);
@@ -212,9 +211,9 @@ public class BarActivity extends FragmentActivity implements BarListener {
         });
     }
 
-    /* Verrouillage du bouton retour */
     @Override
     public void onBackPressed() {
+        quitMode();
     }
 
 
@@ -244,26 +243,28 @@ public class BarActivity extends FragmentActivity implements BarListener {
         switch (item.getItemId()) {
             // Confirmation avant de quitter le mode Entrées
             case android.R.id.home:
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
-                        Intent intent = new Intent(BarActivity.this, EventOrgaActivity.class);
-                        intent.putExtra("EVENT_ID", eventId);
-                        startActivity(intent);
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-                builder.setMessage("Vous allez quitter le mode Bar.");
-                builder.show();
+                quitMode();
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-
+    public void quitMode(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+                Intent intent = new Intent(BarActivity.this, EventOrgaActivity.class);
+                intent.putExtra("EVENT_ID", eventId);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+            }
+        });
+        builder.setMessage("Vous allez quitter le mode Bar.");
+        builder.show();
+    }
 
 }
