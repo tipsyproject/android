@@ -11,17 +11,18 @@ import java.util.ArrayList;
 /**
  * Created by tech on 11/03/14.
  */
-public interface BarListener extends EventModule {
+public interface BarListener {
 
     public Panier getPanier();
 
     public ArrayList<Ticket> getConso();
 
-    public void goToQuantity(Ticket ticket);
-
     public void loadEventConso(String eventId, final QueryCallback callback_e);
 
-    public void addItemToPanier(Item item);
+    public void increaseConso(Ticket ticket);
 
-    public void onRemove(int position);
+    public void decreaseConso(Item item);
+
+    public void validerPanier();
+
 }

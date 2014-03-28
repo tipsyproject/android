@@ -28,11 +28,4 @@
         android:gravity="center"
         android:textSize="25dp"
         android:textColor="#FFFFFF" />
-
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/remove"
-        android:focusable="false"
-        android:background="@drawable/ic_action_discard" />
 </LinearLayout>

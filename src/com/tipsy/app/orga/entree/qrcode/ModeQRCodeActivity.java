@@ -49,14 +49,14 @@ public class ModeQRCodeActivity extends EntreeActivity implements IScanResultHan
             }
         }
         if (!found) {
-            //callback.KO("Entrée non reconnue", "Pensez à actualiser la liste");
+            KO("Entrée non reconnue", "Pensez à actualiser la liste");
             fragBarcode.restart();
         } else if (entree.isUsed()){
-            //callback.KO("Entrée déjà utilisée", entree.getPrenom() + " " + entree.getNom());
+            KO("Entrée déjà utilisée", entree.getPrenom() + " " + entree.getNom());
             fragBarcode.restart();
         }
         else {
-            //callback.OK(entree.getTicket().getNom(), entree.getPrenom() + " " + entree.getNom());
+            OK(entree.getTicket().getNom(), entree.getPrenom() + " " + entree.getNom());
             //modeNFC();
             entree.setUsed(true);
             final Achat e = entree;

@@ -5,24 +5,11 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:text="Consommations"
-        android:id="@+id/titre_conso"
-        android:layout_above="@+id/frag_conso"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:layout_centerHorizontal="true"
-        android:background="@drawable/border_orange"
-        android:textColor="@color/background_light"
-        android:gravity="center"
-        android:layout_alignParentTop="true" />
-
     <GridView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/gridConso"
-        android:numColumns="2"
+        android:numColumns="3"
         android:verticalSpacing="1dp"
         android:horizontalSpacing="1dp"/>
 

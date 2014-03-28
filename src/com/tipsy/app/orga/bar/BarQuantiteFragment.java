@@ -64,7 +64,7 @@ public class BarQuantiteFragment extends Fragment {
         buttonValidate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                callback.addItemToPanier(item);
+                //callback.addItemToPanier(item);
             }
         });
         return view;

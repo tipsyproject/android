@@ -65,28 +65,6 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
         /* Ecran constamment allumé */
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        /*
-        if (Build.VERSION.SDK_INT == Build.VERSION_CODES.JELLY_BEAN_MR2) {
-            // Get the content view
-            View contentView = findViewById(android.R.id.content);
-
-            // Make sure it's a valid instance of a FrameLayout
-            if (contentView instanceof FrameLayout) {
-                TypedValue tv = new TypedValue();
-
-                // Get the windowContentOverlay value of the current theme
-                if (getTheme().resolveAttribute(
-                        android.R.attr.windowContentOverlay, tv, true)) {
-
-                    // If it's a valid resource, set it as the foreground drawable
-                    // for the content view
-                    if (tv.resourceId != 0) {
-                        ((FrameLayout) contentView).setForeground(
-                                getResources().getDrawable(tv.resourceId));
-                    }
-                }
-            }
-        }*/
 
         /* Initialisation écoute NFC */
         adapter = NfcAdapter.getDefaultAdapter(this);

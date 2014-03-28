@@ -45,14 +45,12 @@ public class BarConsoFragment extends Fragment {
         gridAdapter = new ConsosArrayAdapter(getActivity(), callback.getConso());
         if (gridView != null) {
             gridView.setAdapter(gridAdapter);
-            //gridView.setEmptyView();
         }
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Log.d(TipsyApp.TAG, callback.getConso().get(position).getNom());
-                callback.goToQuantity(callback.getConso().get(position));
+                callback.increaseConso(callback.getConso().get(position));
             }
 
         });
@@ -68,7 +66,6 @@ public class BarConsoFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_bar_conso, container, false);
 
         gridView = (GridView) view.findViewById(R.id.gridConso);
-        //conso = callback.getConso().get(Ticket.CONSO);
 
         return view;
     }
