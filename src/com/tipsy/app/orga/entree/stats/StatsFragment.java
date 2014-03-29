@@ -1,18 +1,14 @@
 package com.tipsy.app.orga.entree.stats;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
 import com.tipsy.app.orga.entree.EntreeFragment;
-import com.tipsy.app.orga.entree.old.EntreeListener;
 import com.tipsy.lib.Achat;
 import com.todddavies.components.progressbar.ProgressWheel;
 

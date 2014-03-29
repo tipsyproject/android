@@ -14,7 +14,6 @@ import android.util.Log;
 import com.parse.Parse;
 import com.tipsy.app.help.HelpActivity;
 import com.tipsy.app.login.LoginActivity;
-import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.lib.TipsyUser;
 import com.tipsy.lib.util.Prefs;
@@ -60,8 +59,6 @@ public class MainActivity extends Activity {
             TipsyUser user = TipsyUser.getCurrentUser();
             if (user == null)
                 startActivity(new Intent(this, LoginActivity.class));
-            else if (user.getType() == TipsyUser.MEMBRE)
-                startActivity(new Intent(this, MembreActivity.class));
             else if (user.getType() == TipsyUser.ORGA)// Orga
                 startActivity(new Intent(this, OrgaActivity.class));
             else

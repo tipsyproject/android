@@ -11,18 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/nom_participant"
+        android:id="@+id/participant"
         android:text="Lennie"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="@dimen/ui_margin" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/prenom_participant"
-        android:text="Bar"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@+id/nom_participant" />
+        android:layout_centerVertical="true" />
 
 </RelativeLayout>

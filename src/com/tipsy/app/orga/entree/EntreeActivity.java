@@ -143,11 +143,11 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
                             }
                         }
                     });
-                    OK(entree.getTicket().getNom(),entree.getPrenom() + " " + entree.getNom());
+                    OK(entree.getTicket().getNom(),entree.getParticipant().getFullName());
                 }
                 // Bracelet déjà passé
                 else {
-                    KO("Entrée déjà validée", entree.getPrenom() + " " + entree.getNom());
+                    KO("Entrée déjà validée", entree.getParticipant().getFullName());
                 }
             }
         }

@@ -36,64 +36,63 @@ public class ListeFragment extends EntreeFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 final Achat entree = callback.getEntrees().get(position);
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-
-                /* Entrée pas encore utilisée = activation + association avec un bracelet */
-                if(!entree.isUsed()) {
-                    builder.setPositiveButton("Activer", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            entree.setUsed(true);
-                            entree.saveInBackground(new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    if(e==null){
-                                        entree.setUsed(true);
-                                        Toast.makeText(getActivity(), "Entrée activée", Toast.LENGTH_SHORT).show();
-                                        entreesAdapter.notifyDataSetChanged();
-                                    }else{
-                                        Toast.makeText(getActivity(), "Activation annulée", Toast.LENGTH_SHORT).show();
+                /* Action possible uniquement pour les participants identifiables */
+                if(!entree.getParticipant().isAnonymous()) {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    /* Entrée pas encore utilisée = activation + association avec un bracelet */
+                    if (!entree.isUsed()) {
+                        builder.setPositiveButton("Activer", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                entree.setUsed(true);
+                                entree.saveInBackground(new SaveCallback() {
+                                    @Override
+                                    public void done(ParseException e) {
+                                        if (e == null) {
+                                            entree.setUsed(true);
+                                            Toast.makeText(getActivity(), "Entrée activée", Toast.LENGTH_SHORT).show();
+                                            entreesAdapter.notifyDataSetChanged();
+                                        } else {
+                                            Toast.makeText(getActivity(), "Activation annulée", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                }
-                            });
-                            entree.setUsed(false);
-                        }
-                    });
-                }else{
-                    builder.setPositiveButton("Désactiver", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            entree.setUsed(false);
-                            entree.saveInBackground(new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    if(e==null){
-                                        entree.setUsed(false);
-                                        Toast.makeText(getActivity(), "Entrée désactivée", Toast.LENGTH_SHORT).show();
-                                        entreesAdapter.notifyDataSetChanged();
-                                    }else{
-                                        Toast.makeText(getActivity(), "Désactivation annulée", Toast.LENGTH_SHORT).show();
+                                });
+                                entree.setUsed(false);
+                            }
+                        });
+                    } else {
+                        builder.setPositiveButton("Désactiver", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                entree.setUsed(false);
+                                entree.saveInBackground(new SaveCallback() {
+                                    @Override
+                                    public void done(ParseException e) {
+                                        if (e == null) {
+                                            entree.setUsed(false);
+                                            Toast.makeText(getActivity(), "Entrée désactivée", Toast.LENGTH_SHORT).show();
+                                            entreesAdapter.notifyDataSetChanged();
+                                        } else {
+                                            Toast.makeText(getActivity(), "Désactivation annulée", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
-                                }
-                            });
-                            entree.setUsed(true);
-                        }
-                    });
-                }
-
-                /* Annuler */
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
+                                });
+                                entree.setUsed(true);
+                            }
+                        });
                     }
-                });
-                builder.setIcon(R.drawable.ic_action_labels);
-                builder.setTitle(entree.getTicket().getNom());
-                String action = (!entree.isUsed()) ? "activer" : "désactiver";
-                String message = "Vous allez " + action + " l'entrée pour: ";
-                if (entree.getPrenom().equals("") && entree.getNom().equals(""))
-                    message  += "XXXXXXXX";
-                else message += entree.getPrenom() + " " + entree.getNom();
-                builder.setMessage(message);
-                builder.create().show();
+
+                    /* Annuler */
+                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            // User cancelled the dialog
+                        }
+                    });
+                    builder.setIcon(R.drawable.ic_action_labels);
+                    builder.setTitle(entree.getTicket().getNom());
+                    String action = (!entree.isUsed()) ? "activer" : "désactiver";
+                    String message = "Vous allez " + action + " l'entrée pour: " + entree.getParticipant().getFullName();
+                    builder.setMessage(message);
+                    builder.create().show();
+                }
             }
         });
         return view;

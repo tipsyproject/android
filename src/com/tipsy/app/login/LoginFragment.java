@@ -21,9 +21,7 @@ import com.parse.ParseUser;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.help.HelpActivity;
-import com.tipsy.app.membre.MembreActivity;
 import com.tipsy.app.orga.OrgaActivity;
-import com.tipsy.app.signup.TypeSignUpActivity;
 import com.tipsy.lib.TipsyUser;
 
 /**
@@ -63,12 +61,6 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
                 validator.validate();
             }
         });
-        signup.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                app.hideKeyboard(getActivity());
-                startActivity(new Intent(getActivity(), TypeSignUpActivity.class));
-            }
-        });
         help.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), HelpActivity.class);
@@ -101,10 +93,7 @@ public class LoginFragment extends Fragment implements Validator.ValidationListe
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
                     TipsyUser u = (TipsyUser) user;
-                    if (u.getType() == TipsyUser.MEMBRE)
-                        startActivity(new Intent(getActivity(), MembreActivity.class));
-                    else
-                        startActivity(new Intent(getActivity(), OrgaActivity.class));
+                    startActivity(new Intent(getActivity(), OrgaActivity.class));
                     getActivity().finish();
                 } else {
                     String message;

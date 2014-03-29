@@ -2,7 +2,6 @@ package com.tipsy.app.orga.entree.qrcode;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.widget.Toast;
 
 import com.abhi.barcode.frag.libv2.BarcodeFragment;
 import com.abhi.barcode.frag.libv2.IScanResultHandler;
@@ -10,9 +9,7 @@ import com.abhi.barcode.frag.libv2.ScanResult;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.entree.EntreeActivity;
 import com.tipsy.app.orga.entree.EntreeMenuFragment;
-import com.tipsy.app.orga.entree.old.NFCCallback;
 import com.tipsy.lib.Achat;
-import com.tipsy.lib.util.Bracelet;
 
 import java.util.Iterator;
 
@@ -52,11 +49,11 @@ public class ModeQRCodeActivity extends EntreeActivity implements IScanResultHan
             KO("Entrée non reconnue", "Pensez à actualiser la liste");
             fragBarcode.restart();
         } else if (entree.isUsed()){
-            KO("Entrée déjà utilisée", entree.getPrenom() + " " + entree.getNom());
+            KO("Entrée déjà utilisée", entree.getParticipant().getFullName());
             fragBarcode.restart();
         }
         else {
-            OK(entree.getTicket().getNom(), entree.getPrenom() + " " + entree.getNom());
+            OK(entree.getTicket().getNom(), entree.getParticipant().getFullName());
             //modeNFC();
             entree.setUsed(true);
             final Achat e = entree;

@@ -38,7 +38,7 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public String getNom() {
-        return getString("nom");
+        return getString("nom").toUpperCase();
     }
 
     public void setNom(String nom) {
@@ -47,12 +47,27 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public String getPrenom() {
-        return getString("prenom");
+        if(getString("prenom").isEmpty())
+            return "";
+        else
+            return Character.toUpperCase(getString("prenom").charAt(0)) + getString("prenom").substring(1).toLowerCase();
     }
 
     public void setPrenom(String prenom) {
         if(prenom != null)
             put("prenom", prenom);
+    }
+
+    public boolean isAnonymous(){
+        return (getPrenom().equals("") && getNom().equals(""));
+    }
+
+    public String getFullName(){
+        if(isAnonymous()){
+            return "Xxxx XXXX";
+        }else{
+            return getPrenom() + " " + getNom();
+        }
     }
 
 

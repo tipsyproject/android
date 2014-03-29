@@ -97,50 +97,21 @@ public class Achat extends ParseObject implements Transaction {
         return getTicket().getNom();
     }
 
-    public String getPrenom() {
-        return isTipsyUser() ? getUser().getPrenom() : getParticipant().getPrenom();
-    }
-
-    public String getNom() {
-        return isTipsyUser() ? getUser().getNom() : getParticipant().getNom();
-    }
-
-    public String getEmail() {
-        return isTipsyUser() ? getUser().getEmail() : getParticipant().getEmail();
-    }
-
     public boolean isDepot() {
         return false;
-    }
-
-    public boolean isUserDefined() {
-        return getUser() != null || getParticipant() != null;
-    }
-
-    public boolean isValid() {
-        return isUserDefined() && getTicket() != null;
     }
 
     public boolean isTipsyUser() {
         return getUser() != null;
     }
 
-    /* Tri par ordre alphabetique des noms */
-    public static Comparator<Achat> SORT_BY_NAME = new Comparator<Achat>() {
-        public int compare(Achat one, Achat other) {
-            // les participants sans nom ni prenom doivent être mis à la fin
-            if (one.getNom().equals("") && one.getPrenom().equals(""))
-                return 1;
-            else return one.getNom().compareTo(other.getNom());
-        }
-    };
     /* Tri par ordre alphabetique des prénoms */
-    public static Comparator<Achat> SORT_BY_FIRSTNAME = new Comparator<Achat>() {
+    public static Comparator<Achat> SORT_BY_FULLNAME = new Comparator<Achat>() {
         public int compare(Achat one, Achat other) {
             // les participants sans nom ni prenom doivent être mis à la fin
-            if (one.getNom().equals("") && one.getPrenom().equals(""))
+            if (one.getParticipant().isAnonymous())
                 return 1;
-            else return one.getPrenom().compareTo(other.getPrenom());
+            else return one.getParticipant().getFullName().compareTo(other.getParticipant().getFullName());
         }
     };
 

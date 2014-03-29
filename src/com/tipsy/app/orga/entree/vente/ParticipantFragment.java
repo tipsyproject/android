@@ -13,11 +13,8 @@ import android.widget.Toast;
 import com.mobsandgeeks.saripaar.Rule;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
-import com.parse.ParseException;
-import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.entree.EntreeFragment;
-import com.tipsy.app.orga.entree.old.EntreeListener;
 import com.tipsy.lib.Participant;
 
 /**

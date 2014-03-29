@@ -58,7 +58,7 @@ public class EntreeModelFragment extends EntreeFragment {
                                         if (e == null) {
                                             callback.getEntrees().clear();
                                             callback.getEntrees().addAll(achats);
-                                            Collections.sort(callback.getEntrees(), Achat.SORT_BY_FIRSTNAME);
+                                            Collections.sort(callback.getEntrees(), Achat.SORT_BY_FULLNAME);
                                             Toast.makeText(getActivity(), "Mise à jour effectuée", Toast.LENGTH_SHORT).show();
                                             callback.modelUpdated();
                                         } else {
