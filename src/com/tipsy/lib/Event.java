@@ -20,6 +20,11 @@ import java.util.List;
 @ParseClassName("Event")
 public class Event extends ParseObject implements Parcelable {
 
+    public final static int EN_PREPARATION = 0;
+    public final static int EN_LIGNE = 1;
+    public final static int EN_COURS = 2;
+    public final static int TERMINE = 3;
+
     public Event() {
     }
 

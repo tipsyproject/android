@@ -35,7 +35,7 @@ public class EntreeModelFragment extends EntreeFragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        initDialog = ProgressDialog.show(getActivity(), null, "Chargement...", true, true);
+        initDialog = ProgressDialog.show(getActivity(), null, "Mise à jour des entrées...", true, true);
 
         /* CHARGEMENT DE:
         event, billetterie et entrees

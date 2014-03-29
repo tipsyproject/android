@@ -10,7 +10,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.entree.EntreeFragment;
 import com.tipsy.lib.Achat;
@@ -39,13 +42,39 @@ public class ListeFragment extends EntreeFragment {
                 if(!entree.isUsed()) {
                     builder.setPositiveButton("Activer", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            //callback.activationManuelle(entree);
+                            entree.setUsed(true);
+                            entree.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if(e==null){
+                                        entree.setUsed(true);
+                                        Toast.makeText(getActivity(), "Entrée activée", Toast.LENGTH_SHORT).show();
+                                        entreesAdapter.notifyDataSetChanged();
+                                    }else{
+                                        Toast.makeText(getActivity(), "Activation annulée", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            entree.setUsed(false);
                         }
                     });
                 }else{
                     builder.setPositiveButton("Désactiver", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
-                            //callback.activationManuelle(entree);
+                            entree.setUsed(false);
+                            entree.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    if(e==null){
+                                        entree.setUsed(false);
+                                        Toast.makeText(getActivity(), "Entrée désactivée", Toast.LENGTH_SHORT).show();
+                                        entreesAdapter.notifyDataSetChanged();
+                                    }else{
+                                        Toast.makeText(getActivity(), "Désactivation annulée", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            });
+                            entree.setUsed(true);
                         }
                     });
                 }
@@ -58,9 +87,10 @@ public class ListeFragment extends EntreeFragment {
                 });
                 builder.setIcon(R.drawable.ic_action_labels);
                 builder.setTitle(entree.getTicket().getNom());
-                String message = "Vous allez activer l'entrée pour: ";
+                String action = (!entree.isUsed()) ? "activer" : "désactiver";
+                String message = "Vous allez " + action + " l'entrée pour: ";
                 if (entree.getPrenom().equals("") && entree.getNom().equals(""))
-                    message  += "Participant sans nom";
+                    message  += "XXXXXXXX";
                 else message += entree.getPrenom() + " " + entree.getNom();
                 builder.setMessage(message);
                 builder.create().show();

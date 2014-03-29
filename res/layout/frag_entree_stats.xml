@@ -9,8 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/linearLayout"
-        android:layout_alignParentTop="true">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true">
 
         <com.todddavies.components.progressbar.ProgressWheel
             android:id="@+id/progressBar"
@@ -47,34 +47,4 @@
 
     </RelativeLayout>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/activity_margin"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/linearLayout"
-        android:gravity="center">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Mode Prévente"
-            android:id="@+id/textView"
-            android:gravity="center"
-            android:layout_marginRight="@dimen/activity_margin" />
-
-        <ToggleButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/toggle_mode_prevente"
-            android:layout_gravity="center"
-            android:checked="false"
-            android:textOn="ON"
-            android:textOff="OFF" />
-
-    </LinearLayout>
 </RelativeLayout>
