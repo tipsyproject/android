@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -8,7 +9,8 @@
         android:orientation="horizontal"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/activity_margin">
+        android:padding="@dimen/activity_margin"
+        android:id="@+id/relativeLayout">
 
         <LinearLayout
             android:orientation="vertical"
@@ -32,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
-                android:text="Permettre aux billets d'être validés à l'entrée de l'événement"
+                android:text="Permettre aux bracelets d'être validés à l'entrée de l'événement"
                 android:id="@+id/textView2"
                 android:textColor="@color/background_light" />
         </LinearLayout>
@@ -60,4 +62,32 @@
         </LinearLayout>
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_below="@+id/relativeLayout"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true">
+
+        <ImageView
+            android:layout_width="69dp"
+            android:layout_height="80dp"
+            android:background="@drawable/nfc2" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Scannez le bracelet à activer"
+            android:layout_marginTop="@dimen/activity_margin" />
+
+    </LinearLayout>
+
 </RelativeLayout>

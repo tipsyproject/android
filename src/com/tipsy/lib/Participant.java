@@ -5,6 +5,7 @@ import android.os.Parcelable;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+import com.tipsy.lib.util.Bracelet;
 
 /**
  * Created by valoo on 27/01/14.
@@ -17,6 +18,10 @@ public class Participant extends ParseObject implements Parcelable {
 
     public String getBracelet() {
         return getString("bracelet");
+    }
+
+    public void setBracelet(Bracelet bracelet) {
+        put("bracelet", bracelet.getTag());
     }
 
     public void setBracelet(String bracelet) {

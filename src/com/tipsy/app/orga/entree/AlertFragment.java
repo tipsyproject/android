@@ -49,10 +49,13 @@ public abstract class AlertFragment extends EntreeFragment {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                /* Au cas où on change d'activité avant la fin */
+                try {
                 /* On ne cache l'alerte que si elle n'a pas été réaffichée entre temps */
-                if(queue.size() < 2)
-                    hide();
-                queue.pop();
+                    if (queue.size() < 2)
+                        hide();
+                    queue.pop();
+                }catch(Exception e){}
             }
         }, 3000);
 

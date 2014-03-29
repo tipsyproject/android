@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,17 +8,25 @@
 
     <GridView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
         android:id="@+id/gridview"
         android:numColumns="2"
         android:verticalSpacing="@dimen/ui_margin"
         android:horizontalSpacing="@dimen/ui_margin"
-        android:layout_margin="@dimen/ui_margin"></GridView>
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="@dimen/ui_margin"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="@dimen/ui_margin"
+        android:layout_marginRight="@dimen/ui_margin"></GridView>
 
     <TextView
         android:id="@+id/empty_liste"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"
-        android:text="@string/empty_liste_billets"></TextView>
-</LinearLayout>
+        android:text="@string/empty_liste_billets"
+        android:layout_alignTop="@+id/gridview"
+        android:layout_alignLeft="@+id/gridview"
+        android:layout_alignStart="@+id/gridview"></TextView>
+
+</RelativeLayout>
