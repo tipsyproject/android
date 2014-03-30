@@ -1,15 +1,23 @@
 package com.tipsy.app.orga.entree.qrcode;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.Toast;
 
 import com.abhi.barcode.frag.libv2.BarcodeFragment;
 import com.abhi.barcode.frag.libv2.IScanResultHandler;
 import com.abhi.barcode.frag.libv2.ScanResult;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.entree.EntreeActivity;
 import com.tipsy.app.orga.entree.EntreeMenuFragment;
+import com.tipsy.app.orga.entree.NFCCallback;
 import com.tipsy.lib.Achat;
+import com.tipsy.lib.util.Bracelet;
 
 import java.util.Iterator;
 
@@ -54,26 +62,59 @@ public class ModeQRCodeActivity extends EntreeActivity implements IScanResultHan
         }
         else {
             OK(entree.getTicket().getNom(), entree.getParticipant().getFullName());
-            //modeNFC();
-            entree.setUsed(true);
-            final Achat e = entree;
-            /*callback.setNFCCallback(new NFCCallback() {
-                @Override
-                public void onScan(Bracelet bracelet) {
-                    /* Bracelet déjà associé à une entrée */
-                    /*if(callback.findBracelet(bracelet) > -1)
-                        callback.KO("Bracelet déjà utilisé","Veuillez en utiliser un autre");
-                    else {
-                        e.getParticipant().setBracelet(bracelet.getTag());
-                        e.setUsed(true);
-                        e.saveInBackground();
-                        callback.setNFCCallback(null);
-                        Toast.makeText(getActivity(), "Bracelet activé", Toast.LENGTH_SHORT).show();
-                        modeQRCode();
-                    }
-                }
-            });*/
+            stepBracelet(entree);
         }
+    }
+
+    public void stepBracelet(final Achat entree){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Activation du bracelet");
+        builder.setMessage("Scannez un bracelet à activer");
+        builder.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                fragBarcode.restart();
+                Toast.makeText(ModeQRCodeActivity.this, "Entrée annulée", Toast.LENGTH_SHORT).show();
+            }
+        });
+                    /* Annuler */
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                fragBarcode.restart();
+                Toast.makeText(ModeQRCodeActivity.this, "Entrée annulée", Toast.LENGTH_SHORT).show();
+            }
+        });
+        final AlertDialog dialog = builder.create();
+        dialog.show();
+
+        setNFCCallback(new NFCCallback() {
+            @Override
+            public void onScan(Bracelet bracelet) {
+                    /* Bracelet déjà associé à une entrée */
+                if (findBracelet(bracelet) > -1)
+                    KO("Bracelet déjà utilisé", "Veuillez en utiliser un autre");
+                else {
+                    entree.getParticipant().setBracelet(bracelet);
+                    entree.setUsed(true);
+                    dialog.dismiss();
+                    final ProgressDialog loading = ProgressDialog.show(ModeQRCodeActivity.this, null, "Enregistrement...", true, true);
+                    entree.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            loading.dismiss();
+                            if(e==null){
+                                setNFCCallback(null);
+                                OK("Bracelet Activé", entree.getParticipant().getFullName());
+                            }else {
+                                Toast.makeText(ModeQRCodeActivity.this, "Erreur enregistrement", Toast.LENGTH_SHORT).show();
+                            }
+                            fragBarcode.restart();
+                        }
+                    });
+
+                }
+            }
+        });
     }
 
     /* Permet au fragment EntreeMenuFragment d'afficher le bon onglet */

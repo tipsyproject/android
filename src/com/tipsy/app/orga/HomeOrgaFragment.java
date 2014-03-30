@@ -89,34 +89,5 @@ public class HomeOrgaFragment extends ListFragment {
 
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true);
-    }
-
-    // Redéfinition de l'actionBar: Bouton de validation
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_orga, menu);
-    }
-
-    // Gestion du click sur le bouton de validation
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // handle item selection
-        switch (item.getItemId()) {
-            case R.id.action_new_event:
-                callback.goToNewEvent();
-                return true;
-            case R.id.action_stats:
-                callback.stats();
-                UserActivity.getMenu().getDrawerList().setItemChecked(MenuOrga.STATS, true);
-                OrgaActivity.getMenu().getDrawerList().setSelection(MenuOrga.STATS);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 
 }

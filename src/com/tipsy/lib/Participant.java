@@ -70,6 +70,10 @@ public class Participant extends ParseObject implements Parcelable {
         }
     }
 
+    public boolean hasBracelet(){
+        return !getBracelet().equals("");
+    }
+
 
     // Implémentation de Parcelable
     @Override

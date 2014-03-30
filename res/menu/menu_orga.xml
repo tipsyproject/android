@@ -8,10 +8,4 @@
         android:icon="@drawable/ic_action_network_cell"
         android:title="Statistiques" />
 
-    <item
-        android:id="@+id/action_new_event"
-        android:showAsAction="always"
-        android:icon="@drawable/ic_action_new"
-        android:title="Créer un événement" />
-
 </menu>
