@@ -63,6 +63,7 @@ public class ModeVenteActivity extends EntreeActivity implements ModeVenteListen
                     wait.dismiss();
                     OK(prevente.getTicket().getNom(),prevente.getParticipant().getFullName());
                     entrees.add(prevente);
+                    resetPrevente();
                     stepWait();
                 }
             }

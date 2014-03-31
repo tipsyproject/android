@@ -7,19 +7,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.FrameLayout;
 
 import com.parse.ParseException;
 import com.parse.SaveCallback;
@@ -236,7 +231,7 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_access, menu);
+        getMenuInflater().inflate(R.menu.menu_entree, menu);
         return super.onCreateOptionsMenu(menu);
     }
 

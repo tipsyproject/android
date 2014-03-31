@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layout">
+
+    <!--
+    <fragment
+        class="com.tipsy.app.orga.bar.BarNFCFragment"
+        android:id="@+id/frag_nfc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        tools:layout="@layout/frag_bar_nfc" />
+    -->
+    <!--
+    <fragment
+        class="com.tipsy.app.orga.vestiaire.TicketsFragment"
+        android:id="@+id/frag_conso"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout="@layout/frag_bar_conso"
+        android:layout_weight="0.4" />
+
+    <fragment
+        class="com.tipsy.app.orga.vestiaire.PanierFragment"
+        android:id="@+id/frag_panier"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
+        android:layout_gravity="center"
+        tools:layout="@layout/frag_bar_panier" /> -->
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="mode sortie"
+        android:id="@+id/textView"
+        android:layout_gravity="center_horizontal" />
+</LinearLayout>

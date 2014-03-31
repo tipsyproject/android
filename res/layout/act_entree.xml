@@ -23,7 +23,7 @@
         android:name="com.tipsy.app.orga.entree.KOFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:layout="@layout/frag_ok" />
+        tools:layout="@layout/frag_ko" />
 
     <fragment
         android:id="@+id/frag_entree_menu"

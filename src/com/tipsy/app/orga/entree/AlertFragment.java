@@ -2,6 +2,7 @@ package com.tipsy.app.orga.entree;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import java.util.Stack;
 /**
  * Created by valoo on 21/03/14.
  */
-public abstract class AlertFragment extends EntreeFragment {
+public abstract class AlertFragment extends Fragment {
     protected TextView text1;
     protected TextView text2;
     protected Stack queue = new Stack();
@@ -57,7 +58,7 @@ public abstract class AlertFragment extends EntreeFragment {
                     queue.pop();
                 }catch(Exception e){}
             }
-        }, 3000);
+        }, 2500);
 
     }
 

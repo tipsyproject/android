@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/event_flyer_height"
+            android:id="@+id/imageView"
+            android:src="@drawable/last_bg_flou"
+            android:scaleType="centerCrop" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/event_fade"
+                android:alpha="0.3" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="@dimen/ui_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ven 10 Jan"
+                    android:id="@+id/date_event"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentStart="true"
+                    android:gravity="right"
+                    android:textStyle="bold"
+                    android:autoText="false" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="23h00"
+                    android:id="@+id/debut_event"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:layout_below="@+id/date_event"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentEnd="true"
+                    android:gravity="right"
+                    android:autoText="false" />
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/frameLayout"
+            android:layout_alignBottom="@+id/imageView"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/event_fade"
+                android:alpha="0.3" />
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:padding="@dimen/ui_margin">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="We Like To Party !"
+                    android:id="@+id/nom_event"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentLeft="false"
+                    android:layout_alignParentStart="true"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:textStyle="bold"
+                    android:autoText="false"
+                    android:gravity="left" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Queen Club"
+                    android:id="@+id/lieu_event"
+                    android:shadowColor="@android:color/black"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="3"
+                    android:layout_below="@+id/nom_event"
+                    android:layout_alignParentRight="false"
+                    android:layout_alignParentEnd="true"
+                    android:autoText="false"
+                    android:gravity="left" />
+            </LinearLayout>
+        </FrameLayout>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="14dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/button_billetterie"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/bg_card_white"
+            android:baselineAligned="true"
+            android:paddingRight="40dp"
+            android:visibility="gone"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/billetterie"
+                android:gravity="center"
+                android:textColor="@color/background_dark"
+                android:drawableLeft="@drawable/ic_action_labels_dark"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/button_access"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/bg_card_white"
+            android:baselineAligned="true"
+            android:paddingRight="40dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/mode_entree"
+                android:gravity="center"
+                android:textColor="@color/background_dark"
+                android:drawableLeft="@drawable/ic_action_labels_dark"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/button_bar"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/bg_card_blue"
+            android:baselineAligned="true"
+            android:paddingRight="40dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/bar"
+                android:gravity="center"
+                android:textColor="@color/background_light"
+                android:drawableLeft="@drawable/ic_action_paste"
+                android:layout_gravity="center_horizontal" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/button_vestiaire"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/bg_card_grey"
+            android:baselineAligned="true"
+            android:paddingRight="40dp"
+            android:layout_marginBottom="14dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Vestiaire"
+                android:gravity="center"
+                android:textColor="@color/background_light"
+                android:drawableLeft="@drawable/ic_action_view_as_list"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:id="@+id/button_infos"
+            android:layout_gravity="top"
+            android:gravity="center_vertical|center_horizontal"
+            android:background="@drawable/bg_card_white"
+            android:baselineAligned="true"
+            android:paddingRight="40dp"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/ui_margin">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/infos"
+                android:gravity="center"
+                android:textColor="@color/background_dark"
+                android:drawableLeft="@drawable/ic_action_about_dark"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

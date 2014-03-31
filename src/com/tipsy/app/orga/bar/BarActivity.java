@@ -78,6 +78,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
             final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
             InitBarFragment initBarFragment = new InitBarFragment();
             Bundle args = new Bundle();
+
             args.putString("EVENT_ID", getIntent().getStringExtra("EVENT_ID"));
             initBarFragment.setArguments(args);
             FragmentTransaction ft = fm.beginTransaction();

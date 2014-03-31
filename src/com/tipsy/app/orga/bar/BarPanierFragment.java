@@ -65,8 +65,6 @@ public class BarPanierFragment extends Fragment {
     }
 
     public void update(){
-        for(Item item : callback.getPanier())
-            Log.d("TOUTAFAIT", item.getTicket().getNom() + ": " + item.getQuantite());
         ((ArrayAdapter<Item>) listView.getAdapter()).notifyDataSetChanged();
         textTotal.setText(Commerce.prixToString(callback.getPanier().getPrixTotal()));
     }

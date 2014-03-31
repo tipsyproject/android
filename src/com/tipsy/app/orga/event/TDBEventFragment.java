@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,10 +22,6 @@ import java.text.SimpleDateFormat;
 
 public class TDBEventFragment extends Fragment {
     private EventOrgaListener callback;
-    private LinearLayout buttonBar;
-    private LinearLayout buttonVestiaire;
-    private LinearLayout buttonAcces;
-    private LinearLayout buttonInfos;
 
     @Override
     public void onAttach(Activity activity) {
@@ -43,9 +40,10 @@ public class TDBEventFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_orga_event_home, container, false);
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
-        TextView nomEvent = (TextView) view.findViewById(R.id.nom_event);
+        TextView nomEvent = (TextView) view.findViewById(R.id.textEvent);
         nomEvent.setText(callback.getEvent().getNom());
 
+        /*
         TextView lieuEvent = (TextView) view.findViewById(R.id.lieu_event);
         lieuEvent.setText(callback.getEvent().getLieu());
 
@@ -57,25 +55,16 @@ public class TDBEventFragment extends Fragment {
         TextView hourEvent = (TextView) view.findViewById(R.id.debut_event);
         hourEvent.setText(f_hour.format(callback.getEvent().getDebut()));
 
-        /* CONTRÔLE D'ACCES */
-        buttonAcces = (LinearLayout) view.findViewById(R.id.button_access);
-        buttonAcces.setOnClickListener(new View.OnClickListener() {
+        */
+        Button buttonEntree = (Button) view.findViewById(R.id.buttonEntree);
+        buttonEntree.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.goToAcces();
+                callback.goToEntree();
             }
         });
 
 
-        /* VESTIAIRE */
-        buttonVestiaire = (LinearLayout) view.findViewById(R.id.button_vestiaire);
-        buttonVestiaire.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
-            }
-        });
-
-        /* BAR */
-        buttonBar = (LinearLayout) view.findViewById(R.id.button_bar);
+        Button buttonBar = (Button) view.findViewById(R.id.buttonBar);
         buttonBar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToBar();
@@ -84,11 +73,18 @@ public class TDBEventFragment extends Fragment {
 
 
 
-        /* SETTINGS EVENT */
-        buttonInfos = (LinearLayout) view.findViewById(R.id.button_infos);
-        buttonInfos.setOnClickListener(new View.OnClickListener() {
+        Button buttonVestiaire = (Button) view.findViewById(R.id.buttonVestiaire);
+        buttonVestiaire.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                callback.goToEditEvent();
+                callback.goToVestiaire();
+            }
+        });
+
+
+        Button buttonAlcooTips = (Button) view.findViewById(R.id.buttonAlcooTips);
+        buttonAlcooTips.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
             }
         });
 

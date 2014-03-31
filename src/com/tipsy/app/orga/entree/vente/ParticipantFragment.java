@@ -59,6 +59,9 @@ public class ParticipantFragment extends EntreeFragment implements Validator.Val
         p.setNom(inputNom.getText().toString());
         p.setPrenom(inputPrenom.getText().toString());
         p.setEmail(inputEmail.getText().toString());
+        inputNom.setText("");
+        inputPrenom.setText("");
+        inputEmail.setText("");
         callback.finishPrevente();
     }
 

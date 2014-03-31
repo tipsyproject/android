@@ -22,7 +22,6 @@ import java.util.List;
 public class Ticket extends ParseObject implements Parcelable {
 
     public static final int BILLET = 0;
-    public static final int VESTIAIRE = 1;
     public static final int CONSO = 2;
 
     public Ticket() {

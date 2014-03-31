@@ -7,6 +7,8 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.tipsy.lib.util.Bracelet;
 
+import java.util.Comparator;
+
 /**
  * Created by valoo on 27/01/14.
  */
@@ -71,7 +73,7 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public boolean hasBracelet(){
-        return !getBracelet().equals("");
+        return getBracelet() != null;
     }
 
 

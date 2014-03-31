@@ -18,6 +18,7 @@ import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.bar.BarActivity;
 import com.tipsy.app.orga.entree.stats.ModeStatsActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
+import com.tipsy.app.orga.vestiaire.ModeEntreeActivity;
 import com.tipsy.app.orga.vestiaire.VestiaireActivity;
 import com.tipsy.lib.Event;
 
@@ -131,7 +132,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     }
 
     // clique sur le bouton de la Billetterie
-    public void goToAcces() {
+    public void goToEntree() {
         Intent intent = new Intent(this, ModeStatsActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
@@ -144,7 +145,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     }
 
     public void goToVestiaire() {
-        Intent intent = new Intent(this, VestiaireActivity.class);
+        Intent intent = new Intent(this, ModeEntreeActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
     }

@@ -11,7 +11,7 @@ public interface EventOrgaListener {
 
     public Event getEvent();
 
-    public void goToAcces();
+    public void goToEntree();
 
     public void goToBar();
 
