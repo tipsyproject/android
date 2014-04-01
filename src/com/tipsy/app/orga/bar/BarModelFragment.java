@@ -1,5 +1,6 @@
-package com.tipsy.app.orga.vestiaire;
+package com.tipsy.app.orga.bar;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +10,9 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.tipsy.app.orga.entree.EntreeFragment;
+import com.tipsy.app.orga.vestiaire.VestiaireFragment;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Event;
-import com.tipsy.lib.Participant;
 import com.tipsy.lib.Ticket;
 import com.tipsy.lib.Vestiaire;
 
@@ -24,14 +24,21 @@ import java.util.List;
  * Created by valoo on 27/12/13.
  */
 
-public class VestiaireModelFragment extends VestiaireFragment {
+public class BarModelFragment extends Fragment {
 
     /* Progress Dialog */
     private ProgressDialog initDialog;
     private boolean loadingParticipants;
-    private boolean loadingVestiaires;
+    private boolean loadingConsos;
 
 
+    private BarListener callback;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        callback = (BarListener) activity;
+    }
     @Override
     public void onDetach() {
         super.onDetach();
@@ -44,17 +51,18 @@ public class VestiaireModelFragment extends VestiaireFragment {
         setRetainInstance(true);
 
         loadingParticipants = true;
-        loadingVestiaires = true;
+        loadingConsos = true;
         initDialog = ProgressDialog.show(getActivity(), null, "Mise à jour des données...", true, true);
 
         /* CHARGEMENT DE:
-        event, participants et tickets vestiaire
+        event, participants et consos
          */
         ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
         query.getInBackground(callback.getEventId(), new GetCallback<Event>() {
             @Override
             public void done(Event ev, ParseException e) {
                 if (ev != null) {
+                    /* Liste des participants */
                     ev.findBilletterie(new FindCallback<Ticket>() {
                         @Override
                         public void done(List<Ticket> billets, ParseException e) {
@@ -70,7 +78,7 @@ public class VestiaireModelFragment extends VestiaireFragment {
                                         } else {
                                             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
-                                        if (!loadingVestiaires)
+                                        if (!loadingConsos)
                                             onModelUpdated();
                                         else
                                             loadingParticipants = false;
@@ -79,28 +87,28 @@ public class VestiaireModelFragment extends VestiaireFragment {
                             }
                         }
                     });
-                    /* Tickets de vestiaire */
-                    ParseQuery<Vestiaire> query = ParseQuery.getQuery(Vestiaire.class);
-                    query.include("participant");
+                    /* Liste des consos */
+                    ParseQuery<Ticket> query = ParseQuery.getQuery(Ticket.class);
+                    query.include("event");
                     query.whereEqualTo("event", ev);
-                    query.setLimit(1000);
-                    query.findInBackground(new FindCallback<Vestiaire>() {
+                    query.whereEqualTo("type", Ticket.CONSO);
+                    query.findInBackground(new FindCallback<Ticket>() {
                         @Override
-                        public void done(List<Vestiaire> vestiaires, ParseException e) {
+                        public void done(List<Ticket> consos, ParseException e) {
                             if (e == null) {
-                                callback.getTickets().clear();
-                                callback.getTickets().addAll(vestiaires);
-                                Collections.sort(callback.getTickets(), Vestiaire.SORT_BY_FULLNAME);
-                            } else {
+                                callback.getConsos().clear();
+                                callback.getConsos().addAll(consos);
+                                BarConsoFragment.gridAdapter.notifyDataSetChanged();
+                            }else {
                                 Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                             if (!loadingParticipants)
                                 onModelUpdated();
                             else
-                                loadingVestiaires = false;
-
+                                loadingConsos = false;
                         }
                     });
+
                 } else {
                     try {
                         initDialog.dismiss();

@@ -42,7 +42,7 @@ public class BarConsoFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        gridAdapter = new ConsosArrayAdapter(getActivity(), callback.getConso());
+        gridAdapter = new ConsosArrayAdapter(getActivity(), callback.getConsos());
         if (gridView != null) {
             gridView.setAdapter(gridAdapter);
         }
@@ -50,7 +50,7 @@ public class BarConsoFragment extends Fragment {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                callback.increaseConso(callback.getConso().get(position));
+                callback.increaseConso(callback.getConsos().get(position));
             }
 
         });

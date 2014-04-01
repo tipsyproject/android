@@ -1,6 +1,8 @@
 package com.tipsy.app.orga.bar;
 
+import com.tipsy.lib.Participant;
 import com.tipsy.lib.Ticket;
+import com.tipsy.lib.Vestiaire;
 import com.tipsy.lib.util.EventModule;
 import com.tipsy.lib.util.Item;
 import com.tipsy.lib.util.Panier;
@@ -13,16 +15,18 @@ import java.util.ArrayList;
  */
 public interface BarListener {
 
+    public String getEventId();
     public Panier getPanier();
+    public ArrayList<Ticket> getConsos();
+    public ArrayList<Participant> getParticipants();
 
-    public ArrayList<Ticket> getConso();
-
-    public void loadEventConso(String eventId, final QueryCallback callback_e);
 
     public void increaseConso(Ticket ticket);
 
     public void decreaseConso(Item item);
 
     public void validerPanier();
+
+    public void modelUpdated();
 
 }

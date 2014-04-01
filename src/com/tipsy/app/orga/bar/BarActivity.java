@@ -29,6 +29,7 @@ import com.parse.SaveCallback;
 import com.tipsy.app.R;
 import com.tipsy.app.TipsyApp;
 import com.tipsy.app.orga.event.EventOrgaActivity;
+import com.tipsy.app.orga.vestiaire.ModelCallback;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Participant;
@@ -49,12 +50,19 @@ import java.util.List;
 public class BarActivity extends FragmentActivity implements BarListener {
 
     private String eventId;
-    private ArrayList<Participant> entrees = new ArrayList<Participant>();
+    protected ArrayList<Ticket> consos = new ArrayList<Ticket>();
+    protected ArrayList<Participant> participants = new ArrayList<Participant>();
+
     protected Panier panier = new Panier(new ArrayList<Item>());
-    protected ArrayList<Ticket> conso = new ArrayList<Ticket>();
+
+    /* Modèle */
+    protected BarModelFragment model;
+    protected ModelCallback onModelUpdated = null;
+
     protected BarConsoFragment fragConsos;
     protected BarPanierFragment fragPanier;
     protected BarNFCFragment fragNFC;
+
     protected boolean activerNFC = false;
 
     @Override
@@ -73,25 +81,20 @@ public class BarActivity extends FragmentActivity implements BarListener {
 
         fragNFC.hide();
 
-        InitBarFragment initEntreeFragment = (InitBarFragment) fm.findFragmentByTag("init");
-        if (savedInstanceState == null && initEntreeFragment == null) {
-            final ProgressDialog wait = ProgressDialog.show(this, null, "Chargement...", true, true);
-            InitBarFragment initBarFragment = new InitBarFragment();
-            Bundle args = new Bundle();
-
-            args.putString("EVENT_ID", getIntent().getStringExtra("EVENT_ID"));
-            initBarFragment.setArguments(args);
-            FragmentTransaction ft = fm.beginTransaction();
-            ft.add(initBarFragment, "init");
-            ft.commit();
-            wait.dismiss();
-        } else {
-            entrees = savedInstanceState.getParcelableArrayList("Entrees");
-            conso = savedInstanceState.getParcelableArrayList("Conso");
-            panier = savedInstanceState.getParcelable("Panier");
+        /* On récupère la liste des tickets, les participants et l'eventId
+           si ce n'est pas le premier lancement  */
+        if(savedInstanceState != null && savedInstanceState.containsKey("consos")){
+            eventId = savedInstanceState.getString("eventId");
+            consos = savedInstanceState.getParcelableArrayList("consos");
+            participants = savedInstanceState.getParcelableArrayList("participants");
+            participants = savedInstanceState.getParcelableArrayList("panier");
             fragPanier.update();
         }
-
+        // Sinon l'activité reçoit l'id de l'event à charger dans le fragment model */
+        else{
+            eventId = getIntent().getStringExtra("EVENT_ID");
+            loadModel();
+        }
     }
 
     public void increaseConso(Ticket ticket){
@@ -122,95 +125,128 @@ public class BarActivity extends FragmentActivity implements BarListener {
 
 
     public void validerPanier(){
-        if (!panier.isEmpty()) {
+        if (panier.isEmpty()) {
+            Toast.makeText(BarActivity.this, "Commande vide", Toast.LENGTH_SHORT).show();
+        }
+        else {
             activerNFC = true;
             fragNFC.show();
         }
-        else
-            Toast.makeText(BarActivity.this, "Commande vide", Toast.LENGTH_SHORT).show();
     }
+
+    public void saveCommande(Participant p, final ProgressDialog wait){
+        Commande commande = new Commande();
+        for (Item item : panier) {
+            for (int i = 0; i < item.getQuantite(); ++i) {
+                Achat achat = new Achat(item.getTicket());
+                achat.setParticipant(p);
+                achat.setUsed(true);
+                commande.add(achat);
+            }
+        }
+        Achat.saveAllInBackground(((ArrayList) commande), new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    /* On cache le fragment NFC */
+                    fragNFC.hide();
+                    panier.clear();
+                    fragPanier.update();
+                    Toast.makeText(BarActivity.this, "Paiement effectué", Toast.LENGTH_SHORT).show();
+                } else {
+                    done(e);
+                    Log.d(TipsyApp.TAG, e.getMessage());
+                    Toast.makeText(BarActivity.this, "Erreur", Toast.LENGTH_SHORT).show();
+                    activerNFC = true;
+                }
+                wait.dismiss();
+            }
+        });
+    }
+
+
 
     @Override
     protected void onNewIntent(Intent intent) {
-        if(activerNFC){
+        if(activerNFC) {
             activerNFC = false;
             final ProgressDialog wait = ProgressDialog.show(this, "", "Vérification en cours...", true, true);
 
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
-            final String tagID = Bracelet.bytesToHex(tag.getId());
-
-            Ticket.loadParticipants(tagID, new FindCallback<Participant>() {
-                @Override
-                public void done(List<Participant> participants, ParseException e) {
-                    if (e == null && participants.size()>0) {
-                        Commande commande = new Commande();
-                        for (Item item : panier)
-                            for (int i = 0; i < item.getQuantite(); ++i) {
-                                Achat achat = new Achat(item.getTicket());
-                                achat.setParticipant(participants.get(0));
-                                achat.setUsed(true);
-                                commande.add(achat);
-                            }
-                        Achat.saveAllInBackground(((ArrayList) commande), new SaveCallback() {
-                            @Override
-                            public void done(ParseException e) {
-                                if (e == null) {
-                                    /* On cache le fragment NFC */
-                                    fragNFC.hide();
-                                    panier.clear();
-                                    fragPanier.update();
-                                    Toast.makeText(BarActivity.this, "Paiement effectué", Toast.LENGTH_SHORT).show();
-                                } else {
-                                    done(e);
-                                    Log.d(TipsyApp.TAG, e.getMessage());
-                                    Toast.makeText(BarActivity.this, "Erreur", Toast.LENGTH_SHORT).show();
-                                    activerNFC = true;
-                                }
-                                wait.dismiss();
-                            }
-                        });
-
-                    } else {
-                        Toast.makeText(BarActivity.this, "Participant inexistant", Toast.LENGTH_SHORT).show();
+            final Bracelet bracelet = new Bracelet(tag);
+            int found = findParticipant(bracelet);
+            if (found > -1) {
+                saveCommande(participants.get(found), wait);
+            } else {
+                /* Si le participant n'a pas été trouvé,
+                on met à jour la liste pour vérifier à nouveau
+                 */
+                onModelUpdated = new ModelCallback() {
+                    @Override
+                    public void updated() {
+                        int found = findParticipant(bracelet);
+                        if (found > -1) {
+                            saveCommande(participants.get(found), wait);
+                        } else {
+                            Toast.makeText(BarActivity.this, "Bracelet inconnu", Toast.LENGTH_LONG).show();
+                            activerNFC = true;
+                            wait.dismiss();
+                        }
+                        onModelUpdated = null;
                     }
-                }
-            });
-            activerNFC = false;
+                };
+                loadModel();
+            }
         }
     }
 
-
-    public void findConso(Event ev, FindCallback cb) {
-        ParseQuery<Ticket> query = ParseQuery.getQuery(Ticket.class);
-        query.include("event");
-        query.whereEqualTo("event", ev);
-        query.whereEqualTo("type", Ticket.CONSO);
-        query.findInBackground(cb);
+    /* Retourne l'index du participant correspondant au bracelet dans la liste des participants
+    *  Retourne -1 si le bracelet n'est associé à aucun participant */
+    public int findParticipant(Bracelet bracelet){
+        Participant p = null;
+        for(int i=0; i<participants.size(); ++i){
+            p = participants.get(i);
+            if (p.hasBracelet() && p.getBracelet().equals(bracelet.getTag()))
+                return i;
+        }
+        return -1;
     }
 
-    public void loadEventConso(String eventId, final QueryCallback callback_e) {
-        ParseQuery<Event> query = ParseQuery.getQuery(Event.class);
-        query.getInBackground(eventId, new GetCallback<Event>() {
-            @Override
-            public void done(Event ev, ParseException e) {
-                if (ev != null) {
-                    findConso(ev, new FindCallback<Ticket>() {
-                        @Override
-                        public void done(List<Ticket> consos, ParseException e) {
-                            if (e == null) {
-                                getConso().clear();
-                                getConso().addAll(consos);
-                                BarConsoFragment.gridAdapter.notifyDataSetChanged();
-                            }
-                            callback_e.done(e);
-                        }
-                    });
-                } else {
-                    callback_e.done(e);
-                }
-            }
-        });
+
+    public void loadModel(){
+        /* Lancement du fragment d'init */
+        model = new BarModelFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        /* Suppression de l'ancien model */
+        BarModelFragment oldModel = (BarModelFragment) getSupportFragmentManager().findFragmentByTag("init");
+        if(oldModel != null)
+            ft.remove(oldModel);
+
+        ft.add(model, "init");
+        ft.commit();
     }
+
+    public void modelUpdated(){
+        if(onModelUpdated != null){
+            onModelUpdated.updated();
+        }
+    };
+
+
+    public String getEventId(){
+        return eventId;
+    }
+    public Panier getPanier() {
+        return panier;
+    }
+    public ArrayList<Ticket> getConsos() {
+        return consos;
+    }
+    public ArrayList<Participant> getParticipants() {
+        return participants;
+    }
+
 
     @Override
     public void onBackPressed() {
@@ -218,24 +254,13 @@ public class BarActivity extends FragmentActivity implements BarListener {
     }
 
 
-
-
-    public Panier getPanier() {
-        return panier;
-    }
-
-    public ArrayList<Ticket> getConso() {
-        return conso;
-    }
-
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (outState == null)
             outState = new Bundle();
-        outState.putParcelableArrayList("Entrees", entrees);
-        outState.putParcelableArrayList("Conso", conso);
-        outState.putParcelable("Panier", panier);
+        outState.putParcelableArrayList("participants", participants);
+        outState.putParcelableArrayList("consos", consos);
+        outState.putParcelable("panier", panier);
         super.onSaveInstanceState(outState);
     }
 
