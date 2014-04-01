@@ -110,7 +110,10 @@ public class Achat extends ParseObject implements Transaction {
         public int compare(Achat one, Achat other) {
             // les participants sans nom ni prenom doivent être mis à la fin
             if (one.getParticipant().isAnonymous())
-                return 1;
+                if(other.getParticipant().isAnonymous())
+                    return 0;
+                else
+                    return 1;
             else return one.getParticipant().getFullName().compareTo(other.getParticipant().getFullName());
         }
     };
