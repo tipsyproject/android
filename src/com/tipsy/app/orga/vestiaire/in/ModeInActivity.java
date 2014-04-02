@@ -1,5 +1,6 @@
 package com.tipsy.app.orga.vestiaire.in;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
@@ -83,9 +84,11 @@ public class ModeInActivity extends VestiaireActivity implements
     }
 
     public void onPanierValidated(final ArrayList<Vestiaire> commande){
+        final ProgressDialog wait = ProgressDialog.show(this, "", "Enregistrement...", true, true);
         Vestiaire.saveAllInBackground((ArrayList) commande, new SaveCallback() {
             @Override
             public void done(ParseException e) {
+                wait.dismiss();
                 if(e==null){
                     tickets.addAll(commande);
                     fragCarnet.clearCommande();
@@ -109,5 +112,21 @@ public class ModeInActivity extends VestiaireActivity implements
 
     public boolean isModeEntree(){
         return true;
+    }
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        onModelUpdated = new ModelCallback() {
+            @Override
+            public void updated() {
+                fragCarnet.updateCarnet();
+            }
+        };
+    }
+    @Override
+    public void onStop(){
+        onModelUpdated = null;
+        super.onStop();
     }
 }

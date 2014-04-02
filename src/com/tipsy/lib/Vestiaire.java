@@ -23,16 +23,17 @@ public class Vestiaire extends ParseObject implements Parcelable {
     public Vestiaire() {
     }
 
-    public Vestiaire(int number){
+    public Vestiaire(int number,String eventId){
         setNumber(number);
+        setEventId(eventId);
     }
 
-    public Event getEvent() {
-        return (Event) getParseObject("event");
+    public String getEventId() {
+        return getString("event");
     }
 
-    public void setEvent(Event event) {
-        put("event", event);
+    public void setEventId(String eventId) {
+        put("event", eventId);
     }
 
     public int getNumber() {
@@ -85,14 +86,14 @@ public class Vestiaire extends ParseObject implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(getObjectId());
-        dest.writeParcelable(getEvent(), flags);
+        dest.writeString(getEventId());
         dest.writeInt(getNumber());
         dest.writeParcelable(getParticipant(), flags);
     }
 
     public Vestiaire(Parcel in) {
         setObjectId(in.readString());
-        setEvent((Event) in.readParcelable(Event.class.getClassLoader()));
+        setEventId(in.readString());
         setNumber(in.readInt());
         setParticipant((Participant) in.readParcelable(Participant.class.getClassLoader()));
     }

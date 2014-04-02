@@ -95,7 +95,7 @@ public class VestiaireModelFragment extends Fragment {
                     /* Tickets de vestiaire */
                     ParseQuery<Vestiaire> query = ParseQuery.getQuery(Vestiaire.class);
                     query.include("participant");
-                    query.whereEqualTo("event", ev);
+                    query.whereEqualTo("event", ev.getObjectId());
                     query.setLimit(1000);
                     query.findInBackground(new FindCallback<Vestiaire>() {
                         @Override

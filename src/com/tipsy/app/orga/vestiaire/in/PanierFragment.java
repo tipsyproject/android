@@ -100,6 +100,8 @@ public class PanierFragment extends Fragment {
                 if(tickets.isEmpty())
                     Toast.makeText(getActivity(), "Aucun ticket défini", Toast.LENGTH_SHORT).show();
                 else {
+                    for(Vestiaire ticket : tickets)
+                        ticket.setParticipant(participant);
                     removeParticipant();
                     listener.onPanierValidated(new ArrayList<Vestiaire>(tickets));
                     tickets.clear();

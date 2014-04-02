@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/layout_item"
-    android:padding="@dimen/activity_margin">
+    android:padding="@dimen/ui_margin">
 
     <TextView
         android:layout_width="match_parent"
@@ -15,6 +15,7 @@
         android:id="@+id/textNumber"
         android:layout_weight="1"
         android:gravity="center"
-        android:textColor="@color/primary" />
+        android:textColor="@color/primary"
+        android:padding="@dimen/activity_margin" />
 
 </LinearLayout>

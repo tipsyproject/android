@@ -140,6 +140,9 @@ public abstract class VestiaireActivity extends FragmentActivity {
     public ArrayList<Participant> getParticipants(){
         return participants;
     }
+    public String getEventId(){
+        return eventId;
+    }
 
     /* Retour à l'activity Event */
     public void quitMode() {

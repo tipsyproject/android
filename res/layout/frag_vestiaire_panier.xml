@@ -39,8 +39,7 @@
         android:id="@+id/listPanier"
         android:choiceMode="singleChoice"
         android:layout_above="@+id/buttonValider"
-        android:layout_below="@+id/layoutParticipant"
-        android:divider="@null" />
+        android:layout_below="@+id/layoutParticipant" />
 
 
 

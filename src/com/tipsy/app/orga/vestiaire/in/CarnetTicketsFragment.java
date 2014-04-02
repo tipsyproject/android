@@ -40,6 +40,7 @@ public class CarnetTicketsFragment extends Fragment {
     public interface CarnetListener {
         public void onTicketChoosen(Vestiaire ticket);
         public ArrayList<Vestiaire> getTickets();
+        public String getEventId();
     }
 
     @Override
@@ -125,7 +126,7 @@ public class CarnetTicketsFragment extends Fragment {
 
     public void numberDefined(int num){
         if(newTicket){
-            listener.onTicketChoosen(new Vestiaire(num));
+            listener.onTicketChoosen(new Vestiaire(num,listener.getEventId()));
         }else{
             genTicketList(num,true);
         }
@@ -134,7 +135,7 @@ public class CarnetTicketsFragment extends Fragment {
     /* Devine le prochain numéro de ticket
         à partir de tous les tickets vendus
      */
-    public int guessNextTicketNumber(){
+    private int guessNextTicketNumber(){
         if(listener.getTickets().isEmpty())
             return 1;
         else {
@@ -152,7 +153,7 @@ public class CarnetTicketsFragment extends Fragment {
         Vestiaire ticket;
         int number = from;
         while(nextTickets.size() < 10){
-            ticket = new Vestiaire(number);
+            ticket = new Vestiaire(number,listener.getEventId());
             /* On affiche seulement des numéros qui ne sont pas
                 en attente d'être validés
                 déjà utilisés
@@ -180,6 +181,11 @@ public class CarnetTicketsFragment extends Fragment {
         nextTickets.add(ticket);
         Collections.sort(nextTickets, Vestiaire.SORT_BY_TICKET);
         listAdapter.notifyDataSetChanged();
+    }
+
+    public void updateCarnet(){
+        /* Génération automatique d'une première liste de tickets */
+        genTicketList(guessNextTicketNumber(),true);
     }
 
     public void clearCommande(){
