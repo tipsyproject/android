@@ -73,7 +73,7 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public boolean hasBracelet(){
-        return getBracelet() != null;
+        return getBracelet() != null && getBracelet() != "";
     }
 
 

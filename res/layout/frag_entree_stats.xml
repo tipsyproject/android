@@ -3,14 +3,14 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:id="@+id/frag_stats"
-    android:background="@color/background_dark_light"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:clickable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true">
+        android:layout_above="@+id/relativeLayout">
 
         <com.todddavies.components.progressbar.ProgressWheel
             android:id="@+id/progressBar"
@@ -45,6 +45,52 @@
                 android:src="@drawable/ic_action_group" />
         </LinearLayout>
 
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="@dimen/activity_margin"
+        android:id="@+id/relativeLayout"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="@dimen/activity_margin">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:id="@+id/imageView2"
+            android:src="@drawable/ic_action_web_site" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Ventes en ligne"
+            android:id="@+id/textView"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView2"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="0"
+            android:id="@+id/textVenteEnLigne"
+            android:textColor="#FFFFFF"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:background="@color/primary"
+            android:paddingLeft="@dimen/activity_margin"
+            android:paddingRight="@dimen/activity_margin"
+            android:paddingTop="@dimen/ui_margin"
+            android:paddingBottom="@dimen/ui_margin" />
     </RelativeLayout>
 
 </RelativeLayout>

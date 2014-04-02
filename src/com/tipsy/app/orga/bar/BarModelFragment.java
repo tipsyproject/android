@@ -10,14 +10,11 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.tipsy.app.orga.vestiaire.VestiaireFragment;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Ticket;
-import com.tipsy.lib.Vestiaire;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**

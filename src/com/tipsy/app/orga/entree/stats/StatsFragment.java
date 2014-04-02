@@ -18,6 +18,7 @@ import com.todddavies.components.progressbar.ProgressWheel;
 public class StatsFragment extends EntreeFragment {
     private ProgressWheel progressWheel;
     private TextView progressText;
+    private TextView textVenteEnLigne;
 
     @SuppressLint("WrongViewCast")
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,6 +27,7 @@ public class StatsFragment extends EntreeFragment {
         /* BARRE DE SUIVI DES ENTREES */
         progressText = (TextView) view.findViewById(R.id.progressText);
         progressWheel = (ProgressWheel) view.findViewById(R.id.progressBar);
+        textVenteEnLigne = (TextView) view.findViewById(R.id.textVenteEnLigne);
         return view;
     }
 
@@ -45,7 +47,10 @@ public class StatsFragment extends EntreeFragment {
         if(entreesTotales > 0)
             progressWheel.setProgress(entreesValidees*360/entreesTotales);
         progressText.setText("" + entreesValidees + "/" + callback.getEntrees().size());
+
+        textVenteEnLigne.setText(Integer.toString(Achat.nombreVenteEnLigne(callback.getEntrees())));
     }
+
 
 }
 

@@ -91,13 +91,6 @@ public class Ticket extends ParseObject implements Parcelable {
         } else callback.done(new ArrayList<Achat>(), null);
     }
 
-    /*
-    public static void loadParticipants(final String tagID, FindCallback<Participant> callback) {
-            ParseQuery<Participant> query = ParseQuery.getQuery(Participant.class);
-            query.whereEqualTo("bracelet",tagID);
-            query.findInBackground(callback);
-    }*/
-
 
     // Implémentation de Parcelable
     @Override

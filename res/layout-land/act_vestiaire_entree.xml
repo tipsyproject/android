@@ -12,7 +12,7 @@
         android:id="@+id/layout">
 
         <fragment
-            class="com.tipsy.app.orga.vestiaire.TicketsFragment"
+            class="com.tipsy.app.orga.vestiaire.in.CarnetTicketsFragment"
             android:id="@+id/fragTickets"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -20,7 +20,7 @@
             tools:layout="@layout/frag_bar_conso" />
 
         <fragment
-            class="com.tipsy.app.orga.vestiaire.PanierFragment"
+            class="com.tipsy.app.orga.vestiaire.in.PanierFragment"
             android:id="@+id/fragPanier"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

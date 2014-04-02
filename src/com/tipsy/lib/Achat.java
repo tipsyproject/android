@@ -7,6 +7,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.tipsy.lib.util.Transaction;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 
 /**
@@ -85,6 +86,14 @@ public class Achat extends ParseObject implements Transaction {
         put("used", used);
     }
 
+    public boolean isWeb() {
+        return getBoolean("web");
+    }
+
+    public void setWeb(boolean web) {
+        put("web", web);
+    }
+
     public int getMontant() {
         return getTicket().getPrix();
     }
@@ -117,6 +126,14 @@ public class Achat extends ParseObject implements Transaction {
             else return one.getParticipant().getFullName().compareTo(other.getParticipant().getFullName());
         }
     };
+
+    public static int nombreVenteEnLigne(ArrayList<Achat> achats){
+        int enligne = 0;
+        for(Achat a: achats)
+            if(a.isWeb())
+                enligne++;
+        return enligne;
+    }
 
 
     // Implémentation de Parcelable

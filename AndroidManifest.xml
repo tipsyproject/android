@@ -146,12 +146,12 @@
             android:screenOrientation="landscape"></activity>
 
         <activity
-            android:name=".orga.vestiaire.ModeEntreeActivity"
+            android:name=".orga.vestiaire.in.ModeInActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"></activity>
 
         <activity
-            android:name=".orga.vestiaire.ModeSortieActivity"
+            android:name=".orga.vestiaire.out.ModeOutActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape"></activity>
 

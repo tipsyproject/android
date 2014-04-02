@@ -70,6 +70,11 @@ public class Vestiaire extends ParseObject implements Parcelable {
     };
 
 
+    public boolean equals(Object o) {
+        return (this.getNumber() == ((Vestiaire) o).getNumber());
+    }
+
+
 
     // Implémentation de Parcelable
     @Override

@@ -14,10 +14,9 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.tipsy.app.R;
-import com.tipsy.app.orga.entree.KOFragment;
-import com.tipsy.app.orga.entree.OKFragment;
 import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.lib.Event;
+import com.tipsy.app.orga.vestiaire.in.ModeInActivity;
+import com.tipsy.app.orga.vestiaire.out.ModeOutActivity;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.Vestiaire;
 import com.tipsy.lib.util.Bracelet;
@@ -27,15 +26,12 @@ import java.util.ArrayList;
 /**
  * Created by tech on 10/03/14.
  */
-public abstract class VestiaireActivity extends FragmentActivity implements VestiaireListener{
+public abstract class VestiaireActivity extends FragmentActivity {
 
     /* Données */
     protected String eventId;
     protected ArrayList<Vestiaire> tickets = new ArrayList<Vestiaire>();
     protected ArrayList<Participant> participants = new ArrayList<Participant>();
-    protected Participant currentParticipant = null;
-    protected int currentNumber;
-    protected ArrayList<Vestiaire> commande = new ArrayList<Vestiaire>();
 
     /* Modèle */
     protected VestiaireModelFragment model;
@@ -94,7 +90,7 @@ public abstract class VestiaireActivity extends FragmentActivity implements Vest
 
     public void modeEntree(){
         overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
-        Intent intent = new Intent(this, ModeEntreeActivity.class);
+        Intent intent = new Intent(this, ModeInActivity.class);
         intent.putExtra("eventId",eventId);
         intent.putExtra("tickets", tickets);
         intent.putExtra("participants", participants);
@@ -103,36 +99,21 @@ public abstract class VestiaireActivity extends FragmentActivity implements Vest
 
     public void modeSortie(){
         overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
-        Intent intent = new Intent(this, ModeSortieActivity.class);
+        Intent intent = new Intent(this, ModeOutActivity.class);
         intent.putExtra("eventId",eventId);
         intent.putExtra("tickets", tickets);
         intent.putExtra("participants", participants);
         startActivity(intent);
     }
 
-    public String getEventId(){
-        return eventId;
-    }
 
-    public ArrayList<Vestiaire> getTickets(){
-        return tickets;
-    }
-
-    public ArrayList<Participant> getParticipants(){
-        return participants;
-    }
-
-    public Participant getCurrentParticipant(){
-        return currentParticipant;
-    }
-
-    public int getCurrentNumber(){
-        return currentNumber;
-    }
 
     public void loadModel(){
         /* Lancement du fragment d'init */
         model = new VestiaireModelFragment();
+        Bundle args = new Bundle();
+        args.putString("eventId",eventId);
+        model.setArguments(args);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
         /* Suppression de l'ancien model */
@@ -145,6 +126,20 @@ public abstract class VestiaireActivity extends FragmentActivity implements Vest
     }
 
 
+    public void onModelUpdated(ArrayList<Vestiaire> tickets, ArrayList<Participant> participants){
+        this.tickets = tickets;
+        this.participants = participants;
+        if(onModelUpdated != null){
+            onModelUpdated.updated();
+        }
+    };
+
+    public ArrayList<Vestiaire> getTickets(){
+        return tickets;
+    }
+    public ArrayList<Participant> getParticipants(){
+        return participants;
+    }
 
     /* Retour à l'activity Event */
     public void quitMode() {
