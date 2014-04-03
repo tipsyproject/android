@@ -37,7 +37,6 @@
     <color name="text_normal_dark">@color/background_light</color>
     <color name="text_normal_light">@color/background_dark</color>
     <color name="text_not_important_dark">@color/secondary</color>
-
     <color name="background_dark_shadow">#29303B</color>
 
 

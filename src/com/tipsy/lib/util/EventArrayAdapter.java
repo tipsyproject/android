@@ -48,12 +48,16 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         TextView nomEvent = (TextView) viewEvent.findViewById(R.id.nom_event);
         nomEvent.setText(events.get(position).getNom());
 
-        TextView lieuEvent = (TextView) viewEvent.findViewById(R.id.lieu_event);
-        lieuEvent.setText(events.get(position).getLieu());
+        if(events.get(position).getLieu() != "") {
+            TextView lieuEvent = (TextView) viewEvent.findViewById(R.id.lieu_event);
+            lieuEvent.setText(events.get(position).getLieu());
+        }
 
-        SimpleDateFormat f = new SimpleDateFormat("EEE dd MMM - kk:mm");
-        TextView dateEvent = (TextView) viewEvent.findViewById(R.id.date_event);
-        dateEvent.setText(f.format(events.get(position).getDebut()));
+        if(events.get(position).getDebut() != null) {
+            SimpleDateFormat f = new SimpleDateFormat("EEE dd MMM - kk:mm");
+            TextView dateEvent = (TextView) viewEvent.findViewById(R.id.date_event);
+            dateEvent.setText(f.format(events.get(position).getDebut()));
+        }
 
         return viewEvent;
     }

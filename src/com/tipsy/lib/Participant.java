@@ -40,7 +40,15 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public String getNom() {
-        return getString("nom").toUpperCase();
+        String nom;
+        if(getString("nom").isEmpty())
+            nom = "";
+        else {
+            nom = Character.toUpperCase(getString("nom").charAt(0)) + "";
+            if(getString("nom").length() > 1)
+                nom += getString("nom").substring(1).toLowerCase();
+        }
+        return nom;
     }
 
     public void setNom(String nom) {
@@ -49,10 +57,15 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public String getPrenom() {
+        String prenom;
         if(getString("prenom").isEmpty())
-            return "";
-        else
-            return Character.toUpperCase(getString("prenom").charAt(0)) + getString("prenom").substring(1).toLowerCase();
+            prenom = "";
+        else {
+            prenom = Character.toUpperCase(getString("prenom").charAt(0)) + "";
+            if(getString("prenom").length() > 1)
+                prenom += getString("prenom").substring(1).toLowerCase();
+        }
+        return prenom;
     }
 
     public void setPrenom(String prenom) {
