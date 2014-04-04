@@ -18,7 +18,12 @@ import com.tipsy.app.R;
 public class TicketNumberFragment extends DialogFragment {
 
     private EditText number;
-    TicketNumberListener listener;
+    private TicketNumberListener listener;
+    private String title;
+
+    public TicketNumberFragment(String title){
+        this.title = title;
+    }
 
     public interface TicketNumberListener {
         public void onNumberDefined(int num);
@@ -48,6 +53,7 @@ public class TicketNumberFragment extends DialogFragment {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder
+            .setTitle(title)
             .setView(view)
             .setPositiveButton("Valider", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int id) {

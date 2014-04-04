@@ -124,9 +124,4 @@ public class ModeInActivity extends VestiaireActivity implements
             }
         };
     }
-    @Override
-    public void onStop(){
-        onModelUpdated = null;
-        super.onStop();
-    }
 }

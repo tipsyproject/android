@@ -9,10 +9,4 @@
         android:id="@+id/list"
         android:choiceMode="singleChoice" />
 
-    <TextView android:id="@id/android:empty"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Aucune entrée vendue."
-        android:gravity="center" />
-
 </LinearLayout>

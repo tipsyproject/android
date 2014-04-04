@@ -65,7 +65,7 @@ public class CarnetTicketsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 newTicket = true;
-                DialogFragment newFragment = new TicketNumberFragment();
+                DialogFragment newFragment = new TicketNumberFragment("Ajouter un ticket");
                 newFragment.show(getChildFragmentManager(), "numberpicker");
             }
         });
@@ -75,7 +75,7 @@ public class CarnetTicketsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 newTicket = false;
-                DialogFragment newFragment = new TicketNumberFragment();
+                DialogFragment newFragment = new TicketNumberFragment("Changer numéro");
                 newFragment.show(getChildFragmentManager(), "numberpicker");
             }
         });

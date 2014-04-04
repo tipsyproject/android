@@ -208,6 +208,7 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
             public void onClick(DialogInterface dialog, int id) {
             }
         });
+        builder.setTitle("Quitter");
         builder.setMessage("Vous allez quitter le mode Entrée.");
         builder.show();
     }

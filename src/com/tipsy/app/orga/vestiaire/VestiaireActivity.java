@@ -159,6 +159,7 @@ public abstract class VestiaireActivity extends FragmentActivity {
             public void onClick(DialogInterface dialog, int id) {
             }
         });
+        builder.setTitle("Quitter");
         builder.setMessage("Vous allez quitter le mode Vestiaire.");
         builder.show();
     }
@@ -182,10 +183,27 @@ public abstract class VestiaireActivity extends FragmentActivity {
                 quitMode();
                 return true;
             case R.id.action_switch:
-                if(isModeEntree())
-                    modeSortie();
-                else
-                    modeEntree();
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if(isModeEntree())
+                            modeSortie();
+                        else
+                            modeEntree();
+                    }
+                });
+                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                    }
+                });
+                if(isModeEntree()){
+                    builder.setTitle("Mode Sortie");
+                    builder.setMessage("Vous allez basculer vers le mode Sortie");
+                }else{
+                    builder.setTitle("Mode Entrée");
+                    builder.setMessage("Vous allez basculer vers le mode Entrée");
+                }
+                builder.show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -218,5 +236,11 @@ public abstract class VestiaireActivity extends FragmentActivity {
         adapter.disableForegroundDispatch(this);
         Log.d("TOUTAFAIT", "NFC Inactif");
         super.onPause();
+    }
+
+    @Override
+    public void onStop(){
+        onModelUpdated = null;
+        super.onStop();
     }
 }

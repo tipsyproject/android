@@ -114,6 +114,16 @@ public class Achat extends ParseObject implements Transaction {
         return getUser() != null;
     }
 
+
+
+    public static int nombreVenteEnLigne(ArrayList<Achat> achats){
+        int enligne = 0;
+        for(Achat a: achats)
+            if(a.isWeb())
+                enligne++;
+        return enligne;
+    }
+
     /* Tri par ordre alphabetique des prénoms */
     public static Comparator<Achat> SORT_BY_FULLNAME = new Comparator<Achat>() {
         public int compare(Achat one, Achat other) {
@@ -126,14 +136,6 @@ public class Achat extends ParseObject implements Transaction {
             else return one.getParticipant().getFullName().compareTo(other.getParticipant().getFullName());
         }
     };
-
-    public static int nombreVenteEnLigne(ArrayList<Achat> achats){
-        int enligne = 0;
-        for(Achat a: achats)
-            if(a.isWeb())
-                enligne++;
-        return enligne;
-    }
 
 
     // Implémentation de Parcelable

@@ -4,41 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:orientation="horizontal"
     android:id="@+id/layout">
 
-    <!--
     <fragment
-        class="com.tipsy.app.orga.bar.BarNFCFragment"
-        android:id="@+id/frag_nfc"
+        class="com.tipsy.app.orga.vestiaire.out.ListeVestiaireFragment"
+        android:id="@+id/fragListe"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        tools:layout="@layout/frag_bar_nfc" />
-    -->
-    <!--
-    <fragment
-        class="com.tipsy.app.orga.vestiaire.in.CarnetTicketsFragmentagment"
-        android:id="@+id/frag_conso"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout="@layout/frag_bar_conso"
-        android:layout_weight="0.4" />
+        android:layout_weight="0.5"
+        tools:layout="@layout/frag_entree_mode_liste" />
 
-    <fragment
-        class="com.tipsy.app.orga.vestiaire.in.PanierFragment"
-        android:id="@+id/frag_panier"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.6"
-        android:layout_gravity="center"
-        tools:layout="@layout/frag_bar_panier" /> -->
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="mode sortie"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
 </LinearLayout>

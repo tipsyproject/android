@@ -5,31 +5,34 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:orientation="vertical"
+        android:orientation="horizontal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:id="@+id/linearLayout">
+        android:id="@+id/linearLayout"
+        android:padding="@dimen/activity_margin">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Numéro de ticket"
+            android:text="N°"
             android:id="@+id/textView"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:layout_alignTop="@+id/linearLayout"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/activity_margin" />
+            android:layout_marginBottom="@dimen/activity_margin"
+            android:textColor="#FFFFFF" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/textNumber" />
+            android:id="@+id/textNumber"
+            android:layout_marginLeft="@dimen/activity_margin" />
     </LinearLayout>
 
 </RelativeLayout>

@@ -26,6 +26,7 @@ public class Vestiaire extends ParseObject implements Parcelable {
     public Vestiaire(int number,String eventId){
         setNumber(number);
         setEventId(eventId);
+        setRendu(false);
     }
 
     public String getEventId() {
@@ -34,6 +35,13 @@ public class Vestiaire extends ParseObject implements Parcelable {
 
     public void setEventId(String eventId) {
         put("event", eventId);
+    }
+
+    public boolean isRendu(){
+        return getBoolean("rendu");
+    }
+    public void setRendu(boolean rendu){
+        put("rendu",rendu);
     }
 
     public int getNumber() {
