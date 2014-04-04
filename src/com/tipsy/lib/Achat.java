@@ -151,6 +151,7 @@ public class Achat extends ParseObject implements Transaction {
         dest.writeParcelable(getPaiementParticipant(), flags);
         dest.writeParcelable(getTicket(), flags);
         dest.writeValue(isUsed());
+        dest.writeValue(isWeb());
     }
 
     public Achat(Parcel in) {
@@ -161,6 +162,7 @@ public class Achat extends ParseObject implements Transaction {
         setPaiementParticipant((Participant) in.readParcelable(Participant.class.getClassLoader()));
         setTicket((Ticket) in.readParcelable(Ticket.class.getClassLoader()));
         setUsed((Boolean) in.readValue(Boolean.class.getClassLoader()));
+        setWeb((Boolean) in.readValue(Boolean.class.getClassLoader()));
     }
 
     public static final Parcelable.Creator<Achat> CREATOR = new Parcelable.Creator<Achat>() {
