@@ -28,13 +28,8 @@ public class StatsFragment extends EntreeFragment {
         progressText = (TextView) view.findViewById(R.id.progressText);
         progressWheel = (ProgressWheel) view.findViewById(R.id.progressBar);
         textVenteEnLigne = (TextView) view.findViewById(R.id.textVenteEnLigne);
-        return view;
-    }
 
-    @Override
-    public void onResume(){
-        super.onResume();
-        updateProgress();
+        return view;
     }
 
     /* MISE A JOUR DE LA BARRE DE PROGRESSION */

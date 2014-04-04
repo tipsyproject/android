@@ -31,6 +31,16 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
     }
 
     @Override
+    public int getCount() {
+        return filteredEntrees.size();
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

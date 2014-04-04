@@ -24,7 +24,15 @@ public class ModeListeActivity extends EntreeActivity {
     }
 
     public void modelUpdated(){
+        fragListe.getEntreeAdapter().getFilter().filter("");
         fragListe.getEntreeAdapter().notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void onStart(){
+        super.onStart();
+        modelUpdated();
     }
 
     /* Permet au fragment EntreeMenuFragment d'afficher le bon onglet */
