@@ -7,12 +7,12 @@
     <ImageButton
         style="@style/ButtonCurrentMode"
         android:id="@+id/button_stats"
-        android:src="@drawable/ic_action_network_cell" />
+        android:src="@drawable/ic_action_line_chart" />
 
     <ImageButton
         style="@style/ButtonOtherMode"
         android:id="@+id/button_qrcode"
-        android:src="@drawable/ic_action_location_found" />
+        android:src="@drawable/ic_action_barcode_2" />
 
     <ImageButton
         style="@style/ButtonOtherMode"
