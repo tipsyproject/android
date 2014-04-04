@@ -46,6 +46,12 @@ public class StatsFragment extends EntreeFragment {
         textVenteEnLigne.setText(Integer.toString(Achat.nombreVenteEnLigne(callback.getEntrees())));
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+        updateProgress();
+    }
+
 
 }
 
