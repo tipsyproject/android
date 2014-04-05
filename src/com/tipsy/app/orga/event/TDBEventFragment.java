@@ -44,16 +44,20 @@ public class TDBEventFragment extends Fragment {
         nomEvent.setText(callback.getEvent().getNom());
 
 
-        TextView lieuEvent = (TextView) view.findViewById(R.id.lieu_event);
-        lieuEvent.setText(callback.getEvent().getLieu());
+        if(callback.getEvent().getLieu() != null) {
+            TextView lieuEvent = (TextView) view.findViewById(R.id.lieu_event);
+            lieuEvent.setText(callback.getEvent().getLieu());
+        }
 
-        SimpleDateFormat f_date = new SimpleDateFormat("EEE dd MMM");
-        TextView dateEvent = (TextView) view.findViewById(R.id.date_event);
-        dateEvent.setText(f_date.format(callback.getEvent().getDebut()));
+        if(callback.getEvent().getDebut() != null) {
+            SimpleDateFormat f_date = new SimpleDateFormat("EEE dd MMM");
+            TextView dateEvent = (TextView) view.findViewById(R.id.date_event);
+            dateEvent.setText(f_date.format(callback.getEvent().getDebut()));
 
-        SimpleDateFormat f_hour = new SimpleDateFormat("kk:mm");
-        TextView hourEvent = (TextView) view.findViewById(R.id.debut_event);
-        hourEvent.setText(f_hour.format(callback.getEvent().getDebut()));
+            SimpleDateFormat f_hour = new SimpleDateFormat("kk:mm");
+            TextView hourEvent = (TextView) view.findViewById(R.id.debut_event);
+            hourEvent.setText(f_hour.format(callback.getEvent().getDebut()));
+        }
 
 
         LinearLayout buttonEntree = (LinearLayout) view.findViewById(R.id.buttonEntree);
