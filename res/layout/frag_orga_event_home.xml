@@ -213,8 +213,9 @@
             android:id="@+id/buttonEntree">
 
             <LinearLayout
-                android:layout_width="80dp"
+                android:layout_width="fill_parent"
                 android:gravity="center"
+                android:layout_weight="0.78"
                 android:background="@color/danger"
                 android:layout_height="fill_parent">
 
@@ -231,6 +232,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_weight="0.22"
                 android:gravity="center"
                 android:background="@color/background_dark_light">
 
@@ -254,8 +256,9 @@
             android:id="@+id/buttonBar">
 
             <LinearLayout
-                android:layout_width="80dp"
+                android:layout_width="fill_parent"
                 android:gravity="center"
+                android:layout_weight="0.78"
                 android:background="@color/primary"
                 android:layout_height="fill_parent">
 
@@ -272,6 +275,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_weight="0.22"
                 android:gravity="center"
                 android:background="@color/background_dark">
 
@@ -295,8 +299,9 @@
             android:id="@+id/buttonVestiaire">
 
             <LinearLayout
-                android:layout_width="80dp"
+                android:layout_width="fill_parent"
                 android:gravity="center"
+                android:layout_weight="0.78"
                 android:background="@color/success"
                 android:layout_height="fill_parent">
 
@@ -313,6 +318,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_weight="0.22"
                 android:gravity="center"
                 android:background="@color/background_dark_light">
 
@@ -337,8 +343,9 @@
             android:id="@+id/buttonAlcooTips">
 
             <LinearLayout
-                android:layout_width="80dp"
+                android:layout_width="fill_parent"
                 android:gravity="center"
+                android:layout_weight="0.78"
                 android:background="@color/warning"
                 android:layout_height="fill_parent">
 
@@ -355,6 +362,7 @@
                 android:orientation="vertical"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:layout_weight="0.22"
                 android:gravity="center"
                 android:background="@color/background_dark">
 
