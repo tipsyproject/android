@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <RelativeLayout
+        android:layout_weight="0.5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/event">
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="250dp"
+            android:layout_height="fill_parent"
             android:id="@+id/imageView"
             android:src="@drawable/os"
             android:scaleType="centerCrop" />
@@ -202,6 +203,7 @@
         android:layout_height="match_parent"
         android:stretchColumns="*"
         android:shrinkColumns="*"
+        android:layout_weight="0.5"
         android:layout_below="@+id/event">
 
         <TableRow android:layout_weight="1">
@@ -379,4 +381,4 @@
         </TableRow>
     </TableLayout>
 
-</RelativeLayout>
+</LinearLayout>
