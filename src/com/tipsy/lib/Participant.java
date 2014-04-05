@@ -90,6 +90,18 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
 
+    /* Tri par ordre alphabetique des prénoms */
+    public static Comparator<Participant> SORT_BY_FULLNAME = new Comparator<Participant>() {
+        public int compare(Participant one, Participant other) {
+            return one.getFullName().compareTo(other.getFullName());
+        }
+    };
+
+    @Override
+    public boolean equals(Object o) {
+        return (this.getObjectId() == ((Participant) o).getObjectId());
+    }
+
     // Implémentation de Parcelable
     @Override
     public int describeContents() {

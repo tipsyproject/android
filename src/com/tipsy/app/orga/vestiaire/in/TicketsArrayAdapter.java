@@ -28,8 +28,12 @@ public class TicketsArrayAdapter extends ArrayAdapter<Vestiaire> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View view = inflater.inflate(R.layout.frag_vestiaire_ticket, parent, false);
+        View view = convertView;
+
+        if(view == null) {
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            view = inflater.inflate(R.layout.frag_vestiaire_ticket, parent, false);
+        }
 
         TextView textTicket = (TextView) view.findViewById(R.id.textTicket);
 

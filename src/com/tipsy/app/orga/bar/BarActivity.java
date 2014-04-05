@@ -289,6 +289,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
             public void onClick(DialogInterface dialog, int id) {
             }
         });
+        builder.setTitle("Quitter");
         builder.setMessage("Vous allez quitter le mode Bar.");
         builder.show();
     }
