@@ -82,7 +82,7 @@ public class Participant extends ParseObject implements Parcelable {
 
     public String getFullName(){
         if(isAnonymous()){
-            return "Xxxx XXXX";
+            return "zzzzNoNamezzzz";
         }else{
             return getPrenom() + " " + getNom();
         }

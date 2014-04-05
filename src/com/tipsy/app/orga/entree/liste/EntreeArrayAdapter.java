@@ -27,12 +27,12 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
         super(context, R.layout.frag_entree, entrees);
         this.context = context;
         this.entrees = entrees;
-        this.filteredEntrees = new ArrayList<Achat>(entrees);
+        //this.filteredEntrees = new ArrayList<Achat>(entrees);
     }
 
     @Override
     public int getCount() {
-        return filteredEntrees.size();
+        return entrees.size();
     }
 
     @Override
@@ -47,7 +47,8 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
         View view = inflater.inflate(R.layout.frag_entree, parent, false);
 
 
-        Achat entree = filteredEntrees.get(position);
+        //Achat entree = filteredEntrees.get(position);
+        Achat entree = entrees.get(position);
 
         TextView nomParticipant = (TextView) view.findViewById(R.id.participant);
 
@@ -58,7 +59,7 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
 
         return view;
     }
-
+    /*
     @Override
     public Filter getFilter() {
 
@@ -95,5 +96,5 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
         };
 
         return filter;
-    }
+    }*/
 }
