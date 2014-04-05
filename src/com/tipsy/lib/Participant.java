@@ -35,8 +35,9 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public void setEmail(String email) {
-        if(email != null)
-            put("email", email);
+        if(email == null)
+            email = "";
+        put("email", email);
     }
 
     public String getNom() {
@@ -52,8 +53,9 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public void setNom(String nom) {
-        if(nom != null)
-            put("nom", nom);
+        if(nom == null)
+            nom = "";
+        put("nom", nom);
     }
 
     public String getPrenom() {
@@ -69,8 +71,9 @@ public class Participant extends ParseObject implements Parcelable {
     }
 
     public void setPrenom(String prenom) {
-        if(prenom != null)
-            put("prenom", prenom);
+        if(prenom == null)
+            prenom = "";
+        put("prenom", prenom);
     }
 
     public boolean isAnonymous(){

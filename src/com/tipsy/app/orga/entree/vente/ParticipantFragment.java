@@ -55,8 +55,10 @@ public class ParticipantFragment extends EntreeFragment implements Validator.Val
     }
 
     public void onValidationSucceeded() {
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
+        }catch(Exception e){}
 
         // On recupère le contenu des champs
         Participant p = callback.getPrevente().getParticipant();

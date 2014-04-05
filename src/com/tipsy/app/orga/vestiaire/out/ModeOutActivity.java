@@ -10,7 +10,7 @@ import com.tipsy.app.orga.vestiaire.VestiaireActivity;
 /**
  * Created by tech on 10/03/14.
  */
-public class ModeOutActivity extends VestiaireActivity //implements ListeVestiaireFragment.ListeVestiaireListener
+public class ModeOutActivity extends VestiaireActivity
 {
 
     //private ListeVestiaireFragment fragListe;
@@ -27,12 +27,12 @@ public class ModeOutActivity extends VestiaireActivity //implements ListeVestiai
     @Override
     public void onStart(){
         super.onStart();
-        onModelUpdated = new ModelCallback() {
+        /*onModelUpdated = new ModelCallback() {
             @Override
             public void updated() {
-                //fragListe.update();
+                fragListe.update();
             }
-        };
+        };*/
     }
 
     public boolean isModeEntree(){
