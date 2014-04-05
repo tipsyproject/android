@@ -202,6 +202,7 @@ public abstract class EntreeActivity extends FragmentActivity implements EntreeL
                 Intent intent = new Intent(EntreeActivity.this, EventOrgaActivity.class);
                 intent.putExtra("EVENT_ID", eventId);
                 startActivity(intent);
+                finish();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

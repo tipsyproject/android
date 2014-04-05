@@ -93,7 +93,6 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
         backToOrga();
     }
 
@@ -122,11 +121,9 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         return event;
     }
 
-    public void home(boolean addTobackStack) {
+    public void home() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new TDBEventFragment());
-        if (addTobackStack)
-            ft.addToBackStack(null);
         ft.commit();
     }
 
@@ -135,18 +132,21 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         Intent intent = new Intent(this, ModeStatsActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
+        finish();
     }
 
     public void goToBar() {
         Intent intent = new Intent(this, BarActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
+        finish();
     }
 
     public void goToVestiaire() {
         Intent intent = new Intent(this, ModeInActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
+        finish();
     }
 
     // Modification d'un événement
@@ -154,11 +154,14 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         Intent intent = new Intent(this, EditEventActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
+        finish();
     }
 
     public void backToOrga() {
         overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
         Intent intent = new Intent(this, OrgaActivity.class);
         startActivity(intent);
+        finish();
+        getSupportFragmentManager().popBackStack();
     }
 }

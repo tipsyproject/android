@@ -74,6 +74,8 @@ public class HomeOrgaFragment extends ListFragment {
 
     public void onBackPressed() {
         //if (delete.getVisibility() == View.VISIBLE)
+        getActivity().overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
+        getActivity().finish();
     }
 
     @Override

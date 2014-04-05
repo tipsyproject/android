@@ -93,11 +93,6 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         }
     }
 
-    /*
-    @Override
-    public void onBackPressed(){
-    }*/
-
     @Override
     public void onSaveInstanceState(Bundle outState) {
         if (outState == null)
@@ -149,6 +144,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         Intent intent = new Intent(this, EventOrgaActivity.class);
         intent.putExtra("EVENT_ID", events.get(index).getObjectId());
         startActivity(intent);
+        finish();
     }
 
     // Clique sur le bouton "Créer un événement" ou Modifications de l'event
@@ -156,6 +152,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
         Intent intent = new Intent(this, EditEventActivity.class);
         intent.putExtra("NEW_EVENT", true);
         startActivity(intent);
+        finish();
     }
 
     public void tableauDeBord(boolean addToBackStack) {

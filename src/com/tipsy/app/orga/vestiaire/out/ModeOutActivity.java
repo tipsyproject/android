@@ -10,11 +10,10 @@ import com.tipsy.app.orga.vestiaire.VestiaireActivity;
 /**
  * Created by tech on 10/03/14.
  */
-public class ModeOutActivity extends VestiaireActivity implements
-        ListeVestiaireFragment.ListeVestiaireListener
+public class ModeOutActivity extends VestiaireActivity //implements ListeVestiaireFragment.ListeVestiaireListener
 {
 
-    private ListeVestiaireFragment fragListe;
+    //private ListeVestiaireFragment fragListe;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -22,7 +21,7 @@ public class ModeOutActivity extends VestiaireActivity implements
         setContentView(R.layout.act_vestiaire_sortie);
         /* Chargement des fragments */
         FragmentManager fm = getSupportFragmentManager();
-        fragListe = (ListeVestiaireFragment) fm.findFragmentById(R.id.fragListe);
+        //fragListe = (ListeVestiaireFragment) fm.findFragmentById(R.id.fragListe);
     }
 
     @Override
@@ -31,7 +30,7 @@ public class ModeOutActivity extends VestiaireActivity implements
         onModelUpdated = new ModelCallback() {
             @Override
             public void updated() {
-                fragListe.update();
+                //fragListe.update();
             }
         };
     }

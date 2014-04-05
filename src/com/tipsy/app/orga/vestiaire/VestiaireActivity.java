@@ -153,6 +153,7 @@ public abstract class VestiaireActivity extends FragmentActivity {
                 Intent intent = new Intent(VestiaireActivity.this, EventOrgaActivity.class);
                 intent.putExtra("EVENT_ID", eventId);
                 startActivity(intent);
+                finish();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {

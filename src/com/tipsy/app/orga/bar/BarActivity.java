@@ -283,6 +283,7 @@ public class BarActivity extends FragmentActivity implements BarListener {
                 Intent intent = new Intent(BarActivity.this, EventOrgaActivity.class);
                 intent.putExtra("EVENT_ID", eventId);
                 startActivity(intent);
+                finish();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
