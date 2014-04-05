@@ -17,6 +17,7 @@ public class ModeListeActivity extends EntreeActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(ModeListeActivity.class, savedInstanceState);
+        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
         fragListe = new ListeFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.add(R.id.mode_container, fragListe);

@@ -31,6 +31,7 @@ public class ModeQRCodeActivity extends EntreeActivity implements IScanResultHan
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(ModeQRCodeActivity.class, savedInstanceState);
+        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
         fragBarcode = new BarcodeFragment();
         /* Association du fragment QRCode avec l'activité */
         fragBarcode.setScanResultHandler(this);

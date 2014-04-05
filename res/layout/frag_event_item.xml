@@ -11,7 +11,6 @@
         android:layout_height="fill_parent"
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:layout_margin="7dp"
         android:scaleType="centerCrop">
 
 
@@ -19,15 +18,15 @@
             android:orientation="horizontal"
             android:id="@+id/layout_color"
             android:layout_width="match_parent"
+            android:background="@color/background_dark"
             android:gravity="center"
-            android:padding="8dp"
             android:layout_height="120dp">
 
             <ImageView
                 android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_height="match_parent"
                 android:id="@+id/imageView"
-                android:src="@drawable/last_bg_flou"
+                android:src="@drawable/os"
                 android:scaleType="centerCrop"
                 android:layout_marginRight="8dp" />
 
@@ -55,14 +54,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/imageView3"
-                        android:src="@drawable/ic_action_go_to_today_dark" />
+                        android:src="@drawable/ic_action_go_to_today" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Mon Event"
                         android:id="@+id/date_event"
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/background_light"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:gravity="center_vertical" />
                 </LinearLayout>
@@ -76,14 +75,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:id="@+id/imageView2"
-                        android:src="@drawable/ic_action_place_dark" />
+                        android:src="@drawable/ic_action_place" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:text="Mon Event"
                         android:id="@+id/lieu_event"
-                        android:textColor="@color/secondary"
+                        android:textColor="@color/background_light"
                         android:textAppearance="?android:attr/textAppearanceSmall"
                         android:gravity="center_vertical" />
 

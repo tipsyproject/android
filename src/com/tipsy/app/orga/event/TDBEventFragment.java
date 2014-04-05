@@ -40,10 +40,10 @@ public class TDBEventFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_orga_event_home, container, false);
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
-        TextView nomEvent = (TextView) view.findViewById(R.id.textEvent);
+        TextView nomEvent = (TextView) view.findViewById(R.id.nom_event);
         nomEvent.setText(callback.getEvent().getNom());
 
-        /*
+
         TextView lieuEvent = (TextView) view.findViewById(R.id.lieu_event);
         lieuEvent.setText(callback.getEvent().getLieu());
 
@@ -55,8 +55,8 @@ public class TDBEventFragment extends Fragment {
         TextView hourEvent = (TextView) view.findViewById(R.id.debut_event);
         hourEvent.setText(f_hour.format(callback.getEvent().getDebut()));
 
-        */
-        Button buttonEntree = (Button) view.findViewById(R.id.buttonEntree);
+
+        LinearLayout buttonEntree = (LinearLayout) view.findViewById(R.id.buttonEntree);
         buttonEntree.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToEntree();
@@ -64,7 +64,7 @@ public class TDBEventFragment extends Fragment {
         });
 
 
-        Button buttonBar = (Button) view.findViewById(R.id.buttonBar);
+        LinearLayout buttonBar = (LinearLayout) view.findViewById(R.id.buttonBar);
         buttonBar.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToBar();
@@ -73,7 +73,7 @@ public class TDBEventFragment extends Fragment {
 
 
 
-        Button buttonVestiaire = (Button) view.findViewById(R.id.buttonVestiaire);
+        LinearLayout buttonVestiaire = (LinearLayout) view.findViewById(R.id.buttonVestiaire);
         buttonVestiaire.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 callback.goToVestiaire();
@@ -81,7 +81,7 @@ public class TDBEventFragment extends Fragment {
         });
 
 
-        Button buttonAlcooTips = (Button) view.findViewById(R.id.buttonAlcooTips);
+        LinearLayout buttonAlcooTips = (LinearLayout) view.findViewById(R.id.buttonAlcooTips);
         buttonAlcooTips.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();

@@ -17,6 +17,7 @@ public class ModeStatsActivity extends EntreeActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(ModeStatsActivity.class, savedInstanceState);
+        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
         /* Init des fragments */
         fragStats = new StatsFragment();
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();

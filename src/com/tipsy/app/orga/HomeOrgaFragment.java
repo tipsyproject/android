@@ -38,7 +38,7 @@ public class HomeOrgaFragment extends ListFragment {
         setListAdapter(adapter);
 
         //delete = (Button) getListView().findViewById(R.id.delete);
-        getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        /*getListView().setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
                 final LinearLayout layout_color = (LinearLayout) view.findViewById(R.id.layout_color);
@@ -54,7 +54,7 @@ public class HomeOrgaFragment extends ListFragment {
                 }
                 return true;
             }
-        });
+        });*/
 
         setEmptyText(getString(R.string.empty_liste_event));
     }

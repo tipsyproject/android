@@ -34,6 +34,7 @@ public class ModeVenteActivity extends EntreeActivity implements ModeVenteListen
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(ModeVenteActivity.class, savedInstanceState);
+        overridePendingTransition(R.animator.fade_in, R.animator.fade_out);
         fragWait = new WaitFragment();
         fragTarifs = new TarifsFragment();
         fragParticipant = new ParticipantFragment();

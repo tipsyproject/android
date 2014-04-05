@@ -13,7 +13,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/event_flyer_height"
             android:id="@+id/imageView"
-            android:src="@drawable/last_bg_flou"
+            android:src="@drawable/os"
             android:scaleType="centerCrop" />
 
         <FrameLayout

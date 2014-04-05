@@ -31,6 +31,7 @@ public class MainActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         Parse.initialize(this, "pcMVnVGR9jVH5yjuGbtfZYsdUfrQadWMiaHvjkYH", "GDauifCqWNi5F3ocuvgn9wYqvn63OeXNHJDw1f7S");
 
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_loading);
 
         super.onCreate(savedInstanceState);
