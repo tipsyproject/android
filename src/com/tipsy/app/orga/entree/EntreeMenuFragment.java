@@ -107,5 +107,6 @@ public class EntreeMenuFragment extends EntreeFragment {
         intent.putExtra("billetterie", callback.getBilletterie());
         intent.putExtra("entrees", callback.getEntrees());
         startActivity(intent);
+        getActivity().finish();
     }
 }

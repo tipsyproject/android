@@ -357,7 +357,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_lab"
+                    android:src="@drawable/ic_action_car"
                     android:scaleType="centerCrop"
                     android:layout_marginRight="8dp" />
 
