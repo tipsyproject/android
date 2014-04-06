@@ -108,6 +108,8 @@ public class Vestiaire extends ParseObject implements Parcelable {
         dest.writeString(getEventId());
         dest.writeInt(getNumber());
         dest.writeParcelable(getParticipant(), flags);
+        dest.writeValue(isRendu());
+        dest.writeInt(getType());
     }
 
     public Vestiaire(Parcel in) {
@@ -115,6 +117,8 @@ public class Vestiaire extends ParseObject implements Parcelable {
         setEventId(in.readString());
         setNumber(in.readInt());
         setParticipant((Participant) in.readParcelable(Participant.class.getClassLoader()));
+        setRendu((Boolean) in.readValue(Boolean.class.getClassLoader()));
+        setType(in.readInt());
     }
 
     public static final Creator<Vestiaire> CREATOR = new Creator<Vestiaire>() {

@@ -102,7 +102,7 @@ public class Participant extends ParseObject implements Parcelable {
 
     @Override
     public boolean equals(Object o) {
-        return (this.getObjectId() == ((Participant) o).getObjectId());
+        return (this.getObjectId().equals(((Participant) o).getObjectId()));
     }
 
     // Implémentation de Parcelable

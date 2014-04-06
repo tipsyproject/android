@@ -42,6 +42,9 @@ public class PanierVestiaireAdapter extends ArrayAdapter<Vestiaire> {
         else
             iconTicket.setImageResource(R.drawable.ic_action_basket);
 
+        if(ticket.isRendu())
+            textNumber.setTextColor(context.getResources().getColor(R.color.secondary));
+
         textNumber.setText(Integer.toString(ticket.getNumber()));
         return view;
     }

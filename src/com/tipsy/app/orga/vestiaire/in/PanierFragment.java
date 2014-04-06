@@ -120,6 +120,12 @@ public class PanierFragment extends Fragment {
         panierAdapter.notifyDataSetChanged();
     }
 
+    public void addAll(ArrayList<Vestiaire> tickets){
+        for(Vestiaire ticket : tickets)
+            this.tickets.add(ticket);
+        panierAdapter.notifyDataSetChanged();
+    }
+
     public void setParticipant(Participant p){
         participant = p;
         enableValidation();

@@ -33,6 +33,7 @@ public class CarnetFragment extends Fragment {
     private Carnet carnetVetements;
     private Carnet carnetSacs;
     private Carnet currentCarnet;
+    private int currentCarnetType;
 
     /* Pour connaitre l'action à effectuer
     lorsqu'un numéro est généré via la dialog */
@@ -102,12 +103,20 @@ public class CarnetFragment extends Fragment {
         });
 
 
-
-
-
-
-        carnetVetements = new Carnet(listener.getEventId(),Vestiaire.VETEMENTS);
-        carnetSacs = new Carnet(listener.getEventId(),Vestiaire.SACS);
+        /*
+        if(savedInstanceState != null){
+            carnetVetements = savedInstanceState.getParcelable("carnetVetements");
+            carnetSacs = savedInstanceState.getParcelable("carnetSacs");
+            currentCarnetType = savedInstanceState.getInt("currentCarnetType");
+        }else {
+            carnetVetements = new Carnet(listener.getEventId(), Vestiaire.VETEMENTS);
+            carnetSacs = new Carnet(listener.getEventId(), Vestiaire.SACS);
+            currentCarnetType = Vestiaire.VETEMENTS;
+        }
+        currentCarnet = (currentCarnetType == Vestiaire.VETEMENTS) ? carnetVetements : carnetSacs;
+        */
+        carnetVetements = new Carnet(listener.getEventId(), Vestiaire.VETEMENTS);
+        carnetSacs = new Carnet(listener.getEventId(), Vestiaire.SACS);
         currentCarnet = carnetVetements;
 
         ListView listView = (ListView) view.findViewById(R.id.listTickets);
@@ -147,6 +156,8 @@ public class CarnetFragment extends Fragment {
             }
         });
 
+
+        //setCarnet(currentCarnetType);
         setCarnet(Vestiaire.VETEMENTS);
         return view;
     }
@@ -187,4 +198,16 @@ public class CarnetFragment extends Fragment {
         listAdapter.useCarnet(currentCarnet);
         listAdapter.notifyDataSetChanged();
     }
+
+
+    /*
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        if (outState == null)
+            outState = new Bundle();
+        outState.putParcelable("carnetVetements", carnetVetements);
+        outState.putParcelable("carnetSacs", carnetSacs);
+        outState.putInt("currentCarnetType", currentCarnetType);
+        super.onSaveInstanceState(outState);
+    }*/
 }

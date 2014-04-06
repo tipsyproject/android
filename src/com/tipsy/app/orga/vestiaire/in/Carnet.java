@@ -1,5 +1,8 @@
 package com.tipsy.app.orga.vestiaire.in;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.tipsy.lib.Vestiaire;
 
 import java.util.ArrayList;
@@ -9,7 +12,7 @@ import java.util.Iterator;
 /**
  * Created by valoo on 05/04/14.
  */
-public class Carnet {
+public class Carnet implements Parcelable{
 
     private final static int SIZE = 10;
 
@@ -95,5 +98,39 @@ public class Carnet {
     public int getType(){
         return type;
     }
+
+
+    // Implémentation de Parcelable
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(eventId);
+        dest.writeTypedList(nextTickets);
+        dest.writeTypedList(corbeille);
+        dest.writeInt(type);
+    }
+
+    public Carnet(Parcel in) {
+        eventId = in.readString();
+        in.readTypedList(nextTickets,Vestiaire.CREATOR);
+        in.readTypedList(corbeille,Vestiaire.CREATOR);
+        type = in.readInt();
+    }
+
+    public static final Parcelable.Creator<Carnet> CREATOR = new Parcelable.Creator<Carnet>() {
+        @Override
+        public Carnet createFromParcel(Parcel source) {
+            return new Carnet(source);
+        }
+
+        @Override
+        public Carnet[] newArray(int size) {
+            return new Carnet[size];
+        }
+    };
 
 }
