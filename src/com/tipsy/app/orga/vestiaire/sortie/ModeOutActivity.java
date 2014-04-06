@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire.out;
+package com.tipsy.app.orga.vestiaire.sortie;
 
 import android.content.Intent;
 import android.nfc.NfcAdapter;

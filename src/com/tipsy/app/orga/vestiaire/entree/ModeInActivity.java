@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire.in;
+package com.tipsy.app.orga.vestiaire.entree;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.parse.ParseException;

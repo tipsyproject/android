@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire.out;
+package com.tipsy.app.orga.vestiaire.entree;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tipsy.app.R;
-import com.tipsy.app.orga.vestiaire.in.PanierVestiaireAdapter;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.Vestiaire;
 
@@ -26,9 +25,9 @@ import java.util.ArrayList;
 /**
  * Created by Alextoss on 13/03/2014.
  */
-public class ListeTicketsFragment extends Fragment {
+public class PanierFragment extends Fragment {
 
-    private ListeTicketsListener listener;
+    private PanierListener listener;
     private PanierVestiaireAdapter panierAdapter;
     private LinearLayout layoutParticipant;
     private TextView textParticipant;
@@ -38,18 +37,19 @@ public class ListeTicketsFragment extends Fragment {
     private Participant participant = null;
     private ArrayList<Vestiaire> tickets = new ArrayList<Vestiaire>();
 
-    public interface ListeTicketsListener {
-        public void onReturnAll(ArrayList<Vestiaire> tickets);
-        public void onReturn(Vestiaire ticket);
+    public interface PanierListener {
+        public void onPanierValidated(ArrayList<Vestiaire> tickets);
+        public void onRemoved(Vestiaire ticket);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            listener = (ListeTicketsListener) activity;
+            listener = (PanierListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(" must implement ListeTicketsListener");
+            throw new ClassCastException(activity.toString()
+                    + " must implement PanierListener");
         }
     }
 
@@ -62,33 +62,15 @@ public class ListeTicketsFragment extends Fragment {
         /* Suppression des tickets du panier */
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-                if(tickets.get(position).isRendu()) {
-                    Toast.makeText(getActivity(),"Article déjà rendu",Toast.LENGTH_SHORT);
-                }else{
-                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                    builder.setTitle("Rendre l'article");
-                    builder.setMessage("Vous allez rendre l'article " + tickets.get(position).getNumber());
-                    builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            tickets.get(position).setRendu(true);
-                            listener.onReturn(tickets.get(position));
-                            panierAdapter.notifyDataSetChanged();
-                        }
-                    });
-                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                        }
-                    });
-                    builder.show();
-                }
-
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                listener.onRemoved(tickets.get(position));
+                tickets.remove(tickets.get(position));
+                panierAdapter.notifyDataSetChanged();
             }
         });
 
         layoutParticipant = (LinearLayout) view.findViewById(R.id.layoutParticipant);
         textParticipant = (TextView) view.findViewById(R.id.textParticipant);
-
         buttonCancel = (ImageButton) view.findViewById(R.id.buttonCancel);
         buttonCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,13 +81,13 @@ public class ListeTicketsFragment extends Fragment {
                         .setPositiveButton("Valider", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 removeParticipant();
-                                tickets.clear();
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                             }
                         });
+                // Create the AlertDialog object and return it
                 builder.create().show();
             }
         });
@@ -114,23 +96,15 @@ public class ListeTicketsFragment extends Fragment {
         buttonValider.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                builder.setTitle("Tout rendre");
-                builder.setMessage("Vous allez rendre tous les articles");
-                builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        for(Vestiaire ticket : tickets)
-                            ticket.setRendu(true);
-                        removeParticipant();
-                        listener.onReturnAll(new ArrayList<Vestiaire>(tickets));
-                        tickets.clear();
-                    }
-                });
-                builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                    }
-                });
-                builder.show();
+                if(tickets.isEmpty())
+                    Toast.makeText(getActivity(), "Aucun ticket défini", Toast.LENGTH_SHORT).show();
+                else {
+                    for(Vestiaire ticket : tickets)
+                        ticket.setParticipant(participant);
+                    removeParticipant();
+                    listener.onPanierValidated(new ArrayList<Vestiaire>(tickets));
+                    tickets.clear();
+                }
             }
         });
 
@@ -140,8 +114,14 @@ public class ListeTicketsFragment extends Fragment {
         return view;
     }
 
+    public void add(Vestiaire ticket){
+        tickets.add(ticket);
+        panierAdapter.notifyDataSetChanged();
+    }
+
     public void addAll(ArrayList<Vestiaire> tickets){
-        this.tickets.addAll(tickets);
+        for(Vestiaire ticket : tickets)
+            this.tickets.add(ticket);
         panierAdapter.notifyDataSetChanged();
     }
 
@@ -164,7 +144,7 @@ public class ListeTicketsFragment extends Fragment {
 
     private void enableValidation(){
         buttonValider.setBackgroundResource(R.color.success);
-        buttonValider.setText("Tout rendre");
+        buttonValider.setText("Valider");
         buttonValider.setEnabled(true);
     }
 

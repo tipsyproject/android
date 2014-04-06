@@ -15,8 +15,8 @@ import android.view.WindowManager;
 
 import com.tipsy.app.R;
 import com.tipsy.app.orga.event.EventOrgaActivity;
-import com.tipsy.app.orga.vestiaire.in.ModeInActivity;
-import com.tipsy.app.orga.vestiaire.out.ModeOutActivity;
+import com.tipsy.app.orga.vestiaire.entree.ModeInActivity;
+import com.tipsy.app.orga.vestiaire.sortie.ModeOutActivity;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.Vestiaire;
 import com.tipsy.lib.util.Bracelet;

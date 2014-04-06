@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire.in;
+package com.tipsy.app.orga.vestiaire.entree;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.tipsy.app.R;
 import com.tipsy.lib.Vestiaire;
-import com.tipsy.lib.util.Item;
 
 import java.util.ArrayList;
 

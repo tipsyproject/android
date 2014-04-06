@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire.in;
+package com.tipsy.app.orga.vestiaire.entree;
 
 import android.os.Parcel;
 import android.os.Parcelable;

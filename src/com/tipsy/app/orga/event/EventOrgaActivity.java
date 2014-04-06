@@ -18,7 +18,7 @@ import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.bar.BarActivity;
 import com.tipsy.app.orga.entree.stats.ModeStatsActivity;
 import com.tipsy.app.orga.event.edit.EditEventActivity;
-import com.tipsy.app.orga.vestiaire.in.ModeInActivity;
+import com.tipsy.app.orga.vestiaire.entree.ModeInActivity;
 import com.tipsy.lib.Event;
 
 /**

@@ -12,6 +12,7 @@
 # generated files
 bin/
 gen/
+out/
 .idea/workspace.xml
 .idea/tasks.xml
 

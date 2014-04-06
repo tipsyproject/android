@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire.in;
+package com.tipsy.app.orga.vestiaire.entree;
 
 import android.app.Activity;
 import android.app.AlertDialog;
