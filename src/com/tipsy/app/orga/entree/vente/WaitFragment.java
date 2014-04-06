@@ -56,7 +56,7 @@ public class WaitFragment extends EntreeFragment {
                             toggle.setChecked(true);
                         }
                     });
-                    builder.setTitle("Désactiver Mode Prévente !");
+                    builder.setTitle("Désactiver Mode Prévente");
                     builder.setMessage("Les bracelets vendus seront automatiquement validés. Ils ne permettront pas l'accès à l'événement.");
                     builder.show();
                 }
