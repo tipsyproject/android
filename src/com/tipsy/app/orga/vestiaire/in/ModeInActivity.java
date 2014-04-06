@@ -134,33 +134,35 @@ public class ModeInActivity extends VestiaireActivity implements
 
 
     private void synchronizeModel(){
-        /* Lancement du fragment d'init */
-        VestiaireSynchroFragment synchro = new VestiaireSynchroFragment();
-        Bundle args = new Bundle();
-        args.putString("eventId",eventId);
-        synchro.setArguments(args);
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        try {
+            /* Lancement du fragment d'init */
+            VestiaireSynchroFragment synchro = new VestiaireSynchroFragment();
+            Bundle args = new Bundle();
+            args.putString("eventId", eventId);
+            synchro.setArguments(args);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
 
-        /* Suppression de l'ancien model */
-        VestiaireSynchroFragment oldSynchro = (VestiaireSynchroFragment) getSupportFragmentManager().findFragmentByTag("synchro");
-        if(oldSynchro != null)
-            ft.remove(oldSynchro);
-        ft.add(synchro, "synchro");
-        ft.commit();
+            /* Suppression de l'ancien model */
+            VestiaireSynchroFragment oldSynchro = (VestiaireSynchroFragment) getSupportFragmentManager().findFragmentByTag("synchro");
+            if (oldSynchro != null)
+                ft.remove(oldSynchro);
+            ft.add(synchro, "synchro");
+
+            ft.commit();
+        }catch(Exception e){}
     }
 
     public void onSynchro(ArrayList<Vestiaire> tickets, ArrayList<Participant> participants){
         this.tickets = tickets;
         this.participants = participants;
         fragCarnet.updateCarnets(this.tickets);
-        Toast.makeText(ModeInActivity.this, "Synchronisé", Toast.LENGTH_SHORT).show();
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 synchronizeModel();
             }
-        }, 15000);
+        }, 30000);
     }
 
 }
