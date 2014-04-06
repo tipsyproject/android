@@ -9,35 +9,70 @@
         android:layout_height="wrap_content"
         android:id="@+id/listTickets"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/linearLayout"
+        android:layout_toRightOf="@+id/menuLayout"
         android:divider="@null"
         android:drawSelectorOnTop="true" />
 
-    <LinearLayout
-        android:orientation="vertical"
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
-        android:id="@+id/linearLayout"
-        android:gravity="bottom">
+        android:id="@+id/menuLayout"
+        android:background="@color/background_dark">
 
-        <ImageButton
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonNewTicket"
-            android:src="@drawable/ic_action_new_label"
-            android:padding="@dimen/activity_margin"
-            android:alpha="1"
-            android:background="@color/primary" />
+            android:orientation="vertical"
+            android:id="@+id/linearLayout">
 
-        <ImageButton
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonVetements"
+                android:src="@drawable/ic_action_tshirt"
+                android:padding="@dimen/activity_margin"
+                android:background="@color/background_dark" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonSacs"
+                android:src="@drawable/ic_action_basket"
+                android:padding="@dimen/activity_margin"
+                android:background="@color/background_dark" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/buttonRefresh"
-            android:src="@drawable/ic_action_drag"
-            android:padding="@dimen/activity_margin"
-            android:alpha="1"
-            android:background="@color/secondary" />
+            android:orientation="vertical"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true">
 
-    </LinearLayout>
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonNewTicket"
+                android:src="@drawable/ic_action_new_label"
+                android:padding="@dimen/activity_margin"
+                android:background="@color/background_dark" />
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/buttonRefresh"
+                android:src="@drawable/ic_action_drag"
+                android:padding="@dimen/activity_margin"
+                android:alpha="1"
+                android:background="@color/background_dark"
+                android:layout_gravity="bottom" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 
 </RelativeLayout>

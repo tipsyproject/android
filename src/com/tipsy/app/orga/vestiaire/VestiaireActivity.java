@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by tech on 10/03/14.
  */
-public abstract class VestiaireActivity extends FragmentActivity {
+public abstract class VestiaireActivity extends FragmentActivity{
 
     /* Données */
     protected String eventId;
@@ -132,7 +132,7 @@ public abstract class VestiaireActivity extends FragmentActivity {
         if(onModelUpdated != null){
             onModelUpdated.updated();
         }
-    };
+    }
 
     public ArrayList<Vestiaire> getTickets(){
         return tickets;

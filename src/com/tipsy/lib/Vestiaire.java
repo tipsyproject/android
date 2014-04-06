@@ -20,11 +20,15 @@ import java.util.Comparator;
 @ParseClassName("Vestiaire")
 public class Vestiaire extends ParseObject implements Parcelable {
 
+    public final static int VETEMENTS = 0;
+    public final static int SACS = 1;
+
     public Vestiaire() {
     }
 
-    public Vestiaire(int number,String eventId){
+    public Vestiaire(int number,int type, String eventId){
         setNumber(number);
+        setType(type);
         setEventId(eventId);
         setRendu(false);
     }
@@ -60,6 +64,13 @@ public class Vestiaire extends ParseObject implements Parcelable {
         put("participant", participant);
     }
 
+    public int getType(){
+        return getInt("type");
+    }
+    public void setType(int type){
+        put("type", type);
+    }
+
 
     /* Tri par ordre alphabetique des prénoms */
     public static Comparator<Vestiaire> SORT_BY_FULLNAME = new Comparator<Vestiaire>() {
@@ -80,7 +91,7 @@ public class Vestiaire extends ParseObject implements Parcelable {
 
 
     public boolean equals(Object o) {
-        return (this.getNumber() == ((Vestiaire) o).getNumber());
+        return (this.getNumber() == ((Vestiaire) o).getNumber() && this.getType() == ((Vestiaire) o).getType());
     }
 
 

@@ -1,21 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:id="@+id/layout_item"
     android:padding="@dimen/ui_margin">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iconItem"
+        android:src="@drawable/ic_action_tshirt"
+        android:padding="@dimen/activity_margin" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="1234"
         android:id="@+id/textNumber"
         android:layout_weight="1"
         android:gravity="center"
         android:textColor="@color/primary"
-        android:padding="@dimen/activity_margin" />
+        android:padding="@dimen/activity_margin"
+        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/iconItem"
+        android:layout_toRightOf="@+id/iconItem" />
 
-</LinearLayout>
+</RelativeLayout>

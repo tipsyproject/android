@@ -20,9 +20,15 @@ public class TicketNumberFragment extends DialogFragment {
     private EditText number;
     private TicketNumberListener listener;
     private String title;
+    private int defaultNumber = -1;
 
     public TicketNumberFragment(String title){
         this.title = title;
+    }
+
+    public TicketNumberFragment(String title, int number){
+        this.title = title;
+        this.defaultNumber = number;
     }
 
     public interface TicketNumberListener {
@@ -50,6 +56,8 @@ public class TicketNumberFragment extends DialogFragment {
 
         View view = inflater.inflate(R.layout.dialog_numberpicker, null);
         number = (EditText) view.findViewById(R.id.textNumber);
+        if(defaultNumber > -1)
+            number.setText(Integer.toString(defaultNumber));
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder

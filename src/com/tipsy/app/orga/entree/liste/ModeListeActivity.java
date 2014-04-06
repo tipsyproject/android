@@ -6,6 +6,9 @@ import android.support.v4.app.FragmentTransaction;
 import com.tipsy.app.R;
 import com.tipsy.app.orga.entree.EntreeActivity;
 import com.tipsy.app.orga.entree.EntreeMenuFragment;
+import com.tipsy.lib.Achat;
+
+import java.util.Collections;
 
 /**
  * Created by valoo on 24/03/14.
@@ -25,7 +28,7 @@ public class ModeListeActivity extends EntreeActivity {
     }
 
     public void modelUpdated(){
-        fragListe.getEntreeAdapter().getFilter().filter("");
+        Collections.sort(entrees, Achat.SORT_BY_FULLNAME);
         fragListe.getEntreeAdapter().notifyDataSetChanged();
     }
 

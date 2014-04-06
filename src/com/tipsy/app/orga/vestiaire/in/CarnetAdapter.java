@@ -16,31 +16,32 @@ import java.util.ArrayList;
  * Created by kef on 02/04/14.
  */
 // Adapter CONSOS
-public class TicketsArrayAdapter extends ArrayAdapter<Vestiaire> {
+public class CarnetAdapter extends ArrayAdapter<Vestiaire> {
     private Context context;
-    private ArrayList <Vestiaire> nextTickets;
+    private ArrayList <Vestiaire> nextTickets = new ArrayList<Vestiaire>();
 
-    public TicketsArrayAdapter(Context context,ArrayList <Vestiaire> nextTickets) {
-        super(context, R.layout.frag_vestiaire_ticket, nextTickets);
-        this.nextTickets = nextTickets;
+    public CarnetAdapter(Context context,ArrayList<Vestiaire> carnet) {
+        super(context, R.layout.frag_vestiaire_ticket, carnet);
         this.context = context;
+        this.nextTickets = carnet;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflater.inflate(R.layout.frag_vestiaire_ticket, parent, false);
 
-        if(view == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.frag_vestiaire_ticket, parent, false);
-        }
 
         TextView textTicket = (TextView) view.findViewById(R.id.textTicket);
-
         Vestiaire ticket = nextTickets.get(position);
 
         textTicket.setText(Integer.toString(ticket.getNumber()));
 
         return view;
+    }
+
+    public void useCarnet(Carnet carnet){
+        nextTickets = carnet.getNextTickets();
+        notifyDataSetChanged();
     }
 }

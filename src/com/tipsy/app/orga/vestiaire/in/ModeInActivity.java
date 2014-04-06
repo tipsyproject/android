@@ -5,7 +5,9 @@ import android.content.Intent;
 import android.nfc.NfcAdapter;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.widget.Toast;
 
 import com.parse.ParseException;
@@ -14,6 +16,7 @@ import com.tipsy.app.R;
 import com.tipsy.app.orga.vestiaire.ModelCallback;
 import com.tipsy.app.orga.vestiaire.VestiaireActivity;
 import com.tipsy.app.orga.vestiaire.VestiaireModelFragment;
+import com.tipsy.app.orga.vestiaire.VestiaireSynchroFragment;
 import com.tipsy.lib.Participant;
 import com.tipsy.lib.Vestiaire;
 import com.tipsy.lib.util.Bracelet;
@@ -26,11 +29,12 @@ import java.util.ArrayList;
 public class ModeInActivity extends VestiaireActivity implements
         VestiaireModelFragment.VestiaireModelListener,
         PanierFragment.PanierListener,
-        CarnetTicketsFragment.CarnetListener,
-        TicketNumberFragment.TicketNumberListener
+        CarnetFragment.CarnetListener,
+        TicketNumberFragment.TicketNumberListener,
+        VestiaireSynchroFragment.VestiaireSynchroListener
 {
 
-    private CarnetTicketsFragment fragCarnet;
+    private CarnetFragment fragCarnet;
     private PanierFragment fragPanier;
     private boolean blockNFC = false;
 
@@ -41,7 +45,7 @@ public class ModeInActivity extends VestiaireActivity implements
 
         /* Chargement des fragments */
         FragmentManager fm = getSupportFragmentManager();
-        fragCarnet = (CarnetTicketsFragment) fm.findFragmentById(R.id.fragTickets);
+        fragCarnet = (CarnetFragment) fm.findFragmentById(R.id.fragTickets);
         fragPanier = (PanierFragment) fm.findFragmentById(R.id.fragPanier);
     }
 
@@ -91,7 +95,6 @@ public class ModeInActivity extends VestiaireActivity implements
                 wait.dismiss();
                 if(e==null){
                     tickets.addAll(commande);
-                    fragCarnet.clearCommande();
                     Toast.makeText(ModeInActivity.this, "Vestiaire enregistré", Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(ModeInActivity.this, "Erreur sauvegarde", Toast.LENGTH_SHORT).show();
@@ -120,8 +123,44 @@ public class ModeInActivity extends VestiaireActivity implements
         onModelUpdated = new ModelCallback() {
             @Override
             public void updated() {
-                fragCarnet.updateCarnet();
+                fragCarnet.updateCarnets(tickets);
             }
         };
+        synchronizeModel();
     }
+
+
+
+
+
+    private void synchronizeModel(){
+        /* Lancement du fragment d'init */
+        VestiaireSynchroFragment synchro = new VestiaireSynchroFragment();
+        Bundle args = new Bundle();
+        args.putString("eventId",eventId);
+        synchro.setArguments(args);
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+
+        /* Suppression de l'ancien model */
+        VestiaireSynchroFragment oldSynchro = (VestiaireSynchroFragment) getSupportFragmentManager().findFragmentByTag("synchro");
+        if(oldSynchro != null)
+            ft.remove(oldSynchro);
+        ft.add(synchro, "synchro");
+        ft.commit();
+    }
+
+    public void onSynchro(ArrayList<Vestiaire> tickets, ArrayList<Participant> participants){
+        this.tickets = tickets;
+        this.participants = participants;
+        fragCarnet.updateCarnets(this.tickets);
+        Toast.makeText(ModeInActivity.this, "Synchronisé", Toast.LENGTH_SHORT).show();
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                synchronizeModel();
+            }
+        }, 15000);
+    }
+
 }

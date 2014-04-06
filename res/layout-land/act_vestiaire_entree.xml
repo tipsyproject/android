@@ -12,12 +12,12 @@
         android:id="@+id/layout">
 
         <fragment
-            class="com.tipsy.app.orga.vestiaire.in.CarnetTicketsFragment"
+            class="com.tipsy.app.orga.vestiaire.in.CarnetFragment"
             android:id="@+id/fragTickets"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.4"
-            tools:layout="@layout/frag_bar_conso" />
+            tools:layout="@layout/frag_vestiaire_tickets" />
 
         <fragment
             class="com.tipsy.app.orga.vestiaire.in.PanierFragment"

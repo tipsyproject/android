@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tipsy.app.R;
@@ -31,7 +32,16 @@ public class PanierVestiaireAdapter extends ArrayAdapter<Vestiaire> {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.frag_vestiaire_item, parent, false);
         TextView textNumber = (TextView) view.findViewById(R.id.textNumber);
+        ImageView iconTicket = (ImageView) view.findViewById(R.id.iconItem);
+
         Vestiaire ticket = tickets.get(position);
+
+
+        if(ticket.getType() == Vestiaire.VETEMENTS)
+            iconTicket.setImageResource(R.drawable.ic_action_tshirt);
+        else
+            iconTicket.setImageResource(R.drawable.ic_action_basket);
+
         textNumber.setText(Integer.toString(ticket.getNumber()));
         return view;
     }

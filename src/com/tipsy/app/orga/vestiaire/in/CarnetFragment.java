@@ -17,20 +17,22 @@ import com.tipsy.app.R;
 import com.tipsy.lib.Vestiaire;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 /**
  * Created by tech on 11/03/14.
  */
-public class CarnetTicketsFragment extends Fragment {
+public class CarnetFragment extends Fragment {
 
     private CarnetListener listener;
-    private TicketsArrayAdapter listAdapter;
+    private CarnetAdapter listAdapter;
 
-    /* Liste des prochains tickets */
-    private ArrayList<Vestiaire> nextTickets = new ArrayList<Vestiaire>();
-    private ArrayList<Vestiaire> commande = new ArrayList<Vestiaire>();
-    private ArrayList<Vestiaire> corbeille = new ArrayList<Vestiaire>();
+    ImageButton buttonVetements;
+    ImageButton buttonSacs;
+
+    /* Carnet de tickets */
+    private Carnet carnetVetements;
+    private Carnet carnetSacs;
+    private Carnet currentCarnet;
 
     /* Pour connaitre l'action à effectuer
     lorsqu'un numéro est généré via la dialog */
@@ -39,7 +41,6 @@ public class CarnetTicketsFragment extends Fragment {
 
     public interface CarnetListener {
         public void onTicketChoosen(Vestiaire ticket);
-        public ArrayList<Vestiaire> getTickets();
         public String getEventId();
     }
 
@@ -60,6 +61,25 @@ public class CarnetTicketsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.frag_vestiaire_tickets, container, false);
 
+        /* Bouton MODE VETEMENTS */
+        buttonVetements = (ImageButton) view.findViewById(R.id.buttonVetements);
+        buttonVetements.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCarnet(Vestiaire.VETEMENTS);
+            }
+        });
+
+        /* BOUTON MODE SACS */
+        buttonSacs = (ImageButton) view.findViewById(R.id.buttonSacs);
+        buttonSacs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setCarnet(Vestiaire.SACS);
+            }
+        });
+
+        /* AJOUTER UN TICKET */
         ImageButton buttonNewTicket = (ImageButton) view.findViewById(R.id.buttonNewTicket);
         buttonNewTicket.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,29 +90,37 @@ public class CarnetTicketsFragment extends Fragment {
             }
         });
 
+        /* DEFINIR LE POINT DE DEPART */
         ImageButton buttonRefresh = (ImageButton) view.findViewById(R.id.buttonRefresh);
         buttonRefresh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 newTicket = false;
-                DialogFragment newFragment = new TicketNumberFragment("Tiket de départ");
+                DialogFragment newFragment = new TicketNumberFragment("Ticket de départ",currentCarnet.guessNextTicketNumber());
                 newFragment.show(getChildFragmentManager(), "numberpicker");
             }
         });
+
+
+
+
+
+
+        carnetVetements = new Carnet(listener.getEventId(),Vestiaire.VETEMENTS);
+        carnetSacs = new Carnet(listener.getEventId(),Vestiaire.SACS);
+        currentCarnet = carnetVetements;
+
         ListView listView = (ListView) view.findViewById(R.id.listTickets);
-        listAdapter = new TicketsArrayAdapter(getActivity(),nextTickets);
+        listAdapter = new CarnetAdapter(getActivity(),currentCarnet.getNextTickets());
         listView.setAdapter(listAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                /* On détache le ticket du carnet */
+                Vestiaire ticket = currentCarnet.detach(position);
                 /* On passe le ticket à l'activity */
-                listener.onTicketChoosen(nextTickets.get(position));
-                /* On le met temporairement utilisé pour qu'il ne soit pas automatiquement regénéré */
-                commande.add(nextTickets.get(position));
-                /* On supprime le ticket de la liste */
-                nextTickets.remove(position);
-                /* On regénère la liste à partir du premier ticket restant */
-                genTicketList(nextTickets.get(0).getNumber(),false);
+                listener.onTicketChoosen(ticket);
+                listAdapter.notifyDataSetChanged();
             }
         });
 
@@ -105,7 +133,8 @@ public class CarnetTicketsFragment extends Fragment {
                 builder.setMessage("Ce ticket sera retiré de la liste jusqu'au prochain démarrage.")
                         .setPositiveButton("Valider", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                removeTicket(nextTickets.get(position));
+                                currentCarnet.detach(position);
+                                listAdapter.notifyDataSetChanged();
                             }
                         })
                         .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
@@ -114,81 +143,48 @@ public class CarnetTicketsFragment extends Fragment {
                         });
                 // Create the AlertDialog object and return it
                 builder.create().show();
-
                 return true;
             }
         });
 
-        /* Génération automatique d'une première liste de tickets */
-        genTicketList(guessNextTicketNumber(),true);
+        setCarnet(Vestiaire.VETEMENTS);
         return view;
     }
 
     public void numberDefined(int num){
         if(newTicket){
-            listener.onTicketChoosen(new Vestiaire(num,listener.getEventId()));
+            listener.onTicketChoosen(new Vestiaire(num,currentCarnet.getType(),listener.getEventId()));
         }else{
-            genTicketList(num,true);
+            currentCarnet.genNextTickets(num,true);
+            listAdapter.notifyDataSetChanged();
         }
-    }
-
-    /* Devine le prochain numéro de ticket
-        à partir de tous les tickets vendus
-     */
-    private int guessNextTicketNumber(){
-        if(listener.getTickets().isEmpty())
-            return 1;
-        else {
-            ArrayList<Vestiaire> tickets = new ArrayList<Vestiaire>();
-            tickets.addAll(listener.getTickets());
-            Collections.sort(tickets, Vestiaire.SORT_BY_TICKET);
-            return tickets.get(tickets.size() - 1).getNumber() + 1;
-        }
-    }
-
-    /* Génère la liste de tickets */
-    private void genTicketList(int from, boolean clear){
-        if(clear)
-            nextTickets.clear();
-        Vestiaire ticket;
-        int number = from;
-        while(nextTickets.size() < 10){
-            ticket = new Vestiaire(number,listener.getEventId());
-            /* On affiche seulement des numéros qui ne sont pas
-                en attente d'être validés
-                déjà utilisés
-                ou jetés
-            */
-            if(!nextTickets.contains(ticket) &&
-                    !commande.contains(ticket) &&
-                !listener.getTickets().contains(ticket) &&
-                !corbeille.contains(ticket))
-                nextTickets.add(ticket);
-            number++;
-        }
-        listAdapter.notifyDataSetChanged();
-    }
-
-    private void removeTicket(Vestiaire ticket){
-        corbeille.add(ticket);
-        nextTickets.remove(ticket);
-        listAdapter.notifyDataSetChanged();
     }
 
     public void add(Vestiaire ticket){
-        commande.remove(ticket);
-        corbeille.remove(ticket);
-        nextTickets.add(ticket);
-        Collections.sort(nextTickets, Vestiaire.SORT_BY_TICKET);
+        if(ticket.getType() == Vestiaire.VETEMENTS)
+            carnetVetements.attach(ticket);
+        else
+            carnetSacs.attach(ticket);
         listAdapter.notifyDataSetChanged();
     }
 
-    public void updateCarnet(){
-        /* Génération automatique d'une première liste de tickets */
-        genTicketList(guessNextTicketNumber(),true);
+    public void updateCarnets(ArrayList<Vestiaire> vestiaires){
+        carnetVetements.synchronize(vestiaires);
+        carnetSacs.synchronize(vestiaires);
+        listAdapter.notifyDataSetChanged();
     }
 
-    public void clearCommande(){
-        commande.clear();
+    private void setCarnet(int carnet){
+        if(carnet == Vestiaire.VETEMENTS) {
+            currentCarnet = carnetVetements;
+            buttonVetements.setBackgroundResource(R.color.primary);
+            buttonSacs.setBackgroundResource(R.color.background_dark);
+        }else {
+            currentCarnet = carnetSacs;
+            buttonVetements.setBackgroundResource(R.color.background_dark);
+            buttonSacs.setBackgroundResource(R.color.primary);
+        }
+        listAdapter.useCarnet(currentCarnet);
+        listAdapter.notifyDataSetChanged();
     }
 }

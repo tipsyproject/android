@@ -10,7 +10,6 @@ import com.parse.FindCallback;
 import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
-import com.tipsy.app.orga.entree.EntreeFragment;
 import com.tipsy.lib.Achat;
 import com.tipsy.lib.Event;
 import com.tipsy.lib.Participant;
@@ -25,28 +24,26 @@ import java.util.List;
  * Created by valoo on 27/12/13.
  */
 
-public class VestiaireModelFragment extends Fragment {
+public class VestiaireSynchroFragment extends Fragment {
 
-    /* Progress Dialog */
-    private ProgressDialog initDialog;
     private boolean loadingParticipants;
     private boolean loadingVestiaires;
     private ArrayList<Vestiaire> tickets;
     private ArrayList<Participant> participants;
-    private VestiaireModelListener listener;
+    private VestiaireSynchroListener listener;
 
-    public interface VestiaireModelListener {
-        public void onModelUpdated(ArrayList<Vestiaire> tickets, ArrayList<Participant> participants);
+    public interface VestiaireSynchroListener {
+        public void onSynchro(ArrayList<Vestiaire> tickets, ArrayList<Participant> participants);
     }
 
     @Override
      public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            listener = (VestiaireModelListener) activity;
+            listener = (VestiaireSynchroListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement VestiaireModelListener");
+                    + " must implement VestiaireSynchroListener");
         }
     }
 
@@ -59,7 +56,6 @@ public class VestiaireModelFragment extends Fragment {
         loadingParticipants = true;
         loadingVestiaires = true;
 
-        initDialog = ProgressDialog.show(getActivity(), null, "Mise à jour des données...", true, true);
 
         /* CHARGEMENT DE:
         event, participants et tickets vestiaire
@@ -115,12 +111,6 @@ public class VestiaireModelFragment extends Fragment {
 
                         }
                     });
-                } else {
-                    try {
-                        initDialog.dismiss();
-                        initDialog = null;
-                    } catch (Exception er) {
-                    }
                 }
             }
         });
@@ -128,18 +118,7 @@ public class VestiaireModelFragment extends Fragment {
     }
 
     private void onModelUpdated(){
-        try {
-            initDialog.dismiss();
-            initDialog = null;
-        } catch (Exception er) {}
-        listener.onModelUpdated(tickets,participants);
-    }
-
-    @Override
-    public void onPause(){
-        if(initDialog != null)
-            initDialog.dismiss();
-        super.onPause();
+        listener.onSynchro(tickets,participants);
     }
 
 }
