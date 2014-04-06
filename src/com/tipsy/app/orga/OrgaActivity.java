@@ -35,6 +35,7 @@ public class OrgaActivity extends UserActivity implements OrgaListener {
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
+        overridePendingTransition(R.animator.activity_open_translate, R.animator.activity_close_scale);
         setContentView(R.layout.act_user);
         super.onCreate(savedInstanceState);
 

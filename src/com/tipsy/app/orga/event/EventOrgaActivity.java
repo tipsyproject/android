@@ -94,6 +94,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     @Override
     public void onBackPressed() {
         backToOrga();
+        overridePendingTransition(R.animator.activity_open_scale, R.animator.activity_close_translate);
     }
 
 
