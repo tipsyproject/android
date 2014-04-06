@@ -75,10 +75,7 @@ public class Vestiaire extends ParseObject implements Parcelable {
     /* Tri par ordre alphabetique des prénoms */
     public static Comparator<Vestiaire> SORT_BY_FULLNAME = new Comparator<Vestiaire>() {
         public int compare(Vestiaire one, Vestiaire other) {
-            // les participants sans nom ni prenom doivent être mis à la fin
-            if (one.getParticipant().isAnonymous())
-                return 1;
-            else return one.getParticipant().getFullName().compareTo(other.getParticipant().getFullName());
+            return one.getParticipant().getFullName().compareTo(other.getParticipant().getFullName());
         }
     };
 
