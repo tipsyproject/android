@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire;
+package com.tipsy.app.orga.vestiaire.fuckingout;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -49,8 +49,7 @@ public class ListeTicketsFragment extends Fragment {
         try {
             listener = (ListeTicketsListener) activity;
         } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement ListeTicketsListener");
+            throw new ClassCastException(" must implement ListeTicketsListener");
         }
     }
 

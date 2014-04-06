@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire;
+package com.tipsy.app.orga.vestiaire.fuckingout;
 
 import android.app.Activity;
 import android.os.Bundle;

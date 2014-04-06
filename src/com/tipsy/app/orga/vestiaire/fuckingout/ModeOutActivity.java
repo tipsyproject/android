@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.vestiaire.out;
+package com.tipsy.app.orga.vestiaire.fuckingout;
 
 import android.content.Intent;
 import android.nfc.NfcAdapter;
@@ -10,8 +10,6 @@ import android.widget.Toast;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
 import com.tipsy.app.R;
-import com.tipsy.app.orga.vestiaire.ListeTicketsFragment;
-import com.tipsy.app.orga.vestiaire.ListeVestiaireFragment;
 import com.tipsy.app.orga.vestiaire.ModelCallback;
 import com.tipsy.app.orga.vestiaire.VestiaireActivity;
 import com.tipsy.lib.Vestiaire;
