@@ -129,4 +129,6 @@ public class ModeVenteActivity extends EntreeActivity implements ModeVenteListen
 
     /* Rien à actualiser */
     public void modelUpdated(){}
+
+
 }
