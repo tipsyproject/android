@@ -1,4 +1,4 @@
-package com.tipsy.app.orga.Alcotips;
+/* package com.tipsy.app.orga.Alcotips;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -16,11 +16,11 @@ import com.tipsy.app.R;
 import com.tipsy.app.orga.bar.PanierArrayAdapter;
 import com.tipsy.lib.util.Commerce;
 import com.tipsy.lib.util.Item;
-
+/*
 /**
  * Created by Bastien on 06/04/2014.
  */
-public class ATResultFragment extends Fragment {
+/*public class ATResultFragment extends Fragment {
 
         private ATListener callback;
         private PanierArrayAdapter panierAdapter;
@@ -55,5 +55,5 @@ public class ATResultFragment extends Fragment {
             textTotal.setText(callback.getAlcool());
         }
     }
-
+*/
 
