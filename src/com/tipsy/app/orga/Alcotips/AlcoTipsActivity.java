@@ -109,7 +109,7 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
                             findConsos(participants.get(found));
 
                             fragNFC.hide();
-                            Toast.makeText(AlcoTipsActivity.this, Integer.toString(alcoolemie) , Toast.LENGTH_LONG).show();
+                      //      Toast.makeText(AlcoTipsActivity.this, Integer.toString(alcoolemie) , Toast.LENGTH_LONG).show();
 
                         } else {
                             Toast.makeText(AlcoTipsActivity.this, "Bracelet inconnu", Toast.LENGTH_LONG).show();
@@ -152,10 +152,12 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
         for (int i=0; i<consosParticipant.size(); ++i){
 
           long Hconso = TimeUnit.MILLISECONDS.toMinutes(consosParticipant.get(i).getCreatedAt().getTime());
-            Toast.makeText(AlcoTipsActivity.this,Long.toString(Hscan - Hconso) , Toast.LENGTH_SHORT).show();
-
-            if ((Hscan - Hconso)< TmaxAbsorb) {
+          long Hdif  = Hscan - Hconso;
+            if (TmaxAbsorb > (Hdif)) {
                 TCParticipant = TAlcool;
+
+                Toast.makeText(AlcoTipsActivity.this,Long.toString(Hdif) , Toast.LENGTH_SHORT).show();
+
             }
             else {
 
