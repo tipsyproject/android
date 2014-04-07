@@ -38,14 +38,12 @@ public class ListeFragment extends EntreeFragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                final Achat entree = callback.getEntrees().get(position);
+                final Achat entree = entreesAdapter.get(position);
                 /* Action possible uniquement pour les participants identifiables */
-                if(!entree.getParticipant().isAnonymous()) {
-                    if(entree.isUsed()){
-                        desactiverEntree(entree);
-                    }else{
-                        activerEntree(entree);
-                    }
+                if(entree.isUsed()){
+                    desactiverEntree(entree);
+                }else{
+                    activerEntree(entree);
                 }
             }
         });
@@ -174,13 +172,12 @@ public class ListeFragment extends EntreeFragment {
     @Override
     public void onResume(){
         super.onResume();
-        entreesAdapter.notifyDataSetChanged();
+        entreesAdapter.getFilter().filter("");
     }
 
     public EntreeArrayAdapter getEntreeAdapter(){
         return entreesAdapter;
     }
-
 
 
 }

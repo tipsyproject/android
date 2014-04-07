@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.tipsy.app.R;
 import com.tipsy.lib.Achat;
+import com.tipsy.lib.Participant;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,18 +22,22 @@ import java.util.Collections;
 public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterable{
     private Context context;
     private ArrayList<Achat> entrees;
-    private ArrayList<Achat> filteredEntrees;
+    private ArrayList<Achat> entreesNonAnonymes;
 
     public EntreeArrayAdapter(Context context, ArrayList<Achat> entrees) {
         super(context, R.layout.frag_entree, entrees);
         this.context = context;
         this.entrees = entrees;
-        //this.filteredEntrees = new ArrayList<Achat>(entrees);
+        this.entreesNonAnonymes = new ArrayList<Achat>();
+    }
+
+    public Achat get(int position){
+        return entreesNonAnonymes.get(position);
     }
 
     @Override
     public int getCount() {
-        return entrees.size();
+        return entreesNonAnonymes.size();
     }
 
     @Override
@@ -47,8 +52,7 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
         View view = inflater.inflate(R.layout.frag_entree, parent, false);
 
 
-        //Achat entree = filteredEntrees.get(position);
-        Achat entree = entrees.get(position);
+        Achat entree = entreesNonAnonymes.get(position);
 
         TextView nomParticipant = (TextView) view.findViewById(R.id.participant);
 
@@ -59,7 +63,6 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
 
         return view;
     }
-    /*
     @Override
     public Filter getFilter() {
 
@@ -68,8 +71,7 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
             @SuppressWarnings("unchecked")
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
-
-                filteredEntrees = (ArrayList<Achat>) results.values;
+                entreesNonAnonymes = (ArrayList<Achat>) results.values;
                 notifyDataSetChanged();
             }
 
@@ -77,24 +79,22 @@ public class EntreeArrayAdapter extends ArrayAdapter<Achat> implements Filterabl
             protected FilterResults performFiltering(CharSequence constraint) {
 
                 FilterResults results = new FilterResults();
-                ArrayList<Achat> filteredAchats = new ArrayList<Achat>();
+                ArrayList<Achat> filteredEntrees = new ArrayList<Achat>();
 
-                for (int i = 0; i < entrees.size(); i++) {
-                    Achat entree = entrees.get(i);
-                    if (!entree.getParticipant().isAnonymous())  {
-                        filteredAchats.add(entree);
-                    }
+                for(Achat entree : entrees){
+                    if(!entree.getParticipant().isAnonymous())
+                        filteredEntrees.add(entree);
                 }
 
 
-                Collections.sort(filteredAchats, Achat.SORT_BY_FULLNAME);
-                results.count = filteredAchats.size();
-                results.values = filteredAchats;
+                Collections.sort(filteredEntrees, Achat.SORT_BY_FULLNAME);
+                results.count = filteredEntrees.size();
+                results.values = filteredEntrees;
 
                 return results;
             }
         };
 
         return filter;
-    }*/
+    }
 }
