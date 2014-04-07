@@ -156,6 +156,7 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         Intent intent = new Intent(this, AlcoTipsActivity.class);
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
+        finish();
     }
 
     // Modification d'un événement

@@ -279,6 +279,7 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
                 Intent intent = new Intent(AlcoTipsActivity.this, EventOrgaActivity.class);
                 intent.putExtra("EVENT_ID", eventId);
                 startActivity(intent);
+                finish();
             }
         });
         builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
