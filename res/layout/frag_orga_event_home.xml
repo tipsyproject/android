@@ -191,7 +191,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Are you Tipsy ?"
-                android:id="@+id/buttonAlcooTips"
+                android:id="@+id/buttonAlcoTips"
                 android:src="@drawable/ic_action_person"
                 style="@style/ButtonEvent"
                 android:drawableTop="@drawable/ic_action_group" />
@@ -345,7 +345,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:id="@+id/buttonAlcooTips">
+            android:id="@+id/buttonAlcoTips">
 
             <LinearLayout
                 android:layout_width="fill_parent"

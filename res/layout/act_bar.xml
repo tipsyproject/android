@@ -12,7 +12,6 @@
         android:id="@+id/frag_nfc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
         tools:layout="@layout/frag_bar_nfc" />
 
     <fragment

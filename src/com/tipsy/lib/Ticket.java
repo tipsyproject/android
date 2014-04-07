@@ -70,7 +70,6 @@ public class Ticket extends ParseObject implements Parcelable {
         put("type", type);
     }
 
-
     @Override
     public boolean equals(Object o) {
         return (this.getObjectId() == ((Ticket) o).getObjectId());

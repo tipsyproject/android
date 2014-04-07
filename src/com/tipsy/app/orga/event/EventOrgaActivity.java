@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.tipsy.app.R;
+import com.tipsy.app.orga.Alcotips.AlcoTipsActivity;
 import com.tipsy.app.orga.OrgaActivity;
 import com.tipsy.app.orga.bar.BarActivity;
 import com.tipsy.app.orga.entree.stats.ModeStatsActivity;
@@ -148,6 +149,11 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
         intent.putExtra("EVENT_ID", event.getObjectId());
         startActivity(intent);
         finish();
+    }
+    public void goToAlcoTips() {
+        Intent intent = new Intent(this, AlcoTipsActivity.class);
+        intent.putExtra("EVENT_ID", event.getObjectId());
+        startActivity(intent);
     }
 
     // Modification d'un événement

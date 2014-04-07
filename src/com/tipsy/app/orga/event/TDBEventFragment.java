@@ -40,7 +40,7 @@ public class TDBEventFragment extends Fragment {
         View view = inflater.inflate(R.layout.frag_orga_event_home, container, false);
         getActivity().getActionBar().setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
 
-        TextView nomEvent = (TextView) view.findViewById(R.id.nom_event);
+        TextView nomEvent = (TextView) view.findViewById(R.id.event);
         nomEvent.setText(callback.getEvent().getNom());
 
 
@@ -85,10 +85,11 @@ public class TDBEventFragment extends Fragment {
         });
 
 
-        LinearLayout buttonAlcooTips = (LinearLayout) view.findViewById(R.id.buttonAlcooTips);
+        LinearLayout buttonAlcooTips = (LinearLayout) view.findViewById(R.id.buttonAlcoTips);
         buttonAlcooTips.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
+                callback.goToAlcoTips();
+//                Toast.makeText(getActivity(), "Fonctionnalité à venir.", Toast.LENGTH_LONG).show();
             }
         });
 
