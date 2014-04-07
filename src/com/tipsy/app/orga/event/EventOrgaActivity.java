@@ -112,8 +112,10 @@ public class EventOrgaActivity extends FragmentActivity implements EventOrgaList
     public void init(Event e) {
         event = e;
         getActionBar().setTitle(event.getNom());
-        if (initDialog != null)
+        if (initDialog != null) {
             initDialog.dismiss();
+            initDialog = null;
+        }
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content, new TDBEventFragment());
         ft.commit();

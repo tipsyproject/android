@@ -134,70 +134,7 @@
 
     </RelativeLayout>
 
-    <!--<LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout"
-        android:layout_below="@+id/event"
-        android:padding="2dp">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Entrée"
-                android:id="@+id/buttonEntree"
-                android:src="@drawable/ic_action_group"
-                style="@style/ButtonEvent"
-                android:drawableTop="@drawable/ic_action_ticket" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Bar"
-                android:id="@+id/buttonBar"
-                android:src="@drawable/ic_action_person"
-                style="@style/ButtonEvent"
-                android:drawableTop="@drawable/ic_action_filter" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:id="@+id/linearLayout2">
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Vestiaire"
-                android:id="@+id/buttonVestiaire"
-                android:src="@drawable/ic_action_person"
-                style="@style/ButtonEvent"
-                android:drawableTop="@drawable/ic_action_tshirt" />
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="Are you Tipsy ?"
-                android:id="@+id/buttonAlcooTips"
-                android:src="@drawable/ic_action_person"
-                style="@style/ButtonEvent"
-                android:drawableTop="@drawable/ic_action_group" />
-        </LinearLayout>
-
-    </LinearLayout>-->
 
 
     <TableLayout
@@ -345,7 +282,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:id="@+id/buttonAlcooTips">
+            android:id="@+id/buttonAlcoTips">
 
             <LinearLayout
                 android:layout_width="fill_parent"

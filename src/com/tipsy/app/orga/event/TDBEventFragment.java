@@ -28,12 +28,12 @@ public class TDBEventFragment extends Fragment {
         super.onAttach(activity);
         callback = (EventOrgaListener) activity;
     }
-
+    /*
     @Override
     public void onDetach() {
         super.onDetach();
         callback = null;
-    }
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
