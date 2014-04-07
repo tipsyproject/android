@@ -43,7 +43,7 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
 
     private String eventId;
     private Event event;
-      protected ArrayList<Participant> participants = new ArrayList<Participant>();
+    protected ArrayList<Participant> participants = new ArrayList<Participant>();
     protected ArrayList<Achat> consosParticipant = new ArrayList<Achat>();
 
     /* Modèle */
@@ -90,13 +90,10 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             final Bracelet bracelet = new Bracelet(tag);
             int found = findParticipant(bracelet);
-            int alcoolemie= 0;
 
             if (found > -1) {
                 findConsos(participants.get(found));
-                alcoolemie = calculTaux();
                 fragNFC.hide();
-                Toast.makeText(AlcoTipsActivity.this, alcoolemie , Toast.LENGTH_LONG).show();
 
             } else {
                 /* Si le participant n'a pas été trouvé,
@@ -106,13 +103,13 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
                     @Override
                     public void updated() {
                         int found = findParticipant(bracelet);
+                        int alcoolemie = 0;
                         if (found > -1) {
 
                             findConsos(participants.get(found));
 
-                            int alcoolémie = calculTaux();
                             fragNFC.hide();
-                            Toast.makeText(AlcoTipsActivity.this, alcoolémie , Toast.LENGTH_LONG).show();
+                            Toast.makeText(AlcoTipsActivity.this, Integer.toString(alcoolemie) , Toast.LENGTH_LONG).show();
 
                         } else {
                             Toast.makeText(AlcoTipsActivity.this, "Bracelet inconnu", Toast.LENGTH_LONG).show();
@@ -123,7 +120,9 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
                     }
                 };
                 loadModel();
+
             }
+            wait.dismiss();
         }
 
 
@@ -139,32 +138,36 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
         return -1;
     }
 
-    public int calculTaux(){
+    public double calculTaux(){
      int TDisipation =15; // taux d'alcool disipé/h
-     int AlcoParticipant=0;  // taux d'alcool du participant
+     double AlcoParticipant=0;  // taux d'alcool du participant
      int TAlcool= 25;     // taux d'alcool moyen contenu dans le sang après une conso
      double TCParticipant=0; // Taux d'alcool restant de la conso
-     long Hconso=0;
      long Hscan =  TimeUnit.MILLISECONDS.toMinutes(System.currentTimeMillis());
      long TmaxAbsorb= 90; // temps d'absorbtion max en minute
 
        // Alcoolémie (g/L)= (10* Nombre d'Ua ingérées)/(Masse corporelle (kg)* coeficient de diffusion) - 0,15*temps écoulé après le premier verre (h)
+
+
         for (int i=0; i<consosParticipant.size(); ++i){
 
-           Hconso = consosParticipant.get(i).getTime();
+          long Hconso = TimeUnit.MILLISECONDS.toMinutes(consosParticipant.get(i).getCreatedAt().getTime());
+            Toast.makeText(AlcoTipsActivity.this,Long.toString(Hscan - Hconso) , Toast.LENGTH_SHORT).show();
 
             if ((Hscan - Hconso)< TmaxAbsorb) {
                 TCParticipant = TAlcool;
             }
             else {
+
                 TCParticipant = TAlcool - ((Hscan - Hconso - TmaxAbsorb) * (TDisipation / 60));
+                if (TCParticipant < 0)
+                TCParticipant=0;
             }
 
-            AlcoParticipant += TCParticipant;
+            AlcoParticipant = AlcoParticipant + TCParticipant;
 
-            return AlcoParticipant;
         }
-        return 0;
+        return AlcoParticipant;
     }
 
 
@@ -186,11 +189,15 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
                         for (Achat conso : achats) {
                           String nomConso = conso.getTitre().toLowerCase();
 
-                        if(nomConso != "soft" && nomConso!= "orange" && nomConso!= "pomme" && nomConso!= "coca")
-                           consosParticipant.add(conso);
+                        if(!nomConso.equals("soft") && !nomConso.equals("orange") && !nomConso.equals("pomme") && !nomConso.equals("coca"))
+
+                            consosParticipant.add(conso);
 
                         }
-                    } else {
+                   double alcoolemie = calculTaux();
+                    Toast.makeText(AlcoTipsActivity.this, Double.toString(alcoolemie) , Toast.LENGTH_LONG).show();
+
+                } else {
                         Toast.makeText(AlcoTipsActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
 

@@ -26,8 +26,6 @@ public class ATModelFragment extends Fragment {
 
     /* Progress Dialog */
     private ProgressDialog initDialog;
-    private boolean loadingParticipants;
-    private boolean loadingConsos;
 
 
     private ATListener callback;
@@ -48,8 +46,6 @@ public class ATModelFragment extends Fragment {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
 
-        loadingParticipants = true;
-        loadingConsos = true;
         initDialog = ProgressDialog.show(getActivity(), null, "Mise à jour des données...", true, true);
 
         /* CHARGEMENT DE:
@@ -77,38 +73,14 @@ public class ATModelFragment extends Fragment {
                                         } else {
                                             Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
                                         }
-                                       // if (!loadingConsos)
+
                                             onModelUpdated();
-                                       // else
-                                         //   loadingParticipants = false;
+
                                     }
                                 });
                             }
                         }
                     });
-                    /* Liste des consos */
-                   /* ParseQuery<Ticket> query = ParseQuery.getQuery(Ticket.class);
-                    query.include("event");
-                    query.whereEqualTo("event", ev);
-                    query.whereEqualTo("type", Ticket.CONSO);
-                  //  ParseQuery<Achat> query = ParseQuery.getQuery(Achat.class);
-                  //  query.whereMatchesQuery("ticket", innerQuery);
-                    query.findInBackground(new FindCallback<Ticket>() {
-                        @Override
-                        public void done(List<Ticket> consos, ParseException e) {
-                            if (e == null) {
-                                callback.getConsos().clear();
-                                callback.getConsos().addAll(consos);
-                            }else {
-                                Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                            if (!loadingParticipants)
-                                onModelUpdated();
-                            else
-                                loadingConsos = false;
-                        }
-                    });
-*/
                 } else {
                     try {
                         initDialog.dismiss();

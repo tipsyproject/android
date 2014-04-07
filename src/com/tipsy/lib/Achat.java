@@ -7,7 +7,7 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 import com.tipsy.lib.util.Transaction;
 
-import java.util.Date;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.concurrent.TimeUnit;
@@ -112,10 +112,6 @@ public class Achat extends ParseObject implements Transaction {
         return false;
     }
 
-    public long getTime() {
-
-      return TimeUnit.MILLISECONDS.toMinutes(getDate("createdAt").getTime());
-    }
 
     public boolean isTipsyUser() {
         return getUser() != null;
