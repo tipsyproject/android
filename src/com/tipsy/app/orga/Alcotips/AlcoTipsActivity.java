@@ -90,13 +90,13 @@ public class AlcoTipsActivity extends FragmentActivity implements ATListener{
             Tag tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
             final Bracelet bracelet = new Bracelet(tag);
             int found = findParticipant(bracelet);
-            int alcoolémie= 0;
+            int alcoolemie= 0;
 
             if (found > -1) {
                 findConsos(participants.get(found));
-                alcoolémie = calculTaux();
+                alcoolemie = calculTaux();
                 fragNFC.hide();
-                Toast.makeText(AlcoTipsActivity.this, alcoolémie , Toast.LENGTH_LONG).show();
+                Toast.makeText(AlcoTipsActivity.this, alcoolemie , Toast.LENGTH_LONG).show();
 
             } else {
                 /* Si le participant n'a pas été trouvé,
